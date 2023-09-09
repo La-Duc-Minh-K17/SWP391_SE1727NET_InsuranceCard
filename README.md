@@ -1,2 +1,2 @@
-# SWP391_SE1727NET_InsuranceCard
+# SWP391_SE1727NET_MedicalAppointmentBooking
 SWP391_Group6 Mini Capstone
