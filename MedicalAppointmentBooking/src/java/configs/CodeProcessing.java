@@ -4,6 +4,7 @@
  */
 package configs;
 
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Base64;
 
@@ -23,6 +24,19 @@ public class CodeProcessing {
         byte[] randomBytes = new byte[16];
         secureRandom.nextBytes(randomBytes);
         return base64Encoder.encodeToString(randomBytes);
+    }
+
+    public static String encode(String s) {
+        byte data[] = s.getBytes(StandardCharsets.UTF_8);
+        String str = Base64.getEncoder().encodeToString(data);
+        return str;
+
+    }
+
+    public static String deCode(String s) {
+        byte[] decodedBytes = Base64.getDecoder().decode(s);
+        String str = new String(decodedBytes);
+        return str;
     }
 
 }

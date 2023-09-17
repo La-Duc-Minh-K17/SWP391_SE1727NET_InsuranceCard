@@ -4,13 +4,16 @@
  */
 package controller.auth;
 
+import configs.CodeProcessing;
 import configs.EmailSending;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.UserAccount;
 
 /**
  *
@@ -56,7 +59,10 @@ public class ForgotPasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        String action = request.getParameter("action");
+        if(action.equals("reset")) {
+            request.getRequestDispatcher("frontend/view/resetpassword.jsp").forward(request, response); 
+        }
         request.getRequestDispatcher("frontend/view/forgotpassword.jsp").forward(request, response);
     }
 
@@ -71,12 +77,24 @@ public class ForgotPasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String email = request.getParameter("email");
         String action = request.getParameter("action");
-        
-        if(action.equals("send_recovery_link")) {
-                
+
+        UserDAO uDAO = new UserDAO();
+        if (action.equals("send_link")) {
+            UserAccount account = uDAO.getAccountByEmail(email);
+            if (account == null) {
+                request.setAttribute("error", "Email address is not found in the system! Try again.");
+                request.getRequestDispatcher("frontend/view/forgotpassword.jsp").forward(request, response);
+            } else {
+                String token = CodeProcessing.generateNewToken();
+                uDAO.updateRecoveryToken(token);
+                EmailSending.sendRecoverAccount(request.getContextPath() + "/forgot?action=reset&token=" + token, email);
+            }   
+        }
+        else if(action.equals("reset_password")) {
+            
         }
     }
 

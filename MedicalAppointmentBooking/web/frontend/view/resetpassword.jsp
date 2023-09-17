@@ -1,6 +1,6 @@
 <%-- 
-    Document   : forgotpassword
-    Created on : Sep 10, 2023, 9:21:12 AM
+    Document   : resetpassword
+    Created on : Sep 17, 2023, 8:08:27 PM
     Author     : Admin
 --%>
 
@@ -47,28 +47,29 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-5 col-md-8">
+                       
                         <div class="card login-page bg-white shadow mt-4 rounded border-0">
-                            <div class="card-body"> 
-                                <h4 class="text-center">Recover Account</h4>  
-                                <form class="login-form mt-4" method="POST" action="<c:url value='/forgot?action=send_link'/>">
+                            <div class="card-body">
+                                <h4 class="text-center">Reset password</h4>  
+                                <form action="<c:url value='/forgot?action=reset_password'/>" class="login-form mt-4">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <p class="text-muted">Please enter your email address. You will receive a link to create a new password via email.</p>
                                             <div class="mb-3">
-                                                <label class="form-label">Email address <span class="text-danger">*</span></label>
-                                                <input type="email" class="form-control" placeholder="Enter Your Email Address" name="email" required="">
-                                                <div style="color: red; text-align:  center; ">
-                                                    <small>${requestScope.error}</small>
-                                                </div>
+                                                <label class="form-label">New Password <span class="text-danger">*</span></label>
+                                                <input type="password" class="form-control" placeholder="Password" name="password" required="">
                                             </div>
                                         </div>
+
                                         <div class="col-lg-12">
-                                            <div class="d-grid">
-                                                <button class="btn btn-primary">Send</button>
+                                            <div class="mb-3">
+                                                <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                                                <input type="password" class="form-control" placeholder="" required="">
                                             </div>
                                         </div>
-                                        <div class="mx-auto">
-                                            <p class="mb-0 mt-3"><small class="text-dark me-2">Remember your password ?</small> <a href="login.html" class="text-dark h6 mb-0">Sign in</a></p>
+                                        <div class="col-lg-12 mb-0">
+                                            <div class="d-grid">
+                                                <button class="btn btn-primary">Reset password</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>

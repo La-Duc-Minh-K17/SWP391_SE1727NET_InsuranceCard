@@ -15,7 +15,8 @@ public class UserAccount {
     private String gender;
     private String phone;
     private String role;
- 
+    private String recovery_token;
+    
     public UserAccount() {
     }
     
