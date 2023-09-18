@@ -6,6 +6,7 @@ package controller.auth;
 
 import configs.CodeProcessing;
 import configs.EmailSending;
+import configs.SessionConfigs;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Timestamp;
 import model.UserAccount;
 
 /**
@@ -56,12 +58,22 @@ public class ForgotPasswordServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    protected UserDAO uDAO = new UserDAO();
+    private final double OTP_EXPIRY_TIME = 1;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        if(action.equals("reset")) {
-            request.getRequestDispatcher("frontend/view/resetpassword.jsp").forward(request, response); 
+        if (action.equals("reset")) {
+            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+            UserAccount account = (UserAccount) SessionConfigs.getInstance().getValue(request, "user");
+            long diffTime = currentTime.getTime() - account.getRecoveryTokenTime().getTime();
+            if (diffTime < OTP_EXPIRY_TIME * 60 * 1000) {
+                request.getRequestDispatcher("frontend/view/resetpassword.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("frontend/view/404.jsp");
+            }
         }
         request.getRequestDispatcher("frontend/view/forgotpassword.jsp").forward(request, response);
     }
@@ -80,8 +92,6 @@ public class ForgotPasswordServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String action = request.getParameter("action");
-
-        UserDAO uDAO = new UserDAO();
         if (action.equals("send_link")) {
             UserAccount account = uDAO.getAccountByEmail(email);
             if (account == null) {
@@ -91,10 +101,13 @@ public class ForgotPasswordServlet extends HttpServlet {
                 String token = CodeProcessing.generateNewToken();
                 uDAO.updateRecoveryToken(token);
                 EmailSending.sendRecoverAccount(request.getContextPath() + "/forgot?action=reset&token=" + token, email);
-            }   
-        }
-        else if(action.equals("reset_password")) {
-            
+                request.getRequestDispatcher("frontend/view/resetpassword.jsp").forward(request, response);
+            }
+        } else if (action.equals("reset_password")) {
+            String newpassword = request.getParameter("password");
+            UserAccount account = (UserAccount) SessionConfigs.getInstance().getValue(request, "user");
+            uDAO.updatePassword(account , newpassword);
+            request.getRequestDispatcher("login").forward(request, response);
         }
     }
 

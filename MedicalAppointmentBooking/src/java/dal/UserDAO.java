@@ -22,7 +22,7 @@ public class UserDAO {
     ResultSet result = null;
     DBConnection dbc = new DBConnection();
     Connection connection = null;
-
+    
     public UserAccount getAccountByEmail(String email) {
         String sql = "select * from useraccount where email = ? ";
         UserAccount useraccount = new UserAccount();
@@ -34,16 +34,20 @@ public class UserDAO {
             while(result.next()) {
                 
             }
-            return null;
+            return useraccount;
         } catch(SQLException ex) {
             ex.printStackTrace();
         }
         return null;
     }
     public void updateRecoveryToken(String token) {
+        
     }
     
-    public Timestamp getRecoveryToken() {
+    public Timestamp getRecoveryTokenTime() {
+        return null;
+    }
+    public void updatePassword(UserAccount user,String pswd) {
         
     }
 }

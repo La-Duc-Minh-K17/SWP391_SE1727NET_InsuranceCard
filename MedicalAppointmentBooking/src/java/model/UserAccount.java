@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author Admin
@@ -14,9 +16,9 @@ public class UserAccount {
     private String fullName;
     private String gender;
     private String phone;
-    private String role;
-    private String recovery_token;
-    
+    private String recoveryToken;
+    private Timestamp recoveryTokenTime;
+    private Role role;
     public UserAccount() {
     }
     
@@ -61,13 +63,30 @@ public class UserAccount {
         this.phone = phone;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
+
+    public String getRecoveryToken() {
+        return recoveryToken;
+    }
+
+    public void setRecoveryToken(String recoveryToken) {
+        this.recoveryToken = recoveryToken;
+    }
+
+    public Timestamp getRecoveryTokenTime() {
+        return recoveryTokenTime;
+    }
+
+    public void setRecoveryTokenTime(Timestamp recoveryTokenTime) {
+        this.recoveryTokenTime = recoveryTokenTime;
+    }
+
     
     
 }

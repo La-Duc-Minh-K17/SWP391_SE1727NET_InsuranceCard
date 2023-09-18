@@ -88,7 +88,7 @@ public class EmailSending {
                 + "                                        <td style=\"height:40px;\">&nbsp;</td>\n"
                 + "                                    </tr>\n"
                 + "                                    <tr>\n"
-                + "                                        <td style=\"padding:0 35px;\">\n"
+                + "                                           <td style=\"padding:0 35px;\">\n"
                 + "                                            <h1\n"
                 + "                                                style=\"color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;\">\n"
                 + "                                                You have\n"

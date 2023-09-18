@@ -18,10 +18,10 @@ public class DBConnection {
         Connection connection = null;
         try {
 
-            String url = "jdbc:sqlserver://localhost:1433;databaseName= ShoesEcommerceWeb";
-            String username = "sa";
-            String password = "1234";
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:mysql://localhost:3306/mabs";
+            String username = "root";
+            String password = "123456";
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, username, password);
             return connection;
         } catch (ClassNotFoundException | SQLException ex) {
@@ -29,4 +29,5 @@ public class DBConnection {
         }
 
     }
+    
 }
