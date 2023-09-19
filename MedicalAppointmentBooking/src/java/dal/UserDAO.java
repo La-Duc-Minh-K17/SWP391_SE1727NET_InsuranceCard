@@ -32,7 +32,6 @@ public class UserDAO {
             ps.setString(1, email);
             result = ps.executeQuery();
             while(result.next()) {
-                
             }
             return useraccount;
         } catch(SQLException ex) {
@@ -50,4 +49,10 @@ public class UserDAO {
     public void updatePassword(UserAccount user,String pswd) {
         
     }
-}
+    public void addUserAccount(UserAccount user) {
+        
+    }
+    public void activeUserAccount(UserAccount user ) {
+        
+    }
+}   

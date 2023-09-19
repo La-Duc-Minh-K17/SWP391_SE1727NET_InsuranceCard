@@ -7,6 +7,7 @@ package configs;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.UUID;
 
 /**
  *
@@ -14,16 +15,15 @@ import java.util.Base64;
  */
 public class CodeProcessing {
 
-    private static final SecureRandom secureRandom = new SecureRandom(); //threadsafe
-    private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder(); //threadsafe
-
     public CodeProcessing() {
     }
 
-    public static String generateNewToken() {
-        byte[] randomBytes = new byte[16];
-        secureRandom.nextBytes(randomBytes);
-        return base64Encoder.encodeToString(randomBytes);
+    private static final SecureRandom secureRandom = new SecureRandom();
+
+    public static String generateToken() {
+        byte[] tokenBytes = new byte[32];
+        secureRandom.nextBytes(tokenBytes);
+        return Base64.getUrlEncoder().withoutPadding().encodeToString(tokenBytes);
     }
 
     public static String encode(String s) {
