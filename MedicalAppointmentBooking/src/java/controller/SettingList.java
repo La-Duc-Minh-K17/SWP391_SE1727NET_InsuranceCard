@@ -5,20 +5,21 @@
 
 package controller;
 
+import dal.SettingDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Account;
+import java.util.ArrayList;
+import model.Setting;
 
 /**
  *
  * @author DELL
  */
-public class RegisterVerify extends HttpServlet {
+public class SettingList extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,17 +32,16 @@ public class RegisterVerify extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            Account acc =(Account)session.getAttribute("authcode");
-            
-            String code = request.getParameter("authcode");
-            
-            if(code.equals(acc.getCode()))
-            {
-                out.print("Verification Done");
-            }else{
-                out.print("Incorrect code");
-            }
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet SettingList</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet SettingList at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     } 
 
@@ -56,8 +56,11 @@ public class RegisterVerify extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
-    } 
+        SettingDBContext st = new SettingDBContext();
+        ArrayList<Setting> settings = st.list();
+        request.setAttribute("settings",settings);
+        request.getRequestDispatcher("frontend/view/settingList.jsp").forward(request, response);
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -69,7 +72,16 @@ public class RegisterVerify extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter out = response.getWriter();
+        String term = request.getParameter("search");
+        String type = request.getParameter("searchType");
+        
+        SettingDBContext st = new SettingDBContext();
+        ArrayList<Setting> settings = st.getSetting(term);
+        
+        out.print(type +" " + term);
+        request.setAttribute("settings",settings);
+        request.getRequestDispatcher("frontend/view/settingList.jsp").forward(request, response);
     }
 
     /** 

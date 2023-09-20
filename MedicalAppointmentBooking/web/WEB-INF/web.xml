@@ -20,6 +20,10 @@
         <servlet-name>RegisterVerify</servlet-name>
         <servlet-class>controller.RegisterVerify</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SettingList</servlet-name>
+        <servlet-class>controller.SettingList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -39,6 +43,29 @@
     <servlet-mapping>
         <servlet-name>RegisterVerify</servlet-name>
         <url-pattern>/verify</url-pattern>
+    </servlet-mapping>
+    <!--    <context-param>
+        <param-name>host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+ 
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+ 
+    <context-param>
+        <param-name>user</param-name>
+        <param-value>minhnnhe176776@fpt.edu.vn</param-value>
+    </context-param>
+ 
+    <context-param>
+        <param-name>pass</param-name>
+        <param-value>minhcat123</param-value>
+    </context-param>-->
+    <servlet-mapping>
+        <servlet-name>SettingList</servlet-name>
+        <url-pattern>/settinglist</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
