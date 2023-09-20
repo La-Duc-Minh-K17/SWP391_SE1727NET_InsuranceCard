@@ -4,10 +4,10 @@
  */
 package controller.auth;
 
-import configs.CodeProcessing;
-import configs.EmailSending;
-import configs.SessionConfigs;
-import configs.TimestampConfigs;
+import utils.CodeProcessing;
+import utils.EmailSending;
+import utils.SessionUtils;
+import utils.TimestampUtils;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -62,21 +62,22 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        TimestampConfigs timeConfig = new TimestampConfigs();
+        TimestampUtils timeConfig = new TimestampUtils();
         UserDAO uDAO = new UserDAO();
         String action = request.getParameter("action");
-        if (action.equals("verify")) {
-            UserAccount user = (UserAccount) SessionConfigs.getInstance().getValue(request, "user");
+        if (action!= null && action.equals("verify")) {
+            UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
             Timestamp confirmationTokenTime = user.getRecoveryTokenTime();
             if (timeConfig.isExpired(confirmationTokenTime)) {
                 uDAO.activeUserAccount(user);
                 request.setAttribute("message", "Verify Successfully.");
             } else {
                request.setAttribute("error", "The link time has expired" );
-               request.getRequestDispatcher("/register?action=register").forward(request, response);
+               request.getRequestDispatcher("/register").forward(request, response);
             }
             response.sendRedirect(request.getContextPath() + "/frontend/view/homepage.jsp");
         }
+        request.getRequestDispatcher("/frontend/view/register.jsp").forward(request, response);
     }
 
     /**
@@ -91,8 +92,7 @@ public class RegisterController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserDAO uDAO = new UserDAO();
-
-        TimestampConfigs timeConfig = new TimestampConfigs();
+        TimestampUtils timeConfig = new TimestampUtils();
         String action = request.getParameter("action");
         String username = request.getParameter("username");
         String fullname = request.getParameter("fullname");
@@ -103,8 +103,8 @@ public class RegisterController extends HttpServlet {
 
         if (action.equals("register")) {
             String confirmationToken = CodeProcessing.generateToken();
-            UserAccount user = new UserAccount(username, password, email, fullname, gender, phone, confirmationToken, timeConfig.getNow(), 0);
-            SessionConfigs.getInstance().putValue(request, "user", user);
+            UserAccount user = new UserAccount(username, password, email, fullname, gender.equals("Male") ? 1 : 0, phone, confirmationToken, timeConfig.getNow(), 0);
+            SessionUtils.getInstance().putValue(request, "user", user);
             uDAO.addUserAccount(user);
             EmailSending.sendVerificationMail(user, request.getContextPath() + "/register?action=verify&token=" + confirmationToken, email);
             request.getRequestDispatcher("/register?action=verify").forward(request, response);

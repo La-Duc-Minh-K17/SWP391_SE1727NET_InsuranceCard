@@ -11,24 +11,37 @@ import java.sql.Timestamp;
  * @author Admin
  */
 public class UserAccount {
+
     private String username;
     private String password;
     private String email;
     private String fullName;
-    private String gender;
+    private int gender;
     private String phone;
+    private String image;
     private String confirmationToken;
     private Timestamp confirmationTokenTime;
     private String recoveryToken;
     private Timestamp recoveryTokenTime;
     private int status;
     private Role role;
-    
+
     public UserAccount() {
-    
+
     }
 
-    public UserAccount(String username, String password, String email, String fullName, String gender, String phone, String confirmationToken, Timestamp confirmationTokenTime , int status) {
+    public UserAccount(String username, String email, String fullName, int gender, String phone, String image) {
+        this.username = username;
+        this.email = email;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.phone = phone;
+        this.image = image;
+    }
+
+    
+
+    public UserAccount(String username, String password, String email, String fullName, int gender, String phone, String confirmationToken, Timestamp confirmationTokenTime, int status) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -39,9 +52,6 @@ public class UserAccount {
         this.confirmationTokenTime = confirmationTokenTime;
         this.status = status;
     }
-
-    
-    
     
 
     public String getUserName() {
@@ -68,11 +78,11 @@ public class UserAccount {
         this.fullName = fullName;
     }
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -128,6 +138,12 @@ public class UserAccount {
         return confirmationTokenTime;
     }
 
-    
-    
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
 }

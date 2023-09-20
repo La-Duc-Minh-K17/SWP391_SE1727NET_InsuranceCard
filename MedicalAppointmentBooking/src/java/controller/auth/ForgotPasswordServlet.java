@@ -4,10 +4,10 @@
  */
 package controller.auth;
 
-import configs.CodeProcessing;
-import configs.EmailSending;
-import configs.SessionConfigs;
-import configs.TimestampConfigs;
+import utils.CodeProcessing;
+import utils.EmailSending;
+import utils.SessionUtils;
+import utils.TimestampUtils;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +15,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Timestamp;
 import model.UserAccount;
 
 /**
@@ -64,11 +63,11 @@ public class ForgotPasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        TimestampConfigs timeConfig = new TimestampConfigs();
+        TimestampUtils timeConfig = new TimestampUtils();
         String action = request.getParameter("action");
         if (action.equals("reset")) {
 
-            UserAccount user = (UserAccount) SessionConfigs.getInstance().getValue(request, "user");
+            UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
 
             if (timeConfig.isExpired(user.getRecoveryTokenTime())) {
                 request.getRequestDispatcher("frontend/view/resetpassword.jsp").forward(request, response);
@@ -107,7 +106,7 @@ public class ForgotPasswordServlet extends HttpServlet {
             }
         } else if (action.equals("reset_password")) {
             String newpassword = request.getParameter("password");
-            UserAccount account = (UserAccount) SessionConfigs.getInstance().getValue(request, "user");
+            UserAccount account = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
             uDAO.updatePassword(account, newpassword);
             request.getRequestDispatcher("login").forward(request, response);
         }

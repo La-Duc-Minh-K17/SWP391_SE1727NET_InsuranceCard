@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package configs;
+package utils;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -10,13 +10,13 @@ import jakarta.servlet.http.HttpServletRequest;
  *
  * @author Admin
  */
-public class SessionConfigs {
+public class SessionUtils {
 
-    private static SessionConfigs sessionConfigs = null;
+    private static SessionUtils sessionConfigs = null;
 
-    public static SessionConfigs getInstance() {
+    public static SessionUtils getInstance() {
         if (sessionConfigs == null) {
-            sessionConfigs = new SessionConfigs();
+            sessionConfigs = new SessionUtils();
         }
         return sessionConfigs;
     }

@@ -23,6 +23,7 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/otherStyle.css" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -47,10 +48,14 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-5 col-md-8">
+                        <c:if test="${error != null}">
+                            <div class="alert alert-error">${requestScope.error}</div>
+                        </c:if>
+                        
                         <div class="card login-page bg-white shadow mt-4 rounded border-0">
                             <div class="card-body">
                                 <h4 class="text-center">Sign Up</h4>  
-                                <form action="index.html" class="login-form mt-4">
+                                <form action="index.html" class="login-form mt-4" METHOD="POST">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="mb-3">                                               
