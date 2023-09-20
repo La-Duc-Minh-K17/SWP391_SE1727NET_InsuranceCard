@@ -77,10 +77,16 @@ public class SettingList extends HttpServlet {
         String type = request.getParameter("searchType");
         
         SettingDBContext st = new SettingDBContext();
-        ArrayList<Setting> settings = st.getSetting(term);
+        ArrayList<Setting> settings = new ArrayList<>(); 
+                
         
-        out.print(type +" " + term);
-        request.setAttribute("settings",settings);
+        if(!type.isEmpty())
+        {
+            settings=st.getSetting(type,term);
+        }else{
+            settings=st.getSettingAllType(type, term);
+        }
+                request.setAttribute("settings",settings);
         request.getRequestDispatcher("frontend/view/settingList.jsp").forward(request, response);
     }
 

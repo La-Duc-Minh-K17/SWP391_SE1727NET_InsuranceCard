@@ -37,15 +37,45 @@ public class SettingDBContext extends DBContext {
         return settings;
     }
 
-    public ArrayList<Setting> getSetting(String term) {
+    public ArrayList<Setting> getSetting(String type,String term) {
         ArrayList<Setting> settings = new ArrayList<>();
 
         try {
             String sql = "SELECT setting_id, type,value,status FROM settings\n"
-                    + "WHERE type = ?";
+                    + "WHERE " + type +" like ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-         
-            stm.setString(1, term);
+           
+            stm.setString(1,"%"+ term+"%");
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Setting s = new Setting();
+                s.setSettingId(rs.getInt("setting_id"));
+                s.setType(rs.getString("type"));
+                s.setValue(rs.getString("value"));
+                s.setStatus(rs.getBoolean("status"));
+
+                settings.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return settings;
+    }
+    public ArrayList<Setting> getSettingAllType(String type,String term) {
+        ArrayList<Setting> settings = new ArrayList<>();
+
+        try {
+            String sql = "SELECT setting_id, type,value,status FROM settings\n" +
+"                    WHERE type like ? or setting_id like ? or value like ? or status like ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+           
+            stm.setString(1,"%"+ term+"%");
+            stm.setString(2,"%"+ term+"%");
+            stm.setString(3,"%"+ term+"%");
+            stm.setString(4,"%"+ term+"%");
+            
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -64,3 +94,8 @@ public class SettingDBContext extends DBContext {
         return settings;
     }
 }
+//String columnName = "setting_id";
+//String columnValue = "some_value";
+//String sql = "SELECT setting_id, type, value, status FROM settings WHERE " + columnName + " = ?";
+//PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//preparedStatement.setString(1, columnValue);
