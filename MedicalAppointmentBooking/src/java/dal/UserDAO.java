@@ -16,12 +16,12 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Base64;
 import model.UserAccount;
-
+import dbContext.DBConnection;
 /**
  *
  * @author Admin
  */
-public class UserDAO {
+public class UserDAO extends DBConnection{
 
     PreparedStatement ps = null;
     ResultSet result = null;

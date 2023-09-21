@@ -11,23 +11,21 @@ package dbContext;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class DBConnection {
-
-    public Connection getConnection() {
-        Connection connection = null;
+public class DBConnection  {
+    protected Connection connection;
+    public DBConnection()
+    {
         try {
-
-            String url = "jdbc:mysql://localhost:3306/mabs";
-            String username = "root";
-            String password = "123456";
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url, username, password);
-            return connection;
+            String user = "sa";
+            String pass = "123";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=Blog";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException | SQLException ex) {
-            return null;
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-    
 }
