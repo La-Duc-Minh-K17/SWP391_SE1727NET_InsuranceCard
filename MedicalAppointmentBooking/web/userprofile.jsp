@@ -1,7 +1,7 @@
 <!DOCTYPE html>
     <html lang="en">
 
-    <head>
+   <head>
         <meta charset="utf-8" />
         <title>MABS</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,31 +12,27 @@
         <meta name="website" content="https://group6.in" />
         <meta name="Version" content="v1.2.0" />
         <!-- favicon -->
-        <link rel="shortcut icon" href="../assets/images/favicon.ico.png">
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
-        <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/newstyle.css" rel="stylesheet" type="text/css" />
+
         <!-- SLIDER -->
-        <link rel="stylesheet" href="../assets/css/tiny-slider.css"/>
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/tiny-slider.css" />
         <!-- Select2 -->
-        <link href="../assets/css/select2.min.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
         <!-- Date picker -->
-        <link rel="stylesheet" href="../assets/css/flatpickr.min.css">
-        <link href="../assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
         <!-- Icons -->
-        <link href="../assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/css/remixicon.css" rel="stylesheet" type="text/css" />
-        <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
+        <link  href="${pageContext.request.contextPath}/frontend/template/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+        <link  href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
+        <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
         <!-- Css -->
-        <link href="../assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-        <link rel="stylesheet" href="frontend/template/assets/css/style.min.css" type="text/css">
-        <link rel="stylesheet" href="frontend/template/assets/css/style.min.css" type="text/css"/>
-        <link rel="stylesheet" href="frontend/template/assets/css/bootstrap.min.css" type="text/css">
-
-
-
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
         <style>
-            #home{
-                background-image: url("../assets/images/bg/backgroundclinic.jpg") ;
+            #home {
+                background-image: url("../assets/images/bg/backgroundclinic.jpg");
             }
         </style>
 
