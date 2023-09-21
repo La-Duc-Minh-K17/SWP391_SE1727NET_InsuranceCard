@@ -68,7 +68,6 @@ public class UserDAO extends DBConnection{
         String sql = "select * from useraccount where email = ? ";
         UserAccount userAccount = new UserAccount();
         try {
-            connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setString(1, email);
             result = ps.executeQuery();

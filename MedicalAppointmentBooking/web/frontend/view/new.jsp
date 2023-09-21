@@ -247,7 +247,7 @@
                                                 <a href="new-details.jsp" class="text-dark title h5">${o.title}</a>
                                                 <div>
                                                     <ul class="list-unstyled mb-0">
-                                                        <a href="new-details.jsp" class="text-dark title h6">${o.script}</a>
+                                                        <a href="new-details.jsp" class="text-dark title h6">${o.script}"</a>
                                                     </ul>
                                                 </div>
                                                 <div class="post-meta d-flex justify-content-between mt-3">                                               
@@ -275,7 +275,7 @@
                                         <form class="flexsearch--form1" action="#" method="post">
                                             <select>
                                                 <c:forEach var="o" items="${requestScope.listC}">
-                                                    <option selected value="0">"${o.name}"</option>
+                                                    <option selected value=${o.ID}>${o.name}</option>
                                                 </c:forEach>
                                             </select>
                                         </form>
@@ -302,25 +302,25 @@
                         </div>
                         <div class="container" style="padding-top:20px">
                             <div>
-                                <c:forEach var="o" items="${requestScope.listC}">
+                                <c:forEach var="o" items="${requestScope.data}">
                                     <div class="col-lg-12 col-md-6 col-12 mb-4 pb-2">
                                         <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                                             <div class="row">
                                                 <div class="col-lg-4">
-                                                    <img src="${o.image}" class="img-fluid" alt="">
+                                                    <img  style ="width:100%;height:100%"src=${o.image} class="img-fluid" alt="">
                                                 </div>
                                                 <div class="col-lg-8">
                                                     <div class="card-body p-4">
                                                         <ul class="list-unstyled mb-2">
                                                             <li class="list-inline-item text-muted small me-3"><i
-                                                                    class="uil uil-calendar-alt text-dark h6 me-1"></i>"${o.date}"</li>
+                                                                    class="uil uil-calendar-alt text-dark h6 me-1"></i>${o.created_time}</li>
                                                             <li class="list-inline-item text-muted small"><i
                                                                     class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
                                                         </ul>
-                                                        <a href="new-details.jsp" class="text-dark title h5">"${o.title}"</a>
+                                                        <a href="new-details.jsp" class="text-dark title h5">${o.title}</a>
                                                         <div>
                                                             <ul class="list-unstyled mb-0">
-                                                                <a href="new-details.jsp" class="text-dark title h6">"${o.script}"</a>
+                                                                <a href="new-details.jsp" class="text-dark title h6">${o.script}</a>
                                                             </ul>
                                                         </div>
                                                         <div class="post-meta d-flex justify-content-between mt-3">                                                           

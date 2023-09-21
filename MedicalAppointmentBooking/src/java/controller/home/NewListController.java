@@ -32,10 +32,10 @@ public class NewListController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -66,6 +66,9 @@ public class NewListController extends HttpServlet {
         request.setAttribute("data", blogslist);
         List<Blog> blogs3 = dao.getTop3News();
         request.setAttribute("blogs3", blogs3);
+        CategoryDao cdao = new CategoryDao();
+        List<Blog_Category> blog_category = cdao.getAllCategorys();
+        request.setAttribute("listC", blog_category);
         request.getRequestDispatcher("frontend/view/new.jsp").forward(request, response);
     }
 
@@ -86,11 +89,11 @@ public class NewListController extends HttpServlet {
         List<Blog> blogslist = new ArrayList<>();
 
         CategoryDao cdao = new CategoryDao();
-        List<Blog_Category> listC = cdao.getAllCategorys();
+        List<Blog_Category> blog_category = cdao.getAllCategorys();
         blogslist = dao.getAllNewsBySearch(search, Integer.parseInt(category));
         List<Blog> blogs4 = new ArrayList<>();
         blogs4 = dao.getTop3News();
-        request.setAttribute("listC", listC);
+        request.setAttribute("listC", blog_category);
         request.setAttribute("list4", blogs4);
         request.setAttribute("data", blogslist);
         request.setAttribute("search", search);
