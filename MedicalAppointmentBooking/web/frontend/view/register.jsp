@@ -51,11 +51,13 @@
                         <c:if test="${error != null}">
                             <div class="alert alert-error">${requestScope.error}</div>
                         </c:if>
-                        
+                        <c:if test="${success != null}">
+                            <div class="alert alert-success">${requestScope.success}</div>
+                        </c:if>
                         <div class="card login-page bg-white shadow mt-4 rounded border-0">
                             <div class="card-body">
                                 <h4 class="text-center">Sign Up</h4>  
-                                <form action="index.html" class="login-form mt-4" METHOD="POST">
+                                <form action="<c:url value='/register?action=regist'/>" class="login-form mt-4" METHOD="POST">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="mb-3">                                               

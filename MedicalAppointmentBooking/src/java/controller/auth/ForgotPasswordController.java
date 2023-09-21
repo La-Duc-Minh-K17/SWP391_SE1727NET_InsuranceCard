@@ -10,6 +10,7 @@ import utils.SessionUtils;
 import utils.TimestampUtils;
 import dal.UserDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ import model.UserAccount;
  *
  * @author Admin
  */
-public class RegisterController extends HttpServlet {
+public class ForgotPasswordController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,40 +35,41 @@ public class RegisterController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        // Get the server name
-        TimestampUtils timeConfig = new TimestampUtils();
-        UserDAO uDAO = new UserDAO();
+        response.setContentType("text/html;charset=UTF-8");
+        TimestampUtils timeUtil = new TimestampUtils();
         String action = request.getParameter("action");
-        if (action != null && action.equals("verify")) {
+        if (action.equals("reset")) {
+
             UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
-            Timestamp confirmationTokenTime = user.getRecoveryTokenTime();
-            if (timeConfig.isExpired(confirmationTokenTime)) {
-                uDAO.activateUserAccount(user);
-                request.setAttribute("message", "Verify Successfully.");
+
+            if (!timeUtil.isExpired(user.getRecoveryTokenTime())) {
+                request.getRequestDispatcher("frontend/view/resetpassword.jsp").forward(request, response);
             } else {
-                request.setAttribute("error", "The link time has expired");
-                request.getRequestDispatcher("/register").forward(request, response);
+                // Tam thoi dung page404.jsp nay, xu ly sau
+                response.sendRedirect("frontend/view/page404.jsp");
             }
-            response.sendRedirect(request.getContextPath() + "/frontend/view/homepage.jsp");
-        }
-        if (action != null && action.equals("regist")) {
-            String username = request.getParameter("username");
-            String fullname = request.getParameter("fullname");
+        } else if (action.equals("send-link")) {
             String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            String phone = request.getParameter("phone");
-            String gender = request.getParameter("gender");
-            String confirmationToken = CodeProcessing.generateToken();
-            UserAccount user = new UserAccount(username, password, email, fullname, gender.equals("Male") ? 1 : 0, phone, confirmationToken, timeConfig.getNow(), 0);
-            SessionUtils.getInstance().putValue(request, "user", user);
-            String fullURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getRequestURI();
-            String urlLink = fullURL + "?action=verify&token=" + confirmationToken;
-            
-            EmailSending.sendVerificationMail(user, urlLink, email);
-            request.setAttribute("success", "A confirmation email has been sent to your Email, please check.");
+            UserAccount account = uDAO.getAccountByEmail(email);
+            if (account == null) {
+                request.setAttribute("error", "Email address is not found in the system! Try again.");
+                request.getRequestDispatcher("frontend/view/forgotpassword.jsp").forward(request, response);
+            } else {
+                String recoveryToken = CodeProcessing.generateToken();
+                Timestamp updatedTime = timeUtil.getNow();
+                uDAO.updateRecoveryToken(account, recoveryToken, updatedTime);
+                String fullURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getRequestURI();
+                String urlLink = fullURL + "?action=verify&token=" + recoveryToken;
+                EmailSending.sendRecoverAccount(urlLink, email);
+                request.getRequestDispatcher("frontend/view/resetpassword.jsp").forward(request, response);
+            }
+        } else if (action.equals("reset_password")) {
+            String newpassword = request.getParameter("password");
+            UserAccount account = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
+            uDAO.updatePassword(account, newpassword);
+            request.getRequestDispatcher("/login").forward(request, response);
         }
-        request.getRequestDispatcher("/frontend/view/register.jsp").forward(request, response);
+        request.getRequestDispatcher("frontend/view/forgotpassword.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,10 +81,12 @@ public class RegisterController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    protected UserDAO uDAO = new UserDAO();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**
@@ -96,7 +100,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**
