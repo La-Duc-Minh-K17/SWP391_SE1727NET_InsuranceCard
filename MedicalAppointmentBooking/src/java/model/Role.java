@@ -16,7 +16,7 @@ public class Role {
 
     public Role() {
     }
-
+    
     public int getRole_id() {
         return role_id;
     }

@@ -22,8 +22,8 @@ import model.UserAccount;
  */
 public class EmailSending {
 
-    public static final String EMAILSENDER = "bestshoesvietnam@gmail.com";
-    public static final String PASSWORDSENDER = "vnrzcqpntzjbzaog";
+    public static final String EMAILSENDER = "medicalbooking2023@gmail.com";
+    public static final String PASSWORDSENDER = "wfvznwykwgatpgnd";
 
     public static void sendEmail(String emailTo, String subject, String msg) {
 
