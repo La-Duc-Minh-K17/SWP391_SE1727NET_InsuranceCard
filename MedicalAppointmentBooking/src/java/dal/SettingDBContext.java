@@ -17,10 +17,11 @@ import model.Setting;
  * @author DELL
  */
 public class SettingDBContext extends DBContext {
+
     public ArrayList<Setting> list() {
         ArrayList<Setting> settings = new ArrayList<>();
         try {
-            String sql = "SELECT setting_id, type,value,status from settings";         
+            String sql = "SELECT setting_id, type,value,description,status from settings";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -28,6 +29,7 @@ public class SettingDBContext extends DBContext {
                 s.setSettingId(rs.getInt("setting_id"));
                 s.setType(rs.getString("type"));
                 s.setValue(rs.getString("value"));
+                s.setDescription(rs.getString("description"));
                 s.setStatus(rs.getBoolean("status"));
                 settings.add(s);
             }
@@ -37,15 +39,15 @@ public class SettingDBContext extends DBContext {
         return settings;
     }
 
-    public ArrayList<Setting> getSetting(String type,String term) {
+    public ArrayList<Setting> getSetting(String type, String term) {
         ArrayList<Setting> settings = new ArrayList<>();
 
         try {
-            String sql = "SELECT setting_id, type,value,status FROM settings\n"
-                    + "WHERE " + type +" like ?";
+            String sql = "SELECT setting_id, type,value,description,status FROM settings\n"
+                    + "WHERE " + type + " like ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-           
-            stm.setString(1,"%"+ term+"%");
+
+            stm.setString(1, "%" + term + "%");
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -53,6 +55,7 @@ public class SettingDBContext extends DBContext {
                 s.setSettingId(rs.getInt("setting_id"));
                 s.setType(rs.getString("type"));
                 s.setValue(rs.getString("value"));
+                s.setDescription(rs.getString("description"));
                 s.setStatus(rs.getBoolean("status"));
 
                 settings.add(s);
@@ -63,19 +66,20 @@ public class SettingDBContext extends DBContext {
 
         return settings;
     }
-    public ArrayList<Setting> getSettingAllType(String type,String term) {
+
+    public ArrayList<Setting> getSettingAllType( String term) {
         ArrayList<Setting> settings = new ArrayList<>();
 
         try {
-            String sql = "SELECT setting_id, type,value,status FROM settings\n" +
-"                    WHERE type like ? or setting_id like ? or value like ? or status like ?";
+            String sql = "SELECT setting_id, type,value,description,status FROM settings\n"
+                    + " WHERE type like ? or setting_id like ? or value like ? or description like ? or status like ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-           
-            stm.setString(1,"%"+ term+"%");
-            stm.setString(2,"%"+ term+"%");
-            stm.setString(3,"%"+ term+"%");
-            stm.setString(4,"%"+ term+"%");
-            
+
+            stm.setString(1, "%" + term + "%");
+            stm.setString(2, "%" + term + "%");
+            stm.setString(3, "%" + term + "%");
+            stm.setString(4, "%" + term + "%");
+            stm.setString(5, "%" + term + "%");
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -83,6 +87,7 @@ public class SettingDBContext extends DBContext {
                 s.setSettingId(rs.getInt("setting_id"));
                 s.setType(rs.getString("type"));
                 s.setValue(rs.getString("value"));
+                s.setDescription(rs.getString("description"));
                 s.setStatus(rs.getBoolean("status"));
 
                 settings.add(s);

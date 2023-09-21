@@ -12,7 +12,16 @@ public class Setting {
     public int settingId;
     public String type;
     public String value;
+    public String description;
     public boolean status;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public int getSettingId() {
         return settingId;

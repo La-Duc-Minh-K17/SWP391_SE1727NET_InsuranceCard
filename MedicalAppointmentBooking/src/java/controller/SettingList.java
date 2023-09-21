@@ -84,7 +84,7 @@ public class SettingList extends HttpServlet {
         {
             settings=st.getSetting(type,term);
         }else{
-            settings=st.getSettingAllType(type, term);
+            settings=st.getSettingAllType( term);
         }
                 request.setAttribute("settings",settings);
         request.getRequestDispatcher("frontend/view/settingList.jsp").forward(request, response);

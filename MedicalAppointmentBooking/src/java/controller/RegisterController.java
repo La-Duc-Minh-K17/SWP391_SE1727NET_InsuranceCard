@@ -92,17 +92,17 @@ public class RegisterController extends HttpServlet {
         account.setUsername(username);
         account.setCode(code);
         
-        boolean test = sm.sendEmail(account);
+//        boolean test = sm.sendEmail(account);
+//        
+//        if(test){
+//            HttpSession session = request.getSession();
+//            session.setAttribute("authcode",account);
+//            response.sendRedirect("verify.jsp");
+//        }
         
-        if(test){
-            HttpSession session = request.getSession();
-            session.setAttribute("authcode",account);
-            response.sendRedirect("verify.jsp");
-        }
-        
-//        AccountDBContext acc = new AccountDBContext();
-//        acc.insertAccount(account);
-//        request.getRequestDispatcher("view/login.jsp").forward(request, response);
+        AccountDBContext acc = new AccountDBContext();
+        acc.insertAccount(account);
+        request.getRequestDispatcher("view/login.jsp").forward(request, response);
     }
 
     /** 

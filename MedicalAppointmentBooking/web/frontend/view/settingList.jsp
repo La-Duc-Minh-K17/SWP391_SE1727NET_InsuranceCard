@@ -27,7 +27,7 @@
     </head>  
     <style>
         body{
-            background-color: whitesmoke;
+            background-color: #D5D3D3;
         }
         .header-title{
             margin-left: 14%;
@@ -46,6 +46,12 @@
         .header select{
             height:27px;
         }
+        .header{
+            background-color: #D9D9D9;
+        }
+        .container{
+            background-color: #D9D9D9;
+        }
     </style>
     <body>
         <div class="header-title">
@@ -59,18 +65,19 @@
                     <option value="setting_id">Setting ID</option>
                     <option value="type">Type</option>
                     <option value="value">Value</option>
+                    <option value="description">Description</option>
                     <option value="status">Status</option>
                 </select>
                 <button type="button">Add more</button>
             </div>
             <div class="container">
-                <table border="1" class="col-md-8 table">
+                <table class="col-md-8 table">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Type</th>  
                             <th scope="col">Value</th>
-                            <!--                        <th scope="col">Note</th>-->
+                            <th scope="col">Description</th>
                             <th scope="col">Status</th>
                             <th scope="col">    </th>
                         </tr>
@@ -81,7 +88,7 @@
                                 <td>${s.settingId}</td>
                                 <td>${s.type}</td>  
                                 <td>${s.value}</td>
-                                <!--                        <td>3</td>-->
+                                <td>${s.description}</td>
                                 <td>${s.status ? 'Active' : 'Deactive'}</td>
                                 <td><a href="edit.jsp">Edit</a></td>
                             </tr>
