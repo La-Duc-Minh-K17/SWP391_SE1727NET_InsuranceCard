@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
+import model.Role;
 import model.UserAccount;
 
 /**
@@ -39,12 +40,21 @@ public class RegisterController extends HttpServlet {
         TimestampUtils timeConfig = new TimestampUtils();
         UserDAO uDAO = new UserDAO();
         String action = request.getParameter("action");
+
         if (action != null && action.equals("verify")) {
             UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
             Timestamp confirmationTokenTime = user.getRecoveryTokenTime();
+
             if (timeConfig.isExpired(confirmationTokenTime)) {
-                uDAO.activateUserAccount(user);
-                request.setAttribute("message", "Verify Successfully.");
+                String token = uDAO.getConfirmationToken(user);
+                String urlToken = request.getParameter("token");
+                if (token.equals(urlToken)) {
+                    uDAO.activateUserAccount(user);
+                    request.setAttribute("message", "Verify Successfully.");
+                }
+                else {
+                    response.sendRedirect("error.jsp");
+                }
             } else {
                 request.setAttribute("error", "The link time has expired");
                 request.getRequestDispatcher("/register").forward(request, response);
@@ -59,11 +69,10 @@ public class RegisterController extends HttpServlet {
             String phone = request.getParameter("phone");
             String gender = request.getParameter("gender");
             String confirmationToken = CodeProcessing.generateToken();
-            UserAccount user = new UserAccount(username, password, email, fullname, gender.equals("Male") ? 1 : 0, phone, confirmationToken, timeConfig.getNow(), 0);
+            UserAccount user = new UserAccount(username, password, email, fullname, gender.equals("Male") ? 1 : 0, phone, confirmationToken, timeConfig.getNow(), 0, new Role(1));
             SessionUtils.getInstance().putValue(request, "user", user);
             String fullURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getRequestURI();
             String urlLink = fullURL + "?action=verify&token=" + confirmationToken;
-            
             EmailSending.sendVerificationMail(user, urlLink, email);
             request.setAttribute("success", "A confirmation email has been sent to your Email, please check.");
         }

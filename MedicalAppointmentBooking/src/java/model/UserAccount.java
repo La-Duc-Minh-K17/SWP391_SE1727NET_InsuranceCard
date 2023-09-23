@@ -41,7 +41,7 @@ public class UserAccount {
 
     
 
-    public UserAccount(String username, String password, String email, String fullName, int gender, String phone, String confirmationToken, Timestamp confirmationTokenTime, int status) {
+    public UserAccount(String username, String password, String email, String fullName, int gender, String phone, String confirmationToken, Timestamp confirmationTokenTime, int status, Role role) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -51,6 +51,7 @@ public class UserAccount {
         this.confirmationToken = confirmationToken;
         this.confirmationTokenTime = confirmationTokenTime;
         this.status = status;
+        this.role = role;
     }
     
 
@@ -122,10 +123,7 @@ public class UserAccount {
         this.recoveryTokenTime = recoveryTokenTime;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
+   
     public String getPassword() {
         return password;
     }

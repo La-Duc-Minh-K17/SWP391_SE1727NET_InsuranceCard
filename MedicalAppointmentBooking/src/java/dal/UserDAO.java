@@ -99,7 +99,7 @@ public class UserDAO {
         return null;
     }
 
-    public void updateRecoveryToken(UserAccount user , String token, Timestamp updatedTime) {
+    public void updateRecoveryToken(UserAccount user, String token, Timestamp updatedTime) {
         PreparedStatement ps = null;
         Connection connection = null;
         String sql = "update table user_account set recovery_token = ? , recovery_token_time = ? where email = ?";
@@ -108,7 +108,7 @@ public class UserDAO {
             ps = connection.prepareStatement(sql);
             ps.setString(1, token);
             ps.setTimestamp(2, updatedTime);
-            ps.setString(3 , user.getEmail());
+            ps.setString(3, user.getEmail());
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -123,8 +123,6 @@ public class UserDAO {
         }
 
     }
-
-    
 
     public void updatePassword(UserAccount user, String newPassword) {
         PreparedStatement ps = null;
@@ -134,7 +132,7 @@ public class UserDAO {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setString(1, newPassword);
-            ps.setString(2 , user.getEmail());
+            ps.setString(2, user.getEmail());
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -149,7 +147,57 @@ public class UserDAO {
         }
     }
 
-    public void addUserAccoun(UserAccount user) {
+    public void addUserAccount(UserAccount user) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "INSERT INTO `mabs`.`user_account`\n"
+                + "(`username`,\n"
+                + "`password`,\n"
+                + "`email`,\n"
+                + "`full_name`,\n"
+                + "`gender`,\n"
+                + "`phone`,\n"
+                + "`status`,\n"
+                + "`confirmation_token`,\n"
+                + "`confirmation_token_time`,\n"
+                + "`role_id`)\n"
+                + "VALUES\n"
+                + "(<{username: }>,\n"
+                + "<{password: }>,\n"
+                + "<{email: }>,\n"
+                + "<{full_name: }>,\n"
+                + "<{gender: }>,\n"
+                + "<{phone: }>,\n"
+                + "<{image: }>,\n"
+                + "<{status: }>,\n"
+                + "<{confirmation_token: }>,\n"
+                + "<{confirmation_token_time: }>,\n"
+                + "<{role_id: }>);   ";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, user.getUserName());
+            ps.setString(2, user.getPassword());
+            ps.setString(4, user.getEmail());
+            ps.setString(5, user.getFullName());
+            ps.setInt(6, user.getGender());
+            ps.setString(7, user.getPhone());
+            ps.setInt(8, user.getStatus());
+            ps.setString(9, user.getConfirmationToken());
+            ps.setTimestamp(10, user.getConfirmationTokenTime());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+
     }
 
     public void activateUserAccount(UserAccount user) {
@@ -173,4 +221,34 @@ public class UserDAO {
             }
         }
     }
+
+    public String getConfirmationToken(UserAccount account) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        String token = null;
+        String sql = "select confirmation_token from user_account where email = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, account.getEmail());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                token = rs.getString(1);
+            }
+            return token;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return token;
+    }
+
 }
