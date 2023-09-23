@@ -23,9 +23,16 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <!-- SLIDER -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/tiny-slider.css"/>
+        <!-- Select2 -->
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
+        <!-- Date picker -->
+        <link rel="stylesheet" href="frontend/template/assets/css/flatpickr.min.css">
+        <link href="frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
         <style>
             #home{
-                background-image: url(frontend/template/assets/images/bg/backgroundclinic.jpg") ;
+                background-image: url("../template/assets/images/bg/backgroundclinic.jpg") ;
             }
         </style>
     <body>
@@ -38,10 +45,10 @@
                 <div>
                     <a class="logo" href="index.html">
                         <span class="logo-light-mode">
-                            <img src="frontend/template/assets/images/MABS__1.png" class="l-dark" height="30" alt="">
-                            <img src="frontend/template/assets/images/MABS__1.png" class="l-light" height="30" alt="">
+                            <img src="../template/assets/images/MABS__1.png" class="l-dark" height="30" alt="">
+                            <img src="../template/assets/images/MABS__1.png" class="l-light" height="30" alt="">
                         </span>
-                        <img src="frontend/template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                        <img src="../template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                     </a>
                 </div>
                 <!-- End Logo container-->
@@ -103,7 +110,7 @@
                 <div class="row justify-content-center mt-5">
                     <div class="col-xl-10">
                         <div class="heading-title text-center">
-                            <img src="../assets/images/logo-icon.png" height="50" alt="">
+                            <img src="../template/assets/images/logo-icon.png" height="50" alt="">
                             <h4 class="heading fw-bold text-white title-dark mt-3 mb-4">Booking Your Appointments</h4>
                             <p class="para-desc mx-auto text-white-50 mb-0">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
                             
@@ -136,7 +143,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-5 col-md-6">
                         <div class="position-relative">
-                            <img src="frontend/template/assets/images/about/About1.png" class="img-fluid" alt="">
+                            <img src="../template/assets/images/about/About1.png" class="img-fluid" alt="">
                             <div class="play-icon">
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#watchvideomodal" class="play-btn video-play-icon">
                                     <i class="mdi mdi-play text-primary rounded-circle bg-white title-bg-dark shadow"></i>
@@ -172,7 +179,7 @@
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
-                                <img src="frontend/template/assets/images/about/homemedical.png" height="40"></img>
+                                <img src="../template/assets/images/about/homemedical.png" height="40"></img>
                             </div>
                             <div class="card-body p-0 mt-3">
                                 <a href="departments.html" class="title text-dark h5">Medical treatment at home</a>
@@ -184,7 +191,7 @@
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
-                                <img src="frontend/template/assets/images/about/pediatric.png" height="40"></img>
+                                <img src="../template/assets/images/about/pediatric.png" height="40"></img>
                             </div>
                             <div class="card-body p-0 mt-3">
                                 <a href="departments.html" class="title text-dark h5">Pediatric</a>
@@ -196,7 +203,7 @@
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
-                                <img src="frontend/template/assets/images/about/internal.png" height="40"></img>
+                                <img src="../template/assets/images/about/internal.png" height="40"></img>
                             </div>
                             <div class="card-body p-0 mt-3">
                                 <a href="departments.html" class="title text-dark h5">Internal</a>
@@ -208,7 +215,7 @@
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
-                                <img src=frontend/template/assets/images/about/ear-nose-mouth.png" height="40"></img>
+                                <img src="../template/assets/images/about/ear-nose-mouth.png" height="40"></img>
                             </div>
                             <div class="card-body p-0 mt-3">
                                 <a href="departments.html" class="title text-dark h5">Ear - Nose - Throat</a>
@@ -220,7 +227,7 @@
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
-                                <img src=frontend/template/assets/images/about/specialize.png" height="40"></img>
+                                <img src="../template/assets/images/about/specialize.png" height="40"></img>
                             </div>
                             <div class="card-body p-0 mt-3">
                                 <a href="departments.html" class="title text-dark h5">Specialized</a>
@@ -232,7 +239,7 @@
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
-                                <img src=frontend/template/assets/images/about/vaccination.png" height="40"></img>
+                                <img src="../template/assets/images/about/vaccination.png" height="40"></img>
                             </div>
                             <div class="card-body p-0 mt-3">
                                 <a href="departments.html" class="title text-dark h5">Vaccination</a>
@@ -256,7 +263,7 @@
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
-                                <img src=frontend/template/assets/images/about/bussinesshealthcheck.png" height="40"/>
+                                <img src="../template/assets/images/about/bussinesshealthcheck.png" height="40"/>
                             </div>
                             <div class="card-body p-0 mt-3">
                                 <a href="departments.html" class="title text-dark h5">Medical Equpipment Rental</a>
@@ -396,7 +403,8 @@
                     <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
                         <div class="card team border-0 rounded shadow overflow-hidden">
                             <div class="team-img position-relative">
-                                <img src=frontend/template/assets/images/doctors/doctor5.png" class="img-fluid" alt="">
+                                <img src="../template/assets/images/doctors/doctor5.png" class="img-fluid" alt="">
+                                
                                 <ul class="list-unstyled team-social mb-0">
                                     <li><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
                                     <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
@@ -414,7 +422,7 @@
                     <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
                         <div class="card team border-0 rounded shadow overflow-hidden">
                             <div class="team-img position-relative">
-                                <img src=frontend/template/assets/images/doctors/doctor2.png" class="img-fluid" alt="">
+                                <img src="../template/assets/images/doctors/doctor2.png" class="img-fluid" alt="">
                                 <ul class="list-unstyled team-social mb-0">
                                     <li><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
                                     <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
@@ -432,7 +440,7 @@
                     <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
                         <div class="card team border-0 rounded shadow overflow-hidden">
                             <div class="team-img position-relative">
-                                <img src=frontend/template/assets/images/doctors/doctor6.png" class="img-fluid" alt="">
+                                <img src="../template/assets/images/doctors/doctor6.png" class="img-fluid" alt="">
                                 <ul class="list-unstyled team-social mb-0">
                                     <li><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
                                     <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
@@ -450,7 +458,7 @@
                     <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
                         <div class="card team border-0 rounded shadow overflow-hidden">
                             <div class="team-img position-relative">
-                                <img src=frontend/template/assets/images/doctors/doctor4.png" class="img-fluid" alt="">
+                                <img src="../template/assets/images/doctors/doctor4.png" class="img-fluid" alt="">
                                 <ul class="list-unstyled team-social mb-0">
                                     <li><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
                                     <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
@@ -480,7 +488,7 @@
                     <div class="slider-range-three">
                         <div class="tiny-slide">
                             <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                <img src=frontend/template/assets/images/blog/03.jpg" class="img-fluid" alt="">
+                                <img src="../template/assets/images/blog/03.jpg" class="img-fluid" alt="">
                                 <div class="card-body p-4">
                                     <ul class="list-unstyled mb-2">
                                         <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
@@ -500,7 +508,7 @@
     
                         <div class="tiny-slide">
                             <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                <img src=frontend/template/assets/images/blog/04.jpg" class="img-fluid" alt="">
+                                <img src="../template/assets/images/blog/04.jpg" class="img-fluid" alt="">
                                 <div class="card-body p-4">
                                     <ul class="list-unstyled mb-2">
                                         <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
@@ -520,7 +528,7 @@
     
                         <div class="tiny-slide">
                             <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                <img src=frontend/template/assets/images/blog/05.jpg" class="img-fluid" alt="">
+                                <img src="../template/assets/images/blog/05.jpg" class="img-fluid" alt="">
                                 <div class="card-body p-4">
                                     <ul class="list-unstyled mb-2">
                                         <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
@@ -540,7 +548,7 @@
     
                         <div class="tiny-slide">
                             <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                <img src=frontend/template/assets/images/blog/06.jpg" class="img-fluid" alt="">
+                                <img src="../template/assets/images/blog/06.jpg" class="img-fluid" alt="">
                                 <div class="card-body p-4">
                                     <ul class="list-unstyled mb-2">
                                         <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
@@ -560,7 +568,7 @@
     
                         <div class="tiny-slide">
                             <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                <img src=frontend/template/assets/images/blog/07.jpg" class="img-fluid" alt="">
+                                <img src="../template/assets/images/blog/07.jpg" class="img-fluid" alt="">
                                 <div class="card-body p-4">
                                     <ul class="list-unstyled mb-2">
                                         <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
@@ -589,7 +597,7 @@
                 <div class="row">
                     <div class="col-xl-5 col-lg-4 mb-0 mb-md-1 pb-0  pb-md-2">
                         <a href="#" class="logo-footer">
-                            <img src="../assets/images/MABS__1.png" height="30" alt="">
+                            <img src="../template/assets/images/MABS__1.png" height="30" alt="">
                         </a>
                         <p class="mt-4 me-xl-5">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
                     </div><!--end col-->
@@ -681,8 +689,8 @@
         <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header p-4 border-bottom">
                 <h5 id="offcanvasRightLabel" class="mb-0">
-                    <img src=frontend/template/assets/images/MABS__1.png" height="24" class="light-version" alt="">
-                    <img src=frontend/template/assets/images/MABS__1.png" height="24" class="dark-version" alt="">
+                    <img src=../template/assets/images/MABS__1.png" height="24" class="light-version" alt="">
+                    <img src=../template/assets/images/MABS__1.png" height="24" class="dark-version" alt="">
                 </h5>
                 <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
             </div>
@@ -733,25 +741,25 @@
         </div>
         <!-- MOdal End -->
         <!-- javascript -->
-        <script src="frontend/assets/js/jquery.min.js"></script>
-        <script src="frontend/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="../template/assets/js/jquery.min.js"></script>
+        <script src="../template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- SLIDER -->
-        <script src="frontend/assets/js/tiny-slider.js"></script>
-        <script src="frontend/assets/js/tiny-slider-init.js"></script>
-        <script src="frontend/assets/js/easy_background.js"></script>
+        <script src="../template/assets/js/tiny-slider.js"></script>
+        <script src="../template/assets/js/tiny-slider-init.js"></script>
+        <script src="../template/assets/js/easy_background.js"></script>
         <!-- Select2 -->
-        <script src="frontend/assets/js/select2.min.js"></script>
-        <script src="frontend/assets/js/select2.init.js"></script>
+        <script src="../template/assets/js/select2.min.js"></script>
+        <script src="../template/assets/js/select2.init.js"></script>
         <!-- Datepicker -->
-        <script src="frontend/assets/js/flatpickr.min.js"></script>
-        <script src="frontend/assets/js/flatpickr.init.js"></script>
+        <script src="../template/assets/js/flatpickr.min.js"></script>
+        <script src="../template/assets/js/flatpickr.init.js"></script>
         <!-- Datepicker -->
-        <script src="frontend/assets/js/jquery.timepicker.min.js"></script> 
-        <script src="frontend/assets/js/timepicker.init.js"></script> 
+        <script src="../template/assets/js/jquery.timepicker.min.js"></script> 
+        <script src="../template/assets/js/timepicker.init.js"></script> 
         <!-- Icons -->
-        <script src="frontend/assets/js/feather.min.js"></script>
+        <script src="../template/assets/js/feather.min.js"></script>
         <!-- Main Js -->
-        <script src="frontend/assets/js/app.js"></script>
+        <script src="../template/assets/js/app.js"></script>
         <script>
             // easy_background("#home",
             //     {
