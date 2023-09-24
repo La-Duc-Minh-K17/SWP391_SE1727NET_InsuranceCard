@@ -62,12 +62,12 @@
                                         <div class="col-md-12">
                                             <div class="mb-3">                                               
                                                 <label class="form-label">Username <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" placeholder="First Name" name="username" required="">
+                                                <input type="text" class="form-control" placeholder="User Name" name="username" required="">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">                                               
-                                                <label class="form-label">Full name <span class="text-danger">*</span></label>
+                                                <label class="form-label">Full Name <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" placeholder="Full Name" name="fullname" required="">
                                             </div>
                                         </div>
@@ -75,31 +75,28 @@
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Your Email <span class="text-danger">*</span></label>
-                                                <input type="email" class="form-control" placeholder="Email" name="email" required="">
+                                                <input type="email" class="form-control" onvalid="validateEmail(this)" oninput="validateEmail(this)" placeholder="name@gmail.com" name="email" required="">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Password <span class="text-danger">*</span></label>
-                                                <input type="password" class="form-control" placeholder="Password" name="password" required="">
+                                                <input type="password" class="form-control" placeholder="Password" name="password" required="" oninvalid="validatePassword(this);" oninput="validatePassword(this);">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Phone <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" placeholder="Password" required="" name="phone">
+                                                <input type="text" class="form-control" placeholder="Password" required="" name="phone" onvalid="validatePhone(this)" oninput="validatePhone(this)">
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <div class="mb-3">
                                                 <label class="form-label">Gender <span class="text-danger">*</span></label>
-
                                             </div>
-
                                             <div class=" d-flex justify-content-around radio-group"> <!-- Group for radio buttons -->
                                                 <label for="male">Male</label>
                                                 <input type="radio"  checked="checked" name="gender" value="Male" required>
-
                                                 <label for="female">Female</label>
                                                 <input type="radio" name="gender" value="Female" required>
                                             </div>

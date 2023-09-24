@@ -4,27 +4,22 @@
  */
 package controller.auth;
 
-import utils.CodeProcessing;
-import utils.EmailSending;
-import utils.SessionUtils;
-import utils.TimeUtil;
 import dal.UserDAO;
-import dbContext.DBConnection;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
-import model.Role;
 import model.UserAccount;
-import utils.Validation;
+import utils.SessionUtils;
+import utils.TimeUtil;
 
 /**
  *
  * @author Admin
  */
-public class RegisterController extends HttpServlet {
+public class VerificationController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,33 +32,28 @@ public class RegisterController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        String action = request.getParameter("action");
         TimeUtil timeConfig = new TimeUtil();
         UserDAO uDAO = new UserDAO();
-        String username = request.getParameter("username");
-        String fullname = request.getParameter("fullname");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String phone = request.getParameter("phone");
-        String gender = request.getParameter("gender");
-        String confirmationToken = CodeProcessing.generateToken();
-        username = Validation.removeDiacritics(username);
-        UserAccount user = new UserAccount(username, password, email, fullname, gender.equals("Male") ? 1 : 0, phone, confirmationToken, timeConfig.getNow(), 0, new Role(1));
+        if (action != null && action.equals("confirm")) {
+            UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
+            Timestamp confirmationTokenTime = user.getConfirmationTokenTime();
+            if (!timeConfig.isExpired(confirmationTokenTime)) {
+                String token = uDAO.getConfirmationToken(user);
+                String urlToken = request.getParameter("token");
+                if (token.equals(urlToken)) {
+                    uDAO.activateUserAccount(user);
+                    request.setAttribute("message", "Verify Successfully.");
+                } else {
+                    response.sendRedirect("error.jsp");
+                }
+            } else {
+                response.sendRedirect("error.jsp");
+            }
 
-        if (uDAO.isAccountExisted(user)) {
-            request.setAttribute("error", "Account has existed !");
-        } else {
-            SessionUtils.getInstance().putValue(request, "user", user);
-            uDAO.addUserAccount(user);
-            String fullURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-            String urlLink = fullURL + "/verify?action=confirm&token=" + confirmationToken;
-            System.out.println(urlLink);
-            EmailSending.sendVerificationMail(user, urlLink, email);
-            request.setAttribute("success", "A confirmation email has been sent to your Email, please check.");
-
+            request.getRequestDispatcher("/login").forward(request, response);
         }
-
-        request.getRequestDispatcher("/frontend/view/register.jsp").forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

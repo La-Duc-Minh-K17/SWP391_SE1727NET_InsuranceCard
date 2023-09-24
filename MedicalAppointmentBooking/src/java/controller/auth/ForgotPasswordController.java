@@ -7,10 +7,9 @@ package controller.auth;
 import utils.CodeProcessing;
 import utils.EmailSending;
 import utils.SessionUtils;
-import utils.TimestampUtils;
+import utils.TimeUtil;
 import dal.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,7 +35,7 @@ public class ForgotPasswordController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        TimestampUtils timeUtil = new TimestampUtils();
+        TimeUtil timeUtil = new TimeUtil();
         String action = request.getParameter("action");
         if (action.equals("reset")) {
 

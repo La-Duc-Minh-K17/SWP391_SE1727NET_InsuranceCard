@@ -5,17 +5,13 @@
 package dal;
 
 import dbContext.DBConnection;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Base64;
 import model.UserAccount;
+import utils.ImageProcessing;
 
 /**
  *
@@ -24,43 +20,6 @@ import model.UserAccount;
 public class UserDAO {
 
     DBConnection dbc = new DBConnection();
-
-    // Convert blob to Base64 string
-    public String imageString(Blob blob) {
-
-        String base64Image = null;
-        InputStream inputStream = null;
-        try {
-            inputStream = blob.getBinaryStream();
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            byte[] buffer = new byte[4096];
-            int bytesRead = -1;
-            try {
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
-                }
-            } catch (IOException ex) {
-                System.out.println(ex);
-            }
-            byte[] imageBytes = outputStream.toByteArray();
-            base64Image = Base64.getEncoder().encodeToString(imageBytes);
-            try {
-                inputStream.close();
-                outputStream.close();
-            } catch (IOException ex) {
-                System.out.println(ex);
-            }
-
-        } catch (SQLException ex) {
-        } finally {
-            try {
-                inputStream.close();
-            } catch (IOException ex) {
-                System.out.println(ex);
-            }
-        }
-        return base64Image;
-    }
 
     public UserAccount getAccountByEmail(String email) {
         PreparedStatement ps = null;
@@ -77,7 +36,7 @@ public class UserDAO {
                 String userName = result.getString("username");
                 String emailAddress = result.getString("email");
                 String fullName = result.getString("full_name");
-                String image = imageString(result.getBlob("image"));
+                String image = ImageProcessing.imageString(result.getBlob("image"));
                 int gender = result.getInt("gender");
                 String phone = result.getString("phone");
                 userAccount = new UserAccount(userName, emailAddress, fullName, gender, phone, image);
@@ -162,29 +121,29 @@ public class UserDAO {
                 + "`confirmation_token_time`,\n"
                 + "`role_id`)\n"
                 + "VALUES\n"
-                + "(<{username: }>,\n"
-                + "<{password: }>,\n"
-                + "<{email: }>,\n"
-                + "<{full_name: }>,\n"
-                + "<{gender: }>,\n"
-                + "<{phone: }>,\n"
-                + "<{image: }>,\n"
-                + "<{status: }>,\n"
-                + "<{confirmation_token: }>,\n"
-                + "<{confirmation_token_time: }>,\n"
-                + "<{role_id: }>);   ";
+                + "( ?,\n"
+                + "?,\n"
+                + "?,\n"
+                + "?,\n"
+                + "?,\n"
+                + "?,\n"
+                + "?,\n"
+                + "?,\n"
+                + "?,\n"
+                + "?);   ";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setString(1, user.getUserName());
             ps.setString(2, user.getPassword());
-            ps.setString(4, user.getEmail());
-            ps.setString(5, user.getFullName());
-            ps.setInt(6, user.getGender());
-            ps.setString(7, user.getPhone());
-            ps.setInt(8, user.getStatus());
-            ps.setString(9, user.getConfirmationToken());
-            ps.setTimestamp(10, user.getConfirmationTokenTime());
+            ps.setString(3, user.getEmail());
+            ps.setString(4, user.getFullName());
+            ps.setInt(5, user.getGender());
+            ps.setString(6, user.getPhone());
+            ps.setInt(7, user.getStatus());
+            ps.setString(8, user.getConfirmationToken());
+            ps.setTimestamp(9, user.getConfirmationTokenTime());
+            ps.setInt(10, user.getRole().getRole_id());
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -203,7 +162,7 @@ public class UserDAO {
     public void activateUserAccount(UserAccount user) {
         PreparedStatement ps = null;
         Connection connection = null;
-        String sql = "update table user_account set status = 1 where email = ?";
+        String sql = "UPDATE user_account SET status = 1 WHERE email = ?";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
@@ -251,4 +210,33 @@ public class UserDAO {
         return token;
     }
 
+    public boolean isAccountExisted(UserAccount account) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        boolean isExisted = false;
+        String sql = "select * from user_account where email = ? and username = ? ";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, account.getEmail());
+            ps.setString(2, account.getUserName());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                isExisted = true;
+            }
+            return isExisted;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return isExisted;
+    }
 }
