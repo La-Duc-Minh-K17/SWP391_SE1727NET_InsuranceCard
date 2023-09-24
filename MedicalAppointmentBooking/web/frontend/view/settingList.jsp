@@ -27,7 +27,7 @@
     </head>  
     <style>
         body{
-            background-color: #D5D3D3;
+            background-color: #D3D3D3;
         }
         .header-title{
             margin-left: 14%;
@@ -52,7 +52,23 @@
         .container{
             background-color: #D9D9D9;
         }
+        #addSettingForm {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        /* CSS để điều chỉnh hiển thị của biểu mẫu "settinglist" */
+        #settingListForm {
+            margin-top: 100px; /* Điều chỉnh khoảng cách giữa biểu mẫu thêm setting và "settinglist" */
+        }
     </style>
+
     <body>
         <div class="header-title">
             <h3>Settings</h3>
@@ -68,43 +84,104 @@
                     <option value="description">Description</option>
                     <option value="status">Status</option>
                 </select>
-                <button type="button">Add more</button>
-            </div>
-            <div class="container">
-                <table class="col-md-8 table">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Type</th>  
-                            <th scope="col">Value</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">    </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="s" items="${settings}">
-                            <tr>
-                                <td>${s.settingId}</td>
-                                <td>${s.type}</td>  
-                                <td>${s.value}</td>
-                                <td>${s.description}</td>
-                                <td>${s.status ? 'Active' : 'Deactive'}</td>
-                                <td><a href="edit.jsp">Edit</a></td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-                <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
-                <!-- Icons -->
-
-                <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
-                <!-- Main Js -->
-
-                <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
+                <button type="button" id="addMoreButton">Add more</button>
             </div>
         </form>
 
+        <div id="addSettingForm" style="display: none;">
+            <form action="addSetting" method="POST">
+                <label for="settingType">Type:</label>
+                <input type="text" id="settingType" name="settingType">
+                <br>
+                <label for="settingValue">Value:</label>
+                <input type="text" id="settingValue" name="settingValue">
+                <br>
+                <label for="settingDescription">Description:</label>
+                <input type="text" id="settingDescription" name="settingDescription">
+                <br>
+                <label for="settingStatus">Status:</label>
+                <select id="settingStatus" name="settingStatus">
+                    <option value="Active">Active</option>
+                    <option value="Deactive">Deactive</option>
+                </select>
+                <br>
+                <button type="submit">Add Setting</button>
+                <button type="button" id="cancelButton">Cancel</button>
+            </form>
+        </div>
+        <div id="settingListForm" class="container">
+            <table class="col-md-8 table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Type</th>  
+                        <th scope="col">Value</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">    </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="s" items="${settings}">
+                        <tr>
+                            <td>${s.settingId}</td>
+                            <td>${s.type}</td>  
+                            <td>${s.value}</td>
+                            <td>${s.description}</td>
+                            <td>${s.status ? 'Active' : 'Deactive'}</td>
+                            <td><a href="edit.jsp">Edit</a></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
 
+        </div>
+
+        <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
+        <!-- Icons -->
+
+        <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
+        <!-- Main Js -->
+
+        <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
+        <script>
+            var addMoreButton = document.getElementById("addMoreButton");
+            var addSettingForm = document.getElementById("addSettingForm");
+
+            // Thêm sự kiện khi nhấn nút "Add more"
+            addMoreButton.addEventListener("click", function () {
+                // Hiển thị biểu mẫu thêm setting
+                addSettingForm.style.display = "block";
+
+                // Ẩn biểu mẫu "settinglist"
+                var settingListForm = document.getElementById("settingListForm");
+                settingListForm.style.display = "none";
+            });
+
+            // Thêm sự kiện khi nhấn nút "Thêm Setting" hoặc "Hủy"
+            var submitButton = addSettingForm.querySelector("button[type='submit']");
+            var cancelButton = addSettingForm.querySelector("button[type='button']");
+
+            submitButton.addEventListener("click", function () {
+                // Ẩn biểu mẫu thêm setting khi nút "Thêm Setting" được nhấn
+                addSettingForm.style.display = "none";
+
+                // Hiển thị lại biểu mẫu "settinglist"
+                var settingListForm = document.getElementById("settingListForm");
+                settingListForm.style.display = "block";
+
+                // Thêm mã xử lý để gửi dữ liệu setting lên máy chủ (phía server) ở đây
+            });
+
+            cancelButton.addEventListener("click", function () {
+                // Ẩn biểu mẫu thêm setting khi nút "Hủy" được nhấn
+                addSettingForm.style.display = "none";
+
+                // Hiển thị lại biểu mẫu "settinglist"
+                var settingListForm = document.getElementById("settingListForm");
+                settingListForm.style.display = "block";
+            });
+        </script>
     </body>
+
 </html>
