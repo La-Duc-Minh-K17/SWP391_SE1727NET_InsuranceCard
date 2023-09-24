@@ -20,6 +20,10 @@
         <servlet-name>ForgotPasswordController</servlet-name>
         <servlet-class>controller.auth.ForgotPasswordController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NewListController</servlet-name>
+        <servlet-class>controller.home.NewListController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>ForgotPasswordController</servlet-name>
         <url-pattern>/forgot</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewListController</servlet-name>
+        <url-pattern>/new</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

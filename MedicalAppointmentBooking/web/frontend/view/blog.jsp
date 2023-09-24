@@ -108,8 +108,7 @@
         <section class="bg-half-60 d-table w-100" style="background: url('../assets/images/bg/02.jpg') center center;">
             <div class="bg-overlay bg-overlay-dark"></div>
             <div class="container">
-                
-                <div class="row mt-5 justify-content-center">
+                 <div class="row mt-5 justify-content-center">
                     <div class="col-12">
                         <div class="section-title text-center">
                             <h3 class="sub-title mb-4 text-white title-dark">Blogs &amp; News</h3>
@@ -124,10 +123,9 @@
                             </nav>
                         </div>
                     </div><!--end col-->
-                </div><!--end row-->
+                </div>
             </div><!--end container-->
         </section>
-
 
         <main>
             <div class="container" style="margin-top: 90px;">
@@ -140,7 +138,7 @@
                                 <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2">
                                     <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                                         <div class="imagefit">
-                                            <img src="${o.image}" style="width:100%;height:100%;" class="img-fluid" alt="">
+                                            <img src="" style="width:100%;height:100%;" class="img-fluid" alt="">
                                         </div>
                                         <div class="card-body p-4">
                                             <ul class="list-unstyled mb-2">
@@ -153,25 +151,12 @@
                                             <a href="new-details.jsp" class="text-dark title h5">${o.title}</a>
                                             <div>
                                                 <ul class="list-unstyled mb-0">
-                                                    <a href="frontend/view/new-details.jsp" class="text-dark title h6">${o.script}"</a>
+                                                    <a href="frontend/view/newdetail.jsp" class="text-dark title h6">${o.description}</a>
                                                 </ul>
-<<<<<<< Updated upstream
-                                                <a href="new-details.jsp" class="text-dark title h5">${o.title}</a>
-                                                <div>
-                                                    <ul class="list-unstyled mb-0">
-                                                        <a href="new-details.jsp" class="text-dark title h6">${o.description}"</a>
-                                                    </ul>
-                                                </div>
-                                                <div class="post-meta d-flex justify-content-between mt-3">                                               
-                                                    <a href="blog-detail.jsp" class="link">Read More <i
-                                                            class="mdi mdi-chevron-right align-middle"></i></a>
-                                                </div>
-=======
                                             </div>
                                             <div class="post-meta d-flex justify-content-between mt-3">                                               
-                                                <a href="frontend/view/blog-details.jsp" class="link">Read More <i
+                                                <a href="frontend/view/blogdetail.jsp" class="link">Read More <i
                                                         class="mdi mdi-chevron-right align-middle"></i></a>
->>>>>>> Stashed changes
                                             </div>
                                         </div>
                                     </div>
@@ -181,6 +166,7 @@
                     </div>
                 </section>
             </div>
+
 
             <div class="container" style="padding-top:10px">
                 <section class="blog_area section-padding">
@@ -194,7 +180,7 @@
                                             <form class="flexsearch--form1" action="#" method="post">
                                                 <select>
                                                     <c:forEach var="o" items="${requestScope.listC}">
-                                                        <option selected value=${o.ID}>${o.name}</option>
+                                                        <option  value=${o.blog_category_id}>${o.name}</option>
                                                     </c:forEach>
                                                 </select>
                                             </form>
@@ -202,6 +188,7 @@
                                     </aside>
                                 </div>
                             </div>
+
 
                             <div class="col-lg-8">
                                 <section class="blog_right_sidebar">
@@ -226,7 +213,7 @@
                                         <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                                             <div class="row">
                                                 <div class="col-lg-4">
-                                                    <img src=${o.image} class="image-container" alt="">
+                                                    <img src= class="image-container" alt="">
                                                 </div>
                                                 <div class="col-lg-8">
                                                     <div class="card-body p-4">
@@ -239,7 +226,7 @@
                                                         <a href="new-details.jsp" class="text-dark title h5">${o.title}</a>
                                                         <div>
                                                             <ul class="list-unstyled mb-0">
-                                                                <a href="new-details.jsp" class="text-dark title h6">${o.script}</a>
+                                                                <a href="new-details.jsp" class="text-dark title h6">${o.description}</a>
                                                             </ul>
                                                         </div>
                                                         <div class="post-meta d-flex justify-content-between mt-3">                                                           
