@@ -222,28 +222,34 @@
             </div><!--end container-->
         </section>
 
-        
+
         <main>
             <div class="container" style="margin-top: 90px;">
-                    <section class="blog_area section-padding">
-                        <div class="container">
-                            <div class="row">
-                                <h6 class="widget_title" style="color: #2d2d2d;">Recent Post</h6>                          
-                                <c:forEach var="o" items="${requestScope.blogs3}">
+                <section class="blog_area section-padding">
+                    <div class="container">
+                        <div class="row">
+                            <h6 class="widget_title" style="color: #2d2d2d;">Recent Post</h6>                          
+                            <c:forEach var="o" items="${requestScope.blogs3}">
 
-                                    <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2">
-                                        <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                                            <div class="image" style="height:246px;width: 492px;">
-                                            <img src="${o.image}" style="width:100%; height:100%" class="img-fluid" alt="">
-                                            </div>
-                                            <div class="card-body p-4">
-                                                <ul class="list-unstyled mb-2">
-                                                    <li class="list-inline-item text-muted small me-3">
-                                                            ${o.created_time}
-                                                    </li>
-                                                    <li class="list-inline-item text-muted small"><i
-                                                            class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
+                                <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2">
+                                    <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
+                                        <div class="imagefit">
+                                            <img src="${o.image}" style="width:100%;height:100%;" class="img-fluid" alt="">
+                                        </div>
+                                        <div class="card-body p-4">
+                                            <ul class="list-unstyled mb-2">
+                                                <li class="list-inline-item text-muted small me-3">
+                                                    ${o.created_time}
+                                                </li>
+                                                <li class="list-inline-item text-muted small"><i
+                                                        class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
+                                            </ul>
+                                            <a href="new-details.jsp" class="text-dark title h5">${o.title}</a>
+                                            <div>
+                                                <ul class="list-unstyled mb-0">
+                                                    <a href="frontend/view/new-details.jsp" class="text-dark title h6">${o.script}"</a>
                                                 </ul>
+<<<<<<< Updated upstream
                                                 <a href="new-details.jsp" class="text-dark title h5">${o.title}</a>
                                                 <div>
                                                     <ul class="list-unstyled mb-0">
@@ -254,13 +260,20 @@
                                                     <a href="blog-detail.jsp" class="link">Read More <i
                                                             class="mdi mdi-chevron-right align-middle"></i></a>
                                                 </div>
+=======
+                                            </div>
+                                            <div class="post-meta d-flex justify-content-between mt-3">                                               
+                                                <a href="frontend/view/blog-details.jsp" class="link">Read More <i
+                                                        class="mdi mdi-chevron-right align-middle"></i></a>
+>>>>>>> Stashed changes
                                             </div>
                                         </div>
                                     </div>
-                                </c:forEach>
-                            </div>
+                                </div>
+                            </c:forEach>
                         </div>
-                    </section>
+                    </div>
+                </section>
             </div>
 
             <div class="container" style="padding-top:10px">
@@ -269,34 +282,34 @@
                         <div class="row">
 
                             <div class="col-lg-4 mb-5 mb-lg-0">
-                            <div class="blog_left_sidebar">                              
-                                <aside class="single_sidebar_widget post_category_widget">
-                                    <ul class="list cat-list">
-                                        <form class="flexsearch--form1" action="#" method="post">
-                                            <select>
-                                                <c:forEach var="o" items="${requestScope.listC}">
-                                                    <option selected value=${o.ID}>${o.name}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </form>
-                                    </ul>
-                                </aside>
-                            </div>
-                        </div>
-
-                          <div class="col-lg-8">
-                            <section class="blog_right_sidebar">
-                                <div class="flexsearch">
-                                    <div class="flexsearch--wrapper">
-                                        <form class="flexsearch--form" action="#" method="post">
-                                            <div class="flexsearch--input-wrapper">
-                                                <input class="flexsearch--input" type="search" placeholder="search">
-                                            </div>
-                                            <input class="flexsearch--submit" type="submit" value="&#10140;" />
-                                        </form>
-                                    </div>
+                                <div class="blog_left_sidebar">                              
+                                    <aside class="single_sidebar_widget post_category_widget">
+                                        <ul class="list cat-list">
+                                            <form class="flexsearch--form1" action="#" method="post">
+                                                <select>
+                                                    <c:forEach var="o" items="${requestScope.listC}">
+                                                        <option selected value=${o.ID}>${o.name}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </form>
+                                        </ul>
+                                    </aside>
                                 </div>
-                        </div>
+                            </div>
+
+                            <div class="col-lg-8">
+                                <section class="blog_right_sidebar">
+                                    <div class="flexsearch">
+                                        <div class="flexsearch--wrapper">
+                                            <form class="flexsearch--form" action="#" method="post">
+                                                <div class="flexsearch--input-wrapper">
+                                                    <input class="flexsearch--input" type="search" placeholder="search">
+                                                </div>
+                                                <input class="flexsearch--submit" type="submit" value="&#10140;" />
+                                            </form>
+                                        </div>
+                                    </div>
+                            </div>
 
                             </section>
                         </div>
@@ -307,7 +320,7 @@
                                         <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                                             <div class="row">
                                                 <div class="col-lg-4">
-                                                    <img  style ="width:100%;height:100%"src=${o.image} class="img-fluid" alt="">
+                                                    <img src=${o.image} class="image-container" alt="">
                                                 </div>
                                                 <div class="col-lg-8">
                                                     <div class="card-body p-4">
@@ -324,7 +337,7 @@
                                                             </ul>
                                                         </div>
                                                         <div class="post-meta d-flex justify-content-between mt-3">                                                           
-                                                            <a href="new-detail.jsp" class="link">Read More <i
+                                                            <a href="new-details.jsp" class="link">Read More <i
                                                                     class="mdi mdi-chevron-right align-middle"></i></a>
                                                         </div>
                                                     </div>
@@ -336,6 +349,30 @@
                                 </c:forEach>
                             </div>
                         </div>
+                        <div class="container" style="padding-top: 20px;">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item <c:if test="${currentPage == 1}">disabled</c:if>">
+                                        <a class="page-link" href="?page=${currentPage - 1}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+
+                                    <c:forEach var="page" begin="1" end="${totalPages}">
+                                        <li class="page-item <c:if test="${page == currentPage}">active</c:if>">
+                                            <a class="page-link" href="?page=${page}">${page}</a>
+                                        </li>
+                                    </c:forEach>
+
+                                    <li class="page-item <c:if test="${currentPage == totalPages}">disabled</c:if>">
+                                        <a class="page-link" href="?page=${currentPage + 1}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
                         </main>
 
                         <!-- Start -->
@@ -344,7 +381,7 @@
                                 <div class="row">
                                     <div class="col-xl-5 col-lg-4 mb-0 mb-md-4 pb-0 pb-md-2">
                                         <a href="#" class="logo-footer">
-                                            <img src="../assets/images/MABS__1.png" height="30" alt="">
+                                            <img src="frontend/template/assets/images/MABS__1.png" height="30" alt="">
                                         </a>
                                         <p class="mt-4 me-xl-5">Great doctor if you need your family member to get effective immediate
                                             assistance, emergency treatment or a simple consultation.</p>

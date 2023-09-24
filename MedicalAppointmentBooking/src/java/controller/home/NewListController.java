@@ -91,10 +91,10 @@ public class NewListController extends HttpServlet {
         CategoryDao cdao = new CategoryDao();
         List<Blog_Category> blog_category = cdao.getAllCategorys();
         blogslist = dao.getAllNewsBySearch(search, Integer.parseInt(category));
-        List<Blog> blogs4 = new ArrayList<>();
-        blogs4 = dao.getTop3News();
+        List<Blog> blogs3 = new ArrayList<>();
+        blogs3 = dao.getTop3News();
         request.setAttribute("listC", blog_category);
-        request.setAttribute("list4", blogs4);
+        request.setAttribute("list4", blogs3);
         request.setAttribute("data", blogslist);
         request.setAttribute("search", search);
         request.getRequestDispatcher("news.jsp").forward(request, response);

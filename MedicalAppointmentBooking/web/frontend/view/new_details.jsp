@@ -196,10 +196,7 @@
                     <div class="col-lg-8 col-lg-7">
                         <img src="../assets/images/blog/single.jpg" class="img-fluid rounded shadow" alt="">
 
-                        <!-- <ul class="list-unstyled mt-4">
-                            <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i> Calvin Carlo</li>
-                            <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i> 1st January, 2021</li>
-                        </ul> -->
+                       
 
                         <p class="text-muted mt-4">This is required when, for example, the final text is not yet
                             available. Dummy text is also known as 'fill text'. It is said that song composers of the

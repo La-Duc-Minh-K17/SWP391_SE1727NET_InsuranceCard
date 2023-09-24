@@ -7,109 +7,109 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
  * Essential Structure *
  ***********************/
 .flexsearch--wrapper {
-	height: auto;
-	width: auto;
-	max-width: 100%;
-	overflow: hidden;
-	background: transparent;
-	margin: 0;
-	position: static;
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    overflow: hidden;
+    background: transparent;
+    margin: 0;
+    position: static;
 }
-	
+
 .flexsearch--form {
-	overflow: hidden;
-	position: relative;
-  
+    overflow: hidden;
+    position: relative;
+
 }
-	
+
 .flexsearch--input-wrapper {
-	padding: 0 66px 0 0; /* Right padding for submit button width */
-	overflow: hidden;
+    padding: 0 66px 0 0; /* Right padding for submit button width */
+    overflow: hidden;
 }
 
 .flexsearch--input {
-  width: 100%;
+    width: 100%;
 }
 
 /***********************
  * Configurable Styles *
  ***********************/
 .flexsearch {
-  padding: 0 25px 0 200px; /* Padding for other horizontal elements */
+    padding: 0 25px 0 200px; /* Padding for other horizontal elements */
 }
 
 .flexsearch--input {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  height: 40px; /* Adjust the height as needed */
-  padding: 0 20px 0 10px; /* Adjust the padding as needed */
-  border-color: rgb(75, 75, 196);
-  border-radius: 20px; /* Adjust the border-radius as needed */
-  border-style: solid;
-  border-width: 2px; /* Adjust the border-width as needed */
-  margin-top: 15px;
-  color: #333;
-  font-family: 'Helvetica', sans-serif;
-  font-size: 20px; /* Adjust the font-size as needed */
-  -webkit-appearance: none;
-  -moz-appearance: none;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 40px; /* Adjust the height as needed */
+    padding: 0 20px 0 10px; /* Adjust the padding as needed */
+    border-color: rgb(75, 75, 196);
+    border-radius: 20px; /* Adjust the border-radius as needed */
+    border-style: solid;
+    border-width: 2px; /* Adjust the border-width as needed */
+    margin-top: 15px;
+    color: #333;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 20px; /* Adjust the font-size as needed */
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 .flexsearch--form1 select {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  height: 40px; /* Adjust the height as needed */
-  padding: 0 20px 0 10px; /* Adjust the padding as needed */
-  border-color: rgb(75, 75, 196);
-  border-radius: 20px; /* Adjust the border-radius as needed */
-  border-style: solid;
-  border-width: 2px; /* Adjust the border-width as needed */
-  margin-top: 15px;
-  color: #333;
-  font-family: 'Helvetica', sans-serif;
-  font-size: 20px; /* Adjust the font-size as needed */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}	
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 40px; /* Adjust the height as needed */
+    padding: 0 20px 0 10px; /* Adjust the padding as needed */
+    border-color: rgb(75, 75, 196);
+    border-radius: 20px; /* Adjust the border-radius as needed */
+    border-style: solid;
+    border-width: 2px; /* Adjust the border-width as needed */
+    margin-top: 15px;
+    color: #333;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 20px; /* Adjust the font-size as needed */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
 .flexsearch--submit {
-  position: absolute;
-	right: 0;
-	top: 0;
-	display: block;
-	width: 40px;
-	height: 40px;
-  padding: 0;
-  border: none;
-	margin-top: 15px; /* margin-top + border-width */
-  margin-right: 50px; /* border-width */
-	background: transparent;
-  color: rgb(75, 75, 196);
-  font-family: 'Helvetica', sans-serif;
-  font-size: 40px;
-  line-height: 30px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    margin-top: 15px; /* margin-top + border-width */
+    margin-right: 50px; /* border-width */
+    background: transparent;
+    color: rgb(75, 75, 196);
+    font-family: 'Helvetica', sans-serif;
+    font-size: 40px;
+    line-height: 30px;
 }
 
 .flexsearch--input:focus {
-  outline: none;
-  border-color: #333;
+    outline: none;
+    border-color: #333;
 }
 
 .flexsearch--input:focus.flexsearch--submit {
- 	color: #333; 
+    color: #333;
 }
 
 .flexsearch--submit:hover {
-  color: #333;
-  cursor: pointer;
+    color: #333;
+    cursor: pointer;
 }
 
 ::-webkit-input-placeholder {
-	color: #888;  
+    color: #888;
 }
 
 input:-moz-placeholder {
-  color: #888
+    color: #888
 }
 
 
@@ -117,58 +117,72 @@ input:-moz-placeholder {
  * Pretify demo *
  ****************/
 .h1 {
-  float: left;
-  margin: 25px;
-  color: #333;
-  font-family: 'Helvetica', sans-serif;
-  font-size: 40px;
-  font-weight: bold;
-  line-height: 40px;
-  text-align: center;
+    float: left;
+    margin: 25px;
+    color: #333;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 40px;
+    text-align: center;
 }
 :root {
-  --arrow-bg: rgba(255, 255, 255, 0.3);
-  --arrow-icon: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg);
-  --option-bg: white;
-  --select-bg: rgba(255, 255, 255, 0.2);
+    --arrow-bg: rgba(255, 255, 255, 0.3);
+    --arrow-icon: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg);
+    --option-bg: white;
+    --select-bg: rgba(255, 255, 255, 0.2);
 }
 /* <select> styles */
 select {
-  /* Reset */
-  appearance: none;
-  border: 0;
-  outline: 0;
-  width:300px;
-  height: 65px;
-  font: inherit;
-  /* Personalize */
-  padding: 0 46px 0 10px;
-	border-color: rgb(75, 75, 196);
-  border-radius: 35px; /* (height/2) + border-width */
-  border-style: solid;
-	border-width: 5px;
-  margin-top: 15px;
-  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  /* Remove IE arrow */
-  &::-ms-expand {
-    display: none;
-  }
-  /* Remove focus outline */
-  &:focus {
-    outline: none;
-  }
-  /* <option> colors */
-  option {
-    color: inherit;
-    background-color: var(--option-bg);
-    color: #000;
-  }
+    /* Reset */
+    appearance: none;
+    border: 0;
+    outline: 0;
+    width:300px;
+    height: 65px;
+    font: inherit;
+    /* Personalize */
+    padding: 0 46px 0 10px;
+    border-color: rgb(75, 75, 196);
+    border-radius: 35px; /* (height/2) + border-width */
+    border-style: solid;
+    border-width: 5px;
+    margin-top: 15px;
+    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    /* Remove IE arrow */
+    &::-ms-expand {
+        display: none;
+    }
+    /* Remove focus outline */
+    &:focus {
+        outline: none;
+    }
+    /* <option> colors */
+    option {
+        color: inherit;
+        background-color: var(--option-bg);
+        color: #000;
+    }
 }
 .bg-half-60 {
-  padding: 60px 0;
-  background-size: cover;
-  align-self: center;
-  position: relative;
-  background-position: center center
+    padding: 60px 0;
+    background-size: cover;
+    align-self: center;
+    position: relative;
+    background-position: center center
+}
+.image-container_imgfit {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cắt hoặc scale ảnh để fit vào form */
+}
+.image-container {
+    width: 300px; /* Thay đổi kích thước theo yêu cầu của bạn */
+    height: 200px; /* Thay đổi kích thước theo yêu cầu của bạn */
+    overflow: hidden; /* Để cắt ảnh nếu nó lớn hơn form */
+}
+.imagefit{
+    height:246px;
+    width: 492px; /* Để cắt ảnh nếu nó lớn hơn form */
 }
