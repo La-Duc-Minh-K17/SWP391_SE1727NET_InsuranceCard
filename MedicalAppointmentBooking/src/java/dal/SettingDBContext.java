@@ -4,6 +4,7 @@
  */
 package dal;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,10 +17,13 @@ import model.Setting;
  *
  * @author DELL
  */
-public class SettingDBContext extends DBContext {
+public class SettingDBContext {
+
+    DBContext db = new DBContext();
 
     public ArrayList<Setting> list() {
         ArrayList<Setting> settings = new ArrayList<>();
+        Connection connection = db.getConnection();
         try {
             String sql = "SELECT setting_id, type,value,description,status from settings";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -41,7 +45,7 @@ public class SettingDBContext extends DBContext {
 
     public ArrayList<Setting> getSetting(String type, String term) {
         ArrayList<Setting> settings = new ArrayList<>();
-
+        Connection connection = db.getConnection();
         try {
             String sql = "SELECT setting_id, type,value,description,status FROM settings\n"
                     + "WHERE " + type + " like ?";
@@ -67,9 +71,9 @@ public class SettingDBContext extends DBContext {
         return settings;
     }
 
-    public ArrayList<Setting> getSettingAllType( String term) {
+    public ArrayList<Setting> getSettingAllType(String term) {
         ArrayList<Setting> settings = new ArrayList<>();
-
+        Connection connection = db.getConnection();
         try {
             String sql = "SELECT setting_id, type,value,description,status FROM settings\n"
                     + " WHERE type like ? or setting_id like ? or value like ? or description like ? or status like ?";

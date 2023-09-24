@@ -14,21 +14,22 @@ import java.util.logging.Logger;
  *
  * @author DELL
  */
-public abstract class DBContext {
-    protected Connection connection;
-    public DBContext()
-    {
+public class DBContext {
+
+    public Connection getConnection() {
+        Connection connection = null;
         try {
-            String username = "minh";
-            String password = "minh1234";
-            String url = "jdbc:sqlserver://DESKTOP-OMSOF7F:1433;databaseName=SWP";
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            String url = "jdbc:mysql://localhost:3306/mabs";
+            String username = "root";
+            String password = "123456";
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, username, password);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+            return connection;
+        } catch (ClassNotFoundException | SQLException ex) {
+            return null;
         }
-        
+
     }
+    
 }

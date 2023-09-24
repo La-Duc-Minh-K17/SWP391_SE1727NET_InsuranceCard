@@ -52,6 +52,23 @@
         .container{
             background-color: #D9D9D9;
         }
+        .add-setting-form {
+            background-color: #red; /* Màu nền */
+            border: 1px solid #ccc; /* Viền */
+            padding: 20px; /* Khoảng cách giữa nội dung và viền */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng đổ */
+        }
+        .add-setting-form h4{
+            text-align:  center;
+        }
+        .add-setting-form label{
+            text-align: left;
+        }
+        .add-setting-form input{
+            border: 1px solid #ccc;
+            
+        }
+        
         #addSettingForm {
             display: none;
             position: absolute;
@@ -88,23 +105,27 @@
             </div>
         </form>
 
-        <div id="addSettingForm" style="display: none;">
+        <div id="addSettingForm" class="add-setting-form" style="display: none;">
             <form action="addSetting" method="POST">
+                <h4>Add Settings</h4>
                 <label for="settingType">Type:</label>
-                <input type="text" id="settingType" name="settingType">
-                <br>
+                <br><br>
+                <input type="text" id="settingType" placeholder="Type" name="settingType">
+                 <br><br>
                 <label for="settingValue">Value:</label>
-                <input type="text" id="settingValue" name="settingValue">
-                <br>
-                <label for="settingDescription">Description:</label>
-                <input type="text" id="settingDescription" name="settingDescription">
-                <br>
+                  <br><br>
+                <input type="text" id="settingValue" placeholder="Value" name="settingValue">
+                  <br><br>
+                <label for="settingDescription"> Description:</label>
+                  <br><br>
+                <input type="text" id="settingDescription" placeholder="Description" name="settingDescription">
+                  <br><br>
                 <label for="settingStatus">Status:</label>
                 <select id="settingStatus" name="settingStatus">
                     <option value="Active">Active</option>
                     <option value="Deactive">Deactive</option>
                 </select>
-                <br>
+                  <br><br>
                 <button type="submit">Add Setting</button>
                 <button type="button" id="cancelButton">Cancel</button>
             </form>

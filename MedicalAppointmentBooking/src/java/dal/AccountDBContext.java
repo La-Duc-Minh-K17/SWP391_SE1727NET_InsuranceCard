@@ -4,6 +4,7 @@
  */
 package dal;
 
+import java.sql.Connection;
 import model.Account;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,10 +17,11 @@ import java.util.logging.Logger;
  *
  * @author DELL
  */
-public class AccountDBContext extends DBContext {
 
+public class AccountDBContext  {
+    DBContext db = new DBContext();
     public void insertAccount(Account account) {
-
+        Connection connection = db.getConnection();
         try {
             String query = "INSERT INTO Account (name, email, password,gender,username,mobile) VALUES (?, ?, ?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -38,6 +40,7 @@ public class AccountDBContext extends DBContext {
         }
     }
     public Account getAccountBy(String username, String password) {
+        Connection connection = db.getConnection();
         try {
             String sql = "SELECT name,email,gender,mobile FROM Account\n"
                     + "WHERE username = ?\n"

@@ -78,8 +78,6 @@ public class RegisterController extends HttpServlet {
         String phoneNumber = request.getParameter("mobile");
         String name = firstName +" "+ lastName;
         
-        SendEmail sm =new SendEmail();
-        String code = sm.getRandom();
       
         
         Account account = new Account();
@@ -90,7 +88,6 @@ public class RegisterController extends HttpServlet {
         account.setGender(gender);
         account.setMobile(phoneNumber);
         account.setUsername(username);
-        account.setCode(code);
         
 //        boolean test = sm.sendEmail(account);
 //        
