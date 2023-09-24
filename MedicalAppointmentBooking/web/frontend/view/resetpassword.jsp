@@ -23,7 +23,7 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/otherStyle.css" rel="stylesheet" type="text/css" />
     </head>
 
     <body>
@@ -47,23 +47,28 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-5 col-md-8">
-                       
+                        <c:if test="${error != null}">
+                            <div class="alert alert-error">${requestScope.error}</div>
+                        </c:if>
+                        <c:if test="${success != null}">
+                            <div class="alert alert-success">${requestScope.success}</div>
+                        </c:if>
                         <div class="card login-page bg-white shadow mt-4 rounded border-0">
                             <div class="card-body">
                                 <h4 class="text-center">Reset password</h4>  
-                                <form action="<c:url value='/forgot?action=reset_password'/>" class="login-form mt-4">
+                                <form action="<c:url value='/forgot?action=reset-password'/>" class="login-form mt-4">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">New Password <span class="text-danger">*</span></label>
-                                                <input type="password" class="form-control" placeholder="Password" name="password" required="">
+                                                <input   type="password" class="form-control" placeholder="Password" name="password" required="" oninvalid="validatePassword(this)" oninput="validatePassword(this)">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
-                                                <input type="password" class="form-control" placeholder="" required="" name="confirmpassword">
+                                                <input type="password" class="form-control" placeholder="Password" required="" onchange="onChange()"name="confirmpassword">
                                             </div>
                                         </div>
                                         <div class="col-lg-12 mb-0">
@@ -82,6 +87,18 @@
         <!-- Hero End -->
 
         <!-- javascript -->
+        <script>
+            function onChange() {
+                const password = document.querySelector('input[name=password]');
+                const confirm = document.querySelector('input[name=confirmpassword]');
+
+                if (confirm.value === password.value) {
+                    confirm.setCustomValidity('');
+                } else {
+                    confirm.setCustomValidity('Passwords do not match');
+                }
+            }
+        </script>
         <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
         <!-- Icons -->
 

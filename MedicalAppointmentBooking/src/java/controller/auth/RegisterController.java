@@ -9,16 +9,13 @@ import utils.EmailSending;
 import utils.SessionUtils;
 import utils.TimeUtil;
 import dal.UserDAO;
-import dbContext.DBConnection;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Timestamp;
 import model.Role;
 import model.UserAccount;
-import utils.Validation;
 
 /**
  *
@@ -37,29 +34,31 @@ public class RegisterController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        TimeUtil timeConfig = new TimeUtil();
-        UserDAO uDAO = new UserDAO();
-        String username = request.getParameter("username");
-        String fullname = request.getParameter("fullname");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String phone = request.getParameter("phone");
-        String gender = request.getParameter("gender");
-        String confirmationToken = CodeProcessing.generateToken();
-        username = Validation.removeDiacritics(username);
-        UserAccount user = new UserAccount(username, password, email, fullname, gender.equals("Male") ? 1 : 0, phone, confirmationToken, timeConfig.getNow(), 0, new Role(1));
+        String action = request.getParameter("action");
+        if (action != null && action.equals("regist")) {
+            TimeUtil timeConfig = new TimeUtil();
+            UserDAO uDAO = new UserDAO();
+            String username = request.getParameter("username");
+            String fullname = request.getParameter("fullname");
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            String phone = request.getParameter("phone");
+            String gender = request.getParameter("gender");
+            String confirmationToken = CodeProcessing.generateToken();
+            
+            UserAccount user = new UserAccount(username, password, email, fullname, gender.equals("Male") ? 1 : 0, phone, confirmationToken, timeConfig.getNow(), 0, new Role(1));
+            if (uDAO.isAccountExisted(user)) {
+                request.setAttribute("error", "Account has existed !");
+            } else {
+                SessionUtils.getInstance().putValue(request, "user", user);
+                uDAO.addUserAccount(user);
+                String fullURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+                String urlLink = fullURL + "/verify?action=confirm&token=" + confirmationToken;
+                
+                EmailSending.sendVerificationMail(user, urlLink, email);
+                request.setAttribute("success", "A confirmation email has been sent to your Email, please check.");
 
-        if (uDAO.isAccountExisted(user)) {
-            request.setAttribute("error", "Account has existed !");
-        } else {
-            SessionUtils.getInstance().putValue(request, "user", user);
-            uDAO.addUserAccount(user);
-            String fullURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-            String urlLink = fullURL + "/verify?action=confirm&token=" + confirmationToken;
-            System.out.println(urlLink);
-            EmailSending.sendVerificationMail(user, urlLink, email);
-            request.setAttribute("success", "A confirmation email has been sent to your Email, please check.");
-
+            }
         }
 
         request.getRequestDispatcher("/frontend/view/register.jsp").forward(request, response);

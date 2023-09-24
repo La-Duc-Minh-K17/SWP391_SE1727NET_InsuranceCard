@@ -39,8 +39,6 @@ public class UserAccount {
         this.image = image;
     }
 
-    
-
     public UserAccount(String username, String password, String email, String fullName, int gender, String phone, String confirmationToken, Timestamp confirmationTokenTime, int status, Role role) {
         this.username = username;
         this.password = password;
@@ -53,7 +51,20 @@ public class UserAccount {
         this.status = status;
         this.role = role;
     }
-    
+
+    public UserAccount(String username, String email, String fullName, int gender, String phone, String image, String confirmationToken, Timestamp confirmationTokenTime, String recoveryToken, Timestamp recoveryTokenTime) {
+        this.username = username;
+        this.email = email;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.phone = phone;
+        this.image = image;
+        this.confirmationToken = confirmationToken;
+        this.confirmationTokenTime = confirmationTokenTime;
+        this.recoveryToken = recoveryToken;
+        this.recoveryTokenTime = recoveryTokenTime;
+
+    }
 
     public String getUserName() {
         return username;
@@ -123,7 +134,6 @@ public class UserAccount {
         this.recoveryTokenTime = recoveryTokenTime;
     }
 
-   
     public String getPassword() {
         return password;
     }
@@ -148,5 +158,5 @@ public class UserAccount {
     public String toString() {
         return "UserAccount{" + "username=" + username + ", password=" + password + ", email=" + email + ", fullName=" + fullName + ", gender=" + gender + ", phone=" + phone + ", image=" + image + ", confirmationToken=" + confirmationToken + ", confirmationTokenTime=" + confirmationTokenTime + ", recoveryToken=" + recoveryToken + ", recoveryTokenTime=" + recoveryTokenTime + ", status=" + status + ", role=" + role + '}';
     }
-    
+
 }

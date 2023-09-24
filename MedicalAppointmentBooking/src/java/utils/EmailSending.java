@@ -55,7 +55,7 @@ public class EmailSending {
 
     }
 
-    public static void sendRecoverAccount(String urlLink, String emailTo) {
+    public static void sendRecoveryAccount(String urlLink, String emailTo) {
         String subject = "[MABS] ACCOUNT RECOVERY";
         String message = "<!DOCTYPE html>\n"
                 + "<html lang=\"en\">\n"
@@ -132,6 +132,7 @@ public class EmailSending {
                 + "</body>\n"
                 + "\n"
                 + "</html>";
+        
         EmailSending.sendEmail(emailTo, subject, message);
     }
 

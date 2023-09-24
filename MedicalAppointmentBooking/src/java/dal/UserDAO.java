@@ -25,21 +25,31 @@ public class UserDAO {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet result = null;
-        String sql = "select * from useraccount where email = ? ";
-        UserAccount userAccount = new UserAccount();
+        String sql = "select * from user_account where email = ? ";
+        UserAccount userAccount = null;
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setString(1, email);
             result = ps.executeQuery();
-            while (result.next()) {
+          
+            if (result.next()) {
+
                 String userName = result.getString("username");
                 String emailAddress = result.getString("email");
                 String fullName = result.getString("full_name");
-                String image = ImageProcessing.imageString(result.getBlob("image"));
+                String image = null;
+                if (result.getBlob("image") != null) {
+                    image = ImageProcessing.imageString(result.getBlob("image"));
+                }
                 int gender = result.getInt("gender");
                 String phone = result.getString("phone");
-                userAccount = new UserAccount(userName, emailAddress, fullName, gender, phone, image);
+                String confirmationToken = result.getString("confirmation_token");
+                Timestamp confirmationTime = result.getTimestamp("confirmation_token_time");
+                String recoveryToken = result.getString("recovery_token");
+                Timestamp recoveryTime = result.getTimestamp("recovery_token_time");
+                
+                userAccount = new UserAccount(userName, emailAddress, fullName, gender, phone, image ,confirmationToken , confirmationTime , recoveryToken , recoveryTime);
             }
             return userAccount;
         } catch (SQLException ex) {
@@ -61,7 +71,7 @@ public class UserDAO {
     public void updateRecoveryToken(UserAccount user, String token, Timestamp updatedTime) {
         PreparedStatement ps = null;
         Connection connection = null;
-        String sql = "update table user_account set recovery_token = ? , recovery_token_time = ? where email = ?";
+        String sql = "UPDATE user_account SET recovery_token = ? , recovery_token_time = ? WHERE email = ?";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);

@@ -18,9 +18,9 @@ import java.util.Base64;
 public class ImageProcessing {
 
     public static String imageString(Blob blob) {
-
         String base64Image = null;
         InputStream inputStream = null;
+
         try {
             inputStream = blob.getBinaryStream();
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -50,6 +50,7 @@ public class ImageProcessing {
                 System.out.println(ex);
             }
         }
+
         return base64Image;
     }
 }
