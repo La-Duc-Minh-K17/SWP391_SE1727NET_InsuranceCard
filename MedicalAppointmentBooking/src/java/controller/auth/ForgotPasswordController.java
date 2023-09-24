@@ -68,7 +68,6 @@ public class ForgotPasswordController extends HttpServlet {
             uDAO.updatePassword(account, newpassword);
             request.getRequestDispatcher("/login").forward(request, response);
             return;
-
         }
         request.getRequestDispatcher("frontend/view/forgotpassword.jsp").forward(request, response);
     }
