@@ -5,10 +5,6 @@
         <servlet-class>controller.HomeServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ForgotPasswordServlet</servlet-name>
-        <servlet-class>controller.auth.ForgotPasswordServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>UserAccountController</servlet-name>
         <servlet-class>controller.home.UserAccountController</servlet-class>
     </servlet>
@@ -16,13 +12,17 @@
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>controller.auth.RegisterController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VerificationController</servlet-name>
+        <servlet-class>controller.auth.VerificationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <servlet-class>controller.auth.ForgotPasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ForgotPasswordServlet</servlet-name>
-        <url-pattern>/forgot</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserAccountController</servlet-name>
@@ -31,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerificationController</servlet-name>
+        <url-pattern>/verify</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <url-pattern>/forgot</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

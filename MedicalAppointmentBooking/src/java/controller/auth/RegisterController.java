@@ -7,14 +7,14 @@ package controller.auth;
 import utils.CodeProcessing;
 import utils.EmailSending;
 import utils.SessionUtils;
-import utils.TimestampUtils;
+import utils.TimeUtil;
 import dal.UserDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Timestamp;
+import model.Role;
 import model.UserAccount;
 
 /**
@@ -34,24 +34,10 @@ public class RegisterController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        // Get the server name
-        TimestampUtils timeConfig = new TimestampUtils();
-        UserDAO uDAO = new UserDAO();
         String action = request.getParameter("action");
-        if (action != null && action.equals("verify")) {
-            UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
-            Timestamp confirmationTokenTime = user.getRecoveryTokenTime();
-            if (timeConfig.isExpired(confirmationTokenTime)) {
-                uDAO.activateUserAccount(user);
-                request.setAttribute("message", "Verify Successfully.");
-            } else {
-                request.setAttribute("error", "The link time has expired");
-                request.getRequestDispatcher("/register").forward(request, response);
-            }
-            response.sendRedirect(request.getContextPath() + "/frontend/view/homepage.jsp");
-        }
         if (action != null && action.equals("regist")) {
+            TimeUtil timeConfig = new TimeUtil();
+            UserDAO uDAO = new UserDAO();
             String username = request.getParameter("username");
             String fullname = request.getParameter("fullname");
             String email = request.getParameter("email");
@@ -59,15 +45,24 @@ public class RegisterController extends HttpServlet {
             String phone = request.getParameter("phone");
             String gender = request.getParameter("gender");
             String confirmationToken = CodeProcessing.generateToken();
-            UserAccount user = new UserAccount(username, password, email, fullname, gender.equals("Male") ? 1 : 0, phone, confirmationToken, timeConfig.getNow(), 0);
-            SessionUtils.getInstance().putValue(request, "user", user);
-            String fullURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getRequestURI();
-            String urlLink = fullURL + "?action=verify&token=" + confirmationToken;
             
-            EmailSending.sendVerificationMail(user, urlLink, email);
-            request.setAttribute("success", "A confirmation email has been sent to your Email, please check.");
+            UserAccount user = new UserAccount(username, password, email, fullname, gender.equals("Male") ? 1 : 0, phone, confirmationToken, timeConfig.getNow(), 0, new Role(1));
+            if (uDAO.isAccountExisted(user)) {
+                request.setAttribute("error", "Account has existed !");
+            } else {
+                SessionUtils.getInstance().putValue(request, "user", user);
+                uDAO.addUserAccount(user);
+                String fullURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+                String urlLink = fullURL + "/verify?action=confirm&token=" + confirmationToken;
+                
+                EmailSending.sendVerificationMail(user, urlLink, email);
+                request.setAttribute("success", "A confirmation email has been sent to your Email, please check.");
+
+            }
         }
+
         request.getRequestDispatcher("/frontend/view/register.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

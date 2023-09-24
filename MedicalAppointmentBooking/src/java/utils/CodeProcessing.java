@@ -20,7 +20,7 @@ public class CodeProcessing {
     private static final SecureRandom secureRandom = new SecureRandom();
 
     public static String generateToken() {
-        byte[] tokenBytes = new byte[32];
+        byte[] tokenBytes = new byte[64];
         secureRandom.nextBytes(tokenBytes);
         return Base64.getUrlEncoder().withoutPadding().encodeToString(tokenBytes);
     }
