@@ -247,7 +247,7 @@
                                                 <a href="new-details.jsp" class="text-dark title h5">${o.title}</a>
                                                 <div>
                                                     <ul class="list-unstyled mb-0">
-                                                        <a href="new-details.jsp" class="text-dark title h6">${o.script}"</a>
+                                                        <a href="new-details.jsp" class="text-dark title h6">${o.description}"</a>
                                                     </ul>
                                                 </div>
                                                 <div class="post-meta d-flex justify-content-between mt-3">                                               

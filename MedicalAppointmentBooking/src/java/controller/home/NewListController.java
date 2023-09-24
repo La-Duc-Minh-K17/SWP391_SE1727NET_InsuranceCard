@@ -5,7 +5,7 @@
 package controller.home;
 
 import dal.CategoryDao;
-import dal.NewsDao;
+import dal.BlogsDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -61,11 +61,11 @@ public class NewListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        NewsDao dao = new NewsDao();
-        List<Blog> blogslist = dao.getAllNews();
-        request.setAttribute("data", blogslist);
-        List<Blog> blogs3 = dao.getTop3News();
-        request.setAttribute("blogs3", blogs3);
+        BlogsDao dao = new BlogsDao();
+        List<Blog> blogsList = dao.getAllNews();
+        request.setAttribute("data", blogsList);
+        List<Blog> blogsList3 = dao.getTop3News();
+        request.setAttribute("blogs3", blogsList3);
         CategoryDao cdao = new CategoryDao();
         List<Blog_Category> blog_category = cdao.getAllCategorys();
         request.setAttribute("listC", blog_category);
@@ -85,7 +85,7 @@ public class NewListController extends HttpServlet {
             throws ServletException, IOException {
         String search = request.getParameter("search");
         String category = request.getParameter("choices-single-default");
-        NewsDao dao = new NewsDao();
+        BlogsDao dao = new BlogsDao();
         List<Blog> blogslist = new ArrayList<>();
 
         CategoryDao cdao = new CategoryDao();

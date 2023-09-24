@@ -14,18 +14,21 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DBConnection  {
-    protected Connection connection;
-    public DBConnection()
-    {
+public class DBConnection {
+
+    public Connection getDBConnection() {
+        Connection connection = null;
+
         try {
-            String user = "sa";
-            String pass = "123";
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=Blog";
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = DriverManager.getConnection(url, user, pass);
+            String url = "jdbc:mysql://localhost:3306/mabs";
+            String username = "root";
+            String password = "123456";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(url, username, password);
+            return connection;
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
+    
 }

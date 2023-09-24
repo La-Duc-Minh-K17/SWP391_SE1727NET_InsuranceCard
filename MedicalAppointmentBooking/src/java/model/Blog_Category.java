@@ -9,19 +9,19 @@ package model;
  * @author nguye
  */
 public class Blog_Category {
-    int ID;
+    int blog_category_id;
     String name;
     String description;
-    String status;
+    int status;
     int setting_id;
 
-    @Override
-    public String toString() {
-        return "Blog_Category{" + "ID=" + ID + ", name=" + name + ", description=" + description + ", status=" + status + ", setting_id=" + setting_id + '}';
+    public Blog_Category(int blog_category_id, String name) {
+        this.blog_category_id = blog_category_id;
+        this.name = name;
     }
 
-    public Blog_Category(int ID, String name, String description, String status, int setting_id) {
-        this.ID = ID;
+    public Blog_Category(int blog_category_id, String name, String description, int status, int setting_id) {
+        this.blog_category_id = blog_category_id;
         this.name = name;
         this.description = description;
         this.status = status;
@@ -31,12 +31,12 @@ public class Blog_Category {
     public Blog_Category() {
     }
 
-    public int getID() {
-        return ID;
+    public int getBlog_category_id() {
+        return blog_category_id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setBlog_category_id(int blog_category_id) {
+        this.blog_category_id = blog_category_id;
     }
 
     public String getName() {
@@ -55,11 +55,11 @@ public class Blog_Category {
         this.description = description;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -70,5 +70,6 @@ public class Blog_Category {
     public void setSetting_id(int setting_id) {
         this.setting_id = setting_id;
     }
+    
     
 }

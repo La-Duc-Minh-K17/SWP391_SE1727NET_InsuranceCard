@@ -5,6 +5,8 @@
 package dal;
 
 import dbContext.DBConnection;
+import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +17,6 @@ import java.util.logging.Logger;
 import model.Blog_Category;
 import model.Blog;
 
-
 /**
  *
  * @author nguye
@@ -23,25 +24,27 @@ import model.Blog;
 public class CategoryDao extends DBConnection {
 
     public List<Blog_Category> getAllCategorys() {
+        List<Blog_Category> blogCategory = new ArrayList<>();
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet result = null;
+        String sql = "SELECT *FROM mabs.blog_category ";
 
-
-        List<Blog_Category> blog_category = new ArrayList<>();
         try {
-            String sql = "SELECT *FROM blog_category";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                Blog_Category b = new Blog_Category();
-                b.setID(rs.getInt(1));
-                b.setName(rs.getString(2));
-                b.setDescription(rs.getString(3));
-                b.setStatus(rs.getString(4));
-                b.setSetting_id(rs.getInt(5));
-                blog_category.add(b);
-            }
-        } catch (Exception e) {
-        }
-        return blog_category;
-    }
+            ps = connection.prepareStatement(sql);
+            result = ps.executeQuery();
+            while (result.next()) {
 
+                int categoryId = result.getInt("blog_category_id");
+                String categoryName = result.getString("name");
+                
+                Blog_Category category = new Blog_Category(categoryId, categoryName);
+                blogCategory.add(category);
+            }
+            return blogCategory;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

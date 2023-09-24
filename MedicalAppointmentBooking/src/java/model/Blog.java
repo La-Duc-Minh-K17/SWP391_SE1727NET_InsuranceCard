@@ -6,49 +6,47 @@ package model;
 
 import java.sql.Date;
 
-
-
 public class Blog {
-    int ID;
-    int category_id;
+
+    int blog_id;
     String title;
-    Date created_time;
+    String description;
     String content;
-    String script;
     String image;
-
-    @Override
-    public String toString() {
-        return "Blog{" + "ID=" + ID + ", category_id=" + category_id + ", title=" + title + ", created_time=" + created_time + ", content=" + content + ", script=" + script + ", image=" + image + '}';
-    }
-
-    public Blog(int ID, int category_id, String title, Date created_time, String content, String script, String image) {
-        this.ID = ID;
-        this.category_id = category_id;
-        this.title = title;
-        this.created_time = created_time;
-        this.content = content;
-        this.script = script;
-        this.image = image;
-    }
+    int blog_category_id;
+    Date created_time;
+    Date update_time;
 
     public Blog() {
     }
 
-    public int getID() {
-        return ID;
+    public Blog(int blog_id, String title, String description, String content, String image, int blog_category_id, Date created_time) {
+        this.blog_id = blog_id;
+        this.title = title;
+        this.description = description;
+        this.content = content;
+        this.image = image;
+        this.blog_category_id = blog_category_id;
+        this.created_time = created_time;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public Blog(int blog_id, String title, String description, String content, String image, int blog_category_id, Date created_time, Date update_time) {
+        this.blog_id = blog_id;
+        this.title = title;
+        this.description = description;
+        this.content = content;
+        this.image = image;
+        this.blog_category_id = blog_category_id;
+        this.created_time = created_time;
+        this.update_time = update_time;
     }
 
-    public int getCategory_id() {
-        return category_id;
+    public int getBlog_id() {
+        return blog_id;
     }
 
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
+    public void setBlog_id(int blog_id) {
+        this.blog_id = blog_id;
     }
 
     public String getTitle() {
@@ -59,12 +57,12 @@ public class Blog {
         this.title = title;
     }
 
-    public Date getCreated_time() {
-        return created_time;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCreated_time(Date created_time) {
-        this.created_time = created_time;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getContent() {
@@ -75,14 +73,6 @@ public class Blog {
         this.content = content;
     }
 
-    public String getScript() {
-        return script;
-    }
-
-    public void setScript(String script) {
-        this.script = script;
-    }
-
     public String getImage() {
         return image;
     }
@@ -90,7 +80,29 @@ public class Blog {
     public void setImage(String image) {
         this.image = image;
     }
-    
-    
-    
+
+    public int getBlog_category_id() {
+        return blog_category_id;
+    }
+
+    public void setBlog_category_id(int blog_category_id) {
+        this.blog_category_id = blog_category_id;
+    }
+
+    public Date getCreated_time() {
+        return created_time;
+    }
+
+    public void setCreated_time(Date created_time) {
+        this.created_time = created_time;
+    }
+
+    public Date getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(Date update_time) {
+        this.update_time = update_time;
+    }
+
 }
