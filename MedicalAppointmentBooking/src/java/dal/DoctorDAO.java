@@ -22,7 +22,7 @@ public class DoctorDAO {
 
     DBConnection dbc = new DBConnection();
 
-    public List<Doctor> getAllDoctor()  {
+    public List<Doctor> getAllDoctor() {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Doctor> doctorList = new ArrayList<>();
@@ -38,11 +38,11 @@ public class DoctorDAO {
                 String phone = rs.getString("phone");
                 String speciality = rs.getString("speciality");
                 String image = null;
-                if(rs.getBlob("image") != null) {
+                if (rs.getBlob("image") != null) {
                     image = ImageProcessing.imageString(rs.getBlob("image"));
                 }
                 String description = rs.getString("description");
-                doctorList.add(new Doctor(doctorId , name , phone , speciality , image , description));
+                doctorList.add(new Doctor(doctorId, name, phone, speciality, image, description));
             }
             return doctorList;
         } catch (SQLException e) {
