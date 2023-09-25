@@ -4,36 +4,36 @@
  */
 package model;
 
-import com.sun.xml.internal.ws.api.config.management.policy.ManagementAssertion.Setting;
-
 /**
  *
  * @author PC
  */
 public class Doctor {
    
-    private int doctor_id;
+    private int doctorId;
     private String name;
-    private int phone;
+    private String phone;
+    private String speciality;
     private String description;
     private boolean status;
     private String img;
 
-    public Doctor( int doctor_id, String name, int phone, String description, boolean status, String img) {
-        
-        this.doctor_id = doctor_id;
+    public Doctor(int doctorId, String name, String phone, String speciality, String description, String img) {
+        this.doctorId = doctorId;
         this.name = name;
         this.phone = phone;
+        this.speciality = speciality;
         this.description = description;
-        this.status = status;
         this.img = img;
     }
-    public int getDoctor_id() {
-        return doctor_id;
+    
+    
+    public int getDoctorId() {
+        return doctorId;
     }
 
-    public void setDoctor_id(int doctor_id) {
-        this.doctor_id = doctor_id;
+    public void setDoctorId(int doctor_id) {
+        this.doctorId = doctor_id;
     }
 
     public String getName() {
@@ -44,11 +44,11 @@ public class Doctor {
         this.name = name;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -75,5 +75,14 @@ public class Doctor {
     public void setImg(String img) {
         this.img = img;
     }
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
+    }
+    
 }
     

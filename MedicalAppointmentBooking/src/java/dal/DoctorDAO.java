@@ -5,7 +5,6 @@
 package dal;
 
 import dbContext.DBConnection;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Doctor;
+import utils.ImageProcessing;
 
 /**
  *
@@ -20,29 +20,41 @@ import model.Doctor;
  */
 public class DoctorDAO {
 
-    PreparedStatement ps = null;
-    ResultSet rs = null;
     DBConnection dbc = new DBConnection();
-    Connection connection = null;
-    
-public List<Doctor> getAllDoctor() throws SQLException, IOException {
-        List<Doctor> list = new ArrayList<>();
-        String sql = "select * from doctor ";
-                
+
+    public List<Doctor> getAllDoctor()  {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Doctor> doctorList = new ArrayList<>();
+        String sql = "select * from doctors ";
+        Connection connection = null;
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                
-                list.add(new Doctor(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getBoolean(5),rs.getString(6)));
+                int doctorId = rs.getInt("doctor_id");
+                String name = rs.getString("name");
+                String phone = rs.getString("phone");
+                String speciality = rs.getString("speciality");
+                String image = null;
+                if(rs.getBlob("image") != null) {
+                    image = ImageProcessing.imageString(rs.getBlob("image"));
+                }
+                String description = rs.getString("description");
+                doctorList.add(new Doctor(doctorId , name , phone , speciality , image , description));
             }
+            return doctorList;
         } catch (SQLException e) {
         } finally {
             if (connection != null) {
-                connection.close();
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
             }
         }
-        return list;
+        return doctorList;
     }
 }

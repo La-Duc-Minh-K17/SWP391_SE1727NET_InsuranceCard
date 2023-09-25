@@ -5,7 +5,6 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,23 +22,23 @@
         <!-- favicon -->
         <link rel="shortcut icon" href="frontend/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
-        <link href="frontend/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- SLIDER -->
-        <link rel="stylesheet" href="fontend/assets/css/tiny-slider.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/tiny-slider.css"/>
         <!-- Select2 -->
-        <link href="frontend/assets/css/select2.min.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
         <!-- Date picker -->
-        <link rel="stylesheet" href="frontend/assets/css/flatpickr.min.css">
-        <link href=".frontend/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
         <!-- Icons -->
-        <link href="frontend/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
-        <link href="frontend/assets/css/remixicon.css"  type="text/css" />
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css"  type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- Css -->
-        <link rel="stylesheet" href="frontend/assets/css/style.min.css" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" type="text/css">
         <style>
             #home{
-                background-image: url("frontend/assets/images/bg/backgroundclinic.jpg") ;
+                background-image: url("${pageContext.request.contextPath}/frontend/template/frontend/template/assets/images/bg/backgroundclinic.jpg") ;
             }
         </style>
     <body>
@@ -81,7 +80,6 @@
                         </div>
                         <div class="d-grid d-md-block">
                             <button type="submit" class="btn btn-primary">Sign up</button>
-
                             <button type="submit" class="btn btn-primary">Login</button>
                             </div>
                         <div id="navigation">
@@ -97,7 +95,7 @@
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="doctor-team-one.html">Doctors</a>
+                            <a href="#">Doctors</a>
                         </li>
                         <li class="has-submenu parent-menu-item">
                             <a href="javascript:void(0)">Services</a>
