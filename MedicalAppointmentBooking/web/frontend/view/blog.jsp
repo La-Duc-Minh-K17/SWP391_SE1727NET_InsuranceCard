@@ -7,13 +7,7 @@
     <head>
         <meta charset="utf-8" />
         <title>MABS</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
-        <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
-        <meta name="author" content="Group6" />
-        <meta name="email" content="support@goup6.in" />
-        <meta name="website" content="https://group6.com" />
-        <meta name="Version" content="v1.2.0" />
+       
         <!-- favicon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
@@ -34,7 +28,7 @@
         <link href="frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
         <style>
             #home{
-                background-image: url("../template/assets/images/bg/backgroundclinic.jpg") ;
+                background-image: url("frontend/template/assets/images/bg/backgroundclinic.jpg") ;
             }
         </style>
     <body>
@@ -47,10 +41,10 @@
                 <div>
                     <a class="logo" href="index.html">
                         <span class="logo-light-mode">
-                            <img src="../template/assets/images/MABS__1.png" class="l-dark" height="30" alt="">
-                            <img src="../template/assets/images/MABS__1.png" class="l-light" height="30" alt="">
+                            <img src="frontend/template/assets/images/MABS__1.png" class="l-dark" height="30" alt="">
+                            <img src="frontend/template/assets/images/MABS__1.png" class="l-light" height="30" alt="">
                         </span>
-                        <img src="../template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                        <img src="frontend/template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                     </a>
                 </div>
                 <!-- End Logo container-->
@@ -127,7 +121,7 @@
             </div><!--end container-->
         </section>
 
-        <main>
+        
             <div class="container" style="margin-top: 90px;">
                 <section class="blog_area section-padding">
                     <div class="container">
@@ -202,6 +196,7 @@
                                             </form>
                                         </div>
                                     </div>
+                                </section>
                             </div>
 
                             </section>
@@ -266,7 +261,7 @@
                             </nav>
                         </div>
 
-                        </main>
+                  
 
 
     
@@ -275,7 +270,7 @@
                 <div class="row">
                     <div class="col-xl-5 col-lg-4 mb-0 mb-md-1 pb-0  pb-md-2">
                         <a href="#" class="logo-footer">
-                            <img src="../template/assets/images/MABS__1.png" height="30" alt="">
+                            <img src="frontend/template/assets/images/MABS__1.png" height="30" alt="">
                         </a>
                         <p class="mt-4 me-xl-5">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
                     </div><!--end col-->
@@ -367,8 +362,8 @@
         <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header p-4 border-bottom">
                 <h5 id="offcanvasRightLabel" class="mb-0">
-                    <img src=../template/assets/images/MABS__1.png" height="24" class="light-version" alt="">
-                    <img src=../template/assets/images/MABS__1.png" height="24" class="dark-version" alt="">
+                    <img src=frontend/template/assets/images/MABS__1.png" height="24" class="light-version" alt="">
+                    <img src=frontend/template/assets/images/MABS__1.png" height="24" class="dark-version" alt="">
                 </h5>
                 <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
             </div>
@@ -419,25 +414,25 @@
         </div>
         <!-- MOdal End -->
         <!-- javascript -->
-        <script src="../template/assets/js/jquery.min.js"></script>
-        <script src="../template/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="frontend/template/assets/js/jquery.min.js"></script>
+        <script src="frontend/template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- SLIDER -->
-        <script src="../template/assets/js/tiny-slider.js"></script>
-        <script src="../template/assets/js/tiny-slider-init.js"></script>
-        <script src="../template/assets/js/easy_background.js"></script>
+        <script src="frontend/template/assets/js/tiny-slider.js"></script>
+        <script src="frontend/template/assets/js/tiny-slider-init.js"></script>
+        <script src="frontend/template/assets/js/easy_background.js"></script>
         <!-- Select2 -->
-        <script src="../template/assets/js/select2.min.js"></script>
-        <script src="../template/assets/js/select2.init.js"></script>
+        <script src="frontend/template/assets/js/select2.min.js"></script>
+        <script src="frontend/template/assets/js/select2.init.js"></script>
         <!-- Datepicker -->
-        <script src="../template/assets/js/flatpickr.min.js"></script>
-        <script src="../template/assets/js/flatpickr.init.js"></script>
+        <script src="frontend/template/assets/js/flatpickr.min.js"></script>
+        <script src="frontend/template/assets/js/flatpickr.init.js"></script>
         <!-- Datepicker -->
-        <script src="../template/assets/js/jquery.timepicker.min.js"></script> 
-        <script src="../template/assets/js/timepicker.init.js"></script> 
+        <script src="frontend/template/assets/js/jquery.timepicker.min.js"></script> 
+        <script src="frontend/template/assets/js/timepicker.init.js"></script> 
         <!-- Icons -->
-        <script src="../template/assets/js/feather.min.js"></script>
+        <script src="frontend/template/assets/js/feather.min.js"></script>
         <!-- Main Js -->
-        <script src="../template/assets/js/app.js"></script>
+        <script src="frontend/template/assets/js/app.js"></script>
         <script>
             // easy_background("#home",
             //     {
