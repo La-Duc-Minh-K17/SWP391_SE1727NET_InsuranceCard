@@ -269,10 +269,10 @@
                                     <h6>Specialties: </h6>
 
                                     <ul class="list-unstyled mt-4">
-                                        <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i> Women's health services</li>
-                                        <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i> Pregnancy care</li>
+                                        <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i> Otorhinolaryngology</li>
+                                        <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i> Dermatology</li>
                                         <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i> Surgical procedures</li>
-                                        <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i> Specialty care</li>
+                                        <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i> Obstetrics and Gynecology (OB-GYN)</li>
                                         <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i> Conclusion</li>
                                     </ul>
 
