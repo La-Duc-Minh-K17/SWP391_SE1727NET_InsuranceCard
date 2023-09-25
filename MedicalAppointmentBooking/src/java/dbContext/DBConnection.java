@@ -23,6 +23,7 @@ public class DBConnection {
             String password = "123456";
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, username, password);
+            System.out.println(connection);
             return connection;
         } catch (ClassNotFoundException | SQLException ex) {
             return null;

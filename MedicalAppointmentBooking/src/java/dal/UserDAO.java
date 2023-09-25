@@ -32,7 +32,7 @@ public class UserDAO {
             ps = connection.prepareStatement(sql);
             ps.setString(1, email);
             result = ps.executeQuery();
-          
+
             if (result.next()) {
 
                 String userName = result.getString("username");
@@ -48,8 +48,8 @@ public class UserDAO {
                 Timestamp confirmationTime = result.getTimestamp("confirmation_token_time");
                 String recoveryToken = result.getString("recovery_token");
                 Timestamp recoveryTime = result.getTimestamp("recovery_token_time");
-                
-                userAccount = new UserAccount(userName, emailAddress, fullName, gender, phone, image ,confirmationToken , confirmationTime , recoveryToken , recoveryTime);
+
+                userAccount = new UserAccount(userName, emailAddress, fullName, gender, phone, image, confirmationToken, confirmationTime, recoveryToken, recoveryTime);
             }
             return userAccount;
         } catch (SQLException ex) {
@@ -248,5 +248,38 @@ public class UserDAO {
             }
         }
         return isExisted;
+    }
+
+    public UserAccount getUserAccount(String username, String password) {
+        PreparedStatement stm = null;
+        Connection connection = null;
+        ResultSet rs = null;
+
+        try {
+            connection = dbc.getConnection();
+            String sql = "SELECT * FROM user_account "
+                    + "WHERE username = ?\n"
+                    + "AND password = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, username);
+            stm.setString(2, password);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                UserAccount account = new UserAccount();
+                String userName = rs.getString("username");
+                String emailAddress = rs.getString("email");
+                String fullName = rs.getString("full_name");
+                String image = null;
+                if (rs.getBlob("image") != null) {
+                    image = ImageProcessing.imageString(rs.getBlob("image"));
+                }
+                int gender = rs.getInt("gender");
+                String phone = rs.getString("phone");
+                return account;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
     }
 }

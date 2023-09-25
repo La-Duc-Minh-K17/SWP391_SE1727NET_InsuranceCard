@@ -12,13 +12,13 @@ import jakarta.servlet.http.HttpServletRequest;
  */
 public class SessionUtils {
 
-    private static SessionUtils sessionConfigs = null;
+    private static SessionUtils sessionUtil = null;
 
     public static SessionUtils getInstance() {
-        if (sessionConfigs == null) {
-            sessionConfigs = new SessionUtils();
+        if (sessionUtil == null) {
+            sessionUtil = new SessionUtils();
         }
-        return sessionConfigs;
+        return sessionUtil;
     }
 
     public void putValue(HttpServletRequest request, String key, Object value) {
