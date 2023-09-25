@@ -4,8 +4,7 @@
  */
 package controller.home;
 
-import com.medicalbooking.dal.DoctorDAO;
-import com.medicalbooking.model.Doctor;
+import dal.DoctorDAO;
 import java.io.IOException;
 import java.util.List;
 import jakarta.servlet.ServletException;
@@ -13,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import model.Doctor;
 
 /**
  *
