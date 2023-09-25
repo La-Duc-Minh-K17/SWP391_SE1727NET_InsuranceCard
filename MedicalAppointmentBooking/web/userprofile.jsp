@@ -32,7 +32,7 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
         <style>
             #home {
-                background-image: url("../assets/images/bg/backgroundclinic.jpg");
+                background-image: url("frontend/template/assets/images/bg/backgroundclinic.jpg");
             }
         </style>
 
@@ -57,11 +57,11 @@
         <div>
             <a class="logo" href="index.html">
                 <span class="logo-light-mode">
-                    <img src="../assets/images/MABS.png.png" class="l-dark" height="24" alt="">
-                    <img src="../assets/images/MABS.png.png" class="l-light" height="24" alt="">
+                    <img src="frontend/template/assets/images/MABS.png.png" class="l-dark" height="24" alt="">
+                    <img src="frontend/template/assets/images/MABS.png.png" class="l-light" height="24" alt="">
                     
                 </span>
-                <img src="../assets/images/MABS__1.png" height="24" class="logo-dark-mode" alt="">
+                <img src="frontend/template/assets/images/MABS__1.png" height="24" class="logo-dark-mode" alt="">
             </a>
         </div>
         <!-- End Logo container-->
@@ -98,10 +98,10 @@
 
             <li class="list-inline-item mb-0 ms-1">
                 <!-- <div class="dropdown dropdown-primary"> -->
-                    <!-- <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/doctors/1.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button> -->
+                    <!-- <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="frontend/template/assets/images/doctors/1.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button> -->
                     <!-- <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
                         <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html"> -->
-                            <!-- <img src="../assets/images/doctors/1.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt=""> -->
+                            <!-- <img src="frontend/template/assets/images/doctors/1.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt=""> -->
                             <div class="flex-1 ms-2">
                                 <!-- <span class="d-block mb-1">Tran Xuan Tiem</span>
                                 <small class="text-muted">Doctor</small> -->
@@ -210,7 +210,7 @@
                         
                             <div class="row">
                                 <div class="col-xl-4 col-lg-4 col-md-5 position-relative">
-                                    <img src="../template/assets/images/doctors/doctorimg.png" class="img-fluid dr-profile-img" alt="">
+                                    <img src="frontend/template/assets/images/doctors/doctorimg.png" class="img-fluid dr-profile-img" alt="">
                                 </div>
 
                                 <div class="col-xl-8 col-lg-8 col-md-7">
@@ -282,7 +282,7 @@
                                         <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
                                             <div class="card team border-0 rounded shadow overflow-hidden">
                                                 <div class="team-person position-relative overflow-hidden">
-                                                    <img src="../assets/images/doctors/doctorimg2.png" class="img-fluid" alt="">
+                                                    <img src="frontend/template/assets/images/doctors/doctorimg2.png" class="img-fluid" alt="">
                                                     <ul class="list-unstyled team-like">
                                                         <li><a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i data-feather="heart" class="icons"></i></a></li>
                                                     </ul>
@@ -327,7 +327,7 @@
                                         <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
                                             <div class="card team border-0 rounded shadow overflow-hidden">
                                                 <div class="team-person position-relative overflow-hidden">
-                                                    <img src="../assets/images/doctors/doctorimg3.jpg" class="img-fluid" alt="">
+                                                    <img src="frontend/template/assets/images/doctors/doctorimg3.jpg" class="img-fluid" alt="">
                                                     <ul class="list-unstyled team-like">
                                                         <li><a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i data-feather="heart" class="icons"></i></a></li>
                                                     </ul>
@@ -372,7 +372,7 @@
                                         <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
                                             <div class="card team border-0 rounded shadow overflow-hidden">
                                                 <div class="team-person position-relative overflow-hidden">
-                                                    <img src="../assets/images/doctors/doctorimg4.jpg" class="img-fluid" alt="">
+                                                    <img src="frontend/template/assets/images/doctors/doctorimg4.jpg" class="img-fluid" alt="">
                                                     <ul class="list-unstyled team-like">
                                                         <li><a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i data-feather="heart" class="icons"></i></a></li>
                                                     </ul>
@@ -417,7 +417,7 @@
                                         <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
                                             <div class="card team border-0 rounded shadow overflow-hidden">
                                                 <div class="team-person position-relative overflow-hidden">
-                                                    <img src="../assets/images/doctors/doctorimg6.jpg" class="img-fluid" alt="">
+                                                    <img src="frontend/template/assets/images/doctors/doctorimg6.jpg" class="img-fluid" alt="">
                                                     <ul class="list-unstyled team-like">
                                                         <li><a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i data-feather="heart" class="icons"></i></a></li>
                                                     </ul>
@@ -523,7 +523,7 @@
                                             <div class="client-review-slider">
                                                 <div class="tiny-slide text-center">
                                                     <p class="text-muted h6 fw-normal fst-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century. "</p>
-                                                    <img src="../assets/images/client/01.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow my-3" alt="">
+                                                    <img src="frontend/template/assets/images/client/01.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow my-3" alt="">
                                                     <ul class="list-unstyled mb-0">
                                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
@@ -536,7 +536,7 @@
                                                 
                                                 <div class="tiny-slide text-center">
                                                     <p class="text-muted h6 fw-normal fst-italic">" The advantage of its Latin origin and the relative meaninglessness of Lorum Ipsum is that the text does not attract attention to itself or distract the viewer's attention from the layout. "</p>
-                                                    <img src="../assets/images/client/02.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow my-3" alt="">
+                                                    <img src="frontend/template/assets/images/client/02.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow my-3" alt="">
                                                     <ul class="list-unstyled mb-0">
                                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
@@ -549,7 +549,7 @@
                                                 
                                                 <div class="tiny-slide text-center">
                                                     <p class="text-muted h6 fw-normal fst-italic">" There is now an abundance of readable dummy texts. These are usually used when a text is required purely to fill a space. These alternatives to the classic Lorem Ipsum texts are often amusing and tell short, funny or nonsensical stories. "</p>
-                                                    <img src="../assets/images/client/03.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow my-3" alt="">
+                                                    <img src="frontend/template/assets/images/client/03.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow my-3" alt="">
                                                     <ul class="list-unstyled mb-0">
                                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
@@ -562,7 +562,7 @@
                                                 
                                                 <div class="tiny-slide text-center">
                                                     <p class="text-muted h6 fw-normal fst-italic">" According to most sources, Lorum Ipsum can be traced back to a text composed by Cicero in 45 BC. Allegedly, a Latin scholar established the origin of the text by compiling all the instances of the unusual word 'consectetur' he could find "</p>
-                                                    <img src="../assets/images/client/04.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow my-3" alt="">
+                                                    <img src="frontend/template/assets/images/client/04.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow my-3" alt="">
                                                     <ul class="list-unstyled mb-0">
                                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
@@ -575,7 +575,7 @@
                                                 
                                                 <div class="tiny-slide text-center">
                                                     <p class="text-muted h6 fw-normal fst-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century. "</p>
-                                                    <img src="../assets/images/client/05.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow my-3" alt="">
+                                                    <img src="frontend/template/assets/images/client/05.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow my-3" alt="">
                                                     <ul class="list-unstyled mb-0">
                                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
@@ -588,7 +588,7 @@
                                                 
                                                 <div class="tiny-slide text-center">
                                                     <p class="text-muted h6 fw-normal fst-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. One may speculate that over the course of time certain letters were added or deleted at various positions within the text. "</p>
-                                                    <img src="../assets/images/client/06.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow my-3" alt="">
+                                                    <img src="frontend/template/assets/images/client/06.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow my-3" alt="">
                                                     <ul class="list-unstyled mb-0">
                                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
@@ -604,27 +604,27 @@
 
                                     <div class="row justify-content-center">
                                         <div class="col-lg-2 col-md-2 col-6 text-center py-4">
-                                            <img src="../assets/images/client/amazon.png" class="avatar avatar-client" alt="">
+                                            <img src="frontend/template/assets/images/client/amazon.png" class="avatar avatar-client" alt="">
                                         </div><!--end col-->
                     
                                         <div class="col-lg-2 col-md-2 col-6 text-center py-4">
-                                            <img src="../assets/images/client/google.png" class="avatar avatar-client" alt="">
+                                            <img src="frontend/template/assets/images/client/google.png" class="avatar avatar-client" alt="">
                                         </div><!--end col-->
                                         
                                         <div class="col-lg-2 col-md-2 col-6 text-center py-4">
-                                            <img src="../assets/images/client/lenovo.png" class="avatar avatar-client" alt="">
+                                            <img src="frontend/template/assets/images/client/lenovo.png" class="avatar avatar-client" alt="">
                                         </div><!--end col-->
                                         
                                         <div class="col-lg-2 col-md-2 col-6 text-center py-4">
-                                            <img src="../assets/images/client/paypal.png" class="avatar avatar-client" alt="">
+                                            <img src="frontend/template/assets/images/client/paypal.png" class="avatar avatar-client" alt="">
                                         </div><!--end col-->
                                         
                                         <div class="col-lg-2 col-md-2 col-6 text-center py-4">
-                                            <img src="../assets/images/client/shopify.png" class="avatar avatar-client" alt="">
+                                            <img src="frontend/template/assets/images/client/shopify.png" class="avatar avatar-client" alt="">
                                         </div><!--end col-->
                                         
                                         <div class="col-lg-2 col-md-2 col-6 text-center py-4">
-                                            <img src="../assets/images/client/spotify.png" class="avatar avatar-client" alt="">
+                                            <img src="frontend/template/assets/images/client/spotify.png" class="avatar avatar-client" alt="">
                                         </div><!--end col-->
                                     </div><!--end row-->
                                 </div><!--end teb pane-->
@@ -715,14 +715,14 @@
         </section><!--end section-->
         <!-- End Hero -->
 
-        Nguyen Tuan Anh
+       
 <!-- Start -->
         <footer class="bg-footer">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-5 col-lg-4 mb-0 mb-md-1 pb-0  pb-md-2">
                         <a href="#" class="logo-footer">
-                            <img src="../assets/images/MABS__1.png" height="30" alt="">
+                            <img src="frontend/template/assets/images/MABS__1.png" height="30" alt="">
                         </a>
                         <p class="mt-4 me-xl-5">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
                     </div><!--end col-->
@@ -840,8 +840,8 @@
         <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header p-4 border-bottom">
                 <h5 id="offcanvasRightLabel" class="mb-0">
-                    <img src="../assets/images/MABS__1.png" height="24" class="light-version" alt="">
-                    <img src="../assets/images/MABS__1.png" height="24" class="dark-version" alt="">
+                    <img src="frontend/template/assets/images/MABS__1.png" height="24" class="light-version" alt="">
+                    <img src="frontend/template/assets/images/MABS__1.png" height="24" class="dark-version" alt="">
                 </h5>
                 <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
             </div>
@@ -852,13 +852,13 @@
                         <div id="style-switcher">
                             <div>
                                 <ul class="text-center list-unstyled mb-0">
-                                    <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="../assets/images/layouts/landing-light-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="../assets/images/layouts/landing-dark-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
-                                    <li class="d-grid"><a href="../admin/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="frontend/template/assets/images/layouts/landing-light-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="frontend/template/assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="frontend/template/assets/images/layouts/landing-dark-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="frontend/template/assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="frontend/template/assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="frontend/template/assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
+                                    <li class="d-grid"><a href="../admin/index.html" target="_blank" class="mt-4"><img src="frontend/template/assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -915,8 +915,8 @@
         <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header p-4 border-bottom">
                 <h5 id="offcanvasRightLabel" class="mb-0">
-                    <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="">
-                    <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="">
+                    <img src="frontend/template/assets/images/logo-dark.png" height="24" class="light-version" alt="">
+                    <img src="frontend/template/assets/images/logo-light.png" height="24" class="dark-version" alt="">
                 </h5>
                 <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
             </div>
@@ -927,13 +927,13 @@
                         <div id="style-switcher">
                             <div>
                                 <ul class="text-center list-unstyled mb-0">
-                                    <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="../assets/images/layouts/landing-light-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="../assets/images/layouts/landing-dark-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
-                                    <li class="d-grid"><a href="../admin/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="frontend/template/assets/images/layouts/landing-light-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="frontend/template/assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="frontend/template/assets/images/layouts/landing-dark-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="frontend/template/assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="frontend/template/assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="frontend/template/assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
+                                    <li class="d-grid"><a href="../admin/index.html" target="_blank" class="mt-4"><img src="frontend/template/assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -957,14 +957,14 @@
         <!-- Offcanvas End -->
         
         <!-- javascript -->
-        <script src="../assets/js/bootstrap.bundle.min.js"></script>
+        <script src="frontend/template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- SLIDER -->
-        <script src="../assets/js/tiny-slider.js"></script>
-        <script src="../assets/js/tiny-slider-init.js"></script>
+        <script src="frontend/template/assets/js/tiny-slider.js"></script>
+        <script src="frontend/template/assets/js/tiny-slider-init.js"></script>
         <!-- Icons -->
-        <script src="../assets/js/feather.min.js"></script>
+        <script src="frontend/template/assets/js/feather.min.js"></script>
         <!-- Main Js -->
-        <script src="../assets/js/app.js"></script>
+        <script src="frontend/template/assets/js/app.js"></script>
     </body>
 
 </html>
