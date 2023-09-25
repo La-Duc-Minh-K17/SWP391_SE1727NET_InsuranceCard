@@ -113,7 +113,7 @@
                     </div><!--end row-->
                 </div>
             </div><!--end container-->
-        </footer><!--e
+        </footer>
     </body>
      <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
         <!-- Icons -->
