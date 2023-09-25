@@ -104,8 +104,8 @@
                 </div><!--end navigation-->
             </div><!--end container-->
         </header><!--end header-->
-        
-        <section class="bg-half-60 d-table w-100" style="background: url('../assets/images/bg/02.jpg') center center;">
+       
+ <section class="bg-half-60 d-table w-100" id="home">
             <div class="bg-overlay bg-overlay-dark"></div>
             <div class="container">
                  <div class="row mt-5 justify-content-center">
