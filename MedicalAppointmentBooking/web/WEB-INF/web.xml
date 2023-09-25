@@ -24,6 +24,10 @@
         <servlet-name>SettingList</servlet-name>
         <servlet-class>controller.SettingList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddSetting</servlet-name>
+        <servlet-class>controller.AddSetting</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -66,6 +70,10 @@
     <servlet-mapping>
         <servlet-name>SettingList</servlet-name>
         <url-pattern>/settinglist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSetting</servlet-name>
+        <url-pattern>/addSetting</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

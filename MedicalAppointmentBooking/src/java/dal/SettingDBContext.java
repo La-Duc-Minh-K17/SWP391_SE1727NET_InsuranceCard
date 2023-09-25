@@ -17,13 +17,13 @@ import model.Setting;
  *
  * @author DELL
  */
-public class SettingDBContext {
+public class SettingDBContext extends DBContext{
 
-    DBContext db = new DBContext();
+    //DBContext db = new DBContext();
 
     public ArrayList<Setting> list() {
         ArrayList<Setting> settings = new ArrayList<>();
-        Connection connection = db.getConnection();
+       // Connection connection = db.getConnection();
         try {
             String sql = "SELECT setting_id, type,value,description,status from settings";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -45,7 +45,7 @@ public class SettingDBContext {
 
     public ArrayList<Setting> getSetting(String type, String term) {
         ArrayList<Setting> settings = new ArrayList<>();
-        Connection connection = db.getConnection();
+        //Connection connection = db.getConnection();
         try {
             String sql = "SELECT setting_id, type,value,description,status FROM settings\n"
                     + "WHERE " + type + " like ?";
@@ -73,7 +73,7 @@ public class SettingDBContext {
 
     public ArrayList<Setting> getSettingAllType(String term) {
         ArrayList<Setting> settings = new ArrayList<>();
-        Connection connection = db.getConnection();
+        //Connection connection = db.getConnection();
         try {
             String sql = "SELECT setting_id, type,value,description,status FROM settings\n"
                     + " WHERE type like ? or setting_id like ? or value like ? or description like ? or status like ?";
@@ -101,6 +101,24 @@ public class SettingDBContext {
         }
 
         return settings;
+    }
+    public void insertSetting(Setting setting) {
+        //Connection connection = db.getConnection();
+        try {
+            String query = "INSERT INTO settings (type, value, description,status) VALUES (?, ?, ?,?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, setting.getType());
+            statement.setString(2, setting.getValue());
+            statement.setString(3, setting.getDescription());
+            statement.setBoolean(4, setting.isStatus());
+            
+       
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingDBContext.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
     }
 }
 //String columnName = "setting_id";

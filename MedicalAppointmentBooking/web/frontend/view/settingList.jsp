@@ -110,15 +110,15 @@
                 <h4>Add Settings</h4>
                 <label for="settingType">Type:</label>
                 <br><br>
-                <input type="text" id="settingType" placeholder="Type" name="settingType">
+                <input type="text" id="settingType" placeholder="Type" name="settingType" required>
                  <br><br>
                 <label for="settingValue">Value:</label>
                   <br><br>
-                <input type="text" id="settingValue" placeholder="Value" name="settingValue">
+                <input type="text" id="settingValue" placeholder="Value" name="settingValue" required>
                   <br><br>
                 <label for="settingDescription"> Description:</label>
                   <br><br>
-                <input type="text" id="settingDescription" placeholder="Description" name="settingDescription">
+                <input type="text" id="settingDescription" placeholder="Description" name="settingDescription"required>
                   <br><br>
                 <label for="settingStatus">Status:</label>
                 <select id="settingStatus" name="settingStatus">
