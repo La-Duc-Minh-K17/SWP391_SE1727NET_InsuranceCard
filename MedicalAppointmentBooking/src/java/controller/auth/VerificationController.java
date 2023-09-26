@@ -44,7 +44,7 @@ public class VerificationController extends HttpServlet {
                 String token = uDAO.getConfirmationToken(user);
                 String urlToken = request.getParameter("token");
                 if (token.equals(urlToken)) {
-                    uDAO.activateUserAccount(user);
+                        uDAO.activateUserAccount(user);
                     request.setAttribute("message", "Verify Successfully.");
                 } else {
                     response.sendRedirect("error.jsp");
@@ -57,14 +57,7 @@ public class VerificationController extends HttpServlet {
         }
         if (action != null && action.equals("verify-reset")) {
             UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
-            System.out.println(user.getRecoveryTokenTime());
-            if (timeConfig.isExpired(user.getRecoveryTokenTime())) {
-                request.setAttribute("error", "The URL link has expired.");
-                request.getRequestDispatcher("frontend/view/forgotpassword.jsp").forward(request, response);
-            } else {
-               
-                request.getRequestDispatcher("frontend/view/forgotpassword.jsp").forward(request, response);
-            }
+            request.getRequestDispatcher("frontend/view/resetpassword.jsp").forward(request, response);
             return;
         }
     }

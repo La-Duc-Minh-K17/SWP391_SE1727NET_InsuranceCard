@@ -18,39 +18,42 @@ import java.util.Base64;
 public class ImageProcessing {
 
     public static String imageString(Blob blob) {
-        String base64Image = null;
+        String base64Image = "";
         InputStream inputStream = null;
-
-        try {
-            inputStream = blob.getBinaryStream();
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            byte[] buffer = new byte[4096];
-            int bytesRead = -1;
+        if (blob != null) {
             try {
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
+                inputStream = blob.getBinaryStream();
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                try {
+                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
+                } catch (IOException ex) {
+                    System.out.println(ex);
                 }
-            } catch (IOException ex) {
-                System.out.println(ex);
-            }
-            byte[] imageBytes = outputStream.toByteArray();
-            base64Image = Base64.getEncoder().encodeToString(imageBytes);
-            try {
-                inputStream.close();
-                outputStream.close();
-            } catch (IOException ex) {
-                System.out.println(ex);
-            }
+                byte[] imageBytes = outputStream.toByteArray();
+                base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                try {
+                    inputStream.close();
+                    outputStream.close();
+                } catch (IOException ex) {
+                    System.out.println(ex);
+                }
 
-        } catch (SQLException ex) {
-        } finally {
-            try {
-                inputStream.close();
-            } catch (IOException ex) {
-                System.out.println(ex);
+            } catch (SQLException ex) {
+            } finally {
+                try {
+                    inputStream.close();
+                } catch (IOException ex) {
+                    System.out.println(ex);
+                }
             }
+        } else {
+            base64Image = "default";
         }
-
+        
         return base64Image;
     }
 }

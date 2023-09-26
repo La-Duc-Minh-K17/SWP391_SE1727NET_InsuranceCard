@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * @author Admin
  */
 public class TimeUtil {
-    private final double OTP_EXPIRY_TIME = 1;
+    private final int OTP_EXPIRY_TIME = 3;
     public Timestamp getNow() {
         long createdTimeMillis = System.currentTimeMillis();
         Timestamp createdTimeTimeStamp = new Timestamp(createdTimeMillis);

@@ -121,17 +121,17 @@
 
                 </ul>
 
-                <div id="navigation">
+                    <div id="navigation">
 
-                    <ul class="navigation-menu nav-left nav-light">
-                        <li><a href="home" class="sub-menu-item">Home</a></li>
-                        <li><a href="#" class="sub-menu-item">Doctors</a></li>
-                        <li><a href="#" class="sub-menu-item">Services</a></li>
-                        <li><a href="#" class="sub-menu-item">Contact us</a></li>
-                        <li><a href="#" class="sub-menu-item">News and Blogs</a></li>
-                    </ul>
+                        <ul class="navigation-menu nav-left nav-light">
+                            <li><a href="home" class="sub-menu-item">Home</a></li>
+                            <li><a href="#" class="sub-menu-item">Doctors</a></li>
+                            <li><a href="#" class="sub-menu-item">Services</a></li>
+                            <li><a href="#" class="sub-menu-item">Contact us</a></li>
+                            <li><a href="#" class="sub-menu-item">News and Blogs</a></li>
+                        </ul>
 
-                </div>
+                    </div>
             </div>
         </header>
         
@@ -161,6 +161,5 @@
     <!-- Icons -->
     <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
     <!-- Main Js -->
-
     <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
 </html>

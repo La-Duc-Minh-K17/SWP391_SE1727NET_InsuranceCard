@@ -26,7 +26,7 @@ public class DoctorDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Doctor> doctorList = new ArrayList<>();
-        String sql = "select * from doctors ";
+        String sql = "select * from doctors  ";
         Connection connection = null;
         try {
             connection = dbc.getConnection();
@@ -37,12 +37,9 @@ public class DoctorDAO {
                 String name = rs.getString("name");
                 String phone = rs.getString("phone");
                 String speciality = rs.getString("speciality");
-                String image = null;
-                if (rs.getBlob("image") != null) {
-                    image = ImageProcessing.imageString(rs.getBlob("image"));
-                }
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
                 String description = rs.getString("description");
-                doctorList.add(new Doctor(doctorId, name, phone, speciality, image, description));
+                doctorList.add(new Doctor(doctorId, name, phone, speciality, description, image));
             }
             return doctorList;
         } catch (SQLException e) {

@@ -9,25 +9,27 @@ package model;
  * @author PC
  */
 public class Doctor {
-   
+
     private int doctorId;
     private String name;
     private String phone;
     private String speciality;
     private String description;
     private boolean status;
-    private String img;
+    private String doctorImage;
 
-    public Doctor(int doctorId, String name, String phone, String speciality, String description, String img) {
+    public Doctor() {
+    }
+
+    public Doctor(int doctorId, String name, String phone, String speciality, String description, String doctorImage) {
         this.doctorId = doctorId;
         this.name = name;
         this.phone = phone;
         this.speciality = speciality;
         this.description = description;
-        this.img = img;
+        this.doctorImage = doctorImage;
     }
-    
-    
+
     public int getDoctorId() {
         return doctorId;
     }
@@ -68,12 +70,12 @@ public class Doctor {
         this.status = status;
     }
 
-    public String getImg() {
-        return img;
+    public String getDoctorImage() {
+        return doctorImage;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setDoctorImage(String doctorImage) {
+        this.doctorImage = doctorImage;
     }
 
     public String getSpeciality() {
@@ -83,6 +85,7 @@ public class Doctor {
     public void setSpeciality(String speciality) {
         this.speciality = speciality;
     }
+
     
+
 }
-    

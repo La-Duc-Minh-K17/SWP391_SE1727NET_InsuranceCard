@@ -96,12 +96,13 @@ public class UserDAO {
     public void updatePassword(UserAccount user, String newPassword) {
         PreparedStatement ps = null;
         Connection connection = null;
-        String sql = "update table user_account set password = ? where email = ? ";
+        String sql = "UPDATE user_account SET password = ? WHERE username = ?";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setString(1, newPassword);
-            ps.setString(2, user.getEmail());
+            ps.setString(2, user.getUserName());
+            System.out.println(user.getUserName());
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
