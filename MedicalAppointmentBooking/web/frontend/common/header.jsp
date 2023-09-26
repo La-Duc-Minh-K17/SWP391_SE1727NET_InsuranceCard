@@ -161,6 +161,5 @@
     <!-- Icons -->
     <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
     <!-- Main Js -->
-
     <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
 </html>
