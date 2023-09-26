@@ -5,6 +5,7 @@
 package dal;
 
 import dbContext.DBConnection;
+import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Doctor;
 import utils.ImageProcessing;
+import utils.TextProcessing;
 
 /**
  *
@@ -26,7 +28,7 @@ public class DoctorDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Doctor> doctorList = new ArrayList<>();
-        String sql = "select * from doctors ";
+        String sql = "select * from doctors  ";
         Connection connection = null;
         try {
             connection = dbc.getConnection();
@@ -37,12 +39,10 @@ public class DoctorDAO {
                 String name = rs.getString("name");
                 String phone = rs.getString("phone");
                 String speciality = rs.getString("speciality");
-                String image = null;
-                if (rs.getBlob("image") != null) {
-                    image = ImageProcessing.imageString(rs.getBlob("image"));
-                }
-                String description = rs.getString("description");
-                doctorList.add(new Doctor(doctorId, name, phone, speciality, image, description));
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                String description = TextProcessing.getClobString((Clob)rs.getClob("description"));
+                System.out.println(description);
+                doctorList.add(new Doctor(doctorId, name, phone, speciality, description, image));
             }
             return doctorList;
         } catch (SQLException e) {
