@@ -8,48 +8,47 @@ package model;
  *
  * @author PC
  */
-public class Doctor {
-   
-    private int doctorId;
-    private String name;
-    private String phone;
-    private String speciality;
-    private String description;
-    private boolean status;
-    private String img;
+public class Doctor extends UserAccount{
 
-    public Doctor(int doctorId, String name, String phone, String speciality, String description, String img) {
-        this.doctorId = doctorId;
-        this.name = name;
-        this.phone = phone;
-        this.speciality = speciality;
-        this.description = description;
-        this.img = img;
-    }
+    private int doctorId;
+    private String speciality;
+    private String position;
+    private String description;
     
+    public Doctor() {
+    }
+
+    public Doctor(int doctorId, String speciality, String position, String description, String username, String email, String fullName, int gender, String phone, String image, int status) {
+        super(username, email, fullName, gender, phone, image, status);
+        this.doctorId = doctorId;
+        this.speciality = speciality;
+        this.position = position;
+        this.description = description;
+    }
+
     
     public int getDoctorId() {
         return doctorId;
     }
 
-    public void setDoctorId(int doctor_id) {
-        this.doctorId = doctor_id;
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
     }
 
-    public String getName() {
-        return name;
+    public String getSpeciality() {
+        return speciality;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPosition() {
+        return position;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public String getDescription() {
@@ -60,29 +59,6 @@ public class Doctor {
         this.description = description;
     }
 
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public String getSpeciality() {
-        return speciality;
-    }
-
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
-    }
     
+
 }
-    

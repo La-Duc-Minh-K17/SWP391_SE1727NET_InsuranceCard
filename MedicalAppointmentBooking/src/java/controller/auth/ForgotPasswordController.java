@@ -6,7 +6,6 @@ import utils.SessionUtils;
 import utils.TimeUtil;
 import dal.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -51,21 +50,23 @@ public class ForgotPasswordController extends HttpServlet {
             } else {
                 String recoveryToken = CodeProcessing.generateToken();
                 Timestamp updatedTime = timeUtil.getNow();
+                account = uDAO.getAccountByEmail(email);
                 uDAO.updateRecoveryToken(account, recoveryToken, updatedTime);
                 String fullURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-                String urlLink = fullURL + "/verify?action=verify-reset&token=" + recoveryToken;
+                String urlLink = fullURL + "/verify?email=" + account.getEmail() + "&action=verify-reset&token=" + recoveryToken;
                 EmailSending.sendRecoveryAccount(urlLink, email);
-                account = uDAO.getAccountByEmail(email);
                 SessionUtils.getInstance().putValue(request, "user", account);
                 request.setAttribute("success", "An email has been sent to your email. Please check.");
                 request.getRequestDispatcher("frontend/view/forgotpassword.jsp").forward(request, response);
                 return;
             }
         }
-        if (action != null && action.equals("reset-password")) {
+        if (action != null && action.equals("reset-password")) { 
             String newpassword = request.getParameter("password");
             UserAccount account = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
+            System.out.println(account);
             uDAO.updatePassword(account, newpassword);
+            request.setAttribute("success", "Password has been reseted successfully.");
             request.getRequestDispatcher("/login").forward(request, response);
             return;
         }

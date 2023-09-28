@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-xl-5 col-lg-4 mb-0 mb-md-1 pb-0  pb-md-2">
                         <a href="#" class="logo-footer">
-                            <img src="../assets/images/MABS__1.png" height="30" alt="">
+                            <img src="frontend/template/assets/images/MABS__1.png" height="30" alt="">
                         </a>
                         <p class="mt-4 me-xl-5">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
                     </div><!--end col-->
@@ -113,7 +113,7 @@
                     </div><!--end row-->
                 </div>
             </div><!--end container-->
-        </footer><!--e
+        </footer>
     </body>
      <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
         <!-- Icons -->
