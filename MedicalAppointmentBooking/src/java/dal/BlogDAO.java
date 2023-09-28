@@ -19,6 +19,7 @@ import java.util.Base64;
 import java.util.List;
 import model.Blog;
 import model.UserAccount;
+import utils.ImageProcessing;
 
 /**
  *
@@ -81,10 +82,14 @@ public class BlogDAO extends DBConnection {
                 int blogId = result.getInt("blog_id");
                 String blogTitle = result.getString("title");
                 String blogDescription = result.getString("description");
-                String blogContent = result.getString("content");          
+                String blogContent = result.getString("content");
+                String image = null;
+                if (result.getBlob("image") != null) {
+                    image = ImageProcessing.imageString(result.getBlob("image"));
+                } 
                 int blogCategoryId = result.getInt("blog_category_id");
                 Date blogCreatedTime = result.getDate("created_time");
-                Blog blog = new Blog(blogId, blogTitle, blogDescription, blogContent, blogCategoryId, blogCreatedTime);
+                Blog blog = new Blog(blogId, blogTitle, blogDescription, blogContent, image, blogCategoryId, blogCreatedTime);
                 blogsList.add(blog);
             }
             return blogsList;
@@ -102,7 +107,7 @@ public class BlogDAO extends DBConnection {
         Connection connection = null;
         ResultSet result = null;
         try {
-           connection = dbc.getConnection();
+            connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {
@@ -110,11 +115,15 @@ public class BlogDAO extends DBConnection {
                 int blogId = result.getInt("blog_id");
                 String blogTitle = result.getString("title");
                 String blogDescription = result.getString("description");
-                String blogContent = result.getString("content");          
+                String blogContent = result.getString("content");
+                String image = null;
+                if (result.getBlob("image") != null) {
+                    image = ImageProcessing.imageString(result.getBlob("image"));
+                } 
                 int blogCategoryId = result.getInt("blog_category_id");
                 Date blogCreatedTime = result.getDate("created_time");
-                Blog blog3 = new Blog(blogId, blogTitle, blogDescription, blogContent, blogCategoryId, blogCreatedTime);
-                blogsList3.add(blog3);
+                Blog blog = new Blog(blogId, blogTitle, blogDescription, blogContent, image, blogCategoryId, blogCreatedTime);
+                blogsList3.add(blog);
             }
             return blogsList3;
         } catch (SQLException ex) {
@@ -123,13 +132,91 @@ public class BlogDAO extends DBConnection {
         return null;
     }
 
-    public List<Blog> getAllNewsBySearch(String search, String from, String to, int categoryId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Blog> getAllNewsBySearch1(int categoryId, String sort) {
+        List<Blog> blogsList = new ArrayList<>();
+        String sql;
+        if ("all".equals(sort)) {         
+                sql = "SELECT * FROM mabs.blogs";          
+        } else if("newest".equals(sort)){
+                sql = "SELECT * FROM mabs.blogs ORDER BY created_time DESC";
+        } else {
+                sql = "SELECT * FROM mabs.blogs ORDER BY created_time ASC";           
+            }    
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet result = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            
 
+            result = ps.executeQuery();
+            while (result.next()) {
+
+               int blogId = result.getInt("blog_id");
+                String blogTitle = result.getString("title");
+                String blogDescription = result.getString("description");
+                String blogContent = result.getString("content");
+                String image = null;
+                if (result.getBlob("image") != null) {
+                    image = ImageProcessing.imageString(result.getBlob("image"));
+                } 
+                int blogCategoryId = result.getInt("blog_category_id");
+                Date blogCreatedTime = result.getDate("created_time");
+                Blog blog = new Blog(blogId, blogTitle, blogDescription, blogContent, image, blogCategoryId, blogCreatedTime);
+                blogsList.add(blog);
+            }
+            return blogsList;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
-    public List<Blog> getAllNewsBySearch(String search, int parseInt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   public List<Blog> getAllNewsBySearch2(int categoryId, String sort) {
+    List<Blog> blogsList = new ArrayList<>();
+    String sql;
+    if ("all".equals(sort)) {
+        sql = "SELECT * FROM mabs.blogs  WHERE blog_category_id = ?";
+    } else if ("newest".equals(sort)) {
+        sql = "SELECT * FROM mabs.blogs WHERE blog_category_id = ? ORDER BY created_time DESC";
+    } else {
+        sql = "SELECT * FROM mabs.blogs WHERE blog_category_id = ? ORDER BY created_time ASC";
     }
+    PreparedStatement ps = null;
+    Connection connection = null;
+    ResultSet result = null;
+    try {
+        connection = dbc.getConnection();
+        ps = connection.prepareStatement(sql);
+        ps.setInt(1, categoryId);
 
+        result = ps.executeQuery();
+        while (result.next()) {
+            int blogId = result.getInt("blog_id");
+                String blogTitle = result.getString("title");
+                String blogDescription = result.getString("description");
+                String blogContent = result.getString("content");
+                String image = null;
+                if (result.getBlob("image") != null) {
+                    image = ImageProcessing.imageString(result.getBlob("image"));
+                } 
+                int blogCategoryId = result.getInt("blog_category_id");
+                Date blogCreatedTime = result.getDate("created_time");
+                Blog blog = new Blog(blogId, blogTitle, blogDescription, blogContent, image, blogCategoryId, blogCreatedTime);
+                blogsList.add(blog);
+        }
+        return blogsList;
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return null;
 }
+
+    public List<Blog> getBlogDetailByID(int blogId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+}
+//               <!-- sql = "SELECT * FROM mabs.blogs WHERE blog_category_id = ?";
+//ps.setInt(1, categoryId);
+//            ps.setString(2, sort);

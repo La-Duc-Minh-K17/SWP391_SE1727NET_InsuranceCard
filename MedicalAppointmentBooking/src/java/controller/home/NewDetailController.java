@@ -5,12 +5,16 @@
 
 package controller.home;
 
+import dal.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import model.Blog;
 
 /**
  *
@@ -66,6 +70,15 @@ public class NewDetailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+                int blogId = Integer.parseInt(request.getParameter("blogId"));
+
+                BlogDAO dao = new BlogDAO();
+        List<Blog> blogsList3 = dao.getTop3News();
+        request.setAttribute("blogs3", blogsList3);
+        List<Blog> blogDetail = new ArrayList<>();
+        blogDetail = dao.getBlogDetailByID(blogId);
+        request.setAttribute("blogs3", blogsList3);
+        request.setAttribute("data", blogDetail);
         request.getRequestDispatcher("frontend/view/blogdetail.jsp").forward(request, response);
     }
 

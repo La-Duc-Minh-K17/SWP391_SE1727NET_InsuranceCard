@@ -83,20 +83,22 @@ public class NewListController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String search = request.getParameter("search");
-        String category = request.getParameter("choices-single-default");
+        int categoryId = Integer.parseInt(request.getParameter("category"));
+        String sort = request.getParameter("sort");
         BlogDAO dao = new BlogDAO();
         List<Blog> blogslist = new ArrayList<>();
-
         CategoryDAO cdao = new CategoryDAO();
-        List<Blog_Category> blog_category = cdao.getAllCategorys();
-        blogslist = dao.getAllNewsBySearch(search, Integer.parseInt(category));
+        List<Blog_Category> blogCategory = cdao.getAllCategorys();
+        if ( categoryId == 0) {
+            blogslist = dao.getAllNewsBySearch1(categoryId, sort);
+        } else{
+            blogslist = dao.getAllNewsBySearch2(categoryId, sort);
+        }
         List<Blog> blogs3 = new ArrayList<>();
         blogs3 = dao.getTop3News();
-        request.setAttribute("listC", blog_category);
-        request.setAttribute("list4", blogs3);
+        request.setAttribute("listC", blogCategory);
+        request.setAttribute("blogs3", blogs3);
         request.setAttribute("data", blogslist);
-        request.setAttribute("search", search);
         request.getRequestDispatcher("frontend/view/blog.jsp").forward(request, response);
     }
 

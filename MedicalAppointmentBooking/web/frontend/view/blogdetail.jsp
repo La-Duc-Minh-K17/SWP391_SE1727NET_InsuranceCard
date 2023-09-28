@@ -102,57 +102,61 @@
         <section class="bg-half-60 d-table w-100" id="home">
             <div class="bg-overlay bg-overlay-dark"></div>
             <div class="container">
-                <div class="row mt-5 justify-content-center">
-                    <div class="col-12">
-                        <div class="section-title text-center">
-                            <h3 class="sub-title mb-4 text-white title-dark">Blogs &amp; News</h3>
-                            <p class="para-desc mx-auto text-white-50">Great doctor if you need your family member to get
-                                effective immediate assistance, emergency treatment or a simple consultation.</p>
+                <form action="newdetail" method="POST">
+                    <div class="row mt-5 justify-content-center">
+                        <div class="col-12" var="o" items="${requestScope.blogs3}">
+                            <div class="section-title text-center">
+                                <h3 class="sub-title mb-4 text-white title-dark">${o.title}</h3>
+                                <p class="para-desc mx-auto text-white-50">Great doctor if you need your family member to get
+                                    effective immediate assistance, emergency treatment or a simple consultation.</p>
 
-                            <nav aria-label="breadcrumb" class="d-inline-block mt-3">
-                                <ul class="breadcrumb bg-light rounded mb-0 py-1 px-2">
-                                    <li class="breadcrumb-item"><a href="index.html">Doctris</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Blogs</li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div><!--end col-->
-                </div>
+                                <nav aria-label="breadcrumb" class="d-inline-block mt-3">
+                                    <ul class="breadcrumb bg-light rounded mb-0 py-1 px-2">
+                                        <li class="breadcrumb-item"><a href="index.html">MABS</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div><!--end col-->
+                    </div></form>
             </div><!--end container-->
         </section>
 
         <main>
             <section class="section">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-7">
-                            <img src="../assets/images/blog/single.jpg" class="img-fluid rounded shadow" alt="">
+                    <div class="row" >
+                        <form action="newdetail" method="POST">
 
-                            <p class="text-muted mt-4"></p>
-                        </div>
+                            <div class="co l-lg-8 col-lg-7">
+                                <img src= class="img-fluid rounded shadow" alt="">
 
-                        <div class="col-lg-4 col-md-5 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                            <div class="card border-0 sidebar sticky-bar rounded shadow">
-                                <div class="card-body">                       
-                                    <div class="widget mb-4 pb-2">
-                                        <h5 class="widget-title">Recent Post</h5>
-                                        <div class="mt-4">
-                                            <c:forEach var="o" items="${requestScope.blogs3}">
-                                                <div class="clearfix post-recent">
-                                                    <div class="post-recent-thumb float-start"> <a href="jvascript:void(0)">
-                                                            <img alt="img" src="../assets/images/blog/07.jpg"
-                                                                 class="img-fluid rounded"></a></div>
-                                                    <div class="post-recent-content float-start"><a
-                                                            href="jvascript:void(0)">${o.title}</a><span
-                                                            class="text-muted mt-2">${created_time}</span></div>
-                                                </div>
-                                            </c:forEach>
+                                <p class="text-muted mt-4"></p>
+                            </div>
 
+                            <div class="col-lg-4 col-md-5 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                                <div class="card border-0 sidebar sticky-bar rounded shadow">
+                                    <div class="card-body">                       
+                                        <div class="widget mb-4 pb-2">
+                                            <h5 class="widget-title">Recent Post</h5>
+                                            <div class="mt-4">
+                                                <c:forEach var="o" items="${requestScope.blogs3}">
+                                                    <div class="clearfix post-recent">
+                                                        <div class="post-recent-thumb float-start"> <a href="jvascript:void(0)">
+                                                                <img alt="img" src= "data:image/jpg;base64,${o.image}"
+                                                                     class="img-fluid rounded"></a></div>
+                                                        <div class="post-recent-content float-start"><a
+                                                                href="jvascript:void(0)">${o.title}</a><span
+                                                                class="text-muted mt-2">${created_time}</span></div>
+                                                    </div>
+                                                </c:forEach>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div><!--end row-->
                 </div><!--end container-->
 
@@ -176,9 +180,9 @@
                                         <div class="slider-range-three  tns-slider tns-carousel tns-subpixel tns-calc tns-horizontal"
                                              id="tns1" style="transform: translate3d(0%, 0px, 0px);">
                                             <div class="tiny-slide tns-item tns-slide-active" id="tns1-item0">
-                                                <c:forEach var="o" items="${requestScope.blogs6}">
+                                                <c:forEach var="o" items="${requestScope.blogs3}">
                                                     <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                                        <img src="../assets/images/blog/03.jpg" class="img-fluid" alt="">
+                                                        <img src="data:image/jpg;base64,${o.image}"class="img-fluid" alt="">
                                                         <div class="card-body p-4">
                                                             <ul class="list-unstyled mb-2">
                                                                 <li class="list-inline-item text-muted small me-3"><i
@@ -189,7 +193,7 @@
                                                             </ul>
                                                             <a href="blog-detail.html" class="text-dark title h5">${o.title}</a>
                                                             <div class="post-meta d-flex justify-content-between mt-3">                           
-                                                                <a href="blog-detail.html" class="link">Read More <i
+                                                                <a href="newdetail" class="link">Read More <i
                                                                         class="mdi mdi-chevron-right align-middle"></i></a>
                                                             </div>
                                                         </div>

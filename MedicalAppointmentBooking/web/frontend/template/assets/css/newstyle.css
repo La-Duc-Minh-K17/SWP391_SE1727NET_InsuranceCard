@@ -74,7 +74,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 .flexsearch--submit {
     position: absolute;
-    right: 0;
+    right: 10px; /* Điều chỉnh giá trị này để đẩy vào bên trong hơn */
     top: 0;
     display: block;
     width: 40px;
