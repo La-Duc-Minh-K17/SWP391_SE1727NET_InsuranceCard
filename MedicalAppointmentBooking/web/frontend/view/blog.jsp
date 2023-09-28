@@ -177,7 +177,7 @@
                                         </div>
                                         <div>
                                             <ul class="list cat-list">
-                                                <select name="category" id="category" >
+                                                <select class=""name="category" id="category" >
                                                     <option value="0">All</option>
                                                     <c:forEach var="o" items="${requestScope.listC}">
                                                         <option value="${o.blog_category_id}">${o.name}</option>

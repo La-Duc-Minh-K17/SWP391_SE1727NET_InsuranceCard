@@ -24,8 +24,6 @@ public class BlogDAO extends DBConnection {
     DBConnection dbc = new DBConnection();
     public CategoryDAO categoryDao = new CategoryDAO();
 
-    
-
     public List<Blog> getAllNews() {
         List<Blog> blogsList = new ArrayList<>();
         String sql = "SELECT *FROM mabs.blogs ";
@@ -45,7 +43,7 @@ public class BlogDAO extends DBConnection {
                 String image = null;
                 if (result.getBlob("image") != null) {
                     image = ImageProcessing.imageString(result.getBlob("image"));
-                } 
+                }
                 int blogCategoryId = result.getInt("blog_category_id");
                 Date blogCreatedTime = result.getDate("created_time");
                 Blog blog = new Blog(blogId, blogTitle, blogDescription, blogContent, image, blogCategoryId, blogCreatedTime);
@@ -78,7 +76,7 @@ public class BlogDAO extends DBConnection {
                 String image = null;
                 if (result.getBlob("image") != null) {
                     image = ImageProcessing.imageString(result.getBlob("image"));
-                } 
+                }
                 int blogCategoryId = result.getInt("blog_category_id");
                 Date blogCreatedTime = result.getDate("created_time");
                 Blog blog = new Blog(blogId, blogTitle, blogDescription, blogContent, image, blogCategoryId, blogCreatedTime);
@@ -94,32 +92,31 @@ public class BlogDAO extends DBConnection {
     public List<Blog> getAllNewsBySearch1(int categoryId, String sort) {
         List<Blog> blogsList = new ArrayList<>();
         String sql;
-        if ("all".equals(sort)) {         
-                sql = "SELECT * FROM mabs.blogs";          
-        } else if("newest".equals(sort)){
-                sql = "SELECT * FROM mabs.blogs ORDER BY created_time DESC";
+        if ("all".equals(sort)) {
+            sql = "SELECT * FROM mabs.blogs";
+        } else if ("newest".equals(sort)) {
+            sql = "SELECT * FROM mabs.blogs ORDER BY created_time DESC";
         } else {
-                sql = "SELECT * FROM mabs.blogs ORDER BY created_time ASC";           
-            }    
+            sql = "SELECT * FROM mabs.blogs ORDER BY created_time ASC";
+        }
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet result = null;
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            
 
             result = ps.executeQuery();
             while (result.next()) {
 
-               int blogId = result.getInt("blog_id");
+                int blogId = result.getInt("blog_id");
                 String blogTitle = result.getString("title");
                 String blogDescription = result.getString("description");
                 String blogContent = result.getString("content");
                 String image = null;
                 if (result.getBlob("image") != null) {
                     image = ImageProcessing.imageString(result.getBlob("image"));
-                } 
+                }
                 int blogCategoryId = result.getInt("blog_category_id");
                 Date blogCreatedTime = result.getDate("created_time");
                 Blog blog = new Blog(blogId, blogTitle, blogDescription, blogContent, image, blogCategoryId, blogCreatedTime);
@@ -132,48 +129,76 @@ public class BlogDAO extends DBConnection {
         return null;
     }
 
-   public List<Blog> getAllNewsBySearch2(int categoryId, String sort) {
-    List<Blog> blogsList = new ArrayList<>();
-    String sql;
-    if ("all".equals(sort)) {
-        sql = "SELECT * FROM mabs.blogs  WHERE blog_category_id = ?";
-    } else if ("newest".equals(sort)) {
-        sql = "SELECT * FROM mabs.blogs WHERE blog_category_id = ? ORDER BY created_time DESC";
-    } else {
-        sql = "SELECT * FROM mabs.blogs WHERE blog_category_id = ? ORDER BY created_time ASC";
-    }
-    PreparedStatement ps = null;
-    Connection connection = null;
-    ResultSet result = null;
-    try {
-        connection = dbc.getConnection();
-        ps = connection.prepareStatement(sql);
-        ps.setInt(1, categoryId);
+    public List<Blog> getAllNewsBySearch2(int categoryId, String sort) {
+        List<Blog> blogsList = new ArrayList<>();
+        String sql;
+        if ("all".equals(sort)) {
+            sql = "SELECT * FROM mabs.blogs  WHERE blog_category_id = ?";
+        } else if ("newest".equals(sort)) {
+            sql = "SELECT * FROM mabs.blogs WHERE blog_category_id = ? ORDER BY created_time DESC";
+        } else {
+            sql = "SELECT * FROM mabs.blogs WHERE blog_category_id = ? ORDER BY created_time ASC";
+        }
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet result = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, categoryId);
 
-        result = ps.executeQuery();
-        while (result.next()) {
-            int blogId = result.getInt("blog_id");
+            result = ps.executeQuery();
+            while (result.next()) {
+                int blogId = result.getInt("blog_id");
                 String blogTitle = result.getString("title");
                 String blogDescription = result.getString("description");
                 String blogContent = result.getString("content");
                 String image = null;
                 if (result.getBlob("image") != null) {
                     image = ImageProcessing.imageString(result.getBlob("image"));
-                } 
+                }
                 int blogCategoryId = result.getInt("blog_category_id");
                 Date blogCreatedTime = result.getDate("created_time");
                 Blog blog = new Blog(blogId, blogTitle, blogDescription, blogContent, image, blogCategoryId, blogCreatedTime);
                 blogsList.add(blog);
+            }
+            return blogsList;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        return blogsList;
-    } catch (SQLException ex) {
-        ex.printStackTrace();
+        return null;
     }
-    return null;
-}
 
-    public List<Blog> getBlogDetailByID(int blogId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Blog getBlogDetailByID(int Id) {
+        Blog blog = new Blog();
+        String sql = "SELECT *FROM mabs.blogs where blog_id = ? ";
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet result = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, Id);
+            result = ps.executeQuery();
+            while (result.next()) {
+
+                int blogId = result.getInt("blog_id");
+                String blogTitle = result.getString("title");
+                String blogDescription = result.getString("description");
+                String blogContent = result.getString("content");
+                String image = null;
+                if (result.getBlob("image") != null) {
+                    image = ImageProcessing.imageString(result.getBlob("image"));
+                }
+                int blogCategoryId = result.getInt("blog_category_id");
+                Date blogCreatedTime = result.getDate("created_time");
+                blog = new Blog(blogId, blogTitle, blogDescription, blogContent, image, blogCategoryId, blogCreatedTime);
+            }
+            return blog;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 }
 //               <!-- sql = "SELECT * FROM mabs.blogs WHERE blog_category_id = ?";

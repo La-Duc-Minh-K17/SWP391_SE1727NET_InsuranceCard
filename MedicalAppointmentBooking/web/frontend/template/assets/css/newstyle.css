@@ -186,3 +186,7 @@ select {
     height:246px;
     width: 492px; /* Để cắt ảnh nếu nó lớn hơn form */
 }
+.fit-image {
+    max-width: 100%;
+    height: auto;
+}
