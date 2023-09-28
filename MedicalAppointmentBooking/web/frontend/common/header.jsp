@@ -52,8 +52,8 @@
 
                 <div>
                     <a class="logo" href="home">
-                        <img src="assets/images/logo-light.png" height="24" class="l-light" alt="">
-                        <img src="assets/images/logo-dark.png" class="l-dark" height="24" alt="">
+                        <img src="frontend/template/assets/images/MABS__1.png" height="24" alt="">
+                        
                     </a>
                 </div>
 
@@ -70,13 +70,6 @@
                 </div>
 
                 <ul class="dropdowns list-inline mb-0">
-
-                    <li class="list-inline-item mb-0 ms-1">
-                        <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
-                            <i class="uil uil-search"></i>
-                        </a>
-                    </li>
-
                     <li class="list-inline-item mb-0 ms-1">
                         <div class="dropdown dropdown-primary">
                             <c:if test="${sessionScope.user != null}">
@@ -98,7 +91,7 @@
                                             <img src="data:image/png;base64,${sessionScope.user.img}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                         </c:if>
                                         <c:if test="${sessionScope.user.img == 'default'}">
-                                            <img src="assets/images/avata.png" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                            <img src="frontend/template/assets/images/avata.png" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                         </c:if>
                                         <div class="flex-1 ms-2">
                                             <span class="d-block mb-1">${sessionScope.user.username}</span>
@@ -124,7 +117,7 @@
                     <div id="navigation">
 
                         <ul class="navigation-menu nav-left nav-light">
-                            <li><a href="home" class="sub-menu-item">Home</a></li>
+                            <li><a href="#" class="sub-menu-item">Home</a></li>
                             <li><a href="#" class="sub-menu-item">Doctors</a></li>
                             <li><a href="#" class="sub-menu-item">Services</a></li>
                             <li><a href="#" class="sub-menu-item">Contact us</a></li>
