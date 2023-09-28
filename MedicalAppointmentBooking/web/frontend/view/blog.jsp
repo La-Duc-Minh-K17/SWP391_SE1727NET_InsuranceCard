@@ -142,14 +142,14 @@
                                             <li class="list-inline-item text-muted small"><i
                                                     class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
                                         </ul>
-                                        <a href="newdetail" class="text-dark title h5">${o.title}</a>
+                                        <a href="newdetail?id=${o.blog_id}" class="text-dark title h5">${o.title}</a>
                                         <div>
                                             <ul class="list-unstyled mb-0">
-                                                <a href="newdetail" class="text-dark title h6">${o.description}</a>
+                                                <a href="newdetail?id=${o.blog_id}" class="text-dark title h6">${o.description}</a>
                                             </ul>
                                         </div>
                                         <div class="post-meta d-flex justify-content-between mt-3">                                               
-                                            <a href="newdetail" class="link">Read More <i
+                                            <a href="newdetail?id=${o.blog_id}" class="link">Read More <i
                                                     class="mdi mdi-chevron-right align-middle"></i></a>
                                         </div>
                                     </div>
@@ -244,14 +244,14 @@
                                             <li class="list-inline-item text-muted small"><i
                                                     class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
                                         </ul>
-                                        <a href="newdetail" class="text-dark title h5">${o.title}</a>
+                                        <a href="newdetail?id=${o.blog_id}" class="text-dark title h5">${o.title}</a>
                                         <div>
                                             <ul class="list-unstyled mb-0">
-                                                <a href="newdetail" class="text-dark title h6">${o.description}</a>
+                                                <a href="newdetail?id=${o.blog_id}" class="text-dark title h6">${o.description}</a>
                                             </ul>
                                         </div>
                                         <div class="post-meta d-flex justify-content-between mt-3">                                                           
-                                            <a href="newdetail" class="link">Read More <i
+                                            <a href="newdetail?id=${o.blog_id}" class="link">Read More <i
                                                     class="mdi mdi-chevron-right align-middle"></i></a>
                                         </div>
                                     </div>

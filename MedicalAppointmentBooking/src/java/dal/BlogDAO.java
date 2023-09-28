@@ -5,20 +5,14 @@
 package dal;
 
 import dbContext.DBConnection;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import model.Blog;
-import model.UserAccount;
 import utils.ImageProcessing;
 
 /**
@@ -30,42 +24,7 @@ public class BlogDAO extends DBConnection {
     DBConnection dbc = new DBConnection();
     public CategoryDAO categoryDao = new CategoryDAO();
 
-    public String imageString(Blob blob) {
-        String base64Image = null;
-        InputStream inputStream = null;
-
-        try {
-            inputStream = blob.getBinaryStream();
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            byte[] buffer = new byte[4096];
-            int bytesRead = -1;
-            try {
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
-                }
-            } catch (IOException ex) {
-                System.out.println(ex);
-            }
-            byte[] imageBytes = outputStream.toByteArray();
-            base64Image = Base64.getEncoder().encodeToString(imageBytes);
-            try {
-                inputStream.close();
-                outputStream.close();
-            } catch (IOException ex) {
-                System.out.println(ex);
-            }
-
-        } catch (SQLException ex) {
-        } finally {
-            try {
-                inputStream.close();
-            } catch (IOException ex) {
-                System.out.println(ex);
-            }
-        }
-
-        return base64Image;
-    }
+    
 
     public List<Blog> getAllNews() {
         List<Blog> blogsList = new ArrayList<>();
