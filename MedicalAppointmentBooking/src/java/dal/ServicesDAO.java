@@ -11,37 +11,34 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Doctor;
-import utils.ImageProcessing;
+import model.Service_Category;
+import static org.apache.catalina.tribes.util.Arrays.add;
 
 /**
  *
  * @author PC
  */
-public class DoctorDAO {
-
+public class ServicesDAO {
     DBConnection dbc = new DBConnection();
 
-    public List<Doctor> getAllDoctor() {
+    public List<Service_Category> getAllServices_category() {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        List<Doctor> doctorList = new ArrayList<>();
-        String sql = "select * from doctors LIMIT 4;  ";
+        List<Service_Category> servicesList = new ArrayList<>();
+        String sql = "select * from service_category ;  ";
         Connection connection = null;
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int doctorId = rs.getInt("doctor_id");
                 String name = rs.getString("name");
-                String phone = rs.getString("phone");
-                String speciality = rs.getString("speciality");
-                String image = ImageProcessing.imageString(rs.getBlob("image"));
                 String description = rs.getString("description");
-                doctorList.add(new Doctor(doctorId, name, phone, speciality, description, image));
+                Boolean status = rs.getBoolean("status");
+                int setting_id = rs.getInt("setting_id");
+                servicesList.add(new Service_Category(name, description,status,setting_id));
             }
-            return doctorList;
+            return servicesList;
         } catch (SQLException e) {
         } finally {
             if (connection != null) {
@@ -52,6 +49,6 @@ public class DoctorDAO {
                 }
             }
         }
-        return doctorList;
+        return servicesList;
     }
 }

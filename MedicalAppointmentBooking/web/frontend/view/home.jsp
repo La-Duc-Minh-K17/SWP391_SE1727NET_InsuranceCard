@@ -26,6 +26,7 @@
                 background-image: url("frontend/template/assets/images/bg/backgroundclinic.jpg") ;
             }
         </style>
+        </head>
     <body>
 
         <jsp:include page="/frontend/common/header.jsp" />
@@ -37,7 +38,7 @@
                 <div class="row justify-content-center mt-5">
                     <div class="col-xl-10">
                         <div class="heading-title text-center">
-                            <img src="../template/assets/images/logo-icon.png" height="50" alt="">
+                            <img src="frontend/template/assets/images/logo-icon.png" height="50" alt="">
                             <h4 class="heading fw-bold text-white title-dark mt-3 mb-4">Booking Your Appointments</h4>
                             <p class="para-desc mx-auto text-white-50 mb-0">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
 
@@ -70,7 +71,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-5 col-md-6">
                         <div class="position-relative">
-                            <img src="../template/assets/images/about/About1.png" class="img-fluid" alt="">
+                            <img src="frontend/template/assets/images/about/About1.png" class="img-fluid" alt="">
                             <div class="play-icon">
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#watchvideomodal" class="play-btn video-play-icon">
                                     <i class="mdi mdi-play text-primary rounded-circle bg-white title-bg-dark shadow"></i>
@@ -106,7 +107,7 @@
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
-                                <img src="../template/assets/images/about/homemedical.png" height="40"></img>
+                                <img src="frontend/template/assets/images/about/homemedical.png" height="40"></img>
                             </div>
                             <div class="card-body p-0 mt-3">
                                 <a href="departments.html" class="title text-dark h5">Medical treatment at home</a>
@@ -118,7 +119,7 @@
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
-                                <img src="../template/assets/images/about/pediatric.png" height="40"></img>
+                                <img src="frontend/template/assets/images/about/pediatric.png" height="40"></img>
                             </div>
                             <div class="card-body p-0 mt-3">
                                 <a href="departments.html" class="title text-dark h5">Pediatric</a>
@@ -130,10 +131,10 @@
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
-                                <img src="../template/assets/images/about/internal.png" height="40"></img>
+                                <img src="frontend/template/assets/images/about/internal.png" height="40"></img>
                             </div>
                             <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Internal</a>
+                                <a href="departments.html" class="title text-dark h5">Endoscopy</a>
                                 <p class="text-muted mt-3">where expertise meets the intricacies of the human body, the demand for informative content is abundant to illuminate the path to health and well-being.</p>
                                 <a href="departments.html" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
                             </div>
@@ -142,10 +143,10 @@
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
-                                <img src="../template/assets/images/about/ear-nose-mouth.png" height="40"></img>
+                                <img src="frontend/template/assets/images/about/ear-nose-mouth.png" height="40"></img>
                             </div>
                             <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Ear - Nose - Throat</a>
+                                <a href="departments.html" class="title text-dark h5">ENT</a>
                                 <p class="text-muted mt-3">where precision and care converge, the need for informative content is abundant to guide you through the sounds, scents, and sensations of health.</p>
                                 <a href="departments.html" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
                             </div>
@@ -154,7 +155,7 @@
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
-                                <img src="../template/assets/images/about/specialize.png" height="40"></img>
+                                <img src="frontend/template/assets/images/about/specialize.png" height="40"></img>
                             </div>
                             <div class="card-body p-0 mt-3">
                                 <a href="departments.html" class="title text-dark h5">Specialized</a>
@@ -166,7 +167,7 @@
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
-                                <img src="../template/assets/images/about/vaccination.png" height="40"></img>
+                                <img src="frontend/template/assets/images/about/vaccination.png" height="40"></img>
                             </div>
                             <div class="card-body p-0 mt-3">
                                 <a href="departments.html" class="title text-dark h5">Vaccination</a>
@@ -190,7 +191,7 @@
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
-                                <img src="../template/assets/images/about/bussinesshealthcheck.png" height="40"/>
+                                <img src="frontend/template/assets/images/about/bussinesshealthcheck.png" height="40"/>
                             </div>
                             <div class="card-body p-0 mt-3">
                                 <a href="departments.html" class="title text-dark h5">Medical Equpipment Rental</a>
@@ -332,8 +333,8 @@
                             <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
                                 <div class="card team border-0 rounded shadow overflow-hidden">
                                     <div class="team-img position-relative">
-                                       
-                                       <img src="data:image/jpg;base64,${d.doctorImage}" width="240" height="300"/>
+
+                                        <img src="data:image/jpg;base64,${d.doctorImage}" width="240" height="300"/>
                                         <ul class="list-unstyled team-social mb-0">
                                             <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
                                             <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
@@ -343,7 +344,7 @@
                                     </div>
                                     <div class="card-body content text-center">
                                         <a href="doctor-team-one.html" class="title text-dark h5 d-block mb-0">${d.name}</a>
-                                        <small class="text-muted speciality">${d.description}</small>
+                                        <small class="text-muted speciality">${d.speciality}</small>
                                     </div>
                                 </div>
                             </div><!--end col-->
@@ -366,7 +367,7 @@
                             <div class="slider-range-three">
                                 <div class="tiny-slide">
                                     <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                        <img src="../template/assets/images/blog/03.jpg" class="img-fluid" alt="">
+                                        <img src="frontend/template/assets/images/blog/03.jpg" class="img-fluid" alt="">
                                         <div class="card-body p-4">
                                             <ul class="list-unstyled mb-2">
                                                 <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
@@ -406,7 +407,7 @@
 
                                 <div class="tiny-slide">
                                     <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                        <img src="../template/assets/images/blog/05.jpg" class="img-fluid" alt="">
+                                        <img src="frontend/template/assets/images/blog/05.jpg" class="img-fluid" alt="">
                                         <div class="card-body p-4">
                                             <ul class="list-unstyled mb-2">
                                                 <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
@@ -426,7 +427,7 @@
 
                                 <div class="tiny-slide">
                                     <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                        <img src="../template/assets/images/blog/06.jpg" class="img-fluid" alt="">
+                                        <img src="frontend/template/assets/images/blog/06.jpg" class="img-fluid" alt="">
                                         <div class="card-body p-4">
                                             <ul class="list-unstyled mb-2">
                                                 <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
@@ -446,7 +447,7 @@
 
                                 <div class="tiny-slide">
                                     <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                        <img src="../template/assets/images/blog/07.jpg" class="img-fluid" alt="">
+                                        <img src="frontend/template/assets/images/blog/07.jpg" class="img-fluid" alt="">
                                         <div class="card-body p-4">
                                             <ul class="list-unstyled mb-2">
                                                 <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
@@ -491,13 +492,13 @@
                             <div id="style-switcher">
                                 <div>
                                     <ul class="text-center list-unstyled mb-0">
-                                        <li class="d-grid"><a href="#" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="../assets/images/layouts/landing-light-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                        <li class="d-grid"><a href="#" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                        <li class="d-grid"><a href="#" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="../assets/images/layouts/landing-dark-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                        <li class="d-grid"><a href="#" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                        <li class="d-grid"><a href="#" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
-                                        <li class="d-grid"><a href="#" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
-                                        <li class="d-grid"><a href="../admin/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
+                                        <li class="d-grid"><a href="#" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="frontend/assets/images/layouts/landing-light-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                        <li class="d-grid"><a href="#" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="frontend/assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                        <li class="d-grid"><a href="#" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="frontend/assets/images/layouts/landing-dark-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                        <li class="d-grid"><a href="#" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="frontend/assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                        <li class="d-grid"><a href="#" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="frontend/assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
+                                        <li class="d-grid"><a href="#" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="frontend/assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
+                                        <li class="d-grid"><a href="frontend/admin/index.html" target="_blank" class="mt-4"><img src="frontend/assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -513,7 +514,7 @@
                         <li class="list-inline-item mb-0"><a href="#/" target="_blank" class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
                         <li class="list-inline-item mb-0"><a href="#" target="_blank" class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
                         <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i class="uil uil-envelope align-middle" title="email"></i></a></li>
-                        <li class="list-inline-item mb-0"><a href="../../../index.html" target="_blank" class="rounded"><i class="uil uil-globe align-middle" title="website"></i></a></li>
+                        <li class="list-inline-item mb-0"><a href="frontend/frontend/frontend/index.html" target="_blank" class="rounded"><i class="uil uil-globe align-middle" title="website"></i></a></li>
                     </ul><!--end icon-->
                 </div>
             </div>
@@ -523,8 +524,9 @@
 
             <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
             <!-- Main Js -->
-
+            <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
             <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-
+            <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.j'/>"></script>
+            <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
     </body>
 </html>
