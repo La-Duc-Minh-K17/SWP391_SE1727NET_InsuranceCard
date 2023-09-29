@@ -28,7 +28,11 @@ public class DoctorDAO {
         List<Doctor> doctorList = new ArrayList<>();
 
         String sql = "select * from doctors d inner join user_account u on d.user_id = u.user_id";
+<<<<<<< Updated upstream
 
+=======
+        
+>>>>>>> Stashed changes
         Connection connection = null;
         try {
             connection = dbc.getConnection();
