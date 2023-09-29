@@ -8,25 +8,22 @@ package model;
  *
  * @author PC
  */
-public class Doctor extends UserAccount{
+public class Doctor extends UserAccount {
 
     private int doctorId;
     private String speciality;
     private String position;
     private String description;
-    
+
     public Doctor() {
     }
-
     public Doctor(int doctorId, String speciality, String position, String description, String username, String email, String fullName, int gender, String phone, String image, int status) {
         super(username, email, fullName, gender, phone, image, status);
         this.doctorId = doctorId;
         this.speciality = speciality;
         this.position = position;
         this.description = description;
-    }
-
-    
+    }       
     public int getDoctorId() {
         return doctorId;
     }
@@ -58,7 +55,5 @@ public class Doctor extends UserAccount{
     public void setDescription(String description) {
         this.description = description;
     }
-
-    
 
 }
