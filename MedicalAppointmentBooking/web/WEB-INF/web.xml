@@ -24,7 +24,7 @@
 
         <servlet-name>NewDetailController</servlet-name>
         <servlet-class>controller.home.NewDetailController</servlet-class>
-  </servlet>
+    </servlet>
     <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.auth.LoginController</servlet-class>
@@ -39,7 +39,7 @@
 
         <servlet-name>ManageDoctorController</servlet-name>
         <servlet-class>controller.manager.ManageDoctorController</servlet-class>
-</servlet>
+    </servlet>
     <servlet>
         <servlet-name>SerivceController</servlet-name>
         <servlet-class>controller.home.SerivceController</servlet-class>
@@ -70,7 +70,7 @@
 
         <servlet-name>NewDetailController</servlet-name>
         <url-pattern>/newdetail</url-pattern>
-</servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -82,10 +82,9 @@
     </servlet-mapping>
 
     <servlet-mapping>
-
         <servlet-name>ManageDoctorController</servlet-name>
         <url-pattern>/manage-doctor</url-pattern>
-</servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SerivceController</servlet-name>
         <url-pattern>/Serivce</url-pattern>

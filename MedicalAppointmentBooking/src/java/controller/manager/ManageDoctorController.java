@@ -6,8 +6,8 @@ package controller.manager;
 
 import dal.DoctorDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +18,7 @@ import model.Doctor;
  *
  * @author Admin
  */
+@MultipartConfig(maxFileSize = 16177215)
 public class ManageDoctorController extends HttpServlet {
 
     /**
@@ -47,7 +48,12 @@ public class ManageDoctorController extends HttpServlet {
             request.getRequestDispatcher("frontend/view/admin/doctorlist.jsp").forward(request, response);
             return;
         }
-        if (action != null && action.equals("")) {
+        if (action != null && action.equals("edit")) { 
+            int id = Integer.parseInt(request.getParameter("id"));
+            Doctor doctor = dDAO.getDoctorById(id);
+            request.setAttribute("doctor", doctor);
+            request.getRequestDispatcher("frontend/view/admin/editdoctor.jsp").forward(request, response);
+            return;
         }
 
         request.getRequestDispatcher("frontend/view/admin/doctorlist.jsp").forward(request, response);
@@ -66,7 +72,7 @@ public class ManageDoctorController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /**

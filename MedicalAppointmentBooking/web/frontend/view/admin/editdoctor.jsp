@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -74,39 +75,28 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
-                    <div class="card border-0 shadow overflow-hidden">
-                        <div class="tab-content p-4" id="pills-tabContent">
-                            <form action="" method="POST" enctype="multipart/form-data" onSubmit="document.getElementById('submit').disabled = true;">
-                                <h5 class="mb-0">Edit Doctor :</h5>
+                <c:set value="${requestScope.doctor}" var="doctor"></c:set>
+                    <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
+                        <div class="card border-0 shadow overflow-hidden">
+                            <div class="tab-content p-4" id="pills-tabContent">
+                                <form action="<c:url value='/manage-doctor?action=edit-image'/>" method="POST" enctype="multipart/form-data">
+                                <h5 class="mb-0">Edit Doctor Information.</h5>
                                 <div>
                                     <p class="text-muted">Update Image.</p>
                                     <div id="myfileupload">
-                                        <input type="file" name="image" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
+                                        <input type="file" name="image" id="uploadfile" name="ImageUpload" onchange="displayThumbnail(this);" />
                                     </div>
-                                    <div id="thumbbox">
-                                        <img class="rounded" height="20%" width="30%" alt="Thumb image" id="thumbimage" style="display: none" />
-                                        <a class="removeimg" href="javascript:"></a>
+                                    <div id="thumbbox" class="mt-3 mb-3">
+                                        <img class="rounded" height="20%" width="30%" alt="Thumb image" id="thumbImage"  src="data:image/jpg;base64,${doctor.image}" />
                                     </div>
-                                    <div id="boxchoice">
-                                        <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                                        <p style="clear:both"></p>
-                                        <input type="submit" id="submit" style="display: none" name="send" class="Update btn btn-primary"
-                                               value="Cập nhật">
-                                        <p style="clear:both"></p>
-                                    </div> 
                                 </div>
-                            </form>
-
-                            <form action="" method="POST" class="mt-4" onSubmit="document.getElementById('submit').disabled = true;">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Name</label>
-                                            <input name="name" oninvalid="CheckFullName(this);" oninput="CheckFullName(this);" id="name" type="text" class="form-control" value="${doctor.doctor_name}">
+                                            <input name="name" id="name" type="text" class="form-control" value="${doctor.fullName}">
                                         </div>
                                     </div>
-
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Gender</label>
@@ -125,29 +115,34 @@
                                             </table>
                                         </div>
                                     </div>
-
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Phone</label>
-                                            <input name="phone" oninvalid="" oninput="" id="number" type="text" class="form-control" value="">
+                                            <input name="phone" oninvalid="" oninput="" id="number" type="text" class="form-control" value="${doctor.phone}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Speciality</label>
                                             <select name="speciality" class="form-select">
-                                                <c:forEach items="${speciality}" var="s">
-                                                    <c:if test="">
-                                                        
-                                                    </c:if>
-                                                </c:forEach>
+                                                <option value="Andrology">Andrology</option>
+                                                <option value="Internal">Internal medicine</option>
+                                                <option value="Neurosurgery">Neurosurgery</option><!-- comment -->
+                                                <option value="Cardiology">Cardiology</option>                               
+                                                <option value="Endocrinology">Endocrinology</option>
+                                                <option value="Dermatology">Dermatology</option>
+                                                <option value="Gastroenterology">Gastroenterology   </option>
+                                                <option value="Gynecology">Gynecology</option>
+                                                <option value="Odontology">Odontology</option>
+                                                <option value="Ophthalmology">Ophthalmology</option>
+                                                <option value="Immunology">Immunology</option>        
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Position</label>
-                                            <input name="position"  type="text" onkeydown="return false" min="1922-01-01" max="2003-01-01" class="form-control" value="${doctor.DOB}">
+                                            <input name="position"  type="text"  class="form-control" value="${doctor.position}">
                                         </div>
                                     </div>
 
@@ -162,22 +157,20 @@
                                         <div class="mb-3">
                                             <label class="form-label">Status <span class="text-danger"></span></label>
                                             <br>
-                                            <input id="credit" name="status" ${doctor.status==true?"checked":""} value="true" type="radio" class="form-check-input"checked required >
+                                            <input id="credit" name="status" ${doctor.status== 1?"checked":""} value="true" type="radio" class="form-check-input"checked required >
 
                                             <label class="form-check-label">Active</label>
 
-                                            <input id="debit" name="status" ${doctor.status==false?"checked":""} value="false" type="radio" class="form-check-input"
+                                            <input id="debit" name="status" ${doctor.status== 0?"checked":""} value="false" type="radio" class="form-check-input"
                                                    required>
                                             <label class="form-check-label">Inactive</label>
-
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <input type="submit" id="submit" name="send" class="btn btn-primary"
-                                               value="SAVE">
+                                        <input type="submit" id="submit" name="send" class="btn btn-primary"value="SAVE">
                                     </div>
                                 </div>
                             </form>
@@ -187,6 +180,28 @@
             </main><!-- comment -->
         </div>
     </body>
+    <script>
+
+
+        function displayThumbnail() {
+            const input = document.getElementById("uploadfile");
+            const thumbnail = document.getElementById("thumbImage");
+
+            // Check if a file has been selected
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    thumbnail.src = e.target.result;
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            } else {
+
+                thumbnail.src = "";
+            }
+        }
+    </script>
     <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
     <!-- simplebar -->
     <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>

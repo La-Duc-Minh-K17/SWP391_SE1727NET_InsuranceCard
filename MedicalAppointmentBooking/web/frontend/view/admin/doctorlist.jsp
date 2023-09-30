@@ -66,8 +66,8 @@
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                          style="min-width: 200px;">
                                         <a class="dropdown-item d-flex align-items-center text-dark"
-                                            <img src="../assets/images/doctors/01.jpg"
-                                                 class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                           <img src="../assets/images/doctors/01.jpg"
+                                           class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                             <div class="flex-1 ms-2">
                                                 <span class="d-block mb-1">Calvin Carlo</span>
                                                 <small class="text-muted">Orthopedic</small>
@@ -142,19 +142,21 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${doctorList}" var="d">
+                                                <c:forEach items="${dList}" var="d">
                                                     <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>${d.user.name}</td>
-                                                        <td>${d.user.phone}</td>
+                                                        <th scope="row">${d.doctorId}</th>
+                                                        <td>${d.fullName}</td>
+                                                        <td>${d.phone}</td>
                                                         <td>${d.speciality}</td>
-                                                        <td>${d.user.status}</td>
+                                                        <td>
+                                                            <c:if test="${d.status == 1}">Active</c:if>
+                                                              <c:if test="${d.status == 0}">Inactive</c:if>
+                                                        </td>
                                                         <td>
                                                             <div class="">
                                                                 <div class="card component-wrapper border-0 rounded shadow">
                                                                     <div>
-                                                                        <a href="<c:url value='/manage-doctor?action=edit&id=${d.doctor_id}'/>  " data-bs-toggle="modal"
-                                                                           class="btn btn-primary btn-sm">Edit</a>
+                                                                        <a href="<c:url value='/manage-doctor?action=edit&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">Edit</a>
                                                                     </div>
                                                                 </div>
                                                             </div><!--end col-->

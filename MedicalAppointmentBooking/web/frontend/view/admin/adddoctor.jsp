@@ -78,7 +78,7 @@
                     <div class="card border-0 shadow overflow-hidden">
                         <div class="tab-content p-4" id="pills-tabContent">
                             <form action="" method="POST" enctype="multipart/form-data" onSubmit="document.getElementById('submit').disabled = true;">
-                                <h5 class="mb-0">Edit Doctor :</h5>
+                                <h5 class="mb-0">Add New Doctor :</h5>
                                 <div>
                                     <p class="text-muted">Update Image.</p>
                                     <div id="myfileupload">

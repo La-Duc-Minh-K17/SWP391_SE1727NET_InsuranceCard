@@ -26,8 +26,9 @@ public class DoctorDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Doctor> doctorList = new ArrayList<>();
-
-        String sql = "select * from doctors d inner join user_account u on d.user_id = u.user_id";
+        String sql = "select * from doctors d \n"
+                + "            inner join user_account u on d.user_id = u.user_id \n"
+                + "            inner join speciality s on s.speciality_id = d.speciality_id\n";
 
         Connection connection = null;
         try {
@@ -43,9 +44,9 @@ public class DoctorDAO {
                 int gender = rs.getInt("gender");
                 String email = rs.getString("email");
                 int status = rs.getInt("status");
-                String position = rs.getString("position");
-                String speciality = rs.getString("speciality");
-                String description = rs.getString("description");
+                String position = rs.getString("doctor_position");
+                String speciality = rs.getString("speName");
+                String description = rs.getString("speDescription");
                 Doctor d = new Doctor(doctorId, position, speciality, description, username, email, name, gender, phone, image, status);
                 doctorList.add(d);
             }
@@ -68,7 +69,10 @@ public class DoctorDAO {
         ResultSet rs = null;
         List<Doctor> doctorList = new ArrayList<>();
 
-        String sql = "select * from doctors d inner join user_account u on d.user_id = u.user_id where full_name like ?";
+        String sql = "select * from doctors d \n"
+                + "            inner join user_account u on d.user_id = u.user_id \n"
+                + "            inner join  speciality s on s.speciality_id = d.speciality_id\n"
+                + "            where d.full_name LIKE ?";
 
         Connection connection = null;
         try {
@@ -85,10 +89,10 @@ public class DoctorDAO {
                 int gender = rs.getInt("gender");
                 String email = rs.getString("email");
                 int status = rs.getInt("status");
-                String position = rs.getString("position");
-                String speciality = rs.getString("speciality");
-                String description = rs.getString("description");
-                Doctor d = new Doctor(doctorId, position, speciality, description, username, email, name, gender, phone, image, status);
+                String position = rs.getString("doctor_position");
+                String speciality = rs.getString("speName");
+                String description = rs.getString("speDescription");
+                Doctor d = new Doctor(doctorId, speciality, position, description, username, email, name, gender, phone, image, status);
                 doctorList.add(d);
             }
             return doctorList;
@@ -109,8 +113,10 @@ public class DoctorDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Doctor doctor = null;
-
-        String sql = "select * from doctors d inner join user_account u on d.user_id = u.user_id where d.doctor_id = ?";
+        String sql = "select * from doctors d \n"
+                + "            inner join user_account u on d.user_id = u.user_id \n"
+                + "            inner join  speciality s on s.speciality_id = d.speciality_id\n"
+                + "            where d.doctor_id = ?";
 
         Connection connection = null;
         try {
@@ -121,17 +127,16 @@ public class DoctorDAO {
             while (rs.next()) {
                 int doctorId = rs.getInt("doctor_id");
                 String username = rs.getString("username");
-                String name = rs.getString("full_name");
+                String fullName = rs.getString("full_name");
                 String phone = rs.getString("phone");
                 String image = ImageProcessing.imageString(rs.getBlob("image"));
                 int gender = rs.getInt("gender");
                 String email = rs.getString("email");
                 int status = rs.getInt("status");
-                String position = rs.getString("position");
-                String speciality = rs.getString("speciality");
-                String description = rs.getString("description");
-                doctor = new Doctor(doctorId, position, speciality, description, username, email, name, gender, phone, image, status);
-
+                String position = rs.getString("doctor_position");
+                String speciality = rs.getString("speName");
+                String description = rs.getString("speDescription");
+                doctor = new Doctor(doctorId, position, speciality, description, username, email, fullName, gender, phone, image, status);
             }
             return doctor;
         } catch (SQLException e) {
@@ -146,7 +151,8 @@ public class DoctorDAO {
         }
         return doctor;
     }
+
     public void updateDoctor(int id) {
-            
+
     }
 }
