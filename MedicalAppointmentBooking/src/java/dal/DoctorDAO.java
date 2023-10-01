@@ -5,6 +5,7 @@
 package dal;
 
 import dbContext.DBConnection;
+import jakarta.servlet.http.Part;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -152,7 +153,47 @@ public class DoctorDAO {
         return doctor;
     }
 
-    public void updateDoctor(int id) {
-
+    public void updateDoctor(int doctorId, String name, int gender, String phone, int speciality_id, String position, String description, int status, Part image) {
+        PreparedStatement ps = null;
+        String sql = "UPDATE mabs.doctors d\n"
+                + "INNER JOIN mabs.user_account u ON d.user_id = u.user_id\n"
+                + "SET\n"
+                + "  u.full_name = ?,\n"
+                + "  u.gender = ?,\n"
+                + "  u.phone = ?,\n"
+                + "  u.image = ? ,\n"
+                + "  d.speciality_id = ?,\n"
+                + "  d.doctor_position = ?,\n"
+                + "  d.doctor_description = ?,\n"
+                + "  u.status = ?\n"
+                + "WHERE d.doctor_id = ?;";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+           
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setInt(2 , gender);
+            ps.setString(3, phone);
+            ps.setBlob(4, ImageProcessing.imageStream(image));
+            ps.setInt(5 ,speciality_id);
+            ps.setString(6, position);
+            ps.setString(7 ,description);
+            ps.setInt(8 , status);
+            ps.setInt(9, doctorId);
+            ps.executeUpdate();
+            
+           
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
     }
 }

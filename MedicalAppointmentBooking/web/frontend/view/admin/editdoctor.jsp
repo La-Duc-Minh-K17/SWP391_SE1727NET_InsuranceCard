@@ -79,7 +79,7 @@
                     <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
                         <div class="card border-0 shadow overflow-hidden">
                             <div class="tab-content p-4" id="pills-tabContent">
-                                <form action="<c:url value='/manage-doctor?action=edit-image'/>" method="POST" enctype="multipart/form-data">
+                                <form action="<c:url value='/manage-doctor?action=edit_info&doctor_id=${doctor.doctorId}'/>" method="POST" enctype="multipart/form-data">
                                 <h5 class="mb-0">Edit Doctor Information.</h5>
                                 <div>
                                     <p class="text-muted">Update Image.</p>
@@ -94,7 +94,7 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Name</label>
-                                            <input name="name" id="name" type="text" class="form-control" value="${doctor.fullName}">
+                                            <input name="fullname" id="name" type="text" class="form-control" value="${doctor.fullName}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -103,11 +103,11 @@
                                             <table>
                                                 <tbody>
                                                     <tr>
-                                                        <td><input id="credit" name="gender" ${doctor.gender== 1?"checked":""} value="true" type="radio" class="form-check-input"
+                                                        <td><input id="" name="gender" ${doctor.gender== 1?"checked":""} value="1" type="radio" class="form-check-input"
                                                                    checked required ></td>
                                                         <td><label class="form-check-label">Male</label></td>
                                                         <td></td>
-                                                        <td><input id="debit" name="gender" ${doctor.gender==0 ?"checked":""} value="false" type="radio" class="form-check-input"
+                                                        <td><input id="" name="gender" ${doctor.gender==0 ?"checked":""} value="0" type="radio" class="form-check-input"
                                                                    required></td>
                                                         <td><label class="form-check-label">Female</label></td>
                                                     </tr>
@@ -125,17 +125,16 @@
                                         <div class="mb-3">
                                             <label class="form-label">Speciality</label>
                                             <select name="speciality" class="form-select">
-                                                <option value="Andrology">Andrology</option>
-                                                <option value="Internal">Internal medicine</option>
-                                                <option value="Neurosurgery">Neurosurgery</option><!-- comment -->
-                                                <option value="Cardiology">Cardiology</option>                               
-                                                <option value="Endocrinology">Endocrinology</option>
-                                                <option value="Dermatology">Dermatology</option>
-                                                <option value="Gastroenterology">Gastroenterology   </option>
-                                                <option value="Gynecology">Gynecology</option>
-                                                <option value="Odontology">Odontology</option>
-                                                <option value="Ophthalmology">Ophthalmology</option>
-                                                <option value="Immunology">Immunology</option>        
+                                                <c:forEach items="${speList}" var="spe">
+                                                    <c:choose>
+                                                        <c:when test="${spe.speName == doctor.speciality}">
+                                                            <option value="${spe.id}" selected>${spe.speName}</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                               <option value="${spe.id}" >${spe.speName}</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
@@ -157,11 +156,11 @@
                                         <div class="mb-3">
                                             <label class="form-label">Status <span class="text-danger"></span></label>
                                             <br>
-                                            <input id="credit" name="status" ${doctor.status== 1?"checked":""} value="true" type="radio" class="form-check-input"checked required >
+                                            <input id="credit" name="status" ${doctor.status== 1?"checked":""} value="1" type="radio" class="form-check-input"checked required >
 
                                             <label class="form-check-label">Active</label>
 
-                                            <input id="debit" name="status" ${doctor.status== 0?"checked":""} value="false" type="radio" class="form-check-input"
+                                            <input id="debit" name="status" ${doctor.status== 0?"checked":""} value="0" type="radio" class="form-check-input"
                                                    required>
                                             <label class="form-check-label">Inactive</label>
                                         </div>
