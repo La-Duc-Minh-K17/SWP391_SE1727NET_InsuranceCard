@@ -202,6 +202,37 @@ public class BlogDAO extends DBConnection {
         }
         return null;
     }
+    public List<Blog> getRandomNews() {
+        List<Blog> blogsList = new ArrayList<>();
+        String sql = "SELECT * FROM mabs.blogs ORDER BY RAND() LIMIT 6; ";
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet result = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            result = ps.executeQuery();
+            while (result.next()) {
+
+                int blogId = result.getInt("blog_id");
+                String blogTitle = result.getString("title");
+                String blogDescription = result.getString("description");
+                String blogContent = result.getString("content");
+                String image = null;
+                if (result.getBlob("image") != null) {
+                    image = ImageProcessing.imageString(result.getBlob("image"));
+                }
+                int blogCategoryId = result.getInt("blog_category_id");
+                Date blogCreatedTime = result.getDate("created_time");
+                Blog blog = new Blog(blogId, blogTitle, blogDescription, blogContent, image, blogCategoryId, blogCreatedTime);
+                blogsList.add(blog);
+            }
+            return blogsList;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }
 //               <!-- sql = "SELECT * FROM mabs.blogs WHERE blog_category_id = ?";
 //ps.setInt(1, categoryId);

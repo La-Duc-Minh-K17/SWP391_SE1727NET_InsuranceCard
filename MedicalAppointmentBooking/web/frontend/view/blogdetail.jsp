@@ -135,9 +135,9 @@
                                     <div class="col-lg-4">
                                         ${data.created_time}                                       
                                     </div>
-                                    
+
                                 </div>
-                                
+
                             </div>
                             <div col-lg-12> 
                                 <img src="data:image/jpg;base64,${data.image}" class=" fit-image" alt="">
@@ -160,7 +160,6 @@
                                                             class="text-muted mt-2">${created_time}</span></div>
                                                 </div>
                                             </c:forEach>
-
                                         </div>
                                     </div>
                                 </div>
@@ -178,43 +177,47 @@
                             </div>
                         </div><!--end col-->
                     </div><!--end row-->
-
                     <div class="container" style="margin-top: 90px;">
                         <section class="blog_area section-padding">
                             <div class="container">
                                 <div class="row">
-                                    <h6 class="widget_title" style="color: #2d2d2d;">Recent Post</h6>                          
-                                    <c:forEach var="o" items="${requestScope.blogs3}">
-
-                                        <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2" value="${o.blog_id}">
-                                            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                                                <div class="imagefit">
-                                                    <img src="data:image/jpg;base64,${o.image}" style="width:100%;height:100%;" class="img-fluid" alt="">
-                                                </div>
-                                                <div class="card-body p-4">
-                                                    <ul class="list-unstyled mb-2">
-                                                        <li class="list-inline-item text-muted small me-3">
-                                                            ${o.created_time}
-                                                        </li>
-                                                        <li class="list-inline-item text-muted small"><i
-                                                                class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                                                    </ul>
-                                                    <a href="newdetail?id=${o.blog_id}" class="text-dark title h5">${o.title}</a>
-                                                    <div>
-                                                        <ul class="list-unstyled mb-0">
-                                                            <a href="newdetail?id=${o.blog_id}" class="text-dark title h6">${o.description}</a>
-                                                        </ul>
+                                    <div class="row">
+                                        <div class="col-lg-12 mt-4 pt-4 m-4">
+                                            <div class="slider-range-three">
+                                                <c:forEach var="o" items="${requestScope.blogs6}">
+                                                    <div class="tiny-slide">
+                                                        <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1" value="${o.blog_id}">
+                                                            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
+                                                                <div class="imagefit">
+                                                                    <img src="data:image/jpg;base64,${o.image}" style="width:100%;height:100%;" class="img-fluid" alt="">
+                                                                </div>
+                                                                <div class="card-body p-4">
+                                                                    <ul class="list-unstyled mb-2">
+                                                                        <li class="list-inline-item text-muted small me-3">
+                                                                            ${o.created_time}
+                                                                        </li>
+                                                                        <li class="list-inline-item text-muted small"><i
+                                                                                class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
+                                                                    </ul>
+                                                                    <a href="newdetail?id=${o.blog_id}" class="text-dark title h5">${o.title}</a>
+                                                                    <div>
+                                                                        <ul class="list-unstyled mb-0">
+                                                                            <a href="newdetail?id=${o.blog_id}" class="text-dark title h6">${o.description}</a>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="post-meta d-flex justify-content-between mt-3">                                               
+                                                                        <a href="newdetail?id=${o.blog_id}" class="link">Read More <i
+                                                                                class="mdi mdi-chevron-right align-middle"></i></a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="post-meta d-flex justify-content-between mt-3">                                               
-                                                        <a href="newdetail?id=${o.blog_id}" class="link">Read More <i
-                                                                class="mdi mdi-chevron-right align-middle"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                </c:forEach>
+                                            </div><!--end col-->
                                         </div>
-                                    </c:forEach>
+                                    </div>
                                 </div>
-                            </div>
                         </section>
                     </div>
 
