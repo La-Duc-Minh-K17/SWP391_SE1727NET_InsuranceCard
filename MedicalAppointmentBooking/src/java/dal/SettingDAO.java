@@ -44,4 +44,65 @@ public class SettingDAO {
         }
         return settings;
     }
+
+    public ArrayList<Setting> getSetting(String type, String term) {
+        ArrayList<Setting> settings = new ArrayList<>();
+        Connection connection = dbc.getConnection();
+        try {
+            String sql = "select s.setting_id  , s.type , role_name as value , role_description as note , role_status \n"
+                    + "from setting  s,(select * from user_role union  select * from speciality  union select * from service_category) as temp \n"
+                    + "where temp.setting_id = s.setting_id and s.type like ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            stm.setString(1, "%" + term + "%");
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Setting s = new Setting();
+                s.setSettingID(rs.getInt("s.setting_id"));
+                s.setType(rs.getString("s.type"));
+                s.setNote(rs.getString("value"));
+                s.setDescription(rs.getString("note"));
+                s.setStatus(rs.getBoolean("role_status"));
+
+                settings.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return settings;
+    }
+
+    public ArrayList<Setting> getSettingAllType(String term) {
+        ArrayList<Setting> settings = new ArrayList<>();
+        Connection connection = dbc.getConnection();
+        try {
+            String sql = "SELECT setting_id, type,value,description,status FROM settings\n"
+                    + " WHERE type like ? or setting_id like ? or value like ? or description like ? or status like ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            stm.setString(1, "%" + term + "%");
+            stm.setString(2, "%" + term + "%");
+            stm.setString(3, "%" + term + "%");
+            stm.setString(4, "%" + term + "%");
+            stm.setString(5, "%" + term + "%");
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Setting s = new Setting();
+                s.setSettingID(rs.getInt("s.setting_id"));
+                s.setType(rs.getString("s.type"));
+                s.setNote(rs.getString("value"));
+                s.setDescription(rs.getString("note"));
+                s.setStatus(rs.getBoolean("role_status"));
+
+                settings.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return settings;
+    }
 }

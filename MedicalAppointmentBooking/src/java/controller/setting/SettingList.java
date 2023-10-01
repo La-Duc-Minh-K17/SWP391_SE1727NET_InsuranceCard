@@ -79,7 +79,7 @@ public class SettingList extends HttpServlet {
         SettingDAO st = new SettingDAO();
         ArrayList<Setting> settings = new ArrayList<>(); 
                 
-        
+        settings=st.getSetting(type,term);
 //        if(!type.isEmpty())
 //        {
 //            settings=st.getSetting(type,term);
