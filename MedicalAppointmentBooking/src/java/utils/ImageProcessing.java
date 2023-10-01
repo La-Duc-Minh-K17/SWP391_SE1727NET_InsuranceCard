@@ -4,6 +4,7 @@
  */
 package utils;
 
+import jakarta.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,7 +54,19 @@ public class ImageProcessing {
         } else {
             base64Image = "default";
         }
-        
+
         return base64Image;
+    }
+
+    public static InputStream imageStream(Part filePart) {
+        InputStream inputStream = null;
+        if (filePart != null && filePart.getSize() != 0) {
+            try {
+                inputStream = filePart.getInputStream();
+            } catch (IOException ex) {
+                System.out.println(ex);
+            }
+        }
+        return inputStream;
     }
 }

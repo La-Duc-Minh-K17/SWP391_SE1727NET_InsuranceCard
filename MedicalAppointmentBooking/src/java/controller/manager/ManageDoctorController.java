@@ -4,17 +4,24 @@
  */
 package controller.manager;
 
+import dal.DoctorDAO;
+import dal.SpecialityDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.util.List;
+
+import model.Doctor;
 
 /**
  *
  * @author Admin
  */
+@MultipartConfig(maxFileSize = 16177215)
 public class ManageDoctorController extends HttpServlet {
 
     /**
@@ -28,19 +35,54 @@ public class ManageDoctorController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ManageDoctorController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ManageDoctorController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        DoctorDAO dDAO = new DoctorDAO();
+        String action = request.getParameter("action");
+        SpecialityDAO sDAO = new SpecialityDAO();
+        request.setAttribute("speList", sDAO.getAllSpeciality());
+        if (action != null && action.equals("view-all")) {
+            List<Doctor> doctorList = dDAO.getAllDoctor();
+            request.setAttribute("dList", doctorList);
+            request.getRequestDispatcher("frontend/view/admin/doctorlist.jsp").forward(request, response);
+            return;
         }
+        if(action != null && action.equals("filter")) {
+            int speId = Integer.parseInt(request.getParameter("speciality_id"));
+            List<Doctor> doctorList = dDAO.getDoctorBySpeciality(speId);
+            request.setAttribute("dList", doctorList);
+            request.getRequestDispatcher("frontend/view/admin/doctorlist.jsp").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("search")) {
+            String search = request.getParameter("search").trim();
+            List<Doctor> dList = dDAO.getDoctorByName(search);
+            request.setAttribute("dList", dList);
+            request.getRequestDispatcher("frontend/view/admin/doctorlist.jsp").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("edit")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            Doctor doctor = dDAO.getDoctorById(id);
+           // request.setAttribute("speList", sDAO.getAllSpeciality());
+            request.setAttribute("doctor", doctor);
+            request.getRequestDispatcher("frontend/view/admin/editdoctor.jsp").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("edit-info")) {
+            int doctorId = Integer.parseInt(request.getParameter("doctor_id"));
+            String name = request.getParameter("fullname");
+            int gender = Integer.parseInt(request.getParameter("gender"));
+            String phone = request.getParameter("phone");
+            int spe_id = Integer.parseInt(request.getParameter("speciality"));
+            String position = request.getParameter("position");
+            String description = request.getParameter("description");
+            int status = Integer.parseInt(request.getParameter("status"));
+            Part image = request.getPart("image");
+            dDAO.updateDoctor(doctorId, name, gender, phone, spe_id, position, description, status, image);
+            response.sendRedirect("manage-doctor?action=edit&id=" + doctorId);
+            return;
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,15 +97,7 @@ public class ManageDoctorController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String action = request.getParameter("action");
-        if (action != null && action.equals("view")) {
-            response.sendRedirect("frontend/view/admin/doctorlist.jsp");
-            return;
-        }
-        if (action != null && action.equals("create")) {
-
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -77,7 +111,7 @@ public class ManageDoctorController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /**

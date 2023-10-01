@@ -4,12 +4,14 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
     </head>
     <body>
+
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                 <div class="sidebar-brand">
@@ -26,12 +28,10 @@
                     </li>
 
                     <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>
-
+                        <a href="<c:url value='/manage-doctor?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i>Services</a>
-
                     </li>
 
                     <li class="sidebar-dropdown">
@@ -40,12 +40,6 @@
                     </li>
                     <li class="sidebar-dropdown">
                         <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a href="blogs.html">Blogs</a></li>
-                                <li><a href="blog-detail.html">Blog Detail</a></li>
-                            </ul>
-                        </div>
                     </li>
                 </ul>
                 <!-- sidebar-menu  -->

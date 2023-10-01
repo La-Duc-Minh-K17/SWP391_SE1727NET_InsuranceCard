@@ -36,12 +36,13 @@
             </div>
         </div>
         <!-- Loader -->
-
         <div class="page-wrapper doctris-theme toggled">
             <jsp:include page="/frontend/common/adminSidebar.jsp" />
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
             <main class="page-content">
+                
+                
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
                         <div class="d-flex align-items-center">
@@ -66,9 +67,8 @@
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                          style="min-width: 200px;">
                                         <a class="dropdown-item d-flex align-items-center text-dark"
-                                           href="https://shreethemes.in/doctris/layouts/admin/profile.html">
-                                            <img src="../assets/images/doctors/01.jpg"
-                                                 class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                           <img src="../assets/images/doctors/01.jpg"
+                                           class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                             <div class="flex-1 ms-2">
                                                 <span class="d-block mb-1">Calvin Carlo</span>
                                                 <small class="text-muted">Orthopedic</small>
@@ -94,10 +94,11 @@
                             <div class="col-xl-3 col-md-3">
                                 <div class="card component-wrapper border-0 rounded shadow">
                                     <div>
-                                        <select class="form-select form-control" id="inputGroupSelect01">
+                                        <select class="form-select form-control" id="speFilter" onchange="filter()">
                                             <option selected disabled>Speciality</option>
-                                            <option value="all">All</option>
-                                       
+                                            <c:forEach items="${speList}" var="spe">
+                                                <option value="${spe.id}">${spe.speName}</option>  
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
@@ -106,10 +107,10 @@
                             <div class="col-xl-6 col-md-6">
                                 <div class="search-bar d-lg-block" style="padding-top :0">
                                     <div id="search" class="menu-search ">
-                                        <form action="<c:url value='/manage-doctor'/>"role="search" method="post" id="searchform" class="searchform">
+                                        <form action="<c:url value='/manage-doctor?action=search'/>"role="search" method="post" id="searchform" class="searchform">
                                             <div>
                                                 <input type="text" class="form-control border rounded-pill" name="search"
-                                                       id="search" placeholder="Search doctor">
+                                                       id="search" placeholder="Search doctor by name">
                                                 <input type="submit" id="searchsubmit" value="Search">
                                             </div>
                                         </form>
@@ -117,8 +118,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-3 mt-4 mt-md-0 text-md-end">
-                                <a href="<c:url value='/manage-doctor?action=create'/>" data-bs-toggle="modal" data-bs-target="#AddModal"
-                                   class="btn btn-primary ">Add Doctor</a>
+                                <a href="<c:url value='/manage-doctor?action=create'/>" class="btn btn-primary ">Add Doctor</a>
                             </div><!--end col-->
                         </div><!--end row-->
 
@@ -126,7 +126,7 @@
                         <div class="col-12 mt-4">
                             <div class="card component-wrapper border-0 rounded shadow">
                                 <div class="p-4 border-bottom">
-                                    <h5 class="mb-0">Doctor List </h5>
+                                    <h5 class="mb-0">Doctor List</h5>
                                 </div>
 
                                 <div class="p-4">
@@ -143,25 +143,31 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="doctorList" var="d"></c:forEach>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                    <td>active</td>
-                                                    <td>
-                                                        <div class="">
-                                                            <div class="card component-wrapper border-0 rounded shadow">
+                                                <c:forEach items="${dList}" var="d">
+                                                    <tr>
+                                                        <th scope="row">${d.doctorId}</th>
+                                                        <td>${d.fullName}</td>
+                                                        <td>${d.phone}</td>
+                                                        <td>${d.speciality}</td>
+                                                        <td>
+                                                            <c:if test="${d.status == 1}">Active</c:if>
+                                                            <c:if test="${d.status == 0}">Inactive</c:if>
+                                                            </td>
+                                                            <td>
                                                                 <div>
-                                                                    <a href="<c:url value='/manage-doctor?action=edit&id='/>  " data-bs-toggle="modal"
-                                                                       class="btn btn-primary btn-sm">
-                                                                        Edit</a>
+                                                                    <div class="card component-wrapper border-0 rounded ">
+                                                                        <div class="mb-2">
+                                                                            <a href="<c:url value='/manage-doctor?action=view&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">View</a>
+                                                                    </div>
+                                                                    <div>
+                                                                        <a href="<c:url value='/manage-doctor?action=edit&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">Edit</a>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div><!--end col-->
-                                                    </td>
-                                                </tr>
+
+                                                            </div><!--end col-->
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
@@ -191,6 +197,14 @@
         </div>
         <!-- page-wrapper -->
         <!-- javascript -->
+        <script>
+            console.log("helloworld");
+            function filter() {
+                const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=filter&speciality_id=';
+                const filterElement = document.getElementById("speFilter").value;
+                window.location.href = url + filterElement;
+            }
+        </script>
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>

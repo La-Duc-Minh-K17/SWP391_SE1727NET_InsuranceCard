@@ -5,11 +5,24 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="shortcut icon" href="/assets/images/favicon.ico.png">
+        <!-- Bootstrap -->
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!-- simplebar -->
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/simplebar.css" rel="stylesheet" type="text/css" />
+        <!-- Select2 -->
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
+        <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
+
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
     </head>
     <body>
         <div class="page-wrapper doctris-theme toggled">
@@ -62,84 +75,102 @@
                         </ul>
                     </div>
                 </div>
-                <div id="EditModal"class="mt-100" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header border-bottom p-3">
-                                <h5 class="modal-title" id="exampleModalLabel">
-                                    Edit Doctor</h5>
-                               
-                            </div>
-                            <form>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="row align-items-center mb-4">
-                                            <label class="form-label">Upload your picture <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-3">
-                                                <img src="../assets/images/doctors/01.jpg"
-                                                     class="avatar avatar-md-md rounded-pill shadow mx-auto d-block" alt="">
-                                            </div><!--end col-->
-                                            <div class="col-6 text-lg-end text-center ">
-
-                                                <input type="file" name="photo" size="50" />
-                                            </div><!--end col-->
-                                        </div><!--end row-->
-
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Name<span class="text-danger">*</span></label>
-                                                <input name="name" id="name" type="text" class="form-control"
-                                                       placeholder="Full Name">
-                                            </div>
-                                        </div><!--end col-->
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Email <span class="text-danger">*</span></label>
-                                                <input name="email" id="email" type="email" class="form-control"
-                                                       placeholder="@gmail.com">
-                                            </div>
-                                        </div><!--end col-->
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Phone</label>
-                                                <input name="phone" id="phone" class="form-control" placeholder="Phone">
-                                            </div>
-                                        </div><!--end col-->
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Speciality</label>
-                                                <select class="form-select form-control" id="" placeholder ="Speciality">
-                                                    <option value="1">All</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </select>
-                                            </div>
-                                        </div><!--end col-->
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Position</label>
-                                                <input name="postion" id="postion" class="form-control" placeholder="Position">
-                                            </div>
-                                        </div><!--end col-->
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Status</label>
-                                                <input name="status" id="status" class="form-control" placeholder="Status">
-                                            </div>
-                                        </div><!--end col-->
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Description</label>
-                                                <textarea name="description" id="description" rows="4" class="form-control"
-                                                          placeholder=""></textarea>
-                                            </div>
-                                        </div>
-                                    </div><!--end row-->
+                <c:set value="${requestScope.doctor}" var="doctor"></c:set>
+                    <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
+                        <div class="card border-0 shadow overflow-hidden">
+                            <div class="tab-content p-4" id="pills-tabContent">
+                                <form action="<c:url value='/manage-doctor?action=edit-info&doctor_id=${doctor.doctorId}'/>" method="POST" enctype="multipart/form-data">
+                                <h5 class="mb-0">Edit Doctor Information.</h5>
+                                <div>
+                                    <p class="text-muted">Update Image.</p>
+                                    <div id="myfileupload">
+                                        <input type="file" name="image" id="uploadfile" name="ImageUpload" onchange="displayThumbnail(this);" />
+                                    </div>
+                                    <div id="thumbbox" class="mt-3 mb-3">
+                                        <img class="rounded" height="20%" width="30%" alt="Thumb image" id="thumbImage"  src="data:image/jpg;base64,${doctor.image}" />
+                                    </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save</button>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Name</label>
+                                            <input name="fullname" id="name" type="text" class="form-control" value="${doctor.fullName}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Gender</label>
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><input id="" name="gender" ${doctor.gender== 1?"checked":""} value="1" type="radio" class="form-check-input"
+                                                                   checked required ></td>
+                                                        <td><label class="form-check-label">Male</label></td>
+                                                        <td></td>
+                                                        <td><input id="" name="gender" ${doctor.gender==0 ?"checked":""} value="0" type="radio" class="form-check-input"
+                                                                   required></td>
+                                                        <td><label class="form-check-label">Female</label></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Phone</label>
+                                            <input name="phone" oninvalid="" oninput="" id="number" type="text" class="form-control" value="${doctor.phone}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Speciality</label>
+                                            <select name="speciality" class="form-select">
+                                                <c:forEach items="${speList}" var="spe">
+                                                    <c:choose>
+                                                        <c:when test="${spe.speName == doctor.speciality}">
+                                                            <option value="${spe.id}" selected>${spe.speName}</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                               <option value="${spe.id}" >${spe.speName}</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Position</label>
+                                            <input name="position"  type="text"  class="form-control" value="${doctor.position}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Description</label>
+                                            <input name="description" type="text" class="form-control" value="${doctor.description}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Status <span class="text-danger"></span></label>
+                                            <br>
+                                            <input id="credit" name="status" ${doctor.status== 1?"checked":""} value="1" type="radio" class="form-check-input"checked required >
+
+                                            <label class="form-check-label">Active</label>
+
+                                            <input id="debit" name="status" ${doctor.status== 0?"checked":""} value="0" type="radio" class="form-check-input"
+                                                   required>
+                                            <label class="form-check-label">Inactive</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <input type="submit" id="submit" name="send" class="btn btn-primary"value="SAVE">
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -148,4 +179,33 @@
             </main><!-- comment -->
         </div>
     </body>
+    <script>
+
+
+        function displayThumbnail() {
+            const input = document.getElementById("uploadfile");
+            const thumbnail = document.getElementById("thumbImage");
+
+            // Check if a file has been selected
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    thumbnail.src = e.target.result;
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            } else {
+
+                thumbnail.src = "";
+            }
+        }
+    </script>
+    <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
+    <!-- simplebar -->
+    <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>
+    <!-- Icons -->
+    <script src="${pageContext.request.contextPath}/frontend/template/assets/js/feather.min.js"></script>
+    <!-- Main Js -->
+    <script src="${pageContext.request.contextPath}/frontend/template/assets/js/app.js"></script><
 </html>
