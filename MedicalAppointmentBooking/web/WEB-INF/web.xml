@@ -32,6 +32,10 @@
         <servlet-name>SerivceController</servlet-name>
         <servlet-class>controller.home.SerivceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SettingList</servlet-name>
+        <servlet-class>controller.setting.SettingList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserAccountController</servlet-name>
         <url-pattern>/user</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>SerivceController</servlet-name>
         <url-pattern>/Serivce</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SettingList</servlet-name>
+        <url-pattern>/settinglist</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
