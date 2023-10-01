@@ -79,13 +79,13 @@ public class SettingList extends HttpServlet {
         SettingDAO st = new SettingDAO();
         ArrayList<Setting> settings = new ArrayList<>(); 
                 
-        settings=st.getSetting(type,term);
-//        if(!type.isEmpty())
-//        {
-//            settings=st.getSetting(type,term);
-//        }else{
-//            settings=st.getSettingAllType( term);
-//        }
+    
+        if(!type.isEmpty())
+        {
+            settings=st.getSetting(type,term);
+        }else{
+            settings=st.getSettingAllType( term);
+        }
                 request.setAttribute("settings",settings);
         request.getRequestDispatcher("frontend/view/settingList.jsp").forward(request, response);
     }

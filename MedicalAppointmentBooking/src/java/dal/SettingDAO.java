@@ -78,8 +78,10 @@ public class SettingDAO {
         ArrayList<Setting> settings = new ArrayList<>();
         Connection connection = dbc.getConnection();
         try {
-            String sql = "SELECT setting_id, type,value,description,status FROM settings\n"
-                    + " WHERE type like ? or setting_id like ? or value like ? or description like ? or status like ?";
+            String sql = "select s.setting_id  , s.type , role_name as value , role_description as note , role_status \n" +
+"from setting  s,(select * from user_role union  select * from speciality  union select * from service_category) as temp \n" +
+"where temp.setting_id = s.setting_id \n" +
+"and (s.type like ? or s.setting_id like ? or role_description  like ? or role_status like ? or role_name like ? )";
             PreparedStatement stm = connection.prepareStatement(sql);
 
             stm.setString(1, "%" + term + "%");
