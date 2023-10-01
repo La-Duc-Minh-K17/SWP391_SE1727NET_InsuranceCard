@@ -6,6 +6,7 @@ package dal;
 
 import dbContext.DBConnection;
 import jakarta.servlet.http.Part;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,8 +48,8 @@ public class DoctorDAO {
                 int status = rs.getInt("status");
                 String position = rs.getString("doctor_position");
                 String speciality = rs.getString("speName");
-                String description = rs.getString("speDescription");
-                Doctor d = new Doctor(doctorId, position, speciality, description, username, email, name, gender, phone, image, status);
+                String description = rs.getString("doctor_description");
+                Doctor d = new Doctor(doctorId, speciality,position, description, username, email, name, gender, phone, image, status);
                 doctorList.add(d);
             }
             return doctorList;
@@ -73,13 +74,13 @@ public class DoctorDAO {
         String sql = "select * from doctors d \n"
                 + "            inner join user_account u on d.user_id = u.user_id \n"
                 + "            inner join  speciality s on s.speciality_id = d.speciality_id\n"
-                + "            where d.full_name LIKE ?";
+                + "            where u.full_name LIKE ?";
 
         Connection connection = null;
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            ps.setString(1, text);
+            ps.setString(1, "%" + text + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 int doctorId = rs.getInt("doctor_id");
@@ -92,7 +93,7 @@ public class DoctorDAO {
                 int status = rs.getInt("status");
                 String position = rs.getString("doctor_position");
                 String speciality = rs.getString("speName");
-                String description = rs.getString("speDescription");
+                String description = rs.getString("doctor_description");
                 Doctor d = new Doctor(doctorId, speciality, position, description, username, email, name, gender, phone, image, status);
                 doctorList.add(d);
             }
@@ -136,7 +137,7 @@ public class DoctorDAO {
                 int status = rs.getInt("status");
                 String position = rs.getString("doctor_position");
                 String speciality = rs.getString("speName");
-                String description = rs.getString("speDescription");
+                String description = rs.getString("doctor_description");
                 doctor = new Doctor(doctorId, position, speciality, description, username, email, fullName, gender, phone, image, status);
             }
             return doctor;
@@ -153,37 +154,88 @@ public class DoctorDAO {
         return doctor;
     }
 
+    public List<Doctor> getDoctorBySpeciality(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Doctor> doctorList = new ArrayList<>();
+
+        String sql = "select * from doctors d \n"
+                + "            inner join user_account u on d.user_id = u.user_id \n"
+                + "            inner join  speciality s on s.speciality_id = d.speciality_id\n"
+                + "            where s.speciality_id = ?";
+
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1 , id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int doctorId = rs.getInt("doctor_id");
+                String username = rs.getString("username");
+                String name = rs.getString("full_name");
+                String phone = rs.getString("phone");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String email = rs.getString("email");
+                int status = rs.getInt("status");
+                String position = rs.getString("doctor_position");
+                String speciality = rs.getString("speName");
+                String description = rs.getString("doctor_description");
+                Doctor d = new Doctor(doctorId, speciality, position, description, username, email, name, gender, phone, image, status);
+                doctorList.add(d);
+            }
+            return doctorList;
+        } catch (SQLException e) {
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return doctorList;
+    }
+
     public void updateDoctor(int doctorId, String name, int gender, String phone, int speciality_id, String position, String description, int status, Part image) {
         PreparedStatement ps = null;
+        InputStream fileImage = ImageProcessing.imageStream(image);
         String sql = "UPDATE mabs.doctors d\n"
                 + "INNER JOIN mabs.user_account u ON d.user_id = u.user_id\n"
                 + "SET\n"
                 + "  u.full_name = ?,\n"
                 + "  u.gender = ?,\n"
                 + "  u.phone = ?,\n"
-                + "  u.image = ? ,\n"
                 + "  d.speciality_id = ?,\n"
                 + "  d.doctor_position = ?,\n"
                 + "  d.doctor_description = ?,\n"
-                + "  u.status = ?\n"
-                + "WHERE d.doctor_id = ?;";
+                + "  u.status = ? \n";
+        if (fileImage != null) {
+            sql = sql + " , u.image = ? \n";
+        }
+        sql = sql + "WHERE d.doctor_id = ?;";
         Connection connection = null;
         try {
             connection = dbc.getConnection();
-           
+
             ps = connection.prepareStatement(sql);
             ps.setString(1, name);
-            ps.setInt(2 , gender);
+            ps.setInt(2, gender);
             ps.setString(3, phone);
-            ps.setBlob(4, ImageProcessing.imageStream(image));
-            ps.setInt(5 ,speciality_id);
-            ps.setString(6, position);
-            ps.setString(7 ,description);
-            ps.setInt(8 , status);
-            ps.setInt(9, doctorId);
+            ps.setInt(4, speciality_id);
+            ps.setString(5, position);
+            ps.setString(6, description);
+            ps.setInt(7, status);
+            if (fileImage != null) {
+                ps.setBlob(8, fileImage);
+                ps.setInt(9, doctorId);
+
+            } else {
+                ps.setInt(8, doctorId);
+            }
             ps.executeUpdate();
-            
-           
         } catch (SQLException e) {
             System.out.println(e);
         } finally {

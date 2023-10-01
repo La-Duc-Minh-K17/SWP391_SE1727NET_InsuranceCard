@@ -11,8 +11,6 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Base64;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -62,7 +60,7 @@ public class ImageProcessing {
 
     public static InputStream imageStream(Part filePart) {
         InputStream inputStream = null;
-        if (filePart != null) {
+        if (filePart != null && filePart.getSize() != 0) {
             try {
                 inputStream = filePart.getInputStream();
             } catch (IOException ex) {

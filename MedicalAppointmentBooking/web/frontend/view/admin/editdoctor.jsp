@@ -79,7 +79,7 @@
                     <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
                         <div class="card border-0 shadow overflow-hidden">
                             <div class="tab-content p-4" id="pills-tabContent">
-                                <form action="<c:url value='/manage-doctor?action=edit_info&doctor_id=${doctor.doctorId}'/>" method="POST" enctype="multipart/form-data">
+                                <form action="<c:url value='/manage-doctor?action=edit-info&doctor_id=${doctor.doctorId}'/>" method="POST" enctype="multipart/form-data">
                                 <h5 class="mb-0">Edit Doctor Information.</h5>
                                 <div>
                                     <p class="text-muted">Update Image.</p>

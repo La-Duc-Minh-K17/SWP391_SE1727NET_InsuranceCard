@@ -36,12 +36,13 @@
             </div>
         </div>
         <!-- Loader -->
-
         <div class="page-wrapper doctris-theme toggled">
             <jsp:include page="/frontend/common/adminSidebar.jsp" />
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
             <main class="page-content">
+                
+                
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
                         <div class="d-flex align-items-center">
@@ -93,10 +94,11 @@
                             <div class="col-xl-3 col-md-3">
                                 <div class="card component-wrapper border-0 rounded shadow">
                                     <div>
-                                        <select class="form-select form-control" id="inputGroupSelect01">
+                                        <select class="form-select form-control" id="speFilter" onchange="filter()">
                                             <option selected disabled>Speciality</option>
-                                            <option value="all">All</option>
-
+                                            <c:forEach items="${speList}" var="spe">
+                                                <option value="${spe.id}">${spe.speName}</option>  
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
@@ -116,8 +118,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-3 mt-4 mt-md-0 text-md-end">
-                                <a href="<c:url value='/manage-doctor?action=create'/>" data-bs-toggle="modal" data-bs-target="#AddModal"
-                                   class="btn btn-primary ">Add Doctor</a>
+                                <a href="<c:url value='/manage-doctor?action=create'/>" class="btn btn-primary ">Add Doctor</a>
                             </div><!--end col-->
                         </div><!--end row-->
 
@@ -150,15 +151,19 @@
                                                         <td>${d.speciality}</td>
                                                         <td>
                                                             <c:if test="${d.status == 1}">Active</c:if>
-                                                              <c:if test="${d.status == 0}">Inactive</c:if>
-                                                        </td>
-                                                        <td>
-                                                            <div class="">
-                                                                <div class="card component-wrapper border-0 rounded shadow">
+                                                            <c:if test="${d.status == 0}">Inactive</c:if>
+                                                            </td>
+                                                            <td>
+                                                                <div>
+                                                                    <div class="card component-wrapper border-0 rounded ">
+                                                                        <div class="mb-2">
+                                                                            <a href="<c:url value='/manage-doctor?action=view&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">View</a>
+                                                                    </div>
                                                                     <div>
                                                                         <a href="<c:url value='/manage-doctor?action=edit&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">Edit</a>
                                                                     </div>
                                                                 </div>
+
                                                             </div><!--end col-->
                                                         </td>
                                                     </tr>
@@ -192,6 +197,14 @@
         </div>
         <!-- page-wrapper -->
         <!-- javascript -->
+        <script>
+            console.log("helloworld");
+            function filter() {
+                const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=filter&speciality_id=';
+                const filterElement = document.getElementById("speFilter").value;
+                window.location.href = url + filterElement;
+            }
+        </script>
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>
