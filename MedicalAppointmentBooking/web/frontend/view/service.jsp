@@ -62,38 +62,38 @@
 
         <!-- Start -->
         <section>
-    <div class="container m-7">
-       <c:forEach items="${requestScope.services}" var="s">
-    <div class="row m-8">
-        <div class="col-md-7 mt-4 mt-sm-0 pt-2 pt-sm-0">
-            <div class="d-flex section-title m-6">
-                <img src="data:image/jpg;base64,${s.service_image}" width="60%" height="80%"/>
-                <div class="service-details">
-                    <h4 class="title">${s.service_name}</h4>
-                    <h5 class="text-muted">${s.fee}</h5>
+    <div class="container mt-5 m-5">
+    <c:forEach items="${requestScope.services}" var="s">
+        <div class="row m-5">
+            <div class="col-md-7 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                <div class="d-flex section-title m-6">
+                    <img src="data:image/jpg;base64,${s.service_image}" width="60%" height="80%"/>
+                    <div class="service-details">
+                        <h7 class="text h5 justify-content-end">${s.service_name}</h7>
+                    </div>
                 </div>
-            </div>
-        </div><!--end col-->
-        <div class="col-md-5 text-right">
-            <div class="mt-9 pt-2">
-                <ul class="list-unstyled text-warning h5 mb-0">
-                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                    <li class="list-inline-item me-2 h6 text-muted">(20 Ratings)</li>
-                </ul>
-                <a href="#" class="btn btn-primary mr-2">Shop Now</a>
-                <a href="#" class="btn btn-soft-primary">Add to Cart</a>
-            </div>
-        </div><!--end col-->
-    </div><!--end row-->
-</c:forEach>
-
-    </div><!--end container-->
+            </div><!--end col-->
+            <div class="col-md-5 text-right">
+                <div class="mt-9 pt-2">
+                    <ul class="list-unstyled text-warning h5 mb-0">
+                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                        <li class="list-inline-item me-2 h6 text-muted">(20 Ratings)</li>
+                    </ul>
+                    <div class="d-flex justify-content-end mr-5">
+                        <a href="#" class="btn btn-primary">Appointment Now</a>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </c:forEach>
+</div><!--end container-->
 </section><!--end section-->
 <!-- End -->
+
 
 
 
