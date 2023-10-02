@@ -7,13 +7,7 @@
     <head>
         <meta charset="utf-8" />
         <title>MABS</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
-        <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
-        <meta name="author" content="Group6" />
-        <meta name="email" content="support@goup6.in" />
-        <meta name="website" content="https://group6.com" />
-        <meta name="Version" content="v1.2.0" />
+
         <!-- favicon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
@@ -23,7 +17,7 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-                <link href="${pageContext.request.contextPath}/frontend/template/assets/css/newstyle.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/newstyle.css" rel="stylesheet" type="text/css" id="theme-opt" />
 
         <!-- SLIDER -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/tiny-slider.css"/>
@@ -34,7 +28,7 @@
         <link href="frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
         <style>
             #home{
-                background-image: url("../template/assets/images/bg/backgroundclinic.jpg") ;
+                background-image: url("frontend/template/assets/images/bg/backgroundclinic.jpg") ;
             }
         </style>
     <body>
@@ -47,10 +41,10 @@
                 <div>
                     <a class="logo" href="index.html">
                         <span class="logo-light-mode">
-                            <img src="../template/assets/images/MABS__1.png" class="l-dark" height="30" alt="">
-                            <img src="../template/assets/images/MABS__1.png" class="l-light" height="30" alt="">
+                            <img src="frontend/template/assets/images/MABS__1.png" class="l-dark" height="30" alt="">
+                            <img src="frontend/template/assets/images/MABS__1.png" class="l-light" height="30" alt="">
                         </span>
-                        <img src="../template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                        <img src="frontend/template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                     </a>
                 </div>
                 <!-- End Logo container-->
@@ -78,11 +72,11 @@
                             <button type="submit" class="btn btn-primary">Sign up</button>
 
                             <button type="submit" class="btn btn-primary">Login</button>
-                            </div>
+                        </div>
                         <div id="navigation">
                     </li>
                 </ul>
-                
+
 
                 <div id="navigation">
                     <!-- Navigation Menu-->   
@@ -104,11 +98,11 @@
                 </div><!--end navigation-->
             </div><!--end container-->
         </header><!--end header-->
-       
- <section class="bg-half-60 d-table w-100" id="home">
+
+        <section class="bg-half-60 d-table w-100" id="home">
             <div class="bg-overlay bg-overlay-dark"></div>
             <div class="container">
-                 <div class="row mt-5 justify-content-center">
+                <div class="row mt-5 justify-content-center">
                     <div class="col-12">
                         <div class="section-title text-center">
                             <h3 class="sub-title mb-4 text-white title-dark">Blogs &amp; News</h3>
@@ -117,7 +111,7 @@
 
                             <nav aria-label="breadcrumb" class="d-inline-block mt-3">
                                 <ul class="breadcrumb bg-light rounded mb-0 py-1 px-2">
-                                    <li class="breadcrumb-item"><a href="index.html">Doctris</a></li>
+                                    <li class="breadcrumb-item"><a href="index.html">MABS</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Blogs</li>
                                 </ul>
                             </nav>
@@ -127,155 +121,155 @@
             </div><!--end container-->
         </section>
 
-        <main>
-            <div class="container" style="margin-top: 90px;">
-                <section class="blog_area section-padding">
-                    <div class="container">
-                        <div class="row">
-                            <h6 class="widget_title" style="color: #2d2d2d;">Recent Post</h6>                          
-                            <c:forEach var="o" items="${requestScope.blogs3}">
 
-                                <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2">
-                                    <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                                        <div class="imagefit">
-                                            <img src="" style="width:100%;height:100%;" class="img-fluid" alt="">
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <ul class="list-unstyled mb-2">
-                                                <li class="list-inline-item text-muted small me-3">
-                                                    ${o.created_time}
-                                                </li>
-                                                <li class="list-inline-item text-muted small"><i
-                                                        class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
+        <div class="container" style="margin-top: 90px;">
+            <section class="blog_area section-padding">
+                <div class="container">
+                    <div class="row">
+                        <h6 class="widget_title" style="color: #2d2d2d;">Recent Post</h6>                          
+                        <c:forEach var="o" items="${requestScope.blogs3}">
+
+                            <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2" value="${o.blog_id}">
+                                <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
+                                    <div class="imagefit">
+                                        <img src="data:image/jpg;base64,${o.image}" style="width:100%;height:100%;" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="card-body p-4">
+                                        <ul class="list-unstyled mb-2">
+                                            <li class="list-inline-item text-muted small me-3">
+                                                ${o.created_time}
+                                            </li>
+                                            <li class="list-inline-item text-muted small"><i
+                                                    class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
+                                        </ul>
+                                        <a href="newdetail?id=${o.blog_id}" class="text-dark title h5">${o.title}</a>
+                                        <div>
+                                            <ul class="list-unstyled mb-0">
+                                                <a href="newdetail?id=${o.blog_id}" class="text-dark title h6">${o.description}</a>
                                             </ul>
-                                            <a href="new-details.jsp" class="text-dark title h5">${o.title}</a>
-                                            <div>
-                                                <ul class="list-unstyled mb-0">
-                                                    <a href="frontend/view/newdetail.jsp" class="text-dark title h6">${o.description}</a>
-                                                </ul>
-                                            </div>
-                                            <div class="post-meta d-flex justify-content-between mt-3">                                               
-                                                <a href="frontend/view/blogdetail.jsp" class="link">Read More <i
-                                                        class="mdi mdi-chevron-right align-middle"></i></a>
-                                            </div>
+                                        </div>
+                                        <div class="post-meta d-flex justify-content-between mt-3">                                               
+                                            <a href="newdetail?id=${o.blog_id}" class="link">Read More <i
+                                                    class="mdi mdi-chevron-right align-middle"></i></a>
                                         </div>
                                     </div>
                                 </div>
-                            </c:forEach>
-                        </div>
+                            </div>
+                        </c:forEach>
                     </div>
-                </section>
-            </div>
+                </div>
+            </section>
+        </div>
 
 
-            <div class="container" style="padding-top:10px">
-                <section class="blog_area section-padding">
-                    <div class="container">
+        <div class="container" style="padding-top:10px">
+            <section class="blog_area section-padding">
+                <div class="container">      
+                    
+                    
+                    <form class="flexsearch--form1" action="new" method="post">
                         <div class="row">
-
-                            <div class="col-lg-4 mb-5 mb-lg-0">
-                                <div class="blog_left_sidebar">                              
+                            <div class="col-lg-5 mb-5 mb-lg-0">
+                                <div class="blog_left_sidebar">
                                     <aside class="single_sidebar_widget post_category_widget">
-                                        <ul class="list cat-list">
-                                            <form class="flexsearch--form1" action="#" method="post">
-                                                <select>
+                                        <div>
+                                            <h5 class="widget_title" style="color: #2d2d2d;text-align: center;">Category</h5>
+                                        </div>
+                                        <div>
+                                            <ul class="list cat-list">
+                                                <select class=""name="category" id="category" >
+                                                    <option value="0">All</option>
                                                     <c:forEach var="o" items="${requestScope.listC}">
-                                                        <option  value=${o.blog_category_id}>${o.name}</option>
+                                                        <option value="${o.blog_category_id}">${o.name}</option>
                                                     </c:forEach>
                                                 </select>
-                                            </form>
+                                            </ul>
+                                        </div>
+                                    </aside>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 mb-5 mb-lg-0">
+                                <div class="blog_left_sidebar">
+                                    <aside class="single_sidebar_widget post_category_widget">
+                                        <ul class="list cat-list">
+                                            <div>
+                                                <h5 class="widget_title" style="color: #2d2d2d;text-align: center;">Sorted By</h5>
+                                            </div>
+                                            <div>
+                                                <select name="sort" id="sort">
+                                                    <option value="all">All</option>
+                                                    <option value="newest">Newest</option>
+                                                    <option value="oldest">Oldest</option>
+                                                </select>
+                                            </div>
                                         </ul>
                                     </aside>
                                 </div>
                             </div>
-
-
-                            <div class="col-lg-8">
-                                <section class="blog_right_sidebar">
-                                    <div class="flexsearch">
-                                        <div class="flexsearch--wrapper">
-                                            <form class="flexsearch--form" action="#" method="post">
-                                                <div class="flexsearch--input-wrapper">
-                                                    <input class="flexsearch--input" type="search" placeholder="search">
-                                                </div>
-                                                <input class="flexsearch--submit" type="submit" value="&#10140;" />
-                                            </form>
-                                        </div>
-                                    </div>
-                            </div>
-
-                            </section>
-                        </div>
-                        <div class="container" style="padding-top:20px">
-                            <div>
-                                <c:forEach var="o" items="${requestScope.data}">
-                                    <div class="col-lg-12 col-md-6 col-12 mb-4 pb-2">
-                                        <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <img src= class="image-container" alt="">
-                                                </div>
-                                                <div class="col-lg-8">
-                                                    <div class="card-body p-4">
-                                                        <ul class="list-unstyled mb-2">
-                                                            <li class="list-inline-item text-muted small me-3"><i
-                                                                    class="uil uil-calendar-alt text-dark h6 me-1"></i>${o.created_time}</li>
-                                                            <li class="list-inline-item text-muted small"><i
-                                                                    class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                                                        </ul>
-                                                        <a href="new-details.jsp" class="text-dark title h5">${o.title}</a>
-                                                        <div>
-                                                            <ul class="list-unstyled mb-0">
-                                                                <a href="new-details.jsp" class="text-dark title h6">${o.description}</a>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="post-meta d-flex justify-content-between mt-3">                                                           
-                                                            <a href="new-details.jsp" class="link">Read More <i
-                                                                    class="mdi mdi-chevron-right align-middle"></i></a>
-                                                        </div>
+                            <div class="col-lg-2">
+                                <div class="blog_left_sidebar">
+                                    <aside class="single_sidebar_widget post_category_widget">
+                                        <ul class="list cat-list">
+                                            <div class="flexsearch">
+                                                <div class="flexsearch--wrapper">
+                                                    <div row>
+                                                        <input class="flexsearch--submit" type="submit" value="&#10140" />
                                                     </div>
                                                 </div>
                                             </div>
-
-                                        </div>
-                                    </div>  
-                                </c:forEach>
+                                        </ul>
+                                    </aside>
+                                </div>
                             </div>
                         </div>
-                        <div class="container" style="padding-top: 20px;">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item <c:if test="${currentPage == 1}">disabled</c:if>">
-                                        <a class="page-link" href="?page=${currentPage - 1}" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
+                    </form>
 
-                                    <c:forEach var="page" begin="1" end="${totalPages}">
-                                        <li class="page-item <c:if test="${page == currentPage}">active</c:if>">
-                                            <a class="page-link" href="?page=${page}">${page}</a>
-                                        </li>
-                                    </c:forEach>
+            </section>
+        </div>
 
-                                    <li class="page-item <c:if test="${currentPage == totalPages}">disabled</c:if>">
-                                        <a class="page-link" href="?page=${currentPage + 1}" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
+        <div class="container" style="padding-top:20px">
+            <div>
+                <c:forEach var="o" items="${requestScope.data}">
+                    <div class="col-lg-12 col-md-6 col-12 mb-4 pb-2">
+                        <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <img src="data:image/jpg;base64,${o.image}" class="image-container" alt="">
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="card-body p-4">
+                                        <ul class="list-unstyled mb-2">
+                                            <li class="list-inline-item text-muted small me-3"><i
+                                                    class="uil uil-calendar-alt text-dark h6 me-1"></i>${o.created_time}</li>
+                                            <li class="list-inline-item text-muted small"><i
+                                                    class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
+                                        </ul>
+                                        <a href="newdetail?id=${o.blog_id}" class="text-dark title h5">${o.title}</a>
+                                        <div>
+                                            <ul class="list-unstyled mb-0">
+                                                <a href="newdetail?id=${o.blog_id}" class="text-dark title h6">${o.description}</a>
+                                            </ul>
+                                        </div>
+                                        <div class="post-meta d-flex justify-content-between mt-3">                                                           
+                                            <a href="newdetail?id=${o.blog_id}" class="link">Read More <i
+                                                    class="mdi mdi-chevron-right align-middle"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-
-                        </main>
-
-
-    
+                    </div>  
+                </c:forEach>
+                
+            </div>
+        </div>
         <footer class="bg-footer">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-5 col-lg-4 mb-0 mb-md-1 pb-0  pb-md-2">
                         <a href="#" class="logo-footer">
-                            <img src="../template/assets/images/MABS__1.png" height="30" alt="">
+                            <img src="frontend/template/assets/images/MABS__1.png" height="30" alt="">
                         </a>
                         <p class="mt-4 me-xl-5">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
                     </div><!--end col-->
@@ -293,7 +287,7 @@
                                     <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Login</a></li>
                                 </ul>
                             </div><!--end col-->
-                            
+
                             <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
                                 <h5 class="text-light title-dark footer-head">Departments</h5>
                                 <ul class="list-unstyled footer-list mt-4">
@@ -306,7 +300,7 @@
                                     <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Neurology</a></li>
                                 </ul>
                             </div><!--end col-->
-                            
+
                             <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
                                 <h5 class="text-light title-dark footer-head">Contact us</h5>
                                 <ul class="list-unstyled footer-list mt-4">
@@ -326,12 +320,12 @@
                                     </li>
                                 </ul> -->
 
-                                <ul class="list-unstyled social-icon footer-social mb-0 mt-4">
-                                    <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="facebook" class="fea icon-sm fea-social"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="twitter" class="fea icon-sm fea-social"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="linkedin" class="fea icon-sm fea-social"></i></a></li>
-                                </ul><!--end icon-->
+                                    <ul class="list-unstyled social-icon footer-social mb-0 mt-4">
+                                        <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="facebook" class="fea icon-sm fea-social"></i></a></li>
+                                        <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
+                                        <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="twitter" class="fea icon-sm fea-social"></i></a></li>
+                                        <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="linkedin" class="fea icon-sm fea-social"></i></a></li>
+                                    </ul><!--end icon-->
                             </div><!--end col-->
                         </div><!--end row-->
                     </div><!--end col-->
@@ -346,7 +340,7 @@
                                 <p class="mb-0"><script>document.write(new Date().getFullYear())</script> ©  Design with <i class="mdi mdi-heart text-danger"></i> by <a href="../../../index.html" target="_blank" class="text-reset">Group6</a>.</p>
                             </div>
                         </div><!--end col-->
-    
+
                         <div class="col-sm-6 mt-4 mt-sm-0">
                             <ul class="list-unstyled footer-list text-sm-end text-center mb-0">
                                 <li class="list-inline-item"><a href="terms.html" class="text-foot me-2">Terms</a></li>
@@ -360,15 +354,15 @@
             </div><!--end container-->
         </footer><!--end footer-->
         <!-- End -->
-     <!-- Back to top -->
+        <!-- Back to top -->
         <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
         <!-- Back to top -->
         <!-- Offcanvas Start -->
         <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header p-4 border-bottom">
                 <h5 id="offcanvasRightLabel" class="mb-0">
-                    <img src=../template/assets/images/MABS__1.png" height="24" class="light-version" alt="">
-                    <img src=../template/assets/images/MABS__1.png" height="24" class="dark-version" alt="">
+                    <img src=frontend/template/assets/images/MABS__1.png" height="24" class="light-version" alt="">
+                    <img src=frontend/template/assets/images/MABS__1.png" height="24" class="dark-version" alt="">
                 </h5>
                 <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
             </div>
@@ -419,32 +413,32 @@
         </div>
         <!-- MOdal End -->
         <!-- javascript -->
-        <script src="../template/assets/js/jquery.min.js"></script>
-        <script src="../template/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="frontend/template/assets/js/jquery.min.js"></script>
+        <script src="frontend/template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- SLIDER -->
-        <script src="../template/assets/js/tiny-slider.js"></script>
-        <script src="../template/assets/js/tiny-slider-init.js"></script>
-        <script src="../template/assets/js/easy_background.js"></script>
+        <script src="frontend/template/assets/js/tiny-slider.js"></script>
+        <script src="frontend/template/assets/js/tiny-slider-init.js"></script>
+        <script src="frontend/template/assets/js/easy_background.js"></script>
         <!-- Select2 -->
-        <script src="../template/assets/js/select2.min.js"></script>
-        <script src="../template/assets/js/select2.init.js"></script>
+        <script src="frontend/template/assets/js/select2.min.js"></script>
+        <script src="frontend/template/assets/js/select2.init.js"></script>
         <!-- Datepicker -->
-        <script src="../template/assets/js/flatpickr.min.js"></script>
-        <script src="../template/assets/js/flatpickr.init.js"></script>
+        <script src="frontend/template/assets/js/flatpickr.min.js"></script>
+        <script src="frontend/template/assets/js/flatpickr.init.js"></script>
         <!-- Datepicker -->
-        <script src="../template/assets/js/jquery.timepicker.min.js"></script> 
-        <script src="../template/assets/js/timepicker.init.js"></script> 
+        <script src="frontend/template/assets/js/jquery.timepicker.min.js"></script> 
+        <script src="frontend/template/assets/js/timepicker.init.js"></script> 
         <!-- Icons -->
-        <script src="../template/assets/js/feather.min.js"></script>
+        <script src="frontend/template/assets/js/feather.min.js"></script>
         <!-- Main Js -->
-        <script src="../template/assets/js/app.js"></script>
+        <script src="frontend/template/assets/js/app.js"></script>
         <script>
-            // easy_background("#home",
-            //     {
-            //         slide: ["../assets/images/bg/02.jpg", "../assets/images/bg/03.jpg", "../assets/images/bg/04.jpg"],
-            //         delay: [1000, 1000, 1000]
-            //     }
-            // );
+                                        // easy_background("#home",
+                                        //     {
+                                        //         slide: ["../assets/images/bg/02.jpg", "../assets/images/bg/03.jpg", "../assets/images/bg/04.jpg"],
+                                        //         delay: [1000, 1000, 1000]
+                                        //     }
+                                        // );
         </script>
     </body>
 </html>

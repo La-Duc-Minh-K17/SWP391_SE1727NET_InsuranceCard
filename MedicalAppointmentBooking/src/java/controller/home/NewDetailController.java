@@ -4,7 +4,6 @@
  */
 package controller.home;
 
-import dal.CategoryDAO;
 import dal.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,14 +13,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import model.Blog_Category;
 import model.Blog;
 
 /**
  *
- * @author kiemq
+ * @author nguye
  */
-public class NewListController extends HttpServlet {
+public class NewDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +38,10 @@ public class NewListController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet NewsList</title>");
+            out.println("<title>Servlet NewDetailController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet NewsList at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet NewDetailController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,15 +59,16 @@ public class NewListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int Id = Integer.parseInt(request.getParameter("id"));
+        System.out.println(Id);
         BlogDAO dao = new BlogDAO();
-        List<Blog> blogsList = dao.getAllNews();
-        request.setAttribute("data", blogsList);
         List<Blog> blogsList3 = dao.getTop3News();
         request.setAttribute("blogs3", blogsList3);
-        CategoryDAO cdao = new CategoryDAO();
-        List<Blog_Category> blogCategory = cdao.getAllCategorys();
-        request.setAttribute("listC", blogCategory);
-        request.getRequestDispatcher("frontend/view/blog.jsp").forward(request, response);
+        Blog blogDetail = new Blog();   
+        blogDetail = dao.getBlogDetailByID(Id);
+        request.setAttribute("blogs3", blogsList3);
+        request.setAttribute("data", blogDetail);
+        request.getRequestDispatcher("frontend/view/blogdetail.jsp").forward(request, response);
     }
 
     /**
@@ -80,28 +79,6 @@ public class NewListController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        int categoryId = Integer.parseInt(request.getParameter("category"));
-        String sort = request.getParameter("sort");
-        BlogDAO dao = new BlogDAO();
-        List<Blog> blogslist = new ArrayList<>();
-        CategoryDAO cdao = new CategoryDAO();
-        List<Blog_Category> blogCategory = cdao.getAllCategorys();
-        if ( categoryId == 0) {
-            blogslist = dao.getAllNewsBySearch1(categoryId, sort);
-        } else{
-            blogslist = dao.getAllNewsBySearch2(categoryId, sort);
-        }
-        List<Blog> blogs3 = new ArrayList<>();
-        blogs3 = dao.getTop3News();
-        request.setAttribute("listC", blogCategory);
-        request.setAttribute("blogs3", blogs3);
-        request.setAttribute("data", blogslist);
-        request.getRequestDispatcher("frontend/view/blog.jsp").forward(request, response);
-    }
-
     /**
      * Returns a short description of the servlet.
      *

@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * @author Admin
  */
 public class UserAccount {
-
+    private int userId;
     private String username;
     private String password;
     private String email;
@@ -30,13 +30,14 @@ public class UserAccount {
 
     }
 
-    public UserAccount(String username, String email, String fullName, int gender, String phone, String image) {
+    public UserAccount(String username, String email, String fullName, int gender, String phone, String image, int status) {
         this.username = username;
         this.email = email;
         this.fullName = fullName;
         this.gender = gender;
         this.phone = phone;
         this.image = image;
+        this.status = status;
     }
 
     public UserAccount(String username, String password, String email, String fullName, int gender, String phone, String confirmationToken, Timestamp confirmationTokenTime, int status, Role role) {
@@ -65,7 +66,23 @@ public class UserAccount {
         this.recoveryTokenTime = recoveryTokenTime;
 
     }
+    
+    public int getUserId() {
+        return userId;
+    }
 
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
     public String getUserName() {
         return username;
     }
