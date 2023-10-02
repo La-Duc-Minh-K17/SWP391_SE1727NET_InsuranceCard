@@ -54,7 +54,7 @@
         <div class="position-relative">
             <div class="shape overflow-hidden text-white">
                 <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+                <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
                 </svg>
             </div>
         </div>
@@ -62,60 +62,51 @@
 
         <!-- Start -->
         <section>
-        <div class="container mt-70 mt-70">
-                    <div class="row">
-                        <div class="col-lg-20">
-                            <div class="section-title">
-                                <h4 class="title mb-0">List Services</h4>
-                            </div>
-                        </div><!--end col-->
-                    </div><!--end row-->
+    <div class="container m-7">
+       <c:forEach items="${requestScope.services}" var="s">
+    <div class="row m-8">
+        <div class="col-md-7 mt-4 mt-sm-0 pt-2 pt-sm-0">
+            <div class="d-flex section-title m-6">
+                <img src="data:image/jpg;base64,${s.service_image}" width="60%" height="80%"/>
+                <div class="service-details">
+                    <h4 class="title">${s.service_name}</h4>
+                    <h5 class="text-muted">${s.fee}</h5>
+                </div>
+            </div>
+        </div><!--end col-->
+        <div class="col-md-5 text-right">
+            <div class="mt-9 pt-2">
+                <ul class="list-unstyled text-warning h5 mb-0">
+                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                    <li class="list-inline-item me-2 h6 text-muted">(20 Ratings)</li>
+                </ul>
+                <a href="#" class="btn btn-primary mr-2">Shop Now</a>
+                <a href="#" class="btn btn-soft-primary">Add to Cart</a>
+            </div>
+        </div><!--end col-->
+    </div><!--end row-->
+</c:forEach>
 
-                    <div class="row">
-                        <c:forEach items="${requestScope.services}" var="s">
-                        <div class="col-lg-12 mt-6 pt-6 m-8">
-                            <div class="row mt-5 justify-content-center">
-                                    <div class="card team border-0 rounded shadow overflow-hidden m-1">
-                                        <img src="data:image/jpg;base64,${s.service_image}" width="600" height="80%">
-                                            <a href="servicedetail" class="text-dark title h5">${s.service_name}</a>
-                                            </div>
-                                    </div>
-                                        </c:forEach>
-                        </div><!--end col-->
-                    </div><!--end row-->
-                </div><!--end container-->
-            </section><!--end section-->
-            <!-- End -->
-            <section class="bg-half-170 d-table w-100 bg-light">
-            <div class="container">
-                <div class="row mt-5 justify-content-center">
-                    <div class="col-12">
-                        <div class="section-title text-center">
-                            <h3 class="sub-title mb-4">Plastic Medicine Box</h3>
-                            <p class="para-desc mx-auto text-muted">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
-                        
-                            <nav aria-label="breadcrumb" class="d-inline-block mt-3">
-                                <ul class="breadcrumb bg-light rounded mb-0 bg-transparent">
-                                    <li class="breadcrumb-item"><a href="index.html">Doctris</a></li>
-                                    <li class="breadcrumb-item"><a href="pharmacy.html">Pharmacy</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Product Detail</li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-        </section><!--end section-->
-            <jsp:include page="/frontend/common/footer.jsp" />
-           
-            <!-- End -->
-            <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
-            <!-- Icons -->
-            <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
-            <!-- Main Js -->
-            <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-            <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-            <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-            <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->
+
+
+
+        <jsp:include page="/frontend/common/footer.jsp" />
+
+        <!-- End -->
+        <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
+        <!-- Icons -->
+        <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
+        <!-- Main Js -->
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
     </body>
 </html>
