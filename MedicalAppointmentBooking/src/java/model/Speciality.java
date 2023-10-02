@@ -14,6 +14,13 @@ public class Speciality {
     public String speDescription;
     public boolean speStatus;
 
+    public Speciality(int specialityId, String speName, String speDescription, boolean speStatus) {
+        this.specialityId = specialityId;
+        this.speName = speName;
+        this.speDescription = speDescription;
+        this.speStatus = speStatus;
+    }
+
     public int getSpecialityId() {
         return specialityId;
     }
