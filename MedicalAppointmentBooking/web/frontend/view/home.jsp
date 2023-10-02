@@ -72,11 +72,7 @@
                     <div class="col-lg-5 col-md-6">
                         <div class="position-relative">
                             <img src="frontend/template/assets/images/about/About1.png" class="img-fluid" alt="">
-                            <div class="play-icon">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#watchvideomodal" class="play-btn video-play-icon">
-                                    <i class="mdi mdi-play text-primary rounded-circle bg-white title-bg-dark shadow"></i>
-                                </a>
-                            </div>
+                            
                         </div>
                     </div><!--end col-->
                     <div class="col-lg-7 col-md-6 mt-4 pt-2 mt-sm-0 pt-sm-0">
@@ -85,9 +81,7 @@
                             <h4 class="title mt-3 mb-4">Good Services And Better <br> Health By Our Specialists</h4>
                             <p class="para-desc text-muted">Providing excellent services for a healthier tomorrow, led by our dedicated specialists.assistance, emergency treatment or a simple consultation.</p>
                             <p class="para-desc text-muted">Access to healthcare in Vietnam is not just an appointment; it's a promise of care, compassion, and well-being for all.</p>
-                            <div class="mt-4">
-                                <a href="aboutus.html" class="btn btn-soft-primary">Read More</a>
-                            </div>
+                            
                         </div>
                     </div><!--end col-->
                 </div><!--end row-->
@@ -112,7 +106,7 @@
                             <div class="card-body p-0 mt-3">
                                 <a href="departments.html" class="title text-dark h5">Medical treatment at home</a>
                                 <p class="text-muted mt-3"> the need for meaningful information is paramount,the required of treat,the threat that need, for every word holds the power to heal, comfort, and guide.</p>
-                                <a href="departments.html" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
+                              
                             </div>
                         </div>
                     </div><!--end col-->

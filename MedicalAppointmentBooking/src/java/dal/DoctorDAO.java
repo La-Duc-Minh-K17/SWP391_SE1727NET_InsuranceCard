@@ -138,7 +138,7 @@ public class DoctorDAO {
                 String position = rs.getString("doctor_position");
                 String speciality = rs.getString("speName");
                 String description = rs.getString("doctor_description");
-                doctor = new Doctor(doctorId, position, speciality, description, username, email, fullName, gender, phone, image, status);
+                doctor = new Doctor(doctorId, speciality, position,description, username, email, fullName, gender, phone, image, status);
             }
             return doctor;
         } catch (SQLException e) {

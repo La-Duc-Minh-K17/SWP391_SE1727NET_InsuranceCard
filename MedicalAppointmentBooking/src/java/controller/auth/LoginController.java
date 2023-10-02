@@ -31,11 +31,6 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        if(action != null && action.equals("forgot")) {
-            request.getRequestDispatcher("/forgot").forward(request,response);
-            return;
-        }
         request.getRequestDispatcher("frontend/view/login.jsp").forward(request, response);
     }
 

@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-
+        <title>Doctris - Doctor Appointment Booking System</title>
         <!-- favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
@@ -41,8 +41,8 @@
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
             <main class="page-content">
-                
-                
+
+
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
                         <div class="d-flex align-items-center">
@@ -117,9 +117,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-3 mt-4 mt-md-0 text-md-end">
-                                <a href="<c:url value='/manage-doctor?action=create'/>" class="btn btn-primary ">Add Doctor</a>
-                            </div><!--end col-->
+                           
                         </div><!--end row-->
 
 
