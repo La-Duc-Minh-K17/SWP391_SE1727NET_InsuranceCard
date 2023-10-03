@@ -69,22 +69,14 @@
                 <div class="d-flex section-title m-6">
                     <img src="data:image/jpg;base64,${s.service_image}" width="60%" height="80%"/>
                     <div class="service-details">
-                        <h7 class="text h5 justify-content-end">${s.service_name}</h7>
+                        <a href="#" class="text dark h5 m-2">${s.service_name}</a>
                     </div>
                 </div>
             </div><!--end col-->
             <div class="col-md-5 text-right">
                 <div class="mt-9 pt-2">
-                    <ul class="list-unstyled text-warning h5 mb-0">
-                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                        <li class="list-inline-item me-2 h6 text-muted">(20 Ratings)</li>
-                    </ul>
                     <div class="d-flex justify-content-end mr-5">
-                        <a href="#" class="btn btn-primary">Appointment Now</a>
+                        <a href="#" class="btn btn-primary">Schedule Now</a>
                     </div>
                 </div>
             </div><!--end col-->
