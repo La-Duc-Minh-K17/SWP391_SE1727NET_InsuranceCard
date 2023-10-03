@@ -33,7 +33,22 @@ public class HomeController extends HttpServlet {
         DoctorDAO doctordao = new DoctorDAO();
         List<Doctor> doctorList = doctordao.getAllDoctor();
         request.setAttribute("doctors", doctorList);
-       
+        String action = request.getParameter("action");
+
+        if (action != null && action.equals("redirect-doctors")) {
+            request.getRequestDispatcher("").forward(request, response);
+            return;
+        }
+
+        if (action != null && action.equals("redirect-services")) {
+            request.getRequestDispatcher("").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("redirect-blogs")) {
+            request.getRequestDispatcher("").forward(request, response);
+            return;
+        }
+
         request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
     }
 

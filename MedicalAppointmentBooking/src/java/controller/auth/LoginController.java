@@ -56,7 +56,7 @@ public class LoginController extends HttpServlet {
             return;
         } else {
             SessionUtils.getInstance().putValue(request, "user", account);
-            response.sendRedirect("frontend/view/home.jsp");
+            request.getRequestDispatcher("home").forward(request, response);
             return;
         }
     }

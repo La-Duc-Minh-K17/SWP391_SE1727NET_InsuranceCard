@@ -9,6 +9,7 @@ package model;
  * @author Admin
  */
 public class Speciality {
+    
     private int id;
     private String speName;
     private String speDescription;

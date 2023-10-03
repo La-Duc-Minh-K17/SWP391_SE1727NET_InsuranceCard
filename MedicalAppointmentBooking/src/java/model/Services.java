@@ -14,10 +14,10 @@ public class Services {
     private String details;
     private int fee;
     private String serviceImage;
-    private boolean status;
+    private int status;
     private int catetegory_Id;
 
-    public Services(String name, String description, String details, int fee, String serviceImage, boolean status, int catetegory_Id) {
+    public Services(String name, String description, String details, int fee, String serviceImage, int status, int catetegory_Id) {
         this.name = name;
         this.description = description;
         this.details = details;
@@ -67,13 +67,15 @@ public class Services {
         this.serviceImage = serviceImage;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
+
+    
 
     public int getCatetegory_Id() {
         return catetegory_Id;
