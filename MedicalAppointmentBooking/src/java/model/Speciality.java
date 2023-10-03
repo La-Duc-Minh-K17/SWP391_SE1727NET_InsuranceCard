@@ -6,27 +6,37 @@ package model;
 
 /**
  *
- * @author DELL
+
+=======
+ * @author Admin
  */
 public class Speciality {
-    public int specialityId;
-    public String speName;
-    public String speDescription;
-    public boolean speStatus;
+    private int id;
+    private String speName;
+    private String speDescription;
+    private int speStatus;
 
-    public Speciality(int specialityId, String speName, String speDescription, boolean speStatus) {
-        this.specialityId = specialityId;
+
+    public Speciality() {
+    }
+
+    
+
+    public Speciality(int id, String speName, String speDescription, int speStatus) {
+        this.id = id;
         this.speName = speName;
         this.speDescription = speDescription;
         this.speStatus = speStatus;
     }
 
-    public int getSpecialityId() {
-        return specialityId;
+
+    public int getId() {
+        return id;
     }
 
-    public void setSpecialityId(int specialityId) {
-        this.specialityId = specialityId;
+    public void setId(int id) {
+        this.id = id;
+
     }
 
     public String getSpeName() {
@@ -45,12 +55,14 @@ public class Speciality {
         this.speDescription = speDescription;
     }
 
-    public boolean isSpeStatus() {
+
+    public int getSpeStatus() {
         return speStatus;
     }
 
-    public void setSpeStatus(boolean speStatus) {
+    public void setSpeStatus(int speStatus) {
         this.speStatus = speStatus;
     }
-    
 }
+    
+

@@ -2,10 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.home;
+package controller.setting;
 
-import dal.CategoryDAO;
-import dal.BlogDAO;
+import dal.SettingDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,15 +12,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.List;
 import model.Blog_Category;
-import model.Blog;
+import model.Role;
+import model.Service_Category;
+import model.Setting;
+import model.Speciality;
 
 /**
  *
- * @author kiemq
+ * @author DELL
  */
-public class NewListController extends HttpServlet {
+public class AddSetting extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +41,10 @@ public class NewListController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet NewsList</title>");
+            out.println("<title>Servlet AddSetting</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet NewsList at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddSetting at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,15 +62,10 @@ public class NewListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BlogDAO dao = new BlogDAO();
-        List<Blog> blogsList = dao.getAllNews();
-        request.setAttribute("data", blogsList);
-        List<Blog> blogsList3 = dao.getTop3News();
-        request.setAttribute("blogs3", blogsList3);
-        CategoryDAO cdao = new CategoryDAO();
-        List<Blog_Category> blogCategory = cdao.getAllCategorys();
-        request.setAttribute("listC", blogCategory);
-        request.getRequestDispatcher("frontend/view/blog.jsp").forward(request, response);
+        SettingDAO st = new SettingDAO();
+        ArrayList<Setting> settings = st.list();
+        request.setAttribute("settings", settings);
+        request.getRequestDispatcher("frontend/view/settingList.jsp").forward(request, response);
     }
 
     /**
@@ -83,23 +79,49 @@ public class NewListController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int categoryId = Integer.parseInt(request.getParameter("category"));
-        String sort = request.getParameter("sort");
-        BlogDAO dao = new BlogDAO();
-        List<Blog> blogslist = new ArrayList<>();
-        CategoryDAO cdao = new CategoryDAO();
-        List<Blog_Category> blogCategory = cdao.getAllCategorys();
-        if ( categoryId == 0) {
-            blogslist = dao.getAllNewsBySearch1(categoryId, sort);
-        } else{
-            blogslist = dao.getAllNewsBySearch2(categoryId, sort);
+        String settingType = request.getParameter("settingType");
+        String settingValue = request.getParameter("settingValue");
+        String settingDescription = request.getParameter("settingDescription");
+        String settingStatus = request.getParameter("settingStatus");
+        int status;
+        if (settingStatus.equalsIgnoreCase("Active")) {
+            status = 1;
+        } else {
+            status = 0;
         }
-        List<Blog> blogs3 = new ArrayList<>();
-        blogs3 = dao.getTop3News();
-        request.setAttribute("listC", blogCategory);
-        request.setAttribute("blogs3", blogs3);
-        request.setAttribute("data", blogslist);
-        request.getRequestDispatcher("frontend/view/blog.jsp").forward(request, response);
+
+        SettingDAO db = new SettingDAO();
+
+        if (settingType.equalsIgnoreCase("user")) {
+            Role role = new Role();
+            role.setRole_name(settingValue);
+            role.setRole_description(settingDescription);
+            role.setStatus(status);
+            db.insertRole(role);
+        } else if (settingType.equalsIgnoreCase("speciality")) {
+            Speciality spe = new Speciality();
+            spe.setSpeName(settingValue);
+            spe.setSpeDescription(settingDescription);
+            spe.setSpeStatus(status);
+            db.insertSpeciality(spe);
+        } else if (settingType.equalsIgnoreCase("service")) {
+            Service_Category service = new Service_Category();
+            service.setName(settingValue);
+            service.setDescription(settingDescription);
+            service.setStatus(status);
+            db.insertService(service);
+        } else if (settingType.equalsIgnoreCase("blog")) {
+            Blog_Category blog = new Blog_Category();
+            blog.setName(settingValue);
+            blog.setDescription(settingDescription);
+            blog.setStatus(status);
+            db.insertBlog(blog);
+        }
+        SettingDAO st = new SettingDAO();
+        ArrayList<Setting> settings = st.list();
+        request.setAttribute("settings", settings);
+        
+        request.getRequestDispatcher("frontend/view/settingList.jsp").forward(request, response);
     }
 
     /**

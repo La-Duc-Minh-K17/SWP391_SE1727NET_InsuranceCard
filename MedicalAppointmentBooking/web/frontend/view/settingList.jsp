@@ -118,9 +118,15 @@
             <form action="addSetting" method="POST">
                 <h4>Add Settings</h4>
                 <label for="settingType">Type:</label>
+                <select id="settingType" name="settingType">
+                    <option value="">All Types</option>
+                    <option value="user">User</option>
+                    <option value="speciality">Speciality</option>
+                    <option value="service">Service</option>
+                    <option value="blog">Blog</option> 
+                </select>
                 <br><br>
-                <input type="text" id="settingType" placeholder="Type" name="settingType" required>
-                <br><br>
+              
                 <label for="settingValue">Value:</label>
                 <br><br>
                 <input type="text" id="settingValue" placeholder="Value" name="settingValue" required>
