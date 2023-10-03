@@ -6,6 +6,8 @@ package model;
 
 /**
  *
+
+=======
  * @author Admin
  */
 public class Speciality {
@@ -21,12 +23,14 @@ public class Speciality {
         this.speStatus = speStatus;
     }
 
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+
     }
 
     public String getSpeName() {
@@ -45,6 +49,7 @@ public class Speciality {
         this.speDescription = speDescription;
     }
 
+
     public int getSpeStatus() {
         return speStatus;
     }
@@ -53,5 +58,5 @@ public class Speciality {
         this.speStatus = speStatus;
     }
     
-    
+
 }
