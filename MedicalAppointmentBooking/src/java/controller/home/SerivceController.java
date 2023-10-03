@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import javax.mail.Service;
 import model.Service_Category;
 
 /**
@@ -34,8 +35,8 @@ public class SerivceController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             ServicesDAO servicedao = new ServicesDAO();
-        List<Service_Category> serviceList = servicedao.getAllServices_category();
-        request.setAttribute("serivices", serviceList);
+            List<Service_Category> serviceList = servicedao.getAllServices_category();
+            request.setAttribute("serivices", serviceList);
         }
     }
 
