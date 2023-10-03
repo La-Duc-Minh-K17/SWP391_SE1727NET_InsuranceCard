@@ -24,6 +24,9 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/otherStyle.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
+        <div class="back-to-home rounded d-none d-sm-block">
+            <a href="home" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
+        </div>
         <section class="bg-home d-flex bg-light align-items-center">
             <div class="container">
                 <div class="row justify-content-center">
@@ -41,15 +44,15 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="mb-3">
-                                                <label class="form-label">User Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" placeholder="User Name" name="username" required="">
+                                                <label class="form-label">User Name <span class="text-danger">* </span></label>
+                                                <input type="text" class="form-control" placeholder="User Name" name="username" required="" value="${cookie.username.value}">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Password <span class="text-danger">*</span></label>
-                                                <input type="password" name="password" class="form-control" placeholder="password" required="">
+                                                <input type="password" name="password" class="form-control" placeholder="Password" required="" value="${cookie.password.value}">
                                             </div>
                                         </div>
 
@@ -57,7 +60,7 @@
                                             <div class="d-flex justify-content-between">
                                                 <div class="mb-3">
                                                     <div class="form-check">
-                                                        <input class="form-check-input align-middle" type="checkbox" value="" id="remember-check">
+                                                        <input name="remember"class="form-check-input align-middle" type="checkbox" id="remember-check"  ${(cookie.remember.value eq 'ON')?"checked":""}>
                                                         <label class="form-check-label" for="remember-check">Remember me</label>
                                                     </div>
                                                 </div>

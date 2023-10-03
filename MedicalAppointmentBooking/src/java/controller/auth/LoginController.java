@@ -7,6 +7,7 @@ package controller.auth;
 import dal.UserDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -48,14 +49,31 @@ public class LoginController extends HttpServlet {
         UserDAO uDAO = new UserDAO();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String remember = request.getParameter("remember");
         UserAccount account = uDAO.getUserAccount(username, password);
       
+        
         if (account == null) {
             request.setAttribute("error", "Invalid username or password");
             request.getRequestDispatcher("/frontend/view/login.jsp").forward(request, response);
             return;
         } else {
             SessionUtils.getInstance().putValue(request, "user", account);
+            Cookie cusername = new Cookie("username", username);
+            Cookie cpass = new Cookie("password", password);
+            Cookie crem = new Cookie("remember", "ON");
+            if (remember != null) {
+                cusername.setMaxAge(60 * 60 * 24 * 30);
+                cpass.setMaxAge(60 * 60 * 24 * 30);
+                crem.setMaxAge(60 * 60 * 24 * 30);
+            } else {
+                cusername.setMaxAge(0);
+                cpass.setMaxAge(0);
+                crem.setMaxAge(0);
+            }
+            response.addCookie(cusername);
+            response.addCookie(cpass);
+            response.addCookie(crem);
             request.getRequestDispatcher("home").forward(request, response);
             return;
         }
