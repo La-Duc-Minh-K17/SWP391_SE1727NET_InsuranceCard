@@ -12,14 +12,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import javax.mail.Service;
-import model.Service_Category;
+import model.Service;
 
 /**
  *
  * @author PC
  */
-public class SerivceController extends HttpServlet {
+public class ServiceController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,8 +34,10 @@ public class SerivceController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             ServicesDAO servicedao = new ServicesDAO();
-        List<Service_Category> serviceList = servicedao.getAllServices_category();
-        request.setAttribute("serivices", serviceList);
+            List<Service> serviceList = servicedao.getAllService();
+            request.setAttribute("services", serviceList);
+            System.out.println(serviceList);
+            request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
         }
     }
 

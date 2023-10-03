@@ -82,7 +82,7 @@
                                 </c:if>
 
                             <c:if test="${sessionScope.user == null}">
-                                <button class="btn btn-primary p-1" onclick="window.location.href = 'user?action=login'">Login</button>
+                                <button class="btn btn-primary p-1" ><a class="btn btn-primary p-1" href="login">Login</a></button>
                             </c:if>
                             <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
                                 <c:if test="${sessionScope.user.username != null}">
@@ -116,10 +116,10 @@
 
                     <div id="navigation">
 
-                        <ul class="navigation-menu nav-left nav-light">
-                            <li><a href="#" class="sub-menu-item">Home</a></li>
+                        <ul class="navigation-menu ">
+                            <li><a href="home" class="sub-menu-item">Home</a></li>
                             <li><a href="#" class="sub-menu-item">Doctors</a></li>
-                            <li><a href="#" class="sub-menu-item">Services</a></li>
+                            <li><a href="service" class="sub-menu-item">Services</a></li>
                             <li><a href="#" class="sub-menu-item">Contact us</a></li>
                             <li><a href="#" class="sub-menu-item">News and Blogs</a></li>
                         </ul>

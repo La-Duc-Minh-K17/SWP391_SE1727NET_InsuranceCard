@@ -26,7 +26,7 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
         <style>
             #home{
-                background-image: url("../template/assets/images/bg/department.jpg") ;
+                background-image: url("frontend/template/assets/images/bg/department.jpg") ;
             }
         </style>
     </head>
@@ -42,7 +42,7 @@
                             <p class="para-desc mx-auto text-white-50">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
                             <nav aria-label="breadcrumb" class="d-inline-block mt-3">
                                 <ul class="breadcrumb bg-light rounded mb-0 py-1 px-2">
-                                    <li class="breadcrumb-item"><a href="index.html">MABS</a></li>
+                                    <li class="breadcrumb-item"><a href="home">MABS</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Services</li>
                                 </ul>
                             </nav>
@@ -54,192 +54,59 @@
         <div class="position-relative">
             <div class="shape overflow-hidden text-white">
                 <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+                <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
                 </svg>
             </div>
         </div>
         <!-- End Hero -->
 
         <!-- Start -->
-        <section class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                        <div class="card features feature-primary border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-eye-fill h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="#" class="title text-dark h5">Medical treatment at home</a>
-                                <p class="text-muted mt-3">The need for meaningful information is paramount,the required of treat,the threat that need, for every word holds the power to heal, comfort, and guide.</p>
-                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-5 mt-sm-0">
-                        <div class="card features feature-primary border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-psychotherapy-fill h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="#" class="title text-dark h5">Endoscopy</a>
-                                <p class="text-muted mt-3">where expertise meets the intricacies of the human body, the demand for informative content is abundant to illuminate the path to health and well-being..</p>
-                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-5 mt-lg-0">
-                        <div class="card features feature-primary border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-stethoscope-fill h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="#" class="title text-dark h5">Specialized</a>
-                                <p class="text-muted mt-3">Each field holds its unique significance, the demand for informative content is abundant to navigate the solutions.</p>
-                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-5 mt-xl-0">
-                        <div class="card features feature-primary border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-capsule-fill h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="#" class="title text-dark h5">Medical Equpipment Rental</a>
-                                <p class="text-muted mt-3">Precision and access to technology are vital, there is a wealth of informative content to assist in meeting your healthcare needs.</p>
-                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                        <div class="card features feature-primary border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-microscope-fill h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="#" class="title text-dark h5">Orthopedic</a>
-                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                        <div class="card features feature-primary border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-pulse-fill h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="#" class="title text-dark h5">Cardiology</a>
-                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                        <div class="card features feature-primary border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-empathize-fill h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="#" class="title text-dark h5">Gynecology</a>
-                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                        <div class="card features feature-primary border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-mind-map h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="#" class="title text-dark h5">Neurology</a>
-                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                        <div class="card features feature-primary border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-mental-health-line h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="#" class="title text-dark h5">Dermatologists</a>
-                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                        <div class="card features feature-primary border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-apple-line h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="#" class="title text-dark h5">Nutritionists</a>
-                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                        <div class="card features feature-primary border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-infrared-thermometer-line h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="#" class="title text-dark h5">Physical Therapists</a>
-                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-        </section><!--end section-->
-        <!-- End -->
-
-        
-        
-            <jsp:include page="/frontend/common/footer.jsp" />
-            <!-- End -->
-            <!-- Back to top -->
-            <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
-            <!-- Back to top -->
-            <!-- Offcanvas Start -->
-                            <div class="offcanvas-body p-4 px-md-5">
-                    <div class="row">
-                        <div class="col-12">
-                            <!-- Style switcher -->
-                            <div id="style-switcher">
-                                <div>
-                                    <ul class="text-center list-unstyled mb-0">
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- end Style switcher -->
-                        </div><!--end col-->
-                    </div><!--end row-->
+        <section>
+    <div class="container mt-5 m-5">
+    <c:forEach items="${requestScope.services}" var="s">
+        <div class="row m-5">
+            <div class="col-md-7 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                <div class="d-flex section-title m-6">
+                    <img src="data:image/jpg;base64,${s.service_image}" width="60%" height="80%"/>
+                    <div class="service-details">
+                        <h7 class="text h5 justify-content-end">${s.service_name}</h7>
+                    </div>
                 </div>
-            <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
-            <!-- Icons -->
-            <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
-            <!-- Main Js -->
-            <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-            <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-            <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-            <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
+            </div><!--end col-->
+            <div class="col-md-5 text-right">
+                <div class="mt-9 pt-2">
+                    <ul class="list-unstyled text-warning h5 mb-0">
+                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                        <li class="list-inline-item me-2 h6 text-muted">(20 Ratings)</li>
+                    </ul>
+                    <div class="d-flex justify-content-end mr-5">
+                        <a href="#" class="btn btn-primary">Appointment Now</a>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </c:forEach>
+</div><!--end container-->
+</section><!--end section-->
+<!-- End -->
+
+
+
+
+        <jsp:include page="/frontend/common/footer.jsp" />
+
+        <!-- End -->
+        <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
+        <!-- Icons -->
+        <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
+        <!-- Main Js -->
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
     </body>
 </html>

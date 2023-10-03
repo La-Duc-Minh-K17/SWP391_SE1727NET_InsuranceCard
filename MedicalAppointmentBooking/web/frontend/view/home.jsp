@@ -102,20 +102,21 @@
                         </div>
                     </div><!--end col-->
                 </div><!--end row-->
-
                 <div class="row">
+                <c:forEach items="${requestScope.services}" var="s">
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
                                 <img src="frontend/template/assets/images/about/homemedical.png" height="40"></img>
                             </div>
                             <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Medical treatment at home</a>
+                                <a href="departments.html" class="title text-dark h5">${s.sname}</a>
                                 <p class="text-muted mt-3"> the need for meaningful information is paramount,the required of treat,the threat that need, for every word holds the power to heal, comfort, and guide.</p>
                                 <a href="departments.html" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
                             </div>
                         </div>
                     </div><!--end col-->
+                    </c:forEach>
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
