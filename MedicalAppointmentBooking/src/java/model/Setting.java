@@ -34,7 +34,7 @@ public class Setting {
     }
     private ArrayList<Speciality> speciality;
     private ArrayList<Blog> blog;
-    private ArrayList<Services> service;
+    private ArrayList<Service> service;
     private ArrayList<Role> role;
 
     public ArrayList<Blog> getBlog() {
@@ -45,11 +45,11 @@ public class Setting {
         this.blog = blog;
     }
 
-    public ArrayList<Services> getService() {
+    public ArrayList<Service> getService() {
         return service;
     }
 
-    public void setService(ArrayList<Services> service) {
+    public void setService(ArrayList<Service> service) {
         this.service = service;
     }
 

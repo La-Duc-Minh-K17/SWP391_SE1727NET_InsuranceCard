@@ -25,6 +25,17 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
         <style>
+            .card-img-container {
+    height: 200px; /* Điều chỉnh chiều cao tùy ý */
+    overflow: hidden;
+}
+
+.card-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Đảm bảo tỷ lệ kích thước và cắt hình ảnh nếu cần */
+}
+
             #home{
                 background-image: url("frontend/template/assets/images/bg/department.jpg") ;
             }
@@ -32,67 +43,47 @@
     </head>
     <body>
         <jsp:include page="/frontend/common/header.jsp" />
-        <section class="bg-half-170 d-table w-100" id="home"  center center;">
-            <div class="bg-overlay bg-overlay-dark"></div>
-            <div class="container">
-                <div class="row mt-5 justify-content-center">
-                    <div class="col-12">
-                        <div class="section-title text-center">
-                            <h3 class="sub-title mb-4 text-white title-dark">Services</h3>
-                            <p class="para-desc mx-auto text-white-50">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
-                            <nav aria-label="breadcrumb" class="d-inline-block mt-3">
-                                <ul class="breadcrumb bg-light rounded mb-0 py-1 px-2">
-                                    <li class="breadcrumb-item"><a href="home">MABS</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Services</li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-        </section><!--end section-->
-        <div class="position-relative">
-            <div class="shape overflow-hidden text-white">
-                <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
-                </svg>
-            </div>
-        </div>
-        <!-- End Hero -->
+        <!-- Hero Section -->
+<!-- Hero Section -->
 
-        <!-- Start -->
-        <section>
+<section class="bg-half-170 d-table w-100" id="home">
+    <!-- ... Hero content ... -->
+</section>
+<!-- End Hero -->
+
+<!-- Form Select -->
+<div class="container mt-5 m-5 text-center">
+    <!-- ... Form select ... -->
+</div>
+<!-- End Form Select -->
+
+<!-- Service Items -->
+<section>
     <div class="container mt-5 m-5">
-    <c:forEach items="${requestScope.services}" var="s">
-        <div class="row m-5">
-            <div class="col-md-7 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                <div class="d-flex section-title m-6">
-                    <img src="data:image/jpg;base64,${s.service_image}" width="60%" height="80%"/>
-                    <div class="service-details">
-                        <h7 class="text h5 justify-content-end">${s.service_name}</h7>
+        <div class="row">
+            <c:forEach items="${requestScope.services}" var="s" varStatus="loop">
+                <div class="col-md-3 mt-4">
+                    <div class="card mb-4">
+                        <div class="card-img-container">
+                            <img src="data:image/jpg;base64,${s.service_image}" class="card-img-top" alt="${s.service_name}">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">${s.service_name}</h5>
+                            <p class="card-text">${s.service_description}</p>
+                            <a href="servicedetail?id=${s.service_id}" class="btn btn-primary">Learn More</a>
+                        </div>
                     </div>
-                </div>
-            </div><!--end col-->
-            <div class="col-md-5 text-right">
-                <div class="mt-9 pt-2">
-                    <ul class="list-unstyled text-warning h5 mb-0">
-                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                        <li class="list-inline-item me-2 h6 text-muted">(20 Ratings)</li>
-                    </ul>
-                    <div class="d-flex justify-content-end mr-5">
-                        <a href="#" class="btn btn-primary">Appointment Now</a>
-                    </div>
-                </div>
-            </div><!--end col-->
+                </div><!--end col-md-3-->
+                <c:if test="${loop.index % 4 == 3}">
+                    <div class="w-100"></div><!-- Clear the row after every 4 items -->
+                </c:if>
+            </c:forEach>
         </div><!--end row-->
-    </c:forEach>
-</div><!--end container-->
+    </div><!--end container-->
 </section><!--end section-->
-<!-- End -->
+<!-- End Service Items -->
+
+
 
 
 
