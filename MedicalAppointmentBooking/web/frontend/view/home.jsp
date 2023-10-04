@@ -19,7 +19,6 @@
         <!-- SLIDER -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/tiny-slider.css"/>
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="frontend/template/assets/css/flatpickr.min.css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
         <style>
             #home{

@@ -73,25 +73,25 @@
                     <li class="list-inline-item mb-0 ms-1">
                         <div class="dropdown dropdown-primary">
                             <c:if test="${sessionScope.user != null}">
-                                <c:if test="${sessionScope.user.img != 'default'}">
-                                    <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="data:image/png;base64,${sessionScope.user.img}" class="avatar avatar-ex-small rounded-circle" alt=""></button> 
+                                <c:if test="${sessionScope.user.image != 'default'}">
+                                    <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="data:image/png;base64,${sessionScope.user.image}" class="avatar avatar-ex-small rounded-circle" alt=""></button> 
                                     </c:if>
-                                    <c:if test="${sessionScope.user.img == 'default'}">
-                                    <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/avata.png" class="avatar avatar-ex-small rounded-circle" alt=""></button>
+                                    <c:if test="${sessionScope.user.image == 'default'}">
+                                    <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/avatar.png" class="avatar avatar-ex-small rounded-circle" alt=""></button>
                                     </c:if>
                                 </c:if>
 
                             <c:if test="${sessionScope.user == null}">
-                                <button class="btn btn-primary p-1" ><a class="btn btn-primary p-1" href="login">Login</a></button>
+                                <button class="btn btn-primary btn-sm" onclick="window.location.href = 'login'">Login</button>
                             </c:if>
                             <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
                                 <c:if test="${sessionScope.user.username != null}">
                                     <a class="dropdown-item d-flex align-items-center text-" href="#">
-                                        <c:if test="${sessionScope.user.img != 'default'}">
-                                            <img src="data:image/png;base64,${sessionScope.user.img}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                        <c:if test="${sessionScope.user.image != 'default'}">
+                                            <img src="data:image/png;base64,${sessionScope.user.image}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                         </c:if>
-                                        <c:if test="${sessionScope.user.img == 'default'}">
-                                            <img src="frontend/template/assets/images/avata.png" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                        <c:if test="${sessionScope.user.image == 'default'}">
+                                            <img src="frontend/template/assets/images/avatar.png" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                         </c:if>
                                         <div class="flex-1 ms-2">
                                             <span class="d-block mb-1">${sessionScope.user.username}</span>
@@ -100,13 +100,13 @@
                                 </c:if>
                                 <div class="dropdown-divider border-top"></div>
                                 <c:if test="${sessionScope.user != null}">
-                                    <a class="dropdown-item text-" href="user?action=profile"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Tài khoản của tôi</a>
+                                    <a class="dropdown-item text-dark" href="home?action=profile"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span>User Profile</a>
                                         </c:if>
                                         <c:if test="${sessionScope.user != null}">
-                                    <a class="dropdown-item text-" href="user?action=logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Đăng xuất</a>
+                                    <a class="dropdown-item text-dark" href="home?action=logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span>Sign out</a>
                                         </c:if>
                                         <c:if test="${sessionScope.user == null}">
-                                    <a class="dropdown-item text-" href="user?action=login"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Đăng Nhập</a>
+                                    <a class="dropdown-item text-dark" href="home?action=login"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Sign in</a>
                                         </c:if>
                             </div>
                         </div>
@@ -115,40 +115,19 @@
                 </ul>
 
                     <div id="navigation">
-
-                        <ul class="navigation-menu ">
+                        <ul class="navigation-menu nav-left">
                             <li><a href="home" class="sub-menu-item">Home</a></li>
-                            <li><a href="#" class="sub-menu-item">Doctors</a></li>
-                            <li><a href="service" class="sub-menu-item">Services</a></li>
-                            <li><a href="#" class="sub-menu-item">Contact us</a></li>
-                            <li><a href="#" class="sub-menu-item">News and Blogs</a></li>
+                            <li><a href="home?action=redirect-doctors" class="sub-menu-item">Doctors</a></li>
+                            <li><a href="home?action=redirect-services" class="sub-menu-item">Services</a></li>
+                            <li><a href="home?action=redirect-contact-us" class="sub-menu-item">Contact us</a></li>
+                            <li><a href="home?action=redirect-blogs" class="sub-menu-item">News and Blogs</a></li>
                         </ul>
 
                     </div>
             </div>
         </header>
         
-         <div class="offcanvas bg-white offcanvas-top" tabindex="-1" id="offcanvasTop">
-            <div class="offcanvas-body d-flex align-items-center align-items-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="text-center">
-                                <h4>Search now.....</h4>
-                                <div class="subcribe-form mt-4">
-                                    <form>
-                                        <div class="mb-0">
-                                            <input type="text" id="help" name="name" class="border bg-white rounded-pill" required="" placeholder="Search">
-                                            <button type="submit" class="btn btn-pills btn-primary">Search</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div><!--end col-->
-                    </div><!--end row-->
-                </div><!--end container-->
-            </div>
-        </div>
+         
     </body>
     <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
     <!-- Icons -->

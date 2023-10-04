@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Doctor;
+import utils.SessionUtils;
 
 /**
  *
@@ -33,8 +34,30 @@ public class HomeController extends HttpServlet {
         DoctorDAO doctordao = new DoctorDAO();
         List<Doctor> doctorList = doctordao.getAllDoctor();
         request.setAttribute("doctors", doctorList);
-       
-        request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
+        String action = request.getParameter("action");
+
+        if (action != null && action.equals("redirect-doctors")) {
+            request.getRequestDispatcher("").forward(request, response);
+            return;
+        }
+
+        if (action != null && action.equals("redirect-services")) {
+            request.getRequestDispatcher("").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("redirect-blogs")) {
+            request.getRequestDispatcher("").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("logout")) {
+            SessionUtils.getInstance().removeValue(request, "user");
+            request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
+            return;
+        }
+        if (action == null) {
+            request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
+            return;
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

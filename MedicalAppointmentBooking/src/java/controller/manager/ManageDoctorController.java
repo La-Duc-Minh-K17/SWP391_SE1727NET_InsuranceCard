@@ -46,7 +46,7 @@ public class ManageDoctorController extends HttpServlet {
             request.getRequestDispatcher("frontend/view/admin/doctorlist.jsp").forward(request, response);
             return;
         }
-        if(action != null && action.equals("filter")) {
+        if (action != null && action.equals("filter")) {
             int speId = Integer.parseInt(request.getParameter("speciality_id"));
             List<Doctor> doctorList = dDAO.getDoctorBySpeciality(speId);
             request.setAttribute("dList", doctorList);
@@ -63,7 +63,6 @@ public class ManageDoctorController extends HttpServlet {
         if (action != null && action.equals("edit")) {
             int id = Integer.parseInt(request.getParameter("id"));
             Doctor doctor = dDAO.getDoctorById(id);
-           // request.setAttribute("speList", sDAO.getAllSpeciality());
             request.setAttribute("doctor", doctor);
             request.getRequestDispatcher("frontend/view/admin/editdoctor.jsp").forward(request, response);
             return;
@@ -81,6 +80,13 @@ public class ManageDoctorController extends HttpServlet {
             dDAO.updateDoctor(doctorId, name, gender, phone, spe_id, position, description, status, image);
             response.sendRedirect("manage-doctor?action=edit&id=" + doctorId);
             return;
+        }
+        if (action != null && action.equals("view")) {
+            int doctorId = Integer.parseInt(request.getParameter("id"));
+            Doctor doctor = dDAO.getDoctorById(doctorId);
+            request.setAttribute("doctor", doctor);
+            request.getRequestDispatcher("frontend/view/admin/doctordetail.jsp").forward(request, response);
+
         }
 
     }
