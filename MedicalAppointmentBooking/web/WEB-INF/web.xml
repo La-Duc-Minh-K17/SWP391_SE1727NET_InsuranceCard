@@ -37,8 +37,12 @@
         <servlet-class>controller.manager.ManageDoctorController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SerivceController</servlet-name>
-        <servlet-class>controller.home.SerivceController</servlet-class>
+        <servlet-name>ServiceController</servlet-name>
+        <servlet-class>controller.home.ServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageBlogController</servlet-name>
+        <servlet-class>controller.manager.ManageBlogController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SettingList</servlet-name>
@@ -47,6 +51,10 @@
     <servlet>
         <servlet-name>AddSetting</servlet-name>
         <servlet-class>controller.setting.AddSetting</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceDetailController</servlet-name>
+        <servlet-class>controller.home.ServiceDetailController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>WebDoctorList</servlet-name>
@@ -89,12 +97,16 @@
         <url-pattern>/manage-doctor</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SerivceController</servlet-name>
-        <url-pattern>/Serivce</url-pattern>
+        <servlet-name>ServiceController</servlet-name>
+        <url-pattern>/service</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SettingList</servlet-name>
         <url-pattern>/settinglist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceDetailController</servlet-name>
+        <url-pattern>/servicedetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddSetting</servlet-name>
