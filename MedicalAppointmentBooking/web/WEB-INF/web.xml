@@ -41,8 +41,13 @@
         <servlet-class>controller.home.ServiceController</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>ManageBlogController</servlet-name>
         <servlet-class>controller.manager.ManageBlogController</servlet-class>
+</servlet>
+  <servlet>
+        <servlet-name>SettingList</servlet-name>
+        <servlet-class>controller.setting.SettingList</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserAccountController</servlet-name>
@@ -84,9 +89,15 @@
         <servlet-name>ServiceController</servlet-name>
         <url-pattern>/Service</url-pattern>
     </servlet-mapping>
+  
     <servlet-mapping>
         <servlet-name>ManageBlogController</servlet-name>
         <url-pattern>/manageblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SettingList</servlet-name>
+        <url-pattern>/settinglist</url-pattern>
+ 
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -11,8 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Service_Category;
-import static org.apache.catalina.tribes.util.Arrays.add;
+import model.Service;
+import utils.ImageProcessing;
 
 /**
  *
@@ -20,26 +20,34 @@ import static org.apache.catalina.tribes.util.Arrays.add;
  */
 public class ServicesDAO {
     DBConnection dbc = new DBConnection();
-
-    public List<Service_Category> getAllServices_category() {
+ 
+    public List<Service> getAllService() {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        List<Service_Category> servicesList = new ArrayList<>();
-        String sql = "select * from service_category ;  ";
+        List<Service> serviceList = new ArrayList<>();
+        String sql = "select * from services";
         Connection connection = null;
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                String name = rs.getString("name");
-                String description = rs.getString("description");
-                Boolean status = rs.getBoolean("status");
-                int setting_id = rs.getInt("setting_id");
-                servicesList.add(new Service_Category(name, description,status,setting_id));
+                int service_id = rs.getInt("service_id");
+                String service_name = rs.getString("service_name");
+                String service_image = ImageProcessing.imageString(rs.getBlob("service_image"));
+                String service_description = rs.getString("service_description");
+                String service_details = rs.getString("service_details");
+                int fee = rs.getInt("fee");
+                int service_status = rs.getInt("service_status");
+                int category_id = rs.getInt("category_id");
+                Service s = new Service(service_id, service_name,service_description, service_details , fee, service_image , service_status, category_id);
+                
+                serviceList.add(s);
+                
             }
-            return servicesList;
+            return serviceList;
         } catch (SQLException e) {
+            System.out.println(e);
         } finally {
             if (connection != null) {
                 try {
@@ -49,6 +57,6 @@ public class ServicesDAO {
                 }
             }
         }
-        return servicesList;
+        return serviceList;
     }
 }
