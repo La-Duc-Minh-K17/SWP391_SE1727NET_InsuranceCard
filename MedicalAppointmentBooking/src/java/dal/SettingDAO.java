@@ -134,13 +134,13 @@ public class SettingDAO {
             Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void insertService(Service_Category sevice) {
+    public void insertService(Service_Category service) {
         Connection connection = dbc.getConnection();
         try {
-            String query = "INSERT INTO services_category (sc_name, sc_description, sc_Status, setting_id)\n"
+            String query = "INSERT INTO service_category (sc_name, sc_description, sc_status, setting_id)\n"
                     + "VALUES (?, ?, ?, 3);";
             PreparedStatement statement = connection.prepareStatement(query);
-            Service_Category service = new Service_Category();
+            
             statement.setString(1, service.getName());
             statement.setString(2, service.getDescription());
             statement.setInt(3, service.getStatus());

@@ -34,7 +34,7 @@ public class ServicesDAO {
             while (rs.next()) {
                 String name = rs.getString("name");
                 String description = rs.getString("description");
-                Boolean status = rs.getBoolean("status");
+                int status = rs.getInt("status");
                 int setting_id = rs.getInt("setting_id");
                 servicesList.add(new Service_Category(name, description,status,setting_id));
             }

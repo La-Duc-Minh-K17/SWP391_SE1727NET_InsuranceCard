@@ -17,9 +17,14 @@ public class Service_Category {
     public Service_Category() {
     }
 
-    public Service_Category(String name, String description, Boolean status, int setting_id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Service_Category(String name, String description, int status, int setting_id) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.setting_id = setting_id;
     }
+
+    
 
     public String getName() {
         return name;

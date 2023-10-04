@@ -77,17 +77,7 @@
             padding: 20px;
             z-index: 1;
         }
-        #editSettingForm{
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            z-index: 1;
-
-        }
+        
 
         /* CSS để điều chỉnh hiển thị của biểu mẫu "settinglist" */
         #settingListForm {
@@ -126,7 +116,7 @@
                     <option value="blog">Blog</option> 
                 </select>
                 <br><br>
-              
+
                 <label for="settingValue">Value:</label>
                 <br><br>
                 <input type="text" id="settingValue" placeholder="Value" name="settingValue" required>
@@ -145,21 +135,7 @@
                 <button type="button" id="cancelButton">Cancel</button>
             </form>
         </div>
-        <div id="editSettingForm" class="edit-setting-form" style="display: none;">
-            <form action="editSetting" method="POST">
-                <h4>Edit Setting</h4>
-                <input type="text" class="settingType" name="settingType" placeholder="Type" required>
-                <input type="text" class="settingValue" name="settingValue" placeholder="Value" required>
-                <input type="text" class="settingDescription" name="settingDescription" placeholder="Description" required>
-                <select class="settingStatus" name="settingStatus">
-                    <option value="Active">Active</option>
-                    <option value="Deactive">Deactive</option>
-                </select>
-                <input type="hidden" class="settingId" name="settingId">
-                <br><br>
-                <button type="button" onclick="saveSetting();">Save</button>
-            </form>
-        </div>
+        
         <div id="settingListForm" class="container">
             <table class="col-md-8 table">
                 <thead>
@@ -233,91 +209,7 @@
                                     settingListForm.style.display = "block";
                                 });
 
-                                function editSetting(id, type, value, description, status) {
-                                    // Lấy các phần tử HTML cần thao tác
-                                    var editSettingForm = document.getElementById("editSettingForm");
-                                    var settingIdInput = document.createElement("input");
-                                    var settingTypeInput = document.createElement("input");
-                                    var settingValueInput = document.createElement("input");
-                                    var settingDescriptionInput = document.createElement("input");
-                                    var settingStatusInput = document.createElement("select");
-
-                                    // Điền dữ liệu cũ vào các trường nhập
-                                    settingIdInput.type = "hidden";
-                                    settingIdInput.name = "settingId";
-                                    settingIdInput.value = id;
-
-                                    settingTypeInput.type = "text";
-                                    settingTypeInput.name = "settingType";
-                                    settingTypeInput.value = type;
-
-                                    settingValueInput.type = "text";
-                                    settingValueInput.name = "settingValue";
-                                    settingValueInput.value = value;
-
-                                    settingDescriptionInput.type = "text";
-                                    settingDescriptionInput.name = "settingDescription";
-                                    settingDescriptionInput.value = description;
-                                    
-                                    
-                                    
-                                    var activeOption = document.createElement("option");
-                                    activeOption.value = "Active";
-                                    activeOption.text = "Active";
-                                    var deactiveOption = document.createElement("option");
-                                    deactiveOption.value = "Deactive";
-                                    deactiveOption.text = "Deactive";
-                                    if (status === 'Active') {
-                                        activeOption.selected = true;
-                                    } else {
-                                        deactiveOption.selected = true;
-                                    }
-                                    settingStatusInput.name = "settingStatus";
-                                    settingStatusInput.appendChild(activeOption);
-                                    settingStatusInput.appendChild(deactiveOption);
-
-                                    // Xóa nội dung cũ của biểu mẫu chỉnh sửa
-                                    editSettingForm.innerHTML = '';
-
-                                    // Thêm các trường nhập vào biểu mẫu chỉnh sửa
-                                    editSettingForm.appendChild(settingIdInput);
-                                    editSettingForm.appendChild(document.createTextNode("Type: "));
-                                    editSettingForm.appendChild(settingTypeInput);
-                                    editSettingForm.appendChild(document.createElement("br"));
-                                    editSettingForm.appendChild(document.createTextNode("Value: "));
-                                    editSettingForm.appendChild(settingValueInput);
-                                    editSettingForm.appendChild(document.createElement("br"));
-                                    editSettingForm.appendChild(document.createTextNode("Description: "));
-                                    editSettingForm.appendChild(settingDescriptionInput);
-                                    editSettingForm.appendChild(document.createElement("br"));
-                                    editSettingForm.appendChild(document.createTextNode("Status: "));
-                                    editSettingForm.appendChild(settingStatusInput);
-
-                                    // Hiển thị biểu mẫu chỉnh sửa
-                                    var settingListForm = document.getElementById("settingListForm");
-                                    settingListForm.style.display = "none";
-                                    editSettingForm.style.display = "block";
-                                }
-                                function saveSetting() {
-                                    var settingIdInput = document.querySelector("input[name='settingId']");
-                                    var settingTypeInput = document.querySelector("input[name='settingType']");
-                                    var settingValueInput = document.querySelector("input[name='settingValue']");
-                                    var settingDescriptionInput = document.querySelector("input[name='settingDescription']");
-                                    var settingStatusInput = document.querySelector("select[name='settingStatus']");
-
-                                    var id = settingIdInput.value;
-                                    var type = settingTypeInput.value;
-                                    var value = settingValueInput.value;
-                                    var description = settingDescriptionInput.value;
-                                    var status = settingStatusInput.value;
-
-                                    // Gửi dữ liệu lên máy chủ (phía server) ở đây, ví dụ sử dụng AJAX hoặc form submission.
-                                    // Sau khi gửi thành công, bạn có thể cập nhật dữ liệu trên trang web.
-
-                                    // Sau khi gửi thành công, bạn có thể cập nhật dữ liệu trên trang web, hoặc ẩn biểu mẫu chỉnh sửa:
-                                    var editSettingForm = document.getElementById("editSettingForm");
-                                    editSettingForm.style.display = "none";
-                                }
+                                
         </script>
     </body>
 
