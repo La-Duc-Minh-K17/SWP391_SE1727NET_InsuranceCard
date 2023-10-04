@@ -20,7 +20,7 @@
         <servlet-name>NewListController</servlet-name>
         <servlet-class>controller.home.NewListController</servlet-class>
     </servlet>
-    <servlet>
+   <servlet>
         <servlet-name>NewDetailController</servlet-name>
         <servlet-class>controller.home.NewDetailController</servlet-class>
     </servlet>
