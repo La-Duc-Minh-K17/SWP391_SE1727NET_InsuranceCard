@@ -18,7 +18,14 @@ public class Service {
     private int service_status;
     private int catetegory_id;
 
-    public Service(int service_id, String service_name, String service_description, String service_details, int fee, String service_image, int service_status, int category_id) {
+    public Service( String service_name, String service_description, String service_details,  String service_image ) {
+        this.service_name = service_name;
+        this.service_description = service_description;
+        this.service_details = service_details;
+        this.service_image = service_image;
+    }
+
+   public Service(int service_id, String service_name, String service_description, String service_details, int fee, String service_image, int service_status, int category_id) {
         this.service_id = service_id;
         this.service_name = service_name;
         this.service_description = service_description;
@@ -27,6 +34,10 @@ public class Service {
         this.service_image = service_image;
         this.service_status = service_status;
         this.catetegory_id = category_id;
+    }
+
+    public Service() {
+        
     }
 
     public int getService_id() {

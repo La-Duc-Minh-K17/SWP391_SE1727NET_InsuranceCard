@@ -69,7 +69,7 @@
                 <div class="d-flex section-title m-6">
                     <img src="data:image/jpg;base64,${s.service_image}" width="60%" height="80%"/>
                     <div class="service-details">
-                        <a href="#" class="text dark h5 m-2">${s.service_name}</a>
+                        <a href="servicedetail?id=${s.service_id}" class="text dark h5 m-2" >${s.service_name}</a>
                     </div>
                 </div>
             </div><!--end col-->
