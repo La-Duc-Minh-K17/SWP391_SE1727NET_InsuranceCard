@@ -4,6 +4,7 @@
  */
 package controller.home;
 
+import dal.DoctorDAO;
 import dal.ServicesDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Doctor;
 import model.Service;
 
 /**
@@ -36,8 +38,11 @@ public class ServiceDetailController extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
         System.out.println(id);
         ServicesDAO servicedao = new ServicesDAO();
-        Service serviceDetail = new Service();   
+        DoctorDAO doctordao = new DoctorDAO();
+        Service serviceDetail = new Service(); 
+        List<Doctor> doctorList = doctordao.getAllDoctor();
         serviceDetail = servicedao.getServiceById(id);
+        request.setAttribute("doctors", doctorList);
         request.setAttribute("serviceDetail", serviceDetail);
         request.getRequestDispatcher("frontend/view/servicedetail.jsp").forward(request, response);
         }
