@@ -165,8 +165,8 @@
         <div class="container" style="padding-top:10px">
             <section class="blog_area section-padding">
                 <div class="container">      
-                    
-                    
+
+
                     <form class="flexsearch--form1" action="new" method="post">
                         <div class="row">
                             <div class="col-lg-5 mb-5 mb-lg-0">
@@ -177,10 +177,10 @@
                                         </div>
                                         <div>
                                             <ul class="list cat-list">
-                                                <select class=""name="category" id="category" >
-                                                    <option value="0">All</option>
+                                                <select class="name" name="category" id="category">
+                                                    <option value="0" ${requestScope.selectedCategory == 0 ? 'selected' : ''}>All</option>
                                                     <c:forEach var="o" items="${requestScope.listC}">
-                                                        <option value="${o.blog_category_id}">${o.name}</option>
+                                                        <option value="${o.blog_category_id}" ${o.blog_category_id == requestScope.selectedCategory ? 'selected' : ''}>${o.name}</option>
                                                     </c:forEach>
                                                 </select>
                                             </ul>
@@ -197,9 +197,9 @@
                                             </div>
                                             <div>
                                                 <select name="sort" id="sort">
-                                                    <option value="all">All</option>
-                                                    <option value="newest">Newest</option>
-                                                    <option value="oldest">Oldest</option>
+                                                    <option value="all" ${"all".equals(requestScope.selectedSort) ? 'selected' : ''}>All</option>
+                                                    <option value="newest" ${"newest".equals(requestScope.selectedSort) ? 'selected' : ''}>Newest</option>
+                                                    <option value="oldest" ${"oldest".equals(requestScope.selectedSort) ? 'selected' : ''}>Oldest</option>
                                                 </select>
                                             </div>
                                         </ul>
@@ -261,7 +261,7 @@
                         </div>
                     </div>  
                 </c:forEach>
-                
+
             </div>
         </div>
         <footer class="bg-footer">

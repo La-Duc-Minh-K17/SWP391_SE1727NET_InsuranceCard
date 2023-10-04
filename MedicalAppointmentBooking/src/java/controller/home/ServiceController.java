@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Service;
 
+
 /**
  *
  * @author PC
@@ -38,6 +39,7 @@ public class ServiceController extends HttpServlet {
             request.setAttribute("services", serviceList);
             System.out.println(serviceList);
             request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
+
         }
     }
 

@@ -83,15 +83,19 @@ public class NewListController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String selectedCategory = request.getParameter("category");
+        String selectedSort = request.getParameter("sort");
+        request.setAttribute("selectedCategory", selectedCategory);
+        request.setAttribute("selectedSort", selectedSort);
         int categoryId = Integer.parseInt(request.getParameter("category"));
         String sort = request.getParameter("sort");
         BlogDAO dao = new BlogDAO();
         List<Blog> blogslist = new ArrayList<>();
         CategoryDAO cdao = new CategoryDAO();
         List<Blog_Category> blogCategory = cdao.getAllCategorys();
-        if ( categoryId == 0) {
+        if (categoryId == 0) {
             blogslist = dao.getAllNewsBySearch1(categoryId, sort);
-        } else{
+        } else {
             blogslist = dao.getAllNewsBySearch2(categoryId, sort);
         }
         List<Blog> blogs3 = new ArrayList<>();
