@@ -30,11 +30,11 @@
                 background-image: url("frontend/template/assets/images/bg/backgroundclinic.jpg") ;
             }
             .header{
-                margin-bottom: 200px;
+                margin-bottom: 150px;
                 background-color: #D9D9D9;
             }
             .header-content{
-/*                background-color: #D9D9D9;*/
+                /*                background-color: #D9D9D9;*/
                 text-align: center;
                 padding-bottom: 30px;
             }
@@ -43,41 +43,83 @@
             }
             .header-content h6{
                 color:grey;
-                
+
             }
             .func select{
-                margin-left: 65%;
+                margin-left: 55.7%;
             }
             .func{
                 margin-top: 25px;
-                margin-left: 5%;
+                margin-left: 13.3%;
+                margin-bottom: 25px;
+            }
+            .doctor{
+                /*              text-align: center;*/
+            }
+            .doctor h6{
+                color:grey;
             }
         </style>
-        </head>
+    </head>
     <body>
-        
+
         <div class="header">
             <jsp:include page="/frontend/common/header.jsp" />
         </div>
-        
+
         <div class="header-content">
             <h3>Doctors team</h2>
-            <h6>Great doctor if you need your family member to get effective immediate assistance,</h4>
-            <h6>emergency treatment or a simple consultation</h4>
-        </div>
-        
-        <div class="func">
-            <input type="text" id="search" name="search" placeholder="Search">
-            <select id="speciality" name="speciality">
-            <option value="">Filter</option>
-            <c:forEach items="${speList}" var="spe">
-                <option value="${spe.speName}">${spe.speName}</option>
-            </c:forEach>
-        </select>
-        </div>
-        
-        <div class="doctor">
-            
-        </div>
-    </body>
-</html>
+                <h6>Great doctor if you need your family member to get effective immediate assistance,</h4>
+                    <h6>emergency treatment or a simple consultation</h4>
+                        </div>
+
+                        <form action="WebDoctorList" method="POST">
+                            <div class="func">
+                                <input type="text" id="search" name="search" placeholder="Search">
+                                <select id="speciality" name="speciality">
+                                    <option value="">Speciality</option>
+                                    <c:forEach items="${speList}" var="spe">
+                                        <option value="${spe.speName}">${spe.speName}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </form>
+
+                        <div id="doctor-container" class="container">
+                            <div class="row">
+                                <c:forEach items="${doctor}" var="doctor">
+                                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2 doctor">
+                                        <img src="data:image/jpg;base64,${doctor.image}" width="240" height="300"/>
+                                        <h5>${doctor.fullName}</h5>
+                                        <h6>${doctor.speciality}</h6>
+                                        <h6>$ ${doctor.service.fee} USD / visit</h6>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                        <script>
+                            
+                            function filterDoctors() {
+                                var selectedSpeciality = document.getElementById("speciality").value;
+                                var doctorContainers = document.getElementsByClassName("doctor");
+
+                                for (var i = 0; i < doctorContainers.length; i++) {
+                                    var doctorSpeciality = doctorContainers[i].querySelector("h6").textContent;
+                                    if (selectedSpeciality === "" || selectedSpeciality === doctorSpeciality) {
+                                        doctorContainers[i].style.display = "block";
+                                    } else {
+                                        doctorContainers[i].style.display = "none";
+                                    }
+                                }
+                            }
+     
+                            document.getElementById("speciality").addEventListener("change", filterDoctors);
+
+                            filterDoctors();
+                        </script>
+                        </body>
+                        <footer>
+                            <jsp:include page="/frontend/common/footer.jsp" />
+                        </footer>
+
+                        </html>

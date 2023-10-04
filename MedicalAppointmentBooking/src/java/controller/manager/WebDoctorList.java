@@ -13,6 +13,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import model.Doctor;
 
 /**
  *
@@ -58,9 +61,9 @@ public class WebDoctorList extends HttpServlet {
         SpecialityDAO spe = new SpecialityDAO();
         request.setAttribute("speList", spe.getAllSpeciality());
         
-        
         DoctorDAO doctor = new DoctorDAO();
         request.setAttribute("doctor", doctor.getAllDoctor());
+        
         request.getRequestDispatcher("frontend/view/webdoctorlist.jsp").forward(request, response);
     } 
 
@@ -74,7 +77,18 @@ public class WebDoctorList extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+       String name = request.getParameter("search");
+       DoctorDAO doctor = new DoctorDAO();
+       List<Doctor> doctors = new ArrayList<>(); 
+       doctors = doctor.getDoctorByName(name);
+       
+       String speciality = request.getParameter("speciality");
+       
+       
+       SpecialityDAO spe = new SpecialityDAO();
+       request.setAttribute("speList", spe.getAllSpeciality());
+       request.setAttribute("doctor", doctors);
+       request.getRequestDispatcher("frontend/view/webdoctorlist.jsp").forward(request, response);
     }
 
     /** 

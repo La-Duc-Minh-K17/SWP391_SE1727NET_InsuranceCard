@@ -17,6 +17,10 @@ public class Services {
     private boolean status;
     private int catetegory_Id;
 
+    public Services() {
+    }
+
+    
     public Services(String name, String description, String details, int fee, String serviceImage, boolean status, int catetegory_Id) {
         this.name = name;
         this.description = description;

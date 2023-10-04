@@ -14,6 +14,16 @@ public class Doctor extends UserAccount {
     private String speciality;
     private String position;
     private String description;
+    private Services service;
+
+    public Services getService() {
+        return service;
+    }
+
+    public void setService(Services service) {
+        this.service = service;
+    }
+    
     
     public Doctor() {
         
