@@ -19,7 +19,7 @@ import model.Service_Category;
  *
  * @author PC
  */
-public class SerivceController extends HttpServlet {
+public class ServiceController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
