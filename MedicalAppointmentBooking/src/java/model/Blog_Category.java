@@ -8,11 +8,11 @@ package model;
  * @author nguye
  */
 public class Blog_Category {
-    int blog_category_id;
-    String name;
-    String description;
-    int status;
-    int setting_id;
+    private int blog_category_id;
+    private String name;
+    private String description;
+    private int status;
+    private int setting_id;
 
     public Blog_Category(int blog_category_id, String name) {
         this.blog_category_id = blog_category_id;

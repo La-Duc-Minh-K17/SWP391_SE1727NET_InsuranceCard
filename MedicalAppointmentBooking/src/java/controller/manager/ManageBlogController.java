@@ -56,8 +56,8 @@ public class ManageBlogController extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             Blog blog = dDAO.getBlogDetailByID(id);
             // request.setAttribute("speList", bDAO.getAllSpeciality());
-            request.setAttribute("doctor", blog);
-            request.getRequestDispatcher("frontend/view/admin/editdoctor.jsp").forward(request, response);
+            request.setAttribute("blog", blog);
+            request.getRequestDispatcher("frontend/view/admin/editblog.jsp").forward(request, response);
             return;
         }
         if (action != null && action.equals("edit-info")) {
