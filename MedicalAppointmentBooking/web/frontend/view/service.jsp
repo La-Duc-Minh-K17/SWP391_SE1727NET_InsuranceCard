@@ -60,31 +60,42 @@
         </div>
         <!-- End Hero -->
 
+        <div class="col-2 mt-4  ">
+                <div class="p-5">
+                    <select class=" form-select form-control link-primary bg-light " id="inputGroupSelect01">
+                        <option selected>Choose...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+        </div><!--end col-->
         <!-- Start -->
         <section>
-    <div class="container mt-5 m-5">
-    <c:forEach items="${requestScope.services}" var="s">
-        <div class="row m-5">
-            <div class="col-md-7 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                <div class="d-flex section-title m-6">
-                    <img src="data:image/jpg;base64,${s.service_image}" width="60%" height="80%"/>
-                    <div class="service-details">
-                        <a href="servicedetail?id=${s.service_id}" class="text dark h5 m-2" >${s.service_name}</a>
-                    </div>
-                </div>
-            </div><!--end col-->
-            <div class="col-md-5 text-right">
-                <div class="mt-9 pt-2">
-                    <div class="d-flex justify-content-end mr-5">
-                        <a href="#" class="btn btn-primary">Schedule Now</a>
-                    </div>
-                </div>
-            </div><!--end col-->
-        </div><!--end row-->
-    </c:forEach>
-</div><!--end container-->
-</section><!--end section-->
-<!-- End -->
+            <div class="container mt-5 m-5">
+                <c:forEach items="${requestScope.services}" var="s">
+                    <div class="row m-5">
+                        <div class="col-md-7 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                            <div class="d-flex section-title m-6">
+                                <img src="data:image/jpg;base64,${s.service_image}" width="60%" height="80%"/>
+                                <div class="service-details">
+                                    <a href="servicedetail?id=${s.service_id}" class="text dark h5 m-2" >${s.service_name}</a>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-md-5 text-right">
+                            <div class="mt-9 pt-2">
+                                <div class="d-flex justify-content-end mr-5">
+                                    <a href="#" class="btn btn-primary">Schedule Now</a>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </c:forEach>
+            </div><!--end container-->
+        </section><!--end section-->
+        <!-- End -->
 
 
 

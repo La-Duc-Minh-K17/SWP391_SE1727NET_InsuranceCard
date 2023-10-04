@@ -29,14 +29,14 @@
     <body>
         <jsp:include page="/frontend/common/header.jsp" />
 
-<section class="bg-light mt-5">
+<section class="bg-lig  ht mt-5">
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row ">
             <div class="col-12">
-                <div class="text-center">
+                <div class="">
                     <p class="mx-auto text-muted">Great doctor if you need your family member to get effective immediate assistance, emergency treatment, or a simple consultation.</p>
 
-                    <nav aria-label="breadcrumb" class="mt-3">
+                    <nav aria-label="breadcrumb" class="mt-2 m-2">
                         <ol class="breadcrumb bg-light rounded bg-transparent">
                             <li class="breadcrumb-item"><a href="home">MABS</a></li>
                             <li class="breadcrumb-item"><a href="service">Services</a></li>
@@ -51,7 +51,7 @@
 
 <!-- Product Images and Details Section -->
 <!-- Product Images and Details Section -->
-<section class="container  mt-5 m-5">
+<section class="container ">
     <div class="row">
         <c:set value="${requestScope.serviceDetail}" var="s" />
         <div class="col-md-5">
@@ -61,20 +61,24 @@
         </div><!--end col-md-5-->
         <div class="col-md-7">
             <div class="text-center m-5">
-                <h4 class="title">${s.service_name}</h4>
-                <h5 class="text-muted">$${s.fee}</h5>
-                <ul class="list-unstyled text-warning h5 mb-0">
-                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
-                    <!-- Add more stars as needed -->
-                    <li class="list-inline-item me-2 h6 text-muted">(20 Ratings)</li>
-                </ul>
+                <h4 class="title h3">${s.service_name}</h4>
                 <div class="m-5">
                     <h5 class="mt-4 py-2">Overview: ${s.service_description}</h5>
-                    <!-- Add more details and content here -->
+                    <ul class="list-unstyled text-warning h5 mb-0">
+                    <li class="list-inline-item">
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                        <i class="mdi mdi-star"></i>
+                    </li>
+                    <li class="list-inline-item me-2 h6 text-muted">(20 Ratings)</li>
+                </ul>
+                <h5 class="text-muted">$${s.fee}</h5>
                     <div class="text-center">
                         <div class="mt-9 pt-2">
                             <div class="d-flex justify-content-center">
-                                <a href="#" class="btn btn-primary">Schedule Now</a>
+                                <a href="#" class="btn btn-outline-primary btn-lg">Schedule Now</a>
                             </div>
                         </div>
                     </div><!--end text-center-->
