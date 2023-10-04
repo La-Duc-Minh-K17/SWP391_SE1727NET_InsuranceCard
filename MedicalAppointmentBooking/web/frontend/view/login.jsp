@@ -57,7 +57,7 @@
                                             <div class="d-flex justify-content-between">
                                                 <div class="mb-3">
                                                     <div class="form-check">
-                                                        <input class="form-check-input align-middle" type="checkbox" value="" id="remember-check">
+                                                        <input name="remember"class="form-check-input align-middle" type="checkbox" id="remember-check"  ${(cookie.remember.value eq 'ON')?"checked":""}>
                                                         <label class="form-check-label" for="remember-check">Remember me</label>
                                                     </div>
                                                 </div>
