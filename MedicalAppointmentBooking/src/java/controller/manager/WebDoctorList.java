@@ -79,15 +79,10 @@ public class WebDoctorList extends HttpServlet {
     throws ServletException, IOException {
        String name = request.getParameter("search");
        DoctorDAO doctor = new DoctorDAO();
-       List<Doctor> doctors = new ArrayList<>(); 
-       doctors = doctor.getDoctorByName(name);
-       
-       String speciality = request.getParameter("speciality");
-       
        
        SpecialityDAO spe = new SpecialityDAO();
        request.setAttribute("speList", spe.getAllSpeciality());
-       request.setAttribute("doctor", doctors);
+       request.setAttribute("doctor", doctor.getDoctorByName(name));
        request.getRequestDispatcher("frontend/view/webdoctorlist.jsp").forward(request, response);
     }
 
