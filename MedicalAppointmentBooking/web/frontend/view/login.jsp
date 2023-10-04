@@ -24,6 +24,9 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/otherStyle.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
+        <div class="back-to-home rounded d-none d-sm-block">
+            <a href="home" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
+        </div>
         <section class="bg-home d-flex bg-light align-items-center">
             <div class="container">
                 <div class="row justify-content-center">
@@ -41,15 +44,15 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="mb-3">
-                                                <label class="form-label">User Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" placeholder="User Name" name="username" required="">
+                                                <label class="form-label">User Name <span class="text-danger">* </span></label>
+                                                <input type="text" class="form-control" placeholder="User Name" name="username" required="" value="${cookie.username.value}">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Password <span class="text-danger">*</span></label>
-                                                <input type="password" name="password" class="form-control" placeholder="password" required="">
+                                                <input type="password" name="password" class="form-control" placeholder="Password" required="" value="${cookie.password.value}">
                                             </div>
                                         </div>
 
@@ -71,7 +74,7 @@
                                         </div>
 
                                         <div class="col-12 text-center">
-                                            <p class="mb-0 mt-3"><small class="text-dark me-2">Don't have an account ?</small> <a href="<c:url value='/regist'/>" class="text-dark fw-bold">Sign Up</a></p>
+                                            <p class="mb-0 mt-3"><small class="text-dark me-2">Don't have an account ?</small> <a href="<c:url value='/register'/>" class="text-dark fw-bold">Sign Up</a></p>
                                         </div>
                                     </div>
                                 </form>
