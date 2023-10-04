@@ -25,15 +25,66 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
         <style>
-            .card-img-container {
-    height: 200px; /* Điều chỉnh chiều cao tùy ý */
+.custom-center {
+    justify-content: center !important;
+}
+
+.card-img-container {
+    height: 200px; 
     overflow: hidden;
+}
+/* CSS để cân đối các dòng chữ trong card */
+.card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body {
+    flex: 1;
+}
+
+.card-title,
+.card-text {
+    text-align: center;
+}
+.card-title,
+.card-text {
+    margin-bottom: 15px; /* Khoảng cách giữa các dòng chữ */
+}
+
+.btn-primary {
+    align-self: center; /* Để căn giữa nút "Learn More" */
 }
 
 .card-img-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Đảm bảo tỷ lệ kích thước và cắt hình ảnh nếu cần */
+    object-fit: cover; 
+}
+/* CSS để cân đối nút "Learn More" trong card */
+.card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-title,
+.card-text {
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    margin-top: auto; /* Để nút "Learn More" ở dưới cùng */
 }
 
             #home{
@@ -46,21 +97,18 @@
         <!-- Hero Section -->
 <!-- Hero Section -->
 
+<!-- Hero Section -->
 <section class="bg-half-170 d-table w-100" id="home">
     <!-- ... Hero content ... -->
 </section>
 <!-- End Hero -->
 
-<!-- Form Select -->
-<div class="container mt-5 m-5 text-center">
-    <!-- ... Form select ... -->
-</div>
-<!-- End Form Select -->
-
 <!-- Service Items -->
 <section>
+    
+<div class="row custom-center">
     <div class="container mt-5 m-5">
-        <div class="row">
+        <div class="row justify-content-center"><!-- Sử dụng justify-content-center ở đây -->
             <c:forEach items="${requestScope.services}" var="s" varStatus="loop">
                 <div class="col-md-3 mt-4">
                     <div class="card mb-4">
@@ -82,6 +130,8 @@
     </div><!--end container-->
 </section><!--end section-->
 <!-- End Service Items -->
+</div>
+
 
 
 
