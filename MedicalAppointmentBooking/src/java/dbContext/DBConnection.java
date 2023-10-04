@@ -22,7 +22,7 @@ public class DBConnection {
             String username = "root";
 
 
-            String password = "12345";
+            String password = "123456";
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, username, password);
