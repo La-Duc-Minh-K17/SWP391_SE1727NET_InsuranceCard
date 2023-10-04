@@ -123,7 +123,7 @@
                                             <section class="blog_area section-padding">
                                                 <div class="container">
                                                     <div class="row">
-                                                        <c:forEach var="o" items="${requestScope.data}">
+                                                        <c:forEach var="o" items="${requestScope.dList}">
 
                                                             <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2" value="${o.blog_id}">
                                                                 <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
@@ -145,7 +145,7 @@
                                                                             </ul>
                                                                         </div>
                                                                         <div class="post-meta d-flex justify-content-between mt-3">                                               
-                                                                            <a href="newdetail?id=${o.blog_id}" class="link">Read More <i
+                                                                            <a href="newdetail?id=${o.blog_id}" class="link">Edit<i
                                                                                     class="mdi mdi-chevron-right align-middle"></i></a>
                                                                         </div>
                                                                     </div>

@@ -112,7 +112,11 @@ input:-moz-placeholder {
     color: #888
 }
 
-
+.enlarged-image {
+    width: 100%;
+    height: auto;
+}
+.img-fluid_1{max-width:500px;height:400px}
 /****************
  * Pretify demo *
  ****************/
@@ -177,6 +181,7 @@ select {
     height: 100%;
     object-fit: cover; /* Cắt hoặc scale ảnh để fit vào form */
 }
+
 .image-container {
     width: 300px; /* Thay đổi kích thước theo yêu cầu của bạn */
     height: 200px; /* Thay đổi kích thước theo yêu cầu của bạn */

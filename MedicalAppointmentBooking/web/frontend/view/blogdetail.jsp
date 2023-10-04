@@ -135,13 +135,16 @@
                                     <div class="col-lg-4">
                                         ${data.created_time}                                       
                                     </div>
-
-                                </div>
-
+                                </div>                                  
                             </div>
-                            <div col-lg-12> 
-                                <img src="data:image/jpg;base64,${data.image}" class=" fit-image" alt="">
-                            </div><div><p class="text-muted mt-4">${data.content}</p></div>
+                            <div class="row">
+                                <div col-lg-12> 
+                                    <img src="data:image/jpg;base64,${data.image}" class="image-container" alt="">
+                                </div>
+                            </div><!-- comment -->
+                            <div>
+                                <p class="text-muted mt-4">${data.content}</p>
+                            </div>
                         </div>
 
                         <div class="col-lg-4 col-md-5 mt-4 mt-sm-0 pt-2 pt-sm-0">
