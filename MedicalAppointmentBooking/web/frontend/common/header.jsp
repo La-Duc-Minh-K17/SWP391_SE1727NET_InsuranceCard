@@ -118,7 +118,7 @@
                         <ul class="navigation-menu nav-left">
                             <li><a href="home" class="sub-menu-item">Home</a></li>
                             <li><a href="home?action=redirect-doctors" class="sub-menu-item">Doctors</a></li>
-                            <li><a href="home?action=redirect-services" class="sub-menu-item">Services</a></li>
+                            <li><a href="service" class="sub-menu-item">Services</a></li>
                             <li><a href="home?action=redirect-contact-us" class="sub-menu-item">Contact us</a></li>
                             <li><a href="home?action=redirect-blogs" class="sub-menu-item">News and Blogs</a></li>
                         </ul>
