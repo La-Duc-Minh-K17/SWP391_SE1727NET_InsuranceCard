@@ -38,15 +38,13 @@
                             <h6 class="mb-0">Doctor Information</h6>
                         </div>
                         <br><br><br><br><br>
-                        <div
-                            class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                        <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
                             <c:if test="${sessionScope.doctor.img == 'default'}">
                                 <img src="assets/images/avata.png" class="rounded-circle shadow-md avatar avatar-md-md"
                                     alt="">
                             </c:if>
                             <c:if test="${sessionScope.doctor.img != 'default'}">
-                                <img src="data:image/png;base64,${sessionScope.doctor.img}"
-                                    class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                <img src="data:image/png;base64,${sessionScope.doctor.img}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
                             </c:if>
                             <h5 class="mt-3 mb-1"></h5>
                         </div>
