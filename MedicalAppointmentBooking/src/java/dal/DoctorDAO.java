@@ -86,13 +86,11 @@ public class DoctorDAO {
         ResultSet rs = null;
         List<Doctor> doctorList = new ArrayList<>();
 
+      
         String sql = "select * from doctors d \n"
-
-                + "			inner join user_account u on d.user_id = u.user_id \n"
-                + "			inner join speciality s on s.speciality_id = d.speciality_id\n";
-
                 + "            inner join user_account u on d.user_id = u.user_id \n"
                 + "            inner join  speciality s on s.speciality_id = d.speciality_id\n"
+                + "            inner join services ser on ser.service_id = d.service_id"
                 + "            where u.full_name LIKE ?";
 
 
