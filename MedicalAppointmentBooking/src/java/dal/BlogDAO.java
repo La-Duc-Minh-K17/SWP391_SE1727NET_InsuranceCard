@@ -268,4 +268,4 @@ public class BlogDAO extends DBConnection {
 }
 //               <!-- sql = "SELECT * FROM mabs.blogs WHERE blog_category_id = ?";
 //ps.setInt(1, categoryId);
-//            ps.setString(2, sort);
+

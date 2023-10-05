@@ -8,14 +8,14 @@ import java.sql.Date;
 
 public class Blog {
 
-    int blog_id;
-    String title;
-    String description;
-    String content;
-    String image;
-    int blog_category_id;
-    Date created_time;
-    Date update_time;
+    private int blog_id;
+    private String title;
+    private String description;
+    private String content;
+    private String image;
+    private int blog_category_id;
+    private Date created_time;
+    private Date update_time;
 
     public Blog() {
     }

@@ -17,6 +17,7 @@ public class Speciality {
     private int speStatus;
 
 
+
     public Speciality() {
     }
 
@@ -63,6 +64,7 @@ public class Speciality {
     public void setSpeStatus(int speStatus) {
         this.speStatus = speStatus;
     }
+
 }
     
 
