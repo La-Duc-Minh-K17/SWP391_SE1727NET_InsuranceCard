@@ -11,14 +11,17 @@ package model;
 public class Role {
     private int role_id;
     private String role_name;
+    private String role_description;
     private int setting_id;
-    private String status;
+    private int status;
 
     public Role() {
     }
-    public Role(int role_id ) {
-        this.role_id = role_id;
+
+    public Role(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
     public int getRole_id() {
         return role_id;
     }
@@ -35,6 +38,14 @@ public class Role {
         this.role_name = role_name;
     }
 
+    public String getRole_description() {
+        return role_description;
+    }
+
+    public void setRole_description(String role_description) {
+        this.role_description = role_description;
+    }
+
     public int getSetting_id() {
         return setting_id;
     }
@@ -43,13 +54,13 @@ public class Role {
         this.setting_id = setting_id;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
-    
+
     
 }

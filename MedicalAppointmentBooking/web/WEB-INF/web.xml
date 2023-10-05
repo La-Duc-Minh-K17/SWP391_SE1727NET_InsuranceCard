@@ -20,6 +20,10 @@
         <servlet-name>NewListController</servlet-name>
         <servlet-class>controller.home.NewListController</servlet-class>
     </servlet>
+   <servlet>
+        <servlet-name>NewDetailController</servlet-name>
+        <servlet-class>controller.home.NewDetailController</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>NewDetailController</servlet-name>
         <servlet-class>controller.home.NewDetailController</servlet-class>
@@ -39,6 +43,11 @@
     <servlet>
         <servlet-name>ServiceController</servlet-name>
         <servlet-class>controller.home.ServiceController</servlet-class>
+
+    </servlet>
+    <servlet>
+        <servlet-name>ManageBlogController</servlet-name>
+        <servlet-class>controller.manager.ManageBlogController</servlet-class>
     </servlet>
     <servlet>
 
@@ -50,9 +59,23 @@
         <servlet-class>controller.setting.SettingList</servlet-class>
     </servlet>
     <servlet>
+
+        <servlet-name>AddSetting</servlet-name>
+        <servlet-class>controller.setting.AddSetting</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ServiceDetailController</servlet-name>
         <servlet-class>controller.home.ServiceDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>WebDoctorList</servlet-name>
+        <servlet-class>controller.manager.WebDoctorList</servlet-class>
+    </servlet>
+
+        <servlet-name>ServiceDetailController</servlet-name>
+        <servlet-class>controller.home.ServiceDetailController</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>UserAccountController</servlet-name>
         <url-pattern>/user</url-pattern>
@@ -92,11 +115,13 @@
     <servlet-mapping>
         <servlet-name>ServiceController</servlet-name>
         <url-pattern>/service</url-pattern>
+
     </servlet-mapping>
   
     <servlet-mapping>
         <servlet-name>ManageBlogController</servlet-name>
         <url-pattern>/manageblog</url-pattern>
+
 
     </servlet-mapping>
     <servlet-mapping>
@@ -107,6 +132,18 @@
     <servlet-mapping>
         <servlet-name>ServiceDetailController</servlet-name>
         <url-pattern>/servicedetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceDetailController</servlet-name>
+        <url-pattern>/servicedetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSetting</servlet-name>
+        <url-pattern>/addSetting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WebDoctorList</servlet-name>
+        <url-pattern>/WebDoctorList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
