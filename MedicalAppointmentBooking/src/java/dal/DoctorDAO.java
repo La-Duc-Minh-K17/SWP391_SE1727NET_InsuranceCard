@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Doctor;
-import model.Services;
+import model.Service;
 import utils.ImageProcessing;
 
 /**
@@ -52,7 +52,7 @@ public class DoctorDAO {
                 String speciality = rs.getString("speName");
                 String description = rs.getString("doctor_description");
                 int fee = rs.getInt("fee");
-                Services s = new Services();
+                Service s = new Service();
                 s.setFee(fee);
                 Doctor d = new Doctor(doctorId, speciality, position, description, username, email, name, gender, phone, image, status);
                 d.setService(s);

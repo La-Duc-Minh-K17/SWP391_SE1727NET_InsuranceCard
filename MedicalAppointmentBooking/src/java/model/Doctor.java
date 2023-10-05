@@ -14,13 +14,13 @@ public class Doctor extends UserAccount {
     private String speciality;
     private String position;
     private String description;
-    private Services service;
+    private Service service;
 
-    public Services getService() {
+    public Service getService() {
         return service;
     }
 
-    public void setService(Services service) {
+    public void setService(Service service) {
         this.service = service;
     }
     
