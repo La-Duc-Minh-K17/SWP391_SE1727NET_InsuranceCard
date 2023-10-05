@@ -198,7 +198,7 @@
         <!-- page-wrapper -->
         <!-- javascript -->
         <script>
-            console.log("helloworld");
+            
             function filter() {
                 const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=filter&speciality_id=';
                 const filterElement = document.getElementById("speFilter").value;
