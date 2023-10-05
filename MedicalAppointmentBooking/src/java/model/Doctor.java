@@ -14,6 +14,7 @@ public class Doctor extends UserAccount {
     private String speciality;
     private String position;
     private String description;
+
     private Service service;
 
     public Service getService() {
@@ -28,6 +29,7 @@ public class Doctor extends UserAccount {
     public Doctor() {
         
     }
+
     public Doctor(int doctorId, String speciality,String position,  String description, String username, String email, String fullName, int gender, String phone, String image, int status) {
         super(username, email, fullName, gender, phone, image, status);
         this.doctorId = doctorId;

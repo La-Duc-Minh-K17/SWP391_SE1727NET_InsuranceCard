@@ -4,8 +4,7 @@
  */
 package controller.manager;
 
-import dal.DoctorDAO;
-import dal.SpecialityDAO;
+import dal.BlogDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -14,15 +13,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.util.List;
+import model.Blog;
 
-import model.Doctor;
 
 /**
  *
  * @author Admin
  */
 @MultipartConfig(maxFileSize = 16177215)
-public class ManageDoctorController extends HttpServlet {
+public class ManageBlogController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,35 +35,29 @@ public class ManageDoctorController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        DoctorDAO dDAO = new DoctorDAO();
+        BlogDAO dDAO = new BlogDAO();
         String action = request.getParameter("action");
-        SpecialityDAO sDAO = new SpecialityDAO();
-        request.setAttribute("speList", sDAO.getAllSpeciality());
+        BlogDAO bDAO = new BlogDAO();
         if (action != null && action.equals("view-all")) {
-            List<Doctor> doctorList = dDAO.getAllDoctor();
-            request.setAttribute("dList", doctorList);
-            request.getRequestDispatcher("frontend/view/admin/doctorlist.jsp").forward(request, response);
+            List<Blog> blogList = dDAO.getAllNews();
+            request.setAttribute("dList", blogList);
+            request.getRequestDispatcher("frontend/view/admin/bloglist.jsp").forward(request, response);
             return;
         }
-        if (action != null && action.equals("filter")) {
-            int speId = Integer.parseInt(request.getParameter("speciality_id"));
-            List<Doctor> doctorList = dDAO.getDoctorBySpeciality(speId);
-            request.setAttribute("dList", doctorList);
-            request.getRequestDispatcher("frontend/view/admin/doctorlist.jsp").forward(request, response);
-            return;
-        }
+        
         if (action != null && action.equals("search")) {
             String search = request.getParameter("search").trim();
-            List<Doctor> dList = dDAO.getDoctorByName(search);
-            request.setAttribute("dList", dList);
-            request.getRequestDispatcher("frontend/view/admin/doctorlist.jsp").forward(request, response);
+            List<Blog> bList = dDAO.getBlogByName(search);
+            request.setAttribute("dList", bList);
+            request.getRequestDispatcher("frontend/view/admin/bloglist.jsp").forward(request, response);
             return;
         }
         if (action != null && action.equals("edit")) {
             int id = Integer.parseInt(request.getParameter("id"));
-            Doctor doctor = dDAO.getDoctorById(id);
-            request.setAttribute("doctor", doctor);
-            request.getRequestDispatcher("frontend/view/admin/editdoctor.jsp").forward(request, response);
+            Blog blog = dDAO.getBlogDetailByID(id);
+            // request.setAttribute("speList", bDAO.getAllSpeciality());
+            request.setAttribute("blog", blog);
+            request.getRequestDispatcher("frontend/view/admin/editblog.jsp").forward(request, response);
             return;
         }
         if (action != null && action.equals("edit-info")) {
@@ -77,16 +70,8 @@ public class ManageDoctorController extends HttpServlet {
             String description = request.getParameter("description");
             int status = Integer.parseInt(request.getParameter("status"));
             Part image = request.getPart("image");
-            dDAO.updateDoctor(doctorId, name, gender, phone, spe_id, position, description, status, image);
             response.sendRedirect("manage-doctor?action=edit&id=" + doctorId);
             return;
-        }
-        if (action != null && action.equals("view")) {
-            int doctorId = Integer.parseInt(request.getParameter("id"));
-            Doctor doctor = dDAO.getDoctorById(doctorId);
-            request.setAttribute("doctor", doctor);
-            request.getRequestDispatcher("frontend/view/admin/doctordetail.jsp").forward(request, response);
-
         }
 
     }
@@ -130,6 +115,4 @@ public class ManageDoctorController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-
 }
-

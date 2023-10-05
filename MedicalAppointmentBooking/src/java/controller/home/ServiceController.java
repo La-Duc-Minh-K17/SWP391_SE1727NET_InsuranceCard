@@ -4,21 +4,22 @@
  */
 package controller.home;
 
-import dal.DoctorDAO;
+import dal.ServicesDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Doctor;
-import utils.SessionUtils;
+import model.Service;
+
 
 /**
  *
- * @author Admin
+ * @author PC
  */
-public class HomeController extends HttpServlet {
+public class ServiceController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,32 +32,14 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DoctorDAO doctordao = new DoctorDAO();
-        List<Doctor> doctorList = doctordao.getAllDoctor();
-        request.setAttribute("doctors", doctorList);
-        String action = request.getParameter("action");
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            ServicesDAO servicedao = new ServicesDAO();
+            List<Service> serviceList = servicedao.getAllService();
+            request.setAttribute("services", serviceList);
+            System.out.println(serviceList);
+            request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
 
-        if (action != null && action.equals("redirect-doctors")) {
-            request.getRequestDispatcher("").forward(request, response);
-            return;
-        }
-
-        if (action != null && action.equals("redirect-services")) {
-            request.getRequestDispatcher("").forward(request, response);
-            return;
-        }
-        if (action != null && action.equals("redirect-blogs")) {
-            request.getRequestDispatcher("").forward(request, response);
-            return;
-        }
-        if (action != null && action.equals("logout")) {
-            SessionUtils.getInstance().removeValue(request, "user");
-            request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
-            return;
-        }
-        if (action == null) {
-            request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
-            return;
         }
     }
 
