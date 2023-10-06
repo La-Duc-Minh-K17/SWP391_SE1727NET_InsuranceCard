@@ -32,10 +32,10 @@
     </head>
 
     <body>
-
-        <section class="bg-half-170 d-table w-100 bg-light">
+        <jsp:include page="/frontend/common/header.jsp" />
+        <section class="bg-half-150 d-table w-100 bg-light">
             <div class="container">
-                <div class="row mt-5 justify-content-center">
+                <div class="row  justify-content-center">
                     <div class="col-12">
                         <div class="section-title text-center">
                             <h3 class="sub-title mb-2">Booking Appointment</h3>
@@ -46,7 +46,6 @@
                 </div>
             </div>
         </section>
-
         <section class="section">
             <div class="container">
                 <div class="row justify-content-center">
@@ -69,19 +68,19 @@
                                         <div class="d-flex align-items-center mt-3">
                                             <h6 class="mb-0">Full Name: </h6>
                                             <p class="text-muted mb-0 ms-2">
-                                                Helloworld
+                                               
                                             </p>
                                         </div>
                                         <div class="d-flex align-items-center mt-3">
                                             <h6 class="mb-0">Position : </h6>
                                             <p class="text-muted mb-0 ms-2">
-                                                adsfdf
+                                             
                                             </p>
                                         </div>
                                         <div class="d-flex align-items-center mt-3">
                                             <h6 class="mb-0">Speciality : </h6>
                                             <p class="text-muted mb-0 ms-2">
-                                                adsfdf
+
                                             </p>
                                         </div>
                                         <div class="d-flex align-items-center mt-3">
@@ -93,7 +92,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="mb-4">
                                 <div class="bg-white rounded shadow overflow-hidden">
                                     <div class="p-4 border-bottom">
@@ -112,12 +110,11 @@
                                         </c:if>
                                         <h5 class="mt-3 mb-1">${sessionScope.service.title}</h5>
                                     </div>
-
                                     <div class="list-unstyled p-4">
                                         <div class="d-flex align-items-center mt-3">
                                             <h6 class="mb-0">Fee: </h6>
                                             <p class="text-muted mb-0 ms-2">
-                                            <fmt:formatNumber pattern="#,###,###,###" value="" />
+                                            
                                             </p>
                                         </div>
                                         <div class="d-flex align-items-center mt-3">
@@ -146,11 +143,9 @@
                                     </a><!--end nav link-->
                                 </li><!--end nav item-->
                             </ul>
-
                             <div class="tab-content p-4" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-clinic" role="tabpanel" aria-labelledby="clinic-booking">
-
-                                    <form>
+                                     <form action="<c:url value='/booking?action=yourself-booking'/> " method="post">
                                         <div class="row">
                                             <div class="p-6 ">
                                                 <h6 class="mb-2 h5">Patient Information</h6>
@@ -158,23 +153,33 @@
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Patient Name <span class="text-danger">*</span></label>
-                                                    <input name="name" id="name" type="text" class="form-control" placeholder="Patient Name :">
+                                                    <input name="name" type="text" class="form-control" placeholder="Patient Name :">
                                                 </div>
                                             </div><!--end col-->
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Your Email <span class="text-danger">*</span></label>
-                                                    <input name="email" id="email" type="email" class="form-control" placeholder="Your email :">
+                                                    <input name="email" type="email" class="form-control" placeholder="@example.com">
                                                 </div> 
                                             </div><!--end col-->
-
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Your Phone <span class="text-danger">*</span></label>
                                                     <input name="phone" id="phone" type="tel" class="form-control" placeholder="Your Phone :">
                                                 </div> 
                                             </div><!--end col-->
-                                            <div class="col-md-12">
+                                             <div class="col-md-6 ">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Gender <span class="text-danger">*</span></label>
+                                                </div>
+                                                <div class=" d-flex justify-content-around radio-group"> <!-- Group for radio buttons -->
+                                                    <label for="male">Male</label>
+                                                    <input type="radio"  checked="checked" name="gender" value="Male" required>
+                                                    <label for="female">Female</label>
+                                                    <input type="radio" name="gender" value="Female" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Date of Birth<span class="text-danger">*</span></label>
                                                     <input name="dob"  type="date" class="flatpickr flatpickr-input form-control" id="dob">
@@ -189,19 +194,16 @@
                                             <div class="p-6">
                                                 <h6 class="mb-2 h5">Appointment Information</h6>
                                             </div>
-
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label"> Date : </label>
-                                                    <input required="" name="date" type="text"
-                                                           class="flatpickr flatpickr-input form-control" id="checkin-date">
+                                                    <input required="" name="apptdate" type="text"class="flatpickr flatpickr-input form-control" id="checkin-date">
                                                 </div>
                                             </div>
-
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Time</label>
-                                                    <select required="" name="time"
+                                                    <select required="" name="appttime"
                                                             class="form-control department-name select2input">
                                                         <option value="7:00">7:00</option>
                                                         <option value="8:00">8:00</option>
@@ -215,11 +217,10 @@
                                                     </select>
                                                 </div>
                                             </div>
-
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Examination Reason <span class="text-danger">*</span></label>
-                                                    <textarea name="comments" id="comments" rows="4" class="form-control" placeholder="Your Heath Status:"></textarea>
+                                                    <textarea name="apptreason" rows="5" class="form-control" placeholder="Your Heath Status:"></textarea>
                                                 </div>
                                             </div><!--end col-->
                                             <div class="col-md-12">
@@ -227,7 +228,6 @@
                                                     <label class="form-label">Choose payment method</label>
                                                     <select required="" name="payment"
                                                             class="form-control department-name select2input">
-
                                                     </select>
                                                 </div>
                                             </div>
@@ -241,21 +241,27 @@
                                 </div>
 
                                 <div class="tab-pane fade" id="pills-online" role="tabpanel" aria-labelledby="online-booking">
-                                   <form>
+                                    <form action="<c:url value='/booking?action=relative-booking'/> " method="post">
                                         <div class="row">
-                                              <div class="p-6 ">
+                                            <div class="p-6 ">
                                                 <h6 class="mb-2 h5">Booker Information</h6>
                                             </div>
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Booker Name <span class="text-danger">*</span></label>
-                                                    <input name="name" id="name" type="text" class="form-control" placeholder="Patient Name :">
+                                                    <input name="booker_name"  type="text" class="form-control" >
                                                 </div>
                                             </div><!--end col-->
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Booker Phone<span class="text-danger">*</span></label>
-                                                    <input name="name" id="name" type="text" class="form-control" placeholder="Patient Name :">
+                                                    <input name="booker_phone"  type="text" class="form-control" >
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Booker Email<span class="text-danger">*</span></label>
+                                                    <input name="booker_email"  type="text" class="form-control">
                                                 </div>
                                             </div><!--end col-->
                                             <div class="p-6 ">
@@ -264,13 +270,13 @@
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Patient Name <span class="text-danger">*</span></label>
-                                                    <input name="name" id="name" type="text" class="form-control" placeholder="Patient Name :">
+                                                    <input name="name"  type="text" class="form-control" placeholder="Patient Name :">
                                                 </div>
                                             </div><!--end col-->
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Your Email <span class="text-danger">*</span></label>
-                                                    <input name="email" id="email" type="email" class="form-control" placeholder="Your email :">
+                                                    <input name="email" id="email" type="email" class="form-control" placeholder="@example.com">
                                                 </div> 
                                             </div><!--end col-->
 
@@ -280,7 +286,19 @@
                                                     <input name="phone" id="phone" type="tel" class="form-control" placeholder="Your Phone :">
                                                 </div> 
                                             </div><!--end col-->
-                                            <div class="col-md-12">
+
+                                            <div class="col-md-6 ">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Gender <span class="text-danger">*</span></label>
+                                                </div>
+                                                <div class=" d-flex justify-content-around radio-group"> <!-- Group for radio buttons -->
+                                                    <label for="male">Male</label>
+                                                    <input type="radio"  checked="checked" name="gender" value="Male" required>
+                                                    <label for="female">Female</label>
+                                                    <input type="radio" name="gender" value="Female" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Date of Birth<span class="text-danger">*</span></label>
                                                     <input name="dob"  type="date" class="flatpickr flatpickr-input form-control" id="dob1">
@@ -298,8 +316,8 @@
 
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label"> Date : </label>
-                                                    <input required="" name="date" type="text"
+                                                    <label class="form-label">Date : </label>
+                                                    <input required="" name="apptdate" type="text"
                                                            class="flatpickr flatpickr-input form-control" id="checkin-date1">
                                                 </div>
                                             </div>
@@ -307,7 +325,7 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Time</label>
-                                                    <select required="" name="time"
+                                                    <select required="" name="appttime"
                                                             class="form-control department-name select2input">
                                                         <option value="7:00">7:00</option>
                                                         <option value="8:00">8:00</option>
@@ -325,7 +343,7 @@
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Examination Reason <span class="text-danger">*</span></label>
-                                                    <textarea name="comments" id="comments" rows="4" class="form-control" placeholder="Your Heath Status:"></textarea>
+                                                    <textarea name="apptreason"  rows="5" class="form-control" placeholder="Your Heath Status:"></textarea>
                                                 </div>
                                             </div><!--end col-->
                                             <div class="col-md-12">
@@ -351,7 +369,7 @@
                 </div><!--end row-->
             </div><!--end container-->
         </section><!--end section-->
-
+        <jsp:include page="/frontend/common/footer.jsp" />
         <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
@@ -374,8 +392,8 @@
                 defaultDate: new Date(),
                 dateFormat: "d/m/Y"
             });
-            
-             $("#checkin-date1").flatpickr({
+
+            $("#checkin-date1").flatpickr({
                 defaultDate: "today",
                 minDate: "today",
                 maxDate: new Date().fp_incr(7),

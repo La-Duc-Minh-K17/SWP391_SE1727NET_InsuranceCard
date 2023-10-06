@@ -2,49 +2,76 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.home;
 
+import dal.AppointmentDAO;
+import dal.PatientDAO;
+import dal.ReservationDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Date;
+import model.Doctor;
+import model.Patient;
+import model.Service;
+import model.UserAccount;
+import utils.SessionUtils;
 
 /**
  *
  * @author Admin
  */
 public class BookingController extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet BookingController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet BookingController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            throws ServletException, IOException {
+        PatientDAO pDAO = new PatientDAO();
+        AppointmentDAO aDAO = new AppointmentDAO();
+        ReservationDAO rDAO = new ReservationDAO();
+        String action = request.getParameter("action");
+        Doctor chosenDoctor = (Doctor) SessionUtils.getInstance().getValue(request, "chosen_doctor");
+        Service chosenService = (Service) SessionUtils.getInstance().getValue(request, "chosen_service");
+        UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
+
+        if (action != null && action.equals("yourself-booking")) {
+            if(chosenDoctor != null) {
+                String dob = request.getParameter("dob");
+                System.out.println(dob);
+                Patient patient = new Patient();
+                pDAO.insertPatient(patient);
+              //response.sendRedirect("/frontend/view/bookingsuccess.jsp");
+                return;
+            }
+            if(chosenService != null) {
+                
+            }
+            return;
         }
-    } 
+        if (action != null && action.equals("relative-booking")) {
+            return;
+        }
+        if (action != null && action.equals("form-filling")) {
+
+            request.getRequestDispatcher("frontend/view/booking.jsp").forward(request, response);
+            return;
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -52,12 +79,13 @@ public class BookingController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -65,12 +93,13 @@ public class BookingController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

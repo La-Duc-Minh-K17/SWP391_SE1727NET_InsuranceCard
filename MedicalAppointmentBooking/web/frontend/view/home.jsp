@@ -352,4 +352,4 @@
         <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
     </body>
 
-</html>
+</html> 

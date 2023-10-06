@@ -45,7 +45,7 @@ public class RegisterController extends HttpServlet {
             String phone = request.getParameter("phone");
             String gender = request.getParameter("gender");
             String confirmationToken = CodeProcessing.generateToken();
-            
+   
             UserAccount user = new UserAccount(username, password, email, fullname, gender.equals("Male") ? 1 : 0, phone, confirmationToken, timeConfig.getNow(), 0, new Role(1));
             if (uDAO.isAccountExisted(user)) {
                 request.setAttribute("error", "Account has existed !");
