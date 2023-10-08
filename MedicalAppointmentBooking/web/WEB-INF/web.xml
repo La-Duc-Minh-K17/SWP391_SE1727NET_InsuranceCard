@@ -72,6 +72,10 @@
         <servlet-name>WebDoctorDetail</servlet-name>
         <servlet-class>controller.manager.WebDoctorDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FilterCategory</servlet-name>
+        <servlet-class>controller.home.FilterCategory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserAccountController</servlet-name>
         <url-pattern>/user</url-pattern>
@@ -135,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>WebDoctorDetail</servlet-name>
         <url-pattern>/WebDoctorDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterCategory</servlet-name>
+        <url-pattern>/filter</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
