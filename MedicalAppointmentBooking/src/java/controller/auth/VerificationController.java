@@ -39,12 +39,11 @@ public class VerificationController extends HttpServlet {
         if (action != null && action.equals("confirm")) {
             UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
             Timestamp confirmationTokenTime = user.getConfirmationTokenTime();
-
             if (!timeConfig.isExpired(confirmationTokenTime)) {
                 String token = uDAO.getConfirmationToken(user);
                 String urlToken = request.getParameter("token");
                 if (token.equals(urlToken)) {
-                        uDAO.activateUserAccount(user);
+                    uDAO.activateUserAccount(user);
                     request.setAttribute("message", "Verify Successfully.");
                 } else {
                     response.sendRedirect("error.jsp");

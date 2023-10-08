@@ -45,7 +45,7 @@ public class RegisterController extends HttpServlet {
             String phone = request.getParameter("phone");
             String gender = request.getParameter("gender");
             String confirmationToken = CodeProcessing.generateToken();
-            
+   
             UserAccount user = new UserAccount(username, password, email, fullname, gender.equals("Male") ? 1 : 0, phone, confirmationToken, timeConfig.getNow(), 0, new Role(1));
             if (uDAO.isAccountExisted(user)) {
                 request.setAttribute("error", "Account has existed !");
@@ -53,8 +53,7 @@ public class RegisterController extends HttpServlet {
                 SessionUtils.getInstance().putValue(request, "user", user);
                 uDAO.addUserAccount(user);
                 String fullURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-                String urlLink = fullURL + "/verify?action=confirm&token=" + confirmationToken;
-                
+                String urlLink = fullURL + "/verify?action=confirm&token=" + confirmationToken; 
                 EmailSending.sendVerificationMail(user, urlLink, email);
                 request.setAttribute("success", "A confirmation email has been sent to your Email, please check.");
 

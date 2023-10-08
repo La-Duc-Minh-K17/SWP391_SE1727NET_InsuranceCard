@@ -67,6 +67,12 @@
         <servlet-class>controller.home.ServiceDetailController</servlet-class>
     </servlet>
     <servlet>
+
+        <servlet-name>BookingController</servlet-name>
+        <servlet-class>controller.home.BookingController</servlet-class>
+  </servlet>
+
+   <servlet>
         <servlet-name>WebDoctorList</servlet-name>
         <servlet-class>controller.manager.WebDoctorList</servlet-class>
     </servlet>
@@ -119,12 +125,10 @@
     <servlet-mapping>
         <servlet-name>ServiceController</servlet-name>
         <url-pattern>/service</url-pattern>
-
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManageBlogController</servlet-name>
         <url-pattern>/manageblog</url-pattern>
-
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SettingList</servlet-name>
@@ -136,6 +140,11 @@
     </servlet-mapping>
     <servlet-mapping>
 
+        <servlet-name>BookingController</servlet-name>
+        <url-pattern>/booking</url-pattern>
+
+ </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SearchController</servlet-name>
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
@@ -150,7 +159,6 @@
     <servlet-mapping>
         <servlet-name>WebDoctorDetail</servlet-name>
         <url-pattern>/WebDoctorDetail</url-pattern>
-
     </servlet-mapping>
     <session-config>
         <session-timeout>
