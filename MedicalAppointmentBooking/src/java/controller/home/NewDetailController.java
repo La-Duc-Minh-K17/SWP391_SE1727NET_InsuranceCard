@@ -90,4 +90,6 @@ public class NewDetailController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+
 }
+
