@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Service;
+import model.Service_Category;
 import utils.ImageProcessing;
 
 /**
@@ -75,11 +76,6 @@ public class ServicesDAO {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                String name = rs.getString("name");
-                String description = rs.getString("description");
-                int status = rs.getInt("status");
-                int setting_id = rs.getInt("setting_id");
-                servicesList.add(new Service_Category(name, description,status,setting_id));
                 int service_id = rs.getInt("service_id");
                 String service_name = rs.getString("service_name");
                 String service_description = rs.getString("service_description");

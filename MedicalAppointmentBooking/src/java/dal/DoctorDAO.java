@@ -35,9 +35,6 @@ public class DoctorDAO {
                 + "			inner join speciality s on s.speciality_id = d.speciality_id\n"
                 + "            inner join services ser on ser.service_id = d.service_id;";
 
-                + "            inner join user_account u on d.user_id = u.user_id \n"
-                + "            inner join speciality s on s.speciality_id = d.speciality_id\n";
-
 
         Connection connection = null;
         try {
@@ -62,9 +59,6 @@ public class DoctorDAO {
                 s.setFee(fee);
                 Doctor d = new Doctor(doctorId, speciality, position, description, username, email, name, gender, phone, image, status);
                 d.setService(s);
-
-                Doctor d = new Doctor(doctorId, speciality,position, description, username, email, name, gender, phone, image, status);
-
                 doctorList.add(d);
             }
             return doctorList;

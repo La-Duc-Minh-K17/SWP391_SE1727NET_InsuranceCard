@@ -75,11 +75,7 @@
         <servlet-name>WebDoctorDetail</servlet-name>
         <servlet-class>controller.manager.WebDoctorDetail</servlet-class>
     </servlet>
-
-    <servlet>
-        <servlet-name>ServiceDetailController</servlet-name>
-        <servlet-class>controller.home.ServiceDetailController</servlet-class>
-    </servlet>
+ 
     <servlet>
         <servlet-name>SearchController</servlet-name>
         <servlet-class>controller.home.SearchController</servlet-class>
@@ -142,9 +138,6 @@
 
         <servlet-name>SearchController</servlet-name>
         <url-pattern>/search</url-pattern>
-
-        <servlet-name>ServiceDetailController</servlet-name>
-        <url-pattern>/servicedetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddSetting</servlet-name>
