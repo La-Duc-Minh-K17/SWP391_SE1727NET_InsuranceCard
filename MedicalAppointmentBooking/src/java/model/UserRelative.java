@@ -13,16 +13,18 @@ public class UserRelative {
     private int relativeId;
     private String fullName;
     private String phone;
+    private int gender;
     private String email;
     private int userId;
 
     public UserRelative() {
     }
 
-    public UserRelative(int relativeId, String fullName, String phone, String email, int userId) {
-        this.relativeId = relativeId;
+    public UserRelative( String fullName, String phone,int gender, String email, int userId) {
+      
         this.fullName = fullName;
         this.phone = phone;
+        this.gender = gender;
         this.email = email;
         this.userId = userId;
     }
@@ -35,8 +37,16 @@ public class UserRelative {
         this.relativeId = relativeId;
     }
 
-   
+    public int getGender() {
+        return gender;
+    }
 
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+   
+    
     public String getFullName() {
         return fullName;
     }

@@ -30,17 +30,17 @@ public class PatientDAO {
             ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setDate(1, patient.getDob());
             ps.setString(2, patient.getAddress());
-            if(patient.getAccount() == null) {
+            if(patient.getUserAccountId() == -1) {
                 ps.setNull(3, java.sql.Types.INTEGER);
             }
             else {
-                ps.setInt(3, patient.getAccount().getUserId());
+                ps.setInt(3, patient.getUserAccountId());
             }
-            if(patient.getUserRelative() == null) {
+            if(patient.getUserRelativeId() == -1) {
                 ps.setNull(4, java.sql.Types.INTEGER);
             }
             else {
-                ps.setInt(4 , patient.getUserRelative().getRelativeId());
+                ps.setInt(4 , patient.getUserRelativeId());
             }
             int affectedRow = ps.executeUpdate();
             if (affectedRow == 1) {

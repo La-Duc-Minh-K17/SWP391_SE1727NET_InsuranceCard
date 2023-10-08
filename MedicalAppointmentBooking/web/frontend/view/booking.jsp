@@ -293,9 +293,9 @@
                                                 </div>
                                                 <div class=" d-flex justify-content-around radio-group"> <!-- Group for radio buttons -->
                                                     <label for="male">Male</label>
-                                                    <input type="radio"  checked="checked" name="gender" value="Male" required>
+                                                    <input type="radio"  checked="checked" name="gender" value="1" required>
                                                     <label for="female">Female</label>
-                                                    <input type="radio" name="gender" value="Female" required>
+                                                    <input type="radio" name="gender" value="0" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">

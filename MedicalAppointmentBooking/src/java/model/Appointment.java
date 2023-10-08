@@ -16,24 +16,25 @@ public class Appointment {
     private String apptNote;
     private Date apptDate;
     private String apptTime;
-    private double billingAmount;
     private String diagnosis;
     private String status;
-    private Doctor doctor;
-    private Patient patient;
+    private int staffId;
+    private int doctorId;
+    private int patientId;
 
     public Appointment() {
     }
 
-    public Appointment(String apptNote, Date apptDate, String apptTime, String status, Doctor doctor, Patient patient) {
+    public Appointment(String apptNote, Date apptDate, String apptTime, String status, int staffId, int doctorId, int patientId) {
         this.apptNote = apptNote;
         this.apptDate = apptDate;
         this.apptTime = apptTime;
         this.status = status;
-        this.doctor = doctor;
-        this.patient = patient;
+        this.staffId = staffId;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
     }
-    
+
     public int getApptId() {
         return apptId;
     }
@@ -66,13 +67,17 @@ public class Appointment {
         this.apptTime = apptTime;
     }
 
-    public double getBillingAmount() {
-        return billingAmount;
+    
+
+    public int getStaffId() {
+        return staffId;
     }
 
-    public void setBilling_amount(double billing_amount) {
-        this.billingAmount = billing_amount;
+    public void setStaffId(int staffId) {
+        this.staffId = staffId;
     }
+
+   
 
     public String getStatus() {
         return status;
@@ -80,10 +85,6 @@ public class Appointment {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
     }
 
     public String getDiagnosis() {
@@ -94,16 +95,20 @@ public class Appointment {
         this.diagnosis = diagnosis;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public int getDoctorId() {
+        return doctorId;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
 }

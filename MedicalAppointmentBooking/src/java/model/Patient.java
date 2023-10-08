@@ -15,20 +15,20 @@ public class Patient {
     private int patientId;
     private String address;
     private Date dob;
-    private UserAccount userAccount;
-    private UserRelative userRelative;
+    private int userAccountId;
+    private int userRelativeId;
 
     public Patient() {
-        userAccount = null;
-        userRelative = null;
+       
     }
 
-    public Patient( Date dob,String address,     UserAccount userAccount, UserRelative userRelative) {
+    public Patient(String address, Date dob, int userAccountId, int userRelativeId) {
         this.address = address;
         this.dob = dob;
-        this.userAccount = userAccount;
-        this.userRelative = userRelative;
+        this.userAccountId = userAccountId;
+        this.userRelativeId = userRelativeId;
     }
+
     
     public int getPatientId() {
         return patientId;
@@ -54,20 +54,22 @@ public class Patient {
         this.dob = dob;
     }
 
-    public UserAccount getAccount() {
-        return userAccount;
+    public int getUserAccountId() {
+        return userAccountId;
     }
 
-    public void setAccount(UserAccount account) {
-        this.userAccount = account;
+    public void setUserAccountId(int userAccountId) {
+        this.userAccountId = userAccountId;
     }
 
-    public UserRelative getUserRelative() {
-        return userRelative;
+    public int getUserRelativeId() {
+        return userRelativeId;
     }
 
-    public void setUserRelative(UserRelative userRelative) {
-        this.userRelative = userRelative;
+    public void setUserRelativeId(int userRelativeId) {
+        this.userRelativeId = userRelativeId;
     }
+
+    
 
 }
