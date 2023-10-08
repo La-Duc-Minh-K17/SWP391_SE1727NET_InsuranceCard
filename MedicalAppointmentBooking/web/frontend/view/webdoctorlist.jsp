@@ -69,8 +69,8 @@
 
         <div class="header-content">
             <h3>Doctors team</h2>
-                <h6>Great doctor if you need your family member to get effective immediate assistance,</h4>
-                    <h6>emergency treatment or a simple consultation</h4>
+                <h6>Great doctor if you need your family member to get effective immediate assistance,</h6>
+                    <h6>emergency treatment or a simple consultation</h6>
                         </div>
 
                         <form action="WebDoctorList" method="POST">
@@ -89,16 +89,18 @@
                             <div class="row">
                                 <c:forEach items="${doctor}" var="doctor">
                                     <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2 doctor">
-                                        <img src="data:image/jpg;base64,${doctor.image}" width="240" height="300"/>
-                                        <h5>${doctor.fullName}</h5>
-                                        <h6>${doctor.speciality}</h6>
-                                        <h6>$ ${doctor.service.fee} USD / visit</h6>
+                                        <a href="WebDoctorDetail?doctorId=${doctor.doctorId}">
+                                            <img src="data:image/jpg;base64,${doctor.image}" width="240" height="300"/>
+                                            <h5>${doctor.fullName}</h5>
+                                            <h6>${doctor.speciality}</h6>
+                                            <h6>$ ${doctor.service.fee} USD / visit</h6>
+                                        </a>
                                     </div>
                                 </c:forEach>
                             </div>
                         </div>
                         <script>
-                            
+
                             function filterDoctors() {
                                 var selectedSpeciality = document.getElementById("speciality").value;
                                 var doctorContainers = document.getElementsByClassName("doctor");
@@ -112,7 +114,7 @@
                                     }
                                 }
                             }
-     
+
                             document.getElementById("speciality").addEventListener("change", filterDoctors);
 
                             filterDoctors();
