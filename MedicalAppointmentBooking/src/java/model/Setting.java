@@ -14,8 +14,8 @@ public class Setting {
     private int settingID;
     private String type;
     private String note;
-     public String description;
-    public boolean status;
+     private String description;
+    private boolean status;
 
     public String getDescription() {
         return description;

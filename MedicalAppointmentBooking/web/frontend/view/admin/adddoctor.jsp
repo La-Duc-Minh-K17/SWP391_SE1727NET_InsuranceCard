@@ -5,7 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -75,52 +74,112 @@
                         </ul>
                     </div>
                 </div>
-                <c:set value="${requestScope.blog}" var="blog"></c:set>
-                    <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
-                        <div class="card border-0 shadow overflow-hidden">
-                            <div class="tab-content p-4" id="pills-tabContent">
-                                <form action="<c:url value='/manageblog?action=edit-info&blog_id=${blog.blog_id}'/>" method="POST" enctype="multipart/form-data">
-                                <h5 class="mb-0">Edit Blog Information.</h5>
+                <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
+                    <div class="card border-0 shadow overflow-hidden">
+                        <div class="tab-content p-4" id="pills-tabContent">
+                            <form action="" method="POST" enctype="multipart/form-data" onSubmit="document.getElementById('submit').disabled = true;">
+                                <h5 class="mb-0">Add New Doctor :</h5>
                                 <div>
                                     <p class="text-muted">Update Image.</p>
                                     <div id="myfileupload">
-                                        <input type="file" name="image" id="uploadfile" name="ImageUpload" onchange="displayThumbnail(this);" />
+                                        <input type="file" name="image" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
                                     </div>
-                                    <div id="thumbbox" class="mt-3 mb-3">
-                                        <img class="rounded" height="20%" width="30%" alt="Thumb image" id="thumbImage"  src="data:image/jpg;base64,${blog.image}" />
+                                    <div id="thumbbox">
+                                        <img class="rounded" height="20%" width="30%" alt="Thumb image" id="thumbimage" style="display: none" />
+                                        <a class="removeimg" href="javascript:"></a>
                                     </div>
+                                    <div id="boxchoice">
+                                        <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
+                                        <p style="clear:both"></p>
+                                        <input type="submit" id="submit" style="display: none" name="send" class="Update btn btn-primary"
+                                               value="Cập nhật">
+                                        <p style="clear:both"></p>
+                                    </div> 
                                 </div>
+                            </form>
+
+                            <form action="" method="POST" class="mt-4" onSubmit="document.getElementById('submit').disabled = true;">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Title  </label>
-                                            <input name="title" id="name" type="text" class="form-control" value="${blog.title}">
+                                            <label class="form-label">Name</label>
+                                            <input name="name" oninvalid="CheckFullName(this);" oninput="CheckFullName(this);" id="name" type="text" class="form-control" value="${doctor.doctor_name}">
                                         </div>
                                     </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Gender</label>
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><input id="credit" name="gender" ${doctor.gender== 1?"checked":""} value="true" type="radio" class="form-check-input"
+                                                                   checked required ></td>
+                                                        <td><label class="form-check-label">Male</label></td>
+                                                        <td></td>
+                                                        <td><input id="debit" name="gender" ${doctor.gender==0 ?"checked":""} value="false" type="radio" class="form-check-input"
+                                                                   required></td>
+                                                        <td><label class="form-check-label">Female</label></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Phone</label>
+                                            <input name="phone" oninvalid="" oninput="" id="number" type="text" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Speciality</label>
+                                            <select name="speciality" class="form-select">
+                                                <c:forEach items="${speciality}" var="s">
+                                                    <c:if test="">
+                                                        
+                                                    </c:if>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Position</label>
+                                            <input name="position"  type="text" onkeydown="return false" min="1922-01-01" max="2003-01-01" class="form-control" value="${doctor.DOB}">
+                                        </div>
+                                    </div>
+
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Description</label>
-                                            <input name="description"  type="text"  class="form-control" value="${blog.description}">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3 custom-box">
-                                            <label class="form-label">Content</label>
-                                            <input name="content" type="text" class="form-control" value="${blog.content}">
+                                            <input name="description" type="text" class="form-control" value="${doctor.description}">
                                         </div>
                                     </div>
 
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Status <span class="text-danger"></span></label>
+                                            <br>
+                                            <input id="credit" name="status" ${doctor.status==true?"checked":""} value="true" type="radio" class="form-check-input"checked required >
+
+                                            <label class="form-check-label">Active</label>
+
+                                            <input id="debit" name="status" ${doctor.status==false?"checked":""} value="false" type="radio" class="form-check-input"
+                                                   required>
+                                            <label class="form-check-label">Inactive</label>
+
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-9">
-                                        <input type="submit" id="submit" name="send" class="btn btn-primary btn-sm"value="SAVE">
-                                    </div>
-                                    <div class=" col-lg-3">
-                                        <a href="<c:url value='/manageblog?action=view-all'/> " class="btn btn-primary btn-sm">TURN BACK</a>
+                                    <div class="col-sm-12">
+                                        <input type="submit" id="submit" name="send" class="btn btn-primary"
+                                               value="SAVE">
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -128,28 +187,6 @@
             </main><!-- comment -->
         </div>
     </body>
-    <script>
-
-
-        function displayThumbnail() {
-            const input = document.getElementById("uploadfile");
-            const thumbnail = document.getElementById("thumbImage");
-
-            // Check if a file has been selected
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-
-                reader.onload = function (e) {
-                    thumbnail.src = e.target.result;
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            } else {
-
-                thumbnail.src = "";
-            }
-        }
-    </script>
     <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
     <!-- simplebar -->
     <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>

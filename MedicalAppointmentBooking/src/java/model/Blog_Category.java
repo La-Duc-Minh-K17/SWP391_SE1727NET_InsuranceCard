@@ -14,10 +14,7 @@ public class Blog_Category {
     private int status;
     private int setting_id;
 
-    public Blog_Category(int blog_category_id, String name) {
-        this.blog_category_id = blog_category_id;
-        this.name = name;
-    }
+  
 
     public Blog_Category(int blog_category_id, String name, String description, int status, int setting_id) {
         this.blog_category_id = blog_category_id;
@@ -28,6 +25,10 @@ public class Blog_Category {
     }
 
     public Blog_Category() {
+    }
+
+    public Blog_Category(int categoryId, String categoryName) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public int getBlog_category_id() {
