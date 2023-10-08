@@ -75,6 +75,11 @@ public class ServicesDAO {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+                int status = rs.getInt("status");
+                int setting_id = rs.getInt("setting_id");
+                servicesList.add(new Service_Category(name, description,status,setting_id));
                 int service_id = rs.getInt("service_id");
                 String service_name = rs.getString("service_name");
                 String service_description = rs.getString("service_description");

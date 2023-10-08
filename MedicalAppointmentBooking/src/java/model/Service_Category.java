@@ -11,17 +11,20 @@ package model;
 public class Service_Category {
     private String name;
     private String description;
-    private boolean status;
+    private int status;
     private int setting_id;
 
-    public Service_Category(String name, String description, boolean status, int setting_id) {
+    public Service_Category() {
+    }
+
+    public Service_Category(String name, String description, int status, int setting_id) {
         this.name = name;
         this.description = description;
         this.status = status;
         this.setting_id = setting_id;
     }
 
-   
+    
 
     public String getName() {
         return name;
@@ -39,11 +42,11 @@ public class Service_Category {
         this.description = description;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -54,5 +57,5 @@ public class Service_Category {
     public void setSetting_id(int setting_id) {
         this.setting_id = setting_id;
     }
-    
+
 }
