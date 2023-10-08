@@ -1,11 +1,7 @@
-<%-- 
-    Document   : managedoctor
-    Created on : Sep 28, 2023, 10:44:49 AM
-    Author     : Admin
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -91,11 +87,23 @@
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <div class="row align-content-center">
+                            <div class="col-xl-3 col-md-3">
+                                <div class="card component-wrapper border-0 rounded shadow">
+                                    <div>
+                                        <select class="form-select form-control" id="speFilter" onchange="filter()">
+                                            <option selected disabled>Category</option>
+                                            <c:forEach items="${cDAO}" var="o">
+                                                <option value="${o.blog_category_id}">${o.name}</option>  
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
 
+                            </div>
                             <div class="col-xl-6 col-md-6">
                                 <div class="search-bar d-lg-block" style="padding-top :0">
                                     <div id="search" class="menu-search ">
-                                        <form action="<c:url value='/manage-doctor?action=search'/>"role="search" method="post" id="searchform" class="searchform">
+                                        <form action="<c:url value='/manageblog?action=search'/>"role="search" method="post" id="searchform" class="searchform">
                                             <div>
                                                 <input type="text" class="form-control border rounded-pill" name="search"
                                                        id="search" placeholder="Search blogs by name">
@@ -105,8 +113,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-md-3 mt-4 mt-md-0 text-md-end">
-                                <a href="<c:url value='/manage-doctor?action=create'/>" class="btn btn-primary ">Add Blogs</a>
+                            <div class="col-xl-3 col-md-3 mt-4 mt-md-0 text-md-end">
+                                <a href="<c:url value='/manageblog?action=add'/>" class="btn btn-primary ">Add Blogs</a>
                             </div><!--end col-->
                         </div><!--end row-->
 
@@ -124,8 +132,8 @@
                                                 <div class="container">
                                                     <div class="row">
                                                         <c:forEach var="o" items="${requestScope.dList}">
-
-                                                            <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2" value="${o.blog_id}">
+                                                            
+                                                            <div class=" col-lg-4 col-md-6 col-12 mb-4 pb-2" value="${o.blog_id}">
                                                                 <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                                                                     <div class="imagefit">
                                                                         <img src="data:image/jpg;base64,${o.image}" style="width:100%;height:100%;" class="img-fluid" alt="">
@@ -144,13 +152,24 @@
                                                                                 <a class="text-dark title h6">${o.description}</a>
                                                                             </ul>
                                                                         </div>
-                                                                        <div class="post-meta d-flex justify-content-between mt-3">                                               
-                                                                            <a href="<c:url value='/manageblog?action=edit&id=${o.blog_id}'/> " class="link">Edit<i
-                                                                                    class="mdi mdi-chevron-right align-middle"></i></a>
-                                                                        </div>
+
+                                                                        <div>
+                                                                            <div class="card component-wrapper border-0 rounded ">
+                                                                                <div class="row">
+                                                                                    <div class="mb-2 col-lg-6">
+                                                                                        <a href="<c:url value='/manageblog?action=edit&id=${o.blog_id}'/> " class="btn btn-primary btn-sm">Edit</a>
+                                                                                    </div>
+                                                                                    <div class="mb-2 col-lg-6">
+                                                                                        <a href="<c:url value='/manageblog?action=delete&id=${o.blog_id}'/> "class="btn btn-primary btn-sm" >Delete</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>         
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                                                   
                                                         </c:forEach>
                                                     </div>
                                                 </div>
@@ -186,7 +205,7 @@
         <script>
             console.log("helloworld");
             function filter() {
-                const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=filter&speciality_id=';
+                const url = 'http://localhost:8082/MedicalAppointmentBooking/manageblog?action=filter&blog_category_id=';
                 const filterElement = document.getElementById("speFilter").value;
                 window.location.href = url + filterElement;
             }

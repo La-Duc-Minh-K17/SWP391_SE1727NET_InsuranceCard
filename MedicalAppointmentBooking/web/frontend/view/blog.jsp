@@ -39,7 +39,7 @@
             <div class="container">
                 <!-- Logo container-->
                 <div>
-                    <a class="logo" href="index.html">
+                    <a class="logo" href="home">
                         <span class="logo-light-mode">
                             <img src="frontend/template/assets/images/MABS__1.png" class="l-dark" height="30" alt="">
                             <img src="frontend/template/assets/images/MABS__1.png" class="l-light" height="30" alt="">
@@ -82,7 +82,7 @@
                     <!-- Navigation Menu-->   
                     <ul class="navigation-menu nav-left nav-light">
                         <li class="has-submenu parent-menu-item">
-                            <a href="index-three.html">Home</a>
+                            <a href="home">Home</a>
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
@@ -91,7 +91,7 @@
                         <li class="has-submenu parent-menu-item">
                             <a href="javascript:void(0)">Services</a>
                         </li>
-                        <li class="has-submenu parent-parent-menu-item"><a href="javascript:void(0)">Blogs</a>
+                        <li class="has-submenu parent-parent-menu-item"><a href="new">Blogs</a>
                         </li>
                         <li><a href="../admin/index.html" class="sub-menu-item" target="_blank">About Us</a></li>
                     </ul><!--end navigation menu-->
@@ -111,8 +111,8 @@
 
                             <nav aria-label="breadcrumb" class="d-inline-block mt-3">
                                 <ul class="breadcrumb bg-light rounded mb-0 py-1 px-2">
-                                    <li class="breadcrumb-item"><a href="index.html">MABS</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+                                    <li class="breadcrumb-item"><a href="home">MABS</a></li>
+                                    <li class="breadcrumb-item active" href="new">Blogs</li>
                                 </ul>
                             </nav>
                         </div>
@@ -264,6 +264,18 @@
 
             </div>
         </div>
+                                                <div>
+                                    <ul class="pagination mb-0 mt-5">
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)"
+                                                                 aria-label="Previous">Prev</a></li>
+                                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)"
+                                                                 aria-label="Next">Next</a></li>
+                                    </ul>
+                                </div>
         <footer class="bg-footer">
             <div class="container">
                 <div class="row">

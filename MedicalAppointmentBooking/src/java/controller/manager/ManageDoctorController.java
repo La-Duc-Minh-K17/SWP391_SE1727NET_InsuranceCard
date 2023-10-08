@@ -80,7 +80,7 @@ public class ManageDoctorController extends HttpServlet {
             dDAO.updateDoctor(doctorId, name, gender, phone, spe_id, position, description, status, image);
             response.sendRedirect("manage-doctor?action=edit&id=" + doctorId);
             return;
-        }
+        }  
         if (action != null && action.equals("view")) {
             int doctorId = Integer.parseInt(request.getParameter("id"));
             Doctor doctor = dDAO.getDoctorById(doctorId);

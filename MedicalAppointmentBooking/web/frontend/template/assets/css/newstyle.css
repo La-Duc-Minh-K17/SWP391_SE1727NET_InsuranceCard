@@ -15,7 +15,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin: 0;
     position: static;
 }
-
+.newsest {
+    width: 300px; /* Thiết lập kích thước chiều rộng mong muốn */
+    height: 200px; /* Thiết lập kích thước chiều cao mong muốn */
+    border: 1px solid #ccc; /* Tùy chỉnh viền cho news */
+    margin: 10px; /* Tạo khoảng cách giữa các news */
+    padding: 10px; /* Tạo khoảng cách bên trong news */
+}
 .flexsearch--form {
     overflow: hidden;
     position: relative;

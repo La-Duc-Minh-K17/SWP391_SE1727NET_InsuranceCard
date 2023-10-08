@@ -82,7 +82,7 @@
                     <!-- Navigation Menu-->   
                     <ul class="navigation-menu nav-left nav-light">
                         <li class="has-submenu parent-menu-item">
-                            <a href="index-three.html">Home</a>
+                            <a href="home">Home</a>
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
@@ -91,7 +91,7 @@
                         <li class="has-submenu parent-menu-item">
                             <a href="javascript:void(0)">Services</a>
                         </li>
-                        <li class="has-submenu parent-parent-menu-item"><a href="javascript:void(0)">Blogs</a>
+                        <li class="has-submenu parent-parent-menu-item"><a href="new">Blogs</a>
                         </li>
                         <li><a href="../admin/index.html" class="sub-menu-item" target="_blank">About Us</a></li>
                     </ul><!--end navigation menu-->
@@ -111,8 +111,8 @@
 
                             <nav aria-label="breadcrumb" class="d-inline-block mt-3">
                                 <ul class="breadcrumb bg-light rounded mb-0 py-1 px-2">
-                                    <li class="breadcrumb-item"><a href="index.html">MABS</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+                                    <li class="breadcrumb-item"><a href="home">MABS</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"href="new">Blogs</li>
                                 </ul>
                             </nav>
                         </div>
