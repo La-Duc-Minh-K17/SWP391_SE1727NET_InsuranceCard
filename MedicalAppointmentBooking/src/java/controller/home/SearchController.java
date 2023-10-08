@@ -7,19 +7,18 @@ package controller.home;
 import dal.ServicesDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import model.Service;
-
 
 /**
  *
  * @author PC
  */
-public class ServiceController extends HttpServlet {
+public class SearchController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +34,17 @@ public class ServiceController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             ServicesDAO servicedao = new ServicesDAO();
-            List<Service> serviceList = servicedao.getAllService();
+            String keyword = request.getParameter("keyword"); 
+            List<Service> serviceList;
+
+            if (keyword != null && !keyword.isEmpty()) {
+                serviceList = servicedao.searchServicesByName(keyword);
+            } else {
+                serviceList = servicedao.getAllService();
+            }
             request.setAttribute("services", serviceList);
-            System.out.println(serviceList);
             request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
+
         }
     }
 
