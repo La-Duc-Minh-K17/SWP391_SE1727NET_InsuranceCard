@@ -25,79 +25,221 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
         <style>
+            .custom-center {
+                justify-content: center !important;
+            }
+
             .card-img-container {
-    height: 200px; /* Điều chỉnh chiều cao tùy ý */
-    overflow: hidden;
-}
+                height: 200px;
+                overflow: hidden;
+            }
+            /* CSS để cân đối các dòng chữ trong card */
+            .card {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
 
-.card-img-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Đảm bảo tỷ lệ kích thước và cắt hình ảnh nếu cần */
-}
 
-            #home{
-                background-image: url("frontend/template/assets/images/bg/department.jpg") ;
+
+            .card-body {
+                flex: 1;
+            }
+
+            .card-title,
+            .card-text {
+                text-align: center;
+                justify-content: s
+            }
+            .card-title,
+            .card-text {
+                margin-bottom: 15px; /* Khoảng cách giữa các dòng chữ */
+            }
+
+            .btn-primary {
+                align-self: center; /* Để căn giữa nút "Learn More" */
+            }
+
+            .card-img-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            /* CSS để cân đối nút "Learn More" trong card */
+            .card {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                text-align: center;
+            }
+
+
+            .custom-button {
+                width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
+                margin: 5px 0; /* Khoảng cách giữa các nút */
+            }
+            .btn-primary {
+                margin-top: auto; /* Để nút "Learn More" ở dưới cùng */
+            }
+            .custom-button {
+                width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
             }
         </style>
     </head>
     <body>
+
         <jsp:include page="/frontend/common/header.jsp" />
-        <!-- Hero Section -->
-<!-- Hero Section -->
-
-<section class="bg-half-170 d-table w-100" id="home">
-    <!-- ... Hero content ... -->
-</section>
-<!-- End Hero -->
-
-<!-- Form Select -->
-<div class="container mt-5 m-5 text-center">
-    <!-- ... Form select ... -->
+        <section class="bg-half-170 d-table w-100" style="background: url('frontend/template/assets/images/bg/department.jpg') center center;">
+            <div class="bg-overlay bg-overlay-dark"></div>
+            <div class="container">
+                <div class="row mt-5 justify-content-center">
+                    <div class="col-12">
+                        <div class="section-title text-center">
+                            <h3 class="sub-title mb-4 text-white title-dark">Services</h3>
+                            <p class="para-desc mx-auto text-white-50">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
+                        
+                            <nav aria-label="breadcrumb" class="d-inline-block mt-3">
+                                <ul class="breadcrumb bg-light rounded mb-0 py-1 px-2">
+                                    <li class="breadcrumb-item"><a href="home">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Services</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end container-->
+        </section><!--end section-->
+        <div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <h3 class="title mt-5">List Services</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form action="search" method="GET">
+                <div class="input-group">
+                    <input type="text" name="keyword" id="searchInput" class="form-control bg-light" placeholder="Search by name">
+                    <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 d-flex align-items-center justify-content-end">
+            <div class="selection-bar btn-success m-5">
+                <select id="sortSelect" class="form-select form-control bg-light">
+                    <option selected disabled>Sort By</option>
+                    <option value="price">Price</option>
+                    <option value="name">Name</option>
+                </select>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- End Form Select -->
 
-<!-- Service Items -->
-<section>
-    <div class="container mt-5 m-5">
-        <div class="row">
-            <c:forEach items="${requestScope.services}" var="s" varStatus="loop">
-                <div class="col-md-3 mt-4">
-                    <div class="card mb-4">
-                        <div class="card-img-container">
-                            <img src="data:image/jpg;base64,${s.service_image}" class="card-img-top" alt="${s.service_name}">
+
+
+
+
+
+        <div class="row custom-center">
+            <div class="container mt-5 m-5">
+                <div class="row justify-content-center">
+
+                    <c:forEach items="${requestScope.services}" var="s" varStatus="loop">
+                        <div class="col-md-3 mt-4">
+                            <div class="card mb-4">
+                                <div class="card-img-container">
+                                    <img src="data:image/jpg;base64,${s.service_image}" class="card-img-top" alt="${s.service_name}">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title text-primary">${s.service_name}</h5>
+                                    <p class="card-body text-secondary ">${s.service_description}</p>
+                                    <h5 class="text-muted ">$${s.fee}</h5>
+                                    <div class="d-flex flex-column align-items-center mt-3">
+                                        <div class="">
+                                            <a href="servicedetail?id=${s.service_id}" class="btn btn-primary custom-button">Learn More</a>
+                                            <a href="#" class="btn btn-success custom-button">Appointment Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title">${s.service_name}</h5>
-                            <p class="card-text">${s.service_description}</p>
-                            <a href="servicedetail?id=${s.service_id}" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div><!--end col-md-3-->
-                <c:if test="${loop.index % 4 == 3}">
-                    <div class="w-100"></div><!-- Clear the row after every 4 items -->
-                </c:if>
-            </c:forEach>
-        </div><!--end row-->
-    </div><!--end container-->
-</section><!--end section-->
-<!-- End Service Items -->
+                        <c:if test="${loop.index % 4 == 3}">
+                            <div class="w-100"></div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+            </div><!--end row-->
+        </div><!--end container-->
+    </section><!--end section-->
+    <!-- End Service Items -->
+    <div class="container  m-5  ">
+        <!-- Your card elements here -->
+        <ul class="pagination justify-content-end">
+            <li class="page-item ${page==1?"disabled":""}"><a class="page-link btn-primary" href="service?page=${page-1}"  " >Previous</a></li>
+                <c:forEach begin="1" end="${totalPage}" var="i">
+                <li class="page-item ${i == page?"active":""}"><a class="page-link btn-primary" href="service?page=${i}">${i}</a></li>
+                </c:forEach>
+            <li class="page-item ${page==totalPage?"disabled":""}"><a class="page-link btn-primary "  href="service?page=${page+1}">Next</a></li>
+
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sortSelect = document.getElementById('sortSelect');
+            const cardsContainer = document.querySelector('.row.justify-content-center');
+
+            sortSelect.addEventListener('change', function () {
+                const selectedValue = this.value;
+
+                // Get all card elements
+                const cards = cardsContainer.querySelectorAll('.col-md-3');
+
+                // Convert NodeList to an array for easier sorting
+                const cardsArray = Array.from(cards);
+
+                if (selectedValue === 'name') {
+                    // Sort cards by service name
+                    cardsArray.sort(function (a, b) {
+                        const nameA = a.querySelector('.card-title').textContent.toLowerCase();
+                        const nameB = b.querySelector('.card-title').textContent.toLowerCase();
+                        return nameA.localeCompare(nameB);
+                    });
+                } else if (selectedValue === 'price') {
+                    // Sort cards by service fee
+                    cardsArray.sort(function (a, b) {
+                        const feeA = parseFloat(a.querySelector('.text-muted').textContent.replace('$', ''));
+                        const feeB = parseFloat(b.querySelector('.text-muted').textContent.replace('$', ''));
+                        return feeA - feeB;
+                    });
+                }
+
+                // Re-append sorted cards to the container
+                cardsArray.forEach(function (card) {
+                    cardsContainer.appendChild(card);
+                });
+            });
+        });
+    </script>
 
 
 
 
 
 
-        <jsp:include page="/frontend/common/footer.jsp" />
 
-        <!-- End -->
-        <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
-        <!-- Icons -->
-        <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
-        <!-- Main Js -->
-        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
-    </body>
+    <jsp:include page="/frontend/common/footer.jsp" />
+
+    <!-- End -->
+    <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
+    <!-- Icons -->
+    <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
+    <!-- Main Js -->
+    <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+    <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
+    <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+    <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
+</body>
 </html>

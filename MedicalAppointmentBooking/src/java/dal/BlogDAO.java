@@ -398,3 +398,4 @@ public class BlogDAO extends DBConnection {
         }
     }
 }
+

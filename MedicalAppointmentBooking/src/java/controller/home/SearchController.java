@@ -4,22 +4,21 @@
  */
 package controller.home;
 
-import dal.BlogDAO;
+import dal.ServicesDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
-import model.Blog;
+import model.Service;
 
 /**
  *
- * @author nguye
+ * @author PC
  */
-public class NewDetailController extends HttpServlet {
+public class SearchController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,16 +33,18 @@ public class NewDetailController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet NewDetailController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet NewDetailController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            ServicesDAO servicedao = new ServicesDAO();
+            String keyword = request.getParameter("keyword"); 
+            List<Service> serviceList;
+
+            if (keyword != null && !keyword.isEmpty()) {
+                serviceList = servicedao.searchServicesByName(keyword);
+            } else {
+                serviceList = servicedao.getAllService();
+            }
+            request.setAttribute("services", serviceList);
+            request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
+
         }
     }
 
@@ -59,17 +60,7 @@ public class NewDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int Id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(Id);
-        BlogDAO dao = new BlogDAO();
-        List<Blog> blogsList3 = dao.getTop3News();
-        request.setAttribute("blogs3", blogsList3);
-        List<Blog> blogsList6 = dao.getRandomNews();
-        Blog blogDetail = new Blog();
-        blogDetail = dao.getBlogDetailByID(Id);
-        request.setAttribute("blogs6", blogsList6);
-        request.setAttribute("data", blogDetail);
-        request.getRequestDispatcher("frontend/view/blogdetail.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -80,6 +71,12 @@ public class NewDetailController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
     /**
      * Returns a short description of the servlet.
      *
@@ -90,6 +87,4 @@ public class NewDetailController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-
 }
-

@@ -130,4 +130,6 @@ public class ManageDoctorController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+
 }
+

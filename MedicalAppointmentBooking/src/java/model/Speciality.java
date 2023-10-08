@@ -16,6 +16,13 @@ public class Speciality {
     private String speDescription;
     private int speStatus;
 
+
+
+    public Speciality() {
+    }
+
+    
+
     public Speciality(int id, String speName, String speDescription, int speStatus) {
         this.id = id;
         this.speName = speName;
@@ -57,6 +64,7 @@ public class Speciality {
     public void setSpeStatus(int speStatus) {
         this.speStatus = speStatus;
     }
-    
 
 }
+    
+
