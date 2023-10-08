@@ -43,7 +43,6 @@
     <servlet>
         <servlet-name>ServiceController</servlet-name>
         <servlet-class>controller.home.ServiceController</servlet-class>
-
     </servlet>
     <servlet>
         <servlet-name>ManageBlogController</servlet-name>
@@ -58,7 +57,6 @@
         <servlet-class>controller.setting.SettingList</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>AddSetting</servlet-name>
         <servlet-class>controller.setting.AddSetting</servlet-class>
     </servlet>
@@ -70,15 +68,9 @@
         <servlet-name>WebDoctorList</servlet-name>
         <servlet-class>controller.manager.WebDoctorList</servlet-class>
     </servlet>
-
     <servlet>
         <servlet-name>WebDoctorDetail</servlet-name>
         <servlet-class>controller.manager.WebDoctorDetail</servlet-class>
-    </servlet>
- 
-    <servlet>
-        <servlet-name>SearchController</servlet-name>
-        <servlet-class>controller.home.SearchController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserAccountController</servlet-name>
@@ -119,12 +111,10 @@
     <servlet-mapping>
         <servlet-name>ServiceController</servlet-name>
         <url-pattern>/service</url-pattern>
-
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManageBlogController</servlet-name>
         <url-pattern>/manageblog</url-pattern>
-
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SettingList</servlet-name>
@@ -133,11 +123,6 @@
     <servlet-mapping>
         <servlet-name>ServiceDetailController</servlet-name>
         <url-pattern>/servicedetail</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-
-        <servlet-name>SearchController</servlet-name>
-        <url-pattern>/search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddSetting</servlet-name>
@@ -150,7 +135,6 @@
     <servlet-mapping>
         <servlet-name>WebDoctorDetail</servlet-name>
         <url-pattern>/WebDoctorDetail</url-pattern>
-
     </servlet-mapping>
     <session-config>
         <session-timeout>

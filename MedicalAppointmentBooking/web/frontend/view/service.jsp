@@ -118,7 +118,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <form action="search" method="GET">
+            <form action="service" method="GET">
                 <div class="input-group">
                     <input type="text" name="keyword" id="searchInput" class="form-control bg-light" placeholder="Search by name">
                     <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
