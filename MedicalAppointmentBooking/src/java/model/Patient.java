@@ -23,6 +23,13 @@ public class Patient {
         userRelative = null;
     }
 
+    public Patient( Date dob,String address,     UserAccount userAccount, UserRelative userRelative) {
+        this.address = address;
+        this.dob = dob;
+        this.userAccount = userAccount;
+        this.userRelative = userRelative;
+    }
+    
     public int getPatientId() {
         return patientId;
     }

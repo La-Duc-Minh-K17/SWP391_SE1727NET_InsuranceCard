@@ -1,4 +1,4 @@
-$(document).ready(function () {
+
     var today = new Date();
     var tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1);
@@ -10,7 +10,7 @@ $(document).ready(function () {
     $("#checkout-date").flatpickr({
         defaultDate: tomorrow
     });
-});
+
 
 
 

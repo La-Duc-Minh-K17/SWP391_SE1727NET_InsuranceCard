@@ -196,14 +196,14 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label"> Date : </label>
-                                                    <input required="" name="apptdate" type="text"class="flatpickr flatpickr-input form-control" id="checkin-date">
+                                                    <label class="form-label">Date : </label>
+                                                    <input id="checkin-date" required="" name="appt-date" type="text"class="flatpickr flatpickr-input form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Time</label>
-                                                    <select required="" name="appttime"
+                                                    <select required="" name="appt-time"
                                                             class="form-control department-name select2input">
                                                         <option value="7:00">7:00</option>
                                                         <option value="8:00">8:00</option>
@@ -226,7 +226,7 @@
                                             <div class="col-md-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Choose payment method</label>
-                                                    <select required="" name="payment"
+                                                    <select  name="payment"
                                                             class="form-control department-name select2input">
                                                     </select>
                                                 </div>
@@ -317,7 +317,7 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Date : </label>
-                                                    <input required="" name="apptdate" type="text"
+                                                    <input required="" name="appt-date" type="text"
                                                            class="flatpickr flatpickr-input form-control" id="checkin-date1">
                                                 </div>
                                             </div>
@@ -325,7 +325,7 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Time</label>
-                                                    <select required="" name="appttime"
+                                                    <select required="" name="appt-time"
                                                             class="form-control department-name select2input">
                                                         <option value="7:00">7:00</option>
                                                         <option value="8:00">8:00</option>
@@ -343,15 +343,14 @@
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Examination Reason <span class="text-danger">*</span></label>
-                                                    <textarea name="apptreason"  rows="5" class="form-control" placeholder="Your Heath Status:"></textarea>
+                                                    <textarea name="appt-reason"  rows="5" class="form-control" placeholder="Your Heath Status:"></textarea>
                                                 </div>
                                             </div><!--end col-->
                                             <div class="col-md-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Choose payment method</label>
-                                                    <select required="" name="payment"
+                                                    <select  name="payment"
                                                             class="form-control department-name select2input">
-
                                                     </select>
                                                 </div>
                                             </div>
@@ -374,7 +373,7 @@
         <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/jquery.min.js'/>"></script>
-        <script src="<c:url value= '/frontend/template/assets/js/flatpickr.init.js'/>"></script>
+         
         <script src="<c:url value= '/frontend/template/assets/js/flatpickr.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/select2.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/select2.init.js'/>"></script>
@@ -384,7 +383,7 @@
             $("#checkin-date").flatpickr({
                 defaultDate: "today",
                 minDate: "today",
-                maxDate: new Date().fp_incr(7),
+                maxDate: new Date().fp_incr(14),
                 dateFormat: "d/m/Y"
 
             });
@@ -396,7 +395,7 @@
             $("#checkin-date1").flatpickr({
                 defaultDate: "today",
                 minDate: "today",
-                maxDate: new Date().fp_incr(7),
+                maxDate: new Date().fp_incr(14),
                 dateFormat: "d/m/Y"
 
             });

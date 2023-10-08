@@ -10,7 +10,7 @@ package model;
  * @author Admin
  */
 public class UserRelative {
-    private int relative_id;
+    private int relativeId;
     private String fullName;
     private String phone;
     private String email;
@@ -19,13 +19,23 @@ public class UserRelative {
     public UserRelative() {
     }
 
-    public int getRelative_id() {
-        return relative_id;
+    public UserRelative(int relativeId, String fullName, String phone, String email, int userId) {
+        this.relativeId = relativeId;
+        this.fullName = fullName;
+        this.phone = phone;
+        this.email = email;
+        this.userId = userId;
     }
 
-    public void setRelative_id(int relative_id) {
-        this.relative_id = relative_id;
+    public int getRelativeId() {
+        return relativeId;
     }
+
+    public void setRelativeId(int relativeId) {
+        this.relativeId = relativeId;
+    }
+
+   
 
     public String getFullName() {
         return fullName;

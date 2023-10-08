@@ -12,13 +12,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Date;
+import model.Appointment;
 import model.Doctor;
 import model.Patient;
 import model.Service;
 import model.UserAccount;
 import utils.SessionUtils;
-
+import utils.TimeUtil;
 /**
  *
  * @author Admin
@@ -43,18 +43,24 @@ public class BookingController extends HttpServlet {
         Doctor chosenDoctor = (Doctor) SessionUtils.getInstance().getValue(request, "chosen_doctor");
         Service chosenService = (Service) SessionUtils.getInstance().getValue(request, "chosen_service");
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
-
+       
         if (action != null && action.equals("yourself-booking")) {
-            if(chosenDoctor != null) {
-                String dob = request.getParameter("dob");
-                System.out.println(dob);
-                Patient patient = new Patient();
-                pDAO.insertPatient(patient);
-              //response.sendRedirect("/frontend/view/bookingsuccess.jsp");
+            String dob = request.getParameter("dob");
+            String address = request.getParameter("address");
+            String apptTime = request.getParameter("appt-time");
+            String apptDate = request.getParameter("appt-date");
+            String apptNote = request.getParameter("appt-reason"); 
+            
+            if (chosenDoctor != null) {
+                
+                Patient patient = new Patient(TimeUtil.dateConverter(dob)  , address, null , null);
+                int patientId = pDAO.insertPatient(patient);
+                Appointment appt = new Appointment(apptNote , TimeUtil.dateConverter(apptDate) ,apptTime ,"PENDING" ,null ,patient);
+                response.sendRedirect("/frontend/view/bookingsuccess.jsp");
                 return;
             }
-            if(chosenService != null) {
-                
+            if (chosenService != null) {
+
             }
             return;
         }

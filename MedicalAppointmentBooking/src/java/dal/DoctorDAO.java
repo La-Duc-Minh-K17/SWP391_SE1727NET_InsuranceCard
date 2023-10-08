@@ -49,7 +49,8 @@ public class DoctorDAO {
                 String position = rs.getString("doctor_position");
                 String speciality = rs.getString("speName");
                 String description = rs.getString("doctor_description");
-                Doctor d = new Doctor(doctorId, speciality,position, description, username, email, name, gender, phone, image, status);
+                Double serviceFee = rs.getDouble("service_fee");
+                Doctor d = new Doctor(doctorId, speciality,position, description,serviceFee, username, email, name, gender, phone, image, status);
                 doctorList.add(d);
             }
             return doctorList;

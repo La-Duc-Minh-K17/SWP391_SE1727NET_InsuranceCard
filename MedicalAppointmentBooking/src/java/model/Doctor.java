@@ -14,7 +14,7 @@ public class Doctor extends UserAccount {
     private String speciality;
     private String position;
     private String description;
-    
+    private double serviceFee;
     public Doctor() {
         
     }
@@ -25,6 +25,16 @@ public class Doctor extends UserAccount {
         this.position = position;
         this.description = description;
     }       
+
+    public Doctor(int doctorId, String speciality, String position, String description, double serviceFee, String username, String email, String fullName, int gender, String phone, String image, int status) {
+        super(username, email, fullName, gender, phone, image, status);
+        this.doctorId = doctorId;
+        this.speciality = speciality;
+        this.position = position;
+        this.description = description;
+        this.serviceFee = serviceFee;
+    }
+    
     public int getDoctorId() {
         return doctorId;
     }
@@ -55,6 +65,14 @@ public class Doctor extends UserAccount {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getServiceFee() {
+        return serviceFee;
+    }
+
+    public void setServiceFee(double serviceFee) {
+        this.serviceFee = serviceFee;
     }
 
     @Override
