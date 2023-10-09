@@ -269,7 +269,6 @@ public class UserDAO {
                 String phone = rs.getString("phone");
                 int status = rs.getInt("status");
                 account = new UserAccount(userName, emailAddress, fullName, gender, phone, image , status);
-
                 return account;
             }
         } catch (SQLException ex) {
@@ -277,4 +276,5 @@ public class UserDAO {
         }
         return null;
     }
+    
 }

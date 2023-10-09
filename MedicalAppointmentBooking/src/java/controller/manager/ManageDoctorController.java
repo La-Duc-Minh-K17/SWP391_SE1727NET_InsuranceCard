@@ -42,6 +42,7 @@ public class ManageDoctorController extends HttpServlet {
         request.setAttribute("speList", sDAO.getAllSpeciality());
         if (action != null && action.equals("view-all")) {
             List<Doctor> doctorList = dDAO.getAllDoctor();
+            System.out.println(doctorList);
             request.setAttribute("dList", doctorList);
             request.getRequestDispatcher("frontend/view/admin/doctorlist.jsp").forward(request, response);
             return;

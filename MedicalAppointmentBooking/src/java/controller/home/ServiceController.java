@@ -37,7 +37,7 @@ public class ServiceController extends HttpServlet {
             ServicesDAO servicedao = new ServicesDAO();
             List<Service> serviceList = servicedao.getAllService();
             request.setAttribute("services", serviceList);
-            System.out.println(serviceList);
+            
             request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
         }
     }
