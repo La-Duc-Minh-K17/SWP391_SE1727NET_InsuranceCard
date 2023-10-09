@@ -141,35 +141,67 @@ public class ServicesDAO {
     return services;
 }
 public List<Service> searchServicesByName(String keyword) {
-    List<Service> resultList = new ArrayList<>();
-    try {
-        Connection conn = new DBConnection().getConnection(); // Adjust this line to get your database connection.
-        String sql = "SELECT * FROM services s WHERE s.service_name LIKE ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, "%" + keyword + "%");
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            int service_id = rs.getInt("service_id");
-            String service_name = rs.getString("service_name");
-            String service_description = rs.getString("service_description");
-            String service_details = rs.getString("service_details");
-            int fee = rs.getInt("fee");
-            String service_image = ImageProcessing.imageString(rs.getBlob("service_image"));
-            int service_status = rs.getInt("service_status");
-            int category_id = rs.getInt("category_id");
-            Service service = new Service(service_id, service_name, service_description, service_details, fee, service_image, service_status, category_id);
-            resultList.add(service); // Add the service to the result list
+        List<Service> resultList = new ArrayList<>();
+        try (Connection conn = dbc.getConnection()) {
+            String sql = "SELECT * FROM services s WHERE s.service_name LIKE ?";
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, "%" + keyword + "%");
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        int service_id = rs.getInt("service_id");
+                        String service_name = rs.getString("service_name");
+                        String service_description = rs.getString("service_description");
+                        String service_details = rs.getString("service_details");
+                        int fee = rs.getInt("fee");
+                        String service_image = ImageProcessing.imageString(rs.getBlob("service_image"));
+                        int service_status = rs.getInt("service_status");
+                        int category_id = rs.getInt("category_id");
+                        Service service = new Service(service_id, service_name, service_description, service_details, fee, service_image, service_status, category_id);
+                        resultList.add(service); // Add the service to the result list
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        // Close resources
-        rs.close();
-        ps.close();
-        conn.close();
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return resultList;
     }
-    return resultList;
-}
 
+
+
+ public List<Service_Category> getCatetogoryService()  {
+        List<Service_Category> list = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "select * from service_category";
+        try {
+            Connection conn = new DBConnection().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int sc_id = rs.getInt("service_category_id");
+                String sc_name = rs.getString("sc_name");
+                String sc_description = rs.getString("sc_description");
+                int sc_status = rs.getInt("sc_status");
+                int setting_id = rs.getInt("setting_id");
+                Service_Category sc = new Service_Category(sc_id, sc_name,sc_description, sc_status , setting_id);
+                list.add(sc);
+                
+            }
+            return list;
+        } catch (SQLException e) {
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ServicesDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return list;
+    }
 
 
 

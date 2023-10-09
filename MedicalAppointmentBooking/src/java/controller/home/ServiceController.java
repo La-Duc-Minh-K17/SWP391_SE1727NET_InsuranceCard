@@ -12,7 +12,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import model.Service;
+import model.Service_Category;
 
 /**
  *
@@ -35,12 +38,15 @@ public class ServiceController extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             ServicesDAO servicedao = new ServicesDAO();
             String keyword = request.getParameter("keyword");
+            List<Service_Category> serviceCateList;
+            serviceCateList = servicedao.getCatetogoryService();
             List<Service> serviceList;
             if (keyword != null && !keyword.isEmpty()) {
                 serviceList = servicedao.searchServicesByName(keyword);
             } else {
                 serviceList = servicedao.getAllService();
             }
+            request.setAttribute("service_category", serviceCateList);
             request.setAttribute("services", serviceList);
             request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
 
