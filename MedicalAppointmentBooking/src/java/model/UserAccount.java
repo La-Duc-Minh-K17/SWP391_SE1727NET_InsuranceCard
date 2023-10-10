@@ -29,7 +29,7 @@ public class UserAccount {
     public UserAccount() {
 
     }
-
+    
     public UserAccount(String username, String email, String fullName, int gender, String phone, String image, int status) {
         this.username = username;
         this.email = email;

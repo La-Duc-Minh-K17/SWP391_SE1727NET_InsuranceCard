@@ -156,19 +156,19 @@
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Patient Name <span class="text-danger">*</span></label>
-                                                    <input name="name" type="text" class="form-control" placeholder="Patient Name :">
+                                                    <input name="name" type="text" class="form-control" placeholder="Patient Name :" value="${sessionScope.user.fullName}">
                                                 </div>
                                             </div><!--end col-->
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Your Email <span class="text-danger">*</span></label>
-                                                    <input name="email" type="email" class="form-control" placeholder="@example.com">
+                                                    <input name="email" type="email" class="form-control" placeholder="@example.com" value="${sessionScope.user.email}">
                                                 </div> 
                                             </div><!--end col-->
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Your Phone <span class="text-danger">*</span></label>
-                                                    <input name="phone" id="phone" type="tel" class="form-control" placeholder="Your Phone :">
+                                                    <input name="phone" id="phone" type="tel" class="form-control" placeholder="Your Phone :" value="${sessionScope.user.phone}">
                                                 </div> 
                                             </div><!--end col-->
                                             <div class="col-md-6 ">
@@ -177,9 +177,13 @@
                                                 </div>
                                                 <div class=" d-flex justify-content-around radio-group"> <!-- Group for radio buttons -->
                                                     <label for="male">Male</label>
-                                                    <input type="radio"  checked="checked" name="gender" value="Male" required>
-                                                    <label for="female">Female</label>
-                                                    <input type="radio" name="gender" value="Female" required>
+                                                    <c:if test="${sessionScope.user.gender == 1 }">
+                                                        <input type="radio" checked="checked" name="gender" value="Male" required>
+                                                    </c:if>
+                                                    <c:if test="${sessionScope.user.gender == 0 }">
+                                                        <label for="female">Female</label>
+                                                        <input type="radio" checked="checked" name="gender" value="Female" required>
+                                                    </c:if>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">

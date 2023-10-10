@@ -11,7 +11,6 @@
     <head>
     </head>
     <body>
-
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                 <div class="sidebar-brand">
@@ -20,25 +19,23 @@
                         <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                     </a>
                 </div>
-
                 <ul class="sidebar-menu pt-3">
                     <li><a href="index.html"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
                     <li><a href="appointment.html">
                             <i class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a>
                     </li>
-
-                    <li class="sidebar-dropdown">
+                    <li class="sidebar-menu">
                         <a href="<c:url value='/manage-doctor?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>
                     </li>
-                    <li class="sidebar-dropdown">
+                    <li class="sidebar-menu">
                         <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i>Services</a>
                     </li>
 
-                    <li class="sidebar-dropdown">
+                    <li class="sidebar-menu">
                         <a href="javascript:void(0)"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Patients</a>
 
                     </li>
-                    <li class="sidebar-dropdown">
+                    <li class="sidebar-menu">
                         <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
                     </li>
                 </ul>

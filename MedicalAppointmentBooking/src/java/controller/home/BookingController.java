@@ -48,7 +48,7 @@ public class BookingController extends HttpServlet {
         Doctor chosenDoctor = (Doctor) SessionUtils.getInstance().getValue(request, "chosen_doctor");
         Service chosenService = (Service) SessionUtils.getInstance().getValue(request, "chosen_service");
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
-
+        System.out.println(user);
         if (action != null && action.equals("yourself-booking")) {
             String dob = request.getParameter("dob");
             String address = request.getParameter("address");
@@ -65,14 +65,17 @@ public class BookingController extends HttpServlet {
             }
             if (chosenService != null) {
                 Patient patient = new Patient(address, TimeUtil.dateConverter(dob), user.getUserId(), -1);
+                System.out.println(patient);
                 int patientId = pDAO.insertPatient(patient);
+                System.out.println(patientId);
                 Reservation resv = new Reservation(apptNote, TimeUtil.dateConverter(apptDate), apptTime, "PENDING", 1, 1, patientId);
-                rDAO.insertNewReservation(resv);
+                //rDAO.insertNewReservation(resv);
                 response.sendRedirect("/frontend/view/bookingsuccess.jsp");
                 return;
             }
 
         }
+        
         if (action != null && action.equals("relative-booking")) {
             String dob = request.getParameter("dob");
             String address = request.getParameter("address");

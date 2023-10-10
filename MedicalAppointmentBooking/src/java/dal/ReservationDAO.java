@@ -20,7 +20,7 @@ public class ReservationDAO {
     public void insertNewReservation(Reservation resv) {
         PreparedStatement ps = null;
         Connection connection = null;
-        String sql = "INSERT INTO `mabs`.`resevations`\n"
+        String sql = "INSERT INTO `mabs`.`reservations`\n"
                 + "(\n"
                 + "`resevation_note`,\n"
                 + "`resevation_date`,\n"

@@ -24,8 +24,7 @@ public class Service_Category {
         this.setting_id = setting_id;
     }
 
-    
-
+  
     public String getName() {
         return name;
     }

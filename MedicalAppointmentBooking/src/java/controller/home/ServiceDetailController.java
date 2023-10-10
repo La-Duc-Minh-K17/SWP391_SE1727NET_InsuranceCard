@@ -53,7 +53,7 @@ public class ServiceDetailController extends HttpServlet {
             if (action != null && action.equals("book-service")) {
                 int id = Integer.parseInt(request.getParameter("id"));
                 Service serviceDetail = servicedao.getServiceById(id);
-                SessionUtils.getInstance().putValue(request, "service", serviceDetail);
+                SessionUtils.getInstance().putValue(request, "chosen_service", serviceDetail);
                 request.getRequestDispatcher("booking?action=form-filling").forward(request, response);
                 return;
             }
