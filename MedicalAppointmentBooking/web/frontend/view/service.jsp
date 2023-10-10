@@ -129,9 +129,9 @@
                     <div class=" justify-content-end ">
                         <div class="selection-bar btn-success m-2">
                             <select id="filterSelect" class="form-select form-control border rounded-pill bg-light">
-                                <option selected >Default Filter</option>
+                                <option selected >Filter By</option>
                                 <c:forEach items="${requestScope.service_category}" var="c">
-                                    <option value=${c.service_category_id} >"${c.sc_name}</option>
+                                    <option value=${c.sc_id} >"${c.name}</option>
                                 </c:forEach>
                             </select>
                         </div>
