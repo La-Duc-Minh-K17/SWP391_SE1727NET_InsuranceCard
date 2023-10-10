@@ -39,9 +39,6 @@
                 display: flex;
                 flex-direction: column;
             }
-
-
-
             .card-body {
                 flex: 1;
             }
@@ -98,7 +95,7 @@
                         <div class="section-title text-center">
                             <h3 class="sub-title mb-4 text-white title-dark">Services</h3>
                             <p class="para-desc mx-auto text-white-50">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
-                        
+
                             <nav aria-label="breadcrumb" class="d-inline-block mt-3">
                                 <ul class="breadcrumb bg-light rounded mb-0 py-1 px-2">
                                     <li class="breadcrumb-item"><a href="home">Home</a></li>
@@ -111,41 +108,34 @@
             </div><!--end container-->
         </section><!--end section-->
         <div class="container">
-    <div class="row">
-        <div class="col-md-9">
-            <h3 class="title mt-5">List Services</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <form action="search" method="GET">
-                <div class="input-group">
-                    <input type="text" name="keyword" id="searchInput" class="form-control bg-light" placeholder="Search by name">
-                    <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
+            <div class="row">
+                <div class="col-md-9">
+                    <h3 class="title mt-5">List Services</h3>
                 </div>
-            </form>
-        </div>
-        <div class="col-md-6 d-flex align-items-center justify-content-end">
-            <div class="selection-bar btn-success m-5">
-                <select id="sortSelect" class="form-select form-control bg-light">
-                    <option selected disabled>Sort By</option>
-                    <option value="price">Price</option>
-                    <option value="name">Name</option>
-                </select>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <form action="search" method="GET">
+                        <div class="input-group">
+                            <input type="text" name="keyword" id="searchInput" class="form-control bg-light" placeholder="Search by name">
+                            <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-end">
+                    <div class="selection-bar btn-success m-5">
+                        <select id="sortSelect" class="form-select form-control bg-light">
+                            <option selected disabled>Sort By</option>
+                            <option value="price">Price</option>
+                            <option value="name">Name</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
-
-
-
-
-
         <div class="row custom-center">
             <div class="container mt-5 m-5">
                 <div class="row justify-content-center">
-
                     <c:forEach items="${requestScope.services}" var="s" varStatus="loop">
                         <div class="col-md-3 mt-4">
                             <div class="card mb-4">
@@ -158,7 +148,7 @@
                                     <h5 class="text-muted ">$${s.fee}</h5>
                                     <div class="d-flex flex-column align-items-center mt-3">
                                         <div class="">
-                                            <a href="servicedetail?id=${s.service_id}" class="btn btn-primary custom-button">Learn More</a>
+                                            <a href="servicedetail?action=view-detail&id=${s.service_id}" class="btn btn-primary custom-button">Learn More</a>
                                             <a href="#" class="btn btn-success custom-button">Appointment Now</a>
                                         </div>
                                     </div>

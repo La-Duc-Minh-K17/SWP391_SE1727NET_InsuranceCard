@@ -68,7 +68,7 @@ public class NewDetailController extends HttpServlet {
         Blog blogDetail = new Blog();
         blogDetail = dao.getBlogDetailByID(Id);
         request.setAttribute("blogs6", blogsList6);
-        request.setAttribute("data", blogDetail);
+        request.setAttribute("blog", blogDetail);
         request.getRequestDispatcher("frontend/view/blogdetail.jsp").forward(request, response);
     }
 

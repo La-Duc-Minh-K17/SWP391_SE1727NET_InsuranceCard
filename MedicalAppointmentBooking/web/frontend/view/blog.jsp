@@ -162,64 +162,38 @@
         </div>
 
 
-        <div class="container" style="padding-top:10px">
+        <div class="container py-5" style="">
             <section class="blog_area section-padding">
                 <div class="container">      
+                    <form class="" action="new" method="post">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-3">
+                                <div class="card component-wrapper border-0 rounded ">
+                                    <div class="">
+                                        <select name="sort"class="form-select form-control" id="sort">
+                                            <option value="all" ${"all".equals(requestScope.selectedSort) ? 'selected' : ''}>All</option>
+                                            <option value="newest" ${"newest".equals(requestScope.selectedSort) ? 'selected' : ''}>Newest</option>
+                                            <option value="oldest" ${"oldest".equals(requestScope.selectedSort) ? 'selected' : ''}>Oldest</option>
+                                        </select>
 
+                                    </div>
+                                </div>
+                            </div><!--end col-->
+                            <div class="col-3">
+                                <div class="card component-wrapper border-0 rounded ">
 
-                    <form class="flexsearch--form1" action="new" method="post">
-                        <div class="row">
-                            <div class="col-lg-5 mb-5 mb-lg-0">
-                                <div class="blog_left_sidebar">
-                                    <aside class="single_sidebar_widget post_category_widget">
-                                        <div>
-                                            <h5 class="widget_title" style="color: #2d2d2d;text-align: center;">Category</h5>
-                                        </div>
-                                        <div>
-                                            <ul class="list cat-list">
-                                                <select class="name" name="category" id="category">
-                                                    <option value="0" ${requestScope.selectedCategory == 0 ? 'selected' : ''}>All</option>
-                                                    <c:forEach var="o" items="${requestScope.listC}">
-                                                        <option value="${o.blog_category_id}" ${o.blog_category_id == requestScope.selectedCategory ? 'selected' : ''}>${o.name}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </ul>
-                                        </div>
-                                    </aside>
+                                    <div class="">
+                                        <select class="form-select form-control" class="name" name="category" id="category">
+                                            <option value="0" ${requestScope.selectedCategory == 0 ? 'selected' : ''}>All</option>
+                                            <c:forEach var="o" items="${requestScope.listC}">
+                                                <option value="${o.blog_category_id}" ${o.blog_category_id == requestScope.selectedCategory ? 'selected' : ''}>${o.name}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-5 mb-5 mb-lg-0">
-                                <div class="blog_left_sidebar">
-                                    <aside class="single_sidebar_widget post_category_widget">
-                                        <ul class="list cat-list">
-                                            <div>
-                                                <h5 class="widget_title" style="color: #2d2d2d;text-align: center;">Sorted By</h5>
-                                            </div>
-                                            <div>
-                                                <select name="sort" id="sort">
-                                                    <option value="all" ${"all".equals(requestScope.selectedSort) ? 'selected' : ''}>All</option>
-                                                    <option value="newest" ${"newest".equals(requestScope.selectedSort) ? 'selected' : ''}>Newest</option>
-                                                    <option value="oldest" ${"oldest".equals(requestScope.selectedSort) ? 'selected' : ''}>Oldest</option>
-                                                </select>
-                                            </div>
-                                        </ul>
-                                    </aside>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="blog_left_sidebar">
-                                    <aside class="single_sidebar_widget post_category_widget">
-                                        <ul class="list cat-list">
-                                            <div class="flexsearch">
-                                                <div class="flexsearch--wrapper">
-                                                    <div row>
-                                                        <input class="flexsearch--submit" type="submit" value="&#10140" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </ul>
-                                    </aside>
-                                </div>
+                            </div><!--end col-->
+                            <div class="col-3  ">
+                                <input type="submit" class="btn btn-primary px-5" value="Search">
                             </div>
                         </div>
                     </form>
@@ -264,18 +238,18 @@
 
             </div>
         </div>
-                                                <div>
-                                    <ul class="pagination mb-0 mt-5">
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)"
-                                                                 aria-label="Previous">Prev</a></li>
-                                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)"
-                                                                 aria-label="Next">Next</a></li>
-                                    </ul>
-                                </div>
+        <div>
+            <ul class="pagination mb-0 mt-5">
+                <li class="page-item"><a class="page-link" href="javascript:void(0)"
+                                         aria-label="Previous">Prev</a></li>
+                <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+                <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                <li class="page-item"><a class="page-link" href="javascript:void(0)"
+                                         aria-label="Next">Next</a></li>
+            </ul>
+        </div>
         <footer class="bg-footer">
             <div class="container">
                 <div class="row">

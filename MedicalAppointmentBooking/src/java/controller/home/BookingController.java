@@ -48,39 +48,44 @@ public class BookingController extends HttpServlet {
         Doctor chosenDoctor = (Doctor) SessionUtils.getInstance().getValue(request, "chosen_doctor");
         Service chosenService = (Service) SessionUtils.getInstance().getValue(request, "chosen_service");
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
-
         if (action != null && action.equals("yourself-booking")) {
             String dob = request.getParameter("dob");
             String address = request.getParameter("address");
             String apptTime = request.getParameter("appt-time");
             String apptDate = request.getParameter("appt-date");
             String apptNote = request.getParameter("appt-reason");
-
             if (chosenDoctor != null) {
                 Patient patient = new Patient(address, TimeUtil.dateConverter(dob), user.getUserId(), -1);
-                int patientId = pDAO.insertPatient(patient);
+                int patientId = pDAO.getPatientId(patient);
+                if (patientId == -1) {
+                    patientId = pDAO.insertPatient(patient);
+                }
                 Appointment appt = new Appointment(apptNote, TimeUtil.dateConverter(apptDate), apptTime, "PENDING", 1, 1, patientId);
                 aDAO.insertNewAppointment(appt);
-                response.sendRedirect("/frontend/view/bookingsuccess.jsp");
+                response.sendRedirect("frontend/view/bookingsuccess.jsp");
                 return;
             }
             if (chosenService != null) {
                 Patient patient = new Patient(address, TimeUtil.dateConverter(dob), user.getUserId(), -1);
-                int patientId = pDAO.insertPatient(patient);
-                Reservation resv = new Reservation(apptNote, TimeUtil.dateConverter(apptDate), apptTime, "PENDING", 1, 1, patientId);
+                int patientId = pDAO.getPatientId(patient);
+                if (patientId == -1) {
+                    patientId = pDAO.insertPatient(patient);
+                }
+                Reservation resv = new Reservation(apptNote, TimeUtil.dateConverter(apptDate), apptTime, "PENDING", 1, chosenService.getService_id(), patientId);
+                System.out.println(resv);
                 rDAO.insertNewReservation(resv);
-                response.sendRedirect("/frontend/view/bookingsuccess.jsp");
+                response.sendRedirect("frontend/view/bookingsuccess.jsp");
                 return;
             }
 
         }
+
         if (action != null && action.equals("relative-booking")) {
             String dob = request.getParameter("dob");
             String address = request.getParameter("address");
             String apptTime = request.getParameter("appt-time");
             String apptDate = request.getParameter("appt-date");
             String apptNote = request.getParameter("appt-reason");
-
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
@@ -92,22 +97,26 @@ public class BookingController extends HttpServlet {
             if (userRId == -1) {
                 userRId = uRDAO.insertUserRelative(userR);
             }
-
             if (chosenDoctor != null) {
                 Patient patient = new Patient(address, TimeUtil.dateConverter(dob), -1, userRId);
-                int patientId = pDAO.insertPatient(patient);
+                int patientId = pDAO.getPatientId(patient);
+                if (patientId == -1) {
+                    patientId = pDAO.insertPatient(patient);
+                }
                 Appointment appt = new Appointment(apptNote, TimeUtil.dateConverter(apptDate), apptTime, "PENDING", 1, 1, patientId);
                 aDAO.insertNewAppointment(appt);
-                response.sendRedirect("/frontend/view/bookingsuccess.jsp");
+                response.sendRedirect("frontend/view/booking_success.jsp");
                 return;
             }
-
             if (chosenService != null) {
                 Patient patient = new Patient(address, TimeUtil.dateConverter(dob), -1, userRId);
-                int patientId = pDAO.insertPatient(patient);
+                int patientId = pDAO.getPatientId(patient);
+                if (patientId == -1) {
+                    patientId = pDAO.insertPatient(patient);
+                }
                 Reservation resv = new Reservation(apptNote, TimeUtil.dateConverter(apptDate), apptTime, "PENDING", 1, 1, patientId);
                 rDAO.insertNewReservation(resv);
-                response.sendRedirect("/frontend/view/bookingsuccess.jsp");
+                response.sendRedirect("frontend/view/booking_success.jsp");
                 return;
             }
             return;
