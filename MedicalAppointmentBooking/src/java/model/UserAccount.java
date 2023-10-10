@@ -171,9 +171,12 @@ public class UserAccount {
         this.image = image;
     }
 
+    
+
     @Override
     public String toString() {
-        return "UserAccount{" + "username=" + username + ", password=" + password + ", email=" + email + ", fullName=" + fullName + ", gender=" + gender + ", phone=" + phone + ", image=" + image + ", confirmationToken=" + confirmationToken + ", confirmationTokenTime=" + confirmationTokenTime + ", recoveryToken=" + recoveryToken + ", recoveryTokenTime=" + recoveryTokenTime + ", status=" + status + ", role=" + role + '}';
+        return "UserAccount{" + "userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email + ", fullName=" + fullName + ", gender=" + gender + ", phone=" + phone + ", image=" + image + ", confirmationToken=" + confirmationToken + ", confirmationTokenTime=" + confirmationTokenTime + ", recoveryToken=" + recoveryToken + ", recoveryTokenTime=" + recoveryTokenTime + ", status=" + status + ", role=" + role + '}';
     }
+    
 
 }

@@ -22,12 +22,12 @@ public class ReservationDAO {
         Connection connection = null;
         String sql = "INSERT INTO `mabs`.`reservations`\n"
                 + "(\n"
-                + "`resevation_note`,\n"
-                + "`resevation_date`,\n"
-                + "`resevation_time`,\n"
-                + "`resevation_status`,\n"
+                + "`reservation_note`,\n"
+                + "`reservation_date`,\n"
+                + "`reservation_time`,\n"
+                + "`reservation_status`,\n"
                 + "`staff_id`,\n"
-                + "`doctor_id`,\n"
+                + "`service_id`,\n"
                 + "`patient_id`)\n"
                 + "VALUES\n"
                 + "(? ,?,?,?,?,?,?);";
@@ -39,7 +39,7 @@ public class ReservationDAO {
             ps.setString(3, resv.getResvTime());
             ps.setString(4, resv.getStatus());
             ps.setInt(5, resv.getStaffId());
-            ps.setInt(6, resv.getDoctorId());
+            ps.setInt(6, resv.getServiceId());
             ps.setInt(7, resv.getPatientId());
             ps.executeUpdate();
            

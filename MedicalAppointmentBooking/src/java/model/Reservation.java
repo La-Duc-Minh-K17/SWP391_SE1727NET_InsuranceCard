@@ -18,19 +18,19 @@ public class Reservation {
     private String testResult;
     private String status;
     private int staffId;
-    private int doctorId;
+    private int serviceId;
     private int patientId;
 
     public Reservation() {
     }
 
-    public Reservation(String resvNote, Date resvDate, String resvTime, String status, int staffId, int doctorId, int patientId) {
+    public Reservation(String resvNote, Date resvDate, String resvTime, String status, int staffId, int serviceId, int patientId) {
         this.resvNote = resvNote;
         this.resvDate = resvDate;
         this.resvTime = resvTime;
         this.status = status;
         this.staffId = staffId;
-        this.doctorId = doctorId;
+        this.serviceId = serviceId;
         this.patientId = patientId;
     }
     
@@ -90,13 +90,15 @@ public class Reservation {
         this.staffId = staffId;
     }
 
-    public int getDoctorId() {
-        return doctorId;
+    public int getServiceId() {
+        return serviceId;
     }
 
-    public void setDoctorId(int doctorId) {
-        this.doctorId = doctorId;
+    public void setServiceId(int serviceId) {
+        this.serviceId = serviceId;
     }
+
+  
 
     public int getPatientId() {
         return patientId;
@@ -105,5 +107,11 @@ public class Reservation {
     public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
+
+    @Override
+    public String toString() {
+        return "Reservation{" + "resvId=" + resvId + ", resvNote=" + resvNote + ", resvDate=" + resvDate + ", resvTime=" + resvTime + ", testResult=" + testResult + ", status=" + status + ", staffId=" + staffId + ", serviceId=" + serviceId + ", patientId=" + patientId + '}';
+    }
+
     
 }
