@@ -115,14 +115,14 @@
             </div>
             <div class="row mb-5">
                 <div class="col-md-4 d-flex align-items-center">
-                    <form action="service" method="GET">
+                    <form action="service?action=search&keyword=" method="GET">
                         <div class="input-group">
                             <input type="text" name="keyword" id="searchInput" class="form-control border bg-light" onchange="filter()" placeholder="Search by name">
-
                             <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
                         </div>
                     </form>
                 </div>
+
                 <div class="col-md-8 d-flex align-items-center justify-content-end">
                     <div class=" justify-content-end ">
                         <div class="selection-bar btn-success m-2">
@@ -189,26 +189,23 @@
             </ul>
         </div>
 
-<script>
-    function filter() {
-        var category = document.getElementById("Filter").value;
-        var sort = document.getElementById("sortSelect").value;
-        var searchInput = document.getElementById("searchInput").value;
+        <script>
+            function filter() {
+                var category = document.getElementById("Filter").value;
+                var sort = document.getElementById("sortSelect").value;
+                var searchInput = document.getElementById("searchInput").value;
+                var url = "service?action=view-all"; // Default action
+                if (category !== "Filter By") {
+                    url = "service?action=filter&category_id=" + category;
+                } else if (searchInput.trim() !== "") {
+                    url = "service?action=search&keyword=" + searchInput;
+                } else if (sort !== "Default Sort") {
+                    url = "service?action=sorted&by=feename&sort=" + sort; // Use "feename" for sorting by service name
+                }
+                window.location.href = url;
+            }
+        </script>
 
-        var url = "service?action=view-all"; // Default action
-
-        if (category !== "Filter By") {
-            url = "service?action=filter&category_id=" + category;
-        } else if (searchInput.trim() !== "") {
-            url = "service?action=search&keyword=" + searchInput;
-        }
-
-        // Optionally, you can add logic for sorting based on the 'sort' value.
-
-        // Redirect to the selected URL.
-        window.location.href = url;
-    }
-</script>
 
         <jsp:include page="/frontend/common/footer.jsp" />
 

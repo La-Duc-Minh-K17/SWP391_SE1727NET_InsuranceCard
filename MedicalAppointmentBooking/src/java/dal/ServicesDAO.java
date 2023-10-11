@@ -166,7 +166,7 @@ public class ServicesDAO {
                         int service_status = rs.getInt("service_status");
                         int category_id = rs.getInt("category_id");
                         Service service = new Service(service_id, service_name, service_description, service_details, fee, service_image, service_status, category_id);
-                        resultList.add(service); // Add the service to the result list
+                        resultList.add(service); 
                     }
                 }
             }
@@ -228,7 +228,7 @@ public class ServicesDAO {
                         int service_status = rs.getInt("service_status");
                         int category_id = rs.getInt("category_id");
                         Service service = new Service(service_id, service_name, service_description, service_details, fee, service_image, service_status, category_id);
-                        resultList.add(service); // Add the service to the result list
+                        resultList.add(service); 
                     }
                 }
             }
@@ -241,7 +241,7 @@ public class ServicesDAO {
         
     }
     
-    public List<Service> sortService(int scId, String sort) {
+    public List<Service> sortService(String by, String sort) {
         List<Service> slist = new ArrayList<>();
         Connection connection = null;
         PreparedStatement ps = null;
@@ -249,10 +249,10 @@ public class ServicesDAO {
         String sql;
         if ("all".equals(sort)) {
             sql = "SELECT * FROM services";
-        } else if ("fee".equals(sort)) {
+        } else if ("price".equals(sort)) {
             sql = "SELECT * FROM services ORDER BY fee ASC";
         }
-        else if("feedsc".equals(sort)) {
+        else if("pricedsc".equals(sort)) {
             sql = "SELECT * FROM services ORDER BY fee DESC";
         }
         else {
@@ -272,7 +272,7 @@ public class ServicesDAO {
                         int service_status = rs.getInt("service_status");
                         int category_id = rs.getInt("category_id");
                         Service service = new Service(service_id, service_name, service_description, service_details, fee, service_image, service_status, category_id);
-                        slist.add(service); // Add the service to the result list
+                        slist.add(service); 
 
                 }
                 return slist;
