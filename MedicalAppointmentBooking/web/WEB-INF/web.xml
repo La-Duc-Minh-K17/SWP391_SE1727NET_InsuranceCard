@@ -138,10 +138,6 @@
         <url-pattern>/booking</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SearchController</servlet-name>
-        <url-pattern>/search</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
 
         <servlet-name>AddSetting</servlet-name>
         <url-pattern>/addSetting</url-pattern>
