@@ -31,10 +31,6 @@ public class Blog_Category {
         this.setting_id = setting_id;
     }
 
-    public Blog_Category(int categoryId, String categoryName) {
-        this.blog_category_id = categoryId;
-        this.name = categoryName;
-    }
 
     public int getBlog_category_id() {
         return blog_category_id;
