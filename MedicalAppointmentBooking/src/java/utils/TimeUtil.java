@@ -25,7 +25,6 @@ public class TimeUtil {
     }
 
     public static java.sql.Date dateConverter(String dateString) {
-
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             java.util.Date utilDate = dateFormat.parse(dateString);
