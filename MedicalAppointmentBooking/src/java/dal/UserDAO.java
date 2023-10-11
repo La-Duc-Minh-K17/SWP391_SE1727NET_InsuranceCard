@@ -6,6 +6,7 @@ package dal;
 
 import dbContext.DBConnection;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -98,7 +99,7 @@ public class UserDAO {
             ps = connection.prepareStatement(sql);
             ps.setString(1, newPassword);
             ps.setString(2, user.getUserName());
-            System.out.println(user.getUserName());
+
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -123,12 +124,16 @@ public class UserDAO {
                 + "`full_name`,\n"
                 + "`gender`,\n"
                 + "`phone`,\n"
+                + "`dob`,\n"
+                + "`address`,\n"
                 + "`status`,\n"
                 + "`confirmation_token`,\n"
                 + "`confirmation_token_time`,\n"
                 + "`role_id`)\n"
                 + "VALUES\n"
                 + "( ?,\n"
+                + "?,\n"
+                + "?,\n"
                 + "?,\n"
                 + "?,\n"
                 + "?,\n"
@@ -147,10 +152,12 @@ public class UserDAO {
             ps.setString(4, user.getFullName());
             ps.setInt(5, user.getGender());
             ps.setString(6, user.getPhone());
-            ps.setInt(7, user.getStatus());
-            ps.setString(8, user.getConfirmationToken());
-            ps.setTimestamp(9, user.getConfirmationTokenTime());
-            ps.setInt(10, user.getRole().getRole_id());
+            ps.setDate(7, user.getDob());
+            ps.setString(8, user.getAddress());
+            ps.setInt(9, user.getStatus());
+            ps.setString(10, user.getConfirmationToken());
+            ps.setTimestamp(11, user.getConfirmationTokenTime());
+            ps.setInt(12, user.getRole().getRole_id());
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -256,7 +263,6 @@ public class UserDAO {
                 + "AND password = ?";
         try {
             connection = dbc.getConnection();
-
             stm = connection.prepareStatement(sql);
             stm.setString(1, username);
             stm.setString(2, password);
@@ -271,8 +277,9 @@ public class UserDAO {
                 int gender = rs.getInt("gender");
                 String phone = rs.getString("phone");
                 int status = rs.getInt("status");
-                account = new UserAccount(userName, emailAddress, fullName, gender, phone, image , status);
-                account.setUserId(id);
+                Date dob = rs.getDate("dob");
+                String address = rs.getString("address");
+                account = new UserAccount(id, userName, emailAddress, fullName, gender, phone, image, dob, address, status);
                 return account;
             }
         } catch (SQLException ex) {
@@ -292,32 +299,26 @@ public class UserDAO {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
             result = ps.executeQuery();
-
             if (result.next()) {
-
                 String userName = result.getString("username");
                 String emailAddress = result.getString("email");
                 String full_name = result.getString("full_name");
-                String image = null;
-                if (result.getBlob("image") != null) {
-                    image = ImageProcessing.imageString(result.getBlob("image"));
-                }
+                String image = ImageProcessing.imageString(result.getBlob("image"));
                 int gender = result.getInt("gender");
                 String phone = result.getString("phone");
                 int status = result.getInt("status");
-
                 userAccount = new UserAccount(userName, emailAddress, full_name, gender, phone, image, status);
             }
             return userAccount;
         } catch (SQLException ex) {
-            
+
         } finally {
             if (connection != null) {
                 // closes the database connection
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    
+
                 }
             }
 
@@ -325,5 +326,31 @@ public class UserDAO {
         return null;
     }
 
-}
+    public int getRandomStaffId() {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet result = null;
+        String sql = "";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            result = ps.executeQuery();
+            if (result.next()) {
+               return result.getInt(1);
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
 
+                }
+            }
+
+        }
+        return -1;
+    }
+}

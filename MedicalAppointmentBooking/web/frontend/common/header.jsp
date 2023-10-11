@@ -77,7 +77,7 @@
                                     <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="data:image/png;base64,${sessionScope.user.image}" class="avatar avatar-ex-small rounded-circle" alt=""></button> 
                                     </c:if>
                                     <c:if test="${sessionScope.user.image == 'default'}">
-                                    <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/avatar.png" class="avatar avatar-ex-small rounded-circle" alt=""></button>
+                                    <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="frontend/template/assets/images/avatar.png" class="avatar avatar-ex-small rounded-circle" alt=""></button>
                                     </c:if>
                                 </c:if>
 

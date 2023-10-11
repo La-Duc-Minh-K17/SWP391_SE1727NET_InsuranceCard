@@ -11,7 +11,8 @@ import java.sql.Date;
  * @author Admin
  */
 public class Reservation {
-     private int resvId;
+
+    private int resvId;
     private String resvNote;
     private Date resvDate;
     private String resvTime;
@@ -33,7 +34,7 @@ public class Reservation {
         this.serviceId = serviceId;
         this.patientId = patientId;
     }
-    
+
     public int getResvId() {
         return resvId;
     }
@@ -98,8 +99,6 @@ public class Reservation {
         this.serviceId = serviceId;
     }
 
-  
-
     public int getPatientId() {
         return patientId;
     }
@@ -113,5 +112,4 @@ public class Reservation {
         return "Reservation{" + "resvId=" + resvId + ", resvNote=" + resvNote + ", resvDate=" + resvDate + ", resvTime=" + resvTime + ", testResult=" + testResult + ", status=" + status + ", staffId=" + staffId + ", serviceId=" + serviceId + ", patientId=" + patientId + '}';
     }
 
-    
 }
