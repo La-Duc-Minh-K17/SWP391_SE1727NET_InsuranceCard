@@ -91,7 +91,7 @@
                                 <div class="card component-wrapper border-0 rounded shadow">
                                     <div>
                                         <select class="form-select form-control" id="speFilter" onchange="filter()">
-                                            <option selected disabled>Category</option>
+                                            <option  value="0">Category</option>
                                             <c:forEach items="${cDAO}" var="o">
                                                 <option value="${o.blog_category_id}">${o.name}</option>  
                                             </c:forEach>
@@ -132,7 +132,7 @@
                                                 <div class="container">
                                                     <div class="row">
                                                         <c:forEach var="o" items="${requestScope.dList}">
-                                                            
+
                                                             <div class=" col-lg-4 col-md-6 col-12 mb-4 pb-2" value="${o.blog_id}">
                                                                 <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                                                                     <div class="imagefit">
@@ -155,13 +155,18 @@
 
                                                                         <div>
                                                                             <div class="card component-wrapper border-0 rounded ">
-                                                                                <div class="row">
-                                                                                    <div class="mb-2 col-lg-6">
+                                                                                <div class="row justify-content-center">
+                                                                                    <div class="mb-2 col-4">
                                                                                         <a href="<c:url value='/manageblog?action=edit&id=${o.blog_id}'/> " class="btn btn-primary btn-sm">Edit</a>
                                                                                     </div>
-                                                                                    <div class="mb-2 col-lg-6">
-                                                                                        <a href="<c:url value='/manageblog?action=delete&id=${o.blog_id}'/> "class="btn btn-primary btn-sm" >Delete</a>
+                                                                                    <div class="mb-2 col-4">
+                                                                                        <a href="<c:url value='/manageblog?action=detail&blog_id=${o.blog_id}'/> " class="btn btn-success btn-sm">View</a>
                                                                                     </div>
+                                                                                    <div class="mb-2 col-4">
+                                                                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="deleteProduct(this)" data-id="${o.blog_id}"class=" btn-sm btn btn-danger"> Delete</a>
+                                                                                    </div>
+
+
                                                                                 </div>
                                                                             </div>
 
@@ -169,7 +174,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                                                   
+
                                                         </c:forEach>
                                                     </div>
                                                 </div>
@@ -200,6 +205,27 @@
             <!-- Modal -->
 
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form action="manageblog?action=delete" method="post">
+                    <div class="modal-content">
+                        <div class="modal-header border-bottom p-3">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure to delete this blog ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <input type="hidden" id="delete_blog_input" name="delete_blog_id" value="">
+                            <input type="submit" class="btn btn-danger" name="delete" value="Delete">                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <!-- page-wrapper -->
         <!-- javascript -->
         <script>
@@ -208,6 +234,12 @@
                 const url = 'http://localhost:8082/MedicalAppointmentBooking/manageblog?action=filter&blog_category_id=';
                 const filterElement = document.getElementById("speFilter").value;
                 window.location.href = url + filterElement;
+            }
+            function deleteProduct(link) {
+                var dataId = link.getAttribute('data-id');
+                let deleteProductInput = document.getElementById('delete_blog_input');
+                deleteProductInput.value = dataId;
+
             }
         </script>
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
