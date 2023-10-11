@@ -12,11 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import static java.util.Collections.sort;
 import model.Service;
-import model.Service_Category;
 
 /**
  *
@@ -37,9 +33,41 @@ public class ServiceController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+        ServicesDAO sDAO = new ServicesDAO();
+        String action = request.getParameter("action");
+        request.setAttribute("cateList", sDAO.getAllServiceCategory());
+        if (action != null && action.equals("view-all")) {
+            List<Service> serList = sDAO.getAllService();
+            request.setAttribute("sList", serList);
+            request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("filter")) {
+            int cateId = Integer.parseInt(request.getParameter("category_id"));
+            List<Service> serList = sDAO.getServiceByCategoryID(cateId);
+            request.setAttribute("sList", serList);
+            request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("search")) {
+            String keyword = request.getParameter("keyword").trim();
+            List<Service> sList = sDAO.searchServicesByName(keyword);
+            request.setAttribute("sList", sList);
+            request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("view")) {
+            int serivce_id = Integer.parseInt(request.getParameter("id"));
+            Service service = sDAO.getServiceById(serivce_id);
+            request.setAttribute("service", service);
+            request.getRequestDispatcher("frontend/view/servicedetail.jsp").forward(request, response);
+
         }
     }
+        
 
+    }
+ 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -52,20 +80,7 @@ public class ServiceController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ServicesDAO servicedao = new ServicesDAO();
-        String keyword = request.getParameter("keyword");
-        List<Service_Category> serviceCateList;
-        serviceCateList = servicedao.getAllServiceCategory();
-        List<Service> serviceList;
-        if (keyword != null && !keyword.isEmpty()) {
-            serviceList = servicedao.searchServicesByName(keyword);
-        } else {
-            serviceList = servicedao.getAllService();
-        }
-        request.setAttribute("service_category", serviceCateList);
-        request.setAttribute("services", serviceList);
-        request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
-
+        processRequest(request, response);
     }
 
     /**
@@ -79,25 +94,7 @@ public class ServiceController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ServicesDAO servicedao = new ServicesDAO();
-        String selectedCategory = request.getParameter("category");
-        String selectedSort = request.getParameter("sort");
-        request.setAttribute("selectedCategory", selectedCategory);
-        request.setAttribute("selectedSort", selectedSort);
-        int categoryId = Integer.parseInt(request.getParameter("sc_Id"));
-        String sort = request.getParameter("sort");
-        List<Service> sList = new ArrayList<>();
-        List<Service_Category> serviceCateList;
-        serviceCateList = servicedao.getAllServiceCategory();
-        if (categoryId == 0) {
-            sList = servicedao.sortServiceByCategoryID(categoryId, sort);
-        } else {
-            sList = servicedao.sortService(categoryId, sort);
-        }
-        request.setAttribute("Lists", sList);
-        request.setAttribute("Listsc", serviceCateList);
-        request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
-
+        processRequest(request, response);
     }
 
     /**
@@ -110,4 +107,6 @@ public class ServiceController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+
 }
+        
