@@ -1,4 +1,4 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -12,6 +12,7 @@ import java.sql.Timestamp;
  * @author Admin
  */
 public class UserAccount {
+
     private int userId;
     private String username;
     private String password;
@@ -32,7 +33,7 @@ public class UserAccount {
     public UserAccount() {
 
     }
-    
+
     public UserAccount(String username, String email, String fullName, int gender, String phone, String image, int status) {
         this.username = username;
         this.email = email;
@@ -43,13 +44,15 @@ public class UserAccount {
         this.status = status;
     }
 
-    public UserAccount(String username, String password, String email, String fullName, int gender, String phone, String confirmationToken, Timestamp confirmationTokenTime, int status, Role role) {
+    public UserAccount(String username, String password, String email, String fullName, int gender, String phone, Date dob, String address, String confirmationToken, Timestamp confirmationTokenTime, int status, Role role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.fullName = fullName;
         this.gender = gender;
         this.phone = phone;
+        this.dob = dob;
+        this.address = address;
         this.confirmationToken = confirmationToken;
         this.confirmationTokenTime = confirmationTokenTime;
         this.status = status;
@@ -81,7 +84,7 @@ public class UserAccount {
         this.address = address;
         this.status = status;
     }
-    
+
     public int getUserId() {
         return userId;
     }
@@ -94,10 +97,26 @@ public class UserAccount {
         return username;
     }
 
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
-    
+
     public String getUserName() {
         return username;
     }
@@ -186,12 +205,9 @@ public class UserAccount {
         this.image = image;
     }
 
-    
-
     @Override
     public String toString() {
         return "UserAccount{" + "userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email + ", fullName=" + fullName + ", gender=" + gender + ", phone=" + phone + ", image=" + image + ", confirmationToken=" + confirmationToken + ", confirmationTokenTime=" + confirmationTokenTime + ", recoveryToken=" + recoveryToken + ", recoveryTokenTime=" + recoveryTokenTime + ", status=" + status + ", role=" + role + '}';
     }
-    
 
 }

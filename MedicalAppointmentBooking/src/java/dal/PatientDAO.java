@@ -23,22 +23,21 @@ public class PatientDAO {
         PreparedStatement ps = null;
         Connection connection = null;
         String sql = "INSERT INTO mabs.patients "
-                + "(`dob` ,address , user_id , relative_id) VALUES ( ? , ? , ? , ? )";
+                + "( user_id , relative_id) VALUES ( ? , ? )";
         try {
             connection = dbc.getConnection();
 
             ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.setDate(1, patient.getDob());
-            ps.setString(2, patient.getAddress());
+          
             if (patient.getUserAccount() == null) {
-                ps.setNull(3, java.sql.Types.INTEGER);
+                ps.setNull(1, java.sql.Types.INTEGER);
             } else {
-                ps.setInt(3, patient.getUserAccount().getUserId());
+                ps.setInt(1, patient.getUserAccount().getUserId());
             }
             if (patient.getUserRelative() == null) {
-                ps.setNull(4, java.sql.Types.INTEGER);
+                ps.setNull(2, java.sql.Types.INTEGER);
             } else {
-                ps.setInt(4, patient.getUserRelative().getRelativeId());
+                ps.setInt(2, patient.getUserRelative().getRelativeId());
             }
             int affectedRow = ps.executeUpdate();
             if (affectedRow == 1) {

@@ -24,11 +24,13 @@ public class UserRelative {
     public UserRelative() {
     }
 
-    public UserRelative(String fullName, String phone,int gender, String email, int userId) {
+    public UserRelative(String fullName, String phone,int gender, String email,Date dob , String address, int userId) {
         this.fullName = fullName;
         this.phone = phone;
         this.gender = gender;
         this.email = email;
+        this.dob = dob;
+        this.address = address;
         this.userId = userId;
     }
 
@@ -91,6 +93,22 @@ public class UserRelative {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
     
 }

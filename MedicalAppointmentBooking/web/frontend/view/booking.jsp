@@ -195,13 +195,13 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Date of Birth<span class="text-danger">*</span></label>
-                                                    <input name="dob"  type="date" class="flatpickr flatpickr-input form-control" id="dob">
+                                                    <input name="dob"  type="date" class="flatpickr flatpickr-input form-control" id="dob" value="${sessionScope.user.dob}">
                                                 </div> 
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Address <span class="text-danger">*</span></label>
-                                                    <input name="address" class="form-control" placeholder="Address:">
+                                                    <input name="address" class="form-control" placeholder="Address:" value="${sessionScope.user.address}">
                                                 </div>
                                             </div><!--end col-->
                                             <div class="p-6">
@@ -398,7 +398,6 @@
         <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/jquery.min.js'/>"></script>
-
         <script src="<c:url value= '/frontend/template/assets/js/flatpickr.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/select2.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/select2.init.js'/>"></script>
@@ -411,10 +410,6 @@
                 maxDate: new Date().fp_incr(14),
                 dateFormat: "d/m/Y"
 
-            });
-            $("#dob").flatpickr({
-                defaultDate: new Date(),
-                dateFormat: "d/m/Y"
             });
 
             $("#checkin-date1").flatpickr({

@@ -13,8 +13,7 @@ import java.sql.Date;
 public class Patient {
 
     private int patientId;
-    private String address;
-    private Date dob;
+   
     private UserAccount userAccount;
     private UserRelative userRelative;
 
@@ -22,9 +21,8 @@ public class Patient {
        
     }
 
-    public Patient(String address, Date dob, UserAccount userAccountId, UserRelative userRelativeId) {
-        this.address = address;
-        this.dob = dob;
+    public Patient(UserAccount userAccountId, UserRelative userRelativeId) {
+      
         this.userAccount = userAccountId;
         this.userRelative = userRelativeId;
     }
@@ -38,21 +36,8 @@ public class Patient {
         this.patientId = patientId;
     }
 
-    public String getAddress() {
-        return address;
-    }
+   
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
 
     public UserAccount getUserAccount() {
         return userAccount;
@@ -70,10 +55,13 @@ public class Patient {
         this.userRelative = userRelative;
     }
 
-    @Override
-    public String toString() {
-        return "Patient{" + "patientId=" + patientId + ", address=" + address + ", dob=" + dob + ", userAccount=" + userAccount + ", userRelative=" + userRelative + '}';
+    public Patient(int patientId, UserAccount userAccount, UserRelative userRelative) {
+        this.patientId = patientId;
+        this.userAccount = userAccount;
+        this.userRelative = userRelative;
     }
+
+    
 
     
         

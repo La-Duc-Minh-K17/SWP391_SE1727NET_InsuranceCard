@@ -57,7 +57,7 @@ public class BookingController extends HttpServlet {
             String apptDate = request.getParameter("appt-date");
             String apptNote = request.getParameter("appt-reason");
             if (chosenDoctor != null) {
-                Patient patient = new Patient(address, TimeUtil.dateConverter(dob), user, null);
+                Patient patient = new Patient( user, null);
                 int patientId = pDAO.getPatientId(patient);
                 if (patientId == -1) {
                     patientId = pDAO.insertPatient(patient);
@@ -68,7 +68,7 @@ public class BookingController extends HttpServlet {
                 return;
             }
             if (chosenService != null) {
-                Patient patient = new Patient(address, TimeUtil.dateConverter(dob), user, null);
+                Patient patient = new Patient( user, null);
                 int patientId = pDAO.getPatientId(patient);
                 if (patientId == -1) {
                     patientId = pDAO.insertPatient(patient);
@@ -91,7 +91,7 @@ public class BookingController extends HttpServlet {
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             int gender = Integer.parseInt(request.getParameter("gender"));
-            UserRelative userR = new UserRelative(name, phone, gender, email, user.getUserId());
+            UserRelative userR = new UserRelative(name, phone, gender, email, TimeUtil.dateConverter(dob) , address, user.getUserId());
             int userRId = uRDAO.getUserRId(userR);
 
             if (userRId == -1) {
@@ -99,7 +99,7 @@ public class BookingController extends HttpServlet {
             }
             userR.setRelativeId(userRId);
             if (chosenDoctor != null) {
-                Patient patient = new Patient(address, TimeUtil.dateConverter(dob), null, userR);
+                Patient patient = new Patient( null, userR);
                 int patientId = pDAO.getPatientId(patient);
                 if (patientId == -1) {
                     patientId = pDAO.insertPatient(patient);
@@ -110,7 +110,7 @@ public class BookingController extends HttpServlet {
                 return;
             }
             if (chosenService != null) {
-                Patient patient = new Patient(address, TimeUtil.dateConverter(dob), null, userR);
+                Patient patient = new Patient( null, userR);
                 int patientId = pDAO.getPatientId(patient);
                 if (patientId == -1) {
                     patientId = pDAO.insertPatient(patient);
