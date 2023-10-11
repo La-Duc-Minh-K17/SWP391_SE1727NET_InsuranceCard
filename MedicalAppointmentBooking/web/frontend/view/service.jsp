@@ -120,7 +120,7 @@
                 <div class="col-md-4 d-flex align-items-center">
                     <form action="service" method="GET">
                         <div class="input-group">
-                            <input type="text" name="keyword" id="searchInput" class="form-control border bg-light" placeholder="Search by name">
+                            <input type="text" name="keyword" id="searchInput" class="form-control border bg-light" onchange="filter()" placeholder="Search by name">
                             <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
                         </div>
                     </form>
@@ -128,9 +128,9 @@
                 <div class="col-md-8 d-flex align-items-center justify-content-end">
                     <div class=" justify-content-end ">
                         <div class="selection-bar btn-success m-2">
-                            <select id="filterSelect" class="form-select form-control border rounded-pill bg-light">
+                            <select class="form-select form-control border rounded-pill bg-light" id="Filter" onchange="filter()">
                                 <option selected >Filter By</option>
-                                <c:forEach items="${requestScope.service_category}" var="c">
+                                <c:forEach items="${requestScope.cateList}" var="c" >
                                     <option value=${c.sc_id} >"${c.name}</option>
                                 </c:forEach>
                             </select>
@@ -138,7 +138,7 @@
                     </div>
                     <div class=" justify-content-end">
                         <div class="selection-bar btn-primary m-2">
-                            <select id="sortSelect" class="form-select form-control border rounded-pill bg-light">
+                            <select id="sortSelect" class="form-select form-control border rounded-pill bg-light" onchange="filter()" >
                                 <option selected >Default Sort</option>
                                 <option value="price">Price</option>
                                 <option value="name">Name</option>
@@ -160,7 +160,7 @@
                 <div class="container mt-5 m-5">
                     <div class="row justify-content-center">
 
-                        <c:forEach items="${requestScope.services}" var="s" varStatus="loop">
+                        <c:forEach items="${requestScope.sList}" var="s" varStatus="loop">
                             <div class="col-md-3 mt-4">
                                 <div class="card mb-4">
                                     <div class="card-img-container">
@@ -200,43 +200,27 @@
             </ul>
         </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const sortSelect = document.getElementById('sortSelect');
-                const cardsContainer = document.querySelector('.row.justify-content-center');
+<script>
+    function filter() {
+        var category = document.getElementById("Filter").value;
+        var sort = document.getElementById("sortSelect").value;
+        var searchInput = document.getElementById("searchInput").value;
 
-                sortSelect.addEventListener('change', function () {
-                    const selectedValue = this.value;
+        var url = "service?action=view-all"; // Default action
 
-                    // Get all card elements
-                    const cards = cardsContainer.querySelectorAll('.col-md-3');
+        if (category !== "Filter By") {
+            url = "service?action=filter&category_id=" + category;
+        } else if (searchInput.trim() !== "") {
+            url = "service?action=search&keyword=" + searchInput;
+        }
 
-                    // Convert NodeList to an array for easier sorting
-                    const cardsArray = Array.from(cards);
+        // Optionally, you can add logic for sorting based on the 'sort' value.
 
-                    if (selectedValue === 'name') {
-                        // Sort cards by service name
-                        cardsArray.sort(function (a, b) {
-                            const nameA = a.querySelector('.card-title').textContent.toLowerCase();
-                            const nameB = b.querySelector('.card-title').textContent.toLowerCase();
-                            return nameA.localeCompare(nameB);
-                        });
-                    } else if (selectedValue === 'price') {
-                        // Sort cards by service fee
-                        cardsArray.sort(function (a, b) {
-                            const feeA = parseFloat(a.querySelector('.text-muted').textContent.replace('$', ''));
-                            const feeB = parseFloat(b.querySelector('.text-muted').textContent.replace('$', ''));
-                            return feeA - feeB;
-                        });
-                    }
+        // Redirect to the selected URL.
+        window.location.href = url;
+    }
+</script>
 
-                    // Re-append sorted cards to the container
-                    cardsArray.forEach(function (card) {
-                        cardsContainer.appendChild(card);
-                    });
-                });
-            });
-        </script>
 
 
 
