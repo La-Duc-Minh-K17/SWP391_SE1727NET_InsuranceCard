@@ -15,18 +15,18 @@ public class Patient {
     private int patientId;
     private String address;
     private Date dob;
-    private int userAccountId;
-    private int userRelativeId;
+    private UserAccount userAccount;
+    private UserRelative userRelative;
 
     public Patient() {
        
     }
 
-    public Patient(String address, Date dob, int userAccountId, int userRelativeId) {
+    public Patient(String address, Date dob, UserAccount userAccountId, UserRelative userRelativeId) {
         this.address = address;
         this.dob = dob;
-        this.userAccountId = userAccountId;
-        this.userRelativeId = userRelativeId;
+        this.userAccount = userAccountId;
+        this.userRelative = userRelativeId;
     }
 
     
@@ -54,27 +54,28 @@ public class Patient {
         this.dob = dob;
     }
 
-    public int getUserAccountId() {
-        return userAccountId;
+    public UserAccount getUserAccount() {
+        return userAccount;
     }
 
-    public void setUserAccountId(int userAccountId) {
-        this.userAccountId = userAccountId;
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 
-    public int getUserRelativeId() {
-        return userRelativeId;
+    public UserRelative getUserRelative() {
+        return userRelative;
     }
 
-    public void setUserRelativeId(int userRelativeId) {
-        this.userRelativeId = userRelativeId;
+    public void setUserRelative(UserRelative userRelative) {
+        this.userRelative = userRelative;
     }
 
     @Override
     public String toString() {
-        return "Patient{" + "patientId=" + patientId + ", address=" + address + ", dob=" + dob + ", userAccountId=" + userAccountId + ", userRelativeId=" + userRelativeId + '}';
+        return "Patient{" + "patientId=" + patientId + ", address=" + address + ", dob=" + dob + ", userAccount=" + userAccount + ", userRelative=" + userRelative + '}';
     }
 
+    
         
 
 }

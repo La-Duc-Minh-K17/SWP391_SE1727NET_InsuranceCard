@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
@@ -19,6 +20,8 @@ public class UserAccount {
     private int gender;
     private String phone;
     private String image;
+    private Date dob;
+    private String address;
     private String confirmationToken;
     private Timestamp confirmationTokenTime;
     private String recoveryToken;
@@ -64,7 +67,19 @@ public class UserAccount {
         this.confirmationTokenTime = confirmationTokenTime;
         this.recoveryToken = recoveryToken;
         this.recoveryTokenTime = recoveryTokenTime;
+    }
 
+    public UserAccount(int userId, String username, String email, String fullName, int gender, String phone, String image, Date dob, String address, int status) {
+        this.userId = userId;
+        this.username = username;
+        this.email = email;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.phone = phone;
+        this.image = image;
+        this.dob = dob;
+        this.address = address;
+        this.status = status;
     }
     
     public int getUserId() {

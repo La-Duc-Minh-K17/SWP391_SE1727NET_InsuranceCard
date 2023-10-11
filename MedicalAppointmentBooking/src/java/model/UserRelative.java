@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.sql.Date;
+
 
 /**
  *
@@ -14,14 +16,15 @@ public class UserRelative {
     private String fullName;
     private String phone;
     private int gender;
+    private Date dob;
+    private String address;
     private String email;
     private int userId;
 
     public UserRelative() {
     }
 
-    public UserRelative( String fullName, String phone,int gender, String email, int userId) {
-      
+    public UserRelative(String fullName, String phone,int gender, String email, int userId) {
         this.fullName = fullName;
         this.phone = phone;
         this.gender = gender;
@@ -29,6 +32,17 @@ public class UserRelative {
         this.userId = userId;
     }
 
+    public UserRelative(int relativeId, String fullName, String phone, int gender, Date dob, String address, String email, int userId) {
+        this.relativeId = relativeId;
+        this.fullName = fullName;
+        this.phone = phone;
+        this.gender = gender;
+        this.dob = dob;
+        this.address = address;
+        this.email = email;
+        this.userId = userId;
+    }
+    
     public int getRelativeId() {
         return relativeId;
     }

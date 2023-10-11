@@ -9,8 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Patient;
 
 /**
@@ -32,15 +30,15 @@ public class PatientDAO {
             ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setDate(1, patient.getDob());
             ps.setString(2, patient.getAddress());
-            if (patient.getUserAccountId() == -1) {
+            if (patient.getUserAccount() == null) {
                 ps.setNull(3, java.sql.Types.INTEGER);
             } else {
-                ps.setInt(3, patient.getUserAccountId());
+                ps.setInt(3, patient.getUserAccount().getUserId());
             }
-            if (patient.getUserRelativeId() == -1) {
+            if (patient.getUserRelative() == null) {
                 ps.setNull(4, java.sql.Types.INTEGER);
             } else {
-                ps.setInt(4, patient.getUserRelativeId());
+                ps.setInt(4, patient.getUserRelative().getRelativeId());
             }
             int affectedRow = ps.executeUpdate();
             if (affectedRow == 1) {
@@ -70,20 +68,18 @@ public class PatientDAO {
         PreparedStatement ps = null;
         Connection connection = null;
         String sql = "";
-        if (patient.getUserAccountId() != -1) {
-            sql = "select * from mabs.patients where user_id = ?";
+        if (patient.getUserAccount() != null) {
+            sql = "select * from mabs.patients where user_id = ? ";
         } else {
             sql = "select * from mabs.patients where relative_id = ?";
         }
-
         try {
-
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            if (patient.getUserAccountId() != -1) {
-                ps.setInt(1, patient.getUserAccountId());
+            if (patient.getUserAccount() != null) {
+                ps.setInt(1, patient.getUserAccount().getUserId());
             } else {
-                ps.setInt(1, patient.getUserRelativeId());
+                ps.setInt(1, patient.getUserRelative().getRelativeId());
             }
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
