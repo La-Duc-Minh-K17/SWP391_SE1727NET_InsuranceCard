@@ -29,7 +29,7 @@ public class UserAccount {
     public UserAccount() {
 
     }
-
+    
     public UserAccount(String username, String email, String fullName, int gender, String phone, String image, int status) {
         this.username = username;
         this.email = email;
@@ -171,9 +171,12 @@ public class UserAccount {
         this.image = image;
     }
 
+    
+
     @Override
     public String toString() {
-        return "UserAccount{" + "username=" + username + ", password=" + password + ", email=" + email + ", fullName=" + fullName + ", gender=" + gender + ", phone=" + phone + ", image=" + image + ", confirmationToken=" + confirmationToken + ", confirmationTokenTime=" + confirmationTokenTime + ", recoveryToken=" + recoveryToken + ", recoveryTokenTime=" + recoveryTokenTime + ", status=" + status + ", role=" + role + '}';
+        return "UserAccount{" + "userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email + ", fullName=" + fullName + ", gender=" + gender + ", phone=" + phone + ", image=" + image + ", confirmationToken=" + confirmationToken + ", confirmationTokenTime=" + confirmationTokenTime + ", recoveryToken=" + recoveryToken + ", recoveryTokenTime=" + recoveryTokenTime + ", status=" + status + ", role=" + role + '}';
     }
+    
 
 }

@@ -53,6 +53,7 @@ public class ServiceController extends HttpServlet {
             String keyword = request.getParameter("keyword").trim();
             List<Service> sList = sDAO.searchServicesByName(keyword);
             request.setAttribute("sList", sList);
+
             request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
             return;
         }

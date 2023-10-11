@@ -42,6 +42,7 @@ public class ManageDoctorController extends HttpServlet {
         request.setAttribute("speList", sDAO.getAllSpeciality());
         if (action != null && action.equals("view-all")) {
             List<Doctor> doctorList = dDAO.getAllDoctor();
+            System.out.println(doctorList);
             request.setAttribute("dList", doctorList);
             request.getRequestDispatcher("frontend/view/admin/doctorlist.jsp").forward(request, response);
             return;
@@ -80,7 +81,7 @@ public class ManageDoctorController extends HttpServlet {
             dDAO.updateDoctor(doctorId, name, gender, phone, spe_id, position, description, status, image);
             response.sendRedirect("manage-doctor?action=edit&id=" + doctorId);
             return;
-        }
+        }  
         if (action != null && action.equals("view")) {
             int doctorId = Integer.parseInt(request.getParameter("id"));
             Doctor doctor = dDAO.getDoctorById(doctorId);

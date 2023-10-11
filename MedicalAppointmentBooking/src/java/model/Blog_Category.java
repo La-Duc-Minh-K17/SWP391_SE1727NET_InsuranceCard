@@ -3,19 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 /**
  *
  * @author nguye
  */
 public class Blog_Category {
+
     private int blog_category_id;
     private String name;
     private String description;
     private int status;
     private int setting_id;
 
-  
+    public Blog_Category() {
 
+    }
+    public Blog_Category(int blog_category_id, String name) {
+        this.blog_category_id = blog_category_id;
+        this.name = name;
+    }
     public Blog_Category(int blog_category_id, String name, String description, int status, int setting_id) {
         this.blog_category_id = blog_category_id;
         this.name = name;
@@ -24,11 +31,9 @@ public class Blog_Category {
         this.setting_id = setting_id;
     }
 
-    public Blog_Category() {
-    }
-
     public Blog_Category(int categoryId, String categoryName) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.blog_category_id = categoryId;
+        this.name = categoryName;
     }
 
     public int getBlog_category_id() {
@@ -70,6 +75,5 @@ public class Blog_Category {
     public void setSetting_id(int setting_id) {
         this.setting_id = setting_id;
     }
-    
-    
+
 }

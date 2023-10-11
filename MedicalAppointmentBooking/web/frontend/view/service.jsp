@@ -39,9 +39,6 @@
                 display: flex;
                 flex-direction: column;
             }
-
-
-
             .card-body {
                 flex: 1;
             }
@@ -121,6 +118,7 @@
                     <form action="service" method="GET">
                         <div class="input-group">
                             <input type="text" name="keyword" id="searchInput" class="form-control border bg-light" onchange="filter()" placeholder="Search by name">
+
                             <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
                         </div>
                     </form>
@@ -147,15 +145,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
             <div class="row custom-center">
                 <div class="container mt-5 m-5">
                     <div class="row justify-content-center">
@@ -220,13 +209,6 @@
         window.location.href = url;
     }
 </script>
-
-
-
-
-
-
-
 
         <jsp:include page="/frontend/common/footer.jsp" />
 

@@ -33,6 +33,7 @@ public class UserDAO {
             ps.setString(1, email);
             result = ps.executeQuery();
             if (result.next()) {
+                int id = result.getInt("user_id");
                 String userName = result.getString("username");
                 String emailAddress = result.getString("email");
                 String fullName = result.getString("full_name");
@@ -44,6 +45,7 @@ public class UserDAO {
                 String recoveryToken = result.getString("recovery_token");
                 Timestamp recoveryTime = result.getTimestamp("recovery_token_time");
                 userAccount = new UserAccount(userName, emailAddress, fullName, gender, phone, image, confirmationToken, confirmationTime, recoveryToken, recoveryTime);
+                userAccount.setUserId(id);
             }
             return userAccount;
         } catch (SQLException ex) {
@@ -261,6 +263,7 @@ public class UserDAO {
             rs = stm.executeQuery();
             if (rs.next()) {
                 UserAccount account = new UserAccount();
+                int id = rs.getInt("user_id");
                 String userName = rs.getString("username");
                 String emailAddress = rs.getString("email");
                 String fullName = rs.getString("full_name");
@@ -269,7 +272,7 @@ public class UserDAO {
                 String phone = rs.getString("phone");
                 int status = rs.getInt("status");
                 account = new UserAccount(userName, emailAddress, fullName, gender, phone, image , status);
-
+                account.setUserId(id);
                 return account;
             }
         } catch (SQLException ex) {
@@ -277,4 +280,50 @@ public class UserDAO {
         }
         return null;
     }
+
+    public UserAccount getAccountId(int id) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet result = null;
+        String sql = "select * from user_account where user_id = ? ";
+        UserAccount userAccount = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            result = ps.executeQuery();
+
+            if (result.next()) {
+
+                String userName = result.getString("username");
+                String emailAddress = result.getString("email");
+                String full_name = result.getString("full_name");
+                String image = null;
+                if (result.getBlob("image") != null) {
+                    image = ImageProcessing.imageString(result.getBlob("image"));
+                }
+                int gender = result.getInt("gender");
+                String phone = result.getString("phone");
+                int status = result.getInt("status");
+
+                userAccount = new UserAccount(userName, emailAddress, full_name, gender, phone, image, status);
+            }
+            return userAccount;
+        } catch (SQLException ex) {
+            
+        } finally {
+            if (connection != null) {
+                // closes the database connection
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    
+                }
+            }
+
+        }
+        return null;
+    }
+
 }
+

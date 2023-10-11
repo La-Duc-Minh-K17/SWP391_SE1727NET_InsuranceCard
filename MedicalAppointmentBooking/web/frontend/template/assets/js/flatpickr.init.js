@@ -1,12 +1,16 @@
-//Flatpickr
-var today = new Date();
-var tomorrow = new Date();
-tomorrow.setDate(today.getDate() + 1);
 
-$("#checkin-date").flatpickr({
-    defaultDate:today
-});
+    var today = new Date();
+    var tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
 
-$("#checkout-date").flatpickr({
-    defaultDate:tomorrow
-});
+    $("#checkin-date").flatpickr({
+        defaultDate: today
+    });
+
+    $("#checkout-date").flatpickr({
+        defaultDate: tomorrow
+    });
+
+
+
+

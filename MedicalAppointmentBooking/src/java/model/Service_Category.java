@@ -25,6 +25,7 @@ public class Service_Category {
         this.setting_id = setting_id;
     }
 
+
     public Service_Category(int sc_id, String name, String description, int status, int setting_id) {
         this.sc_id = sc_id;
         this.name = name;
@@ -42,6 +43,7 @@ public class Service_Category {
     }
 
     
+
 
     public String getName() {
         return name;

@@ -37,7 +37,7 @@
         </div>
         <!-- Loader -->
         <div class="page-wrapper doctris-theme toggled">
-            <jsp:include page="/frontend/common/adminSidebar.jsp" />
+            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
             <main class="page-content">
@@ -198,7 +198,7 @@
         <!-- page-wrapper -->
         <!-- javascript -->
         <script>
-            console.log("helloworld");
+            
             function filter() {
                 const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=filter&speciality_id=';
                 const filterElement = document.getElementById("speFilter").value;

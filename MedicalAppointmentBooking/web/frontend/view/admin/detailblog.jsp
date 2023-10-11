@@ -79,13 +79,10 @@
                     <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
                         <div class="card border-0 shadow overflow-hidden">
                             <div class="tab-content p-4" id="pills-tabContent">
-                                <form action="<c:url value='/manageblog?action=edit-info&blog_id=${blog.blog_id}'/>" method="POST" enctype="multipart/form-data">
-                                <h5 class="mb-0">Edit Blog Information.</h5>
-                                <div>
-                                    <p class="text-muted">Update Image.</p>
-                                    <div id="myfileupload">
-                                        <input type="file" name="image" id="uploadfile" name="ImageUpload" onchange="displayThumbnail(this);" />
-                                    </div>
+                                <form action="<c:url value='/manageblog?action=detail&blog_id=${blog.blog_id}'/>" method="POST" enctype="multipart/form-data">
+                                <h5 class="mb-0"> Blog Information.</h5>
+                                <div>   
+                                    <label class="form-label">Image  </label>
                                     <div id="thumbbox" class="mt-3 mb-3">
                                         <img class="rounded" height="20%" width="30%" alt="Thumb image" id="thumbImage"  src="data:image/jpg;base64,${blog.image}" />
                                     </div>
@@ -94,28 +91,25 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Title  </label>
-                                            <input name="title" id="name" type="text" class="form-control" value="${blog.title}">
+                                            <h5>${blog.title}</h5>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Description</label>
-                                            <input name="description"  type="text"  class="form-control" value="${blog.description}">
+                                            <h5>${blog.description}</h5>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Content</label>
-                                            <input name="content" type="text" class="form-control" value="${blog.content}">
+                                            <h5>${blog.content}</h5>
                                         </div>
                                     </div>
 
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-9">
-                                        <input type="submit" id="submit" name="send" class="btn btn-primary btn-sm"value="SAVE">
-                                    </div>
                                     <div class=" col-lg-3">
                                         <a href="<c:url value='/manageblog?action=view-all'/> " class="btn btn-primary btn-sm">TURN BACK</a>
                                     </div>

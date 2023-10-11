@@ -75,12 +75,11 @@
                         </ul>
                     </div>
                 </div>
-                <c:set value="${requestScope.blog}" var="blog"></c:set>
-                    <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
-                        <div class="card border-0 shadow overflow-hidden">
-                            <div class="tab-content p-4" id="pills-tabContent">
-                                <form action="<c:url value='/manageblog?action=edit-info&blog_id=${blog.blog_id}'/>" method="POST" enctype="multipart/form-data">
-                                <h5 class="mb-0">Edit Blog Information.</h5>
+                <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
+                    <div class="card border-0 shadow overflow-hidden">
+                        <div class="tab-content p-4" id="pills-tabContent">
+                            <form action="<c:url value='/manageblog?action=add-info'/>" method="POST" enctype="multipart/form-data">
+                                <h5 class="mb-0">Add Blog Information.</h5>
                                 <div>
                                     <p class="text-muted">Update Image.</p>
                                     <div id="myfileupload">
@@ -94,33 +93,46 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Title  </label>
-                                            <input name="title" id="name" type="text" class="form-control" value="${blog.title}">
+                                            <input name="title" id="name" type="text" class="form-control" >
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Description</label>
-                                            <input name="description"  type="text"  class="form-control" value="${blog.description}">
+                                            <input name="description"  type="text"  class="form-control" >
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Content</label>
-                                            <input name="content" type="text" class="form-control" value="${blog.content}">
+                                            <input name="content" type="text" class="form-control" >
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3 custom-box">
+                                            <div class="form-group">
+                                                <label>Category</label>
+                                                <select name="category_id" class="select">
+                                                    <option>Choose Category</option>
+                                                    <c:forEach var="o" items="${requestScope.cDAO}">
+                                                        <option value="${o.blog_category_id}">${o.name}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Created Time</label>
+                                                <input name="created_time" type="date" class="form-control" >
+                                            </div>
                                         </div>
                                     </div>
 
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-9">
-                                        <input type="submit" id="submit" name="send" class="btn btn-primary btn-sm"value="SAVE">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <input type="submit" id="submit" name="send" class="btn btn-primary"value="ADD">
+                                        </div>
                                     </div>
-                                    <div class=" col-lg-3">
-                                        <a href="<c:url value='/manageblog?action=view-all'/> " class="btn btn-primary btn-sm">TURN BACK</a>
-                                    </div>
-                                </div>
-
                             </form>
                         </div>
                     </div>
