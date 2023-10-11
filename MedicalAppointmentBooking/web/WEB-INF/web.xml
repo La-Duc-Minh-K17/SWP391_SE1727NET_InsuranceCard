@@ -77,8 +77,8 @@
         <servlet-class>controller.manager.WebDoctorDetail</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SearchController</servlet-name>
-        <servlet-class>controller.home.SearchController</servlet-class>
+        <servlet-name>FilterCategory</servlet-name>
+        <servlet-class>controller.home.FilterCategory</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserAccountController</servlet-name>
@@ -133,6 +133,7 @@
         <url-pattern>/servicedetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>BookingController</servlet-name>
         <url-pattern>/booking</url-pattern>
     </servlet-mapping>
@@ -141,6 +142,7 @@
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>AddSetting</servlet-name>
         <url-pattern>/addSetting</url-pattern>
     </servlet-mapping>
@@ -151,6 +153,10 @@
     <servlet-mapping>
         <servlet-name>WebDoctorDetail</servlet-name>
         <url-pattern>/WebDoctorDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterCategory</servlet-name>
+        <url-pattern>/filter</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
