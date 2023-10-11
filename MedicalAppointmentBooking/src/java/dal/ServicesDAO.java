@@ -211,12 +211,12 @@ public class ServicesDAO {
         return List;
     }
     
-    public ArrayList<Service> sortServiceByCategoryID(int scId, String sort) {
+    public ArrayList<Service> getServiceByCategoryID(int cateId) {
         ArrayList<Service> resultList = new ArrayList<>();
         try ( Connection conn = dbc.getConnection()) {
             String sql = "SELECT * FROM services s WHERE s.category_id = ?";
             try ( PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setInt(1, scId);
+                ps.setInt(1, cateId);
                 try ( ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         int service_id = rs.getInt("service_id");
