@@ -5,12 +5,16 @@
 
 package controller.staff;
 
+import dal.AppointmentDAO;
+import dal.ReservationDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Appointment;
+import model.Reservation;
 
 /**
  *
@@ -27,18 +31,17 @@ public class StaffWaitingList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet StaffWaitingList</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet StaffWaitingList at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        AppointmentDAO aDAO = new AppointmentDAO();
+        ReservationDAO rDAO = new ReservationDAO();
+        String action = request.getParameter("action");
+        
+        if(action == null) {
+            List<Appointment> apptList = aDAO.getWatingAppointment();
+            List<Reservation> resvList = rDAO.getWatingReservation();
+            request.setAttribute("apptList", apptList);
+            request.setAttribute("resvList", resvList);
+            request.getRequestDispatcher("frontend/view/admin/staff_waitinglist.jsp").forward(request, response);
+            return;
         }
     } 
 

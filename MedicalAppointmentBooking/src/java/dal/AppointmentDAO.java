@@ -28,7 +28,7 @@ public class AppointmentDAO {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
-        String sql = "";
+        String sql = "select * from appointments where appointment_status = 'PENDING'";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
@@ -37,14 +37,15 @@ public class AppointmentDAO {
                 int id = rs.getInt("appointment_id");
                 String note = rs.getString("appointment_note");
                 Date date = rs.getDate("appointment_date");
-                Time time = rs.getTime("appointment_time");
+                String time = rs.getString("appointment_time");
                 String diagnosis = rs.getString("diagnosis");
                 String status = rs.getString("appointment_status");
-                int staffId = rs.getInt("staff_id");
-                int doctoId = rs.getInt ("doctor_id");
-                int patientId = rs.getInt("patientId");
-                
+                int doctorId = rs.getInt ("doctor_id");
+                int patientId = rs.getInt("patient_id");
+                Appointment appt = new Appointment(id , note , date, time , diagnosis , status , doctorId ,patientId);
+                list.add(appt);
             }
+            return list;
         } catch (SQLException ex) {
             System.out.println(ex);
         } finally {
@@ -56,6 +57,7 @@ public class AppointmentDAO {
                 }
             }
         }
+        return list;
     }
 
     public void insertNewAppointment(Appointment appt) {

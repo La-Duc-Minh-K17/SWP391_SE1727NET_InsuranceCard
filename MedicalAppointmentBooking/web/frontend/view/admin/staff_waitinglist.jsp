@@ -179,7 +179,7 @@
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <c:forEach items="${dList}" var="d">
+                                                                            <c:forEach items="${apptList}" var="appt">
                                                                                 <tr>
                                                                                     <th scope="row">${d.doctorId}</th>
                                                                                     <td>${d.fullName}</td>
