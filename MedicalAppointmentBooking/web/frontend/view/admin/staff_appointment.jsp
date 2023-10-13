@@ -11,7 +11,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-
         <!-- favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
@@ -37,18 +36,20 @@
         </div>
         <!-- Loader -->
         <div class="page-wrapper doctris-theme toggled">
-            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
+            <jsp:include page="/frontend/common/staff_side_bar.jsp" />
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
-            <main class="page-content">  
+            <main class="page-content">
+                
+                
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
                         <div class="d-flex align-items-center">
                             <a href="#" class="logo-icon">
-                                <img src="../assets/images/logo-icon.png" height="30" class="small" alt="">
+                                <img src="frontend/template/assets/images/logo-icon.png" height="30" class="small" alt="">
                                 <span class="big">
-                                    <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                                    <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                                    <img src="frontend/template/assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                                    <img src="frontend/template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                                 </span>
                             </a>
                             <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
