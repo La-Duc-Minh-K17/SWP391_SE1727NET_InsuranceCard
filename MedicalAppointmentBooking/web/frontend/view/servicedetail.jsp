@@ -88,23 +88,33 @@
             </div><!--end row-->
             <!-- Display Doctors in Two Rows -->
             <div class="row mt-5">
-                <h4 class="col-20 text-center title">Doctors</h4>
-                <c:forEach items="${requestScope.doctors}" var="d" >
+                <h4 class="col-20 text-center title">Related Services</h4>
+                <c:forEach items="${requestScope.Lists}" var="l" >
                     <div class="col-md-3 mt-4 pt-2">
                         <div class="card team border-0 rounded shadow overflow-hidden">
                             <div class="team-img position-relative">
-                                <img src="data:image/jpg;base64,${d.image}" width="240" height="300" alt="${d.fullName}" />
+                                <img src="data:image/jpg;base64,${l.service_image}" width="300" height="250" alt="" />
                             </div>
                             <div class="card-body content text-center">
-                                <a href="doctor-team-one.html" class="title text-dark h5 d-block mb-0">${d.fullName}</a>
-                                <small class="text-muted speciality">${d.speciality}</small>
+                                <a href="javascript:void(0);" onclick="viewServiceDetails(${s.service_id}, ${s.category_id})" class="title text-dark h5 d-block mb-0">${l.service_name}</a>
+                                <small class="text-muted speciality">$${l.fee}</small>
                             </div>
                         </div>
                     </div><!--end col-->
                 </c:forEach>
             </div><!--end row-->
         </section><!--end Product Images and Details Section-->
-        <jsp:include page="/frontend/common/footer.jsp" />
+                <script>
+            function filter() {
+                function viewServiceDetails(serviceId, categoryId) {
+                var url = "servicedetail?action=view-detail&id=" + serviceId + "&category_id=" + categoryId;
+                window.location.href = url;
+            }
+                }
+                window.location.href = url;
+            }
+        </script>
+        
         <!-- Add your scripts here -->
         <script src="<c:url value='/frontend/template/assets/js/bootstrap.bundle.min.js' />"></script>
         <!-- Icons -->
@@ -116,4 +126,5 @@
         <script src="<c:url value='/frontend/template/assets/js/tiny-slider-init.js' />"></script>
         <!-- End -->
     </body>
+    <footer><jsp:include page="/frontend/common/footer.jsp" /></footer>
 </html>

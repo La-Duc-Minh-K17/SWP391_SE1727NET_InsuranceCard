@@ -80,6 +80,14 @@
         <servlet-name>FilterCategory</servlet-name>
         <servlet-class>controller.home.FilterCategory</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageServices</servlet-name>
+        <servlet-class>controller.manager.ManageServices</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>webServiceDetail</servlet-name>
+        <servlet-class>controller.manager.webServiceDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserAccountController</servlet-name>
         <url-pattern>/user</url-pattern>
@@ -133,12 +141,10 @@
         <url-pattern>/servicedetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>BookingController</servlet-name>
         <url-pattern>/booking</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>AddSetting</servlet-name>
         <url-pattern>/addSetting</url-pattern>
     </servlet-mapping>
@@ -153,6 +159,14 @@
     <servlet-mapping>
         <servlet-name>FilterCategory</servlet-name>
         <url-pattern>/filter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageServices</servlet-name>
+        <url-pattern>/manage-service</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>webServiceDetail</servlet-name>
+        <url-pattern>/detailservice</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
