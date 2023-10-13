@@ -49,7 +49,6 @@ public class BookingController extends HttpServlet {
         Service chosenService = (Service) SessionUtils.getInstance().getValue(request, "chosen_service");
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
         
-        
         if (action != null && action.equals("yourself-booking")) {
             String dob = request.getParameter("dob");
             String address = request.getParameter("address");

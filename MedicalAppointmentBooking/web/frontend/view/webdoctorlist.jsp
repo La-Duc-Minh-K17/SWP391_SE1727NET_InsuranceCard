@@ -93,7 +93,7 @@
                                             <img src="data:image/jpg;base64,${doctor.image}" width="240" height="300"/>
                                             <h5>${doctor.fullName}</h5>
                                             <h6>${doctor.speciality}</h6>
-                                            <h6>$ ${doctor.service.fee} USD / visit</h6>
+                                            <h6>$ ${doctor.serviceFee} USD / visit</h6>
                                         </a>
                                     </div>
                                 </c:forEach>
