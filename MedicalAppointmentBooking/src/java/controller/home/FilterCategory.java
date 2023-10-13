@@ -4,21 +4,18 @@
  */
 package controller.home;
 
-import dal.ServicesDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Service;
 
 /**
  *
  * @author PC
  */
-public class SearchController extends HttpServlet {
+public class FilterCategory extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,18 +30,16 @@ public class SearchController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            ServicesDAO servicedao = new ServicesDAO();
-            String keyword = request.getParameter("keyword"); 
-            List<Service> serviceList;
-
-            if (keyword != null && !keyword.isEmpty()) {
-                serviceList = servicedao.searchServicesByName(keyword);
-            } else {
-                serviceList = servicedao.getAllService();
-            }
-            request.setAttribute("services", serviceList);
-            request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
-
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet FilterCategory</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet FilterCategory at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

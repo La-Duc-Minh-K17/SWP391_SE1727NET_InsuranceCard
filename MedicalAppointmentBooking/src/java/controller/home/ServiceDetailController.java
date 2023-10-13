@@ -36,6 +36,7 @@ public class ServiceDetailController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+
             ServicesDAO servicedao = new ServicesDAO();
             DoctorDAO doctordao = new DoctorDAO();
             String action = request.getParameter("action");

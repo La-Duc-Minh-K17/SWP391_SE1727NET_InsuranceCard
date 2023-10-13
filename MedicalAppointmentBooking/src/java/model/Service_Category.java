@@ -9,6 +9,7 @@ package model;
  * @author PC
  */
 public class Service_Category {
+    private int sc_id;
     private String name;
     private String description;
     private int status;
@@ -24,7 +25,26 @@ public class Service_Category {
         this.setting_id = setting_id;
     }
 
-  
+
+    public Service_Category(int sc_id, String name, String description, int status, int setting_id) {
+        this.sc_id = sc_id;
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.setting_id = setting_id;
+    }
+
+    public int getSc_id() {
+        return sc_id;
+    }
+
+    public void setSc_id(int sc_id) {
+        this.sc_id = sc_id;
+    }
+
+    
+
+
     public String getName() {
         return name;
     }
