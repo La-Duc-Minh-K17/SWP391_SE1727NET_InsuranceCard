@@ -1,4 +1,5 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
     <html lang="en">
 
@@ -77,21 +78,21 @@
                                         <img src="frontend/template/assets/images/doctors/01.jpg" class="avatar avatar-md-md rounded-pill shadow mx-auto d-block" alt="">
                                     </div><!--end col-->
 
-                                    <div class="${d.image}">    
-                                        <h5 class="">Upload your picture</h5>
-                                        <p class="text-muted mb-0">For best results, use an image at least 256px by 256px in either .jpg or .png format</p>
-                                    </div><!--end col-->
-
-                                    <div class="col-lg-5 col-md-12 text-lg-end text-center mt-4 mt-lg-0">  
-                                        <a href="#" class="btn btn-primary">Upload</a>
-                                        <a href="#" class="btn btn-soft-primary ms-2">Remove</a>
-                                         
-                                    </div><!--end col-->
+                                    <div>
+                                    <p class="text-muted">Update Image.</p>
+                                    <div id="myfileupload">
+                                        <input type="file" name="image" id="uploadfile" name="ImageUpload" onchange="displayThumbnail(this);" />
+                                    </div>
+                                    <div id="thumbbox" class="mt-3 mb-3">
+                                        <img class="rounded" height="20%" width="30%" alt="Thumb image" id="thumbImage"  src="data:image/jpg;base64,${d.image}" />
+                                    </div>
+                                </div>
                                 </div><!--end row-->
                             </div>
 
                             <div class="p-4">
-                                <form>
+                                <form action="EditProfile" method="post" enctype="multipart/form-data">
+                                    
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
@@ -112,9 +113,27 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Phone no.</label>
-                                                <input name="number" id="number" type="text" class="form-control" placeholder="${d.phone}:">
+                                                <input name="number" id="number" type="text" class="form-control" placeholder="${d.phone}">
                                             </div>                                                                               
                                         </div><!--end col-->
+                                        
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Gender:  <span id="genderDisplay">${d.gender}</span></label>
+                                                <input name="number" id="number" type="text" class="form-control" placeholder="${d.gender}">
+                                            </div>                                                                               
+                                        </div><!--end col-->
+                                        
+                                        <script>
+                                            function getGender(genderCode) {
+                                                return genderCode === 1 ? 'Male' : genderCode === 0 ? 'Female' : 'Unknown';
+                                            }
+                                        </script>
+
+                                        
+                                            <script>
+                                                document.getElementById('genderDisplay').textContent = getGender(${d.gender});
+                                            </script>
 
                                         
                                     </div><!--end row-->
@@ -124,7 +143,9 @@
                                             <input type="submit" id="submit" name="send" class="btn btn-primary" value="Save changes">
                                         </div><!--end col-->
                                     </div><!--end row-->
+                                    <input type="hidden" name="id" value="${d.userId}">
                                 </form><!--end form--> 
+                                
                             </div>
                         </div>
 
@@ -133,27 +154,27 @@
                                 <h5 class="mb-0">Change Password :</h5>
                             </div>
 
-                            <div class="p-4">
-                                <form>
+                            <div class="p-4" >
+                                <form action="edit" method="post" id="passwordForm">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Old password :</label>
-                                                <input type="password" class="form-control" placeholder="Old password" required="">
+                                                <input type="password" id="oldPassword" name="oldPassword" class="form-control" placeholder="Old password" required="">
                                             </div>
                                         </div><!--end col-->
     
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">New password :</label>
-                                                <input type="password" class="form-control" placeholder="New password" required="">
+                                                <input type="password" id="newPassword" name="newPassword" class="form-control" placeholder="New password" required="">
                                             </div>
                                         </div><!--end col-->
     
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Re-type New password :</label>
-                                                <input type="password" class="form-control" placeholder="Re-type New password" required="">
+                                                <input type="password" id="retypePassword" name="retypePassword" class="form-control" placeholder="Re-type New password" required="">
                                             </div>
                                         </div><!--end col-->
     
@@ -164,6 +185,17 @@
 
                                     </div><!--end row-->
                                 </form>
+                                <script>
+                                    document.getElementById('passwordForm').addEventListener('submit', function(e) {
+                                        const newPassword = document.getElementById('newPassword').value;
+                                        const retypePassword = document.getElementById('retypePassword').value;
+
+                                        if (newPassword !== retypePassword) {
+                                            alert('The new password and retyped password do not match.');
+                                            e.preventDefault();  // Prevent form submission
+                                        }
+                                    });
+                                </script>
                             </div>
                         </div>
 
@@ -203,7 +235,28 @@
             </div>
         </div>
         <!-- Offcanvas End -->
+        <script>
 
+
+        function displayThumbnail() {
+            const input = document.getElementById("uploadfile");
+            const thumbnail = document.getElementById("thumbImage");
+
+            // Check if a file has been selected
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    thumbnail.src = e.target.result;
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            } else {
+
+                thumbnail.src = "";
+            }
+        }
+    </script>
         <!-- Offcanvas Start -->
         <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header p-4 border-bottom">
@@ -247,14 +300,15 @@
                 </ul><!--end icon-->
             </div>
         </div>
-        <!-- Offcanvas End -->
-        
-        <!-- javascript -->
-        <script src="frontend/template/assets/js/bootstrap.bundle.min.js"></script>
-        <!-- Icons -->
-        <script src="frontend/template/assets/js/feather.min.js"></script>
-        <!-- Main Js -->
-        <script src="frontend/template/assets/js/app.js"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
+            <!-- Icons -->
+
+            <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
+            <!-- Main Js -->
+            <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+            <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
+            <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.j'/>"></script>
+            <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
     </body>
 
 </html>

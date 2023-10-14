@@ -5,6 +5,8 @@
 package dal;
 
 import dbContext.DBConnection;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,7 +63,36 @@ public class UserDAO {
         }
         return null;
     }
+public boolean checkPassword(UserAccount user, String oldPassword) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
+        try {
+     
+            String sql = "SELECT password FROM user_account WHERE username = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, user.getUsername());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String storedPassword = rs.getString("password");
+                // For simplicity, using plaintext. In real scenarios, compare hashed values.
+                return storedPassword.equals(oldPassword);
+            }
+        } catch (SQLException e) {
+           System.out.println(e);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (connection != null) connection.close();
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+        return false;
+    }
     public void updateRecoveryToken(UserAccount user, String token, Timestamp updatedTime) {
         PreparedStatement ps = null;
         Connection connection = null;
@@ -319,6 +350,43 @@ public class UserDAO {
 
         }
         return null;
+    }
+public void updateUserAccount(int id, String fullName, Part image, String phoneNum) {
+        InputStream fileImage = ImageProcessing.imageStream(image);
+        PreparedStatement ps = null;
+        String sql = "UPDATE mabs.user_account \n"
+                + "SET name = ?, phone = ?";
+        if (fileImage != null) {
+            sql += ", image = ? ";
+        }
+
+        sql += "WHERE user_id = ? ";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, fullName);
+            ps.setString(2, phoneNum);
+
+            if (fileImage != null) {
+                ps.setBlob(3, fileImage);
+                ps.setInt(4, id);
+            } else {
+                ps.setInt(3, id);
+            }
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
     }
 }
 
