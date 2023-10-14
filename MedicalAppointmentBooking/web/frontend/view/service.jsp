@@ -221,7 +221,7 @@
             var category = document.getElementById("Filter").value;
             var sort = document.getElementById("sortSelect").value;
             var searchInput = document.getElementById("searchInput").value;
-            var url = "service?action=view-all"; // Default action
+            var url = "manage-service?action=view-all"; // Default action
 
             if (category !== "Filter By") {
                 url = "service?action=filter&category_id=" + category;
