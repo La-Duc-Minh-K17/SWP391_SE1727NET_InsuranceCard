@@ -47,10 +47,10 @@
                     <div class="header-bar d-flex justify-content-between border-bottom">
                         <div class="d-flex align-items-center">
                             <a href="#" class="logo-icon">
-                                <img src="../../assets/images/logo-icon.png" height="30" class="small" alt="">
+                                <img src="frontend/template/assets/images/logo-icon.png" height="30" class="small" alt="">
                                 <span class="big">
-                                    <img src="../../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                                    <img src="../../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                                    <img src="frontend/template/assets/images/MABS__1.png" height="24" class="logo-light-mode" alt="">
+                                    <img src="frontend/template/assets/images/MABS__1.png" height="24" class="logo-dark-mode" alt="">
                                 </span>
                             </a>
                             <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
@@ -158,8 +158,8 @@
                                                                     <div class="card component-wrapper border-0 rounded">
                                                                         <div class="d-flex mb-2">
                                                                             <a href="<c:url value='/manage-service?action=view&id=${s.service_id}'/>" class="btn btn-primary btn-sm m-2  ">View</a>
-                                                                        <a href="<c:url value='/manage-service?action=edit&id=${d.service_id}'/>" class="btn btn-primary btn-sm ml-2 m-2">Edit</a>
-                                                                        <a href="<c:url value='/manage-service?action=status&id=${d.service_id}'/>" class="btn btn-danger btn-sm ml-2 m-2">Deactivate</a>
+                                                                        <a href="<c:url value='/manage-service?action=edit&service_id=${s.service_id}'/>" class="btn btn-primary btn-sm ml-2 m-2">Edit</a>
+                                                                        <a href="<c:url value='/manage-service?action=status&id=${s.service_id}'/>" class="btn btn-danger btn-sm ml-2 m-2">Deactivate</a>
                                                                     </div>
                                                                 </div>
 
@@ -199,21 +199,21 @@
         <!-- javascript -->
         <script>
             function filter() {
-                var category = document.getElementById("Filter").value;
-                var sort = document.getElementById("sortSelect").value;
-                var searchInput = document.getElementById("searchInput").value;
-                var url = "service?action=view-all"; // Default action
+                var category = document.getElementById("speFilter").value;
+                var searchInput = document.getElementById("search").value;
+                var url = "manage-service?action=view-all"; // Change to the correct URL mapping
 
                 if (category !== "Filter By") {
-                    url = "service?action=filter&category_id=" + category;
+                    url += "?action=filter&category_id=" + category;
                 } else if (searchInput.trim() !== "") {
-                    url = "service?action=search&keyword=" + searchInput;
+                    url += "?action=search&search=" + searchInput;
                 } else if (sort !== "Default Sort") {
-                    url = "service?action=sorted&by=feename&sort=" + sort;
+                    url += "?action=sorted&by=feename&sort=" + sort;
                 }
 
                 window.location.href = url;
             }
+
         </script>
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->
