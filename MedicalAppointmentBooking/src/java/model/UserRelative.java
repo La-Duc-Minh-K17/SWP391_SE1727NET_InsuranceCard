@@ -34,7 +34,7 @@ public class UserRelative {
         this.userId = userId;
     }
 
-    public UserRelative(int relativeId, String fullName, String phone, int gender, Date dob, String address, String email, int userId) {
+    public UserRelative(int relativeId, String fullName, String phone, int gender, Date dob, String address, String email) {
         this.relativeId = relativeId;
         this.fullName = fullName;
         this.phone = phone;
@@ -42,8 +42,9 @@ public class UserRelative {
         this.dob = dob;
         this.address = address;
         this.email = email;
-        this.userId = userId;
     }
+
+    
     
     public int getRelativeId() {
         return relativeId;

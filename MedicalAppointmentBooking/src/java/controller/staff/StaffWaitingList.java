@@ -35,11 +35,11 @@ public class StaffWaitingList extends HttpServlet {
         ReservationDAO rDAO = new ReservationDAO();
         String action = request.getParameter("action");
         
-        if(action == null) {
+        if(action != null && action.equals("view-all")) {
             List<Appointment> apptList = aDAO.getWatingAppointment();
-            List<Reservation> resvList = rDAO.getWatingReservation();
+            //List<Reservation> resvList = rDAO.getWatingReservation();
             request.setAttribute("apptList", apptList);
-            request.setAttribute("resvList", resvList);
+            //request.setAttribute("resvList", resvList);
             request.getRequestDispatcher("frontend/view/admin/staff_waitinglist.jsp").forward(request, response);
             return;
         }

@@ -9,7 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Patient;
+import model.UserAccount;
+import model.UserRelative;
 
 /**
  *
@@ -18,7 +22,9 @@ import model.Patient;
 public class PatientDAO {
 
     DBConnection dbc = new DBConnection();
-
+    private UserDAO uDAO = new UserDAO();
+    private UserRelativeDAO uRDAO = new UserRelativeDAO();
+    
     public int insertPatient(Patient patient) {
         PreparedStatement ps = null;
         Connection connection = null;
@@ -28,7 +34,7 @@ public class PatientDAO {
             connection = dbc.getConnection();
 
             ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-          
+
             if (patient.getUserAccount() == null) {
                 ps.setNull(1, java.sql.Types.INTEGER);
             } else {
@@ -61,6 +67,40 @@ public class PatientDAO {
             }
         }
         return 0;
+    }
+
+    public Patient getPatientById(int id) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "select * from patients where patient_id = ? ";
+        ResultSet rs = null;
+        
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()) {
+                int patientId = rs.getInt("patient_id");
+                int userId = rs.getInt("user_id");
+                int relativeId = rs.getInt("relative_id");
+               
+                UserAccount user = null;
+                UserRelative userR = null;
+                if(userId != 0) {
+                    user = uDAO.getAccountById(userId);
+                }
+                if(relativeId != 0) {
+                    userR = uRDAO.getUserRelativeById(relativeId);
+                }
+                Patient p = new Patient(patientId , user , userR);
+                return p;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public int getPatientId(Patient patient) {
@@ -98,5 +138,5 @@ public class PatientDAO {
         }
         return -1;
     }
-  
+
 }

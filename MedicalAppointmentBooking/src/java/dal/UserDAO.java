@@ -288,7 +288,7 @@ public class UserDAO {
         return null;
     }
 
-    public UserAccount getAccountId(int id) {
+    public UserAccount getAccountById(int id) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet result = null;
@@ -300,14 +300,19 @@ public class UserDAO {
             ps.setInt(1, id);
             result = ps.executeQuery();
             if (result.next()) {
+                int userId = result.getInt("user_id");
                 String userName = result.getString("username");
                 String emailAddress = result.getString("email");
                 String full_name = result.getString("full_name");
                 String image = ImageProcessing.imageString(result.getBlob("image"));
+                Date dob = result.getDate("dob");
+                String address = result.getString("address");
                 int gender = result.getInt("gender");
                 String phone = result.getString("phone");
                 int status = result.getInt("status");
                 userAccount = new UserAccount(userName, emailAddress, full_name, gender, phone, image, status);
+                userAccount.setDob(dob);
+                userAccount.setAddress(address);
             }
             return userAccount;
         } catch (SQLException ex) {
@@ -326,31 +331,5 @@ public class UserDAO {
         return null;
     }
 
-    public int getRandomStaffId() {
-        PreparedStatement ps = null;
-        Connection connection = null;
-        ResultSet result = null;
-        String sql = "";
-        try {
-            connection = dbc.getConnection();
-            ps = connection.prepareStatement(sql);
-            result = ps.executeQuery();
-            if (result.next()) {
-               return result.getInt(1);
-            }
-            
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-
-                }
-            }
-
-        }
-        return -1;
-    }
+  
 }

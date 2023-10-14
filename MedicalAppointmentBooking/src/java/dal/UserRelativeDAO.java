@@ -7,9 +7,12 @@ package dal;
 import dbContext.DBConnection;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.UserRelative;
 
 /**
@@ -60,9 +63,7 @@ public class UserRelativeDAO {
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-
         String sql = "select * from user_relatives where full_name = ? and gender = ? and  phone = ? and email = ?  ";
-
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
@@ -87,5 +88,34 @@ public class UserRelativeDAO {
 
         }
         return -1;
+    }
+    public UserRelative getUserRelativeById(int searchId) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        UserRelative uR = null;
+        String sql = "select * from user_relatives where relative_id = ?";
+        
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, searchId);
+            rs = ps.executeQuery();
+            
+            while(rs.next())  {
+                int id = rs.getInt("relative_id");
+                String name = rs.getString("full_name");
+                int gender = rs.getInt("gender");
+                String phone = rs.getString("phone");
+                String email = rs.getString("email");
+                Date dob = rs.getDate("dob");
+                String address = rs.getString("address");
+                uR = new UserRelative(id , name , phone,gender , dob , address, email);
+                return uR;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserRelativeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return uR;
     }
 }
