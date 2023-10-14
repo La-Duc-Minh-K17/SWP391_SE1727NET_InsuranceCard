@@ -35,7 +35,7 @@ public class StaffWaitingList extends HttpServlet {
         ReservationDAO rDAO = new ReservationDAO();
         String action = request.getParameter("action");
         
-        if(action == null) {
+        if(action != null && action.equals("view-all")) {
             List<Appointment> apptList = aDAO.getWatingAppointment();
             List<Reservation> resvList = rDAO.getWatingReservation();
             request.setAttribute("apptList", apptList);

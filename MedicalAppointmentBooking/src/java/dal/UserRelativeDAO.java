@@ -60,9 +60,7 @@ public class UserRelativeDAO {
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-
         String sql = "select * from user_relatives where full_name = ? and gender = ? and  phone = ? and email = ?  ";
-
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
@@ -87,5 +85,8 @@ public class UserRelativeDAO {
 
         }
         return -1;
+    }
+    public UserRelative getUserRelativeById(int id) {
+        
     }
 }

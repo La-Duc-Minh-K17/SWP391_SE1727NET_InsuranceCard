@@ -18,34 +18,33 @@ public class Appointment {
     private String apptTime;
     private String diagnosis;
     private String status;
-    private int staffId;
-    private int doctorId;
-    private int patientId;
+    private UserAccount staff;
+    private Doctor doctor;
+    private Patient patient;
 
     public Appointment() {
     }
 
-    public Appointment(String apptNote, Date apptDate, String apptTime, String status, int staffId, int doctorId, int patientId) {
+    public Appointment(String apptNote, Date apptDate, String apptTime, String status, Doctor doctor, Patient patient) {
         this.apptNote = apptNote;
         this.apptDate = apptDate;
         this.apptTime = apptTime;
         this.status = status;
-        this.staffId = staffId;
-        this.doctorId = doctorId;
-        this.patientId = patientId;
+        this.doctor = doctor;
+        this.patient = patient;
     }
 
-    public Appointment(int apptId, String apptNote, Date apptDate, String apptTime, String diagnosis, String status,  int doctorId, int patientId) {
+    public Appointment(int apptId, String apptNote, Date apptDate, String apptTime, String diagnosis, String status, Doctor doctor, Patient patient) {
         this.apptId = apptId;
         this.apptNote = apptNote;
         this.apptDate = apptDate;
         this.apptTime = apptTime;
         this.diagnosis = diagnosis;
         this.status = status;
-        this.doctorId = doctorId;
-        this.patientId = patientId;
+        this.doctor = doctor;
+        this.patient = patient;
     }
-    
+
     public int getApptId() {
         return apptId;
     }
@@ -78,17 +77,13 @@ public class Appointment {
         this.apptTime = apptTime;
     }
 
-    
-
-    public int getStaffId() {
-        return staffId;
+    public String getDiagnosis() {
+        return diagnosis;
     }
 
-    public void setStaffId(int staffId) {
-        this.staffId = staffId;
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
     }
-
-   
 
     public String getStatus() {
         return status;
@@ -98,28 +93,30 @@ public class Appointment {
         this.status = status;
     }
 
-    public String getDiagnosis() {
-        return diagnosis;
+    public UserAccount getStaff() {
+        return staff;
     }
 
-    public void setDiagnosis(String diagnosis) {
-        this.diagnosis = diagnosis;
+    public void setStaff(UserAccount staff) {
+        this.staff = staff;
     }
 
-    public int getDoctorId() {
-        return doctorId;
+   
+    public Doctor getDoctor() {
+        return doctor;
     }
 
-    public void setDoctorId(int doctorId) {
-        this.doctorId = doctorId;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
-    public int getPatientId() {
-        return patientId;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
+    
 }

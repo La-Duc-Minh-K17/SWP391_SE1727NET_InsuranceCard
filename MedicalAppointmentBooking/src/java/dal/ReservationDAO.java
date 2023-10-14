@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Appointment;
 import model.Reservation;
 
 /**
@@ -22,7 +21,8 @@ import model.Reservation;
 public class ReservationDAO {
 
     DBConnection dbc = new DBConnection();
-
+  
+    private PatientDAO pDAO = new PatientDAO();
     public List<Reservation> getWatingReservation() {
         List<Reservation> list = new ArrayList<>();
         PreparedStatement ps = null;
@@ -41,6 +41,7 @@ public class ReservationDAO {
                 String result = rs.getString("test_result");
                 String status = rs.getString("reservation_status");
                 int serviceId = rs.getInt("service_id");
+               
                 int patientId = rs.getInt("patientId");
                 Reservation resv = new Reservation(id, note, date, time, result, status, serviceId, patientId);
                 list.add(resv);
@@ -69,11 +70,10 @@ public class ReservationDAO {
                 + "`reservation_date`,\n"
                 + "`reservation_time`,\n"
                 + "`reservation_status`,\n"
-                + "`staff_id`,\n"
                 + "`service_id`,\n"
                 + "`patient_id`)\n"
                 + "VALUES\n"
-                + "(? ,?,?,?,?,?,?);";
+                + "(? ,?,?,?,?,?);";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
@@ -81,9 +81,8 @@ public class ReservationDAO {
             ps.setDate(2, resv.getResvDate());
             ps.setString(3, resv.getResvTime());
             ps.setString(4, resv.getStatus());
-            ps.setInt(5, resv.getStaffId());
-            ps.setInt(6, resv.getServiceId());
-            ps.setInt(7, resv.getPatientId());
+            ps.setInt(5, resv.getService().getService_id());
+            ps.setInt(6, resv.getPatient().getPatientId());
             ps.executeUpdate();
 
         } catch (SQLException ex) {

@@ -170,26 +170,26 @@
                                                                     <table class="table mb-0 table-center">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th scope="col">ID</th>
-                                                                                <th scope="col">Name</th>
-                                                                                <th scope="col">Phone</th>
-                                                                                <th scope="col">Speciality</th>
-                                                                                <th scope="col">Status</th>
-                                                                                <th scope="col">Action</th>
+                                                                                <th class="border-bottom p-3">ID</th>
+                                                                                <th class="border-bottom p-3">Name</th>
+                                                                                <th class="border-bottom p-3">Phone</th>
+                                                                                <th class="border-bottom p-3">Speciality</th>
+                                                                                <th class="border-bottom p-3">Status</th>
+                                                                                <th class="border-bottom p-3">Action</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
                                                                             <c:forEach items="${apptList}" var="appt">
                                                                                 <tr>
-                                                                                    <th scope="row">${d.doctorId}</th>
-                                                                                    <td>${d.fullName}</td>
-                                                                                    <td>${d.phone}</td>
-                                                                                    <td>${d.speciality}</td>
-                                                                                    <td>
+                                                                                    <th class="p-3">${appt.apptId}</th>
+                                                                                    <td class="p-3">${appt.apptNote}</td>
+                                                                                    <td class="p-3">${appt.appDate}</td>
+                                                                                    <td class="p-3">${d.speciality}</td>
+                                                                                    <td class="p-3">
                                                                                         <c:if test="${d.status == 1}">Active</c:if>
                                                                                         <c:if test="${d.status == 0}">Inactive</c:if>
                                                                                         </td>
-                                                                                        <td>
+                                                                                        <td class="p-3">
                                                                                             <div>
                                                                                                 <div class="card component-wrapper border-0 rounded ">
                                                                                                     <div class="mb-2">
