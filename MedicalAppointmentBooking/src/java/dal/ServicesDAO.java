@@ -7,6 +7,7 @@ package dal;
 import dbContext.DBConnection;
 import jakarta.servlet.http.Part;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,7 +67,7 @@ public class ServicesDAO {
         return serviceList;
     }
 
-        public List<Service> getRelatedService(int cateid) {
+    public List<Service> getRelatedService(int cateid) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Service> serviceList = new ArrayList<>();
@@ -104,6 +105,7 @@ public class ServicesDAO {
         }
         return serviceList;
     }
+
     public Service getServiceById(int id) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -142,21 +144,22 @@ public class ServicesDAO {
         return service;
     }
 
-    public void updateService(int service_id, String service_name,String service_description, String service_details, int fee, Part service_image, int service_status, int category_id) {
+    public void updateService(int service_id, String service_name, String service_description, String service_details, int fee, Part service_image, int service_status, int category_id) {
         PreparedStatement ps = null;
         InputStream fileImage = ImageProcessing.imageStream(service_image);
-        String sql = "UPDATE mabs.services d\n"
+        String sql = "UPDATE mabs.services s\n"
                 + "SET\n"
-                + "  u.service_name = ?,\n"
-                + "  u.service_description = ?,\n"
-                + "  u.service_details = ?,\n"
-                + "  d.fee = ?,\n"
-                + "  d.service_image = ?,\n"
-                + "  d.service_status = ?,\n";
+                + "  s.service_name = ?,\n"
+                + "  s.service_description = ?,\n"
+                + "  s.service_details = ?,\n"
+                + "  s.fee = ?,\n"
+                + "  s.service_image = ?,\n"
+                + "  s.service_status = ?,\n"
+                + "  s.category_id = ?,\n";
         if (fileImage != null) {
-            sql = sql + " , u.service_image = ? \n";
+            sql = sql + " , s.service_image = ? \n";
         }
-        sql = sql + "WHERE d.service_id = ?;";
+        sql = sql + "WHERE s.service_id = ?;";
         Connection connection = null;
         try {
             connection = dbc.getConnection();
@@ -165,14 +168,15 @@ public class ServicesDAO {
             ps.setString(1, service_name);
             ps.setString(2, service_description);
             ps.setString(3, service_details);
+            ps.setInt(6, service_status);
+            ps.setInt(7, category_id);
+            
             ps.setInt(4, fee);
-            ps.setInt(5, service_status);
             if (fileImage != null) {
-                ps.setBlob(6, fileImage);
-                ps.setInt(7, service_id);
-
+                ps.setBlob(5, fileImage);
+                ps.setInt(8, service_id);
             } else {
-                ps.setInt(8, category_id);
+                ps.setInt(5, service_id);
             }
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -188,8 +192,42 @@ public class ServicesDAO {
         }
     }
 
-        
-    
+    public void addService(String service_name, String service_description, String service_details, int fee, Part service_image, int service_status, int category_id) {
+        InputStream fileImage = ImageProcessing.imageStream(service_image);
+        PreparedStatement ps = null;
+        String sql = "INSERT INTO services(service_name,service_description, service_details,fee,service_image,service_status,category_id)\n"
+                + "VALUES (?,\n"
+                + " ?,\n"
+                + " ?,\n"
+                + " ?,\n"
+                + " ?,\n"
+                + " ?);";
+
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, service_name);
+            ps.setString(2, service_description);
+            ps.setString(3, service_details);
+            ps.setInt(4, fee);
+            ps.setBlob(5, fileImage);
+            ps.setInt(6, service_status);
+            ps.setInt(7, category_id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+
     public List<Service> searchServicesByName(String keyword) {
         List<Service> resultList = new ArrayList<>();
         try ( Connection conn = dbc.getConnection()) {
@@ -207,7 +245,7 @@ public class ServicesDAO {
                         int service_status = rs.getInt("service_status");
                         int category_id = rs.getInt("category_id");
                         Service service = new Service(service_id, service_name, service_description, service_details, fee, service_image, service_status, category_id);
-                        resultList.add(service); 
+                        resultList.add(service);
                     }
                 }
             }
@@ -233,7 +271,7 @@ public class ServicesDAO {
                 String description = rs.getString("sc_description");
                 int status = rs.getInt("sc_status");
                 int setting_id = rs.getInt("setting_id");
-                Service_Category sc = new Service_Category(sc_id, name, description, status,setting_id);
+                Service_Category sc = new Service_Category(sc_id, name, description, status, setting_id);
                 List.add(sc);
 
             }
@@ -251,7 +289,7 @@ public class ServicesDAO {
         }
         return List;
     }
-    
+
     public ArrayList<Service> getServiceByCategoryID(int cateId) {
         ArrayList<Service> resultList = new ArrayList<>();
         try ( Connection conn = dbc.getConnection()) {
@@ -269,7 +307,7 @@ public class ServicesDAO {
                         int service_status = rs.getInt("service_status");
                         int category_id = rs.getInt("category_id");
                         Service service = new Service(service_id, service_name, service_description, service_details, fee, service_image, service_status, category_id);
-                        resultList.add(service); 
+                        resultList.add(service);
                     }
                 }
             }
@@ -277,11 +315,11 @@ public class ServicesDAO {
             e.printStackTrace();
         };
         System.out.println(resultList);
-        
+
         return resultList;
-        
+
     }
-    
+
     public List<Service> sortService(String by, String sort) {
         List<Service> slist = new ArrayList<>();
         Connection connection = null;
@@ -292,80 +330,73 @@ public class ServicesDAO {
             sql = "SELECT * FROM services";
         } else if ("price".equals(sort)) {
             sql = "SELECT * FROM services ORDER BY fee ASC";
-        }
-        else if("pricedsc".equals(sort)) {
+        } else if ("pricedsc".equals(sort)) {
             sql = "SELECT * FROM services ORDER BY fee DESC";
-        }
-        else {
+        } else {
             sql = "SELECT * FROM services ORDER BY service_name";
         }
-            try {
-                Connection conn = new DBConnection().getConnection();
-                ps = conn.prepareStatement(sql);
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    int service_id = rs.getInt("service_id");
-                        String service_name = rs.getString("service_name");
-                        String service_description = rs.getString("service_description");
-                        String service_details = rs.getString("service_details");
-                        int fee = rs.getInt("fee");
-                        String service_image = ImageProcessing.imageString(rs.getBlob("service_image"));
-                        int service_status = rs.getInt("service_status");
-                        int category_id = rs.getInt("category_id");
-                        Service service = new Service(service_id, service_name, service_description, service_details, fee, service_image, service_status, category_id);
-                        slist.add(service); 
+        try {
+            Connection conn = new DBConnection().getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int service_id = rs.getInt("service_id");
+                String service_name = rs.getString("service_name");
+                String service_description = rs.getString("service_description");
+                String service_details = rs.getString("service_details");
+                int fee = rs.getInt("fee");
+                String service_image = ImageProcessing.imageString(rs.getBlob("service_image"));
+                int service_status = rs.getInt("service_status");
+                int category_id = rs.getInt("category_id");
+                Service service = new Service(service_id, service_name, service_description, service_details, fee, service_image, service_status, category_id);
+                slist.add(service);
 
-                }
-                return slist;
-            } catch (SQLException e) {
-            } finally {
-                if (connection != null) {
-                    try {
-                        connection.close();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(ServicesDAO.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
             }
             return slist;
-        }
-
-    public List<Service_Category> getSCategory(int scId, String sort) {
-    List<Service_Category> scList = new ArrayList<>();
-    String sql;
-    if ("all".equals(sort)) {
-        sql = "SELECT * FROM mabs.service_category WHERE service_category_id = ?";
-    } else if ("scId".equals(sort)) {
-        sql = "SELECT * FROM mabs.service_category WHERE service_category_id = ? ORDER BY service_category_id DESC";
-    } else {
-        sql = "SELECT * FROM mabs.service_category WHERE service_category_id = ? ORDER BY service_category_id ASC";
-    }
-    try (
-        Connection connection = dbc.getConnection();
-        PreparedStatement ps = connection.prepareStatement(sql)
-    ) {
-        ps.setInt(1, scId);
-
-        try (ResultSet result = ps.executeQuery()) {
-            while (result.next()) {
-                int sc_id = result.getInt("service_category_id");
-                String name = result.getString("sc_name");
-                String description = result.getString("sc_description");
-                int status = result.getInt("sc_status");
-                int setting_id = result.getInt("setting_id");
-                Service_Category sc = new Service_Category(sc_id, name, description, status,setting_id);
-                scList.add(sc);
+        } catch (SQLException e) {
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ServicesDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-        return scList;
-    } catch (SQLException ex) {
-        ex.printStackTrace();
+        return slist;
     }
-    return null;
-}
 
+    public List<Service_Category> getSCategory(int scId, String sort) {
+        List<Service_Category> scList = new ArrayList<>();
+        String sql;
+        if ("all".equals(sort)) {
+            sql = "SELECT * FROM mabs.service_category WHERE service_category_id = ?";
+        } else if ("scId".equals(sort)) {
+            sql = "SELECT * FROM mabs.service_category WHERE service_category_id = ? ORDER BY service_category_id DESC";
+        } else {
+            sql = "SELECT * FROM mabs.service_category WHERE service_category_id = ? ORDER BY service_category_id ASC";
+        }
+        try (
+                 Connection connection = dbc.getConnection();  PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, scId);
 
-    
+            try ( ResultSet result = ps.executeQuery()) {
+                while (result.next()) {
+                    int sc_id = result.getInt("service_category_id");
+                    String name = result.getString("sc_name");
+                    String description = result.getString("sc_description");
+                    int status = result.getInt("sc_status");
+                    int setting_id = result.getInt("setting_id");
+                    Service_Category sc = new Service_Category(sc_id, name, description, status, setting_id);
+                    scList.add(sc);
+                }
+            }
+            return scList;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     public List<Service> getListByPage(List<Service> list,
             int start, int end) {
@@ -384,7 +415,8 @@ public class ServicesDAO {
         }
         return arr;
     }
-public ArrayList<Service> paging(int page, int page_size) {
+
+    public ArrayList<Service> paging(int page, int page_size) {
         ArrayList<Service> services = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet rs = null;

@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Edit Service</title>
         <link rel="shortcut icon" href="/frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -92,42 +92,43 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Title</label>
-                                            <input name="title" id="name" type="text" class="form-control" value="${s.service_name}">
+                                            <input name="service_name" id="name" type="text" class="form-control" value="${s.service_name}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Price</label>
-                                            <input name="description"  type="text"  class="form-control" value="${s.fee}">
+                                            <input name="service_fee"  type="text"  class="form-control" value="${s.fee}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Description</label>
-                                            <input name="content" type="text" class="form-control" value="${s.service_description}">
+                                            <input name="service_description" type="text" class="form-control" value="${s.service_description}">
                                         </div>
                                     </div>
                                         <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Category</label>
-                                            <input name="content" type="number" class="form-control" value="${s.category_id}">
+                                            <input name="category_id" type="number" class="form-control" value="${s.category_id}">
                                         </div>
                                     </div>
                                         <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Status</label>
-                                            <input name="content" type="numer" class="form-control" value="${s.service_status}">
+                                            <input name="status" type="numer" class="form-control" value="${s.service_status}">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-9">
-                                        <input type="submit" id="submit" name="send" class="btn btn-primary btn-sm"value="SAVE">
+                                    <div class=" col-lg-9">
+                                        <a href="<c:url value='/manage-service?action=view-all'/> " class="btn btn-primary mt-5 ">Return</a>
                                     </div>
-                                    <div class=" col-lg-3">
-                                        <a href="<c:url value='/manage-service?action=view-all'/> " class="btn btn-primary btn-sm">Return</a>
+                                    <div class="col-lg-3">
+                                        <input type="submit" id="submit" name="send" class="btn btn-primary mt-5"value="SAVE">
                                     </div>
+                                    
                                 </div>
 
                             </form>

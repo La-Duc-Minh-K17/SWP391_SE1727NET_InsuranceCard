@@ -10,8 +10,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="shortcut icon" href="frontend/template/assets/images/favicon.ico.png">
+        <title>Detail Service</title>
+        <link rel="shortcut icon" href="/frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- simplebar -->
@@ -21,12 +21,11 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
-
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
     </head>
     <body>
         <div class="page-wrapper doctris-theme toggled">
-            <jsp:include page="/frontend/common/adminSidebar.jsp" />
+            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
             <main class="page-content">
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
@@ -41,7 +40,6 @@
                             <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
                                 <i class="uil uil-bars"></i>
                             </a>
-
                         </div>
                         <ul class="list-unstyled mb-0">
                             <li class="list-inline-item mb-0 ms-1">
@@ -75,50 +73,69 @@
                         </ul>
                     </div>
                 </div>
-                <c:set value="${requestScope.blog}" var="blog"></c:set>
+                <c:set value="${requestScope.service}" var="s"></c:set>
                     <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
                         <div class="card border-0 shadow overflow-hidden">
                             <div class="tab-content p-4" id="pills-tabContent">
-                                <form action="<c:url value='/manageblog?action=detail&blog_id=${blog.blog_id}'/>" method="POST" enctype="multipart/form-data">
-                                <h5 class="mb-0"> Blog Information.</h5>
+                                <form action="<c:url value='/manage-service?action=view&service_id=${s.service_id}'/>" method="POST" enctype="multipart/form-data">
+                                <h5 class="mb-0"> Service Information</h5>
                                 <div>   
-                                    <label class="form-label">Image  </label>
+                                    <label class="form-label">Service Image</label>
                                     <div id="thumbbox" class="mt-3 mb-3">
-                                        <img class="rounded" height="20%" width="30%" alt="Thumb image" id="thumbImage"  src="data:image/jpg;base64,${blog.image}" />
+                                        <img class="rounded" height="20%" width="30%" alt="Thumb image" id="thumbImage"  src="data:image/jpg;base64,${s.service_image}" />
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Title  </label>
-                                            <h5>${blog.title}</h5>
+                                            <h5>Title</h5>
+                                            <label class="form-label">${s.service_name}  </label>
+
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Description</label>
-                                            <h5>${blog.description}</h5>
+                                            <h5>Price</h5>
+                                            <label class="form-label">$${s.fee}  </label>
+
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <div class="mb-3 custom-box">
-                                            <label class="form-label">Content</label>
-                                            <h5>${blog.content}</h5>
+                                        <div class="mb-3">
+                                            <h5>Category</h5>
+                                            <label class="form-label">${s.service_details}  </label>
+
                                         </div>
                                     </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <h5>Description</h5>
+                                            <label class="form-label">${s.service_description}  </label>
 
-                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <h5>Status</h5>
+                                            <label class="form-label"><c:if test="${s.service_status == 1}">Active</c:if>
+                                                <c:if test="${s.service_status == 0}">Inactive</c:if></label>
 
-                                <div class="row">
-                                    <div class=" col-lg-3">
-                                        <a href="<c:url value='/manageblog?action=view-all'/> " class="btn btn-primary btn-sm">TURN BACK</a>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-lg-9">
+                                                <a href="/<c:url value='/manage-service?action=edit&service_id=${s.service_id}'/> " class="btn btn-primary m-3 ">Edit</a>
+                                        </div>
+                                        <div class=" col-lg-3">
+                                            <a href="<c:url value='/manage-service?action=view-all'/> " class="btn btn-primary m-3 ">Return</a>
+                                        </div>
+
                                     </div>
                                 </div>
-
-                            </form>
                         </div>
                     </div>
-                </div>
             </main><!-- comment -->
         </div>
     </body>

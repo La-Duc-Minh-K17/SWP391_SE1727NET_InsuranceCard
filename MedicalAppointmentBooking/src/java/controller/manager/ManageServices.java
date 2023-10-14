@@ -28,6 +28,7 @@ public class ManageServices extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             ServicesDAO sDAO = new ServicesDAO();
             String action = request.getParameter("action");
+            System.out.println(action);
             request.setAttribute("cateList", sDAO.getAllServiceCategory());
             if (action != null && action.equals("view-all")) {
                 List<Service> serviceList = sDAO.getAllService();
@@ -60,24 +61,25 @@ public class ManageServices extends HttpServlet {
             if (action != null && action.equals("edit-info")) {
                 int service_id = Integer.parseInt(request.getParameter("service_id"));
                 String service_name = request.getParameter("service_name");
-                int fee = Integer.parseInt(request.getParameter("fee"));
+                String fee = request.getParameter("service_fee");
+                System.out.println(service_name);
                 String service_description = request.getParameter("service_description");
                 int category_id = Integer.parseInt(request.getParameter("category_id"));
                 String service_details = request.getParameter("service_details");
                 int service_status = Integer.parseInt(request.getParameter("status"));
                 Part service_image = request.getPart("image");
-                sDAO.updateService(service_id, service_name, service_description, service_details, fee, service_image, service_status, category_id);
-                response.sendRedirect("manage-service?action=edit&id=" + service_id);
+                sDAO.updateService(service_id, service_name, service_description, service_details, 5, service_image, service_status, category_id);
+                response.sendRedirect("manage-service?action=edit&service_id=" + service_id);
                 return;
             }
             if (action != null && action.equals("view")) {
-                int service_id = Integer.parseInt(request.getParameter("id"));
-                Service sevice = sDAO.getServiceById(service_id);
+                int id = Integer.parseInt(request.getParameter("service_id"));
+                Service sevice = sDAO.getServiceById(id);
                 request.setAttribute("service", sevice);
                 request.getRequestDispatcher("frontend/view/admin/detailservice.jsp").forward(request, response);
 
             }
-
+            
         }
     }
 

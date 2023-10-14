@@ -157,7 +157,7 @@
                                                                 <div class="container d-flex">
                                                                     <div class="card component-wrapper border-0 rounded">
                                                                         <div class="d-flex mb-2">
-                                                                            <a href="<c:url value='/manage-service?action=view&id=${s.service_id}'/>" class="btn btn-primary btn-sm m-2  ">View</a>
+                                                                        <a href="<c:url value='/manage-service?action=view&service_id=${s.service_id}'/>" class="btn btn-primary btn-sm m-2  ">View</a>
                                                                         <a href="<c:url value='/manage-service?action=edit&service_id=${s.service_id}'/>" class="btn btn-primary btn-sm ml-2 m-2">Edit</a>
                                                                         <a href="<c:url value='/manage-service?action=status&id=${s.service_id}'/>" class="btn btn-danger btn-sm ml-2 m-2">Deactivate</a>
                                                                     </div>
