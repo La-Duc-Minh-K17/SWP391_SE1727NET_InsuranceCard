@@ -78,8 +78,8 @@ public class PatientDAO {
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
-            
             if(rs.next()) {
                 int patientId = rs.getInt("patient_id");
                 Integer userId = rs.getInt("user_id");
@@ -90,13 +90,16 @@ public class PatientDAO {
                     user = uDAO.getAccountById(userId.intValue());
                 }
                 if(relativeId != null) {
-                    userR = uRDAO.
+                    userR = uRDAO.getUserRelativeById(relativeId.intValue());
                 }
+                Patient p = new Patient(patientId , user , userR);
+                return p;
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(PatientDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     public int getPatientId(Patient patient) {
