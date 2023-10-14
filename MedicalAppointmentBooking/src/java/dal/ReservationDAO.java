@@ -12,7 +12,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Patient;
 import model.Reservation;
+import model.Service;
 
 /**
  *
@@ -21,8 +23,9 @@ import model.Reservation;
 public class ReservationDAO {
 
     DBConnection dbc = new DBConnection();
-    ServicesDAO sDAO = new ServicesDAO();
+    private ServicesDAO sDAO = new ServicesDAO();
     private PatientDAO pDAO = new PatientDAO();
+    
     public List<Reservation> getWatingReservation() {
         List<Reservation> list = new ArrayList<>();
         PreparedStatement ps = null;
@@ -41,10 +44,12 @@ public class ReservationDAO {
                 String result = rs.getString("test_result");
                 String status = rs.getString("reservation_status");
                 int serviceId = rs.getInt("service_id");
-//                Service service = 
-//                int patientId = rs.getInt("patientId");
-//                Reservation resv = new Reservation(id, note, date, time, result, status, serviceId, patientId);
-//                list.add(resv);
+                Service service = sDAO.getServiceById(serviceId);
+                System.out.println(service);
+                int patientId = rs.getInt("patient_id");
+                Patient patient = pDAO.getPatientById(patientId);
+                Reservation resv = new Reservation(id, note, date, time, result, status, service, patient);
+                list.add(resv);
             }
             return list;
         } catch (SQLException ex) {

@@ -88,7 +88,8 @@
     <servlet>
         <servlet-name>webServiceDetail</servlet-name>
         <servlet-class>controller.manager.webServiceDetail</servlet-class>
-
+    </servlet>
+    <servlet>
         <servlet-name>StaffWaitingList</servlet-name>
         <servlet-class>controller.staff.StaffWaitingList</servlet-class>
     </servlet>

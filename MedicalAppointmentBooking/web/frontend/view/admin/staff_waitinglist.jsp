@@ -38,7 +38,7 @@
         <!-- Loader -->
         <div class="page-wrapper doctris-theme toggled">
             <jsp:include page="/frontend/common/staff_side_bar.jsp" />
-       
+
             <main class="page-content">  
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
@@ -122,7 +122,6 @@
                                 <div class="p-4 border-bottom">
                                     <h5 class="mb-0">Waiting List </h5>
                                 </div>
-
                                 <div class="p-4">
                                     <div class="row">
                                         <div class="col-lg-12">
@@ -160,8 +159,6 @@
                                                      aria-labelledby="pills-cloud-tab">
                                                     <div class="col-12 ">
                                                         <div class="card component-wrapper border-0 rounded shadow">
-
-
                                                             <div class="p-4">
                                                                 <div class="table-responsive bg-white shadow rounded">
                                                                     <table class="table mb-0 table-center">
@@ -181,11 +178,11 @@
                                                                                 <c:if test="${appt.patient.userAccount != null}">
                                                                                     <c:set var="patient" value="${appt.patient.userAccount}"></c:set>
                                                                                 </c:if>
-                                                                                 <c:if test="${appt.patient.userRelative != null}">
+                                                                                <c:if test="${appt.patient.userRelative != null}">
                                                                                     <c:set var="patient" value="${appt.patient.userRelative}"></c:set>
                                                                                 </c:if>
                                                                                 <tr>
-                                                                                    <th class="p-3">${appt.apptId}</th>
+                                                                                    <td class="p-3">${appt.apptId}</td>
                                                                                     <td class="p-3">${patient.fullName}</td>
                                                                                     <td class="p-3">${appt.doctor.fullName}</td>
                                                                                     <td class="p-3">${appt.apptDate}</td>
@@ -236,33 +233,38 @@
                                                                     <table class="table mb-0 table-center">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th scope="col">ID</th>
-                                                                                <th scope="col">Name</th>
-                                                                                <th scope="col">Phone</th>
-                                                                                <th scope="col">Speciality</th>
-                                                                                <th scope="col">Status</th>
-                                                                                <th scope="col">Action</th>
+                                                                                <th class="border-bottom p-3">ID</th>
+                                                                                <th class="border-bottom p-3">Patient</th>
+                                                                                <th class="border-bottom p-3">Service</th>
+                                                                                <th class="border-bottom p-3">Date</th>
+                                                                                <th class="border-bottom p-3">Time</th>
+                                                                                <th class="border-bottom p-3">Status</th>
+                                                                                <th class="border-bottom p-3">Action</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <c:forEach items="${dList}" var="d">
+                                                                            <c:forEach items="${resvList}" var="resv">
+                                                                                <c:if test="${resv.patient.userAccount != null}">
+                                                                                    <c:set var="patient" value="${resv.patient.userAccount}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${resv.patient.userRelative != null}">
+                                                                                    <c:set var="patient" value="${resv.patient.userRelative}"></c:set>
+                                                                                </c:if>
                                                                                 <tr>
-                                                                                    <th scope="row">${d.doctorId}</th>
-                                                                                    <td>${d.fullName}</td>
-                                                                                    <td>${d.phone}</td>
-                                                                                    <td>${d.speciality}</td>
-                                                                                    <td>
-                                                                                        <c:if test="${d.status == 1}">Active</c:if>
-                                                                                        <c:if test="${d.status == 0}">Inactive</c:if>
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <div>
-                                                                                                <div class="card component-wrapper border-0 rounded ">
-                                                                                                    <div class="mb-2">
-                                                                                                        <a href="<c:url value='/manage-doctor?action=view&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">View</a>
+                                                                                    <th class="p-3">${resv.resvId}</th>
+                                                                                    <td class="p-3">${patient.fullName}</td>
+                                                                                    <td class="p-3">${resv.service.service_name}</td>
+                                                                                    <td class="p-3">${resv.resvDate}</td>
+                                                                                    <td class="p-3">${resv.resvTime}</td>
+                                                                                    <td class="p-3">${resv.status}</td>
+                                                                                    <td class="p-3">
+                                                                                        <div>
+                                                                                            <div class="card component-wrapper border-0 rounded ">
+                                                                                                <div class="mb-2">
+                                                                                                    <a href="<c:url value='/manage-doctor?action=view&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">View</a>
                                                                                                 </div>
                                                                                                 <div>
-                                                                                                    <a href="<c:url value='/manage-doctor?action=edit&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">Edit</a>
+                                                                                                    <a href="<c:url value='/manage-doctor?action=edit&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">Confirm</a>
                                                                                                 </div>
                                                                                             </div>
 
