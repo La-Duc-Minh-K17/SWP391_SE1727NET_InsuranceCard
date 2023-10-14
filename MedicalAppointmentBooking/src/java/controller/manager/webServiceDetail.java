@@ -2,27 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.home;
+package controller.manager;
 
-import dal.DoctorDAO;
-import dal.ServicesDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import model.Doctor;
-import model.Service;
-import utils.SessionUtils;
 
 /**
  *
  * @author PC
  */
-public class ServiceDetailController extends HttpServlet {
+public class webServiceDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,32 +30,16 @@ public class ServiceDetailController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-
-            ServicesDAO servicedao = new ServicesDAO();
-            DoctorDAO doctordao = new DoctorDAO();
-            String action = request.getParameter("action");
-            
-            if (action != null && action.equals("view-detail")) {
-                int id = Integer.parseInt(request.getParameter("id"));
-                int cateid = Integer.parseInt(request.getParameter("category_id"));
-                Service serviceDetail = new Service();
-                List<Service> sList = servicedao.getRelatedService(cateid);
-                List<Doctor> doctorList = doctordao.getAllDoctor();
-                serviceDetail = servicedao.getServiceById(id);
-                request.setAttribute("Lists", sList);
-                request.setAttribute("doctors", doctorList);
-                request.setAttribute("serviceDetail", serviceDetail);
-                request.getRequestDispatcher("frontend/view/servicedetail.jsp").forward(request, response);
-                return;
-            }
-            if (action != null && action.equals("book-service")) {
-                int id = Integer.parseInt(request.getParameter("id"));
-                Service serviceDetail = servicedao.getServiceById(id);
-                SessionUtils.getInstance().putValue(request, "chosen_service", serviceDetail);
-                request.getRequestDispatcher("booking?action=form-filling").forward(request, response);
-                return;
-            }
-
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet webServiceDetail</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet webServiceDetail at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -79,9 +56,16 @@ public class ServiceDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

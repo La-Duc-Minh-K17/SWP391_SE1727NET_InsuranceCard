@@ -82,6 +82,24 @@
             .custom-button {
                 width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
             }
+            body {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+
+            .wrapper {
+                flex: 1;
+            }
+            .footer {
+                background-color: #333; /* Set the background color of your footer */
+                color: white; /* Set the text color of your footer */
+                text-align: center;
+                padding: 20px;
+                width: 100%;
+            }
         </style>
     </head>
     <body>
@@ -161,10 +179,12 @@
                                         <h5 class="text-muted ">$${s.fee}</h5>
                                         <div class="d-flex flex-column align-items-center mt-3">
                                             <div class="">
-                                                <a href="servicedetail?id=${s.service_id}" class="btn btn-primary custom-button">Learn More</a>
-                                                <a href="#" class="btn btn-success custom-button">Appointment Now</a>
+                                                <a href="javascript:void(0);" onclick="viewServiceDetails(${s.service_id}, ${s.category_id})" class="btn btn-primary custom-button">Learn More</a>
+                                                <a href="service?action=book-service&id=${s.service_id}" class="btn btn-success custom-button">Appointment Now</a>
                                             </div>
                                         </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -188,35 +208,45 @@
 
             </ul>
         </div>
+    </div> 
+    <jsp:include page="/frontend/common/footer.jsp" />
 
-        <script>
-            function filter() {
-                var category = document.getElementById("Filter").value;
-                var sort = document.getElementById("sortSelect").value;
-                var searchInput = document.getElementById("searchInput").value;
-                var url = "service?action=view-all"; // Default action
-                if (category !== "Filter By") {
-                    url = "service?action=filter&category_id=" + category;
-                } else if (searchInput.trim() !== "") {
-                    url = "service?action=search&keyword=" + searchInput;
-                } else if (sort !== "Default Sort") {
-                    url = "service?action=sorted&by=feename&sort=" + sort; // Use "feename" for sorting by service name
-                }
-                window.location.href = url;
+    <script>
+        function viewServiceDetails(serviceId, categoryId) {
+            var url = "servicedetail?action=view-detail&id=" + serviceId + "&category_id=" + categoryId;
+            window.location.href = url;
+        }
+
+        function filter() {
+            var category = document.getElementById("Filter").value;
+            var sort = document.getElementById("sortSelect").value;
+            var searchInput = document.getElementById("searchInput").value;
+            var url = "manage-service?action=view-all"; // Default action
+
+            if (category !== "Filter By") {
+                url = "service?action=filter&category_id=" + category;
+            } else if (searchInput.trim() !== "") {
+                url = "service?action=search&keyword=" + searchInput;
+            } else if (sort !== "Default Sort") {
+                url = "service?action=sorted&by=feename&sort=" + sort;
             }
-        </script>
+
+            window.location.href = url;
+        }
+    </script>
 
 
-        <jsp:include page="/frontend/common/footer.jsp" />
 
-        <!-- End -->
-        <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
-        <!-- Icons -->
-        <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
-        <!-- Main Js -->
-        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
+
+    <!-- End -->
+    <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
+    <!-- Icons -->
+    <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
+    <!-- Main Js -->
+    <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+    <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
+    <script src= "<c:url     value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+    <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
 </body>
+
 </html>
