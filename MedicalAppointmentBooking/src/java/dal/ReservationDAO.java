@@ -21,7 +21,7 @@ import model.Reservation;
 public class ReservationDAO {
 
     DBConnection dbc = new DBConnection();
-  
+    ServicesDAO sDAO = new ServicesDAO();
     private PatientDAO pDAO = new PatientDAO();
     public List<Reservation> getWatingReservation() {
         List<Reservation> list = new ArrayList<>();
@@ -41,10 +41,10 @@ public class ReservationDAO {
                 String result = rs.getString("test_result");
                 String status = rs.getString("reservation_status");
                 int serviceId = rs.getInt("service_id");
-               
-                int patientId = rs.getInt("patientId");
-                Reservation resv = new Reservation(id, note, date, time, result, status, serviceId, patientId);
-                list.add(resv);
+//                Service service = 
+//                int patientId = rs.getInt("patientId");
+//                Reservation resv = new Reservation(id, note, date, time, result, status, serviceId, patientId);
+//                list.add(resv);
             }
             return list;
         } catch (SQLException ex) {

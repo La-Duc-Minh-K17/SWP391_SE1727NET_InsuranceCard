@@ -82,15 +82,16 @@ public class PatientDAO {
             rs = ps.executeQuery();
             if(rs.next()) {
                 int patientId = rs.getInt("patient_id");
-                Integer userId = rs.getInt("user_id");
-                Integer relativeId = rs.getInt("relative_id");
+                int userId = rs.getInt("user_id");
+                int relativeId = rs.getInt("relative_id");
+               
                 UserAccount user = null;
                 UserRelative userR = null;
-                if(userId != null) {
-                    user = uDAO.getAccountById(userId.intValue());
+                if(userId != 0) {
+                    user = uDAO.getAccountById(userId);
                 }
-                if(relativeId != null) {
-                    userR = uRDAO.getUserRelativeById(relativeId.intValue());
+                if(relativeId != 0) {
+                    userR = uRDAO.getUserRelativeById(relativeId);
                 }
                 Patient p = new Patient(patientId , user , userR);
                 return p;

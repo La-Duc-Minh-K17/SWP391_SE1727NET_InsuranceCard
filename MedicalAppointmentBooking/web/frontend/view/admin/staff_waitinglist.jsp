@@ -178,9 +178,15 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             <c:forEach items="${apptList}" var="appt">
+                                                                                <c:if test="${appt.patient.userAccount != null}">
+                                                                                    <c:set var="patient" value="${appt.patient.userAccount}"></c:set>
+                                                                                </c:if>
+                                                                                 <c:if test="${appt.patient.userRelative != null}">
+                                                                                    <c:set var="patient" value="${appt.patient.userRelative}"></c:set>
+                                                                                </c:if>
                                                                                 <tr>
                                                                                     <th class="p-3">${appt.apptId}</th>
-                                                                                    <td class="p-3"></td>
+                                                                                    <td class="p-3">${patient.fullName}</td>
                                                                                     <td class="p-3">${appt.doctor.fullName}</td>
                                                                                     <td class="p-3">${appt.apptDate}</td>
                                                                                     <td class="p-3">${appt.apptTime}</td>
@@ -192,7 +198,7 @@
                                                                                                     <a href="<c:url value='/manage-doctor?action=view&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">View</a>
                                                                                                 </div>
                                                                                                 <div>
-                                                                                                    <a href="<c:url value='/manage-doctor?action=edit&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">Edit</a>
+                                                                                                    <a href="<c:url value='/manage-doctor?action=edit&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">Confirm</a>
                                                                                                 </div>
                                                                                             </div>
 

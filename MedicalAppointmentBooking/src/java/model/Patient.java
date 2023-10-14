@@ -4,8 +4,6 @@
  */
 package model;
 
-import java.sql.Date;
-
 /**
  *
  * @author Admin
@@ -20,25 +18,16 @@ public class Patient {
     public Patient() {
        
     }
-
     public Patient(UserAccount userAccountId, UserRelative userRelativeId) {
-      
         this.userAccount = userAccountId;
         this.userRelative = userRelativeId;
-    }
-
-    
+    }   
     public int getPatientId() {
         return patientId;
     }
-
     public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
-
-   
-
-
     public UserAccount getUserAccount() {
         return userAccount;
     }
@@ -61,8 +50,13 @@ public class Patient {
         this.userRelative = userRelative;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Patient{" + "patientId=" + patientId + ", userAccount=" + userAccount + ", userRelative=" + userRelative + '}';
+    }
 
+    
+    
     
         
 

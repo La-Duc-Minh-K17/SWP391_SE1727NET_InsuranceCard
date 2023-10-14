@@ -300,6 +300,7 @@ public class UserDAO {
             ps.setInt(1, id);
             result = ps.executeQuery();
             if (result.next()) {
+                int userId = result.getInt("user_id");
                 String userName = result.getString("username");
                 String emailAddress = result.getString("email");
                 String full_name = result.getString("full_name");
