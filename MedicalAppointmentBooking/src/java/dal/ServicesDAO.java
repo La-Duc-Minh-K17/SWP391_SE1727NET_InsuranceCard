@@ -5,6 +5,8 @@
 package dal;
 
 import dbContext.DBConnection;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -150,9 +152,8 @@ public class ServicesDAO {
                 + "  s.service_description = ?,\n"
                 + "  s.service_details = ?,\n"
                 + "  s.fee = ?,\n"
-                + "  s.service_image = ?,\n"
                 + "  s.service_status = ?,\n"
-                + "  s.category_id = ?,\n";
+                + "  s.category_id = ?\n";
         if (fileImage != null) {
             sql = sql + " , s.service_image = ? \n";
         }
@@ -165,15 +166,15 @@ public class ServicesDAO {
             ps.setString(1, service_name);
             ps.setString(2, service_description);
             ps.setString(3, service_details);
-            ps.setInt(6, service_status);
-            ps.setInt(7, category_id);
-            
             ps.setInt(4, fee);
+            ps.setInt(5, service_status);
+            ps.setInt(6, category_id);
+            
             if (fileImage != null) {
-                ps.setBlob(5, fileImage);
+                ps.setBlob(7, fileImage);
                 ps.setInt(8, service_id);
             } else {
-                ps.setInt(5, service_id);
+                ps.setInt(7, service_id);
             }
             ps.executeUpdate();
         } catch (SQLException e) {

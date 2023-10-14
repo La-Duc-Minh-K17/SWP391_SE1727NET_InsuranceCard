@@ -8,6 +8,7 @@ import dal.ServicesDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import model.Service;
  *
  * @author PC
  */
+@MultipartConfig(maxFileSize = 16177215)
 public class ManageServices extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
