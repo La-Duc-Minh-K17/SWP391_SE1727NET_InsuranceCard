@@ -15,12 +15,12 @@
             <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                 <div class="sidebar-brand">
                     <a href="index.html">
-                        <img src="../../template/assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                        <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                        <img src="frontend/template/assets/images/MABS__1.png" height="24" class="logo-light-mode" alt="">
+                        <img src="frontend/template/assets/images/MABS__1.png" height="24" class="logo-dark-mode" alt="">
                     </a>
                 </div>
                 <ul class="sidebar-menu pt-3">
-                    <li><a href="index.html"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
+                    <li><a href="home"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
                     <li><a href="appointment.html">
                             <i class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a>
                     </li>
@@ -28,7 +28,7 @@
                         <a href="<c:url value='/manage-doctor?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>
                     </li>
                     <li class="sidebar-menu">
-                        <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i>Services</a>
+                        <a href="<c:url value='/manage-service?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Services</a>
                     </li>
 
                     <li class="sidebar-menu">

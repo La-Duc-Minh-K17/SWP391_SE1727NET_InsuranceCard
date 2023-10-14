@@ -15,8 +15,8 @@
             <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                 <div class="sidebar-brand">
                     <a href="index.html">
-                        <img src="../../template/assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                        <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                        <img src="frontend/template/assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                        <img src="frontend/template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                     </a>
                 </div>
                 <ul class="sidebar-menu pt-3">
