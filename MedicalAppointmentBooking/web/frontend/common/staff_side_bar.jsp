@@ -20,12 +20,16 @@
                     </a>
                 </div>
                 <ul class="sidebar-menu pt-3">
-                    <li><a href="<c:url value='/admin-dashboard?action=view-all'/>"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
                     <li>
-                        <a href="<c:url value='/admin-dashboard?action=view-all'/>">    <i class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment List</a>
+                        <a href="<c:url value='/staff?action=view-waitinglist'/>"><i class="uil uil-calendar-alt me-2 d-inline-block">
+                            </i>Waiting List
+                        </a>
                     </li>
                     <li>
-                        <a href="<c:url value='/admin-dashboard?action=view-all'/>">    <i class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment List</a>
+                        <a href="<c:url value='/staff?action=view-appointment'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Appointment List</a>
+                    </li>
+                    <li>
+                        <a href="<c:url value='/staff?action=view-reservation'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Reservation List</a>
                     </li>
                 </ul>
                 <!-- sidebar-menu  -->

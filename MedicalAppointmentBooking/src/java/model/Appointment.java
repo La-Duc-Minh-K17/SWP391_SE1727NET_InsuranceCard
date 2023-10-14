@@ -35,6 +35,17 @@ public class Appointment {
         this.patientId = patientId;
     }
 
+    public Appointment(int apptId, String apptNote, Date apptDate, String apptTime, String diagnosis, String status,  int doctorId, int patientId) {
+        this.apptId = apptId;
+        this.apptNote = apptNote;
+        this.apptDate = apptDate;
+        this.apptTime = apptTime;
+        this.diagnosis = diagnosis;
+        this.status = status;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
+    }
+    
     public int getApptId() {
         return apptId;
     }

@@ -6,8 +6,13 @@ package dal;
 
 import dbContext.DBConnection;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import model.Appointment;
 import model.Reservation;
 
 /**
@@ -15,7 +20,45 @@ import model.Reservation;
  * @author Admin
  */
 public class ReservationDAO {
+
     DBConnection dbc = new DBConnection();
+
+    public List<Reservation> getWatingReservation() {
+        List<Reservation> list = new ArrayList<>();
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        String sql = "select * from reservations where reservation_status = 'PENDING'";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("reservation_id");
+                String note = rs.getString("reservation_note");
+                Date date = rs.getDate("reservation_date");
+                String time = rs.getString("reservation_time");
+                String result = rs.getString("test_result");
+                String status = rs.getString("reservation_status");
+                int serviceId = rs.getInt("service_id");
+                int patientId = rs.getInt("patientId");
+                Reservation resv = new Reservation(id, note, date, time, result, status, serviceId, patientId);
+                list.add(resv);
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return list;
+    }
 
     public void insertNewReservation(Reservation resv) {
         PreparedStatement ps = null;
@@ -42,7 +85,7 @@ public class ReservationDAO {
             ps.setInt(6, resv.getServiceId());
             ps.setInt(7, resv.getPatientId());
             ps.executeUpdate();
-           
+
         } catch (SQLException ex) {
             System.out.println(ex);
         } finally {

@@ -35,6 +35,20 @@ public class Reservation {
         this.patientId = patientId;
     }
 
+    public Reservation(int resvId, String resvNote, Date resvDate, String resvTime, String testResult, String status, int serviceId, int patientId) {
+        this.resvId = resvId;
+        this.resvNote = resvNote;
+        this.resvDate = resvDate;
+        this.resvTime = resvTime;
+        this.testResult = testResult;
+        this.status = status;
+        this.serviceId = serviceId;
+        this.patientId = patientId;
+    }
+
+    
+    
+    
     public int getResvId() {
         return resvId;
     }
