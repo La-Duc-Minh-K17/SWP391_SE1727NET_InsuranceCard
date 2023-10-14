@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import model.Blog;
@@ -54,7 +55,12 @@ public class ManageBlogController extends HttpServlet {
         }
         if (action != null && action.equals("filter")) {
             int catId = Integer.parseInt(request.getParameter("blog_category_id"));
-            List<Blog> dbiList = dDAO.getBlogById(catId);
+            List<Blog> dbiList= new ArrayList<>();
+            if (catId == 0) {
+                dbiList = dDAO.getAllNews();
+                
+            }else{
+            dbiList = dDAO.getBlogById(catId);}
             request.setAttribute("dList", dbiList);
             request.getRequestDispatcher("frontend/view/admin/bloglist.jsp").forward(request, response);
             return;
@@ -83,28 +89,36 @@ public class ManageBlogController extends HttpServlet {
             String content = request.getParameter("content");
             Part image = request.getPart("image");
             dDAO.updateBlog(blogId, title, description, content, image);
-            response.sendRedirect("manageblog?action=edit&id=" + blogId);   
+            response.sendRedirect("manageblog?action=edit&id=" + blogId);
+            return;
+        }
+        if (action != null && action.equals("detail")) {
+            int blogId = Integer.parseInt(request.getParameter("blog_id"));
+            Blog blog = dDAO.getBlogDetailByID(blogId);
+            request.setAttribute("blog", blog);
+            request.getRequestDispatcher("frontend/view/admin/detailblog.jsp").forward(request, response);
             return;
         }
         if (action != null && action.equals("delete")) {
-            int id = Integer.parseInt(request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("delete_blog_id"));
             dDAO.deleteBlogById(id);
-            response.sendRedirect("manageblog?action=delete&id=" + id);
+            System.out.println(id);
+            response.sendRedirect("manageblog?action=view-all");
             return;
         }
-        if (action != null && action.equals("add")) {           
+        if (action != null && action.equals("add")) {
             request.getRequestDispatcher("frontend/view/admin/addblog.jsp").forward(request, response);
             return;
         }
         if (action != null && action.equals("add-info")) {
             String title = request.getParameter("title");
             String description = request.getParameter("description");
-            String content = request.getParameter("content");            
-            int categoryId = Integer.parseInt(request.getParameter("category_id"));           
+            String content = request.getParameter("content");
+            int categoryId = Integer.parseInt(request.getParameter("category_id"));
             Part image = request.getPart("image");
             Date createdTime = Date.valueOf(request.getParameter("created_time"));
             dDAO.addBlog(title, description, content, categoryId, image, createdTime);
-            response.sendRedirect("manageblog?action=add-info");
+            response.sendRedirect("manageblog?action=view-all");
             return;
         }
     }
