@@ -25,7 +25,7 @@
     </head>
     <body>
         <div class="page-wrapper doctris-theme toggled">
-           <jsp:include page="/frontend/common/manager_side_bar.jsp" />
+            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
             <main class="page-content">
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
@@ -81,11 +81,11 @@
                                 <h5 class="mb-0">Edit Service Information.</h5>
                                 <div>
                                     <p class="text-muted">Update Image.</p>
-                                    <div id="myfileupload">
-                                        <input type="file" name="image" id="uploadfile" name="ImageUpload" onchange="displayThumbnail(this);" />
-                                    </div>
-                                    <div id="thumbbox" class="mt-3 mb-3">
+                                    <div id="thumbbox" class="mt-5 mb-3">
                                         <img class="rounded" height="20%" width="30%" alt="Thumb image" id="thumbImage"  src="data:image/jpg;base64,${s.service_image}" />
+                                    </div>
+                                    <div id="myfileupload" class="mt-5 mb-5">
+                                        <input type="file" name="image" id="uploadfile" name="ImageUpload" onchange="displayThumbnail(this);" />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -98,31 +98,51 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Price</label>
-                                            <input name="service_fee"  type="text"  class="form-control" value="${s.fee}">
+                                            <div class="input-group">
+                                                <span class="input-group-text">$</span>
+                                                <input name="service_fee" type="text" class="form-control" value="${s.fee}">
+                                            </div>
                                         </div>
                                     </div>
+
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Description</label>
                                             <input name="service_description" type="text" class="form-control" value="${s.service_description}">
                                         </div>
                                     </div>
-                                        <div class="col-lg-12">
+                                    <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Detail</label>
                                             <input name="service_details" type="text" class="form-control" value="${s.service_details}">
                                         </div>
                                     </div>
-                                        <div class="col-lg-12">
-                                        <div class="mb-3 custom-box">
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
                                             <label class="form-label">Category</label>
-                                            <input name="category_id" type="number" class="form-control" value="${s.category_id}">
+                                            <select name="category_id" class="form-select">
+                                                <c:forEach items="${requestScope.cateList}" var="c">
+                                                    <option value="${c.sc_id}">${c.name}</option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                     </div>
-                                        <div class="col-lg-12">
-                                        <div class="mb-3 custom-box">
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
                                             <label class="form-label">Status</label>
-                                            <input name="status" type="number" class="form-control" value="${s.service_status}">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><input id="" name="status" ${s.service_status== 1?"checked":""} value="1" type="radio" class="form-check-input m-3 "
+                                                                   checked required ></td>
+                                                        <td><label class="form-check-label mt-3 mb-3">Activate</label></td>
+                                                        <td></td>
+                                                        <td><input id="" name="status" ${s.service_status==0 ?"checked":""} value="0" type="radio" class="form-check-input m-3"
+                                                                   required></td>
+                                                        <td><label class="form-check-label mt-3 mb-3">Inactivate</label></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -134,7 +154,7 @@
                                     <div class="col-lg-3">
                                         <input type="submit" id="submit" name="send" class="btn btn-primary mt-5"value="SAVE">
                                     </div>
-                                    
+
                                 </div>
 
                             </form>

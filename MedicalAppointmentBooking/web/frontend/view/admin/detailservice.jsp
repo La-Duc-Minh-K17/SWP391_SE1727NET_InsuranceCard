@@ -78,9 +78,9 @@
                         <div class="card border-0 shadow overflow-hidden">
                             <div class="tab-content p-4" id="pills-tabContent">
                                 <form action="<c:url value='/manage-service?action=view&service_id=${s.service_id}'/>" method="POST" enctype="multipart/form-data">
-                                <h5 class="mb-0"> Service Information</h5>
+                                <h2 class="mb-0 text-primary"> Service Information</h2>
                                 <div>   
-                                    <label class="form-label">Service Image</label>
+                                    <h5 class=" mt-5">Service Image</h5>
                                     <div id="thumbbox" class="mt-3 mb-3">
                                         <img class="rounded" height="20%" width="30%" alt="Thumb image" id="thumbImage"  src="data:image/jpg;base64,${s.service_image}" />
                                     </div>
@@ -117,15 +117,21 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <h5>Status</h5>
-                                            <label class="form-label"><c:if test="${s.service_status == 1}">Active</c:if>
-                                                <c:if test="${s.service_status == 0}">Inactive</c:if></label>
-
-                                            </div>
+                                            <label class="form-label">
+                                                <c:if test="${s.service_status == 1}">
+                                                    <span class="text-success">Active</span>
+                                                </c:if>
+                                                <c:if test="${s.service_status == 0}">
+                                                    <span class="text-danger">Inactive</span>
+                                                </c:if>
+                                            </label>
                                         </div>
+                                    </div>
 
-                                        <div class="row">
 
-                                            <div class="col-lg-9">
+                                    <div class="row">
+
+                                        <div class="col-lg-9">
                                             <a href="<c:url value='/manage-service?action=edit&service_id=${s.service_id}'/> " class="btn btn-primary m-3 ">Edit</a>
                                         </div>
                                         <div class=" col-lg-3">
