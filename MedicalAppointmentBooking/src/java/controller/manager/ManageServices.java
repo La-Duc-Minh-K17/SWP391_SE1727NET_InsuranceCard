@@ -31,11 +31,9 @@ public class ManageServices extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             ServicesDAO sDAO = new ServicesDAO();
             String action = request.getParameter("action");
-            System.out.println(action);
             request.setAttribute("cateList", sDAO.getAllServiceCategory());
             if (action != null && action.equals("view-all")) {
                 List<Service> serviceList = sDAO.getAllService();
-                System.out.println(serviceList);
                 request.setAttribute("sList", serviceList);
                 request.getRequestDispatcher("frontend/view/admin/listservice.jsp").forward(request, response);
                 return;
@@ -100,7 +98,15 @@ public class ManageServices extends HttpServlet {
             if (action != null && action.equals("status")) {
                 int service_id = Integer.parseInt(request.getParameter("service_id"));
                 int currentStatus = Integer.parseInt(request.getParameter("status"));
-                int newStatus = (currentStatus == 1) ? 0 : 1;
+                int newStatus;
+                if (currentStatus == 1) {
+                    newStatus = 0;
+                } else {
+                    newStatus = 1;
+                }
+                System.out.println("currentStatus: " + currentStatus);
+                System.out.println("newStatus: " + newStatus);
+                System.out.println("service_id: " + service_id);
                 sDAO.updateServiceStatus(service_id, newStatus);
                 response.sendRedirect("manage-service?action=view-all");
                 return;
@@ -110,18 +116,17 @@ public class ManageServices extends HttpServlet {
 
     }
 
-
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-/**
- * Handles the HTTP <code>GET</code> method.
- *
- * @param request servlet request
- * @param response servlet response
- * @throws ServletException if a servlet-specific error occurs
- * @throws IOException if an I/O error occurs
- */
-@Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -135,7 +140,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
      * @throws IOException if an I/O error occurs
      */
     @Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -146,7 +151,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
      * @return a String containing servlet description
      */
     @Override
-public String getServletInfo() {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
