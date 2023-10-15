@@ -89,7 +89,7 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <h5>Title</h5>
-                                            <label class="form-label">${s.service_name}  </label>
+                                            <label class="form-label ">${s.service_name}  </label>
 
                                         </div>
                                     </div>
@@ -102,7 +102,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <h5>Category</h5>
+                                            <h5>Details</h5>
                                             <label class="form-label">${s.service_details}  </label>
 
                                         </div>
@@ -126,7 +126,7 @@
                                         <div class="row">
 
                                             <div class="col-lg-9">
-                                                <a href="/<c:url value='/manage-service?action=edit&service_id=${s.service_id}'/> " class="btn btn-primary m-3 ">Edit</a>
+                                            <a href="<c:url value='/manage-service?action=edit&service_id=${s.service_id}'/> " class="btn btn-primary m-3 ">Edit</a>
                                         </div>
                                         <div class=" col-lg-3">
                                             <a href="<c:url value='/manage-service?action=view-all'/> " class="btn btn-primary m-3 ">Return</a>
