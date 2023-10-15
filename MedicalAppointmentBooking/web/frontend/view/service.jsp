@@ -147,7 +147,7 @@
                             <select class="form-select form-control border rounded-pill bg-light" id="Filter" onchange="filter()">
                                 <option selected >Filter By</option>
                                 <c:forEach items="${requestScope.cateList}" var="c" >
-                                    <option value=${c.sc_id} >"${c.name}</option>
+                                    <option value=${c.sc_id} >${c.name}</option>
                                 </c:forEach>
                             </select>
                         </div>

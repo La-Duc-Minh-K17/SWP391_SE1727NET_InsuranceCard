@@ -92,47 +92,69 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Title</label>
-                                            <input name="service_name" id="name" type="text" class="form-control" value="${s.service_name}">
+                                            <div class="mb-3">
+                                                <label class="form-label">Title</label>
+                                                <input name="service_name" id="name" type="text" class="form-control" value="${s.service_name}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Price</label>
-                                            <input name="service_fee"  type="text"  class="form-control" value="${s.fee}">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3 custom-box">
-                                            <label class="form-label">Description</label>
-                                            <input name="service_description" type="text" class="form-control" value="${s.service_description}">
-                                        </div>
-                                    </div>
                                         <div class="col-lg-12">
-                                        <div class="mb-3 custom-box">
-                                            <label class="form-label">Detail</label>
-                                            <input name="service_details" type="text" class="form-control" value="${s.service_details}">
+                                            <div class="mb-3">
+                                                <label class="form-label">Price</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">$</span>
+                                                    <input name="service_fee" type="text" class="form-control" value="${s.fee}">
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
                                         <div class="col-lg-12">
-                                        <div class="mb-3 custom-box">
-                                            <label class="form-label">Category</label>
-                                            <input name="category_id" type="number" class="form-control" value="${s.category_id}">
+                                            <div class="mb-3 custom-box">
+                                                <label class="form-label">Description</label>
+                                                <input name="service_description" type="text" class="form-control" value="${s.service_description}">
+                                            </div>
                                         </div>
-                                    </div>
                                         <div class="col-lg-12">
-                                        <div class="mb-3 custom-box">
-                                            <label class="form-label">Status</label>
-                                            <input name="status" type="numer" class="form-control" value="${s.service_status}">
+                                            <div class="mb-3 custom-box">
+                                                <label class="form-label">Detail</label>
+                                                <input name="service_details" type="text" class="form-control" value="${s.service_details}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Category</label>
+                                                <select name="category_id" class="form-select">
+                                                    <c:forEach items="${requestScope.cateList}" var="c">
+                                                        <option value="${c.sc_id}">${c.name}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Status</label>
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><input id="" name="status" ${s.service_status== 1?"checked":""} value="1" type="radio" class="form-check-input m-3 "
+                                                                       checked required ></td>
+                                                            <td><label class="form-check-label mt-3 mb-3">Activate</label></td>
+                                                            <td></td>
+                                                            <td><input id="" name="status" ${s.service_status==0 ?"checked":""} value="0" type="radio" class="form-check-input m-3"
+                                                                       required></td>
+                                                            <td><label class="form-check-label mt-3 mb-3">Inactivate</label></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="row mb-5">
+                                        <div class=" col-lg-9">
+                                            <a href="<c:url value='/manage-service?action=view-all'/> " class="btn btn-primary mt-5 ">Return</a>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <input type="submit" id="submit" name="send" class="btn btn-primary mt-5"value="ADD">
+                                        </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <input type="submit" id="submit" name="send" class="btn btn-primary"value="ADD">
-                                        </div>
                                     </div>
                             </form>
                         </div>
