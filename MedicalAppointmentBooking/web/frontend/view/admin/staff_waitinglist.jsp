@@ -59,7 +59,7 @@
                                 <div class="dropdown dropdown-primary">
                                     <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                            src="../assets/images/doctors/01.jpg"
+                                            src="/assets/images/doctors/01.jpg"
                                             class="avatar avatar-ex-small rounded-circle" alt=""></button>
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                          style="min-width: 200px;">
@@ -159,18 +159,21 @@
                                                      aria-labelledby="pills-cloud-tab">
                                                     <div class="col-12 ">
                                                         <div class="card component-wrapper border-0 rounded shadow">
-                                                            <div class="p-4">
+                                                            <div>
                                                                 <div class="table-responsive bg-white shadow rounded">
                                                                     <table class="table mb-0 table-center">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th class="border-bottom p-3">ID</th>
-                                                                                <th class="border-bottom p-3">Patient</th>
-                                                                                <th class="border-bottom p-3">Doctor</th>
-                                                                                <th class="border-bottom p-3">Date</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 50px;">#</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 150px;">Email</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 150px">DOB</th>
+                                                                                <th class="border-bottom p-3">Gender</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 150px;">Date</th>
                                                                                 <th class="border-bottom p-3">Time</th>
-                                                                                <th class="border-bottom p-3">Status</th>
-                                                                                <th class="border-bottom p-3">Action</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 220px;">Doctor</th>
+                                                                                <th class="border-bottom p-3">Fees</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 150px;">Action</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -182,25 +185,41 @@
                                                                                     <c:set var="patient" value="${appt.patient.userRelative}"></c:set>
                                                                                 </c:if>
                                                                                 <tr>
-                                                                                    <td class="p-3">${appt.apptId}</td>
-                                                                                    <td class="p-3">${patient.fullName}</td>
-                                                                                    <td class="p-3">${appt.doctor.fullName}</td>
+                                                                                    <th class="p-3">1</th>
+                                                                                    <td class="p-3">
+                                                                                        <a href="#" class="text-dark">
+                                                                                            <div class="d-flex align-items-center">
+                                                                                                <c:if test="${patient.image != 'default'}"> 
+                                                                                                    <img src="data:image/jpg;base64,${patient.image}" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                                                                </c:if>
+                                                                                                <c:if test="${patient.image == 'default'}"> 
+                                                                                                    <img src="frontend/template/assets/images/patient.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                                                                </c:if>
+                                                                                                <span class="ms-2">${patient.fullName}</span>
+                                                                                            </div>
+                                                                                        </a>
+                                                                                    </td>
+                                                                                    <td class="p-3">${patient.email}</td>
+                                                                                    <td class="p-3">${patient.dob}</td>
+                                                                                    <td class="p-3">${patient.gender == 1 ? "Male" : "Female"}</td>
                                                                                     <td class="p-3">${appt.apptDate}</td>
                                                                                     <td class="p-3">${appt.apptTime}</td>
-                                                                                    <td class="p-3">${appt.status}</td>
                                                                                     <td class="p-3">
-                                                                                        <div>
-                                                                                            <div class="card component-wrapper border-0 rounded ">
-                                                                                                <div class="mb-2">
-                                                                                                    <a href="<c:url value='/manage-doctor?action=view&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">View</a>
-                                                                                                </div>
-                                                                                                <div>
-                                                                                                    <a href="<c:url value='/manage-doctor?action=edit&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">Confirm</a>
-                                                                                                </div>
+                                                                                        <a href="#" class="text-dark">
+                                                                                            <div class="d-flex align-items-center">
+                                                                                                <img src="data:image/jpg;base64,${appt.doctor.image}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                                                                                <span class="ms-2">${appt.doctor.fullName}</span>
                                                                                             </div>
-
-                                                                                        </div><!--end col-->
+                                                                                        </a>
                                                                                     </td>
+                                                                                    <td class="p-3">${appt.doctor.serviceFee}/Patient</td>
+                                                                                    <td class="text-start p-3">
+                                                                                        <a href="#acceptappointment" class="btn btn-icon btn-pills btn-soft-success" data-bs-toggle="modal" data-bs-target="#acceptappointment" onclick="acceptAppt(this)" data-id="${appt.apptId}">
+                                                                                            <i class="uil uil-check-circle" ></i></a>
+                                                                                        <a href="#cancelappointment" class="btn btn-icon btn-pills btn-soft-danger" data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
+                                                                                            <i class="uil uil-times-circle"></i></a>
+                                                                                    </td>
+
                                                                                 </tr>
                                                                             </c:forEach>
                                                                         </tbody>
@@ -228,18 +247,21 @@
                                                      aria-labelledby="pills-smart-tab">
                                                     <div class="col-12 ">
                                                         <div class="card component-wrapper border-0 rounded shadow">
-                                                            <div class="p-4">
+                                                            <div >
                                                                 <div class="table-responsive bg-white shadow rounded">
                                                                     <table class="table mb-0 table-center">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th class="border-bottom p-3">ID</th>
-                                                                                <th class="border-bottom p-3">Patient</th>
-                                                                                <th class="border-bottom p-3">Service</th>
-                                                                                <th class="border-bottom p-3">Date</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 50px;">#</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 150px;">Email</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 150px">DOB</th>
+                                                                                <th class="border-bottom p-3">Gender</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 150px;">Date</th>
                                                                                 <th class="border-bottom p-3">Time</th>
-                                                                                <th class="border-bottom p-3">Status</th>
-                                                                                <th class="border-bottom p-3">Action</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 220px;">Service</th>
+                                                                                <th class="border-bottom p-3">Fees</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 150px;">Action</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -251,32 +273,41 @@
                                                                                     <c:set var="patient" value="${resv.patient.userRelative}"></c:set>
                                                                                 </c:if>
                                                                                 <tr>
-                                                                                    <th class="p-3">${resv.resvId}</th>
-                                                                                    <td class="p-3">${patient.fullName}</td>
-                                                                                    <td class="p-3">${resv.service.service_name}</td>
+                                                                                    <th class="p-3">1</th>
+                                                                                    <td class="p-3">
+                                                                                        <a href="#" class="text-dark">
+                                                                                            <div class="d-flex align-items-center">
+                                                                                                <c:if test="${patient.image != 'default'}"> 
+                                                                                                    <img src="data:image/jpg;base64,${patient.image}" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                                                                </c:if>
+                                                                                                <c:if test="${patient.image == 'default'}"> 
+                                                                                                    <img src="frontend/template/assets/images/patient.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                                                                </c:if>
+                                                                                                <span class="ms-2">${patient.fullName}</span>
+                                                                                            </div>
+                                                                                        </a>
+                                                                                    </td>
+                                                                                    <td class="p-3">${patient.email}</td>
+                                                                                    <td class="p-3">${patient.dob}</td>
+                                                                                    <td class="p-3">${patient.gender == 1 ? "Male" : "Female"}</td>
                                                                                     <td class="p-3">${resv.resvDate}</td>
                                                                                     <td class="p-3">${resv.resvTime}</td>
-                                                                                    <td class="p-3">${resv.status}</td>
                                                                                     <td class="p-3">
-                                                                                        <div>
-                                                                                            <div class="card component-wrapper border-0 rounded ">
-                                                                                                <div class="mb-2">
-                                                                                                    <a href="<c:url value='/manage-doctor?action=view&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">View</a>
-                                                                                                </div>
-                                                                                                <div>
-                                                                                                    <a href="<c:url value='/manage-doctor?action=edit&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">Confirm</a>
-                                                                                                </div>
-                                                                                            </div>
-
-                                                                                        </div><!--end col-->
+                                                                                        <a href="#" class="text-dark">
+                                                                                            ${resv.service.service_name}</a>
+                                                                                    </td>
+                                                                                    <td class="p-3">$${resv.service.fee}/Patient</td>
+                                                                                    <td class="text-end p-3">
+                                                                                        <a href="#" class="btn btn-icon btn-pills btn-soft-primary" data-bs-toggle="modal" data-bs-target="#viewappointment_${resv.resvId}"><i class="uil uil-eye"></i></a>
+                                                                                        <a href="#" class="btn btn-icon btn-pills btn-soft-success" data-bs-toggle="modal" data-bs-target="#acceptappointment"><i class="uil uil-check-circle"></i></a>
+                                                                                        <a href="#" class="btn btn-icon btn-pills btn-soft-danger" data-bs-toggle="modal" data-bs-target="#cancelappointment"><i class="uil uil-times-circle"></i></a>
                                                                                     </td>
                                                                                 </tr>
                                                                             </c:forEach>
                                                                         </tbody>
-                                                                    </table>
+                                                                    </table> 
                                                                 </div>
                                                             </div>
-
                                                             <div>
                                                                 <ul class="pagination mb-0 mt-5">
                                                                     <li class="page-item"><a class="page-link" href="javascript:void(0)"
@@ -305,19 +336,130 @@
             </main>
             <!--End page-content" -->
             <!-- Modal -->
+            <div class="modal fade" id="acceptappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <form action="<c:url value='/staff-waiting-list?action=accept?type=appointment'></c:url>" method="post">
+                            <div class="modal-content">
+                                <div class="modal-body py-5">
+                                    <div class="text-center">
+                                        <div class="icon d-flex align-items-center justify-content-center bg-soft-success rounded-circle mx-auto" style="height: 95px; width:95px;">
+                                            <i class="uil uil-check-circle h1 mb-0"></i>
+                                        </div>
+                                        <div class="mt-4">
+                                            <h4>Accept Appointment</h4>
+                                            <p class="para-desc mx-auto text-muted mb-0">This appointment will be assigned for you after clicking on accept button..</p>
+                                            <div class="mt-4">
+                                                <input type="hidden" id="accept_appointment" name="appointment_accpeted" value="">
+                                                <input type="submit" class="btn btn-success" name="accept" value="Accept">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Accept Appointment End -->
 
-        </div>
-        <!-- page-wrapper -->
-        <!-- javascript -->
-        <script>
+                <!-- Cancel Appointment Start -->
+                <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <form action="<c:url value='/staff-waiting-list?action=cancel&type=appointment'></c:url>" method="post">
+                            <div class="modal-content">
+                                <div class="modal-body py-5">
+                                    <div class="text-center">
+                                        <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
+                                            <i class="uil uil-times-circle h1 mb-0"></i>
+                                        </div>
+                                        <div class="mt-4">
+                                            <h4>Cancel Appointment</h4>
+                                            <p class="para-desc mx-auto text-muted mb-0">This appointment will be cancelled by you. Are you sure ?</p>
+                                            <div class="mt-4">
+                                                <input type="hidden" id="cancel_appointment" name="appointment_canceled" value="">
+                                                <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
-            function filter() {
-                const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=filter&speciality_id=';
-                const filterElement = document.getElementById("speFilter").value;
-                window.location.href = url + filterElement;
-            }
-        </script>
-        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
+
+                <!-- Accept reservation Start-->
+                <div class="modal fade" id="acceptreservation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <form action="<c:url value='/staff-waiting-list?action=accept&type=reservation'></c:url>" method="post">
+                                <div class="modal-body py-5">
+                                    <div class="text-center">
+                                        <div class="icon d-flex align-items-center justify-content-center bg-soft-success rounded-circle mx-auto" style="height: 95px; width:95px;">
+                                            <i class="uil uil-check-circle h1 mb-0"></i>
+                                        </div>
+                                        <div class="mt-4">
+                                            <h4>Accept Appointment</h4>
+                                            <p class="para-desc mx-auto text-muted mb-0">This appointment will be assigned for you after clicking on accept button.</p>
+                                            <div class="mt-4">
+                                                <input type="hidden" id="accept_reservation" name="reservation_accepted" value="">
+                                                <input type="submit" class="btn btn-success" name="accept" value="Accept">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Accept reservation End -->
+
+                <!-- Cancel Reservation Start -->
+                <div class="modal fade" id="cancelreservation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <form action="<c:url value='/staff-waiting-list?action=cancel&type=appointment'></c:url>" method="post">
+                                <div class="modal-body py-5">
+                                    <div class="text-center">
+                                        <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
+                                            <i class="uil uil-times-circle h1 mb-0"></i>
+                                        </div>
+                                        <div class="mt-4">
+                                            <h4>Cancel Appointment</h4>
+                                            <p class="para-desc mx-auto text-muted mb-0">Great doctor if you need your family member to get immediate assistance, emergency treatment.</p>
+                                            <div class="mt-4">
+                                                 <input type="hidden" id="cancel_reservation" name="reservation_canceled" value="">
+                                                <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- page-wrapper -->
+            <!-- javascript -->
+            <script>
+                function acceptAppt(appt) {
+                    var dataId = appt.getAttribute('data-id');
+                    let accept_appt = document.getElementById('accept_appointment');
+                    accept_appt.value = dataId;
+                    console.log(accept_appt.value);
+                }
+                function cancelAppt(appt) {
+                    var dataId = appt.getAttribute('data-id');
+                    let cancel_appt = document.getElementById('cancel_appointment');
+                    cancel_appt.value = dataId;
+                }
+
+                function filter() {
+                    const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=filter&speciality_id=';
+                    const filterElement = document.getElementById("speFilter").value;
+                    window.location.href = url + filterElement;
+                }
+            </script>
+            <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>
         <!-- Icons -->
