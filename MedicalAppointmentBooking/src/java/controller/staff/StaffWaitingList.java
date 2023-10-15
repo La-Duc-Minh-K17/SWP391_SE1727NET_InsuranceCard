@@ -50,7 +50,7 @@ public class StaffWaitingList extends HttpServlet {
             String type = request.getParameter("type");
             if (type.equals("appointment")) {
                 int apptId = Integer.parseInt(request.getParameter("appointment_accepted"));
-                UserAccount account = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
+                UserAccount account = (UserAccount)SessionUtils.getInstance().getValue(request, "user");
                 aDAO.assignAppointment(apptId, account);
             }
             if (type.equals("reservation")) {

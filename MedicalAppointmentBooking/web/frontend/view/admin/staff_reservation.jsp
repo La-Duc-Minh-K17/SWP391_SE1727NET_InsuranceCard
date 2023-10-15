@@ -122,11 +122,8 @@
                                 <div class="p-4 border-bottom">
                                     <h5 class="mb-0">Staff's Reservation List </h5>
                                 </div>
-                                <div class="p-4">
-
+                                <div class="p-2">
                                     <div class="row pt-2">
-
-
                                         <div class="col-12 ">
                                             <div class="card component-wrapper border-0 rounded shadow">
                                                 <div >
@@ -188,7 +185,23 @@
                                                                                 <i class="uil uil-times-circle"></i></a>
                                                                         </td>
                                                                     </tr>
-                                                                </c:forEach>
+                                                                <div class="modal fade" id="acceptappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered">
+                                                                        <form action="<c:url value='/staff-waiting-list?action=accept?type=appointment'></c:url>" method="post">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-body py-5">
+                                                                                        <div class="text-center">
+                                                                                           
+                                                                                            <div class="mt-4">
+                                                                                                
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                            </c:forEach>
                                                             </tbody>
                                                         </table> 
                                                     </div>
@@ -216,35 +229,13 @@
             </main>
             <!--End page-content" -->
             <!-- Modal -->
-            <div class="modal fade" id="acceptappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <form action="<c:url value='/staff-waiting-list?action=accept?type=appointment'></c:url>" method="post">
-                            <div class="modal-content">
-                                <div class="modal-body py-5">
-                                    <div class="text-center">
-                                        <div class="icon d-flex align-items-center justify-content-center bg-soft-success rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                            <i class="uil uil-check-circle h1 mb-0"></i>
-                                        </div>
-                                        <div class="mt-4">
-                                            <h4>Accept Appointment</h4>
-                                            <p class="para-desc mx-auto text-muted mb-0">This appointment will be assigned for you after clicking on accept button..</p>
-                                            <div class="mt-4">
-                                                <input type="hidden" id="accept_appointment" name="appointment_accepted" value="">
-                                                <input type="submit" class="btn btn-success" name="accept" value="Accept">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <!-- Accept Appointment End -->
 
-                <!-- Cancel Appointment Start -->
-                <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <form action="<c:url value='/staff-waiting-list?action=cancel&type=appointment'></c:url>" method="post">
+            <!-- Accept Appointment End -->
+
+            <!-- Cancel Appointment Start -->
+            <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <form action="<c:url value='/staff-waiting-list?action=cancel&type=appointment'></c:url>" method="post">
                             <div class="modal-content">
                                 <div class="modal-body py-5">
                                     <div class="text-center">
@@ -321,26 +312,7 @@
             <!-- page-wrapper -->
             <!-- javascript -->
             <script>
-                function acceptAppt(appt) {
-                    var dataId = appt.getAttribute('data-id');
-                    let accept_appt = document.getElementById('accept_appointment');
-                    accept_appt.value = dataId;
-                    console.log(accept_appt.value);
-                }
-                function cancelAppt(appt) {
-                    var dataId = appt.getAttribute('data-id');
-                    let cancel_appt = document.getElementById('cancel_appointment');
-                    cancel_appt.value = dataId;
 
-                }
-
-                function acceptResv(resv) {
-
-                    var dataId = resv.getAttribute('data-id');
-                    let accept_resv = document.getElementById('accept_reservation');
-                    accept_resv.value = dataId;
-
-                }
                 function cancelResv(resv) {
                     var dataId = resv.getAttribute('data-id');
                     let cancel_resv = document.getElementById('cancel_reservation');
