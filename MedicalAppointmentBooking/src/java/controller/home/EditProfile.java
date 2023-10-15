@@ -49,7 +49,7 @@ public class EditProfile extends HttpServlet {
             UserDAO udao = new UserDAO();
             UserAccount account = udao.getAccountId(curAcc.getUserId());
             request.setAttribute("accc", account);
-            request.getRequestDispatcher("frontend/template/view/editprofile.jsp").forward(request, response);
+            request.getRequestDispatcher("frontend/view/editprofile.jsp").forward(request, response);
         }
 
     }

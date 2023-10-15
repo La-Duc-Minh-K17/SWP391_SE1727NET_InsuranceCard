@@ -266,7 +266,7 @@ public class UserDAO {
                 String userName = rs.getString("username");
                 String emailAddress = rs.getString("email");
                 String fullName = rs.getString("full_name");
-                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                String image = rs.getString("image");
                 int gender = rs.getInt("gender");
                 String phone = rs.getString("phone");
                 int status = rs.getInt("status");

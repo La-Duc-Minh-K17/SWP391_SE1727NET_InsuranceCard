@@ -56,7 +56,7 @@
                             </div>
 
                             <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
-                                <img src="data:image/jpg;base64,${d.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                <img src="${sessionScope.account.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
                                 <h5 class="mt-3 mb-1">${d.fullName}</h5>
                                 
                             </div>

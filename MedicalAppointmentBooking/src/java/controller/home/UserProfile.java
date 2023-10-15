@@ -42,7 +42,7 @@ public class UserProfile extends HttpServlet {
                   Doctor account = udao.getDoctorById(id);                 
                   request.setAttribute("account", account);
                   request.setAttribute("useraccount", useraccount);
-               request.getRequestDispatcher("frontend/template/view/profile.jsp").forward(request, response);
+               request.getRequestDispatcher("frontend/view/profile.jsp").forward(request, response);
         }
     }
 

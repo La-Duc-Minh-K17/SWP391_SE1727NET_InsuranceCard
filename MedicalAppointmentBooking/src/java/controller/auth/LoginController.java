@@ -57,7 +57,7 @@ public class LoginController extends HttpServlet {
 
         if (account == null) {
             request.setAttribute("error", "Invalid username or password");
-            request.getRequestDispatcher("./frontend/template/view/login.jsp").forward(request, response);
+            request.getRequestDispatcher("./frontend/view/login.jsp").forward(request, response);
             return;
         } else {
             request.getSession().setAttribute("account", account);
