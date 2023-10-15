@@ -122,7 +122,7 @@
                                         <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Status</label>
-                                            <input name="status" type="numer" class="form-control" value="${s.service_status}">
+                                            <input name="status" type="number" class="form-control" value="${s.service_status}">
                                         </div>
                                     </div>
                                 </div>
