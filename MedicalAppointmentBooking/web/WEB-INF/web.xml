@@ -25,10 +25,6 @@
         <servlet-class>controller.home.NewDetailController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>NewDetailController</servlet-name>
-        <servlet-class>controller.home.NewDetailController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.auth.LoginController</servlet-class>
     </servlet>
@@ -43,10 +39,6 @@
     <servlet>
         <servlet-name>ServiceController</servlet-name>
         <servlet-class>controller.home.ServiceController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ManageBlogController</servlet-name>
-        <servlet-class>controller.manager.ManageBlogController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManageBlogController</servlet-name>
@@ -88,7 +80,8 @@
     <servlet>
         <servlet-name>webServiceDetail</servlet-name>
         <servlet-class>controller.manager.webServiceDetail</servlet-class>
-
+    </servlet>
+    <servlet>
         <servlet-name>StaffWaitingList</servlet-name>
         <servlet-class>controller.staff.StaffWaitingList</servlet-class>
     </servlet>

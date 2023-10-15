@@ -94,7 +94,7 @@
                             <div class="col-xl-3 col-md-3">
                                 <div class="card component-wrapper border-0 rounded shadow">
                                     <div>
-                                        <select class="form-select form-control" id="speFilter" onchange="filter()">
+                                        <select class="form-select form-control" id="Filter" onchange="filter()">
                                             <option selected disabled>Category</option>
                                             <c:forEach items="${cateList}" var="cate">
                                                 <option value="${cate.sc_id}">${cate.name}</option>  
@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-3 mt-4 mt-md-0 text-md-end">
-                                <a href="<c:url value='/manage-service?action=create'/>" class="btn btn-primary ">Add Service</a>
+                                <a href="<c:url value='/manage-service?action=add'/>" class="btn btn-primary ">Add Service</a>
                             </div><!--end col-->
                         </div><!--end row-->
 
@@ -157,11 +157,19 @@
                                                                 <div class="container d-flex">
                                                                     <div class="card component-wrapper border-0 rounded">
                                                                         <div class="d-flex mb-2">
-                                                                        <a href="<c:url value='/manage-service?action=view&service_id=${s.service_id}'/>" class="btn btn-primary btn-sm m-2  ">View</a>
+                                                                            <a href="<c:url value='/manage-service?action=view&service_id=${s.service_id}'/>" class="btn btn-primary btn-sm m-2">View</a>
                                                                         <a href="<c:url value='/manage-service?action=edit&service_id=${s.service_id}'/>" class="btn btn-primary btn-sm ml-2 m-2">Edit</a>
-                                                                        <a href="<c:url value='/manage-service?action=status&id=${s.service_id}'/>" class="btn btn-danger btn-sm ml-2 m-2">Deactivate</a>
+                                                                        <c:choose>
+                                                                            <c:when test="${s.service_status == 1}">
+                                                                                <a href="<c:url value='/manage-service?action=status&service_id=${s.service_id}&status=${s.service_status}'/>" class="btn btn-danger btn-sm ml-2 m-2">Deactivate</a>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <a href="<c:url value='/manage-service?action=status&service_id=${s.service_id}&status=${s.service_status}'/>" class="btn btn-success btn-sm ml-2 m-2">Activate</a>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
                                                                     </div>
                                                                 </div>
+
 
 
                                                             </div><!--end col-->
@@ -199,20 +207,11 @@
         <!-- javascript -->
         <script>
             function filter() {
-                var category = document.getElementById("speFilter").value;
-                var searchInput = document.getElementById("search").value;
-                var url = "manage-service?action=view-all"; // Change to the correct URL mapping
-
-                if (category !== "Filter By") {
-                    url += "?action=filter&category_id=" + category;
-                } else if (searchInput.trim() !== "") {
-                    url += "?action=search&search=" + searchInput;
-                } else if (sort !== "Default Sort") {
-                    url += "?action=sorted&by=feename&sort=" + sort;
-                }
-
-                window.location.href = url;
+                const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-service?action=filter&category_id=';
+                const filterElement = document.getElementById("Filter").value;
+                window.location.href = url + filterElement;
             }
+
 
         </script>
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>

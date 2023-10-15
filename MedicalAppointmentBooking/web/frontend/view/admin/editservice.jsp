@@ -109,6 +109,12 @@
                                     </div>
                                         <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
+                                            <label class="form-label">Detail</label>
+                                            <input name="service_details" type="text" class="form-control" value="${s.service_details}">
+                                        </div>
+                                    </div>
+                                        <div class="col-lg-12">
+                                        <div class="mb-3 custom-box">
                                             <label class="form-label">Category</label>
                                             <input name="category_id" type="number" class="form-control" value="${s.category_id}">
                                         </div>
@@ -116,7 +122,7 @@
                                         <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Status</label>
-                                            <input name="status" type="numer" class="form-control" value="${s.service_status}">
+                                            <input name="status" type="number" class="form-control" value="${s.service_status}">
                                         </div>
                                     </div>
                                 </div>
