@@ -104,9 +104,6 @@ public class ManageServices extends HttpServlet {
                 } else {
                     newStatus = 1;
                 }
-                System.out.println("currentStatus: " + currentStatus);
-                System.out.println("newStatus: " + newStatus);
-                System.out.println("service_id: " + service_id);
                 sDAO.updateServiceStatus(service_id, newStatus);
                 response.sendRedirect("manage-service?action=view-all");
                 return;
