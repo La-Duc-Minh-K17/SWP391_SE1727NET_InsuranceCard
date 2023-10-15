@@ -93,8 +93,8 @@
                                     <div>
                                         <select class="form-select form-control" id="speFilter" onchange="filter()">
                                             <option selected disabled>Sort</option>
-                                            <option>Newest</option>
-                                            <option>Oldest</option>
+                                            <option value="newest">Newest</option>
+                                            <option value="oldest">Oldest</option>
                                         </select>
                                     </div>
                                 </div>
@@ -103,7 +103,7 @@
                             <div class="col-xl-6 col-md-6">
                                 <div class="search-bar d-lg-block" style="padding-top :0">
                                     <div id="search" class="menu-search ">
-                                        <form action="<c:url value='/manage-doctor?action=search'/>" role="search" method="post"
+                                        <form action="<c:url value='/staff-waiting-list?action=search'/>" role="search" method="post"
                                               id="searchform" class="searchform">
                                             <div>
                                                 <input type="text" class="form-control border rounded-pill" name="search"
@@ -214,9 +214,11 @@
                                                                                     </td>
                                                                                     <td class="p-3">${appt.doctor.serviceFee}/Patient</td>
                                                                                     <td class="text-start p-3">
-                                                                                        <a href="#acceptappointment" class="btn btn-icon btn-pills btn-soft-success" data-bs-toggle="modal" data-bs-target="#acceptappointment" onclick="acceptAppt(this)" data-id="${appt.apptId}">
+                                                                                        <a href="#acceptappointment" class="btn btn-icon btn-pills btn-soft-success"
+                                                                                           data-bs-toggle="modal" data-bs-target="#acceptappointment" onclick="acceptAppt(this)" data-id="${appt.apptId}">
                                                                                             <i class="uil uil-check-circle" ></i></a>
-                                                                                        <a href="#cancelappointment" class="btn btn-icon btn-pills btn-soft-danger" data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
+                                                                                        <a href="#cancelappointment" class="btn btn-icon btn-pills btn-soft-danger" 
+                                                                                           data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
                                                                                             <i class="uil uil-times-circle"></i></a>
                                                                                     </td>
 
@@ -297,10 +299,13 @@
                                                                                             ${resv.service.service_name}</a>
                                                                                     </td>
                                                                                     <td class="p-3">$${resv.service.fee}/Patient</td>
-                                                                                    <td class="text-end p-3">
-                                                                                        <a href="#" class="btn btn-icon btn-pills btn-soft-primary" data-bs-toggle="modal" data-bs-target="#viewappointment_${resv.resvId}"><i class="uil uil-eye"></i></a>
-                                                                                        <a href="#" class="btn btn-icon btn-pills btn-soft-success" data-bs-toggle="modal" data-bs-target="#acceptappointment"><i class="uil uil-check-circle"></i></a>
-                                                                                        <a href="#" class="btn btn-icon btn-pills btn-soft-danger" data-bs-toggle="modal" data-bs-target="#cancelappointment"><i class="uil uil-times-circle"></i></a>
+                                                                                    <td class="text-start p-3">
+                                                                                        <a href="#" class="btn btn-icon btn-pills btn-soft-success"
+                                                                                           data-bs-toggle="modal" data-bs-target="#acceptreservation" onclick="acceptResv(this)" data-id="${resv.resvId}">
+                                                                                            <i class="uil uil-check-circle"></i></a>
+                                                                                        <a href="#" class="btn btn-icon btn-pills btn-soft-danger" data-bs-toggle="modal"
+                                                                                           data-bs-target="#cancelreservation" onclick="cancelResv(this)" data-id="${resv.resvId}">
+                                                                                            <i class="uil uil-times-circle"></i></a>
                                                                                     </td>
                                                                                 </tr>
                                                                             </c:forEach>
@@ -349,7 +354,7 @@
                                             <h4>Accept Appointment</h4>
                                             <p class="para-desc mx-auto text-muted mb-0">This appointment will be assigned for you after clicking on accept button..</p>
                                             <div class="mt-4">
-                                                <input type="hidden" id="accept_appointment" name="appointment_accpeted" value="">
+                                                <input type="hidden" id="accept_appointment" name="appointment_accepted" value="">
                                                 <input type="submit" class="btn btn-success" name="accept" value="Accept">
                                             </div>
                                         </div>
@@ -399,7 +404,7 @@
                                         </div>
                                         <div class="mt-4">
                                             <h4>Accept Appointment</h4>
-                                            <p class="para-desc mx-auto text-muted mb-0">This appointment will be assigned for you after clicking on accept button.</p>
+                                            <p class="para-desc mx-auto text-muted mb-0">This reservation will be assigned for you after clicking on accept button.</p>
                                             <div class="mt-4">
                                                 <input type="hidden" id="accept_reservation" name="reservation_accepted" value="">
                                                 <input type="submit" class="btn btn-success" name="accept" value="Accept">
@@ -417,19 +422,19 @@
                 <div class="modal fade" id="cancelreservation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-                            <form action="<c:url value='/staff-waiting-list?action=cancel&type=appointment'></c:url>" method="post">
-                                <div class="modal-body py-5">
-                                    <div class="text-center">
-                                        <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                            <i class="uil uil-times-circle h1 mb-0"></i>
-                                        </div>
+                            <form action="<c:url value='/staff-waiting-list?action=cancel&type=reservation'></c:url>" method="post">
+                            <div class="modal-body py-5">
+                                <div class="text-center">
+                                    <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
+                                        <i class="uil uil-times-circle h1 mb-0"></i>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4>Cancel Appointment</h4>
+                                        <p class="para-desc mx-auto text-muted mb-0">This reservation will be cancelled by you. Are you sure ?.</p>
                                         <div class="mt-4">
-                                            <h4>Cancel Appointment</h4>
-                                            <p class="para-desc mx-auto text-muted mb-0">Great doctor if you need your family member to get immediate assistance, emergency treatment.</p>
-                                            <div class="mt-4">
-                                                 <input type="hidden" id="cancel_reservation" name="reservation_canceled" value="">
-                                                <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
-                                            </div>
+                                            <input type="hidden" id="cancel_reservation" name="reservation_canceled" value="">
+                                            <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -451,6 +456,20 @@
                     var dataId = appt.getAttribute('data-id');
                     let cancel_appt = document.getElementById('cancel_appointment');
                     cancel_appt.value = dataId;
+                    
+                }
+                
+                 function acceptResv(resv) {
+                    
+                    var dataId = resv.getAttribute('data-id');
+                    let accept_resv = document.getElementById('accept_reservation');
+                    accept_resv.value = dataId;
+                  
+                }
+                function cancelResv(resv) {
+                    var dataId = resv.getAttribute('data-id');
+                    let cancel_resv = document.getElementById('cancel_reservation');
+                    cancel_resv.value = dataId;
                 }
 
                 function filter() {

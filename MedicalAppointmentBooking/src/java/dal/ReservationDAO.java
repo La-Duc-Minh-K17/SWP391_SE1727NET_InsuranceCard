@@ -12,9 +12,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Appointment;
 import model.Patient;
 import model.Reservation;
 import model.Service;
+import model.UserAccount;
 
 /**
  *
@@ -25,7 +27,7 @@ public class ReservationDAO {
     DBConnection dbc = new DBConnection();
     private ServicesDAO sDAO = new ServicesDAO();
     private PatientDAO pDAO = new PatientDAO();
-    
+
     public List<Reservation> getWatingReservation() {
         List<Reservation> list = new ArrayList<>();
         PreparedStatement ps = null;
@@ -101,6 +103,60 @@ public class ReservationDAO {
                 }
             }
         }
+    }
 
+    public void assignReservation(int resvId, UserAccount account) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "UPDATE `mabs`.`reservations`\n"
+                + "SET\n"
+                + "`reservation_status` = 'CONFIRMED',\n"
+                + "`staff_id` = ? "
+                + "WHERE `reservation_id` =?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, account.getUserId());
+            ps.setInt(2, resvId);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    }
+
+    public void cancelReservation(int  resvId, UserAccount account) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "UPDATE `mabs`.`reservations`\n"
+                + "SET\n"
+                + "`reservation_status` = ?,\n"
+                + "`staff_id` = ? "
+                + "WHERE `reservation_id` =?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, "REJECTED");
+            ps.setInt(2, account.getUserId());
+            ps.setInt(3, resvId);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
     }
 }
