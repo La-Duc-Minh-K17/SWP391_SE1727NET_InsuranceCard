@@ -51,81 +51,85 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                         <div class="card border-0 shadow rounded overflow-hidden">
-                            <div class="mb-4">
-                                <div class="bg-white rounded shadow overflow-hidden">
-                                    <div class="text-center avatar-profile margin-nagative mt-5 position-relative pb-4 border-bottom">
-                                        <c:if test="${sessionScope.doctor.img == 'default'}">
-                                            <img src="/frontend/template/assets/images/avatar.png" class="rounded-circle shadow-md avatar avatar-md-md"
-                                                 alt="">
-                                        </c:if>
-                                        <c:if test="${sessionScope.doctor.img != 'default'}">
-                                            <img src="data:image/png;base64," class="rounded-circle shadow-md avatar avatar-md-md" alt="">
-                                        </c:if>
-                                        <h5 class="mt-3 mb-1"></h5>
-                                    </div>
+                            <c:if test="${sessionScope.chosen_doctor != null}">
+                                <div class="mb-4">
+                                    <div class="bg-white rounded shadow overflow-hidden">
+                                        <div class="text-center avatar-profile margin-nagative mt-5 position-relative pb-4 border-bottom">
+                                            <c:if test="${sessionScope.chosen_doctor.img == 'default'}">
+                                                <img src="/frontend/template/assets/images/avatar.png" class="rounded-circle shadow-md avatar avatar-md-md"
+                                                     alt="">
+                                            </c:if>
+                                            <c:if test="${sessionScope.chosen_doctor.img != 'default'}">
+                                                <img src="data:image/png;base64,${sessionScope.chosen_doctor.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                            </c:if>
+                                            <h5 class="mt-3 mb-1"></h5>
+                                        </div>
 
-                                    <div class="list-unstyled p-4">
-                                        <div class="d-flex align-items-center mt-3">
-                                            <h6 class="mb-0">Full Name: </h6>
-                                            <p class="text-muted mb-0 ms-2">
-                                               
-                                            </p>
-                                        </div>
-                                        <div class="d-flex align-items-center mt-3">
-                                            <h6 class="mb-0">Position : </h6>
-                                            <p class="text-muted mb-0 ms-2">
-                                             
-                                            </p>
-                                        </div>
-                                        <div class="d-flex align-items-center mt-3">
-                                            <h6 class="mb-0">Speciality : </h6>
-                                            <p class="text-muted mb-0 ms-2">
-
-                                            </p>
-                                        </div>
-                                        <div class="d-flex align-items-center mt-3">
-                                            <h6 class="mb-0">Fee: </h6>
-                                            <p class="text-muted mb-0 ms-2">
-                                                100$
-                                            </p>
+                                        <div class="list-unstyled p-4">
+                                            <div class="d-flex align-items-center mt-3">
+                                                <h6 class="mb-0">Full Name: </h6>
+                                                <p class="text-muted mb-0 ms-2">
+                                                    ${sessionScope.chosen_doctor.fullName}
+                                                </p>
+                                            </div>
+                                            <div class="d-flex align-items-center mt-3">
+                                                <h6 class="mb-0">Position : </h6>
+                                                <p class="text-muted mb-0 ms-2">
+                                                    ${sessionScope.chosen_doctor.position}
+                                                </p>
+                                            </div>
+                                            <div class="d-flex align-items-center mt-3">
+                                                <h6 class="mb-0">Speciality : </h6>
+                                                <p class="text-muted mb-0 ms-2">
+                                                    ${sessionScope.chosen_doctor.speciality}
+                                                </p>
+                                            </div>
+                                            <div class="d-flex align-items-center mt-3">
+                                                <h6 class="mb-0">Fee: </h6>
+                                                <p class="text-muted mb-0 ms-2">
+                                                    ${sessionScope.chosen_doctor.serviceFee}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="mb-4">
-                                <div class="bg-white rounded shadow overflow-hidden">
-                                    <div class="p-4 border-bottom">
-                                        <h6 class="mb-0">Service Information</h6>
-                                    </div>
-                                    <br><br><br>
-                                    <div
-                                        class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
-                                        <c:if test="${sessionScope.service.img == 'default'}">
-                                            <img src="assets/images/avata.png" class="rounded-circle shadow-md avatar avatar-md-md"
-                                                 alt="">
-                                        </c:if>
-                                        <c:if test="${sessionScope.service.img != 'default'}">
-                                            <img src="data:image/png;base64,${sessionScope.service.img}"
-                                                 class="rounded-circle shadow-md avatar avatar-md-md" alt="">
-                                        </c:if>
-                                        <h5 class="mt-3 mb-1">${sessionScope.service.title}</h5>
-                                    </div>
-                                    <div class="list-unstyled p-4">
-                                        <div class="d-flex align-items-center mt-3">
-                                            <h6 class="mb-0">Fee: </h6>
-                                            <p class="text-muted mb-0 ms-2">
-                                            
-                                            </p>
+                            </c:if>
+                            <c:if test="${sessionScope.chosen_service != null}">
+                                <div class="mb-4">
+                                    <div class="bg-white rounded shadow overflow-hidden">
+                                        <div class="p-4 border-bottom">
+                                            <h6 class="mb-0">Service Information</h6>
                                         </div>
-                                        <div class="d-flex align-items-center mt-3">
-                                            <h6 class="mb-0">Description: </h6>
-                                            <p class="text-muted mb-0 ms-2">
-
-                                            </p>
+                                        <br><br><br>
+                                        <div
+                                            class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                                            <c:if test="${sessionScope.chosen_service.service_image == 'default'}">
+                                                <img src="assets/images/avata.png" class="rounded-circle shadow-md avatar avatar-md-md"
+                                                     alt="">
+                                            </c:if>
+                                            <c:if test="${sessionScope.chosen_service.service_image != 'default'}">
+                                                <img src="data:image/png;base64,${sessionScope.chosen_service.service_image}"
+                                                     class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                            </c:if>
+                                            <h5 class="mt-3 mb-1">${sessionScope.chosen_service.service_name}</h5>
+                                        </div>
+                                        <div class="list-unstyled p-4">
+                                            <div class="d-flex align-items-center mt-3">
+                                                <h6 class="mb-0">Fee: </h6>
+                                                <p class="text-muted mb-0 ms-2">
+                                                    ${sessionScope.chosen_service.fee}
+                                                </p>
+                                            </div>
+                                            <div class="d-flex align-items-center mt-3">
+                                                <h6 class="mb-0">Description: </h6>
+                                                <p class="text-muted mb-0 ms-2">
+                                                    ${sessionScope.chosen_service.service_description}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </c:if>
                             <ul class="nav nav-pills nav-justified flex-column flex-sm-row rounded-0 shadow overflow-hidden bg-light mb-0" id="pills-tab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link rounded-0 active" id="clinic-booking" data-bs-toggle="pill" href="#pills-clinic" role="tab" aria-controls="pills-clinic" aria-selected="false">
@@ -134,7 +138,6 @@
                                         </div>
                                     </a><!--end nav link-->
                                 </li><!--end nav item-->
-
                                 <li class="nav-item">
                                     <a class="nav-link rounded-0" id="online-booking" data-bs-toggle="pill" href="#pills-online" role="tab" aria-controls="pills-online" aria-selected="false">
                                         <div class="text-center pt-1 pb-1">
@@ -145,7 +148,7 @@
                             </ul>
                             <div class="tab-content p-4" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-clinic" role="tabpanel" aria-labelledby="clinic-booking">
-                                     <form action="<c:url value='/booking?action=yourself-booking'/> " method="post">
+                                    <form action="<c:url value='/booking?action=yourself-booking'/> " method="post">
                                         <div class="row">
                                             <div class="p-6 ">
                                                 <h6 class="mb-2 h5">Patient Information</h6>
@@ -153,42 +156,52 @@
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Patient Name <span class="text-danger">*</span></label>
-                                                    <input name="name" type="text" class="form-control" placeholder="Patient Name :">
+                                                    <input name="name" type="text" class="form-control" placeholder="Patient Name :" value="${sessionScope.user.fullName}">
                                                 </div>
                                             </div><!--end col-->
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Your Email <span class="text-danger">*</span></label>
-                                                    <input name="email" type="email" class="form-control" placeholder="@example.com">
+                                                    <input name="email" type="email" class="form-control" placeholder="@example.com" value="${sessionScope.user.email}">
                                                 </div> 
                                             </div><!--end col-->
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Your Phone <span class="text-danger">*</span></label>
-                                                    <input name="phone" id="phone" type="tel" class="form-control" placeholder="Your Phone :">
+                                                    <input name="phone" id="phone" type="tel" class="form-control" placeholder="Your Phone :" value="${sessionScope.user.phone}">
                                                 </div> 
                                             </div><!--end col-->
-                                             <div class="col-md-6 ">
+                                            <div class="col-md-6 ">
                                                 <div class="mb-3">
                                                     <label class="form-label">Gender <span class="text-danger">*</span></label>
                                                 </div>
                                                 <div class=" d-flex justify-content-around radio-group"> <!-- Group for radio buttons -->
-                                                    <label for="male">Male</label>
-                                                    <input type="radio"  checked="checked" name="gender" value="Male" required>
-                                                    <label for="female">Female</label>
-                                                    <input type="radio" name="gender" value="Female" required>
+
+                                                    <c:if test="${sessionScope.user.gender == 1 }">
+                                                        <label for="male">Male</label>
+                                                        <input type="radio" checked="checked" name="gender" value="Male" required>
+                                                        <label for="female">Female</label>
+                                                        <input type="radio"  name="gender" value="Female" required>
+
+                                                    </c:if>
+                                                    <c:if test="${sessionScope.user.gender == 0 }">
+                                                        <label for="male">Male</label>
+                                                        <input type="radio" name="gender" value="Male" required>
+                                                        <label for="female">Female</label>
+                                                        <input type="radio" checked="checked" name="gender" value="Female" required>
+                                                    </c:if>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Date of Birth<span class="text-danger">*</span></label>
-                                                    <input name="dob"  type="date" class="flatpickr flatpickr-input form-control" id="dob">
+                                                    <input name="dob"  type="date" class="flatpickr flatpickr-input form-control" id="dob" value="${sessionScope.user.dob}">
                                                 </div> 
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Address <span class="text-danger">*</span></label>
-                                                    <input name="address" class="form-control" placeholder="Address:">
+                                                    <input name="address" class="form-control" placeholder="Address:" value="${sessionScope.user.address}">
                                                 </div>
                                             </div><!--end col-->
                                             <div class="p-6">
@@ -227,10 +240,21 @@
                                                 <div class="mb-3">
                                                     <label class="form-label">Choose payment method</label>
                                                     <select  name="payment"
-                                                            class="form-control department-name select2input">
+                                                             class="form-control department-name select2input">
+                                                        <option check="checked" value="">
+                                                            Pay later at the medical facility</option>
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-12">
+                                                <div class="d-grid">
+                                                    <div class="alert alert-primary alert-danger">
+                                                        <p style="text-align: justify; "><b>NOTE</b></p>
+                                                        <p style="text-align: justify; ">
+                                                            Please fill in all information to save time during examination procedures</p>
+                                                    </div>
+                                                </div>
+                                            </div><!--end col-->
                                             <div class="col-lg-12">
                                                 <div class="d-grid">
                                                     <button type="submit" class="btn btn-primary">Book An Appointment</button>
@@ -249,19 +273,19 @@
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Booker Name <span class="text-danger">*</span></label>
-                                                    <input name="booker_name"  type="text" class="form-control" >
+                                                    <input name="booker_name"  type="text" class="form-control" value="${sessionScope.user.fullName}" >
                                                 </div>
                                             </div><!--end col-->
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Booker Phone<span class="text-danger">*</span></label>
-                                                    <input name="booker_phone"  type="text" class="form-control" >
+                                                    <input name="booker_phone"  type="text" class="form-control"  value="${sessionScope.user.phone}">
                                                 </div>
                                             </div><!--end col-->
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Booker Email<span class="text-danger">*</span></label>
-                                                    <input name="booker_email"  type="text" class="form-control">
+                                                    <input name="booker_email"  type="text" class="form-control" value="${sessionScope.user.email}">
                                                 </div>
                                             </div><!--end col-->
                                             <div class="p-6 ">
@@ -349,8 +373,9 @@
                                             <div class="col-md-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Choose payment method</label>
-                                                    <select  name="payment"
-                                                            class="form-control department-name select2input">
+                                                    <select  name="payment"class="form-control department-name select2input">
+                                                        <option check="checked" value="">
+                                                            Pay later at the medical facility</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -373,7 +398,6 @@
         <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/jquery.min.js'/>"></script>
-         
         <script src="<c:url value= '/frontend/template/assets/js/flatpickr.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/select2.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/select2.init.js'/>"></script>
@@ -386,10 +410,6 @@
                 maxDate: new Date().fp_incr(14),
                 dateFormat: "d/m/Y"
 
-            });
-            $("#dob").flatpickr({
-                defaultDate: new Date(),
-                dateFormat: "d/m/Y"
             });
 
             $("#checkin-date1").flatpickr({

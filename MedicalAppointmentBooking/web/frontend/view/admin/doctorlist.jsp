@@ -37,12 +37,10 @@
         </div>
         <!-- Loader -->
         <div class="page-wrapper doctris-theme toggled">
-            <jsp:include page="/frontend/common/adminSidebar.jsp" />
+            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
-            <main class="page-content">
-                
-                
+            <main class="page-content">  
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
                         <div class="d-flex align-items-center">

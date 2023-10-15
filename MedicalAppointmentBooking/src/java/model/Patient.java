@@ -4,8 +4,6 @@
  */
 package model;
 
-import java.sql.Date;
-
 /**
  *
  * @author Admin
@@ -13,63 +11,53 @@ import java.sql.Date;
 public class Patient {
 
     private int patientId;
-    private String address;
-    private Date dob;
-    private int userAccountId;
-    private int userRelativeId;
+   
+    private UserAccount userAccount;
+    private UserRelative userRelative;
 
     public Patient() {
        
     }
-
-    public Patient(String address, Date dob, int userAccountId, int userRelativeId) {
-        this.address = address;
-        this.dob = dob;
-        this.userAccountId = userAccountId;
-        this.userRelativeId = userRelativeId;
-    }
-
-    
+    public Patient(UserAccount userAccountId, UserRelative userRelativeId) {
+        this.userAccount = userAccountId;
+        this.userRelative = userRelativeId;
+    }   
     public int getPatientId() {
         return patientId;
     }
-
     public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
-
-    public String getAddress() {
-        return address;
+    public UserAccount getUserAccount() {
+        return userAccount;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 
-    public Date getDob() {
-        return dob;
+    public UserRelative getUserRelative() {
+        return userRelative;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public void setUserRelative(UserRelative userRelative) {
+        this.userRelative = userRelative;
     }
 
-    public int getUserAccountId() {
-        return userAccountId;
+    public Patient(int patientId, UserAccount userAccount, UserRelative userRelative) {
+        this.patientId = patientId;
+        this.userAccount = userAccount;
+        this.userRelative = userRelative;
     }
 
-    public void setUserAccountId(int userAccountId) {
-        this.userAccountId = userAccountId;
-    }
-
-    public int getUserRelativeId() {
-        return userRelativeId;
-    }
-
-    public void setUserRelativeId(int userRelativeId) {
-        this.userRelativeId = userRelativeId;
+    @Override
+    public String toString() {
+        return "Patient{" + "patientId=" + patientId + ", userAccount=" + userAccount + ", userRelative=" + userRelative + '}';
     }
 
     
+    
+    
+        
 
 }

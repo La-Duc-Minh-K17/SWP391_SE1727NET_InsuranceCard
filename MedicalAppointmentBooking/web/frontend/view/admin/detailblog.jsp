@@ -26,7 +26,7 @@
     </head>
     <body>
         <div class="page-wrapper doctris-theme toggled">
-            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
+            <jsp:include page="/frontend/common/adminSidebar.jsp" />
             <main class="page-content">
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
@@ -75,16 +75,14 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
-                    <div class="card border-0 shadow overflow-hidden">
-                        <div class="tab-content p-4" id="pills-tabContent">
-                            <form action="<c:url value='/manageblog?action=add-info'/>" method="POST" enctype="multipart/form-data">
-                                <h5 class="mb-0">Add Blog Information.</h5>
-                                <div>
-                                    <p class="text-muted">Update Image.</p>
-                                    <div id="myfileupload">
-                                        <input type="file" name="image" id="uploadfile" name="ImageUpload" onchange="displayThumbnail(this);" />
-                                    </div>
+                <c:set value="${requestScope.blog}" var="blog"></c:set>
+                    <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
+                        <div class="card border-0 shadow overflow-hidden">
+                            <div class="tab-content p-4" id="pills-tabContent">
+                                <form action="<c:url value='/manageblog?action=detail&blog_id=${blog.blog_id}'/>" method="POST" enctype="multipart/form-data">
+                                <h5 class="mb-0"> Blog Information.</h5>
+                                <div>   
+                                    <label class="form-label">Image  </label>
                                     <div id="thumbbox" class="mt-3 mb-3">
                                         <img class="rounded" height="20%" width="30%" alt="Thumb image" id="thumbImage"  src="data:image/jpg;base64,${blog.image}" />
                                     </div>
@@ -93,46 +91,30 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Title  </label>
-                                            <input name="title" id="name" type="text" class="form-control" >
+                                            <h5>${blog.title}</h5>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Description</label>
-                                            <input name="description"  type="text"  class="form-control" >
+                                            <h5>${blog.description}</h5>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Content</label>
-                                            <input name="content" type="text" class="form-control" >
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3 custom-box">
-                                            <div class="form-group">
-                                                <label>Category</label>
-                                                <select name="category_id" class="select">
-                                                    <option>Choose Category</option>
-                                                    <c:forEach var="o" items="${requestScope.cDAO}">
-                                                        <option value="${o.blog_category_id}">${o.name}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Created Time</label>
-                                                <input name="created_time" type="date" class="form-control" >
-                                            </div>
+                                            <h5>${blog.content}</h5>
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <input type="submit" id="submit" name="send" class="btn btn-primary"value="ADD">
-                                        </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class=" col-lg-3">
+                                        <a href="<c:url value='/manageblog?action=view-all'/> " class="btn btn-primary btn-sm">TURN BACK</a>
                                     </div>
+                                </div>
+
                             </form>
                         </div>
                     </div>

@@ -77,7 +77,7 @@
                                     <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="data:image/png;base64,${sessionScope.user.image}" class="avatar avatar-ex-small rounded-circle" alt=""></button> 
                                     </c:if>
                                     <c:if test="${sessionScope.user.image == 'default'}">
-                                    <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/avatar.png" class="avatar avatar-ex-small rounded-circle" alt=""></button>
+                                    <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="frontend/template/assets/images/avatar.png" class="avatar avatar-ex-small rounded-circle" alt=""></button>
                                     </c:if>
                                 </c:if>
 
@@ -118,7 +118,7 @@
                         <ul class="navigation-menu nav-left">
                             <li><a href="home" class="sub-menu-item">Home</a></li>
                             <li><a href="home?action=redirect-doctors" class="sub-menu-item">Doctors</a></li>
-                            <li><a href="service" class="sub-menu-item">Services</a></li>
+                            <li><a href="service?action=view-all" class="sub-menu-item">Services</a></li>
                             <li><a href="home?action=redirect-contact-us" class="sub-menu-item">Contact us</a></li>
                             <li><a href="home?action=redirect-blogs" class="sub-menu-item">News and Blogs</a></li>
                         </ul>

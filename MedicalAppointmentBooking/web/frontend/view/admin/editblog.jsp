@@ -26,7 +26,7 @@
     </head>
     <body>
         <div class="page-wrapper doctris-theme toggled">
-            <jsp:include page="/frontend/common/adminSidebar.jsp" />
+            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
             <main class="page-content">
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">

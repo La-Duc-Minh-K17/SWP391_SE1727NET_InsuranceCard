@@ -1,7 +1,7 @@
 <%-- 
-    Document   : adddoctor
-    Created on : Sep 28, 2023, 1:54:24 PM
-    Author     : Admin
+    Document   : addservice
+    Created on : Oct 15, 2023, 5:00:17 PM
+    Author     : PC
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="shortcut icon" href="/assets/images/favicon.ico.png">
+        <link rel="shortcut icon" href="frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- simplebar -->
@@ -78,10 +78,10 @@
                 <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
                     <div class="card border-0 shadow overflow-hidden">
                         <div class="tab-content p-4" id="pills-tabContent">
-                            <form action="<c:url value='/manageblog?action=add-info'/>" method="POST" enctype="multipart/form-data">
-                                <h5 class="mb-0">Add Blog Information.</h5>
+                            <form action="<c:url value='/manage-service?action=add-info'/>" method="POST" enctype="multipart/form-data">
+                                <h5 class="mb-0">Add Service.</h5>
                                 <div>
-                                    <p class="text-muted">Update Image.</p>
+                                    <p class="text-muted">Choose Image.</p>
                                     <div id="myfileupload">
                                         <input type="file" name="image" id="uploadfile" name="ImageUpload" onchange="displayThumbnail(this);" />
                                     </div>
@@ -91,42 +91,43 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Title  </label>
-                                            <input name="title" id="name" type="text" class="form-control" >
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Description</label>
-                                            <input name="description"  type="text"  class="form-control" >
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3 custom-box">
-                                            <label class="form-label">Content</label>
-                                            <input name="content" type="text" class="form-control" >
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3 custom-box">
-                                            <div class="form-group">
-                                                <label>Category</label>
-                                                <select name="category_id" class="select">
-                                                    <option>Choose Category</option>
-                                                    <c:forEach var="o" items="${requestScope.cDAO}">
-                                                        <option value="${o.blog_category_id}">${o.name}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                        </div>
                                         <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Created Time</label>
-                                                <input name="created_time" type="date" class="form-control" >
-                                            </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Title</label>
+                                            <input name="service_name" id="name" type="text" class="form-control" value="${s.service_name}">
                                         </div>
                                     </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Price</label>
+                                            <input name="service_fee"  type="text"  class="form-control" value="${s.fee}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3 custom-box">
+                                            <label class="form-label">Description</label>
+                                            <input name="service_description" type="text" class="form-control" value="${s.service_description}">
+                                        </div>
+                                    </div>
+                                        <div class="col-lg-12">
+                                        <div class="mb-3 custom-box">
+                                            <label class="form-label">Detail</label>
+                                            <input name="service_details" type="text" class="form-control" value="${s.service_details}">
+                                        </div>
+                                    </div>
+                                        <div class="col-lg-12">
+                                        <div class="mb-3 custom-box">
+                                            <label class="form-label">Category</label>
+                                            <input name="category_id" type="number" class="form-control" value="${s.category_id}">
+                                        </div>
+                                    </div>
+                                        <div class="col-lg-12">
+                                        <div class="mb-3 custom-box">
+                                            <label class="form-label">Status</label>
+                                            <input name="status" type="numer" class="form-control" value="${s.service_status}">
+                                        </div>
+                                    </div>
+                                </div>
 
                                     <div class="row">
                                         <div class="col-sm-12">

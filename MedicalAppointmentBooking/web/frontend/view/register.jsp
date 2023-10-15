@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- favicon -->
-        <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
+          <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- Icons -->
@@ -23,8 +23,12 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/otherStyle.css" rel="stylesheet" type="text/css" />
-
+        <!-- SLIDER -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/tiny-slider.css"/>
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
+        
     </head>
 
     <body>
@@ -90,17 +94,29 @@
                                                 <input type="text" class="form-control" placeholder="Password" required="" name="phone" onvalid="validatePhone(this)" oninput="validatePhone(this)">
                                             </div>
                                         </div>
-                                        <div class="col-md-12 mb-3">
+                                        <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Gender <span class="text-danger">*</span></label>
                                             </div>
                                             <div class=" d-flex justify-content-around radio-group"> <!-- Group for radio buttons -->
                                                 <label for="male">Male</label>
-                                                <input type="radio"  checked="checked" name="gender" value="Male" required>
+                                                <input type="radio" checked="checked" name="gender" value="Male" required>
                                                 <label for="female">Female</label>
                                                 <input type="radio" name="gender" value="Female" required>
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Date of Birth<span class="text-danger">*</span></label>
+                                                <input name="dob"  type="date" class="flatpickr flatpickr-input form-control" id="dob">
+                                            </div> 
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Address <span class="text-danger">*</span></label>
+                                                <input name="address" class="form-control" placeholder="Address:">
+                                            </div>
+                                        </div><!--end col-->
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <div class="form-check">
@@ -132,13 +148,20 @@
 
         <!-- javascript -->
         <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
-        <!-- Icons -->
-
         <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
-        <!-- Main Js -->
-
         <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-
+        <script src="<c:url value= '/frontend/template/assets/js/jquery.min.js'/>"></script>
+        <script src="<c:url value= '/frontend/template/assets/js/flatpickr.min.js'/>"></script>
+        <script src="<c:url value= '/frontend/template/assets/js/select2.min.js'/>"></script>
+        <script src="<c:url value= '/frontend/template/assets/js/select2.init.js'/>"></script>
+        <script src="<c:url value= '/frontend/template/assets/js/jquery.timepicker.min.js'/>"></script>
+        <script src="<c:url value= '/frontend/template/assets/js/timepicker.init.js'/>"></script>
+        <script>
+            $("#dob").flatpickr({
+                defaultDate: new Date(),
+                dateFormat: "d/m/Y"
+            });
+        </script>
     </body>
 
 </html>

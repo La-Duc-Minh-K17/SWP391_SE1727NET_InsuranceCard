@@ -39,9 +39,6 @@
                 display: flex;
                 flex-direction: column;
             }
-
-
-
             .card-body {
                 flex: 1;
             }
@@ -85,6 +82,24 @@
             .custom-button {
                 width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
             }
+            body {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+
+            .wrapper {
+                flex: 1;
+            }
+            .footer {
+                background-color: #333; /* Set the background color of your footer */
+                color: white; /* Set the text color of your footer */
+                text-align: center;
+                padding: 20px;
+                width: 100%;
+            }
         </style>
     </head>
     <body>
@@ -98,7 +113,7 @@
                         <div class="section-title text-center">
                             <h3 class="sub-title mb-4 text-white title-dark">Services</h3>
                             <p class="para-desc mx-auto text-white-50">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
-                        
+
                             <nav aria-label="breadcrumb" class="d-inline-block mt-3">
                                 <ul class="breadcrumb bg-light rounded mb-0 py-1 px-2">
                                     <li class="breadcrumb-item"><a href="home">Home</a></li>
@@ -111,126 +126,117 @@
             </div><!--end container-->
         </section><!--end section-->
         <div class="container">
-    <div class="row">
-        <div class="col-md-9">
-            <h3 class="title mt-5">List Services</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <form action="search" method="GET">
-                <div class="input-group">
-                    <input type="text" name="keyword" id="searchInput" class="form-control bg-light" placeholder="Search by name">
-                    <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
+            <div class="row">
+                <div class="col-md-9">
+                    <h3 class="title mt-5 text-primary">List Services</h3>
                 </div>
-            </form>
-        </div>
-        <div class="col-md-6 d-flex align-items-center justify-content-end">
-            <div class="selection-bar btn-success m-5">
-                <select id="sortSelect" class="form-select form-control bg-light">
-                    <option selected disabled>Sort By</option>
-                    <option value="price">Price</option>
-                    <option value="name">Name</option>
-                </select>
             </div>
-        </div>
-    </div>
-</div>
+            <div class="row mb-5">
+                <div class="col-md-4 d-flex align-items-center">
+                    <form action="service?action=search&keyword=" method="GET">
+                        <div class="input-group">
+                            <input type="text" name="keyword" id="searchInput" class="form-control border bg-light" onchange="filter()" placeholder="Search by name">
+                            <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
+                        </div>
+                    </form>
+                </div>
 
+                <div class="col-md-8 d-flex align-items-center justify-content-end">
+                    <div class=" justify-content-end ">
+                        <div class="selection-bar btn-success m-2">
+                            <select class="form-select form-control border rounded-pill bg-light" id="Filter" onchange="filter()">
+                                <option selected >Filter By</option>
+                                <c:forEach items="${requestScope.cateList}" var="c" >
+                                    <option value=${c.sc_id} >"${c.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class=" justify-content-end">
+                        <div class="selection-bar btn-primary m-2">
+                            <select id="sortSelect" class="form-select form-control border rounded-pill bg-light" onchange="filter()" >
+                                <option selected >Default Sort</option>
+                                <option value="price">Price</option>
+                                <option value="name">Name</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row custom-center">
+                <div class="container mt-5 m-5">
+                    <div class="row justify-content-center">
 
-
-
-
-
-        <div class="row custom-center">
-            <div class="container mt-5 m-5">
-                <div class="row justify-content-center">
-
-                    <c:forEach items="${requestScope.services}" var="s" varStatus="loop">
-                        <div class="col-md-3 mt-4">
-                            <div class="card mb-4">
-                                <div class="card-img-container">
-                                    <img src="data:image/jpg;base64,${s.service_image}" class="card-img-top" alt="${s.service_name}">
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title text-primary">${s.service_name}</h5>
-                                    <p class="card-body text-secondary ">${s.service_description}</p>
-                                    <h5 class="text-muted ">$${s.fee}</h5>
-                                    <div class="d-flex flex-column align-items-center mt-3">
-                                        <div class="">
-                                            <a href="servicedetail?id=${s.service_id}" class="btn btn-primary custom-button">Learn More</a>
-                                            <a href="#" class="btn btn-success custom-button">Appointment Now</a>
+                        <c:forEach items="${requestScope.sList}" var="s" varStatus="loop">
+                            <div class="col-md-3 mt-4">
+                                <div class="card mb-4">
+                                    <div class="card-img-container">
+                                        <img src="data:image/jpg;base64,${s.service_image}" class="card-img-top" alt="${s.service_name}">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title text-primary">${s.service_name}</h5>
+                                        <p class="card-body text-secondary ">${s.service_description}</p>
+                                        <h5 class="text-muted ">$${s.fee}</h5>
+                                        <div class="d-flex flex-column align-items-center mt-3">
+                                            <div class="">
+                                                <a href="javascript:void(0);" onclick="viewServiceDetails(${s.service_id}, ${s.category_id})" class="btn btn-primary custom-button">Learn More</a>
+                                                <a href="service?action=book-service&id=${s.service_id}" class="btn btn-success custom-button">Appointment Now</a>
+                                            </div>
                                         </div>
+
+
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <c:if test="${loop.index % 4 == 3}">
-                            <div class="w-100"></div>
-                        </c:if>
+                            <c:if test="${loop.index % 4 == 3}">
+                                <div class="w-100"></div>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                </div><!--end row-->
+            </div><!--end container-->
+        </section><!--end section-->
+        <!-- End Service Items -->
+        <div class="container  m-5  ">
+            <!-- Your card elements here -->
+            <ul class="pagination justify-content-end">
+                <li class="page-item ${page==1?"disabled":""}"><a class="page-link btn-primary" href="service?page=${page-1}"  " >Previous</a></li>
+                    <c:forEach begin="1" end="${totalPage}" var="i">
+                    <li class="page-item ${i == page?"active":""}"><a class="page-link btn-primary" href="service?page=${i}">${i}</a></li>
                     </c:forEach>
-                </div>
-            </div><!--end row-->
-        </div><!--end container-->
-    </section><!--end section-->
-    <!-- End Service Items -->
-    <div class="container  m-5  ">
-        <!-- Your card elements here -->
-        <ul class="pagination justify-content-end">
-            <li class="page-item ${page==1?"disabled":""}"><a class="page-link btn-primary" href="service?page=${page-1}"  " >Previous</a></li>
-                <c:forEach begin="1" end="${totalPage}" var="i">
-                <li class="page-item ${i == page?"active":""}"><a class="page-link btn-primary" href="service?page=${i}">${i}</a></li>
-                </c:forEach>
-            <li class="page-item ${page==totalPage?"disabled":""}"><a class="page-link btn-primary "  href="service?page=${page+1}">Next</a></li>
+                <li class="page-item ${page==totalPage?"disabled":""}"><a class="page-link btn-primary "  href="service?page=${page+1}">Next</a></li>
 
-        </ul>
-    </div>
+            </ul>
+        </div>
+    </div> 
+    <jsp:include page="/frontend/common/footer.jsp" />
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const sortSelect = document.getElementById('sortSelect');
-            const cardsContainer = document.querySelector('.row.justify-content-center');
+        function viewServiceDetails(serviceId, categoryId) {
+            var url = "servicedetail?action=view-detail&id=" + serviceId + "&category_id=" + categoryId;
+            window.location.href = url;
+        }
 
-            sortSelect.addEventListener('change', function () {
-                const selectedValue = this.value;
+        function filter() {
+            var category = document.getElementById("Filter").value;
+            var sort = document.getElementById("sortSelect").value;
+            var searchInput = document.getElementById("searchInput").value;
+            var url = "manage-service?action=view-all"; // Default action
 
-                // Get all card elements
-                const cards = cardsContainer.querySelectorAll('.col-md-3');
+            if (category !== "Filter By") {
+                url = "service?action=filter&category_id=" + category;
+            } else if (searchInput.trim() !== "") {
+                url = "service?action=search&keyword=" + searchInput;
+            } else if (sort !== "Default Sort") {
+                url = "service?action=sorted&by=feename&sort=" + sort;
+            }
 
-                // Convert NodeList to an array for easier sorting
-                const cardsArray = Array.from(cards);
-
-                if (selectedValue === 'name') {
-                    // Sort cards by service name
-                    cardsArray.sort(function (a, b) {
-                        const nameA = a.querySelector('.card-title').textContent.toLowerCase();
-                        const nameB = b.querySelector('.card-title').textContent.toLowerCase();
-                        return nameA.localeCompare(nameB);
-                    });
-                } else if (selectedValue === 'price') {
-                    // Sort cards by service fee
-                    cardsArray.sort(function (a, b) {
-                        const feeA = parseFloat(a.querySelector('.text-muted').textContent.replace('$', ''));
-                        const feeB = parseFloat(b.querySelector('.text-muted').textContent.replace('$', ''));
-                        return feeA - feeB;
-                    });
-                }
-
-                // Re-append sorted cards to the container
-                cardsArray.forEach(function (card) {
-                    cardsContainer.appendChild(card);
-                });
-            });
-        });
+            window.location.href = url;
+        }
     </script>
 
 
 
-
-
-
-
-    <jsp:include page="/frontend/common/footer.jsp" />
 
     <!-- End -->
     <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
@@ -239,7 +245,8 @@
     <!-- Main Js -->
     <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
     <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-    <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+    <script src= "<c:url     value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
     <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
 </body>
+
 </html>

@@ -16,7 +16,7 @@ public class Service {
     private int fee;
     private String service_image;
     private int service_status;
-    private int catetegory_id;
+    private int category_id;
 
     public Service( String service_name, String service_description, String service_details,  String service_image ) {
         this.service_name = service_name;
@@ -33,7 +33,12 @@ public class Service {
         this.fee = fee;
         this.service_image = service_image;
         this.service_status = service_status;
-        this.catetegory_id = category_id;
+        this.category_id = category_id;
+    }
+
+    public Service(int service_id, int service_status) {
+        this.service_id = service_id;
+        this.service_status = service_status;
     }
 
     public Service() {
@@ -96,18 +101,18 @@ public class Service {
         this.service_status = service_status;
     }
 
-    public int getCatetegory_id() {
-        return catetegory_id;
+    public int getCategory_id() {
+        return category_id;
     }
 
-    public void setCatetegory_id(int catetegory_id) {
-        this.catetegory_id = catetegory_id;
+    public void setCategory_id(int catetegory_id) {
+        this.category_id = catetegory_id;
     }
 
 
     @Override
     public String toString() {
-        return "Services{" + "service_id=" + service_id + ", service_name=" + service_name + ", service_description=" + service_description + ", service_details=" + service_details + ", fee=" + fee + ", service_image=" + service_image + ", service_status=" + service_status + ", catetegory_id=" + catetegory_id + '}';
+        return "Services{" + "service_id=" + service_id + ", service_name=" + service_name + ", service_description=" + service_description + ", service_details=" + service_details + ", fee=" + fee + ", service_image=" + service_image + ", service_status=" + service_status + ", category_id=" + category_id + '}';
     }
    
 }

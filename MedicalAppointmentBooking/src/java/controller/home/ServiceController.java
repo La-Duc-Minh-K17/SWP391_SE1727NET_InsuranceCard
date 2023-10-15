@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Service;
 
-
 /**
  *
  * @author PC
@@ -34,12 +33,45 @@ public class ServiceController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            ServicesDAO servicedao = new ServicesDAO();
-            List<Service> serviceList = servicedao.getAllService();
-            request.setAttribute("services", serviceList);
-            System.out.println(serviceList);
-            request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
+            ServicesDAO sDAO = new ServicesDAO();
+            String action = request.getParameter("action");
+            request.setAttribute("cateList", sDAO.getAllServiceCategory());
+            if (action != null && action.equals("view-all")) {
+                List<Service> serList = sDAO.getAllService();
+                request.setAttribute("sList", serList);
+                request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
+                return;
+            }
+            if (action != null && action.equals("filter")) {
+                int cateId = Integer.parseInt(request.getParameter("category_id"));
+                List<Service> serList = sDAO.getServiceByCategoryID(cateId);
+                request.setAttribute("sList", serList);
+                request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
+                return;
+            }
+            if (action != null && action.equals("search")) {
+                String keyword = request.getParameter("keyword").trim();
+                List<Service> sList = sDAO.searchServicesByName(keyword);
+                request.setAttribute("sList", sList);
+
+                request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
+                return;
+            }
+            if (action != null && action.equals("view")) {
+                int serivce_id = Integer.parseInt(request.getParameter("id"));
+                Service service = sDAO.getServiceById(serivce_id);
+                request.setAttribute("service", service);
+                request.getRequestDispatcher("frontend/view/servicedetail.jsp").forward(request, response);
+
+            }  if (action != null && action.equals("sorted")) {
+                String by = request.getParameter("by");
+                String sort = request.getParameter("sort");
+                List<Service> sortedServiceList = sDAO.sortService(by, sort);
+                request.setAttribute("sList", sortedServiceList);
+                request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
+            }
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

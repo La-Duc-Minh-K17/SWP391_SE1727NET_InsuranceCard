@@ -2,23 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.home;
+package controller.manager;
 
-import dal.ServicesDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Service;
 
 /**
  *
  * @author PC
  */
-public class SearchController extends HttpServlet {
+public class webServiceDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,18 +30,16 @@ public class SearchController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            ServicesDAO servicedao = new ServicesDAO();
-            String keyword = request.getParameter("keyword"); 
-            List<Service> serviceList;
-
-            if (keyword != null && !keyword.isEmpty()) {
-                serviceList = servicedao.searchServicesByName(keyword);
-            } else {
-                serviceList = servicedao.getAllService();
-            }
-            request.setAttribute("services", serviceList);
-            request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
-
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet webServiceDetail</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet webServiceDetail at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
