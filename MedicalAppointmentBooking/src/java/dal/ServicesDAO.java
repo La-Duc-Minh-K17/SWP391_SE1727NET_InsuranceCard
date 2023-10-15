@@ -197,8 +197,8 @@ public class ServicesDAO {
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            ps.setInt(1, service_id);
-            ps.setInt(2, newStatus);
+            ps.setInt(2, service_id);
+            ps.setInt(1, newStatus);
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);

@@ -36,6 +36,11 @@ public class Service {
         this.category_id = category_id;
     }
 
+    public Service(int service_id, int service_status) {
+        this.service_id = service_id;
+        this.service_status = service_status;
+    }
+
     public Service() {
         
     }
