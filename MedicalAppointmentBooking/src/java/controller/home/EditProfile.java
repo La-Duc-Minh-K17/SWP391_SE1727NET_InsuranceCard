@@ -4,24 +4,22 @@
  */
 package controller.home;
 
-import dal.DoctorDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Doctor;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 import model.UserAccount;
 
 /**
  *
  * @author ngocq
  */
-@WebServlet(name = "UserProfile", urlPatterns = {"/accountprofile"})
-public class UserProfile extends HttpServlet {
+public class EditProfile extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,45 +32,47 @@ public class UserProfile extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        try ( PrintWriter out = response.getWriter()) {
-            int id = Integer.parseInt(request.getParameter("id"));
-                  Doctor useraccount = new Doctor();
-                  DoctorDAO udao = new DoctorDAO();
-                  Doctor account = udao.getDoctorById(id);                 
-                  request.setAttribute("account", account);
-                  request.setAttribute("useraccount", useraccount);
-               request.getRequestDispatcher("frontend/view/profile.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        if (session.getAttribute("account") == null) {
+            response.sendRedirect("./login");
+        } else {
+            UserAccount curAcc = ((UserAccount) session.getAttribute("account"));
+            UserDAO udao = new UserDAO();
+            UserAccount account = udao.getAccountId(curAcc.getUserId());
+            request.setAttribute("accc", account);
+            request.getRequestDispatcher("frontend/view/editprofile.jsp").forward(request, response);
+        }
+
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            HttpSession session = request.getSession();
+            UserAccount curAcc = ((UserAccount) session.getAttribute("account"));
+
+            UserDAO udao = new UserDAO();
+            String fullName = request.getParameter("name");
+            String gender = request.getParameter("gender");
+            String image = request.getParameter("proimage");
+            String phoneNum = request.getParameter("phone");
+
+            udao.updateUserAccount(curAcc.getUserId(), fullName, image, phoneNum, gender);
+            response.sendRedirect("EditProfile?id=" + curAcc.getUserId());
+
+        } catch (Exception e) {
+            response.getWriter().print(e.getMessage());
+        }
     }
 
     /**
