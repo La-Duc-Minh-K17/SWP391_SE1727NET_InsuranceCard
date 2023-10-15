@@ -87,7 +87,7 @@
 
                 <div class="container-fluid">
                     <div class="layout-specing">
-                        <div class="row align-content-center">
+<!--                        <div class="row align-content-center">
                             <div class="col-xl-3 col-md-3">
                                 <div class="card component-wrapper border-0 rounded shadow">
                                     <div>
@@ -115,7 +115,7 @@
                                 </div>
                             </div>
 
-                        </div><!--end row-->
+                        </div>end row-->
 
                         <div class="col-12 mt-4">
                             <div class="card component-wrapper border-0 rounded shadow">
