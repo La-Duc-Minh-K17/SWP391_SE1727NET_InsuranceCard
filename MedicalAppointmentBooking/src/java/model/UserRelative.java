@@ -17,6 +17,7 @@ public class UserRelative {
     private String phone;
     private int gender;
     private Date dob;
+    private String image = "default";
     private String address;
     private String email;
     private int userId;
@@ -110,6 +111,14 @@ public class UserRelative {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
     
 }

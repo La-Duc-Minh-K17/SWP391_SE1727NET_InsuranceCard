@@ -117,7 +117,12 @@ public class Reservation {
         this.patient = patient;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Reservation{" + "resvId=" + resvId + ", resvNote=" + resvNote + ", resvDate=" + resvDate + ", resvTime=" + resvTime + ", testResult=" + testResult + ", status=" + status + ", staff=" + staff + ", service=" + service + ", patient=" + patient + '}';
+    }
 
+    
+    
   
 }

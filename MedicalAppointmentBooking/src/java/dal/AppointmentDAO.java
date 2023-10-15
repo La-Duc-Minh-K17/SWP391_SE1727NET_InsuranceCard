@@ -15,6 +15,7 @@ import java.util.List;
 import model.Appointment;
 import model.Doctor;
 import model.Patient;
+import model.UserAccount;
 
 /**
  *
@@ -23,15 +24,15 @@ import model.Patient;
 public class AppointmentDAO {
 
     DBConnection dbc = new DBConnection();
-    private DoctorDAO dDAO = new DoctorDAO();
-    private PatientDAO pDAO = new PatientDAO();
+    private final DoctorDAO dDAO = new DoctorDAO();
+    private final PatientDAO pDAO = new PatientDAO();
 
     public List<Appointment> getWatingAppointment() {
         List<Appointment> list = new ArrayList<>();
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
-        String sql = "select * from appointments appt where appt.appointment_status = 'PENDING' ";
+        String sql = "select * from appointments appt where appt.appointment_status = 'PENDING' ORDER BY appointment_date ASC , appointment_time ASC";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
@@ -101,5 +102,97 @@ public class AppointmentDAO {
             }
         }
 
+    }
+
+    public Appointment getAppointmentById(int apptId) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        Appointment appt = null;
+        String sql = "select * from appointments where appointment_id = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("appointment_id");
+                String note = rs.getString("appointment_note");
+                Date date = rs.getDate("appointment_date");
+                String time = rs.getString("appointment_time");
+                String diagnosis = rs.getString("diagnosis");
+                String status = rs.getString("appointment_status");
+                int doctorId = rs.getInt("doctor_id");
+                Doctor doctor = dDAO.getDoctorById(doctorId);
+                int patientId = rs.getInt("patient_id");
+                Patient patient = pDAO.getPatientById(patientId);
+                appt = new Appointment(id, note, date, time, diagnosis, status, doctor, patient);
+            }
+            return appt;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return null;
+    }
+
+    public void assignAppointment(int apptId, UserAccount account) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "UPDATE `mabs`.`appointments`\n"
+                + "SET\n"
+                + "`appointment_status` = 'CONFIRMED',\n"
+                + "`staff_id` = ? WHERE `appointment_id` =?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, account.getUserId());
+            ps.setInt(2, apptId);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    }
+
+    public void cancelAppointment(int apptId, UserAccount account) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "UPDATE `mabs`.`appointments`\n"
+                + "SET\n"
+                + "`appointment_status` = ?,\n"
+                + "`staff_id` = ?\n"
+                + "WHERE appointment_id` = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, "REJECTED");
+            ps.setInt(2, account.getUserId());
+            ps.setInt(3, apptId);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
     }
 }
