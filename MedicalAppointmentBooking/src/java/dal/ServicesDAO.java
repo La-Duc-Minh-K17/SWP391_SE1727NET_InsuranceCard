@@ -169,7 +169,7 @@ public class ServicesDAO {
             ps.setInt(4, fee);
             ps.setInt(5, service_status);
             ps.setInt(6, category_id);
-            
+
             if (fileImage != null) {
                 ps.setBlob(7, fileImage);
                 ps.setInt(8, service_id);
@@ -190,11 +190,35 @@ public class ServicesDAO {
         }
     }
 
+    public void updateServiceStatus(int service_id, int newStatus) {
+        PreparedStatement ps = null;
+        String sql = "UPDATE mabs.services SET service_status = ? WHERE service_id = ?;";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, service_id);
+            ps.setInt(2, newStatus);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+
     public void addService(String service_name, String service_description, String service_details, int fee, Part service_image, int service_status, int category_id) {
         InputStream fileImage = ImageProcessing.imageStream(service_image);
         PreparedStatement ps = null;
         String sql = "INSERT INTO services(service_name,service_description, service_details,fee,service_image,service_status,category_id)\n"
                 + "VALUES (?,\n"
+                + " ?,\n"
                 + " ?,\n"
                 + " ?,\n"
                 + " ?,\n"
