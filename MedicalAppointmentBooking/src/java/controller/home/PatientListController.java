@@ -34,12 +34,11 @@ public class PatientListController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            int id = Integer.parseInt(request.getParameter("id"));
+            int doctorId = Integer.parseInt(request.getParameter("id"));
+            DoctorDAO dDao = new DoctorDAO();
+            Doctor doctor = dDao.getDoctorById(doctorId);
             PatientDAO pdao = new PatientDAO();
-            Doctor useraccount = new Doctor();
-            DoctorDAO udao = new DoctorDAO();
-            Doctor doc = udao.getDoctorById(id);
-            request.setAttribute("doc", doc);
+            request.setAttribute("doctor", doctor);
             request.getRequestDispatcher("frontend/view/patientlist.jsp").forward(request, response);
 
         }

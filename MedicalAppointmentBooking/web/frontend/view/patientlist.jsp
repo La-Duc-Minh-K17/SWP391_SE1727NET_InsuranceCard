@@ -48,31 +48,35 @@
                     <div class="row">
                         <div class="col-xl-3 col-lg-4 col-md-5 col-12">
                             <div class="rounded shadow overflow-hidden sticky-bar">
-                                <div class="card border-0" style ="margin-top: 50px">
-                                    <img src="../assets/images/doctors/profile-bg.jpg" class="img-fluid" alt="">
+                                <div class="card border-0" >
+                                    <img src="frontend/template/assets/images/doctors/profile-bg.jpg" class="img-fluid" alt="">
                                 </div>
-
-                                <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
-                                    <img src="../assets/images/doctors/01.jpg" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
-                                    <h5 class="mt-3 mb-1">${doc.name}</h5>
-                                    <p class="text-muted mb-0">${doc.category}</p>
+                                <div>  
+                                    <div>
+                                    <c:set var="doctor" value="${doctor}"></c:set>
+                                        <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                                            <img src="data:image/jpg;base64,${doctor.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                        <h5 class="mt-3 mb-1">Dr. ${doctor.fullName}</h5>
+                                        <p class="text-muted mb-0">${doctor.speciality}</p>
+                                    </div>
+                                    </div>
+                                    <div>
+                                        <ul class="list-unstyled sidebar-nav mb-0">
+                                            <li class="navbar-item"><a href="doctor-appointment.html" class="navbar-link"><i class="ri-calendar-check-line align-middle navbar-icon"></i> Appointment</a></li>
+                                            <li class="navbar-item"><a href="doctor-schedule.html" class="navbar-link"><i class="ri-timer-line align-middle navbar-icon"></i> Schedule Timing</a></li>
+                                            <li class="navbar-item"><a href="doctor-profile.html" class="navbar-link"><i class="ri-user-line align-middle navbar-icon"></i> Profile</a></li>
+                                            <li class="navbar-item"><a href="doctor-profile-setting.html" class="navbar-link"><i class="ri-user-settings-line align-middle navbar-icon"></i> Profile Settings</a></li>
+                                            <li class="navbar-item active"><a href="patient-list.html" class="navbar-link"><i class="ri-empathize-line align-middle navbar-icon"></i> Patients</a></li>
+                                            <li class="navbar-item"><a href="patient-review.html" class="navbar-link"><i class="ri-chat-1-line align-middle navbar-icon"></i> Patients Review</a></li>
+                                            <li class="navbar-item"><a href="forgot-password.html" class="navbar-link"><i class="ri-device-recover-line align-middle navbar-icon"></i> Forgot Password</a></li>
+                                        </ul></div>
                                 </div>
-                                <ul class="list-unstyled sidebar-nav mb-0">
-                                    <li class="navbar-item"><a href="doctor-appointment.html" class="navbar-link"><i class="ri-calendar-check-line align-middle navbar-icon"></i> Appointment</a></li>
-                                    <li class="navbar-item"><a href="doctor-schedule.html" class="navbar-link"><i class="ri-timer-line align-middle navbar-icon"></i> Schedule Timing</a></li>
-                                    <li class="navbar-item"><a href="doctor-profile.html" class="navbar-link"><i class="ri-user-line align-middle navbar-icon"></i> Profile</a></li>
-                                    <li class="navbar-item"><a href="doctor-profile-setting.html" class="navbar-link"><i class="ri-user-settings-line align-middle navbar-icon"></i> Profile Settings</a></li>
-                                    <li class="navbar-item active"><a href="patient-list.html" class="navbar-link"><i class="ri-empathize-line align-middle navbar-icon"></i> Patients</a></li>
-                                    <li class="navbar-item"><a href="patient-review.html" class="navbar-link"><i class="ri-chat-1-line align-middle navbar-icon"></i> Patients Review</a></li>
-                                    <li class="navbar-item"><a href="forgot-password.html" class="navbar-link"><i class="ri-device-recover-line align-middle navbar-icon"></i> Forgot Password</a></li>
-                                </ul>
-                            </div>
-                        </div><!--end col-->
-
+                            </div><!--end col-->
+                        </div>
                         <div class="col-xl-9 col-lg-8 col-md-7 mt-4 pt-2 mt-sm-0 pt-sm-0">
                             <h5 class="mb-0">Patients List</h5>
                             <div class="row">
-                                
+
                                 <div class="col-xl-3 col-lg-6 col-12 mt-4 pt-2">
                                     <div class="card border-0 shadow rounded p-4">
                                         <div class="d-flex justify-content-between">
@@ -99,7 +103,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
