@@ -53,7 +53,7 @@ public class ServiceReview extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("frontend/view/servicereview.jsp").forward(request, response);
+        request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
     } 
 
     /** 
