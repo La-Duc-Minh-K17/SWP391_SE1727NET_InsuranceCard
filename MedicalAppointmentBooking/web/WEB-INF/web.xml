@@ -100,10 +100,7 @@
         <servlet-name>StaffReservationList</servlet-name>
         <servlet-class>controller.staff.StaffReservationList</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>CheckAvailability</servlet-name>
-        <servlet-class>controller.home.CheckAvailability</servlet-class>
-    </servlet>
+    
     <servlet-mapping>
         <servlet-name>UserAccountController</servlet-name>
         <url-pattern>/user</url-pattern>
@@ -196,10 +193,7 @@
         <servlet-name>webServiceDetail</servlet-name>
         <url-pattern>/detailservice</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CheckAvailability</servlet-name>
-        <url-pattern>/checkavailability</url-pattern>
-    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
