@@ -167,6 +167,39 @@ public class AppointmentDAO {
             }
         }
     }
+    private final int MAX_APPOINTMENT = 3;
+
+    public boolean checkAvailability(Appointment appt) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        String sql = "SELECT COUNT(*) AS appointment_count\n"
+                + "FROM appointments\n"
+                + "WHERE doctor_id = ? AND appointment_date = ? AND appointment_time = ? ";
+        try {
+            connection = dbc.getConnection();
+            ps.setInt(1, appt.getDoctor().getDoctorId());
+            ps.setDate(2, appt.getApptDate());
+            ps.setString(3, appt.getApptTime());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                if (rs.getInt(1) >= MAX_APPOINTMENT) {
+                    return false;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return true;
+    }
 
     public void cancelAppointment(int apptId, UserAccount account) {
         PreparedStatement ps = null;

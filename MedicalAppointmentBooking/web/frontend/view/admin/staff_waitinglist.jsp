@@ -146,8 +146,6 @@
                                                         </div>
                                                     </a>
                                                 </li>
-
-
                                             </ul><!--end nav pills-->
                                         </div><!--end col-->
                                     </div><!--end row-->
@@ -178,12 +176,7 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             <c:forEach items="${apptList}" var="appt">
-                                                                                <c:if test="${appt.patient.userAccount != null}">
-                                                                                    <c:set var="patient" value="${appt.patient.userAccount}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${appt.patient.userRelative != null}">
-                                                                                    <c:set var="patient" value="${appt.patient.userRelative}"></c:set>
-                                                                                </c:if>
+                                                                                    <c:set var="patient" value="${appt.patient}"></c:set>
                                                                                 <tr>
                                                                                     <th class="p-3">1</th>
                                                                                     <td class="p-3">
@@ -268,12 +261,7 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             <c:forEach items="${resvList}" var="resv">
-                                                                                <c:if test="${resv.patient.userAccount != null}">
                                                                                     <c:set var="patient" value="${resv.patient.userAccount}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${resv.patient.userRelative != null}">
-                                                                                    <c:set var="patient" value="${resv.patient.userRelative}"></c:set>
-                                                                                </c:if>
                                                                                 <tr>
                                                                                     <th class="p-3">1</th>
                                                                                     <td class="p-3">
