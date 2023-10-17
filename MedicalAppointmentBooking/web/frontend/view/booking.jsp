@@ -24,9 +24,7 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
-        <style>
 
-        </style>
     </head>
 
     <body>
@@ -202,7 +200,7 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Time</label>
-                                                    <select required="" name="appt-time"
+                                                    <select id ="appt-time" disabled required="" name="appt-time"
                                                             class="form-control department-name select2input">
                                                         <option value="7:00">7:00</option>
                                                         <option value="8:00">8:00</option>
@@ -271,23 +269,51 @@
             $("#checkin-date").flatpickr({
                 defaultDate: "today",
                 minDate: "today",
-                maxDate: new Date().fp_incr(14),
+                maxDate: new Date().fp_incr(7),
                 dateFormat: "d/m/Y"
 
             });
 
-            $("#checkin-date1").flatpickr({
-                defaultDate: "today",
-                minDate: "today",
-                maxDate: new Date().fp_incr(14),
-                dateFormat: "d/m/Y"
-
-            });
-            $("#dob1").flatpickr({
+            $("#dob").flatpickr({
                 defaultDate: new Date(),
                 dateFormat: "d/m/Y"
             });
-        </script>
 
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('#checkin-date').change(function () {
+                    var selectedDate = $('#checkin-date').val();
+
+                    // Make an AJAX request to your server to fetch available appointment times.
+                    $.ajax({
+                        url: 'your-server-endpoint', // Replace with the actual URL
+                        method: 'GET',
+                        data: {date: selectedDate}, // Send the selected date to the server
+                        dataType: 'json', // Expect JSON response
+
+                        success: function (data) {
+                            // Enable the appointment time dropdown and populate it with the response data.
+                            var apptTimeSelect = $('#appt-time');
+                            apptTimeSelect.prop('disabled', false);
+                            apptTimeSelect.empty();
+
+                            // Populate the dropdown with the appointment times from the server.
+                            if (data && data.appointmentTimes) {
+                                $.each(data.appointmentTimes, function (index, time) {
+                                    apptTimeSelect.append($('<option>', {
+                                        value: time,
+                                        text: time
+                                    }));
+                                });
+                            }
+                        },
+                        error: function (error) {
+                            console.log('Error:', error);
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

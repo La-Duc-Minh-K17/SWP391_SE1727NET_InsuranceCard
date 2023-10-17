@@ -46,13 +46,13 @@ public class BookingController extends HttpServlet {
         Doctor chosenDoctor = (Doctor) SessionUtils.getInstance().getValue(request, "chosen_doctor");
         Service chosenService = (Service) SessionUtils.getInstance().getValue(request, "chosen_service");
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
-        
+
         if (action != null && action.equals("yourself-booking")) {
 
             String apptTime = request.getParameter("appt-time");
             String apptDate = request.getParameter("appt-date");
             String apptNote = request.getParameter("appt-reason");
-            
+
             if (chosenDoctor != null) {
                 Patient patient = new Patient(
                         user.getUserId(),
@@ -71,7 +71,7 @@ public class BookingController extends HttpServlet {
                 }
                 patient.setPatientId(patientId);
                 Appointment appt = new Appointment(apptNote, TimeUtil.dateConverter(apptDate), apptTime, "SCHEDULED", chosenDoctor, patient);
-                if(aDAO.checkAvailability(appt)) {
+                if (aDAO.checkAvailability(appt)) {
                     request.setAttribute("error", "This slot time is fully booked now! Please choose other date and time.");
                     request.getRequestDispatcher("frontend/view/booking.jsp").forward(request, response);
                     return;
@@ -99,6 +99,11 @@ public class BookingController extends HttpServlet {
                 }
                 patient.setPatientId(patientId);
                 Reservation resv = new Reservation(apptNote, TimeUtil.dateConverter(apptDate), apptTime, "SCHEDULED", chosenService, patient);
+                if (rDAO.checkAvailability(resv)) {
+                    request.setAttribute("error", "This slot time is fully booked now! Please choose other date and time.");
+                    request.getRequestDispatcher("frontend/view/booking.jsp").forward(request, response);
+                    return;
+                }
                 rDAO.insertNewReservation(resv);
                 response.sendRedirect("frontend/view/booking_success.jsp");
                 return;

@@ -159,7 +159,7 @@ public class ReservationDAO {
             }
         }
     }
-    private final int MAX_APPOINTMENT = 2;
+    
 
     public boolean checkAvailability(Reservation resv) {
         PreparedStatement ps = null;
@@ -175,7 +175,7 @@ public class ReservationDAO {
             ps.setString(3, resv.getResvTime());
             rs = ps.executeQuery();
             if (rs.next()) {
-                if (rs.getInt(1) >= MAX_APPOINTMENT) {
+                if (rs.getInt(1) >= 1) {
                     return false;
                 }
             }
