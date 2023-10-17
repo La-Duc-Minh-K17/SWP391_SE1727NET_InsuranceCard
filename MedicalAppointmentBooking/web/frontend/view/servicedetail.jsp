@@ -58,12 +58,13 @@
                     <div class="text-center m-5">
                         <img  src="data:image/jpg;base64,${s.service_image}" height="400" width="500" alt="${s.service_name}" />
                     </div>
-                </div><!--end col-md-5-->
+                </div>
                 <div class="col-md-7">
                     <div class="text-center m-5">
                         <h4 class="title h3">${s.service_name}</h4>
                         <div class="m-5">
-                            <h5 class="mt-4 py-2">Overview: ${s.service_description}</h5>
+                            <h5 class="mt-4 py-2">Overview:</h5>
+                            <label class="form-label">${s.service_description} </label>
                             <ul class="list-unstyled text-warning h5 mb-0">
                                 <li class="list-inline-item">
                                     <i class="mdi mdi-star"></i>

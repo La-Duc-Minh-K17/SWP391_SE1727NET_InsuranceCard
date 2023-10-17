@@ -1,6 +1,6 @@
 <%-- 
-    Document   : detailservice
-    Created on : Oct 13, 2023, 2:25:25 PM
+    Document   : addservice
+    Created on : Oct 15, 2023, 5:00:17 PM
     Author     : PC
 --%>
 
@@ -10,8 +10,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Detail Service</title>
-        <link rel="shortcut icon" href="/frontend/template/assets/images/favicon.ico.png">
+        <title>JSP Page</title>
+        <link rel="shortcut icon" href="frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- simplebar -->
@@ -21,6 +21,7 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
+
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
     </head>
     <body>
@@ -40,6 +41,7 @@
                             <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
                                 <i class="uil uil-bars"></i>
                             </a>
+
                         </div>
                         <ul class="list-unstyled mb-0">
                             <li class="list-inline-item mb-0 ms-1">
@@ -73,75 +75,91 @@
                         </ul>
                     </div>
                 </div>
-                <c:set value="${requestScope.service}" var="s"></c:set>
-                    <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
-                        <div class="card border-0 shadow overflow-hidden">
-                            <div class="tab-content p-4" id="pills-tabContent">
-                                <form action="<c:url value='/manage-service?action=view&service_id=${s.service_id}'/>" method="POST" enctype="multipart/form-data">
-                                <h2 class="mb-0 text-primary"> Service Information</h2>
-                                <div>   
-                                    <h5 class=" mt-5">Service Image</h5>
+                <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
+                    <div class="card border-0 shadow overflow-hidden">
+                        <div class="tab-content p-4" id="pills-tabContent">
+                            <form action="<c:url value='/manage-service?action=add-info'/>" method="POST" enctype="multipart/form-data">
+                                <h5 class="mb-0">Add Service.</h5>
+                                <div>
+                                    <p class="text-muted">Choose Image.</p>
+                                    <div id="myfileupload">
+                                        <input type="file" name="image" id="uploadfile" name="ImageUpload" onchange="displayThumbnail(this);" />
+                                    </div>
                                     <div id="thumbbox" class="mt-3 mb-3">
-                                        <img class="rounded" height="20%" width="30%" alt="Thumb image" id="thumbImage"  src="data:image/jpg;base64,${s.service_image}" />
+                                        <img class="rounded" height="20%" width="30%" alt="Thumb image" id="thumbImage"  src="data:image/jpg;base64,${blog.image}" />
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <h5>Title</h5>
-                                            <label class="form-label ">${s.service_name}  </label>
-
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Title</label>
+                                                <input name="service_name" id="name" type="text" class="form-control" value="${s.service_name}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Price</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">$</span>
+                                                    <input name="service_fee" type="text" class="form-control" value="${s.fee}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3 custom-box">
+                                                <label class="form-label">Description</label>
+                                                <input name="service_description" type="text" class="form-control" value="${s.service_description}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3 custom-box">
+                                                <label class="form-label">Detail</label>
+                                                <input name="service_details" type="text" class="form-control" value="${s.service_details}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Category</label>
+                                                <select name="category_id" class="form-select">
+                                                    <c:forEach items="${requestScope.cateList}" var="c">
+                                                        <option value="${c.sc_id}">${c.name}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Status</label>
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><input id="" name="status" ${s.service_status== 1?"checked":""} value="1" type="radio" class="form-check-input m-3 "
+                                                                       checked required ></td>
+                                                            <td><label class="form-check-label mt-3 mb-3">Activate</label></td>
+                                                            <td></td>
+                                                            <td><input id="" name="status" ${s.service_status==0 ?"checked":""} value="0" type="radio" class="form-check-input m-3"
+                                                                       required></td>
+                                                            <td><label class="form-check-label mt-3 mb-3">Inactivate</label></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <h5>Price</h5>
-                                            <label class="form-label">$${s.fee}  </label>
-
+                                    <div class="row mb-5">
+                                        <div class=" col-lg-9">
+                                            <a href="<c:url value='/manage-service?action=view-all'/> " class="btn btn-primary mt-5 ">Return</a>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <h5>Details</h5>
-                                            <label class="form-label">${s.service_details}  </label>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <h5>Description</h5>
-                                            <label class="form-label">${s.service_description}  </label>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <h5>Status</h5>
-                                            <label class="form-label">
-                                                <c:if test="${s.service_status == 1}">
-                                                    <span class="text-success">Active</span>
-                                                </c:if>
-                                                <c:if test="${s.service_status == 0}">
-                                                    <span class="text-danger">Inactive</span>
-                                                </c:if>
-                                            </label>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-
-                                        <div class="col-lg-9">
-                                            <a href="<c:url value='/manage-service?action=edit&service_id=${s.service_id}'/> " class="btn btn-primary m-3 ">Edit</a>
-                                        </div>
-                                        <div class=" col-lg-3">
-                                            <a href="<c:url value='/manage-service?action=view-all'/> " class="btn btn-primary m-3 ">Return</a>
+                                        <div class="col-lg-3">
+                                            <input type="submit" id="submit" name="send" class="btn btn-primary mt-5"value="ADD">
                                         </div>
 
                                     </div>
-                                </div>
+                            </form>
                         </div>
                     </div>
+                </div>
             </main><!-- comment -->
         </div>
     </body>

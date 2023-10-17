@@ -1,25 +1,27 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller.home;
 
-import dal.DoctorDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Doctor;
+import jakarta.servlet.http.HttpSession;
 import model.UserAccount;
 
 /**
  *
- * @author ngocq
+ * @author DUCHIEUPC.COM
  */
-public class EditProfileController extends HttpServlet {
+@WebServlet(name = "DeleteUser", urlPatterns = {"/DeleteUser"})
+public class DeleteUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,23 +35,17 @@ public class EditProfileController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            Doctor useraccount = new Doctor();        
-            String newPassword = request.getParameter("password");
-            useraccount.setUserId(id);
-            UserAccount user = new UserAccount();
-            UserDAO udao = new UserDAO();
-            useraccount.setUsername(request.getParameter("username"));
-            useraccount.setImage(request.getParameter("image"));
-            useraccount.setEmail(request.getParameter("email"));
-            useraccount.setPhone(request.getParameter("phone"));
-            DoctorDAO ddao = new DoctorDAO();
-            udao.updatePassword(useraccount, newPassword);
-            ddao.getDoctorById(id);
-            request.setAttribute("useraccount", useraccount);
-            request.setAttribute("newpassword", newPassword);
-            request.getRequestDispatcher("frontend/template/view/userprofile.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet DeleteUser</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet DeleteUser at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -65,7 +61,16 @@ public class EditProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        if (session.getAttribute("account") == null) {
+            response.sendRedirect("./login");
+        } else {
+            UserAccount curAcc = ((UserAccount) session.getAttribute("account"));
+            UserDAO udao = new UserDAO();
+            udao.deleteUserAccount(curAcc.getUserId());
+            session.removeAttribute("account");
+            response.sendRedirect("home");
+        }
     }
 
     /**

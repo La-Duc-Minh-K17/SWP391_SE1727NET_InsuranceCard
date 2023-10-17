@@ -150,9 +150,8 @@ public class ServicesDAO {
                 + "  s.service_description = ?,\n"
                 + "  s.service_details = ?,\n"
                 + "  s.fee = ?,\n"
-                + "  s.service_image = ?,\n"
                 + "  s.service_status = ?,\n"
-                + "  s.category_id = ?,\n";
+                + "  s.category_id = ?\n";
         if (fileImage != null) {
             sql = sql + " , s.service_image = ? \n";
         }
@@ -165,16 +164,39 @@ public class ServicesDAO {
             ps.setString(1, service_name);
             ps.setString(2, service_description);
             ps.setString(3, service_details);
-            ps.setInt(6, service_status);
-            ps.setInt(7, category_id);
-            
             ps.setInt(4, fee);
+            ps.setInt(5, service_status);
+            ps.setInt(6, category_id);
+
             if (fileImage != null) {
-                ps.setBlob(5, fileImage);
+                ps.setBlob(7, fileImage);
                 ps.setInt(8, service_id);
             } else {
-                ps.setInt(5, service_id);
+                ps.setInt(7, service_id);
             }
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void updateServiceStatus(int service_id, int newStatus) {
+        PreparedStatement ps = null;
+        String sql = "UPDATE mabs.services SET service_status = ? WHERE service_id = ?;";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(2, service_id);
+            ps.setInt(1, newStatus);
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -194,6 +216,7 @@ public class ServicesDAO {
         PreparedStatement ps = null;
         String sql = "INSERT INTO services(service_name,service_description, service_details,fee,service_image,service_status,category_id)\n"
                 + "VALUES (?,\n"
+                + " ?,\n"
                 + " ?,\n"
                 + " ?,\n"
                 + " ?,\n"

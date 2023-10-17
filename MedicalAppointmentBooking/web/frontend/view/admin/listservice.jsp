@@ -94,7 +94,7 @@
                             <div class="col-xl-3 col-md-3">
                                 <div class="card component-wrapper border-0 rounded shadow">
                                     <div>
-                                        <select class="form-select form-control" id="speFilter" onchange="filter()">
+                                        <select class="form-select form-control" id="Filter" onchange="filter()">
                                             <option selected disabled>Category</option>
                                             <c:forEach items="${cateList}" var="cate">
                                                 <option value="${cate.sc_id}">${cate.name}</option>  
@@ -105,11 +105,11 @@
 
                             </div>
                             <div class="col-xl-6 col-md-6">
-                                <div class="search-bar d-lg-block" style="padding-top :0">
-                                    <div id="search" class="menu-search ">
-                                        <form action="<c:url value='/manage-service?action=search'/>"role="search" method="post" id="searchform" class="searchform">
+                                <div class="search-bar d-lg-block " style="padding-top :0">
+                                    <div id="search" class="menu-search  ">
+                                        <form action="<c:url value='/manage-service?action=search'/>"role="search" method="post" id="searchform" class="searchform  ">
                                             <div>
-                                                <input type="text" class="form-control border rounded-pill" name="search"
+                                                <input type="text" class="form-control border rounded-pill bg-light " name="search"
                                                        id="search" placeholder="Search service by name">
                                                 <input type="submit" id="searchsubmit" value="Search">
                                             </div>
@@ -118,15 +118,15 @@
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-3 mt-4 mt-md-0 text-md-end">
-                                <a href="<c:url value='/manage-service?action=create'/>" class="btn btn-primary ">Add Service</a>
+                                <a href="<c:url value='/manage-service?action=add'/>" class="btn btn-primary ">Add Service</a>
                             </div><!--end col-->
                         </div><!--end row-->
 
 
-                        <div class="col-12 mt-4">
-                            <div class="card component-wrapper border-0 rounded shadow">
+                        <div class="col-12 mt-5">
+                            <div class="card component-wrapper border-0 rounded shadow ">
                                 <div class="p-4 border-bottom">
-                                    <h5 class="mb-0">Service List</h5>
+                                    <h4 class="mb-0 text-primary">Service List</h4>
                                 </div>
 
                                 <div class="p-4">
@@ -139,7 +139,7 @@
                                                     <th scope="col">Name</th>
                                                     <th scope="col">Price</th>
                                                     <th scope="col">Status</th>
-                                                    <th scope="col">Action</th>
+                                                    <th scope="col" class="text-md-center">Action</th> 
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -153,25 +153,39 @@
                                                             <c:if test="${s.service_status == 1}">Active</c:if>
                                                             <c:if test="${s.service_status == 0}">Inactive</c:if>
                                                             </td>
-                                                            <td>
-                                                                <div class="container d-flex">
-                                                                    <div class="card component-wrapper border-0 rounded">
-                                                                        <div class="d-flex mb-2">
-                                                                        <a href="<c:url value='/manage-service?action=view&service_id=${s.service_id}'/>" class="btn btn-primary btn-sm m-2  ">View</a>
-                                                                        <a href="<c:url value='/manage-service?action=edit&service_id=${s.service_id}'/>" class="btn btn-primary btn-sm ml-2 m-2">Edit</a>
-                                                                        <a href="<c:url value='/manage-service?action=status&id=${s.service_id}'/>" class="btn btn-danger btn-sm ml-2 m-2">Deactivate</a>
-                                                                    </div>
-                                                                </div>
+                                                    <style>
+                                                        .custom-btn {
+                                                            width: 100px; /* Adjust the width as needed */
+                                                        }
+                                                    </style>
+                                                    <td class="text-center">
+                                                        <div class="container d-flex justify-content-center">
+                                                            <div class="card component-wrapper border-0 rounded">
+                                                                <div class="d-flex mb-2">
+                                                                    <a href="<c:url value='/manage-service?action=view&service_id=${s.service_id}'/>" class="btn btn-primary custom-btn btn-sm m-2">View</a>
+                                                                <a href="<c:url value='/manage-service?action=edit&service_id=${s.service_id}'/>" class="btn btn-primary custom-btn btn-sm m-2">Edit</a>
+                                                                <c:choose>
+                                                                    <c:when test="${s.service_status == 1}">
+                                                                        <a href="<c:url value='/manage-service?action=status&service_id=${s.service_id}&status=${s.service_status}'/>" class="btn btn-danger custom-btn btn-sm m-2">Deactivate</a>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <a href="<c:url value='/manage-service?action=status&service_id=${s.service_id}&status=${s.service_status}'/>" class="btn btn-success custom-btn btn-sm m-2">Activate</a>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
 
 
-                                                            </div><!--end col-->
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
+                                                </tr>
+                                            </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+
+
 
                                 <div>
                                     <ul class="pagination mb-0 mt-5">
@@ -199,20 +213,11 @@
         <!-- javascript -->
         <script>
             function filter() {
-                var category = document.getElementById("speFilter").value;
-                var searchInput = document.getElementById("search").value;
-                var url = "manage-service?action=view-all"; // Change to the correct URL mapping
-
-                if (category !== "Filter By") {
-                    url += "?action=filter&category_id=" + category;
-                } else if (searchInput.trim() !== "") {
-                    url += "?action=search&search=" + searchInput;
-                } else if (sort !== "Default Sort") {
-                    url += "?action=sorted&by=feename&sort=" + sort;
-                }
-
-                window.location.href = url;
+                const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-service?action=filter&category_id=';
+                const filterElement = document.getElementById("Filter").value;
+                window.location.href = url + filterElement;
             }
+
 
         </script>
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
