@@ -132,7 +132,7 @@ public class ReservationDAO {
         }
     }
 
-    public void cancelReservation(int  resvId, UserAccount account) {
+    public void cancelReservation(int resvId, UserAccount account) {
         PreparedStatement ps = null;
         Connection connection = null;
         String sql = "UPDATE `mabs`.`reservations`\n"
@@ -159,4 +159,38 @@ public class ReservationDAO {
             }
         }
     }
+    
+
+    public boolean checkAvailability(Reservation resv) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        String sql = "SELECT COUNT(*) AS appointment_count\n"
+                + "FROM appointments\n"
+                + "WHERE service_id = ? AND reservation_date = ? AND reservation_time = ? ";
+        try {
+            connection = dbc.getConnection();
+            ps.setInt(1, resv.getService().getService_id());
+            ps.setDate(2, resv.getResvDate());
+            ps.setString(3, resv.getResvTime());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                if (rs.getInt(1) >= 1) {
+                    return false;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return true;
+    }
+
 }

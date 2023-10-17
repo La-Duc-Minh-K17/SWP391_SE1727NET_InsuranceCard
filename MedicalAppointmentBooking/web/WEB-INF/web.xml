@@ -74,7 +74,6 @@
         <servlet-class>controller.home.FilterCategory</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>ManageServices</servlet-name>
         <servlet-class>controller.manager.ManageServices</servlet-class>
     </servlet>
@@ -98,6 +97,7 @@
         <servlet-name>EditProfile</servlet-name>
         <servlet-class>controller.home.EditProfile</servlet-class>
     </servlet>
+    
     <servlet-mapping>
         <servlet-name>UserAccountController</servlet-name>
         <url-pattern>/user</url-pattern>
@@ -198,6 +198,7 @@
         <servlet-name>webServiceDetail</servlet-name>
         <url-pattern>/detailservice</url-pattern>
     </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
