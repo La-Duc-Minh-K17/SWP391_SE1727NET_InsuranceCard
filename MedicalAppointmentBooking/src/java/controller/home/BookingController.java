@@ -18,6 +18,7 @@ import model.Patient;
 import model.Reservation;
 import model.Service;
 import model.UserAccount;
+import utils.EmailSending;
 import utils.SessionUtils;
 import utils.TimeUtil;
 
@@ -76,6 +77,7 @@ public class BookingController extends HttpServlet {
                     return;
                 }
                 aDAO.insertNewAppointment(appt);
+                EmailSending.sendReminderEmail(appt);
                 response.sendRedirect("frontend/view/booking_success.jsp");
                 return;
             }

@@ -25,18 +25,16 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
         <style>
-            #home{
-                background-image: url("frontend/template/assets/images/bg/backgroundclinic.jpg") ;
-            }
+
         </style>
     </head>
 
     <body>
         <jsp:include page="/frontend/common/header.jsp" />
-        <section class="bg-half-100 d-table w-100 bg-light">
+        <section  class="bg-half-150 d-table w-100 bg-light" style="padding: 150px 0 90px 0;">
             <div class="container">
                 <div class="row  justify-content-center">
-                    <div class="col-12">
+                    <div class="col-12"  ">
                         <div class="section-title text-center">
                             <h3 class="sub-title mb-2">Booking Appointment</h3>
                             <p class="para-desc mx-auto text-muted">Great doctor if you need your family member to get
@@ -50,6 +48,9 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
+                        <c:if test="${error != null}">
+                            <div class="alert alert-error">${requestScope.error}</div>
+                        </c:if>
                         <div class="card border-0 shadow rounded overflow-hidden">
                             <c:if test="${sessionScope.chosen_doctor != null}">
                                 <div class="mb-4">
@@ -130,7 +131,7 @@
                                     </div>
                                 </div>
                             </c:if>
-                           
+
                             <div class="tab-content p-4" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-clinic" role="tabpanel" aria-labelledby="clinic-booking">
                                     <form action="<c:url value='/booking?action=yourself-booking'/> " method="post">
@@ -249,7 +250,7 @@
                                     </form>
                                 </div>
 
-                             
+
                             </div>
                         </div>
                     </div><!--end col-->

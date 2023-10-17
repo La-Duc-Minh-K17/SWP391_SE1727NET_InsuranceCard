@@ -37,7 +37,7 @@ public class AppointmentDAO {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
-            while (rs.next()) {
+            while (rs.next()){
                 int id = rs.getInt("appointment_id");
                 String note = rs.getString("appointment_note");
                 Date date = rs.getDate("appointment_date");
@@ -167,7 +167,7 @@ public class AppointmentDAO {
             }
         }
     }
-    private final int MAX_APPOINTMENT = 3;
+    private final int MAX_APPOINTMENT = 2;
 
     public boolean checkAvailability(Appointment appt) {
         PreparedStatement ps = null;
