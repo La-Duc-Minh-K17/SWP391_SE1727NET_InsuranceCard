@@ -54,11 +54,11 @@
     </servlet>
     <servlet>
         <servlet-name>SettingList</servlet-name>
-        <servlet-class>controller.setting.SettingList</servlet-class>
+        <servlet-class>controller.admin.SettingList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddSetting</servlet-name>
-        <servlet-class>controller.setting.AddSetting</servlet-class>
+        <servlet-class>controller.admin.AddSetting</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ServiceDetailController</servlet-name>
