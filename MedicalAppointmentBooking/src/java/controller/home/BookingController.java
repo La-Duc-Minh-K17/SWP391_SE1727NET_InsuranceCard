@@ -81,6 +81,7 @@ public class BookingController extends HttpServlet {
                 response.sendRedirect("frontend/view/booking_success.jsp");
                 return;
             }
+            
             if (chosenService != null) {
                 Patient patient = new Patient(
                         user.getUserId(),
@@ -108,6 +109,11 @@ public class BookingController extends HttpServlet {
                 response.sendRedirect("frontend/view/booking_success.jsp");
                 return;
             }
+
+            if(chosenService == null ) {
+                
+            }
+            return;
 
         }
         if (action != null && action.equals("form-filling")) {
