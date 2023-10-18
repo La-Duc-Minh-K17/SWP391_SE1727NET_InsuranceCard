@@ -99,16 +99,19 @@
                                         <tr>
                                             <th scope="col">ID</th>
                                             <th scope="col">Patient</th>
-                                            <th scope="col">Rate</th>
-                                            <th scope="col">Comment</th>     
+                                            <th scope="col">Service</th>
+                                            <th scope="col">Comment</th>
+                                            <th scope="col">Rate</th>     
                                             <th scope="col">Created Time</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${review}" var="rv">
+                                        <c:forEach items="${review}" var="rv" varStatus="loop">
                                             <tr>
-                                                <th scope="row">1</th>
+                                                <th scope="row">${loop.index + 1}</th>
                                                 <td>${rv.user.fullName}</td>
+                                                <td>${rv.service.service_name}</td>
+                                                <td>${rv.review}</td>
                                                 <td><c:choose>
                                                         <c:when test="${rv.rate >= 1}">
                                                             ★
@@ -139,7 +142,7 @@
                                                         </c:when>
                                                         <c:otherwise>☆</c:otherwise>
                                                     </c:choose></td>
-                                                <td>${rv.review}</td>
+                                                
                                                 <td>${rv.create_time}</td>  
                                             </tr>     
                                         </c:forEach>
