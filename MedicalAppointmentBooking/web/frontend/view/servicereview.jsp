@@ -41,8 +41,6 @@
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
             <main class="page-content">
-                
-                
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
                         <div class="d-flex align-items-center">
@@ -88,17 +86,53 @@
                     </div>
                 </div>
 
-                <div class="container-fluid">
-                    <div class="layout-specing">
-                        <div class="row align-content-center">
-                            <div class="col-xl-3 col-md-3">
-                                
-                                        
-                            </div>
-                        </div><!--end col-->
+                <div class="col-12 mt-4">
+                            <div class="card component-wrapper border-0 rounded shadow">
+                                <div class="p-4 border-bottom">
+                                    <h5 class="mb-0">Service List</h5>
+                                </div>
 
-                    </div>
-                </div><!--end container-->
+                                <div class="p-4">
+                                    <div class="table-responsive bg-white shadow rounded">
+                                        <table class="table mb-0 table-center">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Patient</th>
+                                                    <th scope="col">Rate</th>
+                                                    <th scope="col">Comment</th>     
+                                                    <th scope="col">Created Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Pham Minh Dung</td>
+                                                        <td>★★★★★</td>
+                                                        <td>Nice</td>
+                                                        <td>18-10-2023</td>
+                                                        
+                                                           
+                                                    </tr>                                          
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <ul class="pagination mb-0 mt-5">
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)"
+                                                                 aria-label="Previous">Prev</a></li>
+                                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)"
+                                                                 aria-label="Next">Next</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
             </main>
             <!--End page-content" -->
             <!-- Modal -->

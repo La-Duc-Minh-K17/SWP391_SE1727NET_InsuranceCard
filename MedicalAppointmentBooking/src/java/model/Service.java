@@ -17,7 +17,7 @@ public class Service {
     private String service_image;
     private int service_status;
     private int catetegory_id;
-
+   
     public Service( String service_name, String service_description, String service_details,  String service_image ) {
         this.service_name = service_name;
         this.service_description = service_description;
