@@ -21,7 +21,7 @@
                 </div>
                 <ul class="sidebar-menu pt-3">
                     <li>
-                        <a href="<c:url value='/staff-waiting-list?action=view-all'/>"><i class="uil uil-calendar-alt me-2 d-inline-block">
+                        <a href="<c:url value='/staff?action=view-waitinglist'/>"><i class="uil uil-calendar-alt me-2 d-inline-block">
                             </i>Waiting List
                         </a>
                     </li>
