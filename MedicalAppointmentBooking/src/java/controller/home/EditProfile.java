@@ -47,7 +47,7 @@ public class EditProfile extends HttpServlet {
         } else {
             UserAccount curAcc = ((UserAccount) session.getAttribute("account"));
             UserDAO udao = new UserDAO();
-            UserAccount account = udao.getAccountId(curAcc.getUserId());
+            UserAccount account = udao.getAccountById(curAcc.getUserId());
             request.setAttribute("accc", account);
             request.getRequestDispatcher("frontend/view/editprofile.jsp").forward(request, response);
         }
