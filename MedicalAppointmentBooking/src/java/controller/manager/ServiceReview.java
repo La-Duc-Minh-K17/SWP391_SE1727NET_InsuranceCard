@@ -5,6 +5,7 @@
 
 package controller.manager;
 
+import dal.ServicesDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -53,6 +54,8 @@ public class ServiceReview extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        ServicesDAO sv = new ServicesDAO();
+        request.setAttribute("review", sv.getServiceReview());
         request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
     } 
 

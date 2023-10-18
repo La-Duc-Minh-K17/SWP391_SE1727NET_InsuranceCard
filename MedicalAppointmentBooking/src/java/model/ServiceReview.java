@@ -15,6 +15,16 @@ public class ServiceReview {
     private String create_time;
     private String review;
     private float rate;
+    private UserAccount user;
+
+    public UserAccount getUser() {
+        return user;
+    }
+
+    public void setUser(UserAccount user) {
+        this.user = user;
+    }
+    
 
     public int getReview_id() {
         return review_id;

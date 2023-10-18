@@ -19,7 +19,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Service;
+import model.ServiceReview;
 import model.Service_Category;
+import model.UserAccount;
 import utils.ImageProcessing;
 
 /**
@@ -30,10 +32,10 @@ public class ServicesDAO {
 
     DBConnection dbc = new DBConnection();
 
-    public List<Service> getServiceReview() {
+    public List<ServiceReview> getServiceReview() {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        List<Service> serviceList = new ArrayList<>();
+        List<ServiceReview> reviewList = new ArrayList<>();
         String sql = "select a.full_name,a.image,review,create_time,rate from \n"
                 + "user_account a\n"
                 + "join service_review sv on a.user_id=sv.user_id";
@@ -43,20 +45,23 @@ public class ServicesDAO {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int service_id = rs.getInt("service_id");
-                String service_name = rs.getString("service_name");
-                String service_image = ImageProcessing.imageString(rs.getBlob("service_image"));
-                String service_description = rs.getString("service_description");
-                String service_details = rs.getString("service_details");
-                int fee = rs.getInt("fee");
-                int service_status = rs.getInt("service_status");
-                int category_id = rs.getInt("category_id");
-                Service s = new Service(service_id, service_name, service_description, service_details, fee, service_image, service_status, category_id);
-
-                serviceList.add(s);
-
+                UserAccount acc = new UserAccount();
+                String name = rs.getString("full_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                String review = rs.getString("review");
+                String create_time=rs.getString("create_time");
+                float rate = rs.getFloat("rate");
+                
+                acc.setFullName(name);
+                acc.setImage(image);
+                ServiceReview s = new ServiceReview();
+                s.setUser(acc);
+                s.setRate(rate);
+                s.setCreate_time(create_time);
+                s.setReview(review);
+                reviewList.add(s);
             }
-            return serviceList;
+            return reviewList;
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
@@ -68,7 +73,7 @@ public class ServicesDAO {
                 }
             }
         }
-        return serviceList;
+        return reviewList;
     }
 
     public List<Service> getAllService() {
