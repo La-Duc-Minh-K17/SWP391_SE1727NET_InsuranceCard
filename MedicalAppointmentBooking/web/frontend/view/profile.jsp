@@ -55,8 +55,8 @@
                             </div>
 
                             <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
-                                <img src="${accc.image}"class="avatar avatar-md-sm rounded-circle border shadow"  alt="">
-                                <h5 class="mt-3 mb-1">${accc.fullName}</h5>
+                                <img src="data:image/jpg;base64,${d.image}"class="avatar avatar-md-sm rounded-circle border shadow"  alt="">
+                                <h5 class="mt-3 mb-1">${d.fullName}</h5>
                                 
                             </div>
 
@@ -70,7 +70,7 @@
                             <div class="p-4 border-bottom">
                                 <h5 class="mb-0">Personal Information </h5>
                                 
-                                <img src="${accc.image}"style="max-width: 150px"  alt="">
+                                <img src="data:image/jpg;base64,${d.image}"style="max-width: 150px"  alt="">
                                 
                             </div>
 
@@ -87,7 +87,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Full Name:  ${accc.fullName}</label>
+                                                <label class="form-label">Full Name:  ${d.fullName}</label>
                                                 
                                             </div>
                                         </div><!--end col-->
@@ -95,14 +95,14 @@
                                        
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Email:  ${accc.email}</label>
+                                                <label class="form-label">Email:  ${d.email}</label>
                                                 
                                             </div> 
                                         </div><!--end col-->
 
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Phone no:  ${accc.phone}</label>
+                                                <label class="form-label">Phone no:  ${d.phone}</label>
                                                 
                                             </div>                                                                               
                                         </div><!--end col-->
@@ -112,9 +112,9 @@
                                             }
                                         </script>
 
-                                        <label class="form-label">Gender:  <span id="genderDisplay">${accc.gender}</span></label>
+                                        <label class="form-label">Gender:  <span id="genderDisplay">${d.gender}</span></label>
                                             <script>
-                                                document.getElementById('genderDisplay').textContent = getGender(${accc.gender});
+                                                document.getElementById('genderDisplay').textContent = getGender(${d.gender});
                                             </script>
                                     </div><!--end row-->
                                     
@@ -124,7 +124,7 @@
                                         </div><!--end col-->
                                     </div><!--end row-->
                                     <div class="col-lg-12 mt-2 mb-0">
-                                             <a href="<c:url value='/EditProfile?id=${accc.userId}'/>" class="btn btn-primary">Edit profile</a>
+                                             <a href="<c:url value='/editprofile'/>" class="btn btn-primary">Edit profile</a>
                                         </div><!--end col-->
                                 </form><!--end form--> 
                             </div>
