@@ -44,6 +44,7 @@
         <servlet-name>ManageBlogController</servlet-name>
         <servlet-class>controller.manager.ManageBlogController</servlet-class>
     </servlet>
+
     <servlet>
         <servlet-name>SettingList</servlet-name>
         <servlet-class>controller.setting.SettingList</servlet-class>
@@ -73,7 +74,6 @@
         <servlet-class>controller.home.FilterCategory</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>ManageServices</servlet-name>
         <servlet-class>controller.manager.ManageServices</servlet-class>
     </servlet>
@@ -92,8 +92,12 @@
     <servlet>
         <servlet-name>StaffReservationList</servlet-name>
         <servlet-class>controller.staff.StaffReservationList</servlet-class>
-
     </servlet>
+    <servlet>
+        <servlet-name>EditProfile</servlet-name>
+        <servlet-class>controller.home.EditProfile</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>UserAccountController</servlet-name>
         <url-pattern>/user</url-pattern>
@@ -151,6 +155,10 @@
         <url-pattern>/booking</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SearchController</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AddSetting</servlet-name>
         <url-pattern>/addSetting</url-pattern>
     </servlet-mapping>
@@ -163,6 +171,10 @@
         <url-pattern>/WebDoctorDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>EditProfile</servlet-name>
+        <url-pattern>/EditProfile</url-pattern>
+      </servlet-mapping>
+    <servlet-mapping
         <servlet-name>StaffWaitingList</servlet-name>
         <url-pattern>/staff-waiting-list</url-pattern>
     </servlet-mapping>
@@ -186,6 +198,7 @@
         <servlet-name>webServiceDetail</servlet-name>
         <url-pattern>/detailservice</url-pattern>
     </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

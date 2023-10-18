@@ -109,9 +109,7 @@ public class ServicesDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Service service = null;
-        String sql = "select * from services s \n"
-                + "            where s.service_id = ?";
-
+        String sql = "select * from services s where s.service_id = ?";
         Connection connection = null;
         try {
             connection = dbc.getConnection();
@@ -450,7 +448,6 @@ public class ServicesDAO {
             ps.setInt(1, (page - 1) * page_size);
             ps.setInt(2, page_size);
             rs = ps.executeQuery();
-
             while (rs.next()) {
                 int service_id = rs.getInt("service_id");
                 String service_name = rs.getString("service_name");
@@ -480,8 +477,5 @@ public class ServicesDAO {
         return services;
     }
 
-//    public static void main(String[] args) throws SQLException {
-//        ServicesDAO dao = new ServicesDAO();
-//        dao.sortServiceByCategoryID(1);
-//    }
+
 }

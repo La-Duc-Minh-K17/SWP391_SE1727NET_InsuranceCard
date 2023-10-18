@@ -4,56 +4,43 @@
  */
 package model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Admin
  */
-public class Patient {
+public class Patient extends UserAccount{
 
     private int patientId;
    
-    private UserAccount userAccount;
-    private UserRelative userRelative;
+    
 
     public Patient() {
        
     }
-    public Patient(UserAccount userAccountId, UserRelative userRelativeId) {
-        this.userAccount = userAccountId;
-        this.userRelative = userRelativeId;
-    }   
+
+    public Patient(int patientId, int userId, String username, String email, String fullName, int gender, String phone, String image, Date dob, String address, int status) {
+        super(userId, username, email, fullName, gender, phone, image, dob, address, status);
+        this.patientId = patientId;
+    }
+
+    public Patient(int userId, String username, String email, String fullName, int gender, String phone, String image, Date dob, String address, int status) {
+        super(userId, username, email, fullName, gender, phone, image, dob, address, status);
+    }
+    
+    
     public int getPatientId() {
         return patientId;
     }
+
     public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
-    public UserAccount getUserAccount() {
-        return userAccount;
-    }
+   
+    
+    
 
-    public void setUserAccount(UserAccount userAccount) {
-        this.userAccount = userAccount;
-    }
-
-    public UserRelative getUserRelative() {
-        return userRelative;
-    }
-
-    public void setUserRelative(UserRelative userRelative) {
-        this.userRelative = userRelative;
-    }
-
-    public Patient(int patientId, UserAccount userAccount, UserRelative userRelative) {
-        this.patientId = patientId;
-        this.userAccount = userAccount;
-        this.userRelative = userRelative;
-    }
-
-    @Override
-    public String toString() {
-        return "Patient{" + "patientId=" + patientId + ", userAccount=" + userAccount + ", userRelative=" + userRelative + '}';
-    }
 
     
     

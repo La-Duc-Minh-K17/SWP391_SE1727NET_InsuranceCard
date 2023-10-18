@@ -33,6 +33,13 @@ public class UserAccount {
     public UserAccount() {
 
     }
+    
+     public UserAccount(int userId, String fullName, String phone, String image) {
+        this.userId = userId;
+        this.fullName = fullName;
+        this.phone = phone;
+        this.image = image;
+    }
 
     public UserAccount(String username, String email, String fullName, int gender, String phone, String image, int status) {
         this.username = username;
@@ -204,6 +211,22 @@ public class UserAccount {
     public void setImage(String image) {
         this.image = image;
     }
+        public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setConfirmationToken(String confirmationToken) {
+        this.confirmationToken = confirmationToken;
+    }
+
+    public void setConfirmationTokenTime(Timestamp confirmationTokenTime) {
+        this.confirmationTokenTime = confirmationTokenTime;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
 
     @Override
     public String toString() {
