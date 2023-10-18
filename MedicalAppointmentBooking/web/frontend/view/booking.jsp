@@ -194,23 +194,19 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Date : </label>
-                                                    <input id="checkin-date" required="" name="appt-date" type="text"class="flatpickr flatpickr-input form-control" >
+                                                    <input id="checkin-date" required="" name="appt-date" type="text"class="flatpickr flatpickr-input form-control" onchange="checkAvailability()" >
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Time</label>
-                                                    <select id ="appt-time" disabled required="" name="appt-time"
+                                                    <select id ="appt-time"required="" name="appt-time"
                                                             class="form-control department-name select2input">
-                                                        <option value="7:00">7:00</option>
-                                                        <option value="8:00">8:00</option>
-                                                        <option value="9:00">9:00</option>
-                                                        <option value="10:00">10:00</option>
-                                                        <option value="11:00">11:00</option>    
-                                                        <option value="14:00">14:00</option>
-                                                        <option value="15:00">15:00</option>
-                                                        <option value="16:00">16:00</option>
-                                                        <option value="17:00">17:00</option>
+                                                        <c:if test="${timeslot != null}">
+                                                            <c:forEach items="${timeslot}" var="time">
+                                                                <option value="${time}">${time}</option>
+                                                            </c:forEach>
+                                                        </c:if>
                                                     </select>
                                                 </div>
                                             </div>
@@ -266,54 +262,26 @@
         <script src="<c:url value= '/frontend/template/assets/js/jquery.timepicker.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/timepicker.init.js'/>"></script>
         <script>
-            $("#checkin-date").flatpickr({
-                defaultDate: "today",
-                minDate: "today",
-                maxDate: new Date().fp_incr(7),
-                dateFormat: "d/m/Y"
+                                                        function checkAvailability() {
+                                                            const url = 'http://localhost:8080/MedicalAppointmentBooking/booking?action=check_availability&date=';
+                                                            const date = document.getElementById("checkin-date").value;
+                                                            window.location.href = url + date;
 
-            });
+                                                        }
+                                                        $("#checkin-date").flatpickr({
+                                                            defaultDate: "today",
+                                                            minDate: "today",
+                                                            maxDate: new Date().fp_incr(7),
+                                                            dateFormat: "d/m/Y"
 
-            $("#dob").flatpickr({
-                defaultDate: new Date(),
-                dateFormat: "d/m/Y"
-            });
+                                                        });
+
+                                                        $("#dob").flatpickr({
+                                                            defaultDate: new Date(),
+                                                            dateFormat: "d/m/Y"
+                                                        });
 
         </script>
-        <script>
-            $(document).ready(function () {
-                $('#checkin-date').change(function () {
-                    var selectedDate = $('#checkin-date').val();
 
-                    // Make an AJAX request to your server to fetch available appointment times.
-                    $.ajax({
-                        url: 'your-server-endpoint', // Replace with the actual URL
-                        method: 'GET',
-                        data: {date: selectedDate}, // Send the selected date to the server
-                        dataType: 'json', // Expect JSON response
-
-                        success: function (data) {
-                            // Enable the appointment time dropdown and populate it with the response data.
-                            var apptTimeSelect = $('#appt-time');
-                            apptTimeSelect.prop('disabled', false);
-                            apptTimeSelect.empty();
-
-                            // Populate the dropdown with the appointment times from the server.
-                            if (data && data.appointmentTimes) {
-                                $.each(data.appointmentTimes, function (index, time) {
-                                    apptTimeSelect.append($('<option>', {
-                                        value: time,
-                                        text: time
-                                    }));
-                                });
-                            }
-                        },
-                        error: function (error) {
-                            console.log('Error:', error);
-                        }
-                    });
-                });
-            });
-        </script>
     </body>
 </html>

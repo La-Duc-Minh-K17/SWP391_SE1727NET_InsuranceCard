@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import model.Appointment;
 import model.Doctor;
 import model.Patient;
@@ -46,7 +47,20 @@ public class BookingController extends HttpServlet {
         Doctor chosenDoctor = (Doctor) SessionUtils.getInstance().getValue(request, "chosen_doctor");
         Service chosenService = (Service) SessionUtils.getInstance().getValue(request, "chosen_service");
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
-
+        if (action != null && action.equals("check_availability")) {
+            String date = request.getParameter("date");
+            List<String> timeSlot = null;
+            if (chosenDoctor != null) {
+                timeSlot = aDAO.getAvailableTimeSlot(chosenDoctor.getDoctorId(), date);
+            }
+            if (chosenService != null) {
+                timeSlot = aDAO.getAvailableTimeSlot(chosenService.getService_id(), date);
+            }
+            request.setAttribute("timeslot", timeSlot);
+            request.setAttribute("date", date);
+            request.getRequestDispatcher("frontend/view/booking.jsp").forward(request, response);
+            return;
+        }
         if (action != null && action.equals("yourself-booking")) {
 
             String apptTime = request.getParameter("appt-time");
