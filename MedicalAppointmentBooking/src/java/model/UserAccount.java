@@ -33,6 +33,12 @@ public class UserAccount {
     public UserAccount() {
 
     }
+    public UserAccount(int userId, String fullName, String phone, String image) {
+        this.userId = userId;
+        this.fullName = fullName;
+        this.phone = phone;
+        this.image = image;
+    }
 
     public UserAccount(String username, String email, String fullName, int gender, String phone, String image, int status) {
         this.username = username;
