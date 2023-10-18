@@ -13,7 +13,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import dal.PatientDAO;
+import java.util.List;
 import model.Doctor;
+import model.Patient;
 
 /**
  *
@@ -38,7 +40,9 @@ public class PatientListController extends HttpServlet {
             DoctorDAO dDao = new DoctorDAO();
             Doctor doctor = dDao.getDoctorById(doctorId);
             PatientDAO pdao = new PatientDAO();
+            List<Patient> listP = pdao.getPatientByDoctorId(doctorId);
             request.setAttribute("doctor", doctor);
+            request.setAttribute("listP", listP);
             request.getRequestDispatcher("frontend/view/patientlist.jsp").forward(request, response);
 
         }

@@ -25,10 +25,6 @@
         <servlet-class>controller.home.NewDetailController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoginController</servlet-name>
-        <servlet-class>controller.auth.LoginController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>HomeController</servlet-name>
         <servlet-class>controller.home.HomeController</servlet-class>
     </servlet>
@@ -69,32 +65,12 @@
         <servlet-class>controller.manager.WebDoctorDetail</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>FilterCategory</servlet-name>
-        <servlet-class>controller.home.FilterCategory</servlet-class>
+        <servlet-name>SearchController</servlet-name>
+        <servlet-class>controller.home.SearchController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ManageServices</servlet-name>
-        <servlet-class>controller.manager.ManageServices</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>webServiceDetail</servlet-name>
-        <servlet-class>controller.manager.webServiceDetail</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StaffWaitingList</servlet-name>
-        <servlet-class>controller.staff.StaffWaitingList</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StaffAppointmentList</servlet-name>
-        <servlet-class>controller.staff.StaffAppointmentList</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StaffReservationList</servlet-name>
-        <servlet-class>controller.staff.StaffReservationList</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>EditProfile</servlet-name>
-        <servlet-class>controller.home.EditProfile</servlet-class>
+        <servlet-name>AccountList</servlet-name>
+        <servlet-class>controller.manager.AccountList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PatientListController</servlet-name>
@@ -125,10 +101,6 @@
         <url-pattern>/newdetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LoginController</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
@@ -157,6 +129,10 @@
         <url-pattern>/booking</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SearchController</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AddSetting</servlet-name>
         <url-pattern>/addSetting</url-pattern>
     </servlet-mapping>
@@ -168,33 +144,33 @@
         <servlet-name>WebDoctorDetail</servlet-name>
         <url-pattern>/WebDoctorDetail</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>EditProfile</servlet-name>
+        <servlet-class>controller.home.EditProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>controller.manager.ChangePassword</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/changepassword</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditProfile</servlet-name>
         <url-pattern>/EditProfile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>StaffWaitingList</servlet-name>
-        <url-pattern>/staff-waiting-list</url-pattern>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>controller.auth.LoginController</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>StaffAppointmentList</servlet-name>
-        <url-pattern>/staff-appointment-list</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>StaffReservationList</servlet-name>
-        <url-pattern>/staff-reservation-list</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>FilterCategory</servlet-name>
-        <url-pattern>/filter</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ManageServices</servlet-name>
-        <url-pattern>/manage-service</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>webServiceDetail</servlet-name>
-        <url-pattern>/detailservice</url-pattern>
+        <servlet-name>AccountList</servlet-name>
+        <url-pattern>/accountlist</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PatientListController</servlet-name>

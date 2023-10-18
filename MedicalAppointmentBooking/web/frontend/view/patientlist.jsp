@@ -53,12 +53,12 @@
                                 </div>
                                 <div>  
                                     <div>
-                                    <c:set var="doctor" value="${doctor}"></c:set>
-                                        <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
-                                            <img src="data:image/jpg;base64,${doctor.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
-                                        <h5 class="mt-3 mb-1">Dr. ${doctor.fullName}</h5>
-                                        <p class="text-muted mb-0">${doctor.speciality}</p>
-                                    </div>
+                                        <c:set var="doctor" value="${doctor}"></c:set>
+                                            <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                                                <img src="data:image/jpg;base64,${doctor.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                            <h5 class="mt-3 mb-1">Dr. ${doctor.fullName}</h5>
+                                            <p class="text-muted mb-0">${doctor.speciality}</p>
+                                        </div>
                                     </div>
                                     <div>
                                         <ul class="list-unstyled sidebar-nav mb-0">
@@ -76,34 +76,50 @@
                         <div class="col-xl-9 col-lg-8 col-md-7 mt-4 pt-2 mt-sm-0 pt-sm-0">
                             <h5 class="mb-0">Patients List</h5>
                             <div class="row">
-
-                                <div class="col-xl-3 col-lg-6 col-12 mt-4 pt-2">
-                                    <div class="card border-0 shadow rounded p-4">
-                                        <div class="d-flex justify-content-between">
-                                            <img src="../assets/images/client/01.jpg" class="avatar avatar-md-md rounded-pill shadow" alt="">
-
-                                            <div class="dropdown dropdown-primary">
-                                                <button type="button" class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-ellipsis-h"></i></button>
-                                                <div class="dropdown-menu dd-menu dropdown-menu-end shadow border-0 mt-3 py-3">
-                                                    <a class="dropdown-item text-dark" href="#"><span class="mb-0 d-inline-block me-1"><i class="uil uil-user align-middle h6"></i></span> Profile</a>
-                                                    <a class="dropdown-item text-dark" href="#"><span class="mb-0 d-inline-block me-1"><i class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                                <c:forEach var="pat" items="${requestScope.listP}">
+                                    <div class="col-xl-4 col-lg-6 col-12 mt-4 pt-2">
+                                        <div class="card border-0 shadow rounded p-4">
+                                            <div class="d-flex justify-content-between">
+                                                <img src="data:image/jpg;base64,${pat.image}" class="avatar avatar-md-md rounded-pill shadow" alt="">
+                                                <div class="dropdown dropdown-primary">
+                                                    <button type="button" class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-ellipsis-h"></i></button>
+                                                    <div class="dropdown-menu dd-menu dropdown-menu-end shadow border-0 mt-3 py-3">
+                                                        <a class="dropdown-item text-dark" href="#"><span class="mb-0 d-inline-block me-1"><i class="uil uil-user align-middle h6"></i></span> Profile</a>
+                                                        <a class="dropdown-item text-dark" href="#"><span class="mb-0 d-inline-block me-1"><i class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div class="card-body p-0 pt-3">
+                                                <a href="#" class="text-dark h6">${pat.fullName}</a>
 
-                                        <div class="card-body p-0 pt-3">
-                                            <a href="#" class="text-dark h6">Howard Tanner</a>
-
-                                            <ul class="mb-0 list-unstyled mt-2">
-                                                <li class="mt-1"><span class="text-muted me-2">Gender:</span>Male</li>
-                                                <li class="mt-1"><span class="text-muted me-2">Date of Birth:</span>25years</li>
-                                                <li class="mt-1"><span class="text-muted me-2">Address:</span>USA</li>
-                                                <li class="mt-1"><span class="text-muted me-2">Diagnosis:</span>Heart Attack</li>
-                                            </ul>
+                                                <ul class="mb-0 list-unstyled mt-2">
+                                                    <li class="mt-1">
+                                                        <i class="uil uil-user text-primary "> Gender:</i>
+                                                        <span class="ms-5 h6">
+                                                            <c:if test= "${pat.gender == 0}">Female</c:if>
+                                                            <c:if test= "${pat.gender == 1}">Male</c:if>
+                                                            </span>
+                                                        </li>
+                                                        <li class="mt-1"><i class="uil uil-phone text-primary "> Phone:</i>
+                                                            <span class=" ms-5 h6">${pat.phone}</span>
+                                                    </li>
+                                                    <li class="mt-1"><i class="uil uil-mailbox text-primary "> Email:</i>
+                                                        <span class=" ms-5 h6">${pat.email}</span>
+                                                    </li>
+                                                    <li class="mt-1"><i class="uil uil-user-nurse text-primary "> DoB:</i>
+                                                        <span class="ms-5 h6">${pat.dob}</span>
+                                                    </li>
+                                                    <li class="mt-1"><i class="uil uil-user-nurse text-primary "> Address:</i>
+                                                        <span class="ms-5 h6">${pat.address}</span>
+                                                    </li>
+                                                    <li class="mt-1"><i class="uil uil-user-nurse text-primary "> Appointment Date:</i>
+                                                        <span class="ms-5 h6">${pat.appointment_date}</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
+                                </c:forEach>
                             </div>
                         </div>
                     </div>
