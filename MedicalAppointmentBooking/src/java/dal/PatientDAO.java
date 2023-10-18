@@ -6,13 +6,18 @@ package dal;
 
 import dbContext.DBConnection;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Patient;
+import model.Service;
 import model.UserAccount;
+import utils.ImageProcessing;
 
 /**
  *
@@ -21,7 +26,39 @@ import model.UserAccount;
 public class PatientDAO {
 
     DBConnection dbc = new DBConnection();
-    private UserDAO uDAO = new UserDAO();
+    private final UserDAO uDAO = new UserDAO();
+    public List<Patient> getAllPatient() {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Patient> PatientList = new ArrayList<>();
+        String sql = "select * from patients p inner join user_account u where p.user_id=u.user_id;";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int patientId = rs.getInt("patient_id");
+                int userId = rs.getInt("user_id");
+                String username = rs.getString("username");
+                String email = rs.getString("email");
+                String fullName = rs.getString("full_name");
+                String phone = rs.getString("phone");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                String address = rs.getString("address");
+                Date dob = rs.getDate("dob");
+                int gender = rs.getInt("gender");
+                int status = rs.getInt("status");
+                Patient p = new Patient( patientId, userId,username,email, fullName, gender, phone, image, dob, address,status);
+
+                PatientList.add(p);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return PatientList;
+    }
 
     public int insertPatient(Patient patient) {
         PreparedStatement ps = null;
@@ -116,5 +153,8 @@ public class PatientDAO {
         }
         return -1;
     }
-
+   public static void main(String[] args) throws SQLException {
+        PatientDAO dao = new PatientDAO();
+        System.out.println(dao.getAllPatient());
+    }
 }
