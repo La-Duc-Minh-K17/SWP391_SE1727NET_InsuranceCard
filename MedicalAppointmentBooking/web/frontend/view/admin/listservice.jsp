@@ -148,7 +148,7 @@
                                                         <th scope="row">${s.service_id}</th>
                                                         <td><img src="data:image/jpg;base64,${s.service_image}" width="200" height="100"></td>
                                                         <td>${s.service_name}</td>
-                                                        <td>${s.fee}</td>
+                                                        <td>$${s.fee}</td>
                                                         <td>
                                                             <c:if test="${s.service_status == 1}">Active</c:if>
                                                             <c:if test="${s.service_status == 0}">Inactive</c:if>
