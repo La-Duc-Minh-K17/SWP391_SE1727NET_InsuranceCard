@@ -22,6 +22,14 @@ public class Patient {
         this.userAccount = userAccountId;
         this.userRelative = userRelativeId;
     }   
+
+    public Patient(String fullName, int gender, String phone, String image, String dob, String addess, String dateAppoint) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Patient(String fullName, int gender, String phone, String image, String dob, String addess, String dateAppoint, int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     public int getPatientId() {
         return patientId;
     }
