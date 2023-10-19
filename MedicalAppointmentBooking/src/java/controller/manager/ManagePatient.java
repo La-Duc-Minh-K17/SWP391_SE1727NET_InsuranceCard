@@ -8,16 +8,21 @@ import dal.PatientDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.sql.Date;
 import java.util.List;
 import model.Patient;
+import model.Service;
 
 /**
  *
  * @author PC
  */
+@MultipartConfig(maxFileSize = 16177215)
 public class ManagePatient extends HttpServlet {
 
     /**
@@ -40,8 +45,37 @@ public class ManagePatient extends HttpServlet {
                 List<Patient> pList = pDAO.getAllPatient();
                 request.setAttribute("pList", pList);
                 request.getRequestDispatcher("frontend/view/admin/listpatient.jsp").forward(request, response);
-                
             }
+            if (action !=null && action.equals("view")){
+                int id = Integer.parseInt(request.getParameter("patientId"));
+                Patient p =  pDAO.getPatientById(id);
+                request.setAttribute("patient", p);
+                request.getRequestDispatcher("frontend/view/admin/detailpatient.jsp").forward(request, response);
+            }
+            if (action != null && action.equals("edit")) {
+                int id = Integer.parseInt(request.getParameter("patientId"));
+                Patient p = pDAO.getPatientById(id);
+                request.setAttribute("patient", p);
+                request.getRequestDispatcher("frontend/view/admin/editpatient.jsp").forward(request, response);
+                return;
+            }
+            if (action != null && action.equals("edit-info")) {
+                int patientId = Integer.parseInt(request.getParameter("patientId"));
+                int userId = Integer.parseInt(request.getParameter("userId"));
+                String fullName = request.getParameter("fullName");
+                int gender = Integer.parseInt(request.getParameter("gender"));
+                String phone = request.getParameter("phone");
+                String dob = request.getParameter("dob");
+                String email = request.getParameter("email");
+                String username = request.getParameter("username");
+                String address = request.getParameter("address");
+                int status = Integer.parseInt(request.getParameter("status"));
+                Part image = request.getPart("image");
+                pDAO.updatePatient( patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
+                response.sendRedirect("manage-patient?action=edit&patientId=" + patientId);
+                return;
+            }
+            
         }
     }
 
