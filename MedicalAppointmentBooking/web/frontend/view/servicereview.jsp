@@ -40,9 +40,7 @@
             <jsp:include page="/frontend/common/manager_side_bar.jsp" />
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
-
-            <main class="page-content">  
-
+            <main class="page-content">
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
                         <div class="d-flex align-items-center">
@@ -94,10 +92,10 @@
                             <div class="col-xl-3 col-md-3">
                                 <div class="card component-wrapper border-0 rounded shadow">
                                     <div>
-                                        <select class="form-select form-control" id="speFilter" onchange="filter()">
-                                            <option selected disabled>Speciality</option>
-                                            <c:forEach items="${speList}" var="spe">
-                                                <option value="${spe.id}">${spe.speName}</option>  
+                                        <select class="form-select form-control" id="serFilter" onchange="filter()">
+                                            <option selected disabled>Service</option>
+                                            <c:forEach items="${serviceList}" var="ser">
+                                                <option value="${ser.service_id}">${ser.service_name}</option>  
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -107,26 +105,35 @@
                             <div class="col-xl-6 col-md-6">
                                 <div class="search-bar d-lg-block" style="padding-top :0">
                                     <div id="search" class="menu-search ">
-                                        <form action="<c:url value='/manage-doctor?action=search'/>"role="search" method="post" id="searchform" class="searchform">
+                                        <form action=""role="search" method="post" id="searchform" class="searchform">
                                             <div>
                                                 <input type="text" class="form-control border rounded-pill" name="search"
-                                                       id="search" placeholder="Search doctor by name">
+                                                       id="search" placeholder="Search patient by name">
                                                 <input type="submit" id="searchsubmit" value="Search">
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-3 mt-4 mt-md-0 text-md-end">
-                                <a href="<c:url value='/manage-doctor?action=create'/>" class="btn btn-primary ">Add Doctor</a>
-                            </div><!--end col-->
+                            <div class="col-xl-3 col-md-3">
+                                <div class="card component-wrapper border-0 rounded shadow">
+                                    <div>
+                                        <select class="form-select form-control" id="sort" onchange="sort()">
+                                            <option selected disabled>Sort</option>
+                                            <option>Newest</option>
+                                            <option>Oldest</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
                         </div><!--end row-->
-
-
                         <div class="col-12 mt-4">
                             <div class="card component-wrapper border-0 rounded shadow">
                                 <div class="p-4 border-bottom">
-                                    <h5 class="mb-0">Doctor List</h5>
+                                    <h5 class="mb-0">Service List</h5>
                                 </div>
 
                                 <div class="p-4">
@@ -135,56 +142,60 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">ID</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Phone</th>
-                                                    <th scope="col">Speciality</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Action</th>
+                                                    <th scope="col">Patient</th>
+                                                    <th scope="col">Service</th>
+                                                    <th scope="col">Comment</th>
+                                                    <th scope="col">Rate</th>     
+                                                    <th scope="col">Created Time</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${dList}" var="d">
+                                                <c:forEach items="${review}" var="rv" varStatus="loop">
                                                     <tr>
-                                                        <th scope="row">${d.doctorId}</th>
-                                                        <td>${d.fullName}</td>
-                                                        <td>${d.phone}</td>
-                                                        <td>${d.speciality}</td>
-                                                        <td>
-                                                            <c:if test="${d.status == 1}">Active</c:if>
-                                                            <c:if test="${d.status == 0}">Inactive</c:if>
-                                                            </td>
-                                                            <td>
-                                                                <div>
-                                                                    <div class="card component-wrapper border-0 rounded ">
-                                                                        <div class="mb-2">
-                                                                            <a href="<c:url value='/manage-doctor?action=view&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">View</a>
-                                                                    </div>
-                                                                    <div>
-                                                                        <a href="<c:url value='/manage-doctor?action=edit&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">Edit</a>
-                                                                    </div>
-                                                                </div>
+                                                        <th scope="row">${loop.index + 1}</th>
+                                                        <td>${rv.user.fullName}</td>
+                                                        <td>${rv.service.service_name}</td>
+                                                        <td>${rv.review}</td>
+                                                        <td><c:choose>
+                                                                <c:when test="${rv.rate >= 1}">
+                                                                    ★
+                                                                </c:when>
+                                                                <c:otherwise>☆</c:otherwise>
+                                                            </c:choose>
+                                                            <c:choose>
+                                                                <c:when test="${rv.rate >= 2}">
+                                                                    ★
+                                                                </c:when>
+                                                                <c:otherwise>☆</c:otherwise>
+                                                            </c:choose>
+                                                            <c:choose>
+                                                                <c:when test="${rv.rate >= 3}">
+                                                                    ★
+                                                                </c:when>
+                                                                <c:otherwise>☆</c:otherwise>
+                                                            </c:choose>
+                                                            <c:choose>
+                                                                <c:when test="${rv.rate >= 4}">
+                                                                    ★
+                                                                </c:when>
+                                                                <c:otherwise>☆</c:otherwise>
+                                                            </c:choose>
+                                                            <c:choose>
+                                                                <c:when test="${rv.rate >= 5}">
+                                                                    ★
+                                                                </c:when>
+                                                                <c:otherwise>☆</c:otherwise>
+                                                            </c:choose></td>
 
-                                                            </div><!--end col-->
-                                                        </td>
-                                                    </tr>
+                                                        <td>${rv.create_time}</td>  
+                                                    </tr>     
                                                 </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
 
-                                <div>
-                                    <ul class="pagination mb-0 mt-5">
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)"
-                                                                 aria-label="Previous">Prev</a></li>
-                                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)"
-                                                                 aria-label="Next">Next</a></li>
-                                    </ul>
-                                </div>
+
                             </div>
                         </div><!--end col-->
 
@@ -197,11 +208,16 @@
         </div>
         <!-- page-wrapper -->
         <!-- javascript -->
+
         <script>
-            
             function filter() {
-                const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=filter&speciality_id=';
-                const filterElement = document.getElementById("speFilter").value;
+                const url = 'http://localhost:9999/MedicalAppointmentBooking/service/review?action=filter&service_id=';
+                const filterElement = document.getElementById("serFilter").value;
+                window.location.href = url + filterElement;
+            }
+            function sort(){
+                const url = 'http://localhost:9999/MedicalAppointmentBooking/service/review?action=sort&sortby=';
+                const filterElement = document.getElementById("sort").value;
                 window.location.href = url + filterElement;
             }
         </script>

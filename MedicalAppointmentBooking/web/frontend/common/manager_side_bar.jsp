@@ -38,6 +38,9 @@
                     <li class="sidebar-menu">
                         <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
                     </li>
+                    <li class="sidebar-menu">
+                        <a href="<c:url value='/service/review?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Service Review</a>
+                    </li>
                 </ul>
                 <!-- sidebar-menu  -->
             </div>
