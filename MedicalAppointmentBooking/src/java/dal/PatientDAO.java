@@ -5,6 +5,8 @@
 package dal;
 
 import dbContext.DBConnection;
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -15,9 +17,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Patient;
-import model.Service;
 import model.UserAccount;
 import utils.ImageProcessing;
+import utils.TimeUtil;
 
 /**
  *
@@ -37,7 +39,7 @@ public class PatientDAO {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 int patientId = rs.getInt("patient_id");
                 int userId = rs.getInt("user_id");
                 String username = rs.getString("username");
@@ -152,6 +154,54 @@ public class PatientDAO {
             }
         }
         return -1;
+    }
+    public void updatePatient(int patientId, int userId, String username, String email, String fullName, int gender, String phone, Part image, String dob, String address, int status) {
+        PreparedStatement ps = null;
+        InputStream fileImage = ImageProcessing.imageStream(image);
+        String sql = "UPDATE mabs.patients p\n"
+                + "SET\n"
+                + "  s.fullName = ?,\n"
+                + "  s.email = ?,\n"
+                + "  s.gender = ?,\n"
+                + "  s.phone = ?,\n"
+                + "  s.dob = ?\n"
+                + "  s.address = ?\n"
+                + "  s.status = ?\n";
+        if (fileImage != null) {
+            sql = sql + " , p.image = ? \n";
+        }
+        sql = sql + "WHERE p.patient_id = ?;";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, fullName);
+            ps.setString(2, email);
+            ps.setInt(3, gender);
+            ps.setString(4, phone);
+            ps.setDate(5, TimeUtil.dateConverter(dob));
+            ps.setString(6, address);
+            ps.setInt(7, status);
+
+            if (fileImage != null) {
+                ps.setBlob(8, fileImage);
+                ps.setInt(9, patientId);
+            } else {
+                ps.setInt(8, patientId);
+            }
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
     }
    public static void main(String[] args) throws SQLException {
         PatientDAO dao = new PatientDAO();
