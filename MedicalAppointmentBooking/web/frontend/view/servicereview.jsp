@@ -115,6 +115,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-xl-3 col-md-3">
+                                <div class="card component-wrapper border-0 rounded shadow">
+                                    <div>
+                                        <select class="form-select form-control" id="sort" onchange="sort()">
+                                            <option selected disabled>Sort</option>
+                                            <option>Newest</option>
+                                            <option>Oldest</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
 
                         </div><!--end row-->
                         <div class="col-12 mt-4">
@@ -198,11 +211,15 @@
 
         <script>
             function filter() {
-                const url = 'http://localhost:8080/MedicalAppointmentBooking/service/review?action=filter&service_id=';
+                const url = 'http://localhost:9999/MedicalAppointmentBooking/service/review?action=filter&service_id=';
                 const filterElement = document.getElementById("serFilter").value;
                 window.location.href = url + filterElement;
             }
-
+            function sort(){
+                const url = 'http://localhost:9999/MedicalAppointmentBooking/service/review?action=sort&sortby=';
+                const filterElement = document.getElementById("sort").value;
+                window.location.href = url + filterElement;
+            }
         </script>
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->

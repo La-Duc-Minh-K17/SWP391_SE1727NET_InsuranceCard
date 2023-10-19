@@ -45,22 +45,129 @@ public class ServicesDAO {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                UserAccount acc = new UserAccount();  
+                UserAccount acc = new UserAccount();
                 String name = rs.getString("full_name");
                 String image = ImageProcessing.imageString(rs.getBlob("image"));
-                
+
                 Service sv = new Service();
-                String service_name=rs.getString("service_name");
-                
+                String service_name = rs.getString("service_name");
+
                 String review = rs.getString("review");
                 String create_time = rs.getString("create_time");
                 float rate = rs.getFloat("rate");
 
                 acc.setFullName(name);
                 acc.setImage(image);
-                
+
                 sv.setService_name(service_name);
-                
+
+                ServiceReview s = new ServiceReview();
+                s.setService(sv);
+                s.setUser(acc);
+                s.setRate(rate);
+                s.setCreate_time(create_time);
+                s.setReview(review);
+                reviewList.add(s);
+            }
+            return reviewList;
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return reviewList;
+    }
+
+    public List<ServiceReview> getServiceReviewById(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ServiceReview s = new ServiceReview();
+        List<ServiceReview> reviewList = new ArrayList<>();
+        String sql = "select review_id,a.full_name,a.image,service_name,review,create_time,rate from \n"
+                + "user_account a join service_review sv on a.user_id=sv.user_id\n"
+                + "join services on sv.service_id=services.service_id\n"
+                + "where sv.service_id= ?";
+
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                UserAccount acc = new UserAccount();
+                String name = rs.getString("full_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+
+                Service sv = new Service();
+                String service_name = rs.getString("service_name");
+
+                String review = rs.getString("review");
+                String create_time = rs.getString("create_time");
+                float rate = rs.getFloat("rate");
+
+                acc.setFullName(name);
+                acc.setImage(image);
+
+                sv.setService_name(service_name);
+
+                s.setService(sv);
+                s.setUser(acc);
+                s.setRate(rate);
+                s.setCreate_time(create_time);
+                s.setReview(review);
+                reviewList.add(s);
+            }
+            return reviewList;
+        } catch (SQLException e) {
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return reviewList;
+    }
+
+    public List<ServiceReview> getServiceReviewASC() {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<ServiceReview> reviewList = new ArrayList<>();
+        String sql = "select review_id,a.full_name,a.image,service_name,review,create_time,rate from \n"
+                + "user_account a join service_review sv on a.user_id=sv.user_id\n"
+                + "join services on sv.service_id=services.service_id\n"
+                + "order by create_time ASC";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                UserAccount acc = new UserAccount();
+                String name = rs.getString("full_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+
+                Service sv = new Service();
+                String service_name = rs.getString("service_name");
+
+                String review = rs.getString("review");
+                String create_time = rs.getString("create_time");
+                float rate = rs.getFloat("rate");
+
+                acc.setFullName(name);
+                acc.setImage(image);
+
+                sv.setService_name(service_name);
+
                 ServiceReview s = new ServiceReview();
                 s.setService(sv);
                 s.setUser(acc);
