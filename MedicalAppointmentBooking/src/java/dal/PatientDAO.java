@@ -6,10 +6,17 @@ package dal;
 
 import dbContext.DBConnection;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Patient;
+import model.UserAccount;
+import utils.ImageProcessing;
 
 /**
  *
@@ -18,31 +25,20 @@ import model.Patient;
 public class PatientDAO {
 
     DBConnection dbc = new DBConnection();
+    private UserDAO uDAO = new UserDAO();
 
     public int insertPatient(Patient patient) {
         PreparedStatement ps = null;
         Connection connection = null;
-        String sql = "INSERT INTO mabs.patients "
-                + "( user_id , relative_id) VALUES ( ? , ? )";
+        String sql = "INSERT INTO mabs.patients( user_id ) VALUES ( ? )";
         try {
             connection = dbc.getConnection();
-
             ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-          
-            if (patient.getUserAccount() == null) {
-                ps.setNull(1, java.sql.Types.INTEGER);
-            } else {
-                ps.setInt(1, patient.getUserAccount().getUserId());
-            }
-            if (patient.getUserRelative() == null) {
-                ps.setNull(2, java.sql.Types.INTEGER);
-            } else {
-                ps.setInt(2, patient.getUserRelative().getRelativeId());
-            }
+            ps.setInt(1, patient.getUserId());
             int affectedRow = ps.executeUpdate();
             if (affectedRow == 1) {
-                try ( // Retrieve the generated keys
-                         ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                try (
+                    ResultSet generatedKeys = ps.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         int generatedId = generatedKeys.getInt(1);
                         return generatedId;
@@ -63,23 +59,49 @@ public class PatientDAO {
         return 0;
     }
 
-    public int getPatientId(Patient patient) {
+    public Patient getPatientById(int id) {
         PreparedStatement ps = null;
         Connection connection = null;
-        String sql = "";
-        if (patient.getUserAccount() != null) {
-            sql = "select * from mabs.patients where user_id = ? ";
-        } else {
-            sql = "select * from mabs.patients where relative_id = ?";
-        }
+        String sql = "select * from patients where patient_id = ? ";
+        ResultSet rs = null;
+
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            if (patient.getUserAccount() != null) {
-                ps.setInt(1, patient.getUserAccount().getUserId());
-            } else {
-                ps.setInt(1, patient.getUserRelative().getRelativeId());
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int patientId = rs.getInt("patient_id");
+                int userId = rs.getInt("user_id");
+                UserAccount user = uDAO.getAccountById(userId);
+                Patient p = new Patient(patientId,
+                        user.getUserId(),
+                        user.getUserName(),
+                        user.getEmail(),
+                        user.getFullName(),
+                        user.getGender(),
+                        user.getPhone(),
+                        user.getImage(),
+                        user.getDob(),
+                        user.getAddress(),
+                        user.getStatus());
+                return p;
             }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public int getPatientId(Patient patient) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "select * from mabs.patients where user_id = ? ";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, patient.getUserId());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 int id = rs.getInt("patient_id");
@@ -98,5 +120,51 @@ public class PatientDAO {
         }
         return -1;
     }
-  
+
+    public List<Patient> getPatientByDoctorId(int doctorId) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<Patient> listPatient = new ArrayList<>();
+        String sql = "SELECT P.patient_id , UA.*\n"
+                + "FROM mabs.user_account UA\n"
+                + "JOIN mabs.patients P ON UA.user_id = P.user_id\n"
+                + "JOIN mabs.appointments A ON P.patient_id = A.patient_id\n"
+                + "WHERE A.doctor_id = ?;";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, doctorId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int patientId = rs.getInt("patient_id");
+                String username = rs.getString("username");
+                int userId = rs.getInt("user_id");
+                String email = rs.getString("email");
+                String fullName = rs.getString("full_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String phone = rs.getString("phone");
+                Date dob = rs.getDate("dob");
+                int status = rs.getInt("status");
+                String address = rs.getString("address");
+                Patient p = new Patient(patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
+                listPatient.add(p);
+            }
+            return listPatient;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return null;
+    }
+
 }

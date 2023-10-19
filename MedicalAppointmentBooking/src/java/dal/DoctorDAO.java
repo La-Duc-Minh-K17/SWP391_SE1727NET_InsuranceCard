@@ -32,6 +32,8 @@ public class DoctorDAO {
         String sql = "select * from doctors d \n"
                 + "inner join user_account u on d.user_id = u.user_id \n"
                 + "inner join speciality s on s.speciality_id = d.speciality_id";
+        
+        
         Connection connection = null;
         try {
             connection = dbc.getConnection();
@@ -76,7 +78,6 @@ public class DoctorDAO {
         String sql = "select * from doctors d \n"
                 + "            inner join user_account u on d.user_id = u.user_id \n"
                 + "            inner join  speciality s on s.speciality_id = d.speciality_id\n"
-                + "            inner join services ser on ser.service_id = d.service_id"
                 + "            where u.full_name LIKE ?";
 
 
@@ -98,7 +99,6 @@ public class DoctorDAO {
                 String position = rs.getString("doctor_position");
                 String speciality = rs.getString("speName");
                 String description = rs.getString("doctor_description");
-
                 Doctor d = new Doctor(doctorId, speciality, position, description, username, email, name, gender, phone, image, status);
                 doctorList.add(d);
             }
@@ -143,7 +143,9 @@ public class DoctorDAO {
                 String position = rs.getString("doctor_position");
                 String speciality = rs.getString("speName");
                 String description = rs.getString("doctor_description");
+                int fee = rs.getInt("service_fee");
                 doctor = new Doctor(doctorId, position, speciality, description, username, email, fullName, gender, phone, image, status);
+            doctor.setServiceFee(fee);
             }
             return doctor;
         } catch (SQLException e) {
@@ -175,8 +177,6 @@ public class DoctorDAO {
             ps = connection.prepareStatement(sql);
 
             ps.setInt(1, id);
-
-            ps.setInt(1 , id);
 
             rs = ps.executeQuery();
             while (rs.next()) {

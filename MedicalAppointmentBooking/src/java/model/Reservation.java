@@ -18,21 +18,31 @@ public class Reservation {
     private String resvTime;
     private String testResult;
     private String status;
-    private int staffId;
-    private int serviceId;
-    private int patientId;
+    private UserAccount staff;
+    private Service service;
+    private Patient patient;
 
     public Reservation() {
     }
 
-    public Reservation(String resvNote, Date resvDate, String resvTime, String status, int staffId, int serviceId, int patientId) {
+    public Reservation(String resvNote, Date resvDate, String resvTime, String status, Service service , Patient patient) {
         this.resvNote = resvNote;
         this.resvDate = resvDate;
         this.resvTime = resvTime;
         this.status = status;
-        this.staffId = staffId;
-        this.serviceId = serviceId;
-        this.patientId = patientId;
+        this.service = service;
+        this.patient = patient;
+    }
+
+    public Reservation(int resvId, String resvNote, Date resvDate, String resvTime, String testResult, String status, Service service , Patient patient) {
+        this.resvId = resvId;
+        this.resvNote = resvNote;
+        this.resvDate = resvDate;
+        this.resvTime = resvTime;
+        this.testResult = testResult;
+        this.status = status;
+        this.service = service;
+        this.patient = patient;
     }
 
     public int getResvId() {
@@ -83,33 +93,31 @@ public class Reservation {
         this.status = status;
     }
 
-    public int getStaffId() {
-        return staffId;
+    public UserAccount getStaff() {
+        return staff;
     }
 
-    public void setStaffId(int staffId) {
-        this.staffId = staffId;
+    public void setStaff(UserAccount staff) {
+        this.staff = staff;
     }
 
-    public int getServiceId() {
-        return serviceId;
+    public Service getService() {
+        return service;
     }
 
-    public void setServiceId(int serviceId) {
-        this.serviceId = serviceId;
+    public void setService(Service service) {
+        this.service = service;
     }
 
-    public int getPatientId() {
-        return patientId;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
-    @Override
-    public String toString() {
-        return "Reservation{" + "resvId=" + resvId + ", resvNote=" + resvNote + ", resvDate=" + resvDate + ", resvTime=" + resvTime + ", testResult=" + testResult + ", status=" + status + ", staffId=" + staffId + ", serviceId=" + serviceId + ", patientId=" + patientId + '}';
-    }
+    
 
+  
 }

@@ -1,7 +1,7 @@
 <%-- 
-    Document   : managedoctor
-    Created on : Sep 28, 2023, 10:44:49 AM
-    Author     : Admin
+    Document   : listservice
+    Created on : Oct 12, 2023, 1:16:48 PM
+    Author     : PC
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -10,10 +10,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Manage Service</title>
 
         <!-- favicon -->
-        <link rel="shortcut icon" href="/assets/images/favicon.ico.png">
+        <link rel="shortcut icon" href="/frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- simplebar -->
@@ -40,17 +40,17 @@
             <jsp:include page="/frontend/common/manager_side_bar.jsp" />
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
+            <main class="page-content">
 
-            <main class="page-content">  
 
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
                         <div class="d-flex align-items-center">
                             <a href="#" class="logo-icon">
-                                <img src="../assets/images/logo-icon.png" height="30" class="small" alt="">
+                                <img src="frontend/template/assets/images/logo-icon.png" height="30" class="small" alt="">
                                 <span class="big">
-                                    <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                                    <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                                    <img src="frontend/template/assets/images/MABS__1.png" height="24" class="logo-light-mode" alt="">
+                                    <img src="frontend/template/assets/images/MABS__1.png" height="24" class="logo-dark-mode" alt="">
                                 </span>
                             </a>
                             <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
@@ -62,7 +62,7 @@
                                 <div class="dropdown dropdown-primary">
                                     <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                            src="../assets/images/doctors/01.jpg"
+                                            src="../../assets/images/doctors/01.jpg"
                                             class="avatar avatar-ex-small rounded-circle" alt=""></button>
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                          style="min-width: 200px;">
@@ -94,10 +94,10 @@
                             <div class="col-xl-3 col-md-3">
                                 <div class="card component-wrapper border-0 rounded shadow">
                                     <div>
-                                        <select class="form-select form-control" id="speFilter" onchange="filter()">
-                                            <option selected disabled>Speciality</option>
-                                            <c:forEach items="${speList}" var="spe">
-                                                <option value="${spe.id}">${spe.speName}</option>  
+                                        <select class="form-select form-control" id="Filter" onchange="filter()">
+                                            <option selected disabled>Category</option>
+                                            <c:forEach items="${cateList}" var="cate">
+                                                <option value="${cate.sc_id}">${cate.name}</option>  
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -105,12 +105,12 @@
 
                             </div>
                             <div class="col-xl-6 col-md-6">
-                                <div class="search-bar d-lg-block" style="padding-top :0">
-                                    <div id="search" class="menu-search ">
-                                        <form action="<c:url value='/manage-doctor?action=search'/>"role="search" method="post" id="searchform" class="searchform">
+                                <div class="search-bar d-lg-block " style="padding-top :0">
+                                    <div id="search" class="menu-search  ">
+                                        <form action="<c:url value='/manage-service?action=search'/>"role="search" method="post" id="searchform" class="searchform  ">
                                             <div>
-                                                <input type="text" class="form-control border rounded-pill" name="search"
-                                                       id="search" placeholder="Search doctor by name">
+                                                <input type="text" class="form-control border rounded-pill bg-light " name="search"
+                                                       id="search" placeholder="Search service by name">
                                                 <input type="submit" id="searchsubmit" value="Search">
                                             </div>
                                         </form>
@@ -118,15 +118,15 @@
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-3 mt-4 mt-md-0 text-md-end">
-                                <a href="<c:url value='/manage-doctor?action=create'/>" class="btn btn-primary ">Add Doctor</a>
+                                <a href="<c:url value='/manage-service?action=add'/>" class="btn btn-primary ">Add Service</a>
                             </div><!--end col-->
                         </div><!--end row-->
 
 
-                        <div class="col-12 mt-4">
-                            <div class="card component-wrapper border-0 rounded shadow">
+                        <div class="col-12 mt-5">
+                            <div class="card component-wrapper border-0 rounded shadow ">
                                 <div class="p-4 border-bottom">
-                                    <h5 class="mb-0">Doctor List</h5>
+                                    <h4 class="mb-0 text-primary">Service List</h4>
                                 </div>
 
                                 <div class="p-4">
@@ -135,43 +135,57 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">ID</th>
+                                                    <th scope="col">Image</th>
                                                     <th scope="col">Name</th>
-                                                    <th scope="col">Phone</th>
-                                                    <th scope="col">Speciality</th>
+                                                    <th scope="col">Price</th>
                                                     <th scope="col">Status</th>
-                                                    <th scope="col">Action</th>
+                                                    <th scope="col" class="text-md-center">Action</th> 
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${dList}" var="d">
+                                                <c:forEach items="${sList}" var="s">
                                                     <tr>
-                                                        <th scope="row">${d.doctorId}</th>
-                                                        <td>${d.fullName}</td>
-                                                        <td>${d.phone}</td>
-                                                        <td>${d.speciality}</td>
+                                                        <th scope="row">${s.service_id}</th>
+                                                        <td><img src="data:image/jpg;base64,${s.service_image}" width="200" height="100"></td>
+                                                        <td>${s.service_name}</td>
+                                                        <td>$${s.fee}</td>
                                                         <td>
-                                                            <c:if test="${d.status == 1}">Active</c:if>
-                                                            <c:if test="${d.status == 0}">Inactive</c:if>
+                                                            <c:if test="${s.service_status == 1}">Active</c:if>
+                                                            <c:if test="${s.service_status == 0}">Inactive</c:if>
                                                             </td>
-                                                            <td>
-                                                                <div>
-                                                                    <div class="card component-wrapper border-0 rounded ">
-                                                                        <div class="mb-2">
-                                                                            <a href="<c:url value='/manage-doctor?action=view&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">View</a>
-                                                                    </div>
-                                                                    <div>
-                                                                        <a href="<c:url value='/manage-doctor?action=edit&id=${d.doctorId}'/> "class="btn btn-primary btn-sm">Edit</a>
-                                                                    </div>
-                                                                </div>
+                                                    <style>
+                                                        .custom-btn {
+                                                            width: 100px; /* Adjust the width as needed */
+                                                        }
+                                                    </style>
+                                                    <td class="text-center">
+                                                        <div class="container d-flex justify-content-center">
+                                                            <div class="card component-wrapper border-0 rounded">
+                                                                <div class="d-flex mb-2">
+                                                                    <a href="<c:url value='/manage-service?action=view&service_id=${s.service_id}'/>" class="btn btn-primary custom-btn btn-sm m-2">View</a>
+                                                                <a href="<c:url value='/manage-service?action=edit&service_id=${s.service_id}'/>" class="btn btn-primary custom-btn btn-sm m-2">Edit</a>
+                                                                <c:choose>
+                                                                    <c:when test="${s.service_status == 1}">
+                                                                        <a href="<c:url value='/manage-service?action=status&service_id=${s.service_id}&status=${s.service_status}'/>" class="btn btn-danger custom-btn btn-sm m-2">Deactivate</a>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <a href="<c:url value='/manage-service?action=status&service_id=${s.service_id}&status=${s.service_status}'/>" class="btn btn-success custom-btn btn-sm m-2">Activate</a>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
 
-                                                            </div><!--end col-->
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
+
+                                                </tr>
+                                            </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+
+
 
                                 <div>
                                     <ul class="pagination mb-0 mt-5">
@@ -198,12 +212,13 @@
         <!-- page-wrapper -->
         <!-- javascript -->
         <script>
-            
             function filter() {
-                const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=filter&speciality_id=';
-                const filterElement = document.getElementById("speFilter").value;
+                const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-service?action=filter&category_id=';
+                const filterElement = document.getElementById("Filter").value;
                 window.location.href = url + filterElement;
             }
+
+
         </script>
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->
@@ -216,3 +231,4 @@
 
     </body>
 </html>
+
