@@ -96,6 +96,14 @@
         <servlet-name>PatientListController</servlet-name>
         <servlet-class>controller.home.PatientListController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PatientCalenderController</servlet-name>
+        <servlet-class>controller.home.PatientCalenderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AppointmentListController</servlet-name>
+        <servlet-class>controller.home.AppointmentListController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserAccountController</servlet-name>
         <url-pattern>/user</url-pattern>
@@ -191,6 +199,14 @@
     <servlet-mapping>
         <servlet-name>PatientListController</servlet-name>
         <url-pattern>/doctor-patientlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PatientCalenderController</servlet-name>
+        <url-pattern>/doctor-patientcalender</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AppointmentListController</servlet-name>
+        <url-pattern>/doctor-appointmentlist</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
