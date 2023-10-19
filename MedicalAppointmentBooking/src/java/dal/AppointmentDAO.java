@@ -38,7 +38,7 @@ public class AppointmentDAO {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("appointment_id");
                 String note = rs.getString("appointment_note");
                 Date date = rs.getDate("appointment_date");
@@ -169,23 +169,24 @@ public class AppointmentDAO {
         }
     }
     private final int MAX_APPOINTMENT = 1;
-    public List<String> getAvailableTimeSlot(int doctorId , String date) {
+
+    public List<String> getAvailableTimeSlot(int doctorId, String date) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
         List<String> timeSlot = new ArrayList<>();
-        timeSlot.add("7:00:00"); 
-        timeSlot.add("8:00:00"); 
-        timeSlot.add("9:00:00"); 
-        timeSlot.add("10:00:00"); 
-        timeSlot.add("11:00:00"); 
-        timeSlot.add("12:00:00"); 
-        timeSlot.add("13:00:00"); 
-        timeSlot.add("14:00:00"); 
-        timeSlot.add("15:00:00"); 
-        timeSlot.add("16:00:00"); 
-        timeSlot.add("17:00:00"); 
-       
+        timeSlot.add("7:00:00");
+        timeSlot.add("8:00:00");
+        timeSlot.add("9:00:00");
+        timeSlot.add("10:00:00");
+        timeSlot.add("11:00:00");
+        timeSlot.add("12:00:00");
+        timeSlot.add("13:00:00");
+        timeSlot.add("14:00:00");
+        timeSlot.add("15:00:00");
+        timeSlot.add("16:00:00");
+        timeSlot.add("17:00:00");
+
         String sql = "SELECT appointment_time\n"
                 + "FROM appointments\n"
                 + "WHERE doctor_id = ? AND appointment_date = ? ";
@@ -193,10 +194,10 @@ public class AppointmentDAO {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setDate(2, TimeUtil.dateConverter(date));
-            ps.setInt(1 , doctorId);
+            ps.setInt(1, doctorId);
             rs = ps.executeQuery();
-            while(rs.next()) {
-                if(timeSlot.contains(rs.getString("appointment_time"))) {
+            while (rs.next()) {
+                if (timeSlot.contains(rs.getString("appointment_time"))) {
                     timeSlot.remove(rs.getString(1));
                 }
             }
@@ -213,6 +214,7 @@ public class AppointmentDAO {
         }
         return timeSlot;
     }
+
     public boolean checkAvailability(Appointment appt) {
         PreparedStatement ps = null;
         Connection connection = null;
@@ -244,7 +246,7 @@ public class AppointmentDAO {
         }
         return true;
     }
-    
+
     public void cancelAppointment(int apptId, UserAccount account) {
         PreparedStatement ps = null;
         Connection connection = null;
@@ -271,5 +273,49 @@ public class AppointmentDAO {
                 }
             }
         }
+    }
+
+    public List<Appointment> getAppointmenttByDoctorId(int docId) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<Appointment> listAppoint = new ArrayList<>();
+        String sql = "SELECT P.patient_id , UA.*\n"
+                + "FROM mabs.user_account UA\n"
+                + "JOIN mabs.patients P ON UA.user_id = P.user_id\n"
+                + "JOIN mabs.appointments A ON P.patient_id = A.patient_id\n"
+                + "WHERE A.doctor_id = ?;";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, docId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("appointment_id");
+                String note = rs.getString("appointment_note");
+                Date date = rs.getDate("appointment_date");
+                String time = rs.getString("appointment_time");
+                String diagnosis = rs.getString("diagnosis");
+                String status = rs.getString("appointment_status");
+                int doctorId = rs.getInt("doctor_id");
+                Doctor doctor = dDAO.getDoctorById(doctorId);
+                int patientId = rs.getInt("patient_id");
+                Patient patient = pDAO.getPatientById(patientId);
+                Appointment appt = new Appointment(id, note, date, time, diagnosis, status, doctor, patient);
+                listAppoint.add(appt);
+            }
+            return listAppoint;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return null;
     }
 }
