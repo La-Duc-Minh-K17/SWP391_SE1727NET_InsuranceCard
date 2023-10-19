@@ -135,13 +135,11 @@
                                                                 <tr>
                                                                     <th class="border-bottom p-3" style="min-width: 50px;">#</th>
                                                                     <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
-                                                                    <th class="border-bottom p-3" style="min-width: 150px;">Email</th>
-                                                                    <th class="border-bottom p-3" style="min-width: 150px">DOB</th>
-                                                                    <th class="border-bottom p-3">Gender</th>
+
                                                                     <th class="border-bottom p-3" style="min-width: 150px;">Date</th>
                                                                     <th class="border-bottom p-3">Time</th>
                                                                     <th class="border-bottom p-3" style="min-width: 220px;">Doctor</th>
-                                                                    <th class="border-bottom p-3">Fees</th>
+                                                                    <th class="border-bottom p-3">Status</th>
                                                                     <th class="border-bottom p-3" style="min-width: 150px;">Action</th>
                                                                 </tr>
                                                             </thead>
@@ -163,9 +161,8 @@
                                                                                 </div>
                                                                             </a>
                                                                         </td>
-                                                                        <td class="p-3">${patient.email}</td>
-                                                                        <td class="p-3">${patient.dob}</td>
-                                                                        <td class="p-3">${patient.gender == 1 ? "Male" : "Female"}</td>
+
+
                                                                         <td class="p-3">${appt.apptDate}</td>
                                                                         <td class="p-3">${appt.apptTime}</td>
                                                                         <td class="p-3">
@@ -176,14 +173,12 @@
                                                                                 </div>
                                                                             </a>
                                                                         </td>
-                                                                        <td class="p-3">$${appt.doctor.serviceFee}</td>
+                                                                           <td class="p-3">${appt.status}</td>
                                                                         <td class="text-start p-3">
-                                                                            <a href="#acceptappointment" class="btn btn-icon btn-pills btn-soft-success"
-                                                                               data-bs-toggle="modal" data-bs-target="#acceptappointment" onclick="acceptAppt(this)" data-id="${appt.apptId}">
-                                                                                <i class="uil uil-check-circle" ></i></a>
-                                                                            <a href="#cancelappointment" class="btn btn-icon btn-pills btn-soft-danger" 
-                                                                               data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
-                                                                                <i class="uil uil-times-circle"></i></a>
+                                                                            <a href="#acceptappointment" class="btn btn-primary btn-sml btn-soft-success"
+                                                                               data-bs-toggle="modal" data-bs-target="#acceptappointment" onclick="viewAppt(this)" data-id="${appt.apptId}">
+                                                                                Details</a>
+
                                                                         </td>
                                                                     </tr>
                                                                 </c:forEach>
@@ -213,35 +208,12 @@
             </main>
             <!--End page-content" -->
             <!-- Modal -->
-            <div class="modal fade" id="acceptappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <form action="<c:url value='/staff-waiting-list?action=accept?type=appointment'></c:url>" method="post">
-                            <div class="modal-content">
-                                <div class="modal-body py-5">
-                                    <div class="text-center">
-                                        <div class="icon d-flex align-items-center justify-content-center bg-soft-success rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                            <i class="uil uil-check-circle h1 mb-0"></i>
-                                        </div>
-                                        <div class="mt-4">
-                                            <h4>Accept Appointment</h4>
-                                            <p class="para-desc mx-auto text-muted mb-0">This appointment will be assigned for you after clicking on accept button..</p>
-                                            <div class="mt-4">
-                                                <input type="hidden" id="accept_appointment" name="appointment_accepted" value="">
-                                                <input type="submit" class="btn btn-success" name="accept" value="Accept">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <!-- Accept Appointment End -->
 
-                <!-- Cancel Appointment Start -->
-                <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <form action="<c:url value='/staff-waiting-list?action=cancel&type=appointment'></c:url>" method="post">
+
+            <!-- Cancel Appointment Start -->
+            <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <form action="<c:url value='/staff-waiting-list?action=cancel&type=appointment'></c:url>" method="post">
                             <div class="modal-content">
                                 <div class="modal-body py-5">
                                     <div class="text-center">
@@ -263,85 +235,15 @@
                     </div>
                 </div>
 
-
-                <!-- Accept reservation Start-->
-                <div class="modal fade" id="acceptreservation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <form action="<c:url value='/staff-waiting-list?action=accept&type=reservation'></c:url>" method="post">
-                                <div class="modal-body py-5">
-                                    <div class="text-center">
-                                        <div class="icon d-flex align-items-center justify-content-center bg-soft-success rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                            <i class="uil uil-check-circle h1 mb-0"></i>
-                                        </div>
-                                        <div class="mt-4">
-                                            <h4>Accept Appointment</h4>
-                                            <p class="para-desc mx-auto text-muted mb-0">This reservation will be assigned for you after clicking on accept button.</p>
-                                            <div class="mt-4">
-                                                <input type="hidden" id="accept_reservation" name="reservation_accepted" value="">
-                                                <input type="submit" class="btn btn-success" name="accept" value="Accept">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- Accept reservation End -->
-
-                <!-- Cancel Reservation Start -->
-                <div class="modal fade" id="cancelreservation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <form action="" method="post">
-                                <div class="modal-body py-5">
-                                    <div class="text-center">
-                                        <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                            <i class="uil uil-times-circle h1 mb-0"></i>
-                                        </div>
-                                        <div class="mt-4">
-                                            <h4>Cancel Appointment</h4>
-                                            <p class="para-desc mx-auto text-muted mb-0">This reservation will be cancelled by you. Are you sure ?.</p>
-                                            <div class="mt-4">
-                                                <input type="hidden" id="cancel_reservation" name="reservation_canceled" value="">
-                                                <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- page-wrapper -->
             <!-- javascript -->
             <script>
-                function acceptAppt(appt) {
+                function viewAppt(appt) {
                     var dataId = appt.getAttribute('data-id');
-                    let accept_appt = document.getElementById('accept_appointment');
-                    accept_appt.value = dataId;
-                    console.log(accept_appt.value);
-                }
-                function cancelAppt(appt) {
-                    var dataId = appt.getAttribute('data-id');
-                    let cancel_appt = document.getElementById('cancel_appointment');
-                    cancel_appt.value = dataId;
+                    const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=view-detail&apptId=' + dataId;
+                    window.href.location = url;
 
-                }
-
-                function acceptResv(resv) {
-
-                    var dataId = resv.getAttribute('data-id');
-                    let accept_resv = document.getElementById('accept_reservation');
-                    accept_resv.value = dataId;
-
-                }
-                function cancelResv(resv) {
-                    var dataId = resv.getAttribute('data-id');
-                    let cancel_resv = document.getElementById('cancel_reservation');
-                    cancel_resv.value = dataId;
                 }
 
                 function filter() {

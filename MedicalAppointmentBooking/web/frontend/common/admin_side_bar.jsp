@@ -29,10 +29,10 @@
                         <a href="<c:url value='/admin-setting?action=view-all'/>"><i class="uil uil-setting me-2 d-inline-block"></i>Settings</a>
                     </li>
                     <li class="sidebar-menu">
-                        <a href="<c:url value='/admin-appointment?action=view-appointment'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Appointment List</a>
+                        <a href="<c:url value='/admin-appointment?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Appointment List</a>
                     </li>
                     <li class="sidebar-menu">
-                        <a href="<c:url value='/admin-reservation?action=view-reservation'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Reservation List</a>
+                        <a href="<c:url value='/admin-reservation?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Reservation List</a>
                     </li>
                     <li class="sidebar-menu">
                         <a href="<c:url value='/admin-profile?action=view'/>"><i class="uil uil-user me-2 d-inline-block"></i>My Account</a>

@@ -28,12 +28,12 @@ public class ReservationDAO {
     private ServicesDAO sDAO = new ServicesDAO();
     private PatientDAO pDAO = new PatientDAO();
 
-    public List<Reservation> getWatingReservation() {
+    public List<Reservation> getAllReservation() {
         List<Reservation> list = new ArrayList<>();
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
-        String sql = "select * from reservations where reservation_status = 'PENDING'";
+        String sql = "select * from reservations ORDER BY reservation_date ASC , reservation_time ASC";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);

@@ -33,7 +33,7 @@ public class AppointmentDAO {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
-        String sql = "select * from appointments appt ORDER BY appointment_date ASC , appointment_time ASC";
+        String sql = "select * from appointments ORDER BY appointment_date ASC , appointment_time ASC";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
