@@ -3,23 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.setting;
+package controller.home;
 
-import dal.SettingDAO;
+import dal.DoctorDAO;
+import dal.PatientDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import model.Setting;
+import java.util.List;
+import model.Doctor;
+import model.Patient;
 
 /**
  *
- * @author DELL
+ * @author nguye
  */
-public class SettingList extends HttpServlet {
+public class PatientCalenderController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -32,16 +34,9 @@ public class SettingList extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SettingList</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SettingList at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+          
+            request.getRequestDispatcher("frontend/view/admin/patientcalender.jsp").forward(request, response);
+
         }
     } 
 
@@ -56,11 +51,8 @@ public class SettingList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        SettingDAO st = new SettingDAO();
-        ArrayList<Setting> settings = st.list();
-        request.setAttribute("settings",settings);
-        request.getRequestDispatcher("frontend/view/settingList.jsp").forward(request, response);
-    }
+        processRequest(request, response);
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -72,24 +64,8 @@ public class SettingList extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        String term = request.getParameter("search");
-        String type = request.getParameter("searchType");
-        
-        SettingDAO st = new SettingDAO();
-        ArrayList<Setting> settings = new ArrayList<>(); 
-                
-    
-        if(!type.isEmpty())
-        {
-            settings=st.getSetting(type,term);
-        }else{
-            settings=st.getSettingAllType( term);
-        }
-                request.setAttribute("settings",settings);
-        request.getRequestDispatcher("frontend/view/settingList.jsp").forward(request, response);
+        processRequest(request, response);
     }
-
 
     /** 
      * Returns a short description of the servlet.

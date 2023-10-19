@@ -160,6 +160,7 @@ public class AppointmentDAO {
         timeSlot.add("15:00:00");
         timeSlot.add("16:00:00");
         timeSlot.add("17:00:00");
+
         String sql = "SELECT appointment_time\n"
                 + "FROM appointments\n"
                 + "WHERE doctor_id = ? AND appointment_date = ? ";
@@ -248,6 +249,7 @@ public class AppointmentDAO {
         }
     }
 
+
     public List<Appointment> searchAppointmentByPatientName(String text) {
         PreparedStatement ps = null;
         Connection connection = null;
@@ -332,6 +334,7 @@ public class AppointmentDAO {
     }
     
     public List<Appointment> getAppointmentByDoctorId(int docId) {
+
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;

@@ -121,7 +121,9 @@ public class PatientDAO {
         return -1;
     }
 
-    public List<Patient> getAllByByDoctorId(int doctorId) {
+
+    public List<Patient> getPatientByDoctorId(int doctorId) {
+
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -166,4 +168,6 @@ public class PatientDAO {
         }
         return null;
     }
+
 }
+

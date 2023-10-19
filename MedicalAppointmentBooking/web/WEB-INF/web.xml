@@ -46,11 +46,11 @@
     </servlet>
     <servlet>
         <servlet-name>SettingList</servlet-name>
-        <servlet-class>controller.setting.SettingList</servlet-class>
+        <servlet-class>controller.admin.SettingList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddSetting</servlet-name>
-        <servlet-class>controller.setting.AddSetting</servlet-class>
+        <servlet-class>controller.admin.AddSetting</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ServiceDetailController</servlet-name>
@@ -73,6 +73,10 @@
         <servlet-class>controller.home.FilterCategory</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ServiceReview</servlet-name>
+        <servlet-class>controller.manager.ServiceReview</servlet-class>
+   </servlet>
+    <servlet>
         <servlet-name>ManageServices</servlet-name>
         <servlet-class>controller.manager.ManageServices</servlet-class>
     </servlet>
@@ -87,6 +91,26 @@
     <servlet>
         <servlet-name>AdminReservation</servlet-name>
         <servlet-class>controller.admin.AdminReservation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffAppointmentList</servlet-name>
+        <servlet-class>controller.staff.StaffAppointmentList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffReservationList</servlet-name>
+        <servlet-class>controller.staff.StaffReservationList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PatientListController</servlet-name>
+        <servlet-class>controller.home.PatientListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PatientCalenderController</servlet-name>
+        <servlet-class>controller.home.PatientCalenderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AppointmentListController</servlet-name>
+        <servlet-class>controller.home.AppointmentListController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserAccountController</servlet-name>
@@ -161,6 +185,10 @@
         <url-pattern>/filter</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
+        <servlet-name>ServiceReview</servlet-name>
+        <url-pattern>/service/review</url-pattern>
+
         <servlet-name>ManageServices</servlet-name>
         <url-pattern>/manage-service</url-pattern>
     </servlet-mapping>
@@ -175,6 +203,18 @@
     <servlet-mapping>
         <servlet-name>AdminReservation</servlet-name>
         <url-pattern>/admin-reservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PatientListController</servlet-name>
+        <url-pattern>/doctor-patientlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PatientCalenderController</servlet-name>
+        <url-pattern>/doctor-patientcalender</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AppointmentListController</servlet-name>
+        <url-pattern>/doctor-appointmentlist</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
