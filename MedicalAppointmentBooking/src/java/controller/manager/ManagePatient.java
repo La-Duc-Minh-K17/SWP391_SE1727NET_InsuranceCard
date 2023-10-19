@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import model.Patient;
 import model.Service;
@@ -46,9 +47,9 @@ public class ManagePatient extends HttpServlet {
                 request.setAttribute("pList", pList);
                 request.getRequestDispatcher("frontend/view/admin/listpatient.jsp").forward(request, response);
             }
-            if (action !=null && action.equals("view")){
+            if (action != null && action.equals("view")) {
                 int id = Integer.parseInt(request.getParameter("patientId"));
-                Patient p =  pDAO.getPatientById(id);
+                Patient p = pDAO.getPatientById(id);
                 request.setAttribute("patient", p);
                 request.getRequestDispatcher("frontend/view/admin/detailpatient.jsp").forward(request, response);
             }
@@ -71,11 +72,31 @@ public class ManagePatient extends HttpServlet {
                 String address = request.getParameter("address");
                 int status = Integer.parseInt(request.getParameter("status"));
                 Part image = request.getPart("image");
-                pDAO.updatePatient( patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
+                pDAO.updatePatient(patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
                 response.sendRedirect("manage-patient?action=edit&patientId=" + patientId);
                 return;
             }
             
+            if (action != null && action.equals("search")) {
+                String search = request.getParameter("search").trim();
+                List<Patient> pList = pDAO.searchPatientsByName(search);
+                request.setAttribute("pList", pList);
+                request.getRequestDispatcher("frontend/view/admin/listpatient.jsp").forward(request, response);
+                return;
+            }
+            if (action != null && action.equals("status")) {
+                int patientId = Integer.parseInt(request.getParameter("patientId"));
+                int currentStatus = Integer.parseInt(request.getParameter("status"));
+                int newStatus;
+                if (currentStatus == 1) {
+                    newStatus = 0;
+                } else {
+                    newStatus = 1;
+                }
+                pDAO.updatePatientStatus(patientId, newStatus);
+                response.sendRedirect("manage-patient?action=view-all");
+                return;
+            }
         }
     }
 
