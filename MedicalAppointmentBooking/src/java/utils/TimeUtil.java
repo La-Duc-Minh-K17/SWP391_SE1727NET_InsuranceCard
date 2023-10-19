@@ -34,7 +34,7 @@ public class TimeUtil {
         }
         return null;
     }
-
+    
     public Timestamp getNow() {
         long createdTimeMillis = System.currentTimeMillis();
         Timestamp createdTimeTimeStamp = new Timestamp(createdTimeMillis);

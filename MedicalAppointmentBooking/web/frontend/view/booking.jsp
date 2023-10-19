@@ -194,7 +194,7 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Date : </label>
-                                                    <input id="checkin-date" required="" name="appt-date" type="text"class="flatpickr flatpickr-input form-control" onchange="checkAvailability()" >
+                                                    <input id="checkin-date" required="" name="appt-date" value="${requestScope.date}" type="date"class="flatpickr flatpickr-input form-control" onchange="checkAvailability()" >
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -269,17 +269,14 @@
 
                                                         }
                                                         $("#checkin-date").flatpickr({
-                                                            defaultDate: "today",
                                                             minDate: "today",
                                                             maxDate: new Date().fp_incr(7),
-                                                            dateFormat: "d/m/Y"
+                                                            dateFormat: "d/m/Y",
+                                                            altInput: true  
 
                                                         });
 
-                                                        $("#dob").flatpickr({
-                                                            defaultDate: new Date(),
-                                                            dateFormat: "d/m/Y"
-                                                        });
+
 
         </script>
 

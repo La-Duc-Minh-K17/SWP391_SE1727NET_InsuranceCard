@@ -38,7 +38,7 @@ public class PatientDAO {
             int affectedRow = ps.executeUpdate();
             if (affectedRow == 1) {
                 try (
-                    ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                         ResultSet generatedKeys = ps.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         int generatedId = generatedKeys.getInt(1);
                         return generatedId;
@@ -121,7 +121,9 @@ public class PatientDAO {
         return -1;
     }
 
+
     public List<Patient> getPatientByDoctorId(int doctorId) {
+
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -168,3 +170,4 @@ public class PatientDAO {
     }
 
 }
+

@@ -670,7 +670,6 @@ public class ServicesDAO {
             ps.setInt(1, (page - 1) * page_size);
             ps.setInt(2, page_size);
             rs = ps.executeQuery();
-
             while (rs.next()) {
                 int service_id = rs.getInt("service_id");
                 String service_name = rs.getString("service_name");

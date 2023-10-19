@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.staff;
+package controller.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class StaffReservationList extends HttpServlet {
+public class AdminReservation extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,10 +33,10 @@ public class StaffReservationList extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StaffReservationList</title>");  
+            out.println("<title>Servlet AdminReservation</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet StaffReservationList at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AdminReservation at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
