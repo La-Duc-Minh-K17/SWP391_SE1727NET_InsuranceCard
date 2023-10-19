@@ -143,7 +143,9 @@ public class DoctorDAO {
                 String position = rs.getString("doctor_position");
                 String speciality = rs.getString("speName");
                 String description = rs.getString("doctor_description");
+                int fee = rs.getInt("service_fee");
                 doctor = new Doctor(doctorId, position, speciality, description, username, email, fullName, gender, phone, image, status);
+            doctor.setServiceFee(fee);
             }
             return doctor;
         } catch (SQLException e) {
@@ -175,8 +177,6 @@ public class DoctorDAO {
             ps = connection.prepareStatement(sql);
 
             ps.setInt(1, id);
-
-            ps.setInt(1 , id);
 
             rs = ps.executeQuery();
             while (rs.next()) {
