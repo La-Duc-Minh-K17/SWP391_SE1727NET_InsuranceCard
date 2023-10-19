@@ -92,18 +92,7 @@ Author     : PC
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <div class="row align-content-center">
-                            <div class="col-xl-3 col-md-3">
-                                <div class="card component-wrapper border-0 rounded shadow">
-                                    <div>
-                                        <select class="form-select form-control" id="Filter" onchange="filter()">
-                                            <option selected disabled>Sort By</option>
-                                            <option selected >Name</option>
-                                            <option selected >Status</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
+                            
                             <div class="col-xl-6 col-md-6">
                                 <div class="search-bar d-lg-block " style="padding-top :0">
                                     <div id="search" class="menu-search  ">
