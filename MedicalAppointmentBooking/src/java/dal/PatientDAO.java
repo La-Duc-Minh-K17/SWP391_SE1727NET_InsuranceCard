@@ -29,6 +29,7 @@ public class PatientDAO {
 
     DBConnection dbc = new DBConnection();
     private final UserDAO uDAO = new UserDAO();
+
     public List<Patient> getAllPatient() {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -51,7 +52,7 @@ public class PatientDAO {
                 Date dob = rs.getDate("dob");
                 int gender = rs.getInt("gender");
                 int status = rs.getInt("status");
-                Patient p = new Patient( patientId, userId,username,email, fullName, gender, phone, image, dob, address,status);
+                Patient p = new Patient(patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
 
                 PatientList.add(p);
             }
@@ -73,7 +74,7 @@ public class PatientDAO {
             int affectedRow = ps.executeUpdate();
             if (affectedRow == 1) {
                 try (
-                    ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                         ResultSet generatedKeys = ps.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         int generatedId = generatedKeys.getInt(1);
                         return generatedId;
@@ -155,6 +156,7 @@ public class PatientDAO {
         }
         return -1;
     }
+
     public void updatePatient(int patientId, int userId, String username, String email, String fullName, int gender, String phone, Part image, String dob, String address, int status) {
         PreparedStatement ps = null;
         InputStream fileImage = ImageProcessing.imageStream(image);
@@ -203,8 +205,61 @@ public class PatientDAO {
             }
         }
     }
-   public static void main(String[] args) throws SQLException {
-        PatientDAO dao = new PatientDAO();
-        System.out.println(dao.getAllPatient());
+
+    public void updatePatientStatus(int patientId, int newStatus) {
+        PreparedStatement ps = null;
+        String sql = "UPDATE mabs.patients SET status = ? WHERE patient_id = ?;";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(2, patientId);
+            ps.setInt(1, newStatus);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
     }
+
+    public List<Patient> searchPatientsByName(String keyword) {
+        List<Patient> resultList = new ArrayList<>();
+        try ( Connection conn = dbc.getConnection()) {
+            String sql = "SELECT * FROM patients p WHERE p.full_name LIKE ?";
+            try ( PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, "%" + keyword + "%");
+                try ( ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        int patientId = rs.getInt("patient_id");
+                        int userId = rs.getInt("user_id");
+                        String username = rs.getString("username");
+                        String email = rs.getString("email");
+                        String fullName = rs.getString("full_name");
+                        String phone = rs.getString("phone");
+                        String image = ImageProcessing.imageString(rs.getBlob("image"));
+                        String address = rs.getString("address");
+                        Date dob = rs.getDate("dob");
+                        int gender = rs.getInt("gender");
+                        int status = rs.getInt("status");
+                        Patient patient = new Patient(patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
+                        resultList.add(patient);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultList;
+    }
+//   public static void main(String[] args) throws SQLException {
+//        PatientDAO dao = new PatientDAO();
+//        System.out.println(dao.getAllPatient());
+//    }
 }
