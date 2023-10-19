@@ -13,11 +13,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import model.Patient;
-import model.Service;
 
 /**
  *
