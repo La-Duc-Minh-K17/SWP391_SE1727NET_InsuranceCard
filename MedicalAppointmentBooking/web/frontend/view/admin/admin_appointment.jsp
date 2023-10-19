@@ -38,14 +38,13 @@
         <!-- Loader -->
         <div class="page-wrapper doctris-theme toggled">
             <jsp:include page="/frontend/common/admin_side_bar.jsp" />
-
             <main class="page-content">  
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
                         <div class="d-flex align-items-center">
                             <a href="#" class="logo-icon">
                                 <img src="frontend/template/assets/images/logo-icon.png" height="30" class="small" alt="">
-                                <span class="big">
+                                <span class="">
                                     <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
                                     <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                                 </span>
@@ -67,8 +66,8 @@
                                            <img src="../assets/images/doctors/01.jpg"
                                            class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                             <div class="flex-1 ms-2">
-                                                <span class="d-block mb-1">Calvin Carlo</span>
-                                                <small class="text-muted">Orthopedic</small>
+                                                <span class="d-block mb-1">${sessionScope.user.fullName}</span>
+                                                <small class="text-muted">${sessionScope.user.speciality}</small>
                                             </div>
                                         </a>
                                         <a class="dropdown-item text-dark" href="dr-profile.html"><span
@@ -92,9 +91,12 @@
                                 <div class="card component-wrapper border-0 rounded shadow">
                                     <div>
                                         <select class="form-select form-control" id="speFilter" onchange="filter()">
-                                            <option selected disabled>Sort</option>
-                                            <option value="newest">Newest</option>
-                                            <option value="oldest">Oldest</option>
+                                            <option selected disabled>Status</option>
+                                            <option value="all">All</option>
+                                            <option value="confirmed">CONFIRMED</option>
+                                            <option value="completed">COMPLETED</option>
+                                            <option value="CANCELED">CANCELED</option>
+                                            <option value="FOLLOW_UP">FOLLOW-UP</option>
                                         </select>
                                     </div>
                                 </div>
@@ -106,8 +108,7 @@
                                         <form action="<c:url value='/admin-appointment?action=search'/>" role="search" method="post"
                                               id="searchform" class="searchform">
                                             <div>
-                                                <input type="text" class="form-control border rounded-pill" name="search"
-                                                       id="search" placeholder="Search patient name">
+                                                <input type="text" class="form-control border rounded-pill" name="search" id="search" placeholder="Search patient name">
                                                 <input type="submit" id="searchsubmit" value="Search">
                                             </div>
                                         </form>
@@ -120,12 +121,10 @@
                         <div class="col-12 mt-4">
                             <div class="card component-wrapper border-0 rounded shadow">
                                 <div class="p-4 border-bottom">
-                                    <h5 class="mb-0">Appointment List </h5>
+                                    <h5 class="mb-0">Appointment List</h5>
                                 </div>
                                 <div class="p-4">
-
                                     <div class="row pt-2">
-
                                         <div class="col-12 ">
                                             <div class="card component-wrapper border-0 rounded shadow">
                                                 <div>
@@ -161,8 +160,6 @@
                                                                                 </div>
                                                                             </a>
                                                                         </td>
-
-
                                                                         <td class="p-3">${appt.apptDate}</td>
                                                                         <td class="p-3">${appt.apptTime}</td>
                                                                         <td class="p-3">
@@ -173,7 +170,7 @@
                                                                                 </div>
                                                                             </a>
                                                                         </td>
-                                                                           <td class="p-3">${appt.status}</td>
+                                                                        <td class="p-3">${appt.status}</td>
                                                                         <td class="text-start p-3">
                                                                             <a href="#acceptappointment" class="btn btn-primary btn-sml btn-soft-success"
                                                                                data-bs-toggle="modal" data-bs-target="#acceptappointment" onclick="viewAppt(this)" data-id="${appt.apptId}">
@@ -206,53 +203,24 @@
                     </div><!--end container-->
                 </div>
             </main>
-            <!--End page-content" -->
-            <!-- Modal -->
+        </div>
+        <!-- page-wrapper -->
+        <!-- javascript -->
+        <script>
+            function viewAppt(appt) {
+                var dataId = appt.getAttribute('data-id');
+                const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=view-detail&apptId=' + dataId;
+                window.href.location = url;
 
+            }
 
-            <!-- Cancel Appointment Start -->
-            <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <form action="<c:url value='/staff-waiting-list?action=cancel&type=appointment'></c:url>" method="post">
-                            <div class="modal-content">
-                                <div class="modal-body py-5">
-                                    <div class="text-center">
-                                        <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                            <i class="uil uil-times-circle h1 mb-0"></i>
-                                        </div>
-                                        <div class="mt-4">
-                                            <h4>Cancel Appointment</h4>
-                                            <p class="para-desc mx-auto text-muted mb-0">This appointment will be cancelled by you. Are you sure ?</p>
-                                            <div class="mt-4">
-                                                <input type="hidden" id="cancel_appointment" name="appointment_canceled" value="">
-                                                <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-            <!-- page-wrapper -->
-            <!-- javascript -->
-            <script>
-                function viewAppt(appt) {
-                    var dataId = appt.getAttribute('data-id');
-                    const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=view-detail&apptId=' + dataId;
-                    window.href.location = url;
-
-                }
-
-                function filter() {
-                    const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=filter&speciality_id=';
-                    const filterElement = document.getElementById("speFilter").value;
-                    window.location.href = url + filterElement;
-                }
-            </script>
-            <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
+            function filter() {
+                const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=filter&speciality_id=';
+                const filterElement = document.getElementById("speFilter").value;
+                window.location.href = url + filterElement;
+            }
+        </script>
+        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>
         <!-- Icons -->
