@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.sql.Date;
+
 /**
  *
  * @author PC
@@ -15,6 +17,7 @@ public class Doctor extends UserAccount {
     private String position;
     private String description;
     private double serviceFee;
+    
     public Doctor() {
         
     }
@@ -35,6 +38,16 @@ public class Doctor extends UserAccount {
         this.description = description;
         this.serviceFee = serviceFee;
     }
+
+    public Doctor(int doctorId, String speciality, String position, String description, double serviceFee, int userId, String username, String email, String fullName, int gender, String phone, String image, Date dob, String address, int status) {
+        super(userId, username, email, fullName, gender, phone, image, dob, address, status);
+        this.doctorId = doctorId;
+        this.speciality = speciality;
+        this.position = position;
+        this.description = description;
+        this.serviceFee = serviceFee;
+    }
+    
     
     public int getDoctorId() {
         return doctorId;

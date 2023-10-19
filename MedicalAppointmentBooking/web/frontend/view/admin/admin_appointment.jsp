@@ -67,7 +67,7 @@
                                            class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                             <div class="flex-1 ms-2">
                                                 <span class="d-block mb-1">${sessionScope.user.fullName}</span>
-                                                <small class="text-muted">${sessionScope.user.speciality}</small>
+                                                <small class="text-muted"></small>
                                             </div>
                                         </a>
                                         <a class="dropdown-item text-dark" href="dr-profile.html"><span
@@ -90,7 +90,7 @@
                             <div class="col-xl-3 col-md-3">
                                 <div class="card component-wrapper border-0 rounded shadow">
                                     <div>
-                                        <select class="form-select form-control" id="speFilter" onchange="filter()">
+                                        <select class="form-select form-control" id="status_filter" onchange="filter()">
                                             <option selected disabled>Status</option>
                                             <option value="all">All</option>
                                             <option value="confirmed">CONFIRMED</option>
@@ -171,11 +171,14 @@
                                                                             </a>
                                                                         </td>
                                                                         <td class="p-3">${appt.status}</td>
-                                                                        <td class="text-start p-3">
-                                                                            <a href="#acceptappointment" class="btn btn-primary btn-sml btn-soft-success"
-                                                                               data-bs-toggle="modal" data-bs-target="#acceptappointment" onclick="viewAppt(this)" data-id="${appt.apptId}">
-                                                                                Details</a>
-
+                                                                        <td class="p-3">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <a href="admin-appointment?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
+                                                                                    Details</a>
+                                                                                <a href="#cancelappointment" class="btn btn-primary btn-sml btn-soft-danger" 
+                                                                                   data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
+                                                                                    Cancel</a>
+                                                                            </div>
                                                                         </td>
                                                                     </tr>
                                                                 </c:forEach>
@@ -184,14 +187,17 @@
                                                     </div>
                                                 </div>
 
-                                                <div>
-                                                    <ul class="pagination mb-0 mt-5">
-                                                        <li class="page-item"><a class="page-link" href="javascript:void(0)"aria-label="Previous">Prev</a></li>
-                                                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
-                                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                                        <li class="page-item"><a class="page-link" href="javascript:void(0)"aria-label="Next">Next</a></li>
-                                                    </ul>
+                                                <c:set var="page" value="${page}"/>
+                                                <div class="row text-center">
+                                                    <div class="col-12 mt-4">
+                                                        <div class="d-md-flex align-items-center text-center justify-content-between">
+                                                            <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
+                                                                <c:forEach begin="${1}" end="${num}" var="i">
+                                                                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="${url}&page=${i}">${i}</a></li>
+                                                                    </c:forEach>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div><!--end col-->
@@ -206,21 +212,51 @@
         </div>
         <!-- page-wrapper -->
         <!-- javascript -->
-        <script>
-            function viewAppt(appt) {
-                var dataId = appt.getAttribute('data-id');
-                const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=view-detail&apptId=' + dataId;
-                window.href.location = url;
+        <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <form action="<c:url value='/admin-appointment?action=cancel'></c:url>" method="post">
+                        <div class="modal-content">
+                            <div class="modal-body py-5">
+                                <div class="text-center">
+                                    <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
+                                        <i class="uil uil-times-circle h1 mb-0"></i>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h4>Cancel Appointment</h4>
+                                        <p class="para-desc mx-auto text-muted mb-0">This appointment will be cancelled by you. Are you sure ?</p>
+                                        <div class="mt-4">
+                                            <input type="hidden" id="cancel_appointment" name="appointment_canceled" value="">
+                                            <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-            }
+            <script>
 
-            function filter() {
-                const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=filter&speciality_id=';
-                const filterElement = document.getElementById("speFilter").value;
-                window.location.href = url + filterElement;
-            }
-        </script>
-        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
+                function viewAppt(appt) {
+                    var dataId = appt.getAttribute('data-id');
+                    const url = 'http://localhost:8080/MedicalAppointmentBooking/admin-appointment?action=view-detail&apptId=' + dataId;
+                    window.href.location = url;
+                }
+
+                function cancelAppt(appt) {
+                    var dataId = appt.getAttribute('data-id');
+                    let cancel_appt = document.getElementById('cancel_appointment');
+                    cancel_appt.value = dataId;
+                }
+
+                function filter() {
+                    const url = 'http://localhost:8080/MedicalAppointmentBooking/admin-appointment?action=filter&status_filter=';
+                    const filterElement = document.getElementById("status_filter").value;
+                    window.location.href = url + filterElement;
+                }
+            </script>
+            <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>
         <!-- Icons -->
