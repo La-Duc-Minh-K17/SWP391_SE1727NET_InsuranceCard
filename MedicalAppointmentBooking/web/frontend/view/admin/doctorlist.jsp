@@ -41,8 +41,6 @@
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
             <main class="page-content">
-                
-                
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
                         <div class="d-flex align-items-center">

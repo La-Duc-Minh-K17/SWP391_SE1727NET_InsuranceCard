@@ -86,85 +86,108 @@
                     </div>
                 </div>
 
-                <div class="col-12 mt-4">
-                    <div class="card component-wrapper border-0 rounded shadow">
-                        <div class="p-4 border-bottom">
-                            <h5 class="mb-0">Service List</h5>
-                        </div>
+                <div class="container-fluid">
+                    <div class="layout-specing">
+                        <div class="row align-content-center">
+                            <div class="col-xl-3 col-md-3">
+                                <div class="card component-wrapper border-0 rounded shadow">
+                                    <div>
+                                        <select class="form-select form-control" id="serFilter" onchange="filter()">
+                                            <option selected disabled>Service</option>
+                                            <c:forEach items="${serviceList}" var="ser">
+                                                <option value="${ser.service_id}">${ser.service_name}</option>  
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
 
-                        <div class="p-4">
-                            <div class="table-responsive bg-white shadow rounded">
-                                <table class="table mb-0 table-center">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Patient</th>
-                                            <th scope="col">Service</th>
-                                            <th scope="col">Comment</th>
-                                            <th scope="col">Rate</th>     
-                                            <th scope="col">Created Time</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach items="${review}" var="rv" varStatus="loop">
-                                            <tr>
-                                                <th scope="row">${loop.index + 1}</th>
-                                                <td>${rv.user.fullName}</td>
-                                                <td>${rv.service.service_name}</td>
-                                                <td>${rv.review}</td>
-                                                <td><c:choose>
-                                                        <c:when test="${rv.rate >= 1}">
-                                                            ★
-                                                        </c:when>
-                                                        <c:otherwise>☆</c:otherwise>
-                                                    </c:choose>
-                                                    <c:choose>
-                                                        <c:when test="${rv.rate >= 2}">
-                                                            ★
-                                                        </c:when>
-                                                        <c:otherwise>☆</c:otherwise>
-                                                    </c:choose>
-                                                    <c:choose>
-                                                        <c:when test="${rv.rate >= 3}">
-                                                            ★
-                                                        </c:when>
-                                                        <c:otherwise>☆</c:otherwise>
-                                                    </c:choose>
-                                                    <c:choose>
-                                                        <c:when test="${rv.rate >= 4}">
-                                                            ★
-                                                        </c:when>
-                                                        <c:otherwise>☆</c:otherwise>
-                                                    </c:choose>
-                                                    <c:choose>
-                                                        <c:when test="${rv.rate >= 5}">
-                                                            ★
-                                                        </c:when>
-                                                        <c:otherwise>☆</c:otherwise>
-                                                    </c:choose></td>
-                                                
-                                                <td>${rv.create_time}</td>  
-                                            </tr>     
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
                             </div>
-                        </div>
+                            <div class="col-xl-6 col-md-6">
+                                <div class="search-bar d-lg-block" style="padding-top :0">
+                                    <div id="search" class="menu-search ">
+                                        <form action=""role="search" method="post" id="searchform" class="searchform">
+                                            <div>
+                                                <input type="text" class="form-control border rounded-pill" name="search"
+                                                       id="search" placeholder="Search patient by name">
+                                                <input type="submit" id="searchsubmit" value="Search">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div>
-                            <ul class="pagination mb-0 mt-5">
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)"
-                                                         aria-label="Previous">Prev</a></li>
-                                <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)"
-                                                         aria-label="Next">Next</a></li>
-                            </ul>
-                        </div>
+                        </div><!--end row-->
+                        <div class="col-12 mt-4">
+                            <div class="card component-wrapper border-0 rounded shadow">
+                                <div class="p-4 border-bottom">
+                                    <h5 class="mb-0">Service List</h5>
+                                </div>
+
+                                <div class="p-4">
+                                    <div class="table-responsive bg-white shadow rounded">
+                                        <table class="table mb-0 table-center">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Patient</th>
+                                                    <th scope="col">Service</th>
+                                                    <th scope="col">Comment</th>
+                                                    <th scope="col">Rate</th>     
+                                                    <th scope="col">Created Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${review}" var="rv" varStatus="loop">
+                                                    <tr>
+                                                        <th scope="row">${loop.index + 1}</th>
+                                                        <td>${rv.user.fullName}</td>
+                                                        <td>${rv.service.service_name}</td>
+                                                        <td>${rv.review}</td>
+                                                        <td><c:choose>
+                                                                <c:when test="${rv.rate >= 1}">
+                                                                    ★
+                                                                </c:when>
+                                                                <c:otherwise>☆</c:otherwise>
+                                                            </c:choose>
+                                                            <c:choose>
+                                                                <c:when test="${rv.rate >= 2}">
+                                                                    ★
+                                                                </c:when>
+                                                                <c:otherwise>☆</c:otherwise>
+                                                            </c:choose>
+                                                            <c:choose>
+                                                                <c:when test="${rv.rate >= 3}">
+                                                                    ★
+                                                                </c:when>
+                                                                <c:otherwise>☆</c:otherwise>
+                                                            </c:choose>
+                                                            <c:choose>
+                                                                <c:when test="${rv.rate >= 4}">
+                                                                    ★
+                                                                </c:when>
+                                                                <c:otherwise>☆</c:otherwise>
+                                                            </c:choose>
+                                                            <c:choose>
+                                                                <c:when test="${rv.rate >= 5}">
+                                                                    ★
+                                                                </c:when>
+                                                                <c:otherwise>☆</c:otherwise>
+                                                            </c:choose></td>
+
+                                                        <td>${rv.create_time}</td>  
+                                                    </tr>     
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div><!--end col-->
+
                     </div>
-                </div>
+                </div><!--end container-->
             </main>
             <!--End page-content" -->
             <!-- Modal -->
@@ -172,13 +195,14 @@
         </div>
         <!-- page-wrapper -->
         <!-- javascript -->
-        <script>
 
+        <script>
             function filter() {
-                const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-doctor?action=filter&speciality_id=';
-                const filterElement = document.getElementById("speFilter").value;
+                const url = 'http://localhost:8080/MedicalAppointmentBooking/service/review?action=filter&service_id=';
+                const filterElement = document.getElementById("serFilter").value;
                 window.location.href = url + filterElement;
             }
+
         </script>
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->

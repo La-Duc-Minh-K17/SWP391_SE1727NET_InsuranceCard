@@ -55,6 +55,7 @@ public class ServiceReview extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         ServicesDAO sv = new ServicesDAO();
+        request.setAttribute("serviceList", sv.getAllService());
         request.setAttribute("review", sv.getServiceReview());
         request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
     } 
