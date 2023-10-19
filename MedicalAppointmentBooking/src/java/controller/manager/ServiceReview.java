@@ -48,10 +48,16 @@ public class ServiceReview extends HttpServlet {
             return;
         } 
          if (action != null && action.equals("sort")) {
-            int serId = Integer.parseInt(request.getParameter("sortby"));
-            request.setAttribute("review", sv.getServiceReviewById(serId));
-            request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
-            return;
+            String sortby = request.getParameter("sortby");
+            if(sortby.equalsIgnoreCase("Newest"))
+            {
+                request.setAttribute("review", sv.getServiceReviewDESC());
+                request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
+            }else{
+                request.setAttribute("review", sv.getServiceReviewASC());
+                request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
+            }  
+            
         } 
 
     }
