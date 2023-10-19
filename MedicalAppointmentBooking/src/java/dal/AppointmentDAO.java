@@ -28,12 +28,12 @@ public class AppointmentDAO {
     private final DoctorDAO dDAO = new DoctorDAO();
     private final PatientDAO pDAO = new PatientDAO();
 
-    public List<Appointment> getWatingAppointment() {
+    public List<Appointment> getAllAppointment() {
         List<Appointment> list = new ArrayList<>();
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
-        String sql = "select * from appointments appt where appt.appointment_status = 'PENDING' ORDER BY appointment_date ASC , appointment_time ASC";
+        String sql = "select * from appointments appt ORDER BY appointment_date ASC , appointment_time ASC";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);

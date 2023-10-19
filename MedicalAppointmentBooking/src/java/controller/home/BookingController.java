@@ -47,6 +47,7 @@ public class BookingController extends HttpServlet {
         Doctor chosenDoctor = (Doctor) SessionUtils.getInstance().getValue(request, "chosen_doctor");
         Service chosenService = (Service) SessionUtils.getInstance().getValue(request, "chosen_service");
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
+      
         if (action != null && action.equals("check_availability")) {
             String date = request.getParameter("date");
             List<String> timeSlot = null;
@@ -54,10 +55,11 @@ public class BookingController extends HttpServlet {
                 timeSlot = aDAO.getAvailableTimeSlot(chosenDoctor.getDoctorId(), date);
             }
             if (chosenService != null) {
-                timeSlot = aDAO.getAvailableTimeSlot(chosenService.getService_id(), date);
+                timeSlot = rDAO.getAvailableTimeSlot(chosenService.getService_id(), date);
             }
             request.setAttribute("timeslot", timeSlot);
             request.setAttribute("date", date);
+            System.out.println( TimeUtil.dateConverter(date));
             request.getRequestDispatcher("frontend/view/booking.jsp").forward(request, response);
             return;
         }

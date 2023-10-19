@@ -12,11 +12,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Appointment;
 import model.Patient;
 import model.Reservation;
 import model.Service;
 import model.UserAccount;
+import utils.TimeUtil;
 
 /**
  *
@@ -131,7 +131,50 @@ public class ReservationDAO {
             }
         }
     }
-
+     public List<String> getAvailableTimeSlot(int serviceId , String date) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<String> timeSlot = new ArrayList<>();
+        timeSlot.add("7:00:00"); 
+        timeSlot.add("8:00:00"); 
+        timeSlot.add("9:00:00"); 
+        timeSlot.add("10:00:00"); 
+        timeSlot.add("11:00:00"); 
+        timeSlot.add("12:00:00"); 
+        timeSlot.add("13:00:00"); 
+        timeSlot.add("14:00:00"); 
+        timeSlot.add("15:00:00"); 
+        timeSlot.add("16:00:00"); 
+        timeSlot.add("17:00:00"); 
+       
+        String sql = "SELECT reservation_time\n"
+                + "FROM reservations\n"
+                + "WHERE service_id = ? AND reservation_date = ? ";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setDate(2, TimeUtil.dateConverter(date));
+            ps.setInt(1 , serviceId);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                if(timeSlot.contains(rs.getString(1))) {
+                    timeSlot.remove(rs.getString(1));
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return timeSlot;
+    }
     public void cancelReservation(int resvId, UserAccount account) {
         PreparedStatement ps = null;
         Connection connection = null;
