@@ -1,7 +1,7 @@
-    <%-- 
-    Document   : listpatient
-    Created on : Oct 18, 2023, 6:10:40 PM
-    Author     : PC
+<%-- 
+Document   : listpatient
+Created on : Oct 18, 2023, 6:10:40 PM
+Author     : PC
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -96,10 +96,9 @@
                                 <div class="card component-wrapper border-0 rounded shadow">
                                     <div>
                                         <select class="form-select form-control" id="Filter" onchange="filter()">
-                                            <option selected disabled>Category</option>
-                                            <c:forEach items="${cateList}" var="cate">
-                                                <option value="${cate.sc_id}">${cate.name}</option>  
-                                            </c:forEach>
+                                            <option selected disabled>Sort By</option>
+                                            <option selected >Name</option>
+                                            <option selected >Status</option>
                                         </select>
                                     </div>
                                 </div>
@@ -108,19 +107,17 @@
                             <div class="col-xl-6 col-md-6">
                                 <div class="search-bar d-lg-block " style="padding-top :0">
                                     <div id="search" class="menu-search  ">
-                                        <form action="<c:url value='/manage-service?action=search'/>"role="search" method="post" id="searchform" class="searchform  ">
+                                        <form action="<c:url value='/manage-patient?action=search'/>"role="search" method="post" id="searchform" class="searchform  ">
                                             <div>
                                                 <input type="text" class="form-control border rounded-pill bg-light " name="search"
-                                                       id="search" placeholder="Search service by name">
+                                                       id="search" placeholder="Search patient by name">
                                                 <input type="submit" id="searchsubmit" value="Search">
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-3 mt-4 mt-md-0 text-md-end">
-                                <a href="<c:url value='/manage-service?action=add'/>" class="btn btn-primary ">Add Service</a>
-                            </div><!--end col-->
+                            
                         </div><!--end row-->
 
 
@@ -135,52 +132,66 @@
                                         <table class="table mb-0 table-center">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">ID</th>
-                                                    <th scope="col">Image</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Price</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col" class="text-md-center">Action</th> 
+                                                    <th class="border-bottom p-3">PatientID</th>
+                                                    <th class="border-bottom p-3">Name</th>
+                                                    <th class="border-bottom p-3">DOB</th>
+                                                    <th class="border-bottom p-3">Gender</th>
+                                                    <th class="border-bottom p-3">Status</th>
+
+
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <c:forEach items="${pList}" var="p">
                                                     <tr>
-                                                        <th scope="row">${p.patientId}</th>
-                                                        <td><img src="data:image/jpg;base64,${p.image}" width="200" height="100"></td>
-                                                        <td>${p.fullName}</td>
-                                                        <td>$${p.phone}</td>
+                                                        <th scope="col">${p.patientId}</th>
+                                                        <td class="p-3">${p.fullName}</td>
+                                                        <td class="p-3">${p.dob}</td>
+                                                        <td> 
+                                                            <c:if test="${p.gender == 1}">
+                                                                <span class="text-primary">Male</span>
+                                                            </c:if>
+                                                            <c:if test="${p.gender == 0}">
+                                                                <span class="text-secondary">Female</span>
+                                                            </c:if>
+                                                        </td>
                                                         <td>
-                                                            <c:if test="${p.status == 1}">Active</c:if>
-                                                            <c:if test="${p.status == 0}">Inactive</c:if>
-                                                            </td>
-                                                    <style>
-                                                        .custom-btn {
-                                                            width: 100px; /* Adjust the width as needed */
-                                                        }
-                                                    </style>
-                                                    <td class="text-center">
-                                                        <div class="container d-flex justify-content-center">
-                                                            <div class="card component-wrapper border-0 rounded">
-                                                                <div class="d-flex mb-2">
-                                                                    <a href="<c:url value='/manage-service?action=view&service_id=${p.patientId}'/>" class="btn btn-primary custom-btn btn-sm m-2">View</a>
-                                                                <a href="<c:url value='/manage-service?action=edit&service_id=${p.patientId}'/>" class="btn btn-primary custom-btn btn-sm m-2">Edit</a>
-                                                                <c:choose>
-                                                                    <c:when test="${s.service_status == 1}">
-                                                                        <a href="<c:url value='/manage-service?action=status&service_id=${p.patientId}&status=${p.status}'/>" class="btn btn-danger custom-btn btn-sm m-2">Deactivate</a>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <a href="<c:url value='/manage-service?action=status&service_id=${p.patientId}&status=${p.status}'/>" class="btn btn-success custom-btn btn-sm m-2">Activate</a>
-                                                                    </c:otherwise>
-                                                                </c:choose>
+                                                            <c:if test="${p.status == 1}">
+                                                                <span class="text-success">Active</span>
+                                                            </c:if>
+                                                            <c:if test="${p.status == 0}">
+                                                                <span class="text-danger">InActive</span>
+                                                            </c:if>
+                                                        </td>
+                                                        <td class="p-3">
+                                                            <style>
+                                                                .custom-btn {
+                                                                    width: 100px; /* Adjust the width as needed */
+                                                                }
+                                                            </style>
+                                                        <td class="text-center">
+                                                            <div class="container d-flex justify-content-center">
+                                                                <div class="card component-wrapper border-0 rounded">
+                                                                    <div class="d-flex mb-2">
+                                                                        <a href="<c:url value='/manage-patient?action=view&patientId=${p.patientId}'/>" class="btn btn-primary custom-btn btn-sm m-2">View</a>
+                                                                        <a href="<c:url value='/manage-patient?action=edit&patientId=${p.patientId}'/>" class="btn btn-primary custom-btn btn-sm m-2">Edit</a>
+                                                                        <c:choose>
+                                                                            <c:when test="${p.status == 1}">
+                                                                                <a href="<c:url value='/manage-patient?action=status&patientId=${p.patientId}&status=${p.status}'/>" class="btn btn-danger custom-btn btn-sm m-2">Deactivate</a>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <a href="<c:url value='/manage-patient?action=status&patientId=${p.patientId}&status=${p.status}'/>" class="btn btn-success custom-btn btn-sm m-2">Activate</a>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                                        </td>
 
 
-                                                </tr>
-                                            </c:forEach>
+
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
