@@ -208,7 +208,7 @@ public class PatientDAO {
 
     public void updatePatientStatus(int patientId, int newStatus) {
         PreparedStatement ps = null;
-        String sql = "UPDATE mabs.patients SET status = ? WHERE patient_id = ?;";
+        String sql = "UPDATE mabs.patients p inner join mabs.user_account u SET u.status = ? WHERE p.patient_id = ?;";
         Connection connection = null;
         try {
             connection = dbc.getConnection();
@@ -232,7 +232,7 @@ public class PatientDAO {
     public List<Patient> searchPatientsByName(String keyword) {
         List<Patient> resultList = new ArrayList<>();
         try ( Connection conn = dbc.getConnection()) {
-            String sql = "SELECT * FROM patients p WHERE p.full_name LIKE ?";
+            String sql = "SELECT * FROM patients p inner join user_account u WHERE p.user_id=u.user_id and u.full_name LIKE ?";
             try ( PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, "%" + keyword + "%");
                 try ( ResultSet rs = ps.executeQuery()) {
