@@ -94,7 +94,6 @@
                 <input type="text" id="search" name="search" placeholder="Search">
                 <select id="searchType" name="searchType">
                     <option value="">All Types</option>
-                    <option value="setting_id">Setting ID</option>
                     <option value="type">Type</option>
                     <option value="value">Value</option>
                     <option value="description">Description</option>
@@ -149,9 +148,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="s" items="${settings}">
+                    <c:forEach var="s" items="${settings}" varStatus="loop">
                         <tr>
-                            <td>${s.settingID}</td>
+                            <td>${loop.index + 1}</td>
                             <td>${s.type}</td>  
                             <td>${s.note}</td>
                             <td>${s.description}</td>
