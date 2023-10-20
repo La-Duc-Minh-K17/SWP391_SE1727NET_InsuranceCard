@@ -44,7 +44,7 @@
         <!-- Loader -->
 
         <div class="back-to-home rounded d-none d-sm-block">
-            <a href="index.html" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
+            <a href="home" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
         </div>
 
         <!-- Hero Start -->
@@ -66,7 +66,7 @@
                                         <div class="col-md-12">
                                             <div class="mb-3">                                               
                                                 <label class="form-label">Username <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" placeholder="User Name" name="username" required="">
+                                                <input type="text" class="form-control" placeholder="User Name" name="username" required="" oninvalid="validateUsername(this);" oninput="validateUsername(this);>
                                             </div>
                                         </div>
                                         <div class="col-md-12">

@@ -99,7 +99,6 @@ public class UserDAO {
             ps = connection.prepareStatement(sql);
             ps.setString(1, newPassword);
             ps.setString(2, user.getUserName());
-
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -303,16 +302,14 @@ public class UserDAO {
                 int userId = result.getInt("user_id");
                 String userName = result.getString("username");
                 String emailAddress = result.getString("email");
-                String full_name = result.getString("full_name");
+                String fullName = result.getString("full_name");
                 String image = ImageProcessing.imageString(result.getBlob("image"));
                 Date dob = result.getDate("dob");
                 String address = result.getString("address");
                 int gender = result.getInt("gender");
                 String phone = result.getString("phone");
                 int status = result.getInt("status");
-                userAccount = new UserAccount(userName, emailAddress, full_name, gender, phone, image, status);
-                userAccount.setDob(dob);
-                userAccount.setAddress(address);
+                userAccount = new UserAccount(userId, userName, emailAddress, fullName, gender, phone, image, dob, address, status);
             }
             return userAccount;
         } catch (SQLException ex) {
@@ -331,5 +328,4 @@ public class UserDAO {
         return null;
     }
 
-  
 }

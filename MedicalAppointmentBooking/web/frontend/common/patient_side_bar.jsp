@@ -1,17 +1,39 @@
 <%-- 
-    Document   : patient_side_bar.jsp
-    Created on : Oct 20, 2023, 10:32:40 AM
+    Document   : adminSidebar
+    Created on : Sep 28, 2023, 10:40:27 AM
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
+                <div class="sidebar-brand">
+                    <a href="index.html">
+                        <img src="frontend/template/assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                        <img src="frontend/template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                    </a>
+                </div>
+                <ul class="sidebar-menu pt-3">
+                    <li class="sidebar-menu" >
+                        <a href="<c:url value='/user-profile?action=view'/>"><i class="uil uil-dashboard me-2 d-inline-block"></i>My Profile</a></li>
+                    
+                    <li class="sidebar-menu">
+                        <a href="<c:url value='/user-appointment?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>My Appointment </a>
+                    </li>
+                    <li class="sidebar-menu">
+                        <a href="<c:url value='/user-reservation?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>My Reservation</a>
+                    </li>
+                   
+                </ul>
+
+            </div>
+        </nav>
     </body>
+
 </html>

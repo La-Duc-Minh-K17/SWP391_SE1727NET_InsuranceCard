@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <servlet>
-        <servlet-name>UserAccountController</servlet-name>
-        <servlet-class>controller.home.UserAccountController</servlet-class>
-    </servlet>
+  
     <servlet>
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>controller.auth.RegisterController</servlet-class>
@@ -75,7 +72,7 @@
     <servlet>
         <servlet-name>ServiceReview</servlet-name>
         <servlet-class>controller.manager.ServiceReview</servlet-class>
-   </servlet>
+    </servlet>
     <servlet>
         <servlet-name>ManageServices</servlet-name>
         <servlet-class>controller.manager.ManageServices</servlet-class>
@@ -112,10 +109,10 @@
         <servlet-name>AppointmentListController</servlet-name>
         <servlet-class>controller.home.AppointmentListController</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>UserAccountController</servlet-name>
-        <url-pattern>/user</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>UserProfileController</servlet-name>
+        <servlet-class>controller.user.UserProfileController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -185,10 +182,10 @@
         <url-pattern>/filter</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>ServiceReview</servlet-name>
         <url-pattern>/service/review</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ManageServices</servlet-name>
         <url-pattern>/manage-service</url-pattern>
     </servlet-mapping>
@@ -215,6 +212,10 @@
     <servlet-mapping>
         <servlet-name>AppointmentListController</servlet-name>
         <url-pattern>/doctor-appointmentlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileController</servlet-name>
+        <url-pattern>/user-profile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

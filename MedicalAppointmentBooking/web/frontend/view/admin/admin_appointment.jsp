@@ -23,7 +23,6 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
-
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
     </head>
     <body>
@@ -143,10 +142,11 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
+                                                                <c:set var="i" value="1"></c:set>
                                                                 <c:forEach items="${apptList}" var="appt">
                                                                     <c:set var="patient" value="${appt.patient}"></c:set>
                                                                         <tr>
-                                                                            <th class="p-3">${appt.apptId}</th>
+                                                                            <td class="p-3">${appt.apptId}</td>
                                                                         <td class="p-3">
                                                                             <a href="#" class="text-dark">
                                                                                 <div class="d-flex align-items-center">
