@@ -158,7 +158,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SettingList</servlet-name>
-        <url-pattern>/settinglist</url-pattern>
+        <url-pattern>/admin-settinglist</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServiceDetailController</servlet-name>

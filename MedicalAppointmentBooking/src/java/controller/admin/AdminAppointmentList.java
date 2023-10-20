@@ -31,12 +31,13 @@ public class AdminAppointmentList extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
+        String uri = null;
+        List<Appointment> apptList = null;
         AppointmentDAO apptDAO = new AppointmentDAO();
         if (action != null && action.equals("view")) {
-            List<Appointment> apptList = apptDAO.getAllAppointment();
-            request.setAttribute("apptList", apptList);
-            request.getRequestDispatcher("frontend/view/admin/admin_appointment.jsp").forward(request, response);
-            return;
+            apptList = apptDAO.getAllAppointment();
+
+            uri = "admin-appointment?action=view";
         }
         if (action != null && action.equals("view-detail")) {
             int apptId = Integer.parseInt(request.getParameter("apptId"));
@@ -47,23 +48,19 @@ public class AdminAppointmentList extends HttpServlet {
         }
         if (action != null && action.equals("search")) {
             String search = request.getParameter("search");
-            List<Appointment> apptList = apptDAO.searchAppointmentByPatientName(search);
-
-            request.setAttribute("apptList", apptList);
-            request.getRequestDispatcher("frontend/view/admin/admin_appointment.jsp").forward(request, response);
-            return;
+            apptList = apptDAO.searchAppointmentByPatientName(search);
+            uri = "admin-appointment?action=search&search=" + search ;
         }
         if (action != null && action.equals("filter")) {
-            String filter = request.getParameter("status_filter");
-            List<Appointment> apptList = null;
-            if (filter.equals("all")) {
-                apptList = apptDAO.getAllAppointment();
+            String status = request.getParameter("status_filter");
+            apptList = null;
+            if (status.equals("all")) {
+                response.sendRedirect("admin-appointment?action=view");
             } else {
-                apptList = apptDAO.getFilteredAppointmentList(filter);
+                apptList = apptDAO.getFilteredAppointmentList(status);
             }
-            request.setAttribute("apptList", apptList);
-            request.getRequestDispatcher("frontend/view/admin/admin_appointment.jsp").forward(request, response);
-            return;
+
+            uri = "admin-appointment?action=filter&status=" + status;
         }
         if (action != null && action.equals("view-detail")) {
             int apptId = Integer.parseInt(request.getParameter("apptId"));
@@ -71,6 +68,27 @@ public class AdminAppointmentList extends HttpServlet {
             request.setAttribute("appt", appt);
             request.getRequestDispatcher("frontend/view/admin/admin_appointmentdetail.jsp").forward(request, response);
             return;
+        }
+        if (apptList != null) {
+            int page, numberpage = 5;
+            int size = apptList.size();
+            int num = (size % numberpage == 0 ? (size / numberpage) : ((size / numberpage)) + 1);
+            String xpage = request.getParameter("page");
+            if (xpage == null) {
+                page = 1;
+            } else {
+                page = Integer.parseInt(xpage);
+            }
+            int start, end;
+            start = (page - 1) * numberpage;
+            end = Math.min(page * numberpage, size);
+            List<Appointment> appointment = apptDAO.getListByPage(apptList, start, end);
+            request.setAttribute("page", page);
+            request.setAttribute("num", num);
+            request.setAttribute("url", uri);
+            request.setAttribute("apptList", appointment);
+            request.getRequestDispatcher("frontend/view/admin/admin_appointment.jsp").forward(request, response);
+
         }
     }
 

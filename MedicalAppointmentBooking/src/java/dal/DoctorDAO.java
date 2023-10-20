@@ -14,7 +14,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Doctor;
-import model.Service;
 import utils.ImageProcessing;
 
 /**

@@ -114,7 +114,7 @@ public class AppointmentDAO {
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            ps.setInt(1 , apptId);
+            ps.setInt(1, apptId);
             rs = ps.executeQuery();
             if (rs.next()) {
                 int id = rs.getInt("appointment_id");
@@ -144,6 +144,7 @@ public class AppointmentDAO {
         return null;
     }
     private final int MAX_APPOINTMENT = 1;
+
     public List<String> getAvailableTimeSlot(int doctorId, String date) {
         PreparedStatement ps = null;
         Connection connection = null;
@@ -249,7 +250,6 @@ public class AppointmentDAO {
         }
     }
 
-
     public List<Appointment> searchAppointmentByPatientName(String text) {
         PreparedStatement ps = null;
         Connection connection = null;
@@ -291,6 +291,15 @@ public class AppointmentDAO {
         }
         return listAppt;
     }
+
+    public List<Appointment> getListByPage(List<Appointment> list, int start, int end) {
+        ArrayList<Appointment> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
+
     public List<Appointment> getFilteredAppointmentList(String text) {
         PreparedStatement ps = null;
         Connection connection = null;
@@ -303,7 +312,7 @@ public class AppointmentDAO {
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            ps.setString(1,text);
+            ps.setString(1, text);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("appointment_id");
@@ -332,7 +341,7 @@ public class AppointmentDAO {
         }
         return listAppt;
     }
-    
+
     public List<Appointment> getAppointmentByDoctorId(int docId) {
 
         PreparedStatement ps = null;
