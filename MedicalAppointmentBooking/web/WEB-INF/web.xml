@@ -75,7 +75,7 @@
     <servlet>
         <servlet-name>ServiceReview</servlet-name>
         <servlet-class>controller.manager.ServiceReview</servlet-class>
-   </servlet>
+    </servlet>
     <servlet>
         <servlet-name>ManageServices</servlet-name>
         <servlet-class>controller.manager.ManageServices</servlet-class>
@@ -188,7 +188,10 @@
 
         <servlet-name>ServiceReview</servlet-name>
         <url-pattern>/service/review</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        
+      
         <servlet-name>ManageServices</servlet-name>
         <url-pattern>/manage-service</url-pattern>
     </servlet-mapping>
