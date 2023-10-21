@@ -125,63 +125,72 @@
                                             <h6 class="mb-0">Speciality</h6>
                                             <p class="text-muted mb-0 ms-2">${appt.doctor.speciality}</p>
                                         </div>
-
-                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card border-0 shadow overflow-hidden mt-4">
-                            <div class="p-4 border-bottom">
-                                <h5 class="mb-0">Appointment Details</h5>
-                            </div>
-                            <div class="tab-content p-4" id="pills-tabContent">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Appointment Date</label>
-                                            <p>${appt.apptDate}</p>
+                        <div class="row"> 
+                            <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">
+                                <div class="p-4 border-bottom">
+                                    <h5 class="mb-0">Appointment Details</h5>
+                                </div>
+                                <div class="tab-content p-4" id="pills-tabContent">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Appointment Date</label>
+                                                <p>${appt.apptDate}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Appointment Time</label>
-                                            <p>${appt.apptTime}</p>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Appointment Time</label>
+                                                <p>${appt.apptTime}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Status</label>
-                                            <p>${appt.status}</p>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Status</label>
+                                                <p>${appt.status}</p>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Service Fee</label>
-                                            <p>${appt.doctor.serviceFee}</p>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Service Fee</label>
+                                                <p>${appt.doctor.serviceFee}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Appointment Note</label>
-                                            <p>${appt.apptNote}</p>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Appointment Note</label>
+                                                <p>${appt.apptNote}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-
-                    </div>
+                            <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
+                                <div>
+                                    <div class="bg-white rounded shadow overflow-hidden">
+                                        <div class="p-4 border-bottom">
+                                            <h5 class="mb-0">Assign new doctor</h5>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>            
+                    </div>           
                 </div>
-
             </main>
         </div>
 
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/simplebar.min.js"></script>
-        <script src="assets/js/feather.min.js"></script>
-        <script src="assets/js/app.js"></script>
+
+        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>
+
+        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/feather.min.js"></script>
+
+        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/app.js"></script>
     </body>
 </html>

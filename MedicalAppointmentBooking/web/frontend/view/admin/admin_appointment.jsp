@@ -92,10 +92,12 @@
                                         <select class="form-select form-control" id="status_filter" onchange="filter()">
                                             <option selected disabled>Status</option>
                                             <option value="all">All</option>
-                                            <option value="confirmed">CONFIRMED</option>
-                                            <option value="completed">COMPLETED</option>
+                                            <option value="CONFIRMED">CONFIRMED</option>
+                                            <option value="PENDING">PENDING</option>
+                                            <option value="RESCHEDULED">RESCHEDULED</option>
+                                            <option value="COMPLETED">COMPLETED</option>
                                             <option value="CANCELED">CANCELED</option>
-                                            <option value="FOLLOW_UP">FOLLOW-UP</option>
+                                            <option value="FOLLOW_UP">FOLLOW-UP</option>    
                                         </select>
                                     </div>
                                 </div>
@@ -133,7 +135,6 @@
                                                                 <tr>
                                                                     <th class="border-bottom p-3" style="min-width: 50px;">#</th>
                                                                     <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
-
                                                                     <th class="border-bottom p-3" style="min-width: 150px;">Date</th>
                                                                     <th class="border-bottom p-3">Time</th>
                                                                     <th class="border-bottom p-3" style="min-width: 220px;">Doctor</th>
@@ -177,7 +178,7 @@
                                                                                     Details</a>
                                                                                 <a href="#cancelappointment" class="btn btn-primary btn-sml btn-soft-danger" 
                                                                                    data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
-                                                                                    Cancel</a>
+                                                                                    DELETE</a>
                                                                             </div>
                                                                         </td>
                                                                     </tr>

@@ -51,7 +51,17 @@ public class UserProfileController extends HttpServlet {
         if (action != null && action.equals("change-password")) {
             String oldPassword = request.getParameter("oldpassword");
             String newPassword = request.getParameter("newpassword");
-            UserAccount checkAccount = uDAO.getUserAccount(user.getUserName(), newPassword);
+            UserAccount checkAccount = uDAO.getUserAccount(user.getUserName(), oldPassword);
+            if (checkAccount == null) {
+                request.setAttribute("error", "Your password is not correct!");
+                request.getRequestDispatcher("frontend/view/userprofile.jsp").forward(request, response);
+            } else {
+                uDAO.updatePassword(user, newPassword);
+                SessionUtils.getInstance().removeValue(request, "user");
+                request.setAttribute("success", "Change password successfully. Login again!");
+                request.getRequestDispatcher("frontend/view/login.jsp").forward(request, response);
+            }
+            return;
         }
     }
 
@@ -82,7 +92,7 @@ public class UserProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-    }
+    }   
 
     /**
      * Returns a short description of the servlet.

@@ -27,7 +27,7 @@ public class AppointmentDAO {
     DBConnection dbc = new DBConnection();
     private final DoctorDAO dDAO = new DoctorDAO();
     private final PatientDAO pDAO = new PatientDAO();
-
+    
     public List<Appointment> getAllAppointment() {
         List<Appointment> list = new ArrayList<>();
         PreparedStatement ps = null;
@@ -66,7 +66,44 @@ public class AppointmentDAO {
         }
         return list;
     }
-
+    public List<Appointment> getWaitingAppointment() {
+        List<Appointment> list = new ArrayList<>();
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        String sql = "select * from appointments where appointment_status = 'PENDING' or appointment_status ='RESCHEDULED' ORDER BY appointment_date ASC , appointment_time ASC";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("appointment_id");
+                String note = rs.getString("appointment_note");
+                Date date = rs.getDate("appointment_date");
+                String time = rs.getString("appointment_time");
+                String diagnosis = rs.getString("diagnosis");
+                String status = rs.getString("appointment_status");
+                int doctorId = rs.getInt("doctor_id");
+                Doctor doctor = dDAO.getDoctorById(doctorId);
+                int patientId = rs.getInt("patient_id");
+                Patient patient = pDAO.getPatientById(patientId);
+                Appointment appt = new Appointment(id, note, date, time, diagnosis, status, doctor, patient);
+                list.add(appt);
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return list;
+    }
     public void insertNewAppointment(Appointment appt) {
         PreparedStatement ps = null;
         Connection connection = null;

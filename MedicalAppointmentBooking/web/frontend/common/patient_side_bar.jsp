@@ -12,15 +12,10 @@
     </head>
     <body>
         <nav id="sidebar" class="sidebar-wrapper">
-            <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
-                <div class="sidebar-brand">
-                    <a href="index.html">
-                        <img src="frontend/template/assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                        <img src="frontend/template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
-                    </a>
-                </div>
-                <ul class="sidebar-menu pt-3">
-                    <li class="sidebar-menu" >
+            <div class="sidebar-content">
+              
+                <ul class="sidebar-menu pt-3 " style="list-style: none">
+                    <li class="sidebar-menu side" >
                         <a href="<c:url value='/user-profile?action=view'/>"><i class="uil uil-dashboard me-2 d-inline-block"></i>My Profile</a></li>
                     
                     <li class="sidebar-menu">
@@ -29,7 +24,7 @@
                     <li class="sidebar-menu">
                         <a href="<c:url value='/user-reservation?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>My Reservation</a>
                     </li>
-                   
+ 
                 </ul>
 
             </div>

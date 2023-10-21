@@ -25,6 +25,7 @@ import utils.TimeUtil;
 public class UserDAO {
 
     DBConnection dbc = new DBConnection();
+    RoleDAO rDAO = new RoleDAO();
 
     public UserAccount getAccountByEmail(String email) {
         PreparedStatement ps = null;
@@ -50,7 +51,7 @@ public class UserDAO {
                 String recoveryToken = result.getString("recovery_token");
                 Timestamp recoveryTime = result.getTimestamp("recovery_token_time");
                 int roleId = result.getInt("role_id");
-                Role role = new Role(roleId);
+                Role role = rDAO.getRoleById(roleId);
                 userAccount = new UserAccount(userName, emailAddress, fullName, gender, phone, image, confirmationToken, confirmationTime, recoveryToken, recoveryTime);
                 userAccount.setUserId(id);
                 userAccount.setRole(role);
@@ -100,12 +101,13 @@ public class UserDAO {
     public void updatePassword(UserAccount user, String newPassword) {
         PreparedStatement ps = null;
         Connection connection = null;
-        String sql = "UPDATE user_account SET password = ? WHERE username = ?";
+        String sql = "UPDATE user_account SET password = ? WHERE username = ? and email = ?";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setString(1, newPassword);
             ps.setString(2, user.getUserName());
+            ps.setString(3, user.getEmail());
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -285,7 +287,8 @@ public class UserDAO {
                 int status = rs.getInt("status");
                 Date dob = rs.getDate("dob");
                 String address = rs.getString("address");
-                Role role = new Role(rs.getInt("role_id"));
+                Role role = rDAO.getRoleById(rs.getInt("role_id"));
+                System.out.println(role);
                 account = new UserAccount(id, userName, emailAddress, fullName, gender, phone, image, dob, address, status);
                 account.setRole(role);
                 return account;
@@ -318,7 +321,7 @@ public class UserDAO {
                 int gender = result.getInt("gender");
                 String phone = result.getString("phone");
                 int status = result.getInt("status");
-                Role role = new Role(result.getInt("role_id"));
+                Role role = rDAO.getRoleById(result.getInt("role_id"));
                 userAccount = new UserAccount(userId, userName, emailAddress, fullName, gender, phone, image, dob, address, status);
                 userAccount.setRole(role);
             }
@@ -367,7 +370,6 @@ public class UserDAO {
             if (fileImage != null) {
                 ps.setBlob(7, fileImage);
                 ps.setInt(8, userId);
-
             } else {
                 ps.setInt(7, userId);
             }

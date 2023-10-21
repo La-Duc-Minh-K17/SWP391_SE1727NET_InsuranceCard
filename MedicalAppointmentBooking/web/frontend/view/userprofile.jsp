@@ -9,7 +9,7 @@
         <meta charset="utf-8" />
         <title>MABS</title>
         <!-- favicon -->
-        <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
+        <link rel="shortcut icon" href="frontend/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
 
     </head>
@@ -52,9 +52,11 @@
                                     <h6 class="mb-0">Address</h6>
                                     <p class="text-muted mb-0 ms-2">${sessionScope.user.address}</p>
                                 </div>
-
-
                             </div>
+                            <c:if test="${sessionScope.user.role.role_name == 'PATIENT'}">
+                                <jsp:include page="/frontend/common/patient_side_bar.jsp" />  
+                            </c:if>
+                            
                         </div>
                     </div><!--end col-->
 
@@ -63,9 +65,7 @@
                             <div class="text-center pt-1 pb-1">
                                 <h4 class="title fw-normal mb-0">Profile Settings</h4>
                             </div>
-                            <c:if test="${error != null }">
-                                <div class="alert alert-error">${requestScope.error}</div>
-                            </c:if>
+
                             <c:if test="${success != null}">
                                 <div class="alert alert-success">${requestScope.success}</div>
                             </c:if>
@@ -154,6 +154,9 @@
                                     </form><!--end form-->
 
                                     <div class="mt-4 pt-2">
+                                        <c:if test="${error != null }">
+                                            <div class="alert alert-error">${requestScope.error}</div>
+                                        </c:if>
                                         <h5 class="mb-0">Change Password :</h5>
                                         <form action="user-profile?action=change-password" method="post" class="mt-4">
                                             <div class="row">
@@ -208,9 +211,9 @@
                     confirm.setCustomValidity('Confirm password do not match. Please check again');
                 }
             }
-     
+
         </script>
-      <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
