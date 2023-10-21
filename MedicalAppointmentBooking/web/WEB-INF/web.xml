@@ -116,6 +116,10 @@
         <servlet-name>AdminAppointmentDetail</servlet-name>
         <servlet-class>controller.admin.AdminAppointmentDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckAvailabilityServlet</servlet-name>
+        <servlet-class>controller.home.CheckAvailabilityServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -223,6 +227,10 @@
     <servlet-mapping>
         <servlet-name>AdminAppointmentDetail</servlet-name>
         <url-pattern>/admin-appointmentdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckAvailabilityServlet</servlet-name>
+        <url-pattern>/CheckAvailabilityServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

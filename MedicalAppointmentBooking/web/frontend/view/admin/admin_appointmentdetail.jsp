@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-          <title>Appointment Detail Page</title>
+        <title>Appointment Detail Page</title>
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -271,26 +271,23 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Choose doctor: </label>
                                                 <select class="form-select form-control" name="doctor" id="doctor">
-                                                    
+                                                    <option readonly>Select Doctor</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6 p-3">
                                             <div class="">
-                                                <label class="form-label">Date : </label>
-                                                <input id="chosenDate" required="" name="appt-date"type="date" class="flatpickr flatpickr-input form-control"  >
+                                                <label class="form-label">Date: </label>
+                                                <select class="form-select form-control" name="date" id="date">
+                                                    <option readonly>Select Doctor</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6 p-3">
                                             <div class="">
                                                 <label class="form-label">Time</label>
-                                                <select id ="appt-time"required="" name="appt-time"
-                                                        class="form-control department-name select2input">
-                                                    <c:if test="${timeslot != null}">
-                                                        <c:forEach items="${timeslot}" var="time">
-                                                            <option value="${time}">${time}</option>
-                                                        </c:forEach>
-                                                    </c:if>
+                                                <select id ="time"required="" name="time" class="form-control department-name select2input">
+                                                    <option readonly>Select Time</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -303,13 +300,7 @@
             </main>
         </div>
         <script type="text/javascript">
-            $("#chosenDate").flatpickr({
-                minDate: "today",
-                maxDate: new Date().fp_incr(7),
-                dateFormat: "d/m/Y",
-                altInput: true
-
-            });
+          
         </script>
 
 
