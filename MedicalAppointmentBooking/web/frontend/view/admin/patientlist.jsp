@@ -87,10 +87,8 @@
                                             <div class="d-flex justify-content-between">
                                                 <img src="data:image/jpg;base64,${pat.image}" class="avatar avatar-md-md rounded-pill shadow" alt="">
                                                 <div class="dropdown dropdown-primary">
-                                                    <button type="button" class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-ellipsis-h"></i></button>
-                                                    <div class="dropdown-menu dd-menu dropdown-menu-end shadow border-0 mt-3 py-3">
-                                                        <a class="dropdown-item text-dark" href="doctor-patientcalender?pid=${pat.patientId}"><span class="mb-0 d-inline-block me-1"><i class="uil uil-user align-middle h6"></i></span> Profile</a>
-                                                    </div>
+                                                    <a href="doctor-patientcalender?pid=${pat.patientId}" class="me-3 btn btn-primary btn-sml ">
+                                                                                Details</a>
                                                 </div>
                                             </div>
                                             <div class="card-body p-0 pt-3">
