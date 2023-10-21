@@ -42,9 +42,9 @@ public class AppointmentListController extends HttpServlet {
             Doctor doctor = dDao.getDoctorById(docId);
             PatientDAO pdao = new PatientDAO();
             AppointmentDAO adao = new AppointmentDAO();
-            List<Appointment> listP = adao.getAppointmenttByDoctorId(docId);
+            List<Appointment> apptList = adao.getAppointmentByDoctorId(docId);
             request.setAttribute("doctor", doctor);
-            request.setAttribute("listP", listP);
+            request.setAttribute("apptList", apptList);
             request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
 
         }
