@@ -14,7 +14,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Doctor;
-import model.Service;
 import utils.ImageProcessing;
 
 /**
@@ -50,7 +49,7 @@ public class DoctorDAO {
                 String speciality = rs.getString("speName");
                 String description = rs.getString("doctor_description");
                 Double serviceFee = rs.getDouble("service_fee");
-                Doctor d = new Doctor(doctorId, speciality,position, description,serviceFee, username, email, name, gender, phone, image, status);
+                Doctor d = new Doctor(doctorId, speciality, position, description, serviceFee, username, email, name, gender, phone, image, status);
                 doctorList.add(d);
             }
             return doctorList;
@@ -138,8 +137,8 @@ public class DoctorDAO {
                 String speciality = rs.getString("speName");
                 String description = rs.getString("doctor_description");
                 int fee = rs.getInt("service_fee");
-                doctor = new Doctor(doctorId, position, speciality, description, username, email, fullName, gender, phone, image, status);
-            doctor.setServiceFee(fee);
+                doctor = new Doctor(doctorId, speciality, position, description, username, email, fullName, gender, phone, image, status);
+                doctor.setServiceFee(fee);
             }
             return doctor;
         } catch (SQLException e) {
@@ -186,6 +185,54 @@ public class DoctorDAO {
                 Doctor d = new Doctor(doctorId, speciality, position, description, username, email, name, gender, phone, image, status);
                 doctorList.add(d);
             }
+            return doctorList;
+        } catch (SQLException e) {
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return doctorList;
+    }
+
+    public List<Doctor> getDoctorBySpeciality(String spe) {
+       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Doctor> doctorList = new ArrayList<>();
+
+        String sql = "select * from doctors d \n"
+                + "            inner join user_account u on d.user_id = u.user_id \n"
+                + "            inner join  speciality s on s.speciality_id = d.speciality_id\n"
+                + "            where s.speName = ?";
+
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, spe);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int doctorId = rs.getInt("doctor_id");
+                String username = rs.getString("username");
+                String name = rs.getString("full_name");
+                String phone = rs.getString("phone");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String email = rs.getString("email");
+                int status = rs.getInt("status");
+                String position = rs.getString("doctor_position");
+                String speciality = rs.getString("speName");
+                String description = rs.getString("doctor_description");
+                Doctor d = new Doctor(doctorId, speciality, position, description, username, email, name, gender, phone, image, status);
+               
+                doctorList.add(d);
+            }
+            
             return doctorList;
         } catch (SQLException e) {
         } finally {

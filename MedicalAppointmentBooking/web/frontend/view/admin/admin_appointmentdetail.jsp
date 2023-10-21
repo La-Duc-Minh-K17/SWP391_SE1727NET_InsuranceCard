@@ -10,24 +10,116 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="shortcut icon" href="/assets/images/favicon.ico.png">
+        <title>Appointment Detail Page</title>
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
+        <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <!-- simplebar -->
-        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/simplebar.css" rel="stylesheet" type="text/css" />
-        <!-- Select2 -->
-        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
+        <!-- Icons -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
-        <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
-
+        <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <!-- SLIDER -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/tiny-slider.css"/>
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="<c:url value= '/frontend/template/assets/js/flatpickr.min.js'/>"></script>
     </head>
 
     <body>
         <div class="page-wrapper doctris-theme toggled">
             <jsp:include page="/frontend/common/admin_side_bar.jsp" />
+            <div class="top-header">
+                <div class="header-bar d-flex justify-content-between border-bottom">
+                    <div class="d-flex align-items-center">
+                        <a href="#" class="logo-icon">
+                            <img src="frontend/template/assets/images/logo-icon.png" height="30" class="small" alt="">
+                            <span class="">
+                                <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                                <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                            </span>
+                        </a>
+                        <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
+                            <i class="uil uil-bars"></i>
+                        </a>
+                    </div>
+                    <ul class="list-unstyled mb-0">
+                        <li class="list-inline-item mb-0 ms-1">
+                            <div class="dropdown dropdown-primary">
+                                <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                        src="/assets/images/doctors/01.jpg"
+                                        class="avatar avatar-ex-small rounded-circle" alt=""></button>
+                                <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
+                                     style="min-width: 200px;">
+                                    <a class="dropdown-item d-flex align-items-center text-dark"
+                                       <img src="../assets/images/doctors/01.jpg"
+                                       class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                        <div class="flex-1 ms-2">
+                                            <span class="d-block mb-1">${sessionScope.user.fullName}</span>
+                                            <small class="text-muted"></small>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item text-dark" href="dr-profile.html"><span
+                                            class="mb-0 d-inline-block me-1"><i
+                                                class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                                    <div class="dropdown-divider border-top"></div>
+                                    <a class="dropdown-item text-dark" href="lock-screen.html"><span
+                                            class="mb-0 d-inline-block me-1"><i
+                                                class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <main class="page-content bg-light">
+                <div class="top-header">
+                    <div class="header-bar d-flex justify-content-between border-bottom">
+                        <div class="d-flex align-items-center">
+                            <a href="#" class="logo-icon">
+                                <img src="frontend/template/assets/images/logo-icon.png" height="30" class="small" alt="">
+                                <span class="">
+                                    <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                                    <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                                </span>
+                            </a>
+                            <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
+                                <i class="uil uil-bars"></i>
+                            </a>
+                        </div>
+                        <ul class="list-unstyled mb-0">
+                            <li class="list-inline-item mb-0 ms-1">
+                                <div class="dropdown dropdown-primary">
+                                    <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
+                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                            src="/assets/images/doctors/01.jpg"
+                                            class="avatar avatar-ex-small rounded-circle" alt=""></button>
+                                    <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
+                                         style="min-width: 200px;">
+                                        <a class="dropdown-item d-flex align-items-center text-dark"
+                                           <img src="../assets/images/doctors/01.jpg"
+                                           class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                            <div class="flex-1 ms-2">
+                                                <span class="d-block mb-1">${sessionScope.user.fullName}</span>
+                                                <small class="text-muted"></small>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item text-dark" href="dr-profile.html"><span
+                                                class="mb-0 d-inline-block me-1"><i
+                                                    class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                                        <div class="dropdown-divider border-top"></div>
+                                        <a class="dropdown-item text-dark" href="lock-screen.html"><span
+                                                class="mb-0 d-inline-block me-1"><i
+                                                    class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <div class="row">
@@ -125,63 +217,99 @@
                                             <h6 class="mb-0">Speciality</h6>
                                             <p class="text-muted mb-0 ms-2">${appt.doctor.speciality}</p>
                                         </div>
-
-                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card border-0 shadow overflow-hidden mt-4">
-                            <div class="p-4 border-bottom">
-                                <h5 class="mb-0">Appointment Details</h5>
-                            </div>
-                            <div class="tab-content p-4" id="pills-tabContent">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Appointment Date</label>
-                                            <p>${appt.apptDate}</p>
+                        <div class="row"> 
+                            <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">
+                                <div class="p-4 border-bottom">
+                                    <h5 class="mb-0">Appointment Details</h5>
+                                </div>
+                                <div class="tab-content p-4" id="pills-tabContent">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Appointment Date</label>
+                                                <p>${appt.apptDate}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Appointment Time</label>
-                                            <p>${appt.apptTime}</p>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Appointment Time</label>
+                                                <p>${appt.apptTime}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Status</label>
-                                            <p>${appt.status}</p>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Status</label>
+                                                <p>${appt.status}</p>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Service Fee</label>
-                                            <p>${appt.doctor.serviceFee}</p>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Service Fee</label>
+                                                <p>${appt.doctor.serviceFee}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Appointment Note</label>
-                                            <p>${appt.apptNote}</p>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Appointment Note</label>
+                                                <p>${appt.apptNote}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-
-                    </div>
+                            <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
+                                <div>
+                                    <div class="bg-white rounded shadow overflow-hidden">
+                                        <div class="p-4 border-bottom">
+                                            <h5 class="mb-0">Assign new doctor</h5>
+                                        </div>
+                                        <div class="col-md-6 p-3">
+                                            <div class="mb-3">
+                                                <label class="form-label">Choose doctor: </label>
+                                                <select class="form-select form-control" name="doctor" id="doctor">
+                                                    <option readonly>Select Doctor</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 p-3">
+                                            <div class="">
+                                                <label class="form-label">Date: </label>
+                                                <select class="form-select form-control" name="date" id="date">
+                                                    <option readonly>Select Doctor</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 p-3">
+                                            <div class="">
+                                                <label class="form-label">Time</label>
+                                                <select id ="time"required="" name="time" class="form-control department-name select2input">
+                                                    <option readonly>Select Time</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>            
+                    </div>           
                 </div>
-
             </main>
         </div>
+        <script type="text/javascript">
+          
+        </script>
 
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/simplebar.min.js"></script>
-        <script src="assets/js/feather.min.js"></script>
-        <script src="assets/js/app.js"></script>
+
+        <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
+        <script src="<c:url value= '/frontend/template/assets/js/select2.min.js'/>"></script>
+        <script src="<c:url value= '/frontend/template/assets/js/select2.init.js'/>"></script>
+
+
     </body>
 </html>

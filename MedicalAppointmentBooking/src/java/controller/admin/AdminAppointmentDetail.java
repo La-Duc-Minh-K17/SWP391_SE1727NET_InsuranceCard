@@ -2,26 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.home;
+package controller.admin;
 
+import dal.AppointmentDAO;
 import dal.DoctorDAO;
-import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Appointment;
 import model.Doctor;
-import model.UserAccount;
 
 /**
  *
- * @author ngocq
+ * @author Admin
  */
-@WebServlet(name = "UserProfile", urlPatterns = {"/accountprofile"})
-public class UserProfile extends HttpServlet {
+public class AdminAppointmentDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,15 +33,17 @@ public class UserProfile extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        try ( PrintWriter out = response.getWriter()) {
-            int id = Integer.parseInt(request.getParameter("id"));
-                  Doctor useraccount = new Doctor();
-                  DoctorDAO udao = new DoctorDAO();
-                  Doctor account = udao.getDoctorById(id);                 
-                  request.setAttribute("account", account);
-                  request.setAttribute("useraccount", useraccount);
-               request.getRequestDispatcher("frontend/template/view/profile.jsp").forward(request, response);
+        String action = request.getParameter("action");
+        AppointmentDAO apptDAO = new AppointmentDAO();
+        DoctorDAO dDAO = new DoctorDAO();
+        if (action != null && action.equals("view-detail")) {
+            int apptId = Integer.parseInt(request.getParameter("apptId"));
+            Appointment appt = apptDAO.getAppointmentById(apptId);
+            List<Doctor> doctorList = dDAO.getDoctorBySpeciality(appt.getDoctor().getSpeciality());
+            request.setAttribute("doctorL", doctorList);
+            request.setAttribute("appt", appt);
+            request.getRequestDispatcher("frontend/view/admin/admin_appointmentdetail.jsp").forward(request, response);
+            return;
         }
     }
 

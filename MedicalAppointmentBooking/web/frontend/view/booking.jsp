@@ -262,23 +262,24 @@
         <script src="<c:url value= '/frontend/template/assets/js/jquery.timepicker.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/timepicker.init.js'/>"></script>
         <script>
-                                                        function checkAvailability() {
-                                                            const url = 'http://localhost:8080/MedicalAppointmentBooking/booking?action=check_availability&date=';
-                                                            const date = document.getElementById("checkin-date").value;
-                                                            window.location.href = url + date;
+            
+        function checkAvailability() {
+        const url = 'http://localhost:8080/MedicalAppointmentBooking/booking?action=check_availability&date=';
+        const date = document.getElementById("checkin-date").value;
+        window.location.href = url + date;
 
-                                                        }
-                                                        $("#checkin-date").flatpickr({
-                                                            minDate: "today",
-                                                            maxDate: new Date().fp_incr(7),
-                                                            dateFormat: "d/m/Y",
-                                                            altInput: true  
+        }
+        $("#checkin-date").flatpickr({
+        minDate: "today",
+        maxDate: new Date().fp_incr(7),
+        dateFormat: "d/m/Y",
+        altInput: true  
 
-                                                        });
+        });
 
 
 
-        </script>
+    </script>
 
-    </body>
+</body>
 </html>

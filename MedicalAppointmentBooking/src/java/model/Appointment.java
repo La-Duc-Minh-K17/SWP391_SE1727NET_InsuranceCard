@@ -118,5 +118,10 @@ public class Appointment {
         this.patient = patient;
     }
 
+    @Override
+    public String toString() {
+        return "Appointment{" + "apptId=" + apptId + ", apptNote=" + apptNote + ", apptDate=" + apptDate + ", apptTime=" + apptTime + ", diagnosis=" + diagnosis + ", status=" + status + ", staff=" + staff + ", doctor=" + doctor + ", patient=" + patient + '}';
+    }
+
     
 }

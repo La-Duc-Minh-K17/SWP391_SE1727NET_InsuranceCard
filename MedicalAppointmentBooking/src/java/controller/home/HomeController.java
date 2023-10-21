@@ -31,24 +31,12 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         DoctorDAO doctordao = new DoctorDAO();
         List<Doctor> doctorList = doctordao.getAllDoctor();
         request.setAttribute("doctors", doctorList);
         String action = request.getParameter("action");
 
-        if (action != null && action.equals("redirect-doctors")) {
-            request.getRequestDispatcher("").forward(request, response);
-            return;
-        }
-
-        if (action != null && action.equals("redirect-services")) {
-            request.getRequestDispatcher("").forward(request, response);
-            return;
-        }
-        if (action != null && action.equals("redirect-blogs")) {
-            request.getRequestDispatcher("").forward(request, response);
-            return;
-        }
         if (action != null && action.equals("logout")) {
             SessionUtils.getInstance().removeValue(request, "user");
             request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);

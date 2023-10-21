@@ -42,17 +42,11 @@
                             <p class="para-desc mx-auto text-white-50 mb-0">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
 
                             <div class="mt-4 pt-2">
-                                <form class="rounded text-start shadow p-4 bg-white-50">
-                                    <div class="row align-items-center">
-                                        <div class="col-md">
-                                            <div class="input-group bg-white border rounded" style="opacity: 0.7;">
-                                                <span class="input-group-text bg-white border-0"></span>
-                                                <input name="name" id="location" type="text" class="form-control border-0" placeholder="">
-                                            </div>
-                                        </div>
+                                <form class="rounded shadow p-3 ">
+                                    <div class="row align-items-center justify-content-center">
                                         <div class="col-md-auto mt-4 mt-sm-0">
                                             <div class="d-grid d-md-block">
-                                                <button type="submit" class="btn btn-primary">Search</button>
+                                                <a href="#" class="btn btn-primary">Book your appointment</a>
                                             </div>
                                         </div><!--end col-->
                                     </div><!--end row-->
