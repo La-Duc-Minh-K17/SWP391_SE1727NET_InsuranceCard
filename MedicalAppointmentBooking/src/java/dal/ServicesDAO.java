@@ -467,7 +467,7 @@ public class ServicesDAO {
     public List<Service> searchServicesByName(String keyword) {
         List<Service> resultList = new ArrayList<>();
         try ( Connection conn = dbc.getConnection()) {
-            String sql = "SELECT * FROM services s WHERE s.service_name LIKE ?";
+            String sql = "SELECT * FROM mabs.services s WHERE s.service_name LIKE ?";
             try ( PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, "%" + keyword + "%");
                 try ( ResultSet rs = ps.executeQuery()) {
@@ -699,8 +699,8 @@ public class ServicesDAO {
         return services;
     }
 
-//    public static void main(String[] args) throws SQLException {
-//        ServicesDAO dao = new ServicesDAO();
-//        dao.sortServiceByCategoryID(1);
-//    }
+    public static void main(String[] args) throws SQLException {
+        ServicesDAO dao = new ServicesDAO();
+        dao.searchServicesByName("ortho");
+    }
 }

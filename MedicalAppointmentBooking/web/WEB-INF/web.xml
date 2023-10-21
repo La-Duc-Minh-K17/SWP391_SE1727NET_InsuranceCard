@@ -77,6 +77,7 @@
         <servlet-class>controller.manager.ServiceReview</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>ManageServices</servlet-name>
         <servlet-class>controller.manager.ManageServices</servlet-class>
     </servlet>
@@ -101,6 +102,10 @@
         <servlet-class>controller.staff.StaffReservationList</servlet-class>
     </servlet>
     <servlet>
+
+        <servlet-name>ManagePatient</servlet-name>
+        <servlet-class>controller.manager.ManagePatient</servlet-class>
+
         <servlet-name>PatientListController</servlet-name>
         <servlet-class>controller.home.PatientListController</servlet-class>
     </servlet>
@@ -115,6 +120,7 @@
     <servlet>
         <servlet-name>AppoinmentDetailController</servlet-name>
         <servlet-class>controller.home.AppoinmentDetailController</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>UserAccountController</servlet-name>
@@ -201,6 +207,10 @@
         <url-pattern>/detailservice</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
+        <servlet-name>ManagePatient</servlet-name>
+        <url-pattern>/manage-patient</url-pattern>
+
         <servlet-name>AdminAppointmentList</servlet-name>
         <url-pattern>/admin-appointment</url-pattern>
     </servlet-mapping>

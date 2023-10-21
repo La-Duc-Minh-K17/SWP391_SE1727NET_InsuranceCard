@@ -133,9 +133,9 @@
             </div>
             <div class="row mb-5">
                 <div class="col-md-4 d-flex align-items-center">
-                    <form action="service?action=search&keyword=" method="GET">
+                    <form action="service?action=search" method="POST">
                         <div class="input-group">
-                            <input type="text" name="keyword" id="searchInput" class="form-control border bg-light" onchange="filter()" placeholder="Search by name">
+                            <input type="text" name="keyword" id="searchInput" class="form-control border bg-light" placeholder="Search by name">
                             <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
                         </div>
                     </form>
