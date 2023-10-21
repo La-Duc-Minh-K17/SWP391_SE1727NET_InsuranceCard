@@ -86,10 +86,7 @@
                                         <div class="card border-0 shadow rounded p-4">
                                             <div class="d-flex justify-content-between">
                                                 <img src="data:image/jpg;base64,${pat.image}" class="avatar avatar-md-md rounded-pill shadow" alt="">
-                                                <div class="dropdown dropdown-primary">
-                                                    <a href="doctor-patientcalender?pid=${pat.patientId}" class="me-3 btn btn-primary btn-sml ">
-                                                                                Details</a>
-                                                </div>
+                                               
                                             </div>
                                             <div class="card-body p-0 pt-3">
                                                 <a href="#" class="text-dark h6">${pat.fullName}</a>
@@ -116,6 +113,10 @@
                                                     </li>
 
                                                 </ul>
+                                                <div class="dropdown dropdown-primary">
+                                                    <a href="doctor-patientcalender?pid=${pat.patientId}" class="me-3 btn btn-primary btn-sml ">
+                                                                                Details</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

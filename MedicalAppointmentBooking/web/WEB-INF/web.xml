@@ -75,7 +75,7 @@
     <servlet>
         <servlet-name>ServiceReview</servlet-name>
         <servlet-class>controller.manager.ServiceReview</servlet-class>
-   </servlet>
+    </servlet>
     <servlet>
         <servlet-name>ManageServices</servlet-name>
         <servlet-class>controller.manager.ManageServices</servlet-class>
@@ -111,6 +111,10 @@
     <servlet>
         <servlet-name>AppointmentListController</servlet-name>
         <servlet-class>controller.home.AppointmentListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AppoinmentDetailController</servlet-name>
+        <servlet-class>controller.home.AppoinmentDetailController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserAccountController</servlet-name>
@@ -215,6 +219,10 @@
     <servlet-mapping>
         <servlet-name>AppointmentListController</servlet-name>
         <url-pattern>/doctor-appointmentlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AppoinmentDetailController</servlet-name>
+        <url-pattern>/doctor-appointmentdetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
