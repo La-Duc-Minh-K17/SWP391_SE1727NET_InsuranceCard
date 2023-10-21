@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.home;
 
 import dal.AppointmentDAO;
@@ -19,30 +18,34 @@ import model.Appointment;
  * @author nguye
  */
 public class AppoinmentDetailController extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-                    AppointmentDAO apptDAO = new AppointmentDAO();
-int apptId = Integer.parseInt(request.getParameter("apptId"));
+        try ( PrintWriter out = response.getWriter()) {
+            AppointmentDAO apptDAO = new AppointmentDAO();
+            int apptId = Integer.parseInt(request.getParameter("apptId"));
+            
             Appointment appt = apptDAO.getAppointmentById(apptId);
             request.setAttribute("appt", appt);
-                        request.getRequestDispatcher("frontend/view/admin/doctorappointmentdetail.jsp").forward(request, response);
+            request.getRequestDispatcher("frontend/view/admin/doctorappointmentdetail.jsp").forward(request, response);
 
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -50,12 +53,13 @@ int apptId = Integer.parseInt(request.getParameter("apptId"));
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -63,12 +67,13 @@ int apptId = Integer.parseInt(request.getParameter("apptId"));
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
