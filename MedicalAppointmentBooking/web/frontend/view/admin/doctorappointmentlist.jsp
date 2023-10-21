@@ -78,51 +78,55 @@
                             <div class="row">
                                 <div class="col-12 mt-4">
                                     <div class="table-responsive bg-white shadow rounded">
-                                        <table class="table mb-0 table-center">
-                                            <thead>
-                                                <tr>
-                                                    <th class="border-bottom p-3" style="min-width: 50px;">#</th>
-                                                    <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
-                                                    <th class="border-bottom p-3">DoB</th>
-                                                    <th class="border-bottom p-3">Gender</th>
-                                                    <th class="border-bottom p-3" style="min-width: 150px;">Date</th>
-                                                    <th class="border-bottom p-3">Time</th>
-                                                    <th class="border-bottom p-3">Fees</th>
-                                                    <th class="border-bottom p-3" style="min-width: 150px;"></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach var="pat" items="${requestScope.listP}">
+                                        <div>
+                                                    <div class="table-responsive bg-white shadow rounded">
+                                                        <table class="table mb-0 table-center">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
 
-                                                    <tr>
-                                                        <th class="p-3">${pat.patientId}</th>
-                                                        <td class="p-3">
-                                                            <a href="#" class="text-dark">
-                                                                <div class="d-flex align-items-center">
-                                                                    <img src="data:image/jpg;base64,${pat.image}" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                                    <span class="ms-2">${pat.fullName}</span>
-                                                                </div>
-                                                            </a>
-                                                        </td>
-                                                        <td class="p-3">${pat.dob}</td>
-                                                        <td class="p-3"><span class="ms-5 h6">
-                                                                <c:if test= "${pat.gender == 0}">Female</c:if>
-                                                                <c:if test= "${pat.gender == 1}">Male</c:if>
-                                                                </span></td>
-                                                            <td class="p-3"></td>
-                                                            <td class="p-3">${pat.time}</td>
-                                                            <td class="p-3">"$"${doctor.fee}/Patient</td>
-                                                            <td class="text-end p-3">
-                                                                <a href="#" class="btn btn-icon btn-pills btn-soft-primary" data-bs-toggle="modal" data-bs-target="#viewappointment"><i class="uil uil-eye"></i></a>
-                                                                <a href="#" class="btn btn-icon btn-pills btn-soft-success" data-bs-toggle="modal" data-bs-target="#acceptappointment"><i class="uil uil-check-circle"></i></a>
-                                                                <a href="#" class="btn btn-icon btn-pills btn-soft-danger" data-bs-toggle="modal" data-bs-target="#cancelappointment"><i class="uil uil-times-circle"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                </c:forEach>
-
-
-                                            </tbody>
-                                        </table>
+                                                                    <th class="border-bottom p-3" style="min-width: 150px;">Date</th>
+                                                                    <th class="border-bottom p-3">Time</th>
+                                                                    <th class="border-bottom p-3">Status</th>
+                                                                    <th class="border-bottom p-3" style="min-width: 150px;">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <c:forEach items="${apptList}" var="appt">
+                                                                    <c:set var="patient" value="${appt.patient}"></c:set>
+                                                                        <tr>
+                                                                        <td class="p-3">
+                                                                            <a href="#" class="text-dark">
+                                                                                <div class="d-flex align-items-center">
+                                                                                    <c:if test="${patient.image != 'default'}"> 
+                                                                                        <img src="data:image/jpg;base64,${patient.image}" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                                                    </c:if>
+                                                                                    <c:if test="${patient.image == 'default'}"> 
+                                                                                        <img src="frontend/template/assets/images/patient.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                                                    </c:if>
+                                                                                    <span class="ms-2">${patient.fullName}</span>
+                                                                                </div>
+                                                                            </a>
+                                                                        </td>
+                                                                        <td class="p-3">${appt.apptDate}</td>
+                                                                        <td class="p-3">${appt.apptTime}</td>
+                                                                        
+                                                                        <td class="p-3">${appt.status}</td>
+                                                                        <td class="p-3">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <a href="admin-appointment?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
+                                                                                    Details</a>
+                                                                                <a href="#cancelappointment" class="btn btn-primary btn-sml btn-soft-danger" 
+                                                                                   data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
+                                                                                    Cancel</a>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </c:forEach>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                     </div>
                                 </div>
                             </div>

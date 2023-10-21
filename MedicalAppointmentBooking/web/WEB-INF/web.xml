@@ -185,10 +185,10 @@
         <url-pattern>/filter</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>ServiceReview</servlet-name>
         <url-pattern>/service/review</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ManageServices</servlet-name>
         <url-pattern>/manage-service</url-pattern>
     </servlet-mapping>

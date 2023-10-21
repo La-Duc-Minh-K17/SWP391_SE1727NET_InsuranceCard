@@ -339,11 +339,7 @@ public class AppointmentDAO {
         Connection connection = null;
         ResultSet rs = null;
         List<Appointment> listAppoint = new ArrayList<>();
-        String sql = "SELECT P.patient_id , UA.*\n"
-                + "FROM mabs.user_account UA\n"
-                + "JOIN mabs.patients P ON UA.user_id = P.user_id\n"
-                + "JOIN mabs.appointments A ON P.patient_id = A.patient_id\n"
-                + "WHERE A.doctor_id = ?;";
+        String sql = "select * from appointments where doctor_id = ?;";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
