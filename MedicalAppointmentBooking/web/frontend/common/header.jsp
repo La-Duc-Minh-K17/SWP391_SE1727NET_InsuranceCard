@@ -34,8 +34,7 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/otherStyle.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <!-- Navbar STart -->
-        <!-- Loader -->
+
         <div id="preloader">
             <div id="status">
                 <div class="spinner">
@@ -44,19 +43,14 @@
                 </div>
             </div>
         </div>
-        <!-- Loader -->
 
-        <!-- Navbar STart -->
         <header id="topnav" class="navigation sticky">
             <div class="container">
-
                 <div>
                     <a class="logo" href="home">
                         <img src="frontend/template/assets/images/MABS__1.png" height="24" alt="">
-                        
                     </a>
                 </div>
-
                 <div class="menu-extras">
                     <div class="menu-item">
                         <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
@@ -82,7 +76,7 @@
                                 </c:if>
 
                             <c:if test="${sessionScope.user == null}">
-                                <button class="btn btn-primary btn-sm" onclick="window.location.href = 'login'">Login</button>
+                                <a class="btn btn-primary btn-sm" href="<c:url value= '/login'/>">Login</a>
                             </c:if>
                             <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
                                 <c:if test="${sessionScope.user.username != null}">
@@ -100,13 +94,16 @@
                                 </c:if>
                                 <div class="dropdown-divider border-top"></div>
                                 <c:if test="${sessionScope.user != null}">
-                                        <a class="dropdown-item text-dark" href="home?action=profile"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span>User Profile</a>
+                                    <a class="dropdown-item text-dark" href="<c:url value= '/user-profile?action=view'/>"><span class="mb-0 d-inline-block me-1">
+                                            <i class="uil uil-sign-out-alt align-middle h6"></i></span>User Profile</a>
                                         </c:if>
                                         <c:if test="${sessionScope.user != null}">
-                                    <a class="dropdown-item text-dark" href="home?action=logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span>Sign out</a>
+                                    <a class="dropdown-item text-dark" href="home?action=logout"><span class="mb-0 d-inline-block me-1">
+                                            <i class="uil uil-sign-out-alt align-middle h6"></i></span>Sign out</a>
                                         </c:if>
                                         <c:if test="${sessionScope.user == null}">
-                                    <a class="dropdown-item text-dark" href="home?action=login"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Sign in</a>
+                                    <a class="dropdown-item text-dark" href="home?action=login"><span class="mb-0 d-inline-block me-1">
+                                            <i class="uil uil-sign-out-alt align-middle h6"></i></span> Sign in</a>
                                         </c:if>
                             </div>
                         </div>
@@ -114,20 +111,20 @@
 
                 </ul>
 
-                    <div id="navigation">
-                        <ul class="navigation-menu nav-left">
-                            <li><a href="home" class="sub-menu-item">Home</a></li>
-                            <li><a href="home?action=redirect-doctors" class="sub-menu-item">Doctors</a></li>
-                            <li><a href="service?action=view-all" class="sub-menu-item">Services</a></li>
-                            <li><a href="home?action=redirect-contact-us" class="sub-menu-item">Contact us</a></li>
-                            <li><a href="home?action=redirect-blogs" class="sub-menu-item">News and Blogs</a></li>
-                        </ul>
+                <div id="navigation">
+                    <ul class="navigation-menu nav-left">
+                        <li><a href="home" class="sub-menu-item">Home</a></li>
+                        <li><a href="home?action=redirect-doctors" class="sub-menu-item">Doctors</a></li>
+                        <li><a href="<c:url value= '/service?action=view-all'/>" class="sub-menu-item">Services</a></li>
+                        <li><a href="home?action=redirect-contact-us" class="sub-menu-item">Contact us</a></li>
+                        <li><a href="home?action=redirect-blogs" class="sub-menu-item">News and Blogs</a></li>
+                    </ul>
 
-                    </div>
+                </div>
             </div>
         </header>
-        
-         
+
+
     </body>
     <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
     <!-- Icons -->

@@ -42,7 +42,7 @@
                             <p class="para-desc mx-auto text-white-50 mb-0">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
 
                             <div class="mt-4 pt-2">
-                                <form class="rounded    shadow p-3 ">
+                                <form class="rounded shadow p-3 ">
                                     <div class="row align-items-center justify-content-center">
                                         <div class="col-md-auto mt-4 mt-sm-0">
                                             <div class="d-grid d-md-block">

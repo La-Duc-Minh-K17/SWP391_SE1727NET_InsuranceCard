@@ -34,6 +34,16 @@ public class TimeUtil {
         }
         return null;
     }
+     public static java.sql.Date dateConverter1(String dateString) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date utilDate = dateFormat.parse(dateString);
+            return new java.sql.Date(utilDate.getTime());
+        } catch (ParseException ex) {
+            Logger.getLogger(TimeUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
     public Timestamp getNow() {
         long createdTimeMillis = System.currentTimeMillis();
