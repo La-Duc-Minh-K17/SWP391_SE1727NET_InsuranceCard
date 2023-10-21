@@ -19,7 +19,10 @@ import java.util.logging.Logger;
 import model.Patient;
 import model.UserAccount;
 import utils.ImageProcessing;
+
 import utils.TimeUtil;
+
+
 
 /**
  *
@@ -215,11 +218,50 @@ public class PatientDAO {
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
+
+
+    public List<Patient> getPatientByDoctorId(int doctorId) {
+
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<Patient> listPatient = new ArrayList<>();
+        String sql = "SELECT P.patient_id , UA.*\n"
+                + "FROM mabs.user_account UA\n"
+                + "JOIN mabs.patients P ON UA.user_id = P.user_id\n"
+                + "JOIN mabs.appointments A ON P.patient_id = A.patient_id\n"
+                + "WHERE A.doctor_id = ?;";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, doctorId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int patientId = rs.getInt("patient_id");
+                String username = rs.getString("username");
+                int userId = rs.getInt("user_id");
+                String email = rs.getString("email");
+                String fullName = rs.getString("full_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String phone = rs.getString("phone");
+                Date dob = rs.getDate("dob");
+                int status = rs.getInt("status");
+                String address = rs.getString("address");
+                Patient p = new Patient(patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
+                listPatient.add(p);
+            }
+            return listPatient;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+
         } finally {
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
+
                     ex.printStackTrace();
                 }
             }
@@ -260,3 +302,13 @@ public class PatientDAO {
 //        System.out.println(dao.getAllPatient());
 //    }
 }
+
+                    System.out.println(ex);
+                }
+            }
+        }
+        return null;
+    }
+
+}
+

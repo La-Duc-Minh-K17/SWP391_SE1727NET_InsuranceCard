@@ -36,7 +36,7 @@
         </div>
         <!-- Loader -->
         <div class="page-wrapper doctris-theme toggled">
-            <jsp:include page="/frontend/common/staff_side_bar.jsp" />
+            <jsp:include page="/frontend/common/admin_side_bar.jsp" />
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
             <main class="page-content">
