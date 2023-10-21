@@ -31,6 +31,7 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         DoctorDAO doctordao = new DoctorDAO();
         List<Doctor> doctorList = doctordao.getAllDoctor();
         request.setAttribute("doctors", doctorList);

@@ -165,6 +165,7 @@ public class AppointmentDAO {
                 int patientId = rs.getInt("patient_id");
                 Patient patient = pDAO.getPatientById(patientId);
                 appt = new Appointment(id, note, date, time, diagnosis, status, doctor, patient);
+                
             }
             return appt;
         } catch (SQLException ex) {

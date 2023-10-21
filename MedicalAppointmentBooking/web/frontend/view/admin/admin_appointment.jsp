@@ -174,7 +174,7 @@
                                                                         <td class="p-3">${appt.status}</td>
                                                                         <td class="p-3">
                                                                             <div class="d-flex align-items-center">
-                                                                                <a href="admin-appointment?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
+                                                                                <a href="admin-appointmentdetail?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
                                                                                     Details</a>
                                                                                 <a href="#cancelappointment" class="btn btn-primary btn-sml btn-soft-danger" 
                                                                                    data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
@@ -216,26 +216,26 @@
         <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <form action="<c:url value='/admin-appointment?action=cancel'></c:url>" method="post">
-                        <div class="modal-content">
-                            <div class="modal-body py-5">
-                                <div class="text-center">
-                                    <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                        <i class="uil uil-times-circle h1 mb-0"></i>
-                                    </div>
+                    <div class="modal-content">
+                        <div class="modal-body py-5">
+                            <div class="text-center">
+                                <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
+                                    <i class="uil uil-times-circle h1 mb-0"></i>
+                                </div>
+                                <div class="mt-4">
+                                    <h4>Cancel Appointment</h4>
+                                    <p class="para-desc mx-auto text-muted mb-0">This appointment will be cancelled by you. Are you sure ?</p>
                                     <div class="mt-4">
-                                        <h4>Cancel Appointment</h4>
-                                        <p class="para-desc mx-auto text-muted mb-0">This appointment will be cancelled by you. Are you sure ?</p>
-                                        <div class="mt-4">
-                                            <input type="hidden" id="cancel_appointment" name="appointment_canceled" value="">
-                                            <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
-                                        </div>
+                                        <input type="hidden" id="cancel_appointment" name="appointment_canceled" value="">
+                                        <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
+        </div>
 
             <script>
 

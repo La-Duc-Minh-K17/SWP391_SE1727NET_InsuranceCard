@@ -7,6 +7,7 @@ package controller.admin;
 import dal.AppointmentDAO;
 import dal.DoctorDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ import model.Doctor;
  *
  * @author Admin
  */
-public class AdminAppointmentList extends HttpServlet {
+public class AdminAppointmentDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,56 +34,16 @@ public class AdminAppointmentList extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        String uri = null;
-        List<Appointment> apptList = null;
         AppointmentDAO apptDAO = new AppointmentDAO();
-        if (action != null && action.equals("view")) {
-            apptList = apptDAO.getAllAppointment();
-            uri = "admin-appointment?action=view";
-        }
+        DoctorDAO dDAO = new DoctorDAO();
         if (action != null && action.equals("view-detail")) {
             int apptId = Integer.parseInt(request.getParameter("apptId"));
             Appointment appt = apptDAO.getAppointmentById(apptId);
+            List<Doctor> doctorList = dDAO.getDoctorBySpeciality(appt.getDoctor().getSpeciality());
+            request.setAttribute("doctorL", doctorList);
             request.setAttribute("appt", appt);
             request.getRequestDispatcher("frontend/view/admin/admin_appointmentdetail.jsp").forward(request, response);
             return;
-        }
-        if (action != null && action.equals("search")) {
-            String search = request.getParameter("search");
-            apptList = apptDAO.searchAppointmentByPatientName(search);
-            uri = "admin-appointment?action=search&search=" + search ;
-        }
-        if (action != null && action.equals("filter")) {
-            String status = request.getParameter("status_filter");
-            apptList = null;
-            if (status.equals("all")) {
-                response.sendRedirect("admin-appointment?action=view");
-            } else {
-                apptList = apptDAO.getFilteredAppointmentList(status);
-            }
-
-            uri = "admin-appointment?action=filter&status=" + status;
-        }
-        if (apptList != null) {
-            int page, numberpage = 5;
-            int size = apptList.size();
-            int num = (size % numberpage == 0 ? (size / numberpage) : ((size / numberpage)) + 1);
-            String xpage = request.getParameter("page");
-            if (xpage == null) {
-                page = 1;
-            } else {
-                page = Integer.parseInt(xpage);
-            }
-            int start, end;
-            start = (page - 1) * numberpage;
-            end = Math.min(page * numberpage, size);
-            List<Appointment> appointment = apptDAO.getListByPage(apptList, start, end);
-            request.setAttribute("page", page);
-            request.setAttribute("num", num);
-            request.setAttribute("url", uri);
-            request.setAttribute("apptList", appointment);
-            request.getRequestDispatcher("frontend/view/admin/admin_appointment.jsp").forward(request, response);
-
         }
     }
 
