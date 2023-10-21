@@ -102,13 +102,6 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <h5>Email</h5>
-                                            <label class="form-label">${p.email}  </label>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
                                             <h5>Address</h5>
                                             <label class="form-label">${p.address}  </label>
 

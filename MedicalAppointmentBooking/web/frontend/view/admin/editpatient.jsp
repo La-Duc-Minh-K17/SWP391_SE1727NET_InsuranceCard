@@ -79,6 +79,9 @@
                             <div class="tab-content p-4" id="pills-tabContent">
                                 <form action="<c:url value='/manage-patient?action=edit-info&patientId=${p.patientId}'/>" method="POST" enctype="multipart/form-data">
                                 <h5 class="mb-0">Edit Patient Information.</h5>
+                                <input type="hidden" name="userId" value="${p.userId}">
+                                <input type="hidden" name="email" value="${p.email}">
+                                <input type="hidden" name="username" value="${p.username}">
                                 <div>
                                     <p class="text-muted">Update Patient Image.</p>
                                     <div id="thumbbox" class="mt-5 mb-3">

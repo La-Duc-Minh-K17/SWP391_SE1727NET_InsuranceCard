@@ -164,14 +164,7 @@ Author     : PC
                                                                     <div class="d-flex mb-2">
                                                                         <a href="<c:url value='/manage-patient?action=view&patientId=${p.patientId}'/>" class="btn btn-primary custom-btn btn-sm m-2">View</a>
                                                                         <a href="<c:url value='/manage-patient?action=edit&patientId=${p.patientId}'/>" class="btn btn-primary custom-btn btn-sm m-2">Edit</a>
-                                                                        <c:choose>
-                                                                            <c:when test="${p.status == 1}">
-                                                                                <a href="<c:url value='/manage-patient?action=status&patientId=${p.patientId}&status=${p.status}'/>" class="btn btn-danger custom-btn btn-sm m-2">Deactivate</a>
-                                                                            </c:when>
-                                                                            <c:otherwise>
-                                                                                <a href="<c:url value='/manage-patient?action=status&patientId=${p.patientId}&status=${p.status}'/>" class="btn btn-success custom-btn btn-sm m-2">Activate</a>
-                                                                            </c:otherwise>
-                                                                        </c:choose>
+                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
