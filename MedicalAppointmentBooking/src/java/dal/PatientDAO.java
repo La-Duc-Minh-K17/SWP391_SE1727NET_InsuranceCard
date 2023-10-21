@@ -158,52 +158,50 @@ public class PatientDAO {
     }
 
     public void updatePatient(int patientId, int userId, String username, String email, String fullName, int gender, String phone, Part image, String dob, String address, int status) {
-        PreparedStatement ps = null;
-        InputStream fileImage = ImageProcessing.imageStream(image);
-        String sql = "UPDATE mabs.patients p inner join user_account u where p.user_id=u.user_id \n"
-                + "SET\n"
-                + "  u.full_name = ?,\n"
-                + "  u.gender = ?,\n"
-                + "  u.phone = ?,\n"
-                + "  u.dob = ?\n"
-                + "  u.address = ?\n"
-                + "  u.status = ?\n";
+    PreparedStatement ps = null;
+    InputStream fileImage = ImageProcessing.imageStream(image);
+    String sql = "UPDATE mabs.patients p INNER JOIN user_account u ON p.user_id = u.user_id SET "
+            + "u.full_name = ?, "
+            + "u.gender = ?, "
+            + "u.phone = ?, "
+            + "u.dob = ?, "
+            + "u.address = ?, "
+            + "u.status = ?";
+    if (fileImage != null) {
+        sql += ", u.image = ?";
+    }
+    sql += " WHERE p.patient_id = ?;";
+    Connection connection = null;
+    try {
+        connection = dbc.getConnection();
+        ps = connection.prepareStatement(sql);
+        ps.setString(1, fullName);
+        ps.setInt(2, gender);
+        ps.setString(3, phone);
+        ps.setDate(4, TimeUtil.dateConverter1(dob));
+        ps.setString(5, address);
+        ps.setInt(6, status);
+
+        int parameterIndex = 7;
+
         if (fileImage != null) {
-            sql = sql + " , u.image = ? \n";
+            ps.setBlob(parameterIndex++, fileImage);
         }
-        sql = sql + "WHERE p.patient_id = ?;";
-        Connection connection = null;
-        try {
-            connection = dbc.getConnection();
-
-            ps = connection.prepareStatement(sql);
-            ps.setString(1, fullName);
-            ps.setString(2, email);
-            ps.setInt(3, gender);
-            ps.setString(4, phone);
-            ps.setDate(5, TimeUtil.dateConverter(dob));
-            ps.setString(6, address);
-            ps.setInt(7, status);
-
-            if (fileImage != null) {
-                ps.setBlob(8, fileImage);
-                ps.setInt(9, patientId);
-            } else {
-                ps.setInt(8, patientId);
-            }
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+        ps.setInt(parameterIndex, patientId);
+        ps.executeUpdate();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
         }
     }
+}
+
 
     public void updatePatientStatus(int patientId, int newStatus) {
         PreparedStatement ps = null;

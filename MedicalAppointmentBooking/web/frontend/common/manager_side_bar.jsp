@@ -32,7 +32,7 @@
                     </li>
 
                     <li class="sidebar-menu">
-                        <a href="javascript:void(0)"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Patients</a>
+                        <a href="<c:url value='/manage-patient?action=view-all'/>"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Patients</a>
 
                     </li>
                     <li class="sidebar-menu">
