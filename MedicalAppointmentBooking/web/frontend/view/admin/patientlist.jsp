@@ -74,7 +74,12 @@
                             </div><!--end col-->
                         </div>
                         <div class="col-xl-9 col-lg-8 col-md-7 mt-4 pt-2 mt-sm-0 pt-sm-0">
-                            <h5 class="mb-0">Patients List</h5>
+                            <div class="row">
+                                <div class="col-xl-3 ">
+                                    <h5 class="mb-0">Patients List</h5>
+                                </div>
+                                
+                            </div>
                             <div class="row">
                                 <c:forEach var="pat" items="${requestScope.listP}">
                                     <div class="col-xl-4 col-lg-6 col-12 mt-4 pt-2">
@@ -111,7 +116,7 @@
                                                     <li class="mt-1"><i class="uil uil-user-nurse text-primary "> Address:</i>
                                                         <span class="ms-5 h6">${pat.address}</span>
                                                     </li>
-                                                    
+
                                                 </ul>
                                             </div>
                                         </div>

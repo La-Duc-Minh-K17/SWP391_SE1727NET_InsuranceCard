@@ -74,77 +74,82 @@
                             </div><!--end col-->
                         </div>
                         <div class="col-xl-9 col-lg-8 col-md-7 mt-4 pt-2 mt-sm-0 pt-sm-0">
-                            <h5 class="mb-0">Appointment List</h5>
                             <div class="row">
-                                <div class="col-12 mt-4">
-                                    <div class="table-responsive bg-white shadow rounded">
-                                        <div>
-                                                    <div class="table-responsive bg-white shadow rounded">
-                                                        <table class="table mb-0 table-center">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
+                                <div class="col-xl-3 ">
+                                    <h5 class="mb-0">Appointment List</h5>  
+                                </div>
+                                
+                            </div>
+                                <div class="row">
+                                    <div class="col-12 mt-4">
+                                        <div class="table-responsive bg-white shadow rounded">
+                                            <div>
+                                                <div class="table-responsive bg-white shadow rounded">
+                                                    <table class="table mb-0 table-center">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
 
-                                                                    <th class="border-bottom p-3" style="min-width: 150px;">Date</th>
-                                                                    <th class="border-bottom p-3">Time</th>
-                                                                    <th class="border-bottom p-3">Status</th>
-                                                                    <th class="border-bottom p-3" style="min-width: 150px;">Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <c:forEach items="${apptList}" var="appt">
-                                                                    <c:set var="patient" value="${appt.patient}"></c:set>
-                                                                        <tr>
+                                                                <th class="border-bottom p-3" style="min-width: 150px;">Date</th>
+                                                                <th class="border-bottom p-3">Time</th>
+                                                                <th class="border-bottom p-3">Status</th>
+                                                                <th class="border-bottom p-3" style="min-width: 150px;">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <c:forEach items="${apptList}" var="appt">
+                                                                <c:set var="patient" value="${appt.patient}"></c:set>
+                                                                    <tr>
                                                                         <td class="p-3">
                                                                             <a href="#" class="text-dark">
                                                                                 <div class="d-flex align-items-center">
-                                                                                    <c:if test="${patient.image != 'default'}"> 
-                                                                                        <img src="data:image/jpg;base64,${patient.image}" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                                                    </c:if>
-                                                                                    <c:if test="${patient.image == 'default'}"> 
-                                                                                        <img src="frontend/template/assets/images/patient.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                                                    </c:if>
-                                                                                    <span class="ms-2">${patient.fullName}</span>
-                                                                                </div>
-                                                                            </a>
-                                                                        </td>
-                                                                        <td class="p-3">${appt.apptDate}</td>
-                                                                        <td class="p-3">${appt.apptTime}</td>
-                                                                        
-                                                                        <td class="p-3">${appt.status}</td>
-                                                                        <td class="p-3">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <a href="admin-appointment?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
-                                                                                    Details</a>
-                                                                                <a href="#cancelappointment" class="btn btn-primary btn-sml btn-soft-danger" 
-                                                                                   data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
-                                                                                    Cancel</a>
+                                                                                <c:if test="${patient.image != 'default'}"> 
+                                                                                    <img src="data:image/jpg;base64,${patient.image}" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                                                </c:if>
+                                                                                <c:if test="${patient.image == 'default'}"> 
+                                                                                    <img src="frontend/template/assets/images/patient.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                                                </c:if>
+                                                                                <span class="ms-2">${patient.fullName}</span>
                                                                             </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                </c:forEach>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                                                        </a>
+                                                                    </td>
+                                                                    <td class="p-3">${appt.apptDate}</td>
+                                                                    <td class="p-3">${appt.apptTime}</td>
+
+                                                                    <td class="p-3">${appt.status}</td>
+                                                                    <td class="p-3">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <a href="admin-appointment?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
+                                                                                Details</a>
+                                                                            <a href="#cancelappointment" class="btn btn-primary btn-sml btn-soft-danger" 
+                                                                               data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
+                                                                                Cancel</a>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row text-center">
-                                <div class="col-12 mt-4 pt-2">
-                                    <ul class="pagination justify-content-center mb-0 list-unstyled">
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Previous">Prev</a></li>
-                                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Next">Next</a></li>
-                                    </ul><!--end pagination-->
-                                </div><!--end col-->
-                            </div><!--end row-->
-                        </div><!--end col-->
-                    </div><!--end row-->
-                </div><!--end container-->
+                                <div class="row text-center">
+                                    <div class="col-12 mt-4 pt-2">
+                                        <ul class="pagination justify-content-center mb-0 list-unstyled">
+                                            <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Previous">Prev</a></li>
+                                            <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Next">Next</a></li>
+                                        </ul><!--end pagination-->
+                                    </div><!--end col-->
+                                </div><!--end row-->
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end container-->
             </section>
         </div>
         <jsp:include page="/frontend/common/footer.jsp" />
