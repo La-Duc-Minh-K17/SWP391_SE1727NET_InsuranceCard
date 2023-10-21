@@ -42,114 +42,156 @@
     <body>
 
         <jsp:include page="/frontend/common/header.jsp" />
-        <div>
-            <section class="bg-dashboard">
-                <div class="container-fluid">
+        <main class="page-content bg-light">
+            <div class="container-fluid">
+                <div class="layout-specing">
                     <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-md-5 col-12">
-                            <div class="rounded shadow overflow-hidden sticky-bar">
-                                <div class="card border-0" >
-                                    <img src="frontend/template/assets/images/doctors/profile-bg.jpg" class="img-fluid" alt="">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="bg-white rounded shadow overflow-hidden">
+                                <div class="p-4 border-bottom">
+                                    <h5 class="mb-0">Patient Information</h5>
                                 </div>
-                                <div>  
-                                    <div>
-                                        <c:set var="doctor" value="${doctor}"></c:set>
-                                            <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
-                                                <img src="data:image/jpg;base64,${doctor.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
-                                            <h5 class="mt-3 mb-1">Dr. ${doctor.fullName}</h5>
-                                            <p class="text-muted mb-0">${doctor.speciality}</p>
-                                        </div>
+                                <br><br><br><br><br>
+                                <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                                    <c:if test="${appt.patient.image == 'default'}">
+                                        <img src="frontend/template/assets/images/patient.jpg" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                    </c:if>
+                                    <c:if test="${appt.patient.image != 'default'}">
+                                        <img src="data:image/png;base64,${appt.patient.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                    </c:if>
+                                    <h5 class="mt-3 mb-1">${appt.patient.fullName}</h5>
+                                </div>
+                                <div class="list-unstyled p-4">
+                                    <div class="d-flex align-items-center mt-2">
+                                        <i class="uil uil-user align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                        <h6 class="mb-0">Gender</h6>
+                                        <c:if test="${appt.patient.gender == 1}">
+                                            <p class="text-muted mb-0 ms-2">Male</p>
+                                        </c:if>
+                                        <c:if test="${appt.patient.gender == 0}">
+                                            <p class="text-muted mb-0 ms-2">Female</p>
+                                        </c:if>     
                                     </div>
-                                    <div>
-                                        <ul class="list-unstyled sidebar-nav mb-0">
-                                            <li class="navbar-item"><a href="doctor-appointmentlist?id=${doctor.doctorId}" class="navbar-link"><i class="ri-calendar-check-line align-middle navbar-icon"></i> Appointment</a></li>
-                                            <li class="navbar-item"><a href="doctor-schedule.html" class="navbar-link"><i class="ri-timer-line align-middle navbar-icon"></i> Schedule Timing</a></li>
-                                            <li class="navbar-item"><a href="doctor-profile.html" class="navbar-link"><i class="ri-user-line align-middle navbar-icon"></i> Profile</a></li>
-                                            <li class="navbar-item"><a href="doctor-profile-setting.html" class="navbar-link"><i class="ri-user-settings-line align-middle navbar-icon"></i> Profile Settings</a></li>
-                                            <li class="navbar-item active"><a href="doctor-patientlist?id=${doctor.doctorId}" class="navbar-link"><i class="ri-empathize-line align-middle navbar-icon"></i> Patients</a></li>
-                                            <li class="navbar-item"><a href="patient-review.html" class="navbar-link"><i class="ri-chat-1-line align-middle navbar-icon"></i> Patients Review</a></li>
-                                            <li class="navbar-item"><a href="forgot-password.html" class="navbar-link"><i class="ri-device-recover-line align-middle navbar-icon"></i> Forgot Password</a></li>
-                                        </ul></div>
+
+                                    <div class="d-flex align-items-center mt-2">
+                                        <i class="uil uil-phone align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                        <h6 class="mb-0">Phone</h6>
+                                        <p class="text-muted mb-0 ms-2">${appt.patient.phone}</p>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <i class="uil uil-mailbox align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                        <h6 class="mb-0">Email</h6>
+                                        <p class="text-muted mb-0 ms-2">${appt.patient.email}</p>
+                                    </div>
+
+                                    <div class="d-flex align-items-center mt-2">
+                                        <i class="uil uil-calendar-alt align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                        <h6 class="mb-0">Date Of Birth</h6>
+                                        <p class="text-muted mb-0 ms-2">${appt.patient.dob}</p>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <i class="uil uil-globe align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                        <h6 class="mb-0">Address</h6>
+                                        <p class="text-muted mb-0 ms-2">${appt.patient.address}</p>
+                                    </div>
                                 </div>
-                            </div><!--end col-->
-                        </div>
-                        <div class="col-xl-9 col-lg-8 col-md-7 mt-4 pt-2 mt-sm-0 pt-sm-0">
-                            <div class="row">
-                                <div class="col-xl-3 ">
-                                    <h5 class="mb-0">Appointment List</h5>  
-                                </div>
-                                
                             </div>
-                                <div class="row">
-                                    <div class="col-12 mt-4">
-                                        <div class="table-responsive bg-white shadow rounded">
-                                            <div>
-                                                <div class="table-responsive bg-white shadow rounded">
-                                                    <table class="table mb-0 table-center">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
+                        </div>
+                        <div class="col-lg-6 col-md-6 ">
+                            <div class="bg-white rounded shadow overflow-hidden">
+                                <div class="p-4 border-bottom">
+                                    <h5 class="mb-0">Doctor Information</h5>
+                                </div>
+                                <br><br><br><br><br>
+                                <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                                    <c:if test="${appt.doctor.image == 'default'}">
+                                        <img src="../template/assets/images/avatar.png" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                    </c:if>
+                                    <c:if test="${appt.doctor.image != 'default'}">
+                                        <img src="data:image/png;base64,${appt.doctor.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                    </c:if>
+                                    <h5 class="mt-3 mb-1">${appt.doctor.fullName}</h5>
+                                </div>
 
-                                                                <th class="border-bottom p-3" style="min-width: 150px;">Date</th>
-                                                                <th class="border-bottom p-3">Time</th>
-                                                                <th class="border-bottom p-3">Status</th>
-                                                                <th class="border-bottom p-3" style="min-width: 150px;">Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <c:forEach items="${apptList}" var="appt">
-                                                                <c:set var="patient" value="${appt.patient}"></c:set>
-                                                                    <tr>
-                                                                        <td class="p-3">
-                                                                            <a href="#" class="text-dark">
-                                                                                <div class="d-flex align-items-center">
-                                                                                <c:if test="${patient.image != 'default'}"> 
-                                                                                    <img src="data:image/jpg;base64,${patient.image}" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                                                </c:if>
-                                                                                <c:if test="${patient.image == 'default'}"> 
-                                                                                    <img src="frontend/template/assets/images/patient.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                                                </c:if>
-                                                                                <span class="ms-2">${patient.fullName}</span>
-                                                                            </div>
-                                                                        </a>
-                                                                    </td>
-                                                                    <td class="p-3">${appt.apptDate}</td>
-                                                                    <td class="p-3">${appt.apptTime}</td>
+                                <div class="list-unstyled p-4">
+                                    <div class="d-flex align-items-center mt-2">
+                                        <i class="uil uil-user align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                        <h6 class="mb-0">Gender</h6>
+                                        <c:if test="${appt.doctor.gender == 1}">
+                                            <p class="text-muted mb-0 ms-2">Male</p>
+                                        </c:if>
+                                        <c:if test="${appt.doctor.gender == 0}">
+                                            <p class="text-muted mb-0 ms-2">Female</p>
+                                        </c:if>     
+                                    </div>
 
-                                                                    <td class="p-3">${appt.status}</td>
-                                                                    <td class="p-3">
-                                                                        <div class="d-flex align-items-center">
-                                                                            <a href="doctor-appointmentdetail?apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
-                                                                                Details</a>
-                                                                            
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <i class="uil uil-phone align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                        <h6 class="mb-0">Phone Contact</h6>
+                                        <p class="text-muted mb-0 ms-2">${appt.doctor.phone}</p>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <i class="uil uil-mailbox align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                        <h6 class="mb-0">Email</h6>
+                                        <p class="text-muted mb-0 ms-2">${appt.doctor.email}</p>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <i class="uil uil-book-open align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                        <h6 class="mb-0">Speciality</h6>
+                                        <p class="text-muted mb-0 ms-2">${appt.doctor.speciality}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-0 shadow overflow-hidden mt-4">
+                        <div class="p-4 border-bottom">
+                            <h5 class="mb-0">Appointment Details</h5>
+                        </div>
+                        <div class="tab-content p-4" id="pills-tabContent">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Appointment Date</label>
+                                        <p>${appt.apptDate}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Appointment Time</label>
+                                        <p>${appt.apptTime}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Status</label>
+                                        <p>${appt.status}</p>
                                     </div>
                                 </div>
 
-                                <div class="row text-center">
-                                    <div class="col-12 mt-4 pt-2">
-                                        <ul class="pagination justify-content-center mb-0 list-unstyled">
-                                            <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Previous">Prev</a></li>
-                                            <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Next">Next</a></li>
-                                        </ul><!--end pagination-->
-                                    </div><!--end col-->
-                                </div><!--end row-->
-                            </div><!--end col-->
-                        </div><!--end row-->
-                    </div><!--end container-->
-            </section>
-        </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Service Fee</label>
+                                        <p>${appt.doctor.serviceFee}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Appointment Note</label>
+                                        <p>${appt.apptNote}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+
+                </div>
+            </div>
+
+        </main>
         <jsp:include page="/frontend/common/footer.jsp" />
         <!-- End -->
 
