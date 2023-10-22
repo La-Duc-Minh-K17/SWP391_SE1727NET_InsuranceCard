@@ -220,7 +220,6 @@ public class PatientDAO {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-
                     ex.printStackTrace();
                 }
             }
@@ -258,7 +257,6 @@ public class PatientDAO {
                 Patient p = new Patient(patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
                 listPatient.add(p);
             }
-            return listPatient;
 
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -273,7 +271,9 @@ public class PatientDAO {
                 }
             }
         }
+
         return null;
+
     }
 
     public List<Patient> searchPatientsByName(String keyword) {
@@ -305,4 +305,5 @@ public class PatientDAO {
         }
         return resultList;
     }
+
 }
