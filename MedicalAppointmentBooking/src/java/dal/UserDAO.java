@@ -353,6 +353,53 @@ public class UserDAO {
             }
         }
     }
+    public void updateUserAccount(int id, String fullName, String image, String phoneNum, String gender) {
+        PreparedStatement ps = null;
+        String sql = "UPDATE mabs.user_account \n"
+                + "SET full_name = '" + fullName + "', phone = '" + phoneNum + "', gender ='" + gender + "', image = '" + image + "'  ";
+        sql += " WHERE user_id = " + id;
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+public void deleteUserAccount(int id) {
+        PreparedStatement ps = null;
+        String sql = " DELETE FROM doctors where user_id = " + id + " ";
+        String sql2 = " DELETE FROM `mabs`.`user_account`\n"
+                + "WHERE user_id = " + id;
+        System.out.println(sql);
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+            ps = connection.prepareStatement(sql2);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
    public UserAccount getUserAccountByID(String uid) {
         PreparedStatement stm = null;
         Connection connection = null;
