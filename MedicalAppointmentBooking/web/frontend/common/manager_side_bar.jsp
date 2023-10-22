@@ -36,7 +36,7 @@
 
                     </li>
                     <li class="sidebar-menu">
-                        <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
+                        <a href="<c:url value='/manageblog?action=view-all'/>"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
                     </li>
                 </ul>
                 <!-- sidebar-menu  -->
