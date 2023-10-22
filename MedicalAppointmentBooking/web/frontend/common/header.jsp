@@ -53,7 +53,7 @@
                 <div>
                     <a class="logo" href="home">
                         <img src="frontend/template/assets/images/MABS__1.png" height="24" alt="">
-                        
+
                     </a>
                 </div>
 
@@ -100,9 +100,10 @@
                                 </c:if>
                                 <div class="dropdown-divider border-top"></div>
                                 <c:if test="${sessionScope.user != null}">
-                                    <a class="dropdown-item text-dark" href="home?action=profile"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span>User Profile</a>
-                                        </c:if>
-                                        <c:if test="${sessionScope.user != null}">
+                                    <a class="dropdown-item text-dark" href="accountprofile"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span>User Profile</a>
+                                    <a class="dropdown-item text-dark" href="ChangePassword"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span>Change password</a>
+                                </c:if>
+                                <c:if test="${sessionScope.user != null}">
                                     <a class="dropdown-item text-dark" href="home?action=logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span>Sign out</a>
                                         </c:if>
                                         <c:if test="${sessionScope.user == null}">
@@ -114,20 +115,20 @@
 
                 </ul>
 
-                    <div id="navigation">
-                        <ul class="navigation-menu nav-left">
-                            <li><a href="home" class="sub-menu-item">Home</a></li>
-                            <li><a href="home?action=redirect-doctors" class="sub-menu-item">Doctors</a></li>
-                            <li><a href="service?action=view-all" class="sub-menu-item">Services</a></li>
-                            <li><a href="home?action=redirect-contact-us" class="sub-menu-item">Contact us</a></li>
-                            <li><a href="home?action=redirect-blogs" class="sub-menu-item">News and Blogs</a></li>
-                        </ul>
+                <div id="navigation">
+                    <ul class="navigation-menu nav-left">
+                        <li><a href="home" class="sub-menu-item">Home</a></li>
+                        <li><a href="home?action=redirect-doctors" class="sub-menu-item">Doctors</a></li>
+                        <li><a href="service?action=view-all" class="sub-menu-item">Services</a></li>
+                        <li><a href="home?action=redirect-contact-us" class="sub-menu-item">Contact us</a></li>
+                        <li><a href="home?action=redirect-blogs" class="sub-menu-item">News and Blogs</a></li>
+                    </ul>
 
-                    </div>
+                </div>
             </div>
         </header>
-        
-         
+
+
     </body>
     <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
     <!-- Icons -->
