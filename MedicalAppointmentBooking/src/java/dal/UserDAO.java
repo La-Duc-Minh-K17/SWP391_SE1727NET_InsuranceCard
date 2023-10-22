@@ -353,5 +353,75 @@ public class UserDAO {
             }
         }
     }
+   public UserAccount getUserAccountByID(String uid) {
+        PreparedStatement stm = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM user_account "
+                + "WHERE user_id = " + uid;
+        try {
+            connection = dbc.getConnection();
+            stm = connection.prepareStatement(sql);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                UserAccount account = new UserAccount();
+                int id = rs.getInt("user_id");
+                String userName = rs.getString("username");
+                String emailAddress = rs.getString("email");
+                String fullName = rs.getString("full_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String phone = rs.getString("phone");
+                int status = rs.getInt("status");
+                Date dob = rs.getDate("dob");
+                String address = rs.getString("address");
+                account = new UserAccount(id, userName, emailAddress, fullName, gender, phone, image, dob, address, status);
+                return account;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+    public ArrayList<UserAccount> getListUserAccount(String status, String role) {
+        PreparedStatement stm = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        ArrayList<UserAccount> list = new ArrayList<>();
+        String sql = "SELECT a.*, r.role_name FROM user_account a join user_role r on a.role_id = r.role_id where 1=1 ";
+        if (!status.isEmpty()) {
+            sql += "  And a.status = " + status;
+        }
+         if (!role.isEmpty()) {
+            sql += "  And a.role_id = " + role;
+        }
+        try {
+            connection = dbc.getConnection();
+            stm = connection.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+
+                UserAccount account = new UserAccount();
+                int id = rs.getInt("user_id");
+                String userName = rs.getString("username");
+                String emailAddress = rs.getString("email");
+                String fullName = rs.getString("full_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String phone = rs.getString("phone");
+                int getStatus = rs.getInt("status");
+                Date dob = rs.getDate("dob");
+                String address = rs.getString("address");
+                Role r = new Role(rs.getInt("role_id"),rs.getString("role_name"));
+                account = new UserAccount(id, userName, emailAddress, fullName, gender, phone, image, dob, address, getStatus);
+               account.setRole(r);
+                list.add(account);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return list;
+    }
+
   
 }
