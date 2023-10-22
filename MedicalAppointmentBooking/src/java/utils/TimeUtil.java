@@ -34,7 +34,8 @@ public class TimeUtil {
         }
         return null;
     }
-     public static java.sql.Date dateConverter1(String dateString) {
+
+    public static java.sql.Date dateConverter1(String dateString) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date utilDate = dateFormat.parse(dateString);
@@ -44,7 +45,7 @@ public class TimeUtil {
         }
         return null;
     }
-    
+
     public Timestamp getNow() {
         long createdTimeMillis = System.currentTimeMillis();
         Timestamp createdTimeTimeStamp = new Timestamp(createdTimeMillis);
@@ -56,5 +57,5 @@ public class TimeUtil {
         long diffTime = currentTimestamp.getTime() - createdTime.getTime();
         return (diffTime > OTP_EXPIRY_TIME * 60 * 1000);
     }
-       
+
 }
