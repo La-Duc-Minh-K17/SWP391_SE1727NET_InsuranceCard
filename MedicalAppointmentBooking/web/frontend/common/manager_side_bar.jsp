@@ -24,6 +24,9 @@
                     <li><a href="appointment.html">
                             <i class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a>
                     </li>
+                     <li class="sidebar-menu">
+                        <a href="<c:url value='/ManageAccount'/>"><i class="uil uil-user me-2 d-inline-block"></i>Account</a>
+                    </li>
                     <li class="sidebar-menu">
                         <a href="<c:url value='/manage-doctor?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>
                     </li>
@@ -35,6 +38,7 @@
                         <a href="javascript:void(0)"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Patients</a>
 
                     </li>
+                    
                     <li class="sidebar-menu">
                         <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
                     </li>

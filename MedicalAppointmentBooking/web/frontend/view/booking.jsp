@@ -24,15 +24,19 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
-
+        <style>
+            #home{
+                background-image: url("frontend/template/assets/images/bg/backgroundclinic.jpg") ;
+            }
+        </style>
     </head>
 
     <body>
         <jsp:include page="/frontend/common/header.jsp" />
-        <section  class="bg-half-150 d-table w-100 bg-light" style="padding: 150px 0 90px 0;">
+        <section class="bg-half-150 d-table w-100 bg-light">
             <div class="container">
                 <div class="row  justify-content-center">
-                    <div class="col-12"  ">
+                    <div class="col-12">
                         <div class="section-title text-center">
                             <h3 class="sub-title mb-2">Booking Appointment</h3>
                             <p class="para-desc mx-auto text-muted">Great doctor if you need your family member to get
@@ -46,9 +50,6 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <c:if test="${error != null}">
-                            <div class="alert alert-error">${requestScope.error}</div>
-                        </c:if>
                         <div class="card border-0 shadow rounded overflow-hidden">
                             <c:if test="${sessionScope.chosen_doctor != null}">
                                 <div class="mb-4">
@@ -129,7 +130,22 @@
                                     </div>
                                 </div>
                             </c:if>
-
+                            <ul class="nav nav-pills nav-justified flex-column flex-sm-row rounded-0 shadow overflow-hidden bg-light mb-0" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link rounded-0 active" id="clinic-booking" data-bs-toggle="pill" href="#pills-clinic" role="tab" aria-controls="pills-clinic" aria-selected="false">
+                                        <div class="text-center pt-1 pb-1">
+                                            <h4 class="title fw-normal mb-0">Booking for yourself</h4>
+                                        </div>
+                                    </a><!--end nav link-->
+                                </li><!--end nav item-->
+                                <li class="nav-item">
+                                    <a class="nav-link rounded-0" id="online-booking" data-bs-toggle="pill" href="#pills-online" role="tab" aria-controls="pills-online" aria-selected="false">
+                                        <div class="text-center pt-1 pb-1">
+                                            <h4 class="title fw-normal mb-0">Booking for relatives</h4>
+                                        </div>
+                                    </a><!--end nav link-->
+                                </li><!--end nav item-->
+                            </ul>
                             <div class="tab-content p-4" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-clinic" role="tabpanel" aria-labelledby="clinic-booking">
                                     <form action="<c:url value='/booking?action=yourself-booking'/> " method="post">
@@ -194,19 +210,23 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Date : </label>
-                                                    <input id="checkin-date" required="" name="appt-date" type="text"class="flatpickr flatpickr-input form-control" onchange="checkAvailability()" >
+                                                    <input id="checkin-date" required="" name="appt-date" type="text"class="flatpickr flatpickr-input form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Time</label>
-                                                    <select id ="appt-time"required="" name="appt-time"
+                                                    <select required="" name="appt-time"
                                                             class="form-control department-name select2input">
-                                                        <c:if test="${timeslot != null}">
-                                                            <c:forEach items="${timeslot}" var="time">
-                                                                <option value="${time}">${time}</option>
-                                                            </c:forEach>
-                                                        </c:if>
+                                                        <option value="7:00">7:00</option>
+                                                        <option value="8:00">8:00</option>
+                                                        <option value="9:00">9:00</option>
+                                                        <option value="10:00">10:00</option>
+                                                        <option value="11:00">11:00</option>
+                                                        <option value="14:00">14:00</option>
+                                                        <option value="15:00">15:00</option>
+                                                        <option value="16:00">16:00</option>
+                                                        <option value="17:00">17:00</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -244,7 +264,129 @@
                                     </form>
                                 </div>
 
+                                <div class="tab-pane fade" id="pills-online" role="tabpanel" aria-labelledby="online-booking">
+                                    <form action="<c:url value='/booking?action=relative-booking'/> " method="post">
+                                        <div class="row">
+                                            <div class="p-6 ">
+                                                <h6 class="mb-2 h5">Booker Information</h6>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Booker Name <span class="text-danger">*</span></label>
+                                                    <input name="booker_name"  type="text" class="form-control" value="${sessionScope.user.fullName}" >
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Booker Phone<span class="text-danger">*</span></label>
+                                                    <input name="booker_phone"  type="text" class="form-control"  value="${sessionScope.user.phone}">
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Booker Email<span class="text-danger">*</span></label>
+                                                    <input name="booker_email"  type="text" class="form-control" value="${sessionScope.user.email}">
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="p-6 ">
+                                                <h6 class="mb-2 h5">Patient Information</h6>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Patient Name <span class="text-danger">*</span></label>
+                                                    <input name="name"  type="text" class="form-control" placeholder="Patient Name :">
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Your Email <span class="text-danger">*</span></label>
+                                                    <input name="email" id="email" type="email" class="form-control" placeholder="@example.com">
+                                                </div> 
+                                            </div><!--end col-->
 
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Your Phone <span class="text-danger">*</span></label>
+                                                    <input name="phone" id="phone" type="tel" class="form-control" placeholder="Your Phone :">
+                                                </div> 
+                                            </div><!--end col-->
+
+                                            <div class="col-md-6 ">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Gender <span class="text-danger">*</span></label>
+                                                </div>
+                                                <div class=" d-flex justify-content-around radio-group"> <!-- Group for radio buttons -->
+                                                    <label for="male">Male</label>
+                                                    <input type="radio"  checked="checked" name="gender" value="1" required>
+                                                    <label for="female">Female</label>
+                                                    <input type="radio" name="gender" value="0" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Date of Birth<span class="text-danger">*</span></label>
+                                                    <input name="dob"  type="date" class="flatpickr flatpickr-input form-control" id="dob1">
+                                                </div> 
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Address <span class="text-danger">*</span></label>
+                                                    <input name="address" class="form-control" placeholder="Address:">
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="p-6">
+                                                <h6 class="mb-2 h5">Appointment Information</h6>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Date : </label>
+                                                    <input required="" name="appt-date" type="text"
+                                                           class="flatpickr flatpickr-input form-control" id="checkin-date1">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Time</label>
+                                                    <select required="" name="appt-time"
+                                                            class="form-control department-name select2input">
+                                                        <option value="7:00">7:00</option>
+                                                        <option value="8:00">8:00</option>
+                                                        <option value="9:00">9:00</option>
+                                                        <option value="10:00">10:00</option>
+                                                        <option value="11:00">11:00</option>
+                                                        <option value="14:00">14:00</option>
+                                                        <option value="15:00">15:00</option>
+                                                        <option value="16:00">16:00</option>
+                                                        <option value="17:00">17:00</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Examination Reason <span class="text-danger">*</span></label>
+                                                    <textarea name="appt-reason"  rows="5" class="form-control" placeholder="Your Heath Status:"></textarea>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Choose payment method</label>
+                                                    <select  name="payment"class="form-control department-name select2input">
+                                                        <option check="checked" value="">
+                                                            Pay later at the medical facility</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="d-grid">
+                                                    <button type="submit" class="btn btn-primary">Book An Appointment</button>
+                                                </div>
+                                            </div><!--end col-->
+                                        </div><!--end row-->
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div><!--end col-->
@@ -262,25 +404,25 @@
         <script src="<c:url value= '/frontend/template/assets/js/jquery.timepicker.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/timepicker.init.js'/>"></script>
         <script>
-                                                        function checkAvailability() {
-                                                            const url = 'http://localhost:8080/MedicalAppointmentBooking/booking?action=check_availability&date=';
-                                                            const date = document.getElementById("checkin-date").value;
-                                                            window.location.href = url + date;
+            $("#checkin-date").flatpickr({
+                defaultDate: "today",
+                minDate: "today",
+                maxDate: new Date().fp_incr(14),
+                dateFormat: "d/m/Y"
 
-                                                        }
-                                                        $("#checkin-date").flatpickr({
-                                                            defaultDate: "today",
-                                                            minDate: "today",
-                                                            maxDate: new Date().fp_incr(7),
-                                                            dateFormat: "d/m/Y"
+            });
 
-                                                        });
+            $("#checkin-date1").flatpickr({
+                defaultDate: "today",
+                minDate: "today",
+                maxDate: new Date().fp_incr(14),
+                dateFormat: "d/m/Y"
 
-                                                        $("#dob").flatpickr({
-                                                            defaultDate: new Date(),
-                                                            dateFormat: "d/m/Y"
-                                                        });
-
+            });
+            $("#dob1").flatpickr({
+                defaultDate: new Date(),
+                dateFormat: "d/m/Y"
+            });
         </script>
 
     </body>

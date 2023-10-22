@@ -70,58 +70,58 @@
         <div class="header-content">
             <h3>Doctors team</h2>
                 <h6>Great doctor if you need your family member to get effective immediate assistance,</h6>
-                    <h6>emergency treatment or a simple consultation</h6>
-                        </div>
+                <h6>emergency treatment or a simple consultation</h6>
+        </div>
 
-                        <form action="WebDoctorList" method="POST">
-                            <div class="func">
-                                <input type="text" id="search" name="search" placeholder="Search">
-                                <select id="speciality" name="speciality">
-                                    <option value="">Speciality</option>
-                                    <c:forEach items="${speList}" var="spe">
-                                        <option value="${spe.speName}">${spe.speName}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </form>
+        <form action="WebDoctorList" method="POST">
+            <div class="func">
+                <input type="text" id="search" name="search" placeholder="Search">
+                <select id="speciality" name="speciality">
+                    <option value="">Speciality</option>
+                    <c:forEach items="${speList}" var="spe">
+                        <option value="${spe.speName}">${spe.speName}</option>
+                    </c:forEach>
+                </select>
+            </div>
+        </form>
 
-                        <div id="doctor-container" class="container">
-                            <div class="row">
-                                <c:forEach items="${doctor}" var="doctor">
-                                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2 doctor">
-                                        <a href="WebDoctorDetail?doctorId=${doctor.doctorId}">
-                                            <img src="data:image/jpg;base64,${doctor.image}" width="240" height="300"/>
-                                            <h5>${doctor.fullName}</h5>
-                                            <h6>${doctor.speciality}</h6>
-                                            <h6>$ ${doctor.serviceFee} USD / visit</h6>
-                                        </a>
-                                    </div>
-                                </c:forEach>
-                            </div>
-                        </div>
-                        <script>
+        <div id="doctor-container" class="container">
+            <div class="row">
+                <c:forEach items="${doctor}" var="doctor">
+                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2 doctor">
+                        <a href="WebDoctorDetail?doctorId=${doctor.doctorId}">
+                            <img src="data:image/jpg;base64,${doctor.image}" width="240" height="300"/>
+                            <h5>${doctor.fullName}</h5>
+                            <h6>${doctor.speciality}</h6>
+                            <h6>$ ${doctor.serviceFee} USD / visit</h6>
+                        </a>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+        <script>
 
-                            function filterDoctors() {
-                                var selectedSpeciality = document.getElementById("speciality").value;
-                                var doctorContainers = document.getElementsByClassName("doctor");
+            function filterDoctors() {
+                var selectedSpeciality = document.getElementById("speciality").value;
+                var doctorContainers = document.getElementsByClassName("doctor");
 
-                                for (var i = 0; i < doctorContainers.length; i++) {
-                                    var doctorSpeciality = doctorContainers[i].querySelector("h6").textContent;
-                                    if (selectedSpeciality === "" || selectedSpeciality === doctorSpeciality) {
-                                        doctorContainers[i].style.display = "block";
-                                    } else {
-                                        doctorContainers[i].style.display = "none";
-                                    }
-                                }
-                            }
+                for (var i = 0; i < doctorContainers.length; i++) {
+                    var doctorSpeciality = doctorContainers[i].querySelector("h6").textContent;
+                    if (selectedSpeciality === "" || selectedSpeciality === doctorSpeciality) {
+                        doctorContainers[i].style.display = "block";
+                    } else {
+                        doctorContainers[i].style.display = "none";
+                    }
+                }
+            }
 
-                            document.getElementById("speciality").addEventListener("change", filterDoctors);
+            document.getElementById("speciality").addEventListener("change", filterDoctors);
 
-                            filterDoctors();
-                        </script>
-                        </body>
-                        <footer>
-                            <jsp:include page="/frontend/common/footer.jsp" />
-                        </footer>
+            filterDoctors();
+        </script>
+    </body>
+    <footer>
+        <jsp:include page="/frontend/common/footer.jsp" />
+    </footer>
 
-                        </html>
+</html>
