@@ -16,7 +16,6 @@ public class Patient extends UserAccount{
     public Patient() {
        
     }
-
     public Patient(int patientId, int userId, String username, String email, String fullName, int gender, String phone, String image, Date dob, String address, int status) {
         super(userId, username, email, fullName, gender, phone, image, dob, address, status);
         this.patientId = patientId;
