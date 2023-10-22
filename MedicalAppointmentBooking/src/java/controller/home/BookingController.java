@@ -47,7 +47,7 @@ public class BookingController extends HttpServlet {
         Doctor chosenDoctor = (Doctor) SessionUtils.getInstance().getValue(request, "chosen_doctor");
         Service chosenService = (Service) SessionUtils.getInstance().getValue(request, "chosen_service");
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
-      
+
         if (action != null && action.equals("check_availability")) {
             String date = request.getParameter("date");
             List<String> timeSlot = null;
@@ -59,16 +59,15 @@ public class BookingController extends HttpServlet {
             }
             request.setAttribute("timeslot", timeSlot);
             request.setAttribute("date", date);
-           
+
             request.getRequestDispatcher("frontend/view/booking.jsp").forward(request, response);
             return;
         }
         if (action != null && action.equals("yourself-booking")) {
-
+            
             String apptTime = request.getParameter("appt-time");
             String apptDate = request.getParameter("appt-date");
             String apptNote = request.getParameter("appt-reason");
-
             if (chosenDoctor != null) {
                 Patient patient = new Patient(
                         user.getUserId(),

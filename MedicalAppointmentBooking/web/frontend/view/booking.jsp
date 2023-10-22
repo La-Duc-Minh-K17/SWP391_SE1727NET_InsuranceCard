@@ -24,6 +24,7 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     </head>
 
@@ -48,6 +49,10 @@
                     <div class="col-lg-8">
                         <c:if test="${error != null}">
                             <div class="alert alert-error">${requestScope.error}</div>
+                        </c:if>
+                        <c:set var="isApptOrResv" value="resv"></c:set>
+                        <c:if test="${sessionScope.chosen_doctor != null}">
+                            <c:set var="isApptOrResv" value="appt"></c:set>
                         </c:if>
                         <div class="card border-0 shadow rounded overflow-hidden">
                             <c:if test="${sessionScope.chosen_doctor != null}">
@@ -194,19 +199,15 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Date : </label>
-                                                    <input id="checkin-date" required="" name="appt-date" value="${requestScope.date}" type="date"class="flatpickr flatpickr-input form-control" onchange="checkAvailability()" >
+                                                    <input id="checkin-date" required="" name="appt-date" type="date"class="flatpickr flatpickr-input form-control"  >
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Time</label>
-                                                    <select id ="appt-time"required="" name="appt-time"
+                                                    <select id ="time"required="" name="appt-time"
                                                             class="form-control department-name select2input">
-                                                        <c:if test="${timeslot != null}">
-                                                            <c:forEach items="${timeslot}" var="time">
-                                                                <option value="${time}">${time}</option>
-                                                            </c:forEach>
-                                                        </c:if>
+                                                        <option>Select Time</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -219,8 +220,7 @@
                                             <div class="col-md-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Choose payment method</label>
-                                                    <select  name="payment"
-                                                             class="form-control department-name select2input">
+                                                    <select name="payment" class="form-control department-name select2input">
                                                         <option check="checked" value="">
                                                             Pay later at the medical facility</option>
                                                     </select>
@@ -255,31 +255,59 @@
         <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-        <script src="<c:url value= '/frontend/template/assets/js/jquery.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/flatpickr.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/select2.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/select2.init.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/jquery.timepicker.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/timepicker.init.js'/>"></script>
         <script>
-            
-        function checkAvailability() {
-        const url = 'http://localhost:8080/MedicalAppointmentBooking/booking?action=check_availability&date=';
-        const date = document.getElementById("checkin-date").value;
-        window.location.href = url + date;
+            $("#checkin-date").flatpickr({
+                minDate: "today",
+                maxDate: new Date().fp_incr(7)
+            });
+            $(document).ready(function () {
 
-        }
-        $("#checkin-date").flatpickr({
-        minDate: "today",
-        maxDate: new Date().fp_incr(7),
-        dateFormat: "d/m/Y",
-        altInput: true  
+                $("#checkin-date").change(function () {
+                    $("#time").find("option").remove();
+                    $("#time").append("<option>Select Time</option>");
+                    
+                    let chosendate = $("#checkin-date").val();
+                    if (${isApptOrResv} === 'appt') {
+                        let data = {
+                            type: "appointment",
+                            chosenDate: chosendate,
+                            doctor_id: ${choosenDoctor.doctorId}
+                        };
+                    } else {
+                        let data = {
+                            type: "reservation",
+                            chosenDate: chosendate,
+                            service_id: ${chosenService.service_id}
+                        };
+                    }
 
-        });
+                    $.ajax({
+                        url: "CheckAvailabilityServlet",
+                        method: "GET",
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
 
+                            let obj = $.parseJSON(data);
+                            $.each(obj, function (key, value) {
+                                $("#time").append(
+                                        '<option value="' + value.slotTime + '">' + value.slotTime + "</option>"
+                                        );
+                            });
+                            $("select").formSelect();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            $("#time").append("<option>No Time Slot Unavailable</option>");
+                        },
+                        cache: false
+                    });
+                });
 
-
-    </script>
-
-</body>
+            });
+        </script>
+    </body>
 </html>

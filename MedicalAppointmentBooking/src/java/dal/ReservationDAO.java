@@ -105,32 +105,7 @@ public class ReservationDAO {
         }
     }
 
-    public void assignReservation(int resvId, UserAccount account) {
-        PreparedStatement ps = null;
-        Connection connection = null;
-        String sql = "UPDATE `mabs`.`reservations`\n"
-                + "SET\n"
-                + "`reservation_status` = 'CONFIRMED',\n"
-                + "`staff_id` = ? "
-                + "WHERE `reservation_id` =?";
-        try {
-            connection = dbc.getConnection();
-            ps = connection.prepareStatement(sql);
-            ps.setInt(1, account.getUserId());
-            ps.setInt(2, resvId);
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    System.out.println(ex);
-                }
-            }
-        }
-    }
+   
      public List<String> getAvailableTimeSlot(int serviceId , String date) {
         PreparedStatement ps = null;
         Connection connection = null;

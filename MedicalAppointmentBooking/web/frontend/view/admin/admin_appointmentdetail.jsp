@@ -259,41 +259,59 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <c:if test="${appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="mt-3">
+                                                <a href="admin-appointmentdetail?action=confirm&apptId=${appt.apptId}"class="btn btn-primary ">Confirm Appointment</a>
+                                            </div>
+                                            <div class="mt-3">
+                                                <a href="admin-appointmentdetail?action=reject&apptId=${appt.apptId}"class="btn btn-primary btn-danger">Reject Appointment  </a>
+                                            </div>
+                                        </div>
+                                    </c:if>
                                 </div>
+
                             </div>
-                            <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
-                                <div>
-                                    <div class="bg-white rounded shadow overflow-hidden">
-                                        <div class="p-4 border-bottom">
-                                            <h5 class="mb-0">Assign new doctor</h5>
-                                        </div>
-                                        <div class="col-md-6 p-3">
-                                            <div class="mb-3">
-                                                <label class="form-label">Choose doctor: </label>
-                                                <select class="form-select form-control" name="doctor" id="doctor">
-                                                    <c:forEach var="d" items="${doctorL}">
-                                                        <option value="${d.doctorId }">${d.fullName}</option>
-                                                    </c:forEach>
-                                                </select>
+                            <c:if test="${appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
+                                <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
+                                    <form action="admin-appointmentdetail?action=reassign&apptId=${appt.apptId}" method="post">
+                                        <div class="bg-white rounded shadow overflow-hidden">
+                                            <div class="p-4 border-bottom">
+                                                <h5 class="mb-0">Update appointment information</h5>
+                                            </div>
+                                            <div class="col-md-6 p-3">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Choose doctor: </label>
+                                                    <select required="" class="form-select form-control" name="doctor" id="doctor">
+                                                        <c:forEach var="d" items="${doctorL}">
+                                                            <option value="${d.doctorId }">${d.fullName}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 p-3">
+                                                <div class="">
+                                                    <label class="form-label">Select Appointment Date: </label>
+                                                    <input required="" id="checkin-date" required="" name="appt-date" value="${appt.apptDate}" type="date"class="flatpickr flatpickr-input form-control"  >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 p-3">
+                                                <div class="">
+                                                    <label class="form-label">Select Appointment Time:</label>
+                                                    <select id ="time"required="" name="appt-time" class="form-control department-name select2input" required="">
+                                                        <option readonly>Select Time</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 p-3">
+                                                <div class="">
+                                                    <input type="submit" id="reassign" class="btn btn-primary" value="Re-assign"> </input>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 p-3">
-                                            <div class="">
-                                                <label class="form-label">Date: </label>
-                                                <input id="checkin-date" required="" name="appt-date" value="${appt.apptDate}" type="date"class="flatpickr flatpickr-input form-control"  >
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 p-3">
-                                            <div class="">
-                                                <label class="form-label">Time</label>
-                                                <select id ="time"required="" name="time" class="form-control department-name select2input">
-                                                    <option readonly>Select Time</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
-                            </div>
+                            </c:if>
                         </div>            
                     </div>           
                 </div>
@@ -305,14 +323,15 @@
                 maxDate: new Date().fp_incr(7)
             });
             $(document).ready(function () {
-                
+
                 $("#checkin-date").change(function () {
-                   
+                    $("#time").find("option").remove();
+                    $("#time").append("<option>Select Time</option>");
                     let chosendate = $("#checkin-date").val();
                     let data = {
-                        type: "reschedule",
+                        type: "appointment",
                         chosenDate: chosendate,
-                        doctor_id :$("#doctor").val()
+                        doctor_id: $("#doctor").val()
                     };
 
                     $.ajax({
@@ -320,11 +339,11 @@
                         method: "GET",
                         data: data,
                         success: function (data, textStatus, jqXHR) {
-                            console.log(data);
+
                             let obj = $.parseJSON(data);
                             $.each(obj, function (key, value) {
                                 $("#time").append(
-                                        '<option value="' + value.scheduleId + '">' + value.slotTime + "</option>"
+                                        '<option value="' + value.slotTime + '">' + value.slotTime + "</option>"
                                         );
                             });
                             $("select").formSelect();
@@ -335,6 +354,7 @@
                         cache: false
                     });
                 });
+
             });
         </script>
 

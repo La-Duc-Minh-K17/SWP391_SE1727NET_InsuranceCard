@@ -32,11 +32,11 @@ public class CheckAvailabilityServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DoctorDAO dDAO = new DoctorDAO();
+        
         DoctorScheduleDAO dcDAO = new DoctorScheduleDAO();
         String type = request.getParameter("type");
 
-        if (type != null && type.equals("reschedule")) {
+        if (type != null && type.equals("appointment")) {
             String date = request.getParameter("chosenDate");
             int doctorId = Integer.parseInt(request.getParameter("doctor_id"));
             List<DoctorSchedule> scheduleList = dcDAO.getAvailableSlot(doctorId, date);
@@ -44,6 +44,17 @@ public class CheckAvailabilityServlet extends HttpServlet {
             String timeList = json.toJson(scheduleList);
             response.setContentType("text/html");
             response.getWriter().write(timeList);
+            
+        }
+        if (type != null && type.equals("reservation")) {
+            String date = request.getParameter("chosenDate");
+            int serviceId = Integer.parseInt(request.getParameter("service_id"));
+            List<DoctorSchedule> scheduleList = dcDAO.getAvailableSlot(serviceId, date);
+            Gson json = new Gson();
+            String timeList = json.toJson(scheduleList);
+            response.setContentType("text/html");
+            response.getWriter().write(timeList);
+            
         }
     }
 
