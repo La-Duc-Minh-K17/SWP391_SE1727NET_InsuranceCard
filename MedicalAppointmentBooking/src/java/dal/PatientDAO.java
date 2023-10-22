@@ -215,7 +215,14 @@ public class PatientDAO {
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
-
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
     }
 
@@ -264,7 +271,9 @@ public class PatientDAO {
                 }
             }
         }
-        return listPatient;
+
+        return null;
+
     }
 
     public List<Patient> searchPatientsByName(String keyword) {
@@ -296,9 +305,5 @@ public class PatientDAO {
         }
         return resultList;
     }
-//   public static void main(String[] args) throws SQLException {
-//        PatientDAO dao = new PatientDAO();
-//        System.out.println(dao.getAllPatient());
-//    }
 
 }

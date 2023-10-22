@@ -37,8 +37,8 @@
                         <a href="#" class="logo-icon">
                             <img src="frontend/template/assets/images/logo-icon.png" height="30" class="small" alt="">
                             <span class="">
-                                <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                                <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                                <img src="frontend/template/assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                                <img src="frontend/template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                             </span>
                         </a>
                         <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
@@ -55,7 +55,7 @@
                                 <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                      style="min-width: 200px;">
                                     <a class="dropdown-item d-flex align-items-center text-dark"
-                                       <img src="../assets/images/doctors/01.jpg"
+                                       <img src="frontend/template/assets/images/doctors/01.jpg"
                                        class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                         <div class="flex-1 ms-2">
                                             <span class="d-block mb-1">${sessionScope.user.fullName}</span>
@@ -259,48 +259,103 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <c:if test="${appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="mt-3">
+                                                <a href="admin-appointmentdetail?action=confirm&apptId=${appt.apptId}"class="btn btn-primary ">Confirm Appointment</a>
+                                            </div>
+                                            <div class="mt-3">
+                                                <a href="admin-appointmentdetail?action=reject&apptId=${appt.apptId}"class="btn btn-primary btn-danger">Reject Appointment  </a>
+                                            </div>
+                                        </div>
+                                    </c:if>
                                 </div>
+
                             </div>
-                            <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
-                                <div>
-                                    <div class="bg-white rounded shadow overflow-hidden">
-                                        <div class="p-4 border-bottom">
-                                            <h5 class="mb-0">Assign new doctor</h5>
-                                        </div>
-                                        <div class="col-md-6 p-3">
-                                            <div class="mb-3">
-                                                <label class="form-label">Choose doctor: </label>
-                                                <select class="form-select form-control" name="doctor" id="doctor">
-                                                    <option readonly>Select Doctor</option>
-                                                </select>
+                            <c:if test="${appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
+                                <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
+                                    <form action="admin-appointmentdetail?action=reassign&apptId=${appt.apptId}" method="post">
+                                        <div class="bg-white rounded shadow overflow-hidden">
+                                            <div class="p-4 border-bottom">
+                                                <h5 class="mb-0">Update appointment information</h5>
+                                            </div>
+                                            <div class="col-md-6 p-3">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Choose doctor: </label>
+                                                    <select required="" class="form-select form-control" name="doctor" id="doctor">
+                                                        <c:forEach var="d" items="${doctorL}">
+                                                            <option value="${d.doctorId }">${d.fullName}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 p-3">
+                                                <div class="">
+                                                    <label class="form-label">Select Appointment Date: </label>
+                                                    <input required="" id="checkin-date" required="" name="appt-date" value="${appt.apptDate}" type="date"class="flatpickr flatpickr-input form-control"  >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 p-3">
+                                                <div class="">
+                                                    <label class="form-label">Select Appointment Time:</label>
+                                                    <select id ="time"required="" name="appt-time" class="form-control department-name select2input" required="">
+                                                        <option readonly>Select Time</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 p-3">
+                                                <div class="">
+                                                    <input type="submit" id="reassign" class="btn btn-primary" value="Re-assign"> </input>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 p-3">
-                                            <div class="">
-                                                <label class="form-label">Date: </label>
-                                                <select class="form-select form-control" name="date" id="date">
-                                                    <option readonly>Select Doctor</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 p-3">
-                                            <div class="">
-                                                <label class="form-label">Time</label>
-                                                <select id ="time"required="" name="time" class="form-control department-name select2input">
-                                                    <option readonly>Select Time</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
-                            </div>
+                            </c:if>
                         </div>            
                     </div>           
                 </div>
             </main>
         </div>
-        <script type="text/javascript">
-          
+        <script>
+            $("#checkin-date").flatpickr({
+                minDate: "today",
+                maxDate: new Date().fp_incr(7)
+            });
+            $(document).ready(function () {
+
+                $("#checkin-date").change(function () {
+                    $("#time").find("option").remove();
+                    $("#time").append("<option>Select Time</option>");
+                    let chosendate = $("#checkin-date").val();
+                    let data = {
+                        type: "appointment",
+                        chosenDate: chosendate,
+                        doctor_id: $("#doctor").val()
+                    };
+
+                    $.ajax({
+                        url: "CheckAvailabilityServlet",
+                        method: "GET",
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            let obj = $.parseJSON(data);
+                            $.each(obj, function (key, value) {
+                                $("#time").append(
+                                        '<option value="' + value.slotTime + '">' + value.slotTime + "</option>"
+                                        );
+                            });
+                            $("select").formSelect();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            $("#time").append("<option>No Time Slot Unavailable</option>");
+                        },
+                        cache: false
+                    });
+                });
+
+            });
         </script>
 
 
@@ -309,7 +364,8 @@
         <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/select2.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/select2.init.js'/>"></script>
-
+        <script src="<c:url value= '/frontend/template/assets/js/jquery.timepicker.min.js'/>"></script>
+        <script src="<c:url value= '/frontend/template/assets/js/timepicker.init.js'/>"></script>
 
     </body>
 </html>

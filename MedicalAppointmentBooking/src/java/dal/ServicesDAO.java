@@ -594,10 +594,7 @@ public class ServicesDAO {
         return resultList;
 
     }
-
-
     public List<Service> sortService(String by, String sort) {
-
         List<Service> slist = new ArrayList<>();
         Connection connection = null;
         PreparedStatement ps = null;
@@ -628,7 +625,6 @@ public class ServicesDAO {
                 int service_status = rs.getInt("service_status");
                 int category_id = rs.getInt("category_id");
                 Service service = new Service(service_id, service_name, service_description, service_details, fee, service_image, service_status, category_id);
-
                 slist.add(service);
 
 

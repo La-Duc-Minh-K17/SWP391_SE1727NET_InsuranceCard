@@ -15,7 +15,6 @@ import java.util.List;
 import model.Patient;
 import model.Reservation;
 import model.Service;
-import model.UserAccount;
 import utils.TimeUtil;
 
 /**
@@ -105,60 +104,34 @@ public class ReservationDAO {
         }
     }
 
-    public void assignReservation(int resvId, UserAccount account) {
-        PreparedStatement ps = null;
-        Connection connection = null;
-        String sql = "UPDATE `mabs`.`reservations`\n"
-                + "SET\n"
-                + "`reservation_status` = 'CONFIRMED',\n"
-                + "`staff_id` = ? "
-                + "WHERE `reservation_id` =?";
-        try {
-            connection = dbc.getConnection();
-            ps = connection.prepareStatement(sql);
-            ps.setInt(1, account.getUserId());
-            ps.setInt(2, resvId);
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    System.out.println(ex);
-                }
-            }
-        }
-    }
-     public List<String> getAvailableTimeSlot(int serviceId , String date) {
+    public List<String> getAvailableTimeSlot(int serviceId, String date) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
         List<String> timeSlot = new ArrayList<>();
-        timeSlot.add("7:00:00"); 
-        timeSlot.add("8:00:00"); 
-        timeSlot.add("9:00:00"); 
-        timeSlot.add("10:00:00"); 
-        timeSlot.add("11:00:00"); 
-        timeSlot.add("12:00:00"); 
-        timeSlot.add("13:00:00"); 
-        timeSlot.add("14:00:00"); 
-        timeSlot.add("15:00:00"); 
-        timeSlot.add("16:00:00"); 
-        timeSlot.add("17:00:00"); 
-       
+        timeSlot.add("7:00:00");
+        timeSlot.add("8:00:00");
+        timeSlot.add("9:00:00");
+        timeSlot.add("10:00:00");
+        timeSlot.add("11:00:00");
+        timeSlot.add("12:00:00");
+        timeSlot.add("13:00:00");
+        timeSlot.add("14:00:00");
+        timeSlot.add("15:00:00");
+        timeSlot.add("16:00:00");
+        timeSlot.add("17:00:00");
+
         String sql = "SELECT reservation_time\n"
                 + "FROM reservations\n"
                 + "WHERE service_id = ? AND reservation_date = ? ";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            ps.setDate(2, TimeUtil.dateConverter(date));
-            ps.setInt(1 , serviceId);
+            ps.setDate(2, TimeUtil.dateConverter1(date));
+            ps.setInt(1, serviceId);
             rs = ps.executeQuery();
-            while(rs.next()) {
-                if(timeSlot.contains(rs.getString(1))) {
+            while (rs.next()) {
+                if (timeSlot.contains(rs.getString(1))) {
                     timeSlot.remove(rs.getString(1));
                 }
             }
@@ -175,20 +148,19 @@ public class ReservationDAO {
         }
         return timeSlot;
     }
-    public void cancelReservation(int resvId, UserAccount account) {
+
+    public void updateStatus(Reservation resv) {
         PreparedStatement ps = null;
         Connection connection = null;
         String sql = "UPDATE `mabs`.`reservations`\n"
                 + "SET\n"
-                + "`reservation_status` = ?,\n"
-                + "`staff_id` = ? "
-                + "WHERE `reservation_id` =?";
+                + "`reservation_status` = ?\n"
+                + "WHERE `reservation_id` = ?";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            ps.setString(1, "REJECTED");
-            ps.setInt(2, account.getUserId());
-            ps.setInt(3, resvId);
+            ps.setString(1, resv.getStatus());
+            ps.setInt(2, resv.getResvId());
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -202,38 +174,6 @@ public class ReservationDAO {
             }
         }
     }
-    
 
-    public boolean checkAvailability(Reservation resv) {
-        PreparedStatement ps = null;
-        Connection connection = null;
-        ResultSet rs = null;
-        String sql = "SELECT COUNT(*) AS appointment_count\n"
-                + "FROM appointments\n"
-                + "WHERE service_id = ? AND reservation_date = ? AND reservation_time = ? ";
-        try {
-            connection = dbc.getConnection();
-            ps.setInt(1, resv.getService().getService_id());
-            ps.setDate(2, resv.getResvDate());
-            ps.setString(3, resv.getResvTime());
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                if (rs.getInt(1) >= 1) {
-                    return false;
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    System.out.println(ex);
-                }
-            }
-        }
-        return true;
-    }
-
+  
 }

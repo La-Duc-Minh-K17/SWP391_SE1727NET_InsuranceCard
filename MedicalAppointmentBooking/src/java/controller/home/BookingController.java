@@ -47,7 +47,7 @@ public class BookingController extends HttpServlet {
         Doctor chosenDoctor = (Doctor) SessionUtils.getInstance().getValue(request, "chosen_doctor");
         Service chosenService = (Service) SessionUtils.getInstance().getValue(request, "chosen_service");
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
-      
+
         if (action != null && action.equals("check_availability")) {
             String date = request.getParameter("date");
             List<String> timeSlot = null;
@@ -59,16 +59,14 @@ public class BookingController extends HttpServlet {
             }
             request.setAttribute("timeslot", timeSlot);
             request.setAttribute("date", date);
-           
             request.getRequestDispatcher("frontend/view/booking.jsp").forward(request, response);
             return;
         }
         if (action != null && action.equals("yourself-booking")) {
-
+            
             String apptTime = request.getParameter("appt-time");
             String apptDate = request.getParameter("appt-date");
             String apptNote = request.getParameter("appt-reason");
-
             if (chosenDoctor != null) {
                 Patient patient = new Patient(
                         user.getUserId(),
@@ -86,12 +84,7 @@ public class BookingController extends HttpServlet {
                     patientId = pDAO.insertPatient(patient);
                 }
                 patient.setPatientId(patientId);
-                Appointment appt = new Appointment(apptNote, TimeUtil.dateConverter(apptDate), apptTime, "PENDING", chosenDoctor, patient);
-                if (aDAO.checkAvailability(appt)) {
-                    request.setAttribute("error", "This slot time is fully booked now! Please choose other date and time.");
-                    request.getRequestDispatcher("frontend/view/booking.jsp").forward(request, response);
-                    return;
-                }
+                Appointment appt = new Appointment(apptNote, TimeUtil.dateConverter1(apptDate), apptTime, "PENDING", chosenDoctor, patient);
                 aDAO.insertNewAppointment(appt);
                 response.sendRedirect("frontend/view/booking_success.jsp");
                 return;
@@ -113,12 +106,8 @@ public class BookingController extends HttpServlet {
                     patientId = pDAO.insertPatient(patient);
                 }
                 patient.setPatientId(patientId);
-                Reservation resv = new Reservation(apptNote, TimeUtil.dateConverter(apptDate), apptTime, "PENDING", chosenService, patient);
-                if (rDAO.checkAvailability(resv)) {
-                    request.setAttribute("error", "This slot time is fully booked now! Please choose other date and time.");
-                    request.getRequestDispatcher("frontend/view/booking.jsp").forward(request, response);
-                    return;
-                }
+                Reservation resv = new Reservation(apptNote, TimeUtil.dateConverter1(apptDate), apptTime, "PENDING", chosenService, patient);
+                System.out.println(resv);
                 rDAO.insertNewReservation(resv);
                 response.sendRedirect("frontend/view/booking_success.jsp");
                 return;
