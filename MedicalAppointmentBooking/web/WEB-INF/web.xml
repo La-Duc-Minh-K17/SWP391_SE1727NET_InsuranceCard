@@ -105,7 +105,8 @@
 
         <servlet-name>ManagePatient</servlet-name>
         <servlet-class>controller.manager.ManagePatient</servlet-class>
-
+    </servlet>
+    <servlet>
         <servlet-name>PatientListController</servlet-name>
         <servlet-class>controller.home.PatientListController</servlet-class>
     </servlet>
@@ -210,7 +211,8 @@
 
         <servlet-name>ManagePatient</servlet-name>
         <url-pattern>/manage-patient</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AdminAppointmentList</servlet-name>
         <url-pattern>/admin-appointment</url-pattern>
     </servlet-mapping>

@@ -14,7 +14,7 @@ Author     : PC
         <title>Manage Service</title>
 
         <!-- favicon -->
-        <link rel="shortcut icon" href="/frontend/template/assets/images/favicon.ico.png">
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- simplebar -->
@@ -155,7 +155,7 @@ Author     : PC
                                                         <td class="p-3">
                                                             <style>
                                                                 .custom-btn {
-                                                                    width: 100px; /* Adjust the width as needed */
+                                                                    width: 100px; 
                                                                 }
                                                             </style>
                                                         <td class="text-center">
