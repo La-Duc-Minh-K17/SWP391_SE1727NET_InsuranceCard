@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="<c:url value= '/frontend/template/assets/js/flatpickr.min.js'/>"></script>
 
     </head>
 
@@ -255,7 +256,7 @@
         <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-        <script src="<c:url value= '/frontend/template/assets/js/flatpickr.min.js'/>"></script>
+
         <script src="<c:url value= '/frontend/template/assets/js/select2.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/select2.init.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/jquery.timepicker.min.js'/>"></script>
@@ -270,21 +271,24 @@
                 $("#checkin-date").change(function () {
                     $("#time").find("option").remove();
                     $("#time").append("<option>Select Time</option>");
-                    
+
                     let chosendate = $("#checkin-date").val();
-                    if (${isApptOrResv} === 'appt') {
-                        let data = {
+                    let data;
+
+                    if ('${isApptOrResv}' === 'appt') {
+                        data = {
                             type: "appointment",
                             chosenDate: chosendate,
-                            doctor_id: ${choosenDoctor.doctorId}
+                            doctor_id: '${sessionScope.chosen_doctor.doctorId}'
                         };
                     } else {
-                        let data = {
+                        data = {
                             type: "reservation",
                             chosenDate: chosendate,
-                            service_id: ${chosenService.service_id}
+                            service_id: '${sessionScope.chosen_service.service_id}'
                         };
                     }
+
 
                     $.ajax({
                         url: "CheckAvailabilityServlet",
@@ -293,10 +297,17 @@
                         success: function (data, textStatus, jqXHR) {
 
                             let obj = $.parseJSON(data);
+
                             $.each(obj, function (key, value) {
-                                $("#time").append(
-                                        '<option value="' + value.slotTime + '">' + value.slotTime + "</option>"
-                                        );
+                                if ('${isApptOrResv}' === 'appt') {
+                                    $("#time").append(
+                                            '<option value="' + value.slotTime + '">' + value.slotTime + "</option>"
+                                            );
+                                } else {
+                                    $("#time").append(
+                                            '<option value="' + value + '">' + value + "</option>"
+                                            );
+                                }
                             });
                             $("select").formSelect();
                         },

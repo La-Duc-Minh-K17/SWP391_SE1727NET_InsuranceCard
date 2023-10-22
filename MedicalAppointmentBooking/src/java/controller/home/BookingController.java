@@ -59,7 +59,6 @@ public class BookingController extends HttpServlet {
             }
             request.setAttribute("timeslot", timeSlot);
             request.setAttribute("date", date);
-
             request.getRequestDispatcher("frontend/view/booking.jsp").forward(request, response);
             return;
         }

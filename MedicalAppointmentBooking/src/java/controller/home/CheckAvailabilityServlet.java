@@ -5,8 +5,8 @@
 package controller.home;
 
 import com.google.gson.Gson;
-import dal.DoctorDAO;
 import dal.DoctorScheduleDAO;
+import dal.ReservationDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -32,7 +32,7 @@ public class CheckAvailabilityServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        ReservationDAO rDAO = new ReservationDAO();
         DoctorScheduleDAO dcDAO = new DoctorScheduleDAO();
         String type = request.getParameter("type");
 
@@ -49,9 +49,9 @@ public class CheckAvailabilityServlet extends HttpServlet {
         if (type != null && type.equals("reservation")) {
             String date = request.getParameter("chosenDate");
             int serviceId = Integer.parseInt(request.getParameter("service_id"));
-            List<DoctorSchedule> scheduleList = dcDAO.getAvailableSlot(serviceId, date);
+            List<String> timeSlot = rDAO.getAvailableTimeSlot(serviceId, date) ;
             Gson json = new Gson();
-            String timeList = json.toJson(scheduleList);
+            String timeList = json.toJson(timeSlot);
             response.setContentType("text/html");
             response.getWriter().write(timeList);
             
