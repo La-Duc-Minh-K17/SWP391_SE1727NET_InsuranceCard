@@ -215,7 +215,7 @@
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Examination Reason <span class="text-danger">*</span></label>
-                                                    <textarea name="apptreason" rows="5" class="form-control" placeholder="Your Heath Status:"></textarea>
+                                                    <textarea name="appt-reason" rows="5" class="form-control" placeholder="Your Heath Status:"></textarea>
                                                 </div>
                                             </div><!--end col-->
                                             <div class="col-md-12">
@@ -256,7 +256,6 @@
         <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-
         <script src="<c:url value= '/frontend/template/assets/js/select2.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/select2.init.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/jquery.timepicker.min.js'/>"></script>
