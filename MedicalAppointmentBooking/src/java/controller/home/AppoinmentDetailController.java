@@ -4,8 +4,6 @@
  */
 package controller.home;
 
-import dal.DoctorDAO;
-import dal.PatientDAO;
 import dal.AppointmentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,16 +11,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Doctor;
-import model.Patient;
 import model.Appointment;
 
 /**
  *
  * @author nguye
  */
-public class AppointmentListController extends HttpServlet {
+public class AppoinmentDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,15 +32,12 @@ public class AppointmentListController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            int docId = Integer.parseInt(request.getParameter("id"));
-            DoctorDAO dDao = new DoctorDAO();
-            Doctor doctor = dDao.getDoctorById(docId);
-            PatientDAO pdao = new PatientDAO();
-            AppointmentDAO adao = new AppointmentDAO();
-            List<Appointment> apptList = adao.getAppointmentByDoctorId(docId);
-            request.setAttribute("doctor", doctor);
-            request.setAttribute("apptList", apptList);
-            request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
+            AppointmentDAO apptDAO = new AppointmentDAO();
+            int apptId = Integer.parseInt(request.getParameter("apptId"));
+            
+            Appointment appt = apptDAO.getAppointmentById(apptId);
+            request.setAttribute("appt", appt);
+            request.getRequestDispatcher("frontend/view/admin/doctorappointmentdetail.jsp").forward(request, response);
 
         }
     }

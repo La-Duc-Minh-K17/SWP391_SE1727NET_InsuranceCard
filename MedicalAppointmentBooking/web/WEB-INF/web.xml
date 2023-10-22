@@ -97,6 +97,10 @@
         <servlet-class>controller.staff.StaffReservationList</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ManagePatient</servlet-name>
+        <servlet-class>controller.manager.ManagePatient</servlet-class>
+</servlet>
+  <servlet>
         <servlet-name>PatientListController</servlet-name>
         <servlet-class>controller.home.PatientListController</servlet-class>
     </servlet>
@@ -109,6 +113,7 @@
         <servlet-class>controller.home.AppointmentListController</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>UserProfileController</servlet-name>
         <servlet-class>controller.user.UserProfileController</servlet-class>
     </servlet>
@@ -120,6 +125,13 @@
         <servlet-name>CheckAvailabilityServlet</servlet-name>
         <servlet-class>controller.home.CheckAvailabilityServlet</servlet-class>
     </servlet>
+        <servlet-name>AppoinmentDetailController</servlet-name>
+        <servlet-class>controller.home.AppoinmentDetailController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserAccountController</servlet-name>
+        <url-pattern>/user</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -201,6 +213,10 @@
         <url-pattern>/detailservice</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ManagePatient</servlet-name>
+        <url-pattern>/manage-patient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AdminAppointmentList</servlet-name>
         <url-pattern>/admin-appointment</url-pattern>
     </servlet-mapping>
@@ -231,6 +247,10 @@
     <servlet-mapping>
         <servlet-name>CheckAvailabilityServlet</servlet-name>
         <url-pattern>/CheckAvailabilityServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AppoinmentDetailController</servlet-name>
+        <url-pattern>/doctor-appointmentdetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
