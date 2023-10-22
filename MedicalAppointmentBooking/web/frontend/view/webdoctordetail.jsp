@@ -118,6 +118,11 @@
             .overview-content {
                 display: block;
             }
+            .feedback{
+                margin-left: 30px;
+                padding-bottom: 20px;
+                display:none;
+            }
         </style>
     </head>
     <body>
@@ -149,9 +154,9 @@
                 <div class="header-content">
                     <ul>
                         <li><a id="overview-link" class="active" href="#Overview">Overview</a></li>
-                        <li><a href="#Experience">Experience</a></li>
-                        <li><a href="#Reviews">Reviews</a></li>
-                        <li><a href="#Timetable">Timetable</a></li>
+
+                        <li><a id="reviews-link" href="#Reviews">Reviews</a></li>
+
                     </ul>
                 </div>
                 <div class="overview-content">
@@ -162,6 +167,44 @@
                     <h5>Speciality:</h5>
                     <p>${doctor.speciality}</p>
                 </div>
+
+                <div class="feedback">
+                    <c:forEach items="${feedback}" var="feedback">
+                        <h5>${feedback.user.fullName}</h5>
+                        <c:choose>
+                            <c:when test="${rv.rate >= 1}">
+                                ★
+                            </c:when>
+                            <c:otherwise>☆</c:otherwise>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${rv.rate >= 2}">
+                                ★
+                            </c:when>
+                            <c:otherwise>☆</c:otherwise>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${rv.rate >= 3}">
+                                ★
+                            </c:when>
+                            <c:otherwise>☆</c:otherwise>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${rv.rate >= 4}">
+                                ★
+                            </c:when>
+                            <c:otherwise>☆</c:otherwise>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${rv.rate >= 5}">
+                                ★
+                            </c:when>
+                            <c:otherwise>☆</c:otherwise>
+                        </c:choose>
+                        <p>${feedback.content}</p>
+                    </c:forEach>
+
+                </div>
             </div>
 
         </div>
@@ -170,20 +213,25 @@
 
 
         <script>
-            // Lấy thẻ "Overview" và phần nội dung "overview-content"
             var overviewLink = document.getElementById("overview-link");
+            var reviewsLink = document.getElementById("reviews-link");
             var overviewContent = document.querySelector(".overview-content");
+            var feedbackContent = document.querySelector(".feedback");
 
             // Xác định sự kiện click cho thẻ "Overview"
             overviewLink.addEventListener("click", function (e) {
-                e.preventDefault(); // Ngăn chặn điều hướng mặc định
+                e.preventDefault();
+                // Hiển thị nội dung "Overview" và ẩn nội dung "Reviews"
+                overviewContent.style.display = "block";
+                feedbackContent.style.display = "none";
+            });
 
-                // Kiểm tra trạng thái hiển thị của nội dung
-                if (overviewContent.style.display === "none") {
-                    overviewContent.style.display = "block"; // Hiển thị nếu đang ẩn
-                } else {
-                    overviewContent.style.display = "none"; // Ẩn nếu đang hiển thị
-                }
+            // Xác định sự kiện click cho thẻ "Reviews"
+            reviewsLink.addEventListener("click", function (e) {
+                e.preventDefault();
+                // Hiển thị nội dung "Reviews" và ẩn nội dung "Overview"
+                feedbackContent.style.display = "block";
+                overviewContent.style.display = "none";
             });
         </script>
     </body>

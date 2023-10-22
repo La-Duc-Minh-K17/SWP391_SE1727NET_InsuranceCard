@@ -14,7 +14,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Doctor;
+import model.DoctorFeedback;
 import model.Service;
+import model.ServiceReview;
+import model.UserAccount;
 import utils.ImageProcessing;
 
 /**
@@ -50,7 +53,7 @@ public class DoctorDAO {
                 String speciality = rs.getString("speName");
                 String description = rs.getString("doctor_description");
                 Double serviceFee = rs.getDouble("service_fee");
-                Doctor d = new Doctor(doctorId, speciality,position, description,serviceFee, username, email, name, gender, phone, image, status);
+                Doctor d = new Doctor(doctorId, speciality, position, description, serviceFee, username, email, name, gender, phone, image, status);
                 doctorList.add(d);
             }
             return doctorList;
@@ -138,8 +141,8 @@ public class DoctorDAO {
                 String speciality = rs.getString("speName");
                 String description = rs.getString("doctor_description");
                 int fee = rs.getInt("service_fee");
-                doctor = new Doctor(doctorId, position, speciality, description, username, email, fullName, gender, phone, image, status);
-            doctor.setServiceFee(fee);
+                doctor = new Doctor(doctorId, speciality, position, description, username, email, fullName, gender, phone, image, status);
+                doctor.setServiceFee(fee);
             }
             return doctor;
         } catch (SQLException e) {
@@ -248,5 +251,52 @@ public class DoctorDAO {
                 }
             }
         }
+    }
+
+    public List<DoctorFeedback> getFeedBackByDoctorID(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<DoctorFeedback> feedbackList = new ArrayList<>();
+        String sql = "select full_name , image,create_time,rate,content \n"
+                + "from doctor_feedback df join user_account u on df.user_id = u.user_id\n"
+                + "where doctor_id = ?";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                UserAccount acc = new UserAccount();
+                String name = rs.getString("full_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+
+                String create_time = rs.getString("create_time");
+                String content = rs.getString("content");
+                float rate = rs.getFloat("rate");
+
+                acc.setFullName(name);
+                acc.setImage(image);
+
+                DoctorFeedback d = new DoctorFeedback();
+                d.setUser(acc);
+                d.setCreate_time(create_time);
+                d.setContent(content);
+                d.setRate(rate);
+                feedbackList.add(d);
+            }
+            return feedbackList;
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return feedbackList;
     }
 }
