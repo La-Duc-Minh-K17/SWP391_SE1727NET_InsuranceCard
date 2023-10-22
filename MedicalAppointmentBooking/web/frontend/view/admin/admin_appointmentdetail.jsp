@@ -37,8 +37,8 @@
                         <a href="#" class="logo-icon">
                             <img src="frontend/template/assets/images/logo-icon.png" height="30" class="small" alt="">
                             <span class="">
-                                <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                                <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                                <img src="frontend/template/assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                                <img src="frontend/template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                             </span>
                         </a>
                         <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
@@ -55,7 +55,7 @@
                                 <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                      style="min-width: 200px;">
                                     <a class="dropdown-item d-flex align-items-center text-dark"
-                                       <img src="../assets/images/doctors/01.jpg"
+                                       <img src="frontend/template/assets/images/doctors/01.jpg"
                                        class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                         <div class="flex-1 ms-2">
                                             <span class="d-block mb-1">${sessionScope.user.fullName}</span>
@@ -271,16 +271,16 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Choose doctor: </label>
                                                 <select class="form-select form-control" name="doctor" id="doctor">
-                                                    <option readonly>Select Doctor</option>
+                                                    <c:forEach var="d" items="${doctorL}">
+                                                        <option value="${d.doctorId }">${d.fullName}</option>
+                                                    </c:forEach>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6 p-3">
                                             <div class="">
                                                 <label class="form-label">Date: </label>
-                                                <select class="form-select form-control" name="date" id="date">
-                                                    <option readonly>Select Doctor</option>
-                                                </select>
+                                                <input id="checkin-date" required="" name="appt-date" value="${appt.apptDate}" type="date"class="flatpickr flatpickr-input form-control"  >
                                             </div>
                                         </div>
                                         <div class="col-md-6 p-3">
@@ -299,8 +299,43 @@
                 </div>
             </main>
         </div>
-        <script type="text/javascript">
-          
+        <script>
+            $("#checkin-date").flatpickr({
+                minDate: "today",
+                maxDate: new Date().fp_incr(7)
+            });
+            $(document).ready(function () {
+                
+                $("#checkin-date").change(function () {
+                   
+                    let chosendate = $("#checkin-date").val();
+                    let data = {
+                        type: "reschedule",
+                        chosenDate: chosendate,
+                        doctor_id :$("#doctor").val()
+                    };
+
+                    $.ajax({
+                        url: "CheckAvailabilityServlet",
+                        method: "GET",
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+                            console.log(data);
+                            let obj = $.parseJSON(data);
+                            $.each(obj, function (key, value) {
+                                $("#time").append(
+                                        '<option value="' + value.scheduleId + '">' + value.slotTime + "</option>"
+                                        );
+                            });
+                            $("select").formSelect();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            $("#time").append("<option>No Time Slot Unavailable</option>");
+                        },
+                        cache: false
+                    });
+                });
+            });
         </script>
 
 
@@ -309,7 +344,8 @@
         <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/select2.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/select2.init.js'/>"></script>
-
+        <script src="<c:url value= '/frontend/template/assets/js/jquery.timepicker.min.js'/>"></script>
+        <script src="<c:url value= '/frontend/template/assets/js/timepicker.init.js'/>"></script>
 
     </body>
 </html>

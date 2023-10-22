@@ -21,7 +21,7 @@ import model.Doctor;
  * @author Admin
  */
 public class AdminAppointmentDetail extends HttpServlet {
-
+        
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,6 +40,7 @@ public class AdminAppointmentDetail extends HttpServlet {
             int apptId = Integer.parseInt(request.getParameter("apptId"));
             Appointment appt = apptDAO.getAppointmentById(apptId);
             List<Doctor> doctorList = dDAO.getDoctorBySpeciality(appt.getDoctor().getSpeciality());
+           
             request.setAttribute("doctorL", doctorList);
             request.setAttribute("appt", appt);
             request.getRequestDispatcher("frontend/view/admin/admin_appointmentdetail.jsp").forward(request, response);

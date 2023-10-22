@@ -17,6 +17,7 @@ public class Doctor extends UserAccount {
     private String position;
     private String description;
     private double serviceFee;
+    private DoctorSchedule schedule;
     
     public Doctor() {
         
@@ -89,6 +90,14 @@ public class Doctor extends UserAccount {
         this.serviceFee = serviceFee;
     }
 
+    public DoctorSchedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(DoctorSchedule schedule) {
+        this.schedule = schedule;
+    }
+    
     @Override
     public String toString() {
         return "Doctor{" + "doctorId=" + doctorId + ", speciality=" + speciality + ", position=" + position + ", description=" + description + '}';

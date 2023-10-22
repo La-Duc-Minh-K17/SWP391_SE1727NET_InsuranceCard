@@ -200,7 +200,7 @@ public class DoctorDAO {
     }
 
     public List<Doctor> getDoctorBySpeciality(String spe) {
-       
+
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Doctor> doctorList = new ArrayList<>();
@@ -229,10 +229,9 @@ public class DoctorDAO {
                 String speciality = rs.getString("speName");
                 String description = rs.getString("doctor_description");
                 Doctor d = new Doctor(doctorId, speciality, position, description, username, email, name, gender, phone, image, status);
-               
                 doctorList.add(d);
             }
-            
+
             return doctorList;
         } catch (SQLException e) {
         } finally {
