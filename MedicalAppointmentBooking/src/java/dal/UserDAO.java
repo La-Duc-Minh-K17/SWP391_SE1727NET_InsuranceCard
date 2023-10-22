@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import model.UserAccount;
 import utils.ImageProcessing;
+import java.util.ArrayList;
+import model.Role;
 
 /**
  *
@@ -330,6 +332,26 @@ public class UserDAO {
         }
         return null;
     }
-
+   public void ChangeAccountStatus(String uid, String ss) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "UPDATE user_account SET status = "+ss+" WHERE user_id = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1,uid);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    }
   
 }
