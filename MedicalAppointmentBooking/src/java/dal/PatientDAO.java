@@ -225,7 +225,6 @@ public class PatientDAO {
                 }
             }
         }
-    }
 
     public List<Patient> getPatientByDoctorId(int doctorId) {
 
@@ -258,7 +257,6 @@ public class PatientDAO {
                 Patient p = new Patient(patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
                 listPatient.add(p);
             }
-            return listPatient;
 
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -305,4 +303,5 @@ public class PatientDAO {
         }
         return resultList;
     }
+
 }
