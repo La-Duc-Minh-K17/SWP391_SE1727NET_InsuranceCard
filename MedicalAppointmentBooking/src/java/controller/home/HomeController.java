@@ -5,6 +5,7 @@
 package controller.home;
 
 import dal.DoctorDAO;
+import dal.ServicesDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Doctor;
+import model.Service;
 import utils.SessionUtils;
 
 /**
@@ -33,8 +35,11 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException {
         
         DoctorDAO doctordao = new DoctorDAO();
+        ServicesDAO servicedao = new ServicesDAO();
         List<Doctor> doctorList = doctordao.getAllDoctor();
+        List<Service> ServiceList = servicedao.getRandomTop3Service();
         request.setAttribute("doctors", doctorList);
+        request.setAttribute("service", ServiceList);
         String action = request.getParameter("action");
 
         if (action != null && action.equals("logout")) {

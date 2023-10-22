@@ -219,7 +219,7 @@ public class PatientDAO {
         } catch (SQLException e) {
             System.out.println(e);
 
-
+        }
     public List<Patient> getPatientByDoctorId(int doctorId) {
 
         PreparedStatement ps = null;
@@ -251,7 +251,7 @@ public class PatientDAO {
                 Patient p = new Patient(patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
                 listPatient.add(p);
             }
-            return listPatient;
+            
 
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -266,6 +266,7 @@ public class PatientDAO {
                 }
             }
         }
+        return listPatient;
     }
 
     public List<Patient> searchPatientsByName(String keyword) {
@@ -303,12 +304,9 @@ public class PatientDAO {
 //    }
 }
 
-                    System.out.println(ex);
-                }
-            }
-        }
-        return null;
-    }
 
-}
+        }
+
+
+
 

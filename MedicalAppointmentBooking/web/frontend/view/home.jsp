@@ -21,11 +21,7 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="frontend/template/assets/css/flatpickr.min.css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
-        <style>
-            #home{
-                background-image: url("frontend/template/assets/images/bg/backgroundclinic.jpg") ;
-            }
-        </style>
+        
     </head>
     <body>
 
@@ -117,109 +113,45 @@
                     <div class="col-12">
                         <div class="section-title mb-4 pb-2 text-center">
                             <span class="badge badge-pill badge-soft-primary mb-3">Services</span>
-                            <h4 class="title mb-4">Our Medical Services</h4>
+                            <h4 class="title mb-4">Our Best Services</h4>
                             <p class="text-muted mx-auto para-desc mb-0">Discover a wide spectrum of high-quality medical services at MABS. From preventive care to specialized treatments, our dedicated team of professionals is here to support your health and well-being. Trust us for comprehensive, compassionate, and cutting-edge medical care.</p>
                         </div>
+                        <div class="d-flex justify-content-end ">
+                        <a href="#" class="btn btn-soft-primary">More Services </a>
+                    </div>
                     </div><!--end col-->
                 </div><!--end row-->
+                <div class="row justify-content-center">
+                <c:forEach items="${requestScope.service}" var="s" varStatus="loop">
+                            <div class="col-md-4 mt-4">
+                                <div class="card mb-4">
+                                    <div class="card-img-container">
+                                        <img src="data:image/jpg;base64,${s.service_image}" class="card-img-top" alt="${s.service_name}">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title text-primary">${s.service_name}</h5>
+                                        <div class="card-text">
+                                            <p class="text-secondary">${s.service_description}</p>
+                                        </div>
+                                        <h5 class="text-muted">$${s.fee}</h5>
+                                    </div>
+                                    <div class="card-end">
+                                        <a href="javascript:void(0);" onclick="viewServiceDetails(${s.service_id}, ${s.category_id})" class="btn btn-primary custom-button">Learn More</a>
+                                        <a href="service?action=book-service&id=${s.service_id}" class="btn btn-success custom-button">Appointment Now</a>
+                                    </div>
+                                </div>
 
-                <div class="row">
-                    <div class="col-xl-3 col-md-4 col-12 mt-5">
-                        <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
-                                <img src="frontend/template/assets/images/about/homemedical.png" height="40"></img>
                             </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Medical treatment at home</a>
-                                <p class="text-muted mt-3">The need for meaningful information is paramount,the required of treat,the threat that need, for every word holds the power to heal, comfort, and guide.</p>
-
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    <div class="col-xl-3 col-md-4 col-12 mt-5">
-                        <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
-                                <img src="frontend/template/assets/images/about/pediatric.png" height="40"></img>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Pediatric</a>
-                                <p class="text-muted mt-3">where the well-being of our youngest treasures is paramount, the need for informative and engaging content is abundant to nurture their growth and health.</p>
-                                <a href="departments.html" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    <div class="col-xl-3 col-md-4 col-12 mt-5">
-                        <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
-                                <img src="frontend/template/assets/images/about/internal.png" height="40"></img>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Endoscopy</a>
-                                <p class="text-muted mt-3">where expertise meets the intricacies of the human body, the demand for informative content is abundant to illuminate the path to health and well-being.</p>
-                                <a href="departments.html" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    <div class="col-xl-3 col-md-4 col-12 mt-5">
-                        <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
-                                <img src="frontend/template/assets/images/about/ear-nose-mouth.png" height="40"></img>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">ENT</a>
-                                <p class="text-muted mt-3">where precision and care converge, the need for informative content is abundant to guide you through the sounds, scents, and sensations of health.</p>
-                                <a href="departments.html" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    <div class="col-xl-3 col-md-4 col-12 mt-5">
-                        <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
-                                <img src="frontend/template/assets/images/about/specialize.png" height="40"></img>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Specialized</a>
-                                <p class="text-muted mt-3">Each field holds its unique significance, the demand for informative content is abundant to navigate the solutions.</p>
-                                <a href="departments.html" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    <div class="col-xl-3 col-md-4 col-12 mt-5">
-                        <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
-                                <img src="frontend/template/assets/images/about/vaccination.png" height="40"></img>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Vaccination</a>
-                                <p class="text-muted mt-3">Science safeguards our future, the need for informative content is abundant to educate, protect, and ensure a healthier tomorrow.</p>
-                                <a href="departments.html" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    <div class="col-xl-3 col-md-4 col-12 mt-5">
-                        <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-empathize-fill h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Business health check</a>
-                                <p class="text-muted mt-3">Success meets strategy, there's an abundance of insightful content to evaluate, optimize, and ensure the vitality of your enterprise.</p>
-                                <a href="departments.html" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    <div class="col-xl-3 col-md-4 col-12 mt-5">
-                        <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
-                                <img src="frontend/template/assets/images/about/bussinesshealthcheck.png" height="40"/>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Medical Equpipment Rental</a>
-                                <p class="text-muted mt-3">Precision and access to technology are vital, there is a wealth of informative content to assist in meeting your healthcare needs.</p>
-                                <a href="departments.html" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
+                            <c:if test="${loop.index % 3 == 3}">
+                                <div class="w-100"></div>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                </div><!--end row-->
+            </div><!--end container-->
+                </div><!--end row-->
+            
+            
                 </div><!--end row-->
             </div><!--end container-->
             <!-- Start -->
@@ -337,6 +269,136 @@
             </div>
         </section><!--end section-->
         <!-- End -->
+        <script>
+           function viewServiceDetails(serviceId, categoryId) {
+            var url = "servicedetail?action=view-detail&id=" + serviceId + "&category_id=" + categoryId;
+            window.location.href = url;
+        }
+
+        function search() {
+            var searchInput = document.getElementById("searchInput").value;
+            var url = "home"; // Default action
+            }
+
+            window.location.href = url;
+        }
+
+
+        </script>
+        <style>
+            #home{
+                background-image: url("frontend/template/assets/images/bg/backgroundclinic.jpg") ;
+                
+            }
+              .custom-center {
+            justify-content: center !important;
+        }
+        .card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        .card-end {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px; /* Adjust padding as needed */
+        }
+
+        .custom-button {
+            width: 100%;
+            margin: 5px 0;
+        }
+
+        .service-card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .card {
+            flex: 1;
+            margin: 0 1rem; /* Adjust margin as needed for spacing between cards */
+            width: 100%; /* Set the width to 100% for full container width */
+            max-width: 400px; /* Adjust the max-width as needed for the desired card size */
+            height: 400px; /* Adjust the height as needed for the desired card size */
+        }
+        .card-img-container {
+            height: 200px;
+            overflow: hidden;
+        }
+        /* CSS để cân đối các dòng chữ trong card */
+        .card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-body {
+            flex: 1;
+        }
+
+        .card-title,
+        .card-text {
+            text-align: center;
+            justify-content: s
+        }
+        .card-title,
+        .card-text {
+            margin-bottom: 15px; /* Khoảng cách giữa các dòng chữ */
+        }
+
+        .btn-primary {
+            align-self: center; /* Để căn giữa nút "Learn More" */
+        }
+
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* CSS để cân đối nút "Learn More" trong card */
+        .card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+
+        .custom-button {
+            width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
+            margin: 5px 0; /* Khoảng cách giữa các nút */
+        }
+        .btn-primary {
+            margin-top: auto; /* Để nút "Learn More" ở dưới cùng */
+        }
+        .custom-button {
+            width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
+
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            flex: 1;
+        }
+        .footer {
+            background-color: #333; /* Set the background color of your footer */
+            color: white; /* Set the text color of your footer */
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+        </style>
         <jsp:include page="/frontend/common/footer.jsp" />
         <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
