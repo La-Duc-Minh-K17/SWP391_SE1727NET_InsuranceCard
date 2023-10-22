@@ -22,8 +22,6 @@ import utils.ImageProcessing;
 
 import utils.TimeUtil;
 
-
-
 /**
  *
  * @author Admin
@@ -161,50 +159,49 @@ public class PatientDAO {
     }
 
     public void updatePatient(int patientId, int userId, String username, String email, String fullName, int gender, String phone, Part image, String dob, String address, int status) {
-    PreparedStatement ps = null;
-    InputStream fileImage = ImageProcessing.imageStream(image);
-    String sql = "UPDATE mabs.patients p INNER JOIN user_account u ON p.user_id = u.user_id SET "
-            + "u.full_name = ?, "
-            + "u.gender = ?, "
-            + "u.phone = ?, "
-            + "u.dob = ?, "
-            + "u.address = ?, "
-            + "u.status = ?";
-    if (fileImage != null) {
-        sql += ", u.image = ?";
-    }
-    sql += " WHERE p.patient_id = ?;";
-    Connection connection = null;
-    try {
-        connection = dbc.getConnection();
-        ps = connection.prepareStatement(sql);
-        ps.setString(1, fullName);
-        ps.setInt(2, gender);
-        ps.setString(3, phone);
-        ps.setDate(4, TimeUtil.dateConverter1(dob));
-        ps.setString(5, address);
-        ps.setInt(6, status);
-
-        int parameterIndex = 7;
-
+        PreparedStatement ps = null;
+        InputStream fileImage = ImageProcessing.imageStream(image);
+        String sql = "UPDATE mabs.patients p INNER JOIN user_account u ON p.user_id = u.user_id SET "
+                + "u.full_name = ?, "
+                + "u.gender = ?, "
+                + "u.phone = ?, "
+                + "u.dob = ?, "
+                + "u.address = ?, "
+                + "u.status = ?";
         if (fileImage != null) {
-            ps.setBlob(parameterIndex++, fileImage);
+            sql += ", u.image = ?";
         }
-        ps.setInt(parameterIndex, patientId);
-        ps.executeUpdate();
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } finally {
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+        sql += " WHERE p.patient_id = ?;";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, fullName);
+            ps.setInt(2, gender);
+            ps.setString(3, phone);
+            ps.setDate(4, TimeUtil.dateConverter1(dob));
+            ps.setString(5, address);
+            ps.setInt(6, status);
+
+            int parameterIndex = 7;
+
+            if (fileImage != null) {
+                ps.setBlob(parameterIndex++, fileImage);
+            }
+            ps.setInt(parameterIndex, patientId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }
-}
-
 
     public void updatePatientStatus(int patientId, int newStatus) {
         PreparedStatement ps = null;
@@ -218,7 +215,17 @@ public class PatientDAO {
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
 
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
 
     public List<Patient> getPatientByDoctorId(int doctorId) {
 
@@ -266,6 +273,7 @@ public class PatientDAO {
                 }
             }
         }
+        return null;
     }
 
     public List<Patient> searchPatientsByName(String keyword) {
@@ -297,18 +305,4 @@ public class PatientDAO {
         }
         return resultList;
     }
-//   public static void main(String[] args) throws SQLException {
-//        PatientDAO dao = new PatientDAO();
-//        System.out.println(dao.getAllPatient());
-//    }
 }
-
-                    System.out.println(ex);
-                }
-            }
-        }
-        return null;
-    }
-
-}
-
