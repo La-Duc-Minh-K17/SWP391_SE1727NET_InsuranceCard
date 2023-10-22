@@ -121,7 +121,7 @@ public class AddSetting extends HttpServlet {
         ArrayList<Setting> settings = st.list();
         request.setAttribute("settings", settings);
         
-        request.getRequestDispatcher("frontend/view/settingList.jsp").forward(request, response);
+        request.getRequestDispatcher("frontend/view/admin/settingList.jsp").forward(request, response);
     }
 
     /**

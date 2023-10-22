@@ -33,6 +33,7 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         DoctorDAO doctordao = new DoctorDAO();
         ServicesDAO servicedao = new ServicesDAO();
         List<Doctor> doctorList = doctordao.getAllDoctor();
@@ -41,19 +42,6 @@ public class HomeController extends HttpServlet {
         request.setAttribute("service", ServiceList);
         String action = request.getParameter("action");
 
-        if (action != null && action.equals("redirect-doctors")) {
-            request.getRequestDispatcher("").forward(request, response);
-            return;
-        }
-
-        if (action != null && action.equals("redirect-services")) {
-            request.getRequestDispatcher("").forward(request, response);
-            return;
-        }
-        if (action != null && action.equals("redirect-blogs")) {
-            request.getRequestDispatcher("").forward(request, response);
-            return;
-        }
         if (action != null && action.equals("logout")) {
             SessionUtils.getInstance().removeValue(request, "user");
             request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);

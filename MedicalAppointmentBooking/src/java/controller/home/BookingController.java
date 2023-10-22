@@ -59,7 +59,7 @@ public class BookingController extends HttpServlet {
             }
             request.setAttribute("timeslot", timeSlot);
             request.setAttribute("date", date);
-            System.out.println( TimeUtil.dateConverter(date));
+           
             request.getRequestDispatcher("frontend/view/booking.jsp").forward(request, response);
             return;
         }
@@ -86,14 +86,13 @@ public class BookingController extends HttpServlet {
                     patientId = pDAO.insertPatient(patient);
                 }
                 patient.setPatientId(patientId);
-                Appointment appt = new Appointment(apptNote, TimeUtil.dateConverter(apptDate), apptTime, "SCHEDULED", chosenDoctor, patient);
+                Appointment appt = new Appointment(apptNote, TimeUtil.dateConverter(apptDate), apptTime, "PENDING", chosenDoctor, patient);
                 if (aDAO.checkAvailability(appt)) {
                     request.setAttribute("error", "This slot time is fully booked now! Please choose other date and time.");
                     request.getRequestDispatcher("frontend/view/booking.jsp").forward(request, response);
                     return;
                 }
                 aDAO.insertNewAppointment(appt);
-                EmailSending.sendReminderEmail(appt);
                 response.sendRedirect("frontend/view/booking_success.jsp");
                 return;
             }
@@ -114,7 +113,7 @@ public class BookingController extends HttpServlet {
                     patientId = pDAO.insertPatient(patient);
                 }
                 patient.setPatientId(patientId);
-                Reservation resv = new Reservation(apptNote, TimeUtil.dateConverter(apptDate), apptTime, "SCHEDULED", chosenService, patient);
+                Reservation resv = new Reservation(apptNote, TimeUtil.dateConverter(apptDate), apptTime, "PENDING", chosenService, patient);
                 if (rDAO.checkAvailability(resv)) {
                     request.setAttribute("error", "This slot time is fully booked now! Please choose other date and time.");
                     request.getRequestDispatcher("frontend/view/booking.jsp").forward(request, response);
