@@ -37,6 +37,24 @@ public class DoctorFeedback extends HttpServlet {
             request.getRequestDispatcher("../frontend/view/doctorfeedback.jsp").forward(request, response);
             return;
         }
+        if (action != null && action.equals("filter")) {
+            int docId = Integer.parseInt(request.getParameter("doctorId"));
+            request.setAttribute("doctorFeedback", d.getFeedBackByDoctorID(docId));
+            request.getRequestDispatcher("../frontend/view/doctorfeedback.jsp").forward(request, response);
+            
+        } 
+         if (action != null && action.equals("sort")) {
+            String sortby = request.getParameter("sortby");
+            if(sortby.equalsIgnoreCase("Newest"))
+            {
+                request.setAttribute("doctorFeedback", d.getDoctorFeedbackDESC());
+                request.getRequestDispatcher("../frontend/view/doctorfeedback.jsp").forward(request, response);
+            }else{
+                request.setAttribute("doctorFeedback",d.getDoctorFeedbackASC());
+                request.getRequestDispatcher("../frontend/view/doctorfeedback.jsp").forward(request, response);
+            }  
+            
+        } 
 
     }
 
