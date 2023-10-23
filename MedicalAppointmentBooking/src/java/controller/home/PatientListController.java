@@ -5,9 +5,7 @@
 package controller.home;
 
 import dal.DoctorDAO;
-import dal.PatientDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,31 +32,31 @@ public class PatientListController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            int doctorId = Integer.parseInt(request.getParameter("id"));
-            DoctorDAO dDao = new DoctorDAO();
-            Doctor doctor = dDao.getDoctorById(doctorId);
-            PatientDAO pdao = new PatientDAO();
-            List<Patient> listP = pdao.getPatientByDoctorId(doctorId);
-            request.setAttribute("doctor", doctor);
-            request.setAttribute("listP", listP);
-            request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
 
-        }
+        int doctorId = Integer.parseInt(request.getParameter("id"));
+        DoctorDAO dDao = new DoctorDAO();
+        Doctor doctor = dDao.getDoctorById(doctorId);
+        PatientDAO pdao = new PatientDAO();
+        List<Patient> listP = pdao.getPatientByDoctorId(doctorId);
+        System.out.println(listP);
+        request.setAttribute("doctor", doctor);
+        request.setAttribute("listPatient", listP);
+        request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+/**
+ * Handles the HTTP <code>GET</code> method.
+ *
+ * @param request servlet request
+ * @param response servlet response
+ * @throws ServletException if a servlet-specific error occurs
+ * @throws IOException if an I/O error occurs
+ */
+@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -72,7 +70,7 @@ public class PatientListController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -83,7 +81,7 @@ public class PatientListController extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

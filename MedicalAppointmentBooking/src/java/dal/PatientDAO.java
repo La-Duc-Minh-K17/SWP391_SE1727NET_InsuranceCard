@@ -226,7 +226,7 @@ public class PatientDAO {
         }
     }
 
-    public List<Patient> getPatientByDoctorId(int doctorId) {
+    public List<Patient> getPatientByDoctorId(int docId) {
 
         PreparedStatement ps = null;
         Connection connection = null;
@@ -240,7 +240,7 @@ public class PatientDAO {
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            ps.setInt(1, doctorId);
+            ps.setInt(1, docId);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int patientId = rs.getInt("patient_id");
@@ -257,7 +257,7 @@ public class PatientDAO {
                 Patient p = new Patient(patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
                 listPatient.add(p);
             }
-
+                return listPatient;
         } catch (SQLException ex) {
             System.out.println(ex);
 
