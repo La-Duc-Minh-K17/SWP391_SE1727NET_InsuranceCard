@@ -280,6 +280,45 @@ public class ServicesDAO {
         return serviceList;
     }
 
+    public List<Service> getAllServiceByStatus() {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Service> serviceList = new ArrayList<>();
+        String sql = "select * from services where service_status ='1';";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int service_id = rs.getInt("service_id");
+                String service_name = rs.getString("service_name");
+                String service_image = ImageProcessing.imageString(rs.getBlob("service_image"));
+                String service_description = rs.getString("service_description");
+                String service_details = rs.getString("service_details");
+                int fee = rs.getInt("fee");
+                int service_status = rs.getInt("service_status");
+                int category_id = rs.getInt("category_id");
+                Service s = new Service(service_id, service_name, service_description, service_details, fee, service_image, service_status, category_id);
+
+                serviceList.add(s);
+
+            }
+            return serviceList;
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return serviceList;
+    }
+    
     public List<Service> getRandomTop3Service() {
         PreparedStatement ps = null;
         ResultSet rs = null;
