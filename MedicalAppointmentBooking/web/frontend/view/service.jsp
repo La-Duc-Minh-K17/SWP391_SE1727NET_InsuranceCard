@@ -67,7 +67,7 @@
 
                 <div class="col-md-8 d-flex align-items-center justify-content-end">
                     <div class=" justify-content-end ">
-                        <div class="selection-bar btn-success m-2">
+                        <div class="selection-bar btn-success m-2 rounded-pill">
                             <select class="form-select form-control border rounded-pill bg-light" id="Filter" onchange="filter()">
                                 <option selected >Filter By</option>
                                 <c:forEach items="${requestScope.cateList}" var="c" >
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class=" justify-content-end">
-                        <div class="selection-bar btn-primary m-2">
+                        <div class="selection-bar btn-primary m-2 rounded-pill">
                             <select id="sortSelect" class="form-select form-control border rounded-pill bg-light" onchange="filter()" >
                                 <option selected >Default Sort</option>
                                 <option value="price">Price</option>

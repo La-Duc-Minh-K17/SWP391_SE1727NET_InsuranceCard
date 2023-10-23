@@ -150,19 +150,23 @@
                                                         <td>${s.service_name}</td>
                                                         <td>$${s.fee}</td>
                                                         <td>
-                                                            <c:if test="${s.service_status == 1}">Active</c:if>
-                                                            <c:if test="${s.service_status == 0}">Inactive</c:if>
-                                                            </td>
-                                                    <style>
-                                                        .custom-btn {
-                                                            width: 100px; /* Adjust the width as needed */
-                                                        }
-                                                    </style>
-                                                    <td class="text-center">
-                                                        <div class="container d-flex justify-content-center">
-                                                            <div class="card component-wrapper border-0 rounded">
-                                                                <div class="d-flex mb-2">
-                                                                    <a href="<c:url value='/manage-service?action=view&service_id=${s.service_id}'/>" class="btn btn-primary custom-btn btn-sm m-2">View</a>
+                                                            <c:if test="${s.service_status == 1}">
+                                                                <span class="text-success">Active</span>
+                                                            </c:if>
+                                                            <c:if test="${s.service_status == 0}">
+                                                                <span class="text-danger ">InActive</span>
+                                                            </c:if>
+                                                        </td>
+                                                <style>
+                                                    .custom-btn {
+                                                        width: 100px; /* Adjust the width as needed */
+                                                    }
+                                                </style>
+                                                <td class="text-center">
+                                                    <div class="container d-flex justify-content-center">
+                                                        <div class="card component-wrapper border-0 rounded">
+                                                            <div class="d-flex mb-2">
+                                                                <a href="<c:url value='/manage-service?action=view&service_id=${s.service_id}'/>" class="btn btn-primary custom-btn btn-sm m-2">View</a>
                                                                 <a href="<c:url value='/manage-service?action=edit&service_id=${s.service_id}'/>" class="btn btn-primary custom-btn btn-sm m-2">Edit</a>
                                                                 <c:choose>
                                                                     <c:when test="${s.service_status == 1}">
