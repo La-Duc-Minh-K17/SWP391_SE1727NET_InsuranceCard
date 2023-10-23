@@ -166,12 +166,17 @@
                                                                 <a href="<c:url value='/manage-service?action=edit&service_id=${s.service_id}'/>" class="btn btn-primary custom-btn btn-sm m-2">Edit</a>
                                                                 <c:choose>
                                                                     <c:when test="${s.service_status == 1}">
-                                                                        <a href="<c:url value='/manage-service?action=status&service_id=${s.service_id}&status=${s.service_status}'/>" class="btn btn-danger custom-btn btn-sm m-2">Deactivate</a>
+                                                                        <a href="<c:url value='/manage-service?action=status&service_id=${s.service_id}&status=${s.service_status}'/>" 
+                                                                           class="btn btn-danger custom-btn btn-sm m-2"
+                                                                           onclick="return confirm('Are you sure you want to deactivate this service?');">Deactivate</a>
                                                                     </c:when>
                                                                     <c:otherwise>
-                                                                        <a href="<c:url value='/manage-service?action=status&service_id=${s.service_id}&status=${s.service_status}'/>" class="btn btn-success custom-btn btn-sm m-2">Activate</a>
+                                                                        <a href="<c:url value='/manage-service?action=status&service_id=${s.service_id}&status=${s.service_status}'/>" 
+                                                                           class="btn btn-success custom-btn btn-sm m-2"
+                                                                           onclick="return confirm('Are you sure you want to activate this service?');">Activate</a>
                                                                     </c:otherwise>
                                                                 </c:choose>
+
                                                             </div>
                                                         </div>
                                                     </div>
