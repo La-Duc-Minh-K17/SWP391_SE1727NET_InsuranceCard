@@ -67,7 +67,7 @@
 
                 <div class="col-md-8 d-flex align-items-center justify-content-end">
                     <div class=" justify-content-end ">
-                        <div class="selection-bar btn-success m-2">
+                        <div class="selection-bar btn-success m-2 rounded-pill">
                             <select class="form-select form-control border rounded-pill bg-light" id="Filter" onchange="filter()">
                                 <option selected >Filter By</option>
                                 <c:forEach items="${requestScope.cateList}" var="c" >
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class=" justify-content-end">
-                        <div class="selection-bar btn-primary m-2">
+                        <div class="selection-bar btn-primary m-2 rounded-pill">
                             <select id="sortSelect" class="form-select form-control border rounded-pill bg-light" onchange="filter()" >
                                 <option selected >Default Sort</option>
                                 <option value="price">Price</option>
@@ -100,13 +100,13 @@
                                     <div class="card-body">
                                         <h5 class="card-title text-primary">${s.service_name}</h5>
                                         <div class="card-text">
-                                            <p class="text-secondary">${s.service_description}</p>
+                                            <p class="text-secondary">${s.service_details}</p>
                                         </div>
                                         <h5 class="text-muted">$${s.fee}</h5>
                                     </div>
                                     <div class="card-end">
                                         <a href="javascript:void(0);" onclick="viewServiceDetails(${s.service_id}, ${s.category_id})" class="btn btn-primary custom-button">Learn More</a>
-                                        <a href="service?action=book-service&id=${s.service_id}" class="btn btn-success custom-button">Appointment Now</a>
+                                        <a href="servicedetail?action=book-service&id=${s.service_id}"class="btn btn-success custom-button">Appointment Now</a>
                                     </div>
                                 </div>
 

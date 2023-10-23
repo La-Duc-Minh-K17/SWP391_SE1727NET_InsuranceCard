@@ -35,7 +35,7 @@ public class PatientDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Patient> PatientList = new ArrayList<>();
-        String sql = "select * from patients p inner join user_account u where p.user_id=u.user_id;";
+        String sql = "select * from patients p inner join user_account u where p.user_id=u.user_id order by patient_id;";
         Connection connection = null;
         try {
             connection = dbc.getConnection();
