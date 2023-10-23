@@ -100,7 +100,7 @@
         <servlet-name>ManagePatient</servlet-name>
         <servlet-class>controller.manager.ManagePatient</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>PatientListController</servlet-name>
         <servlet-class>controller.home.PatientListController</servlet-class>
     </servlet>
@@ -127,6 +127,10 @@
     <servlet>
         <servlet-name>AppoinmentDetailController</servlet-name>
         <servlet-class>controller.home.AppoinmentDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminReservationDetail</servlet-name>
+        <servlet-class>controller.admin.AdminReservationDetail</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
@@ -247,6 +251,10 @@
     <servlet-mapping>
         <servlet-name>AppoinmentDetailController</servlet-name>
         <url-pattern>/doctor-appointmentdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminReservationDetail</servlet-name>
+        <url-pattern>/admin-reservationdetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

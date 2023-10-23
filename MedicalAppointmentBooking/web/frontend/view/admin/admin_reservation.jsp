@@ -26,15 +26,7 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
     </head>
     <body>
-        <div id="preloader">
-            <div id="status">
-                <div class="spinner">
-                    <div class="double-bounce1"></div>
-                    <div class="double-bounce2"></div>
-                </div>
-            </div>
-        </div>
-        <!-- Loader -->
+
         <div class="page-wrapper doctris-theme toggled">
             <jsp:include page="/frontend/common/admin_side_bar.jsp" />
             <main class="page-content">  
@@ -91,14 +83,15 @@
                                     <div>
                                         <select class="form-select form-control" id="status_filter" onchange="filter()">
                                             <option selected disabled>Status</option>
-                                            <option value="all">All</option>
-                                            <option value="CONFIRMED">CONFIRMED</option>
-                                            <option value="PENDING">PENDING</option>
-                                            <option value="RESCHEDULED">RESCHEDULED</option>
-                                            <option value="COMPLETED">COMPLETED</option>
-                                            <option value="CANCELED">CANCELED</option>
-                                            <option value="FOLLOW_UP">FOLLOW-UP</option>    
+                                            <option ${status == 'ALL' ? 'selected' : ''} value="ALL">All</option>
+                                            <option ${status == 'CONFIRMED' ? 'selected' : ''} value="CONFIRMED">CONFIRMED</option>
+                                            <option ${status == 'PENDING' ? 'selected' : ''} value="PENDING">PENDING</option>
+                                            <option ${status == 'RESCHEDULED' ? 'selected' : ''} value="RESCHEDULED">RESCHEDULED</option>
+                                            <option ${status == 'COMPLETED' ? 'selected' : ''} value="COMPLETED">COMPLETED</option>
+                                            <option ${status == 'CANCELED' ? 'selected' : ''} value="CANCELED">CANCELED</option>
+                                                
                                         </select>
+
                                     </div>
                                 </div>
 
@@ -106,7 +99,7 @@
                             <div class="col-xl-6 col-md-6">
                                 <div class="search-bar d-lg-block" style="padding-top :0">
                                     <div id="search" class="menu-search ">
-                                        <form action="<c:url value='/admin-appointment?action=search'/>" role="search" method="post"
+                                        <form action="<c:url value='/admin-reservation?action=search'/>" role="search" method="post"
                                               id="searchform" class="searchform">
                                             <div>
                                                 <input type="text" class="form-control border rounded-pill" name="search" id="search" placeholder="Search patient name">
@@ -122,7 +115,7 @@
                         <div class="col-12 mt-4">
                             <div class="card component-wrapper border-0 rounded shadow">
                                 <div class="p-4 border-bottom">
-                                    <h5 class="mb-0">Appointment List</h5>
+                                    <h5 class="mb-0">Reservation List</h5>
                                 </div>
                                 <div class="p-4">
                                     <div class="row pt-2">
@@ -137,7 +130,7 @@
                                                                     <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
                                                                     <th class="border-bottom p-3" style="min-width: 150px;">Date</th>
                                                                     <th class="border-bottom p-3">Time</th>
-                                                                    <th class="border-bottom p-3" style="min-width: 220px;">Doctor</th>
+                                                                    <th class="border-bottom p-3" style="min-width: 220px;">Service</th>
                                                                     <th class="border-bottom p-3">Status</th>
                                                                     <th class="border-bottom p-3" style="min-width: 150px;">Action</th>
                                                                 </tr>
@@ -171,13 +164,13 @@
                                                                                 </div>
                                                                             </a>
                                                                         </td>
-                                                                        <td class="p-3">${appt.status}</td>
+                                                                        <td class="p-3">${resv.status}</td>
                                                                         <td class="p-3">
                                                                             <div class="d-flex align-items-center">
-                                                                                <a href="admin-appointmentdetail?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
+                                                                                <a href="admin-reservationdetail?action=view-detail&resvId=${resv.resvId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
                                                                                     Details</a>
                                                                                 <a href="#cancelappointment" class="btn btn-primary btn-sml btn-soft-danger" 
-                                                                                   data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
+                                                                                   data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${resv.resvId}">
                                                                                     DELETE</a>
                                                                             </div>
                                                                         </td>
@@ -215,7 +208,7 @@
         <!-- javascript -->
         <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <form action="<c:url value='/admin-appointment?action=cancel'></c:url>" method="post">
+                <form action="<c:url value='/admin-reservation?action=cancel'></c:url>" method="post">
                         <div class="modal-content">
                             <div class="modal-body py-5">
                                 <div class="text-center">
@@ -239,11 +232,7 @@
 
             <script>
 
-                function viewAppt(appt) {
-                    var dataId = appt.getAttribute('data-id');
-                    const url = 'http://localhost:8080/MedicalAppointmentBooking/admin-appointment?action=view-detail&apptId=' + dataId;
-                    window.href.location = url;
-                }
+
 
                 function cancelAppt(appt) {
                     var dataId = appt.getAttribute('data-id');
@@ -252,7 +241,7 @@
                 }
 
                 function filter() {
-                    const url = 'http://localhost:8080/MedicalAppointmentBooking/admin-appointment?action=filter&status_filter=';
+                    const url = 'http://localhost:8080/MedicalAppointmentBooking/admin-reservation?action=filter&status_filter=';
                     const filterElement = document.getElementById("status_filter").value;
                     window.location.href = url + filterElement;
                 }

@@ -176,9 +176,7 @@
                                                                             <div class="d-flex align-items-center">
                                                                                 <a href="admin-appointmentdetail?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
                                                                                     Details</a>
-                                                                                <a href="#cancelappointment" class="btn btn-primary btn-sml btn-soft-danger" 
-                                                                                   data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
-                                                                                    DELETE</a>
+                                                                               
                                                                             </div>
                                                                         </td>
                                                                     </tr>
@@ -213,38 +211,10 @@
         </div>
         <!-- page-wrapper -->
         <!-- javascript -->
-        <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <form action="<c:url value='/admin-appointment?action=cancel'></c:url>" method="post">
-                    <div class="modal-content">
-                        <div class="modal-body py-5">
-                            <div class="text-center">
-                                <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                    <i class="uil uil-times-circle h1 mb-0"></i>
-                                </div>
-                                <div class="mt-4">
-                                    <h4>Cancel Appointment</h4>
-                                    <p class="para-desc mx-auto text-muted mb-0">This appointment will be cancelled by you. Are you sure ?</p>
-                                    <div class="mt-4">
-                                        <input type="hidden" id="cancel_appointment" name="appointment_canceled" value="">
-                                        <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+      
 
             <script>
-
-                function viewAppt(appt) {
-                    var dataId = appt.getAttribute('data-id');
-                    const url = 'http://localhost:8080/MedicalAppointmentBooking/admin-appointment?action=view-detail&apptId=' + dataId;
-                    window.href.location = url;
-                }
-
+             
                 function cancelAppt(appt) {
                     var dataId = appt.getAttribute('data-id');
                     let cancel_appt = document.getElementById('cancel_appointment');
@@ -257,7 +227,7 @@
                     window.location.href = url + filterElement;
                 }
             </script>
-            <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>
         <!-- Icons -->
