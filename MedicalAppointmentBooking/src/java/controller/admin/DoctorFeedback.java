@@ -5,6 +5,7 @@
 
 package controller.admin;
 
+import dal.DoctorDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -27,6 +28,8 @@ public class DoctorFeedback extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        DoctorDAO d = new DoctorDAO();
+        request.setAttribute("doctorFeedback", d.getDoctorFeedback());
         request.getRequestDispatcher("../frontend/view/doctorfeedback.jsp").forward(request, response);
         
     } 

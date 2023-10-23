@@ -130,6 +130,9 @@
 
                 color:#D9D9D9;
             }
+            .text-write{
+                margin-top: 50px;
+            }
         </style>
     </head>
     <body>
@@ -176,43 +179,51 @@
                 </div>
 
                 <div class="feedback">
-                    <c:forEach items="${feedback}" var="feedback">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <h5>${feedback.user.fullName}</h5>
-                            <h6 style="margin-right: 20px;">${feedback.create_time}</h6>
-                        </div>                     
-                        <c:choose>
-                            <c:when test="${feedback.rate >= 1}">
-                                ★
-                            </c:when>
-                            <c:otherwise>☆</c:otherwise>
-                        </c:choose>
-                        <c:choose>
-                            <c:when test="${feedback.rate >= 2}">
-                                ★
-                            </c:when>
-                            <c:otherwise>☆</c:otherwise>
-                        </c:choose>
-                        <c:choose>
-                            <c:when test="${feedback.rate >= 3}">
-                                ★
-                            </c:when>
-                            <c:otherwise>☆</c:otherwise>
-                        </c:choose>
-                        <c:choose>
-                            <c:when test="${feedback.rate >= 4}">
-                                ★
-                            </c:when>
-                            <c:otherwise>☆</c:otherwise>
-                        </c:choose>
-                        <c:choose>
-                            <c:when test="${feedback.rate >= 5}">
-                                ★
-                            </c:when>
-                            <c:otherwise>☆</c:otherwise>
-                        </c:choose>                        <p>${feedback.content}</p>
-                    </c:forEach>
+                    <form action="WebDoctorDetail" method="post">
+                        <c:forEach items="${feedback}" var="feedback">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <h5>${feedback.user.fullName}</h5>
+                                <h6 style="margin-right: 20px;">${feedback.create_time}</h6>
+                            </div>                     
+                            <c:choose>
+                                <c:when test="${feedback.rate >= 1}">
+                                    ★
+                                </c:when>
+                                <c:otherwise>☆</c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${feedback.rate >= 2}">
+                                    ★
+                                </c:when>
+                                <c:otherwise>☆</c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${feedback.rate >= 3}">
+                                    ★
+                                </c:when>
+                                <c:otherwise>☆</c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${feedback.rate >= 4}">
+                                    ★
+                                </c:when>
+                                <c:otherwise>☆</c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${feedback.rate >= 5}">
+                                    ★
+                                </c:when>
+                                <c:otherwise>☆</c:otherwise>
+                            </c:choose>      
+                            <p>${feedback.content}</p>
+                        </c:forEach>
+                        <div class="text-write">
+                            <textarea name="userFeedback" rows="4" cols="50" placeholder="Write your feedback here..."></textarea>
+                            <br>
+                            <input type="submit" value="Submit Feedback">
+                        </div>
 
+                    </form>
                 </div>
             </div>
 

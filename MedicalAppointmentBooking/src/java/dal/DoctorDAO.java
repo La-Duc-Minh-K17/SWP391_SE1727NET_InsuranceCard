@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Doctor;
 import model.DoctorFeedback;
 import model.Service;
@@ -253,6 +255,62 @@ public class DoctorDAO {
         }
     }
 
+    public List<DoctorFeedback> getDoctorFeedback() {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<DoctorFeedback> doctorfeedback = new ArrayList<>();
+        String sql = "SELECT\n"
+                + "    ua.full_name AS patient_name,\n"
+                + "    ua.image,\n"
+                + "    da.full_name AS doctor_name,\n"
+                + "    df.content,\n"
+                + "    df.rate,\n"
+                + "    df.create_time\n"
+                + "FROM doctor_feedback AS df\n"
+                + "JOIN user_account AS ua ON df.user_id = ua.user_id\n"
+                + "JOIN doctors AS d ON df.doctor_id = d.doctor_id\n"
+                + "JOIN user_account AS da ON d.user_id = da.user_id;";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                UserAccount acc = new UserAccount();
+                String patientName = rs.getString("patient_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                String doctorName = rs.getString("doctor_name");
+
+                String content = rs.getString("content");
+                String create_time = rs.getString("create_time");
+                float rate = rs.getFloat("rate");
+
+                acc.setFullName(patientName);
+                acc.setImage(image);
+
+                DoctorFeedback d = new DoctorFeedback();
+                d.setDoctorName(doctorName);
+                d.setContent(content);
+                d.setCreate_time(create_time);
+                d.setRate(rate);
+                d.setUser(acc);
+                doctorfeedback.add(d);
+            }
+            return doctorfeedback;
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return doctorfeedback;
+    }
+
     public List<DoctorFeedback> getFeedBackByDoctorID(int id) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -298,5 +356,31 @@ public class DoctorDAO {
             }
         }
         return feedbackList;
+    }
+
+    public void insertFeedback(DoctorFeedback feedback) {
+        Connection connection = dbc.getConnection();
+        try {
+            String query = "INSERT INTO doctor_feedback ( user_id,doctor_id,create_time,content,rate)\n"
+                    + "VALUES (?,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setInt(1, feedback.getUser().getUserId());
+//            statement.setInt(2, feedback.getDoctor().getDoctorId());
+            statement.setString(3, feedback.getCreate_time());
+            statement.setString(4, feedback.getContent());
+            statement.setFloat(5, feedback.getRate());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
     }
 }

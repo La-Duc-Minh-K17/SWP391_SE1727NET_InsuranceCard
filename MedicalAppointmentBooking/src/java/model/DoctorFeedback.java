@@ -11,7 +11,7 @@ package model;
 public class DoctorFeedback {
     private int feedback_id;
     private UserAccount user;
-    private Doctor doctor;
+    private String doctorName;
     private String create_time;
     private String content;
     private float rate;
@@ -32,12 +32,12 @@ public class DoctorFeedback {
         this.user = user;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public String getDoctorName() {
+        return doctorName;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
     }
 
     public String getCreate_time() {
@@ -63,5 +63,11 @@ public class DoctorFeedback {
     public void setRate(float rate) {
         this.rate = rate;
     }
+
+   
+
+    
+
+    
     
 }
