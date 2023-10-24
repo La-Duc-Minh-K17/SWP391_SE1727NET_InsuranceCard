@@ -296,7 +296,53 @@ public class DoctorDAO {
         }
     }
 
-    public Doctor getDoctorRelatedCategory() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Doctor getDoctorRelatedCategory(int Id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Doctor doctor = null;
+        String sql = "SELECT distinct D.*, UA.*\n"
+                + "FROM mabs.doctors D\n"
+                + "JOIN mabs.speciality S on D.speciality_id = S.speciality_id\n"
+                + "JOIN mabs.blog_category BC on S.speName = BC.name\n"
+                + "JOIN mabs.blogs B on BC.blog_category_id = B.blog_category_id\n"
+                + "JOIN mabs.user_account UA on D.user_id = UA.user_id\n"
+                + "WHERE B.blog_id = ?\n"
+                + "ORDER BY RAND()\n"
+                + "LIMIT 1;";
+
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, Id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int doctorId = rs.getInt("doctor_id");
+                String username = rs.getString("username");
+                String fullName = rs.getString("full_name");
+                String phone = rs.getString("phone");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String email = rs.getString("email");
+                int status = rs.getInt("status");
+                String position = rs.getString("doctor_position");
+                String speciality = rs.getString("speName");
+                String description = rs.getString("doctor_description");
+                int fee = rs.getInt("service_fee");
+                doctor = new Doctor(doctorId, speciality, position, description, username, email, fullName, gender, phone, image, status);
+                doctor.setServiceFee(fee);
+            }
+            return doctor;
+        } catch (SQLException e) {
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return doctor;
     }
 }
