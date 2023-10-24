@@ -306,7 +306,7 @@ public class DoctorDAO {
                 + "JOIN mabs.blog_category BC on S.speName = BC.name\n"
                 + "JOIN mabs.blogs B on BC.blog_category_id = B.blog_category_id\n"
                 + "JOIN mabs.user_account UA on D.user_id = UA.user_id\n"
-                + "WHERE B.blog_id = 7\n"
+                + "WHERE B.blog_id = ?\n"
                 + "ORDER BY RAND()\n"
                 + "LIMIT 1;";
 
