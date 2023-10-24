@@ -93,9 +93,9 @@
                                 <div class="card component-wrapper border-0 rounded shadow">
                                     <div>
                                         <select class="form-select form-control" id="serFilter" onchange="filter()">
-                                            <option selected disabled>Service</option>
-                                            <c:forEach items="${serviceList}" var="ser">
-                                                <option value="${ser.service_id}">${ser.service_name}</option>  
+                                            <option selected disabled>Doctor</option>
+                                            <c:forEach items="${doctorList}" var="doc">
+                                                <option value="${doc.doctorId}">${doc.fullName}</option>  
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -133,7 +133,7 @@
                         <div class="col-12 mt-4">
                             <div class="card component-wrapper border-0 rounded shadow">
                                 <div class="p-4 border-bottom">
-                                    <h5 class="mb-0">Service List</h5>
+                                    <h5 class="mb-0">Feedback List</h5>
                                 </div>
 
                                 <div class="p-4">
@@ -143,51 +143,52 @@
                                                 <tr>
                                                     <th scope="col">ID</th>
                                                     <th scope="col">Patient</th>
-                                                    <th scope="col">Service</th>
-                                                    <th scope="col">Comment</th>
+                                                    <th scope="col">Doctor</th>
+                                                    <th scope="col">Feedback</th>
                                                     <th scope="col">Rate</th>     
                                                     <th scope="col">Created Time</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach items="${review}" var="rv" varStatus="loop">
+                                                <c:forEach items="${doctorFeedback}" var="df" varStatus="loop">
                                                     <tr>
                                                         <th scope="row">${loop.index + 1}</th>
-                                                        <td>${rv.user.fullName}</td>
-                                                        <td>${rv.service.service_name}</td>
-                                                        <td>${rv.review}</td>
+                                                        <td>${df.user.fullName}</td>
+                                                        <td>${df.doctorName}</td>
+                                                        <td>${df.content}</td>
+
                                                         <td><c:choose>
-                                                                <c:when test="${rv.rate >= 1}">
+                                                                <c:when test="${df.rate >= 1}">
                                                                     ★
                                                                 </c:when>
                                                                 <c:otherwise>☆</c:otherwise>
                                                             </c:choose>
                                                             <c:choose>
-                                                                <c:when test="${rv.rate >= 2}">
+                                                                <c:when test="${df.rate >= 2}">
                                                                     ★
                                                                 </c:when>
                                                                 <c:otherwise>☆</c:otherwise>
                                                             </c:choose>
                                                             <c:choose>
-                                                                <c:when test="${rv.rate >= 3}">
+                                                                <c:when test="${df.rate >= 3}">
                                                                     ★
                                                                 </c:when>
                                                                 <c:otherwise>☆</c:otherwise>
                                                             </c:choose>
                                                             <c:choose>
-                                                                <c:when test="${rv.rate >= 4}">
+                                                                <c:when test="${df.rate >= 4}">
                                                                     ★
                                                                 </c:when>
                                                                 <c:otherwise>☆</c:otherwise>
                                                             </c:choose>
                                                             <c:choose>
-                                                                <c:when test="${rv.rate >= 5}">
+                                                                <c:when test="${df.rate >= 5}">
                                                                     ★
                                                                 </c:when>
                                                                 <c:otherwise>☆</c:otherwise>
                                                             </c:choose></td>
 
-                                                        <td>${rv.create_time}</td>  
+                                                        <td>${df.create_time}</td>  
                                                     </tr>     
                                                 </c:forEach>
                                             </tbody>
@@ -222,12 +223,12 @@
 
         <script>
             function filter() {
-                const url = 'http://localhost:9999/MedicalAppointmentBooking/service/review?action=filter&service_id=';
+                const url = 'http://localhost:9999/MedicalAppointmentBooking/doctor/feedback?action=filter&doctorId=';
                 const filterElement = document.getElementById("serFilter").value;
                 window.location.href = url + filterElement;
             }
             function sort() {
-                const url = 'http://localhost:9999/MedicalAppointmentBooking/service/review?action=sort&sortby=';
+                const url = 'http://localhost:9999/MedicalAppointmentBooking/doctor/feedback?action=sort&sortby=';
                 const filterElement = document.getElementById("sort").value;
                 window.location.href = url + filterElement;
             }

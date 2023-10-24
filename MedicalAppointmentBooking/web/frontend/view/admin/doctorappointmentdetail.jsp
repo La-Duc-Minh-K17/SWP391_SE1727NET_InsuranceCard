@@ -46,7 +46,27 @@
             <div class="container-fluid">
                 <div class="layout-specing">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6">
+                         <div class="col-xl-3 col-lg-4 col-md-5 col-12">
+                            <div class="rounded shadow overflow-hidden sticky-bar">
+                                <div class="card border-0" >
+                                    <img src="frontend/template/assets/images/doctors/profile-bg.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div>  
+
+                                    <div>
+                                        <ul class="list-unstyled sidebar-nav mb-0">
+                                            <li class="navbar-item"><a href="doctor-appointmentlist?id=${doctor.doctorId}" class="navbar-link"><i class="ri-calendar-check-line align-middle navbar-icon"></i> Appointment</a></li>
+                                            <li class="navbar-item"><a href="doctor-schedule.html" class="navbar-link"><i class="ri-timer-line align-middle navbar-icon"></i> Schedule Timing</a></li>
+                                            <li class="navbar-item"><a href="doctor-profile.html" class="navbar-link"><i class="ri-user-line align-middle navbar-icon"></i> Profile</a></li>
+                                            <li class="navbar-item"><a href="doctor-profile-setting.html" class="navbar-link"><i class="ri-user-settings-line align-middle navbar-icon"></i> Profile Settings</a></li>
+                                            <li class="navbar-item active"><a href="doctor-patientlist?id=${doctor.doctorId}" class="navbar-link"><i class="ri-empathize-line align-middle navbar-icon"></i> Patients</a></li>
+                                            <li class="navbar-item"><a href="patient-review.html" class="navbar-link"><i class="ri-chat-1-line align-middle navbar-icon"></i> Patients Review</a></li>
+                                            <li class="navbar-item"><a href="forgot-password.html" class="navbar-link"><i class="ri-device-recover-line align-middle navbar-icon"></i> Forgot Password</a></li>
+                                        </ul></div>
+                                </div>
+                            </div><!--end col-->
+                        </div>
+                        <div class="col-lg-5 col-md-6">
                             <div class="bg-white rounded shadow overflow-hidden">
                                 <div class="p-4 border-bottom">
                                     <h5 class="mb-0">Patient Information</h5>
@@ -97,7 +117,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 ">
+                        <div class="col-lg-4 col-md-6 ">
                             <div class="bg-white rounded shadow overflow-hidden">
                                 <div class="p-4 border-bottom">
                                     <h5 class="mb-0">Doctor Information</h5>

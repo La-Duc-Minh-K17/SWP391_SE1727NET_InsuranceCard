@@ -81,7 +81,7 @@
                                 
                             </div>
                             <div class="row">
-                                <c:forEach var="pat" items="${requestScope.listP}">
+                                <c:forEach var="pat" items="${requestScope.listPatient}">
                                     <div class="col-xl-4 col-lg-6 col-12 mt-4 pt-2">
                                         <div class="card border-0 shadow rounded p-4">
                                             <div class="d-flex justify-content-between">

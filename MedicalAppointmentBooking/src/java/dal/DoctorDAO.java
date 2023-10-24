@@ -13,7 +13,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Doctor;
+
+import model.DoctorFeedback;
+import model.Service;
+import model.ServiceReview;
+import model.UserAccount;
 import utils.ImageProcessing;
 
 /**
@@ -294,5 +301,353 @@ public class DoctorDAO {
                 }
             }
         }
+    }
+
+
+    public List<DoctorFeedback> getDoctorFeedback() {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<DoctorFeedback> doctorfeedback = new ArrayList<>();
+        String sql = "SELECT\n"
+                + "    ua.full_name AS patient_name,\n"
+                + "    ua.image,\n"
+                + "    da.full_name AS doctor_name,\n"
+                + "    df.content,\n"
+                + "    df.rate,\n"
+                + "    df.create_time\n"
+                + "FROM doctor_feedback AS df\n"
+                + "JOIN user_account AS ua ON df.user_id = ua.user_id\n"
+                + "JOIN doctors AS d ON df.doctor_id = d.doctor_id\n"
+                + "JOIN user_account AS da ON d.user_id = da.user_id;";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                UserAccount acc = new UserAccount();
+                String patientName = rs.getString("patient_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                String doctorName = rs.getString("doctor_name");
+
+                String content = rs.getString("content");
+                String create_time = rs.getString("create_time");
+                float rate = rs.getFloat("rate");
+
+                acc.setFullName(patientName);
+                acc.setImage(image);
+
+                DoctorFeedback d = new DoctorFeedback();
+                d.setDoctorName(doctorName);
+                d.setContent(content);
+                d.setCreate_time(create_time);
+                d.setRate(rate);
+                d.setUser(acc);
+                doctorfeedback.add(d);
+            }
+            return doctorfeedback;
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return doctorfeedback;
+    }
+
+    public List<DoctorFeedback> getDoctorFeedbackASC() {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<DoctorFeedback> doctorfeedback = new ArrayList<>();
+        String sql = "SELECT\n"
+                + "    ua.full_name AS patient_name,\n"
+                + "    ua.image,\n"
+                + "    da.full_name AS doctor_name,\n"
+                + "    df.content,\n"
+                + "    df.rate,\n"
+                + "    df.create_time\n"
+                + "FROM doctor_feedback AS df\n"
+                + "JOIN user_account AS ua ON df.user_id = ua.user_id\n"
+                + "JOIN doctors AS d ON df.doctor_id = d.doctor_id\n"
+                + "JOIN user_account AS da ON d.user_id = da.user_id\n"
+                + "order by df.create_time ASC";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                UserAccount acc = new UserAccount();
+                String patientName = rs.getString("patient_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                String doctorName = rs.getString("doctor_name");
+
+                String content = rs.getString("content");
+                String create_time = rs.getString("create_time");
+                float rate = rs.getFloat("rate");
+
+                acc.setFullName(patientName);
+                acc.setImage(image);
+
+                DoctorFeedback d = new DoctorFeedback();
+                d.setDoctorName(doctorName);
+                d.setContent(content);
+                d.setCreate_time(create_time);
+                d.setRate(rate);
+                d.setUser(acc);
+                doctorfeedback.add(d);
+            }
+            return doctorfeedback;
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return doctorfeedback;
+    }
+    public List<DoctorFeedback> getDoctorFeedbackDESC() {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<DoctorFeedback> doctorfeedback = new ArrayList<>();
+        String sql = "SELECT\n"
+                + "    ua.full_name AS patient_name,\n"
+                + "    ua.image,\n"
+                + "    da.full_name AS doctor_name,\n"
+                + "    df.content,\n"
+                + "    df.rate,\n"
+                + "    df.create_time\n"
+                + "FROM doctor_feedback AS df\n"
+                + "JOIN user_account AS ua ON df.user_id = ua.user_id\n"
+                + "JOIN doctors AS d ON df.doctor_id = d.doctor_id\n"
+                + "JOIN user_account AS da ON d.user_id = da.user_id\n"
+                + "order by df.create_time DESC";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                UserAccount acc = new UserAccount();
+                String patientName = rs.getString("patient_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                String doctorName = rs.getString("doctor_name");
+
+                String content = rs.getString("content");
+                String create_time = rs.getString("create_time");
+                float rate = rs.getFloat("rate");
+
+                acc.setFullName(patientName);
+                acc.setImage(image);
+
+                DoctorFeedback d = new DoctorFeedback();
+                d.setDoctorName(doctorName);
+                d.setContent(content);
+                d.setCreate_time(create_time);
+                d.setRate(rate);
+                d.setUser(acc);
+                doctorfeedback.add(d);
+            }
+            return doctorfeedback;
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return doctorfeedback;
+    }
+
+    public List<DoctorFeedback> getDoctorFeedbackByDoctorId(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<DoctorFeedback> doctorfeedback = new ArrayList<>();
+        String sql = "SELECT\n"
+                + "    ua.full_name AS patient_name,\n"
+                + "    ua.image,\n"
+                + "    da.full_name AS doctor_name,\n"
+                + "    df.content,\n"
+                + "    df.rate,\n"
+                + "    df.create_time\n"
+                + "FROM doctor_feedback AS df\n"
+                + "JOIN user_account AS ua ON df.user_id = ua.user_id\n"
+                + "JOIN doctors AS d ON df.doctor_id = d.doctor_id\n"
+                + "JOIN user_account AS da ON d.user_id = da.user_id\n"
+                + "where d.doctor_id = ?;";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                UserAccount acc = new UserAccount();
+                String patientName = rs.getString("patient_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                String doctorName = rs.getString("doctor_name");
+
+                String content = rs.getString("content");
+                String create_time = rs.getString("create_time");
+                float rate = rs.getFloat("rate");
+
+                acc.setFullName(patientName);
+                acc.setImage(image);
+
+                DoctorFeedback d = new DoctorFeedback();
+                d.setDoctorName(doctorName);
+                d.setContent(content);
+                d.setCreate_time(create_time);
+                d.setRate(rate);
+                d.setUser(acc);
+                doctorfeedback.add(d);
+            }
+            return doctorfeedback;
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return doctorfeedback;
+    }
+
+    public List<DoctorFeedback> getFeedBackByDoctorID(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<DoctorFeedback> feedbackList = new ArrayList<>();
+        String sql = "select full_name , image,create_time,rate,content \n"
+                + "from doctor_feedback df join user_account u on df.user_id = u.user_id\n"
+                + "where doctor_id = ?";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                UserAccount acc = new UserAccount();
+                String name = rs.getString("full_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+
+                String create_time = rs.getString("create_time");
+                String content = rs.getString("content");
+                float rate = rs.getFloat("rate");
+
+                acc.setFullName(name);
+                acc.setImage(image);
+
+                DoctorFeedback d = new DoctorFeedback();
+                d.setUser(acc);
+                d.setCreate_time(create_time);
+                d.setContent(content);
+                d.setRate(rate);
+                feedbackList.add(d);
+            }
+            return feedbackList;
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return feedbackList;
+    }
+
+    public void insertFeedback(DoctorFeedback feedback) {
+        Connection connection = dbc.getConnection();
+        try {
+            String query = "INSERT INTO doctor_feedback ( user_id,doctor_id,create_time,content,rate)\n"
+                    + "VALUES (?,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setInt(1, feedback.getUser().getUserId());
+//            statement.setInt(2, feedback.getDoctor().getDoctorId());
+            statement.setString(3, feedback.getCreate_time());
+            statement.setString(4, feedback.getContent());
+            statement.setFloat(5, feedback.getRate());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    }
+  
+    public Doctor getDoctorRelatedCategory(int Id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Doctor doctor = null;
+        String sql = "SELECT distinct D.*, UA.*\n"
+                + "FROM mabs.doctors D\n"
+                + "JOIN mabs.speciality S on D.speciality_id = S.speciality_id\n"
+                + "JOIN mabs.blog_category BC on S.speName = BC.name\n"
+                + "JOIN mabs.blogs B on BC.blog_category_id = B.blog_category_id\n"
+                + "JOIN mabs.user_account UA on D.user_id = UA.user_id\n"
+                + "WHERE B.blog_id = ?\n"
+                + "ORDER BY RAND()\n"
+                + "LIMIT 1;";
+            ps.setInt(1, Id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int doctorId = rs.getInt("doctor_id");
+                String username = rs.getString("username");
+                String fullName = rs.getString("full_name");
+                String phone = rs.getString("phone");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String email = rs.getString("email");
+                int status = rs.getInt("status");
+                String position = rs.getString("doctor_position");
+                String speciality = rs.getString("speName");
+                String description = rs.getString("doctor_description");
+                int fee = rs.getInt("service_fee");
+                doctor = new Doctor(doctorId, speciality, position, description, username, email, fullName, gender, phone, image, status);
+                doctor.setServiceFee(fee);
+            }
+            return doctor;
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return doctor;
+
     }
 }

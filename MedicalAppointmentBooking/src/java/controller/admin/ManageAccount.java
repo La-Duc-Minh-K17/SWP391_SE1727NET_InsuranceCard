@@ -1,25 +1,26 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-package controller.manager;
+package controller.admin;
 
-import dal.ServicesDAO;
+import dal.RoleDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import static java.lang.System.out;
-import java.util.List;
-import model.Doctor;
 
 /**
  *
- * @author DELL
+ * @author DUCHIEUPC.COM
  */
-public class ServiceReview extends HttpServlet {
+@WebServlet(name = "ManageAccount", urlPatterns = {"/ManageAccount"})
+public class ManageAccount extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,34 +33,19 @@ public class ServiceReview extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");      
-        ServicesDAO sv = new ServicesDAO();
-        request.setAttribute("serviceList", sv.getAllService());
-        if (action != null && action.equals("view-all")) {
-            
-            request.setAttribute("review", sv.getServiceReview());
-            request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
-            return;
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ManageAccount</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ManageAccount at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        if (action != null && action.equals("filter")) {
-            int serId = Integer.parseInt(request.getParameter("service_id"));
-            request.setAttribute("review", sv.getServiceReviewById(serId));
-            request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
-            return;
-        } 
-         if (action != null && action.equals("sort")) {
-            String sortby = request.getParameter("sortby");
-            if(sortby.equalsIgnoreCase("Newest"))
-            {
-                request.setAttribute("review", sv.getServiceReviewDESC());
-                request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
-            }else{
-                request.setAttribute("review", sv.getServiceReviewASC());
-                request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
-            }  
-            
-        } 
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -74,7 +60,14 @@ public class ServiceReview extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String role = request.getParameter("role")==null?"":request.getParameter("role");
+        String status = request.getParameter("status")==null?"":request.getParameter("status");
+
+        UserDAO uDAO = new UserDAO();
+        request.setAttribute("ul", uDAO.getListUserAccount(status, role));
+        request.setAttribute("rl", new RoleDAO().getListRole());
+
+        request.getRequestDispatcher("frontend/view/admin/accountlist.jsp").forward(request, response);
     }
 
     /**
