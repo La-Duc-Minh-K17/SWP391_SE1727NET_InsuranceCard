@@ -4,10 +4,13 @@
  */
 package utils;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +25,34 @@ public class TimeUtil {
     public static Time sqlTime(String time) {
         Time sqlTime = Time.valueOf(time);
         return sqlTime;
+    }
+
+    public static LocalDateTime stringToLocalDateTime(String dateString) {
+        try {
+            String formatPattern = "yyyy-MM-dd'T'HH:mm:ss";
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatPattern);
+
+            // Parse the string into a LocalDateTime object
+            LocalDateTime localDateTime = LocalDateTime.parse(dateString, formatter);
+
+            return localDateTime;
+        } catch (Exception e) {
+            // Handle parsing exceptions, e.g., invalid date format
+            e.printStackTrace();
+            return null; // Return null or throw an exception as needed
+        }
+    }
+
+    public static String sqlDateToString(Date sqlDate) {
+        try {
+            String formatPattern = "yyyy-MM-dd";
+            SimpleDateFormat sdf = new SimpleDateFormat(formatPattern);
+            return sdf.format(sqlDate);
+        } catch (Exception e) {
+            // Handle any potential exceptions here
+            e.printStackTrace();
+            return null; // You can return null or handle exceptions as needed
+        }
     }
 
     public static java.sql.Date dateConverter(String dateString) {

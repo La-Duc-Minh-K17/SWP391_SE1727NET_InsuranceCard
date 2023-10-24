@@ -78,7 +78,8 @@
                 <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
                     <div class="card border-0 shadow overflow-hidden">
                         <div class="tab-content p-4" id="pills-tabContent">
-                            <form action="<c:url value='/manage-service?action=add-info'/>" method="POST" enctype="multipart/form-data">
+                            <form action="<c:url value='/manage-service?action=add-info'/>" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+
                                 <h5 class="mb-0">Add Service.</h5>
                                 <div>
                                     <p class="text-muted">Choose Image.</p>
@@ -94,7 +95,7 @@
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Title</label>
-                                                <input name="service_name" id="name" type="text" class="form-control" value="${s.service_name}">
+                                                <input name="service_name" id="name" type="text" class="form-control" value="${s.service_name}" required placeholder="Service Name">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -102,20 +103,20 @@
                                                 <label class="form-label">Price</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text">$</span>
-                                                    <input name="service_fee" type="text" class="form-control" value="${s.fee}">
+                                                    <input name="service_fee" type="text" class="form-control" value="${s.fee}" required placeholder="Service Fee">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="mb-3 custom-box">
                                                 <label class="form-label">Description</label>
-                                                <input name="service_description" type="text" class="form-control" value="${s.service_description}">
+                                                <input name="service_description" type="text" class="form-control" value="${s.service_description}" required placeholder="Service Description">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="mb-3 custom-box">
                                                 <label class="form-label">Detail</label>
-                                                <input name="service_details" type="text" class="form-control" value="${s.service_details}">
+                                                <input name="service_details" type="text" class="form-control" value="${s.service_details}" required placeholder="Service Details">
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -183,6 +184,21 @@
 
                 thumbnail.src = "";
             }
+            function validateForm() {
+        var serviceName = document.getElementById("name").value;
+        var serviceFee = document.getElementById("service_fee").value;
+        var serviceDescription = document.getElementById("service_description").value;
+        var serviceDetails = document.getElementById("service_details").value;
+
+        if (serviceName === "" || serviceFee === "" || serviceDescription === "" || serviceDetails === "") {
+            alert("Please fill in all the required fields.");
+            return false; // Prevent form submission
+        }
+
+        // You can add additional validation logic here if needed
+
+        return true; // Allow form submission
+    }
         }
     </script>
     <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>

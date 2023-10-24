@@ -37,8 +37,6 @@
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
             <main class="page-content">
-
-
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
                         <div class="d-flex align-items-center">
@@ -103,7 +101,7 @@
                             <div class="col-xl-6 col-md-6">
                                 <div class="search-bar d-lg-block" style="padding-top :0">
                                     <div id="search" class="menu-search ">
-                                        <form action="<c:url value='/manageblog?action=search'/>"role="search" method="post" id="searchform" class="searchform">
+                                        <form action="<c:url value='/manage-blog?action=search'/>"role="search" method="post" id="searchform" class="searchform">
                                             <div>
                                                 <input type="text" class="form-control border rounded-pill" name="search"
                                                        id="search" placeholder="Search blogs by name">
@@ -114,7 +112,7 @@
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-3 mt-4 mt-md-0 text-md-end">
-                                <a href="<c:url value='/manageblog?action=add'/>" class="btn btn-primary ">Add Blogs</a>
+                                <a href="<c:url value='/manage-blog?action=add'/>" class="btn btn-primary ">Add Blogs</a>
                             </div><!--end col-->
                         </div><!--end row-->
 
@@ -132,7 +130,6 @@
                                                 <div class="container">
                                                     <div class="row">
                                                         <c:forEach var="o" items="${requestScope.dList}">
-
                                                             <div class=" col-lg-4 col-md-6 col-12 mb-4 pb-2" value="${o.blog_id}">
                                                                 <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                                                                     <div class="imagefit">
@@ -157,10 +154,10 @@
                                                                             <div class="card component-wrapper border-0 rounded ">
                                                                                 <div class="row justify-content-center">
                                                                                     <div class="mb-2 col-4">
-                                                                                        <a href="<c:url value='/manageblog?action=edit&id=${o.blog_id}'/> " class="btn btn-primary btn-sm">Edit</a>
+                                                                                        <a href="<c:url value='/manage-blog?action=edit&id=${o.blog_id}'/> " class="btn btn-primary btn-sm">Edit</a>
                                                                                     </div>
                                                                                     <div class="mb-2 col-4">
-                                                                                        <a href="<c:url value='/manageblog?action=detail&blog_id=${o.blog_id}'/> " class="btn btn-success btn-sm">View</a>
+                                                                                        <a href="<c:url value='/manage-blog?action=detail&blog_id=${o.blog_id}'/> " class="btn btn-success btn-sm">View</a>
                                                                                     </div>
                                                                                     <div class="mb-2 col-4">
                                                                                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="deleteProduct(this)" data-id="${o.blog_id}"class=" btn-sm btn btn-danger"> Delete</a>
@@ -231,7 +228,7 @@
         <script>
             console.log("helloworld");
             function filter() {
-                const url = 'http://localhost:8082/MedicalAppointmentBooking/manageblog?action=filter&blog_category_id=';
+                const url = 'http://localhost:8082/MedicalAppointmentBooking/manage-blog?action=filter&blog_category_id=';
                 const filterElement = document.getElementById("speFilter").value;
                 window.location.href = url + filterElement;
             }

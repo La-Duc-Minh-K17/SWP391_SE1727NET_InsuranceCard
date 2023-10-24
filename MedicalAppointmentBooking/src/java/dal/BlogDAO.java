@@ -22,7 +22,7 @@ import utils.ImageProcessing;
  *
  * @author phuongnt
  */
-public class BlogDAO extends DBConnection {
+public class BlogDAO {
 
     DBConnection dbc = new DBConnection();
     public CategoryDAO categoryDao = new CategoryDAO();
@@ -38,15 +38,11 @@ public class BlogDAO extends DBConnection {
             ps = connection.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {
-
                 int blogId = result.getInt("blog_id");
                 String blogTitle = result.getString("title");
                 String blogDescription = result.getString("description");
                 String blogContent = result.getString("content");
-                String image = null;
-                if (result.getBlob("image") != null) {
-                    image = ImageProcessing.imageString(result.getBlob("image"));
-                }
+                String image = ImageProcessing.imageString(result.getBlob("image"));
                 int blogCategoryId = result.getInt("blog_category_id");
                 Date blogCreatedTime = result.getDate("created_time");
                 Blog blog = new Blog(blogId, blogTitle, blogDescription, blogContent, image, blogCategoryId, blogCreatedTime);
@@ -76,10 +72,7 @@ public class BlogDAO extends DBConnection {
                 String blogTitle = result.getString("title");
                 String blogDescription = result.getString("description");
                 String blogContent = result.getString("content");
-                String image = null;
-                if (result.getBlob("image") != null) {
-                    image = ImageProcessing.imageString(result.getBlob("image"));
-                }
+                String image = ImageProcessing.imageString(result.getBlob("image"));
                 int blogCategoryId = result.getInt("blog_category_id");
                 Date blogCreatedTime = result.getDate("created_time");
                 Blog blog = new Blog(blogId, blogTitle, blogDescription, blogContent, image, blogCategoryId, blogCreatedTime);
@@ -108,7 +101,6 @@ public class BlogDAO extends DBConnection {
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-
             result = ps.executeQuery();
             while (result.next()) {
 
@@ -370,7 +362,6 @@ public class BlogDAO extends DBConnection {
                 + " ?,\n"
                 + " ?,\n"
                 + " ?);";
-        
         Connection connection = null;
         try {
             connection = dbc.getConnection();
@@ -395,4 +386,3 @@ public class BlogDAO extends DBConnection {
         }
     }
 }
-

@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8" />
         <title>MABS</title>
-        <!-- favicon -->
+        <!-- favicon -->    
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -136,7 +136,7 @@
                                         <h5 class="text-muted">$${s.fee}</h5>
                                     </div>
                                     <div class="card-end">
-                                        <a href="javascript:void(0);" onclick="viewServiceDetails(${s.service_id}, ${s.category_id})" class="btn btn-primary custom-button">Learn More</a>
+                                        <a href="servicedetail?action=view-detail&id=${s.service_id}&category_id=${s.category_id}"  class="btn btn-primary custom-button">Learn More</a>
                                         <a href="service?action=book-service&id=${s.service_id}" class="btn btn-success custom-button">Appointment Now</a>
                                     </div>
                                 </div>
