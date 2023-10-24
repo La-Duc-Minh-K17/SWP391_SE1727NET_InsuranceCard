@@ -67,9 +67,8 @@
                             </div><!--end col-->
                         </div>
                         <div class="col-xl-9 col-lg-8 col-md-7 mt-4 pt-2 mt-sm-0 pt-sm-0">
-                            <h5 class="mb-0">Patients List</h5>
                             <div class="row">
-                                <div class="col-lg-6 col-md-6">
+                                <div class="col-lg-12 col-md-6">
                                     <div class="bg-white rounded shadow overflow-hidden">
                                         <div class="p-4 border-bottom">
                                             <h5 class="mb-0">Patient Information</h5>
