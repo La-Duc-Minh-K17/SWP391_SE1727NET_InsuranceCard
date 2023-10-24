@@ -69,7 +69,7 @@ public class NewDetailController extends HttpServlet {
         List<Blog> blogsList6 = dao.getRandomNews();
         Blog blogDetail = new Blog();
         DoctorDAO ddao = new DoctorDAO();
-        Doctor doc = ddao.getDoctorRelatedCategory();
+        Doctor doc = ddao.getDoctorRelatedCategory(Id);
         blogDetail = dao.getBlogDetailByID(Id);
         request.setAttribute("blogs6", blogsList6);
         request.setAttribute("blog", blogDetail);
