@@ -141,37 +141,42 @@
                                     </div>
                                     <div>
                                         <h5>Related Doctor</h5>
-                                        <c:forEach items="${requestScope.doc}" var="d">
-                                            <div class="tiny-slide">
-                                                <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                                    <div class="d-flex justify-content-center">
-                                                        <img src="data:image/jpg;base64,${d.image}" width="80%" height="220" />
-                                                    </div>
-                                                    <div class="card-body p-4">
-                                                        <div class="card-body content text-center">
-                                                            <a href="#"
-                                                               class="title text-dark  d-block mb-0">${d.fullName}</a>
-                                                            <small class="text-muted speciality">${d.speciality}</small>
+                                        <div class="tiny-slide">
+                                            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
+                                                <div class="tiny-slide">
+                                                    <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
+                                                        <div class="card border-0" >
+                                                            <img src="frontend/template/assets/images/doctors/profile-bg.jpg" class="img-fluid" alt="">
                                                         </div>
-
-                                                        <div class="post-meta d-flex justify-content-around mt-3">
-                                                            <div>
-                                                                <a href="#" class="btn btn-primary btn-sm">Book Appointment</a></div>
-                                                            <div>
-                                                                <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                                                        <div>
+                                                            <c:set var="doctor" value="${doctor}"></c:set>
+                                                                <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                                                                    <img src="data:image/jpg;base64,${doctor.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                                                <h5 class="mt-3 mb-1">Dr. ${doctor.fullName}</h5>
+                                                                <p class="text-muted mb-0">${doctor.speciality}</p>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="post-meta d-flex justify-content-around mt-3">
+                                                    <div>
+                                                        <a href="#" class="btn btn-primary btn-sm">Book Appointment</a></div>
+                                                    <div>
+                                                        <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                                                    </div>
+
+                                                </div>
                                             </div>
-                                        </c:forEach>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        </form>
-                    </div><!--end row-->
+                    </div>
+                </div>
+                </form>
+                </div><!--end row-->
                 </div><!--end container-->
 
                 <div class="container mt-100 mt-60">

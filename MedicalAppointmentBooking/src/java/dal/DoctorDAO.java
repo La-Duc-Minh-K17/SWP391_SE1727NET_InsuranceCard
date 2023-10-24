@@ -605,18 +605,22 @@ public class DoctorDAO {
     }
   
     public Doctor getDoctorRelatedCategory(int Id) {
-        PreparedStatement ps = null;
+         PreparedStatement ps = null;
         ResultSet rs = null;
         Doctor doctor = null;
-        String sql = "SELECT distinct D.*, UA.*\n"
-                + "FROM mabs.doctors D\n"
-                + "JOIN mabs.speciality S on D.speciality_id = S.speciality_id\n"
-                + "JOIN mabs.blog_category BC on S.speName = BC.name\n"
-                + "JOIN mabs.blogs B on BC.blog_category_id = B.blog_category_id\n"
-                + "JOIN mabs.user_account UA on D.user_id = UA.user_id\n"
-                + "WHERE B.blog_id = ?\n"
-                + "ORDER BY RAND()\n"
-                + "LIMIT 1;";
+        String sql = "SELECT distinct *\n" +
+"                FROM mabs.doctors D\n" +
+"                JOIN mabs.speciality S on D.speciality_id = S.speciality_id\n" +
+"                JOIN mabs.blog_category BC on S.speName = BC.name\n" +
+"                JOIN mabs.blogs B on BC.blog_category_id = B.blog_category_id\n" +
+"                JOIN mabs.user_account UA on D.user_id = UA.user_id\n" +
+"                WHERE B.blog_id = ?\n" +
+"                ORDER BY RAND()\n" +
+"                LIMIT 1;";
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
             ps.setInt(1, Id);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -650,4 +654,5 @@ public class DoctorDAO {
         return doctor;
 
     }
+
 }
