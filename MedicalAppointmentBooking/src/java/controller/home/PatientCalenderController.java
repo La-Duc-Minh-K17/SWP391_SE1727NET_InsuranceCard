@@ -38,7 +38,6 @@ public class PatientCalenderController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
           AppointmentDAO apptDAO = new AppointmentDAO();
             int apptId = Integer.parseInt(request.getParameter("pid"));
-            
             Appointment appt = apptDAO.getAppointmentById(apptId);
             request.setAttribute("appt", appt);
             request.getRequestDispatcher("frontend/view/admin/patientcalender.jsp").forward(request, response);
