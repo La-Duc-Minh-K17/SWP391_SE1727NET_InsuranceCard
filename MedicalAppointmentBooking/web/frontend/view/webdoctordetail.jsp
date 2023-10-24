@@ -154,8 +154,9 @@
 
                     <h6>Great doctor if you need your family member to get effective immediate assistance,</h6>
                     <h6>emergency treatment or a simple consultation</h6>
-                    <p>You have <span>? patients</span> remaining today!</p>
+                    <a href="javascript:void(0)" class="btn btn-primary m-1">Book now</a>
                 </div>
+                    
             </div>
 
         </div>
