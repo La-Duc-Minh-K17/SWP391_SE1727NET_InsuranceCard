@@ -98,6 +98,39 @@ public class UserDAO {
         }
 
     }
+        public void updateAccount(String id, String role, String status, String fullname,
+            String phone, String gender, String dob) {
+        PreparedStatement ps = null;
+        String sql = "UPDATE `mabs`.`user_account`  SET\n"
+                + "            `role_id` =?,\n"
+                + "            `status` = b'"+status+"',\n"
+                + "            `full_name` = ?,\n"
+                + "            `phone` = ?,\n"
+                + "            `gender` =  b'"+gender+"',\n"
+                + "            `dob` = ? \n"
+                + "             WHERE `user_id` =   " + id;
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, role);
+            ps.setString(2, fullname);
+            ps.setString(3, phone);
+            ps.setString(4, dob);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+
 
     public void updatePassword(UserAccount user, String newPassword) {
         PreparedStatement ps = null;
