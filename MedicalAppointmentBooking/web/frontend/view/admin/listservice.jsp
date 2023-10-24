@@ -113,6 +113,18 @@
                                                        id="search" placeholder="Search service by name">
                                                 <input type="submit" id="searchsubmit" value="Search">
                                             </div>
+                                            <c:choose>
+                                                <c:when test="${empty sList}">
+                                                    <tr>
+                                                        <td colspan="6">No services found with the given name.</td>
+                                                    </tr>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:forEach items="${sList}" var="s">
+                                                    </c:forEach>
+                                                </c:otherwise>
+                                            </c:choose>
+
                                         </form>
                                     </div>
                                 </div>
@@ -157,38 +169,34 @@
                                                                 <span class="text-danger ">InActive</span>
                                                             </c:if>
                                                         </td>
-                                                <style>
-                                                    .custom-btn {
-                                                        width: 100px; /* Adjust the width as needed */
-                                                    }
-                                                </style>
-                                                <td class="text-center">
-                                                    <div class="container d-flex justify-content-center">
-                                                        <div class="card component-wrapper border-0 rounded">
-                                                            <div class="d-flex mb-2">
-                                                                <a href="<c:url value='/manage-service?action=view&service_id=${s.service_id}'/>" class="btn btn-primary custom-btn btn-sm m-2">View</a>
-                                                                <a href="<c:url value='/manage-service?action=edit&service_id=${s.service_id}'/>" class="btn btn-primary custom-btn btn-sm m-2">Edit</a>
-                                                                <c:choose>
-                                                                    <c:when test="${s.service_status == 1}">
-                                                                        <a href="<c:url value='/manage-service?action=status&service_id=${s.service_id}&status=${s.service_status}'/>" 
-                                                                           class="btn btn-danger custom-btn btn-sm m-2"
-                                                                           onclick="return confirm('Are you sure you want to deactivate this service?');">Deactivate</a>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <a href="<c:url value='/manage-service?action=status&service_id=${s.service_id}&status=${s.service_status}'/>" 
-                                                                           class="btn btn-success custom-btn btn-sm m-2"
-                                                                           onclick="return confirm('Are you sure you want to activate this service?');">Activate</a>
-                                                                    </c:otherwise>
-                                                                </c:choose>
 
+                                                        <td class="text-center">
+                                                            <div class="container d-flex justify-content-center">
+                                                                <div class="card component-wrapper border-0 rounded">
+                                                                    <div class="d-flex mb-2">
+                                                                        <a href="<c:url value='/manage-service?action=view&service_id=${s.service_id}'/>" class="btn btn-primary custom-btn btn-sm m-2">View</a>
+                                                                        <a href="<c:url value='/manage-service?action=edit&service_id=${s.service_id}'/>" class="btn btn-primary custom-btn btn-sm m-2">Edit</a>
+                                                                        <c:choose>
+                                                                            <c:when test="${s.service_status == 1}">
+                                                                                <a href="<c:url value='/manage-service?action=status&service_id=${s.service_id}&status=${s.service_status}'/>" 
+                                                                                   class="btn btn-danger custom-btn btn-sm m-2"
+                                                                                   onclick="return confirm('Are you sure you want to deactivate this service?');">Deactivate</a>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <a href="<c:url value='/manage-service?action=status&service_id=${s.service_id}&status=${s.service_status}'/>" 
+                                                                                   class="btn btn-success custom-btn btn-sm m-2"
+                                                                                   onclick="return confirm('Are you sure you want to activate this service?');">Activate</a>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                                        </td>
 
 
-                                                </tr>
-                                            </c:forEach>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
@@ -219,6 +227,11 @@
 
         </div>
         <!-- page-wrapper -->
+        <style>
+            .custom-btn {
+                width: 100px; /* Adjust the width as needed */
+            }
+        </style>
         <!-- javascript -->
         <script>
             function filter() {
