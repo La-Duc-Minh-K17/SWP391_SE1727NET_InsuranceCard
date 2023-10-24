@@ -5,6 +5,7 @@
 package controller.home;
 
 import dal.BlogDAO;
+import dal.DoctorDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import model.Blog;
+import model.Doctor;
 
 /**
  *
@@ -66,6 +68,8 @@ public class NewDetailController extends HttpServlet {
         request.setAttribute("blogs3", blogsList3);
         List<Blog> blogsList6 = dao.getRandomNews();
         Blog blogDetail = new Blog();
+        DoctorDAO ddao = new DoctorDAO();
+        Doctor doc = ddao.getDoctorRelatedCategory();
         blogDetail = dao.getBlogDetailByID(Id);
         request.setAttribute("blogs6", blogsList6);
         request.setAttribute("blog", blogDetail);

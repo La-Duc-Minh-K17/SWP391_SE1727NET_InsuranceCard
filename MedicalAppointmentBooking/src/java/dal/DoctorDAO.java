@@ -295,4 +295,8 @@ public class DoctorDAO {
             }
         }
     }
+
+    public Doctor getDoctorRelatedCategory() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
