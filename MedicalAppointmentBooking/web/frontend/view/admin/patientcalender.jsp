@@ -120,46 +120,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 ">
-                                    <div class="bg-white rounded shadow overflow-hidden">
-                                        <div class="p-4 border-bottom">
-                                            <h5 class="mb-0">Appointment Details</h5>
-                                        </div>
-                                        <div class="tab-content p-4" id="pills-tabContent">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Appointment Date</label>
-                                                        <p>${appt.apptDate}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Appointment Time</label>
-                                                        <p>${appt.apptTime}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Status</label>
-                                                        <p>${appt.status}</p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Service Fee</label>
-                                                        <p>${appt.doctor.serviceFee}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Appointment Note</label>
-                                                        <p>${appt.apptNote}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="d-flex align-items-center">
                                             <a href="javascript:history.back();" class="me-3 btn btn-primary btn-sml btn-soft-success">
                                                 Turn Back
