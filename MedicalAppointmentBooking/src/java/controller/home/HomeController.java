@@ -47,10 +47,18 @@ public class HomeController extends HttpServlet {
             request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
             return;
         }
+        if (action != null && action.equals("view")) {
+                int serivce_id = Integer.parseInt(request.getParameter("id"));
+                Service service = servicedao.getServiceById(serivce_id);
+                request.setAttribute("service", service);
+                request.getRequestDispatcher("frontend/view/servicedetail.jsp").forward(request, response);
+
+            }
         if (action == null) {
             request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
             return;
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
