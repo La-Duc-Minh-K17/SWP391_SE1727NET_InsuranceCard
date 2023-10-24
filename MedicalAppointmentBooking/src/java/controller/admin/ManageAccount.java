@@ -1,10 +1,11 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-package controller.home;
+package controller.admin;
 
-import dal.DoctorDAO;
+import dal.RoleDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,15 +14,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Doctor;
-import model.UserAccount;
 
 /**
  *
- * @author ngocq
+ * @author DUCHIEUPC.COM
  */
-@WebServlet(name = "UserProfile", urlPatterns = {"/accountprofile"})
-public class UserProfile extends HttpServlet {
+@WebServlet(name = "ManageAccount", urlPatterns = {"/ManageAccount"})
+public class ManageAccount extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,15 +33,18 @@ public class UserProfile extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        try ( PrintWriter out = response.getWriter()) {
-            int id = Integer.parseInt(request.getParameter("id"));
-                  Doctor useraccount = new Doctor();
-                  DoctorDAO udao = new DoctorDAO();
-                  Doctor account = udao.getDoctorById(id);                 
-                  request.setAttribute("account", account);
-                  request.setAttribute("useraccount", useraccount);
-               request.getRequestDispatcher("frontend/template/view/profile.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ManageAccount</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ManageAccount at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -58,7 +60,14 @@ public class UserProfile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String role = request.getParameter("role")==null?"":request.getParameter("role");
+        String status = request.getParameter("status")==null?"":request.getParameter("status");
+
+        UserDAO uDAO = new UserDAO();
+        request.setAttribute("ul", uDAO.getListUserAccount(status, role));
+        request.setAttribute("rl", new RoleDAO().getListRole());
+
+        request.getRequestDispatcher("frontend/view/admin/accountlist.jsp").forward(request, response);
     }
 
     /**

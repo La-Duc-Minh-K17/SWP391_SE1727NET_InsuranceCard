@@ -39,7 +39,7 @@
                             <nav aria-label="breadcrumb" class="mt-2 m-2">
                                 <ol class="breadcrumb bg-light rounded bg-transparent">
                                     <li class="breadcrumb-item"><a href="home">MABS</a></li>
-                                    <li class="breadcrumb-item"><a href="service">Services</a></li>
+                                    <li class="breadcrumb-item"><a href="service?action=view-all">Services</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Services Detail</li>
                                 </ol>
                             </nav>
@@ -52,70 +52,64 @@
         <!-- Product Images and Details Section -->
         <!-- Product Images and Details Section -->
         <section class="container ">
+            <c:set value="${requestScope.serviceDetail}" var="s" />
             <div class="row">
-                <c:set value="${requestScope.serviceDetail}" var="s" />
                 <div class="col-md-5">
                     <div class="text-center m-5">
-                        <img  src="data:image/jpg;base64,${s.service_image}" height="400" width="500" alt="${s.service_name}" />
+                        <img src="data:image/jpg;base64,${s.service_image}" height="400" width="500" alt="${s.service_name}" />
                     </div>
                 </div>
                 <div class="col-md-7">
                     <div class="text-center m-5">
-                        <h4 class="title h3">${s.service_name}</h4>
-                        <div class="m-5">
-                            <h5 class="mt-4 py-2">Overview:</h5>
-                            <label class="form-label">${s.service_description} </label>
-                            <ul class="list-unstyled text-warning h5 mb-0">
-                                <li class="list-inline-item">
-                                    <i class="mdi mdi-star"></i>
-                                    <i class="mdi mdi-star"></i>
-                                    <i class="mdi mdi-star"></i>
-                                    <i class="mdi mdi-star"></i>
-                                    <i class="mdi mdi-star"></i>
-                                </li>
-                                <li class="list-inline-item me-2 h6 text-muted">(20 Ratings)</li>
-                            </ul>
-                            <h5 class="text-muted">$${s.fee}</h5>
-                            <div class="text-center">
-                                <div class="mt-9 pt-2">
-                                    <div class="d-flex justify-content-center">
-                                        <a href="servicedetail?action=book-service&id=${s.service_id}" class="btn btn-outline-primary btn-lg">Schedule Now</a>
-                                    </div>
+                        <h4 class="title h3 text-primary">${s.service_name}</h4>
+                        <h4 class="text-muted mt-5">$${s.fee}</h4>
+                        <div class="text-center">
+                            <div class="mt-5 pt-2">
+                                <div class="d-flex justify-content-center">
+                                    <a href="servicedetail?action=book-service&id=${s.service_id}" class="btn btn-outline-primary btn-lg">Schedule Now</a>
                                 </div>
-                            </div><!--end text-center-->
-                        </div><!--end m-5-->
+                            </div>
+                        </div><!--end text-center-->
                     </div>
                 </div><!--end col-md-7-->
             </div><!--end row-->
-            <!-- Display Doctors in Two Rows -->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-start m-5">
+                        <h5 class="mt-4 py-2">Description</h5>
+                        <label class="form-label">${s.service_description} </label>
+                    </div>
+                </div>
+            </div><!--end row-->
+
             <div class="row mt-5">
-                <h4 class="col-20 text-center title">Related Services</h4>
+                <h4 class="col-12 text-start title text-primary">Related Services</h4>
                 <c:forEach items="${requestScope.Lists}" var="l" >
                     <div class="col-md-3 mt-4 pt-2">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
+                        <div class="card team border-0 rounded shadow overflow-hidden" style="height: 100%;">
                             <div class="team-img position-relative">
                                 <img src="data:image/jpg;base64,${l.service_image}" width="300" height="250" alt="" />
                             </div>
-                            <div class="card-body content text-center">
-                                <a href="javascript:void(0);" onclick="viewServiceDetails(${s.service_id}, ${s.category_id})" class="title text-dark h5 d-block mb-0">${l.service_name}</a>
-                                <small class="text-muted speciality">$${l.fee}</small>
+                            <div class="card-body content text-center" style="position: relative;">
+                                <a href="javascript:void(0);" onclick="viewServiceDetails(${l.service_id}, ${l.category_id})" class="title text-dark h5 d-block">${l.service_name}</a>
+                                <small class="text-muted " style="position: absolute; bottom: 0; left: 0; right: 0;">$${l.fee}</small>
                             </div>
                         </div>
                     </div><!--end col-->
                 </c:forEach>
             </div><!--end row-->
+
+
         </section><!--end Product Images and Details Section-->
-                <script>
-            function filter() {
-                function viewServiceDetails(serviceId, categoryId) {
+        <script>
+            function viewServiceDetails(serviceId, categoryId) {
                 var url = "servicedetail?action=view-detail&id=" + serviceId + "&category_id=" + categoryId;
                 window.location.href = url;
             }
-                }
-                window.location.href = url;
-            }
         </script>
-        
+
+
         <!-- Add your scripts here -->
         <script src="<c:url value='/frontend/template/assets/js/bootstrap.bundle.min.js' />"></script>
         <!-- Icons -->

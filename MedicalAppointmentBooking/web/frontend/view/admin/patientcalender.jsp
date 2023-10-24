@@ -52,21 +52,14 @@
                                     <img src="frontend/template/assets/images/doctors/profile-bg.jpg" class="img-fluid" alt="">
                                 </div>
                                 <div>  
-                                    <div>
-                                        <c:set var="doctor" value="${doctor}"></c:set>
-                                            <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
-                                                <img src="data:image/jpg;base64,${doctor.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
-                                            <h5 class="mt-3 mb-1">Dr. ${doctor.fullName}</h5>
-                                            <p class="text-muted mb-0">${doctor.speciality}</p>
-                                        </div>
-                                    </div>
+
                                     <div>
                                         <ul class="list-unstyled sidebar-nav mb-0">
-                                            <li class="navbar-item"><a href="doctor-appointmentlist" class="navbar-link"><i class="ri-calendar-check-line align-middle navbar-icon"></i> Appointment</a></li>
+                                            <li class="navbar-item"><a href="doctor-appointmentlist?id=" class="navbar-link"><i class="ri-calendar-check-line align-middle navbar-icon"></i> Appointment</a></li>
                                             <li class="navbar-item"><a href="doctor-schedule.html" class="navbar-link"><i class="ri-timer-line align-middle navbar-icon"></i> Schedule Timing</a></li>
                                             <li class="navbar-item"><a href="doctor-profile.html" class="navbar-link"><i class="ri-user-line align-middle navbar-icon"></i> Profile</a></li>
                                             <li class="navbar-item"><a href="doctor-profile-setting.html" class="navbar-link"><i class="ri-user-settings-line align-middle navbar-icon"></i> Profile Settings</a></li>
-                                            <li class="navbar-item active"><a href="doctor-patientlist?id=${doctor.doctorId}" class="navbar-link"><i class="ri-empathize-line align-middle navbar-icon"></i> Patients</a></li>
+                                            <li class="navbar-item active"><a href="doctor-patientlist?id=" class="navbar-link"><i class="ri-empathize-line align-middle navbar-icon"></i> Patients</a></li>
                                             <li class="navbar-item"><a href="patient-review.html" class="navbar-link"><i class="ri-chat-1-line align-middle navbar-icon"></i> Patients Review</a></li>
                                             <li class="navbar-item"><a href="forgot-password.html" class="navbar-link"><i class="ri-device-recover-line align-middle navbar-icon"></i> Forgot Password</a></li>
                                         </ul></div>
@@ -74,59 +67,71 @@
                             </div><!--end col-->
                         </div>
                         <div class="col-xl-9 col-lg-8 col-md-7 mt-4 pt-2 mt-sm-0 pt-sm-0">
-                            <h5 class="mb-0">Patients List</h5>
                             <div class="row">
-                                <c:forEach var="pat" items="${requestScope.listP}">
-                                    <div class="col-xl-12 col-lg-6 col-12 mt-4 pt-2">
-                                        <div class="card border-0 shadow rounded p-4">
-                                            <div class="d-flex justify-content-between">
-                                                <img src="data:image/jpg;base64,${pat.image}" class="avatar avatar-md-md rounded-pill shadow" alt="">
-                                               
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="bg-white rounded shadow overflow-hidden">
+                                        <div class="p-4 border-bottom">
+                                            <h5 class="mb-0">Patient Information</h5>
+                                        </div>
+                                        <br><br><br><br><br>
+                                        <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                                            <c:if test="${appt.patient.image == 'default'}">
+                                                <img src="frontend/template/assets/images/patient.jpg" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                            </c:if>
+                                            <c:if test="${appt.patient.image != 'default'}">
+                                                <img src="data:image/png;base64,${appt.patient.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                            </c:if>
+                                            <h5 class="mt-3 mb-1">${appt.patient.fullName}</h5>
+                                        </div>
+                                        <div class="list-unstyled p-4">
+                                            <div class="d-flex align-items-center mt-2">
+                                                <i class="uil uil-user align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                                <h6 class="mb-0">Gender</h6>
+                                                <c:if test="${appt.patient.gender == 1}">
+                                                    <p class="text-muted mb-0 ms-2">Male</p>
+                                                </c:if>
+                                                <c:if test="${appt.patient.gender == 0}">
+                                                    <p class="text-muted mb-0 ms-2">Female</p>
+                                                </c:if>     
                                             </div>
-                                             <div class="card-body p-0 pt-3">
-                                                <a href="#" class="text-dark h6">${pat.fullName}</a>
 
-                                                <ul class="mb-0 list-unstyled mt-2">
-                                                    <li class="mt-1">
-                                                        <i class="uil uil-user text-primary "> Gender:</i>
-                                                        <span class="ms-5 h6">
-                                                            <c:if test= "${pat.gender == 0}">Female</c:if>
-                                                            <c:if test= "${pat.gender == 1}">Male</c:if>
-                                                            </span>
-                                                        </li>
-                                                        <li class="mt-1"><i class="uil uil-phone text-primary "> Phone:</i>
-                                                            <span class=" ms-5 h6">${pat.phone}</span>
-                                                    </li>
-                                                    <li class="mt-1"><i class="uil uil-mailbox text-primary "> Email:</i>
-                                                        <span class=" ms-5 h6">${pat.email}</span>
-                                                    </li>
-                                                    <li class="mt-1"><i class="uil uil-user-nurse text-primary "> DoB:</i>
-                                                        <span class="ms-5 h6">${pat.dob}</span>
-                                                    </li>
-                                                    <li class="mt-1"><i class="uil uil-user-nurse text-primary "> Address:</i>
-                                                        <span class="ms-5 h6">${pat.address}</span>
-                                                    </li>
-                                                    
-                                                </ul>
+                                            <div class="d-flex align-items-center mt-2">
+                                                <i class="uil uil-phone align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                                <h6 class="mb-0">Phone</h6>
+                                                <p class="text-muted mb-0 ms-2">${appt.patient.phone}</p>
+                                            </div>
+                                            <div class="d-flex align-items-center mt-2">
+                                                <i class="uil uil-mailbox align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                                <h6 class="mb-0">Email</h6>
+                                                <p class="text-muted mb-0 ms-2">${appt.patient.email}</p>
+                                            </div>
+
+                                            <div class="d-flex align-items-center mt-2">
+                                                <i class="uil uil-calendar-alt align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                                <h6 class="mb-0">Date Of Birth</h6>
+                                                <p class="text-muted mb-0 ms-2">${appt.patient.dob}</p>
+                                            </div>
+                                            <div class="d-flex align-items-center mt-2">
+                                                <i class="uil uil-globe align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                                <h6 class="mb-0">Address</h6>
+                                                <p class="text-muted mb-0 ms-2">${appt.patient.address}</p>
                                             </div>
                                         </div>
                                     </div>
-                                </c:forEach>
+                                </div>
+                                        <div class="d-flex align-items-center">
+                                            <a href="javascript:history.back();" class="me-3 btn btn-primary btn-sml btn-soft-success">
+                                                Turn Back
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row text-center">
-                        <div class="col-12 mt-4 pt-2">
-                            <ul class="pagination justify-content-center mb-0 list-unstyled">
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Previous">Prev</a></li>
-                                <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Next">Next</a></li>
-                            </ul><!--end pagination-->
-                        </div><!--end col-->
-                    </div><!--end row-->
+
+
                 </div><!--end col-->
         </div><!--end row-->
     </div><!--end container-->

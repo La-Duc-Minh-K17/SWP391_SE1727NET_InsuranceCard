@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Doctor;
+
 import model.DoctorFeedback;
 import model.Service;
 import model.ServiceReview;
@@ -205,6 +206,53 @@ public class DoctorDAO {
         return doctorList;
     }
 
+    public List<Doctor> getDoctorBySpeciality(String spe) {
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Doctor> doctorList = new ArrayList<>();
+
+        String sql = "select * from doctors d \n"
+                + "            inner join user_account u on d.user_id = u.user_id \n"
+                + "            inner join  speciality s on s.speciality_id = d.speciality_id\n"
+                + "            where s.speName = ?";
+
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, spe);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int doctorId = rs.getInt("doctor_id");
+                String username = rs.getString("username");
+                String name = rs.getString("full_name");
+                String phone = rs.getString("phone");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String email = rs.getString("email");
+                int status = rs.getInt("status");
+                String position = rs.getString("doctor_position");
+                String speciality = rs.getString("speName");
+                String description = rs.getString("doctor_description");
+                Doctor d = new Doctor(doctorId, speciality, position, description, username, email, name, gender, phone, image, status);
+                doctorList.add(d);
+            }
+
+            return doctorList;
+        } catch (SQLException e) {
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return doctorList;
+    }
+
     public void updateDoctor(int doctorId, String name, int gender, String phone, int speciality_id, String position, String description, int status, Part image) {
         PreparedStatement ps = null;
         InputStream fileImage = ImageProcessing.imageStream(image);
@@ -254,6 +302,7 @@ public class DoctorDAO {
             }
         }
     }
+
 
     public List<DoctorFeedback> getDoctorFeedback() {
         PreparedStatement ps = null;
@@ -553,5 +602,52 @@ public class DoctorDAO {
                 }
             }
         }
+    }
+  
+    public Doctor getDoctorRelatedCategory(int Id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Doctor doctor = null;
+        String sql = "SELECT distinct D.*, UA.*\n"
+                + "FROM mabs.doctors D\n"
+                + "JOIN mabs.speciality S on D.speciality_id = S.speciality_id\n"
+                + "JOIN mabs.blog_category BC on S.speName = BC.name\n"
+                + "JOIN mabs.blogs B on BC.blog_category_id = B.blog_category_id\n"
+                + "JOIN mabs.user_account UA on D.user_id = UA.user_id\n"
+                + "WHERE B.blog_id = ?\n"
+                + "ORDER BY RAND()\n"
+                + "LIMIT 1;";
+            ps.setInt(1, Id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int doctorId = rs.getInt("doctor_id");
+                String username = rs.getString("username");
+                String fullName = rs.getString("full_name");
+                String phone = rs.getString("phone");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String email = rs.getString("email");
+                int status = rs.getInt("status");
+                String position = rs.getString("doctor_position");
+                String speciality = rs.getString("speName");
+                String description = rs.getString("doctor_description");
+                int fee = rs.getInt("service_fee");
+                doctor = new Doctor(doctorId, speciality, position, description, username, email, fullName, gender, phone, image, status);
+                doctor.setServiceFee(fee);
+            }
+            return doctor;
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return doctor;
+
     }
 }

@@ -18,6 +18,18 @@ public class Role {
     public Role() {
     }
 
+    public Role(int role_id, String role_name, String role_description, int setting_id, int status) {
+        this.role_id = role_id;
+        this.role_name = role_name;
+        this.role_description = role_description;
+        this.setting_id = setting_id;
+        this.status = status;
+    }
+    public Role(int role_id, String role_name) {
+        this.role_id = role_id;
+        this.role_name = role_name;
+    }
+    
     public Role(int roleId) {
         this.role_id = roleId;
     }
@@ -62,5 +74,10 @@ public class Role {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "Role{" + "role_id=" + role_id + ", role_name=" + role_name + ", role_description=" + role_description + ", setting_id=" + setting_id + ", status=" + status + '}';
+    }
+    
     
 }

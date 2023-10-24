@@ -271,6 +271,16 @@ try {
 } catch (error) {
 
 }
+function validateUsername(input) {
+    let username = input.value;
+    let regex = /^[a-zA-Z0-9]{8,20}$/;
+
+    if (!regex.test(username)) {
+        input.setCustomValidity("Username should be between 8 and 20 characters and contain only letters and numbers.");
+    } else {
+        input.setCustomValidity(""); 
+    }
+}
 function validatePassword(input) {
     // JavaScript code to perform password validation
     let password = input.value;

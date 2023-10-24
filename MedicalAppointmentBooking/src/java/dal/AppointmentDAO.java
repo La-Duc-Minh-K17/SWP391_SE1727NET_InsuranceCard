@@ -67,6 +67,45 @@ public class AppointmentDAO {
         return list;
     }
 
+    public List<Appointment> getWaitingAppointment() {
+        List<Appointment> list = new ArrayList<>();
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        String sql = "select * from appointments where appointment_status = 'PENDING' or appointment_status ='RESCHEDULED' ORDER BY appointment_date ASC , appointment_time ASC";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("appointment_id");
+                String note = rs.getString("appointment_note");
+                Date date = rs.getDate("appointment_date");
+                String time = rs.getString("appointment_time");
+                String diagnosis = rs.getString("diagnosis");
+                String status = rs.getString("appointment_status");
+                int doctorId = rs.getInt("doctor_id");
+                Doctor doctor = dDAO.getDoctorById(doctorId);
+                int patientId = rs.getInt("patient_id");
+                Patient patient = pDAO.getPatientById(patientId);
+                Appointment appt = new Appointment(id, note, date, time, diagnosis, status, doctor, patient);
+                list.add(appt);
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return list;
+    }
+
     public void insertNewAppointment(Appointment appt) {
         PreparedStatement ps = null;
         Connection connection = null;
@@ -114,7 +153,7 @@ public class AppointmentDAO {
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            ps.setInt(1 , apptId);
+            ps.setInt(1, apptId);
             rs = ps.executeQuery();
             if (rs.next()) {
                 int id = rs.getInt("appointment_id");
@@ -128,6 +167,7 @@ public class AppointmentDAO {
                 int patientId = rs.getInt("patient_id");
                 Patient patient = pDAO.getPatientById(patientId);
                 appt = new Appointment(id, note, date, time, diagnosis, status, doctor, patient);
+
             }
             return appt;
         } catch (SQLException ex) {
@@ -144,6 +184,7 @@ public class AppointmentDAO {
         return null;
     }
     private final int MAX_APPOINTMENT = 1;
+
     public List<String> getAvailableTimeSlot(int doctorId, String date) {
         PreparedStatement ps = null;
         Connection connection = null;
@@ -221,20 +262,18 @@ public class AppointmentDAO {
         return true;
     }
 
-    public void cancelAppointment(int apptId, UserAccount account) {
+    public void updateStatus(Appointment appointment) {
         PreparedStatement ps = null;
         Connection connection = null;
         String sql = "UPDATE `mabs`.`appointments`\n"
                 + "SET\n"
-                + "`appointment_status` = ?,\n"
-                + "`staff_id` = ?\n"
-                + "WHERE appointment_id` = ?";
+                + "`appointment_status` = ?\n"
+                + "WHERE `appointment_id` = ?";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            ps.setString(1, "REJECTED");
-            ps.setInt(2, account.getUserId());
-            ps.setInt(3, apptId);
+            ps.setString(1, appointment.getStatus());
+            ps.setInt(2, appointment.getApptId());
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -248,7 +287,6 @@ public class AppointmentDAO {
             }
         }
     }
-
 
     public List<Appointment> searchAppointmentByPatientName(String text) {
         PreparedStatement ps = null;
@@ -291,6 +329,15 @@ public class AppointmentDAO {
         }
         return listAppt;
     }
+
+    public List<Appointment> getListByPage(List<Appointment> list, int start, int end) {
+        ArrayList<Appointment> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
+
     public List<Appointment> getFilteredAppointmentList(String text) {
         PreparedStatement ps = null;
         Connection connection = null;
@@ -303,7 +350,7 @@ public class AppointmentDAO {
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            ps.setString(1,text);
+            ps.setString(1, text);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("appointment_id");
@@ -332,18 +379,14 @@ public class AppointmentDAO {
         }
         return listAppt;
     }
-    
+
     public List<Appointment> getAppointmentByDoctorId(int docId) {
 
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
         List<Appointment> listAppoint = new ArrayList<>();
-        String sql = "SELECT P.patient_id , UA.*\n"
-                + "FROM mabs.user_account UA\n"
-                + "JOIN mabs.patients P ON UA.user_id = P.user_id\n"
-                + "JOIN mabs.appointments A ON P.patient_id = A.patient_id\n"
-                + "WHERE A.doctor_id = ?;";
+        String sql = "select * from appointments where doctor_id = ?;";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
@@ -376,5 +419,35 @@ public class AppointmentDAO {
             }
         }
         return null;
+    }
+
+    public void rescheduleAppointment(Appointment appointment) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "UPDATE `mabs`.`appointments`\n"
+                + "SET\n"
+                + "`appointment_date` = ?,\n"
+                + "`appointment_time` = ?,\n"
+                + "`doctor_id` =?\n"
+                + "WHERE `appointment_id` = ?;";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setDate(1, appointment.getApptDate());
+            ps.setString(2, appointment.getApptTime());
+            ps.setInt(3, appointment.getDoctor().getDoctorId());
+            ps.setInt(4, appointment.getApptId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
     }
 }

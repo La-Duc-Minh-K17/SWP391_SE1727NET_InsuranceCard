@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>UserAccountController</servlet-name>
-        <servlet-class>controller.home.UserAccountController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>controller.auth.RegisterController</servlet-class>
     </servlet>
@@ -101,6 +97,10 @@
         <servlet-class>controller.staff.StaffReservationList</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ManagePatient</servlet-name>
+        <servlet-class>controller.manager.ManagePatient</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>PatientListController</servlet-name>
         <servlet-class>controller.home.PatientListController</servlet-class>
     </servlet>
@@ -113,13 +113,34 @@
         <servlet-class>controller.home.AppointmentListController</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>DoctorFeedback</servlet-name>
         <servlet-class>controller.admin.DoctorFeedback</servlet-class>
+</servlet>
+ <servlet>
+        <servlet-name>UserProfileController</servlet-name>
+        <servlet-class>controller.user.UserProfileController</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>UserAccountController</servlet-name>
-        <url-pattern>/user</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>AdminAppointmentDetail</servlet-name>
+        <servlet-class>controller.admin.AdminAppointmentDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckAvailabilityServlet</servlet-name>
+        <servlet-class>controller.home.CheckAvailabilityServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AppoinmentDetailController</servlet-name>
+        <servlet-class>controller.home.AppoinmentDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeAccountStatus</servlet-name>
+        <servlet-class>controller.admin.ChangeAccountStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageAccount</servlet-name>
+        <servlet-class>controller.admin.ManageAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -162,7 +183,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SettingList</servlet-name>
-        <url-pattern>/settinglist</url-pattern>
+        <url-pattern>/admin-settinglist</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServiceDetailController</servlet-name>
@@ -201,6 +222,10 @@
         <url-pattern>/detailservice</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ManagePatient</servlet-name>
+        <url-pattern>/manage-patient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AdminAppointmentList</servlet-name>
         <url-pattern>/admin-appointment</url-pattern>
     </servlet-mapping>
@@ -221,8 +246,34 @@
         <url-pattern>/doctor-appointmentlist</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>DoctorFeedback</servlet-name>
         <url-pattern>/doctor/feedback</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileController</servlet-name>
+        <url-pattern>/user-profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAppointmentDetail</servlet-name>
+        <url-pattern>/admin-appointmentdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckAvailabilityServlet</servlet-name>
+        <url-pattern>/CheckAvailabilityServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AppoinmentDetailController</servlet-name>
+        <url-pattern>/doctor-appointmentdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeAccountStatus</servlet-name>
+        <url-pattern>/ChangeAccountStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageAccount</servlet-name>
+        <url-pattern>/ManageAccount</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -24,83 +24,7 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
-        <style>
-            .custom-center {
-                justify-content: center !important;
-            }
 
-            .card-img-container {
-                height: 200px;
-                overflow: hidden;
-            }
-            /* CSS để cân đối các dòng chữ trong card */
-            .card {
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-            }
-            .card-body {
-                flex: 1;
-            }
-
-            .card-title,
-            .card-text {
-                text-align: center;
-                justify-content: s
-            }
-            .card-title,
-            .card-text {
-                margin-bottom: 15px; /* Khoảng cách giữa các dòng chữ */
-            }
-
-            .btn-primary {
-                align-self: center; /* Để căn giữa nút "Learn More" */
-            }
-
-            .card-img-container img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-            /* CSS để cân đối nút "Learn More" trong card */
-            .card {
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                text-align: center;
-            }
-
-
-            .custom-button {
-                width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
-                margin: 5px 0; /* Khoảng cách giữa các nút */
-            }
-            .btn-primary {
-                margin-top: auto; /* Để nút "Learn More" ở dưới cùng */
-            }
-            .custom-button {
-                width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
-            }
-            body {
-                margin: 0;
-                padding: 0;
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-            }
-
-            .wrapper {
-                flex: 1;
-            }
-            .footer {
-                background-color: #333; /* Set the background color of your footer */
-                color: white; /* Set the text color of your footer */
-                text-align: center;
-                padding: 20px;
-                width: 100%;
-            }
-        </style>
     </head>
     <body>
 
@@ -133,9 +57,9 @@
             </div>
             <div class="row mb-5">
                 <div class="col-md-4 d-flex align-items-center">
-                    <form action="service?action=search&keyword=" method="GET">
+                    <form action="service?action=search" method="POST">
                         <div class="input-group">
-                            <input type="text" name="keyword" id="searchInput" class="form-control border bg-light" onchange="filter()" placeholder="Search by name">
+                            <input type="text" name="keyword" id="searchInput" class="form-control border bg-light" placeholder="Search by name">
                             <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
                         </div>
                     </form>
@@ -143,7 +67,7 @@
 
                 <div class="col-md-8 d-flex align-items-center justify-content-end">
                     <div class=" justify-content-end ">
-                        <div class="selection-bar btn-success m-2">
+                        <div class="selection-bar btn-success m-2 rounded-pill">
                             <select class="form-select form-control border rounded-pill bg-light" id="Filter" onchange="filter()">
                                 <option selected >Filter By</option>
                                 <c:forEach items="${requestScope.cateList}" var="c" >
@@ -153,7 +77,7 @@
                         </div>
                     </div>
                     <div class=" justify-content-end">
-                        <div class="selection-bar btn-primary m-2">
+                        <div class="selection-bar btn-primary m-2 rounded-pill">
                             <select id="sortSelect" class="form-select form-control border rounded-pill bg-light" onchange="filter()" >
                                 <option selected >Default Sort</option>
                                 <option value="price">Price</option>
@@ -168,27 +92,26 @@
                     <div class="row justify-content-center">
 
                         <c:forEach items="${requestScope.sList}" var="s" varStatus="loop">
-                            <div class="col-md-3 mt-4">
+                            <div class="col-md-4 mt-4">
                                 <div class="card mb-4">
                                     <div class="card-img-container">
                                         <img src="data:image/jpg;base64,${s.service_image}" class="card-img-top" alt="${s.service_name}">
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title text-primary">${s.service_name}</h5>
-                                        <p class="card-body text-secondary ">${s.service_description}</p>
-                                        <h5 class="text-muted ">$${s.fee}</h5>
-                                        <div class="d-flex flex-column align-items-center mt-3">
-                                            <div class="">
-                                                <a href="javascript:void(0);" onclick="viewServiceDetails(${s.service_id}, ${s.category_id})" class="btn btn-primary custom-button">Learn More</a>
-                                                <a href="service?action=book-service&id=${s.service_id}" class="btn btn-success custom-button">Appointment Now</a>
-                                            </div>
+                                        <div class="card-text">
+                                            <p class="text-secondary">${s.service_details}</p>
                                         </div>
-
-
+                                        <h5 class="text-muted">$${s.fee}</h5>
+                                    </div>
+                                    <div class="card-end">
+                                        <a href="javascript:void(0);" onclick="viewServiceDetails(${s.service_id}, ${s.category_id})" class="btn btn-primary custom-button">Learn More</a>
+                                        <a href="servicedetail?action=book-service&id=${s.service_id}"class="btn btn-success custom-button">Appointment Now</a>
                                     </div>
                                 </div>
+
                             </div>
-                            <c:if test="${loop.index % 4 == 3}">
+                            <c:if test="${loop.index % 3 == 3}">
                                 <div class="w-100"></div>
                             </c:if>
                         </c:forEach>
@@ -236,7 +159,116 @@
     </script>
 
 
+    <style>
+        .custom-center {
+            justify-content: center !important;
+        }
+        .card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+        }
 
+        .card-end {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px; /* Adjust padding as needed */
+        }
+
+        .custom-button {
+            width: 100%;
+            margin: 5px 0;
+        }
+
+        .service-card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .card {
+            flex: 1;
+            margin: 0 1rem; /* Adjust margin as needed for spacing between cards */
+            width: 100%; /* Set the width to 100% for full container width */
+            max-width: 400px; /* Adjust the max-width as needed for the desired card size */
+            height: 400px; /* Adjust the height as needed for the desired card size */
+        }
+        .card-img-container {
+            height: 200px;
+            overflow: hidden;
+        }
+        /* CSS để cân đối các dòng chữ trong card */
+        .card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-body {
+            flex: 1;
+        }
+
+        .card-title,
+        .card-text {
+            text-align: center;
+            justify-content: s
+        }
+        .card-title,
+        .card-text {
+            margin-bottom: 15px; /* Khoảng cách giữa các dòng chữ */
+        }
+
+        .btn-primary {
+            align-self: center; /* Để căn giữa nút "Learn More" */
+        }
+
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* CSS để cân đối nút "Learn More" trong card */
+        .card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+
+        .custom-button {
+            width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
+            margin: 5px 0; /* Khoảng cách giữa các nút */
+        }
+        .btn-primary {
+            margin-top: auto; /* Để nút "Learn More" ở dưới cùng */
+        }
+        .custom-button {
+            width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
+
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            flex: 1;
+        }
+        .footer {
+            background-color: #333; /* Set the background color of your footer */
+            color: white; /* Set the text color of your footer */
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+    </style>
 
     <!-- End -->
     <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>

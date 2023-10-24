@@ -23,7 +23,6 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
-
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
     </head>
     <body>
@@ -93,10 +92,12 @@
                                         <select class="form-select form-control" id="status_filter" onchange="filter()">
                                             <option selected disabled>Status</option>
                                             <option value="all">All</option>
-                                            <option value="confirmed">CONFIRMED</option>
-                                            <option value="completed">COMPLETED</option>
+                                            <option value="CONFIRMED">CONFIRMED</option>
+                                            <option value="PENDING">PENDING</option>
+                                            <option value="RESCHEDULED">RESCHEDULED</option>
+                                            <option value="COMPLETED">COMPLETED</option>
                                             <option value="CANCELED">CANCELED</option>
-                                            <option value="FOLLOW_UP">FOLLOW-UP</option>
+                                            <option value="FOLLOW_UP">FOLLOW-UP</option>    
                                         </select>
                                     </div>
                                 </div>
@@ -134,7 +135,6 @@
                                                                 <tr>
                                                                     <th class="border-bottom p-3" style="min-width: 50px;">#</th>
                                                                     <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
-
                                                                     <th class="border-bottom p-3" style="min-width: 150px;">Date</th>
                                                                     <th class="border-bottom p-3">Time</th>
                                                                     <th class="border-bottom p-3" style="min-width: 220px;">Doctor</th>
@@ -143,10 +143,11 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
+                                                                <c:set var="i" value="1"></c:set>
                                                                 <c:forEach items="${apptList}" var="appt">
                                                                     <c:set var="patient" value="${appt.patient}"></c:set>
                                                                         <tr>
-                                                                            <th class="p-3">${appt.apptId}</th>
+                                                                            <td class="p-3">${appt.apptId}</td>
                                                                         <td class="p-3">
                                                                             <a href="#" class="text-dark">
                                                                                 <div class="d-flex align-items-center">
@@ -173,11 +174,11 @@
                                                                         <td class="p-3">${appt.status}</td>
                                                                         <td class="p-3">
                                                                             <div class="d-flex align-items-center">
-                                                                                <a href="admin-appointment?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
+                                                                                <a href="admin-appointmentdetail?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
                                                                                     Details</a>
                                                                                 <a href="#cancelappointment" class="btn btn-primary btn-sml btn-soft-danger" 
                                                                                    data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
-                                                                                    Cancel</a>
+                                                                                    DELETE</a>
                                                                             </div>
                                                                         </td>
                                                                     </tr>
@@ -215,26 +216,26 @@
         <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <form action="<c:url value='/admin-appointment?action=cancel'></c:url>" method="post">
-                        <div class="modal-content">
-                            <div class="modal-body py-5">
-                                <div class="text-center">
-                                    <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                        <i class="uil uil-times-circle h1 mb-0"></i>
-                                    </div>
+                    <div class="modal-content">
+                        <div class="modal-body py-5">
+                            <div class="text-center">
+                                <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
+                                    <i class="uil uil-times-circle h1 mb-0"></i>
+                                </div>
+                                <div class="mt-4">
+                                    <h4>Cancel Appointment</h4>
+                                    <p class="para-desc mx-auto text-muted mb-0">This appointment will be cancelled by you. Are you sure ?</p>
                                     <div class="mt-4">
-                                        <h4>Cancel Appointment</h4>
-                                        <p class="para-desc mx-auto text-muted mb-0">This appointment will be cancelled by you. Are you sure ?</p>
-                                        <div class="mt-4">
-                                            <input type="hidden" id="cancel_appointment" name="appointment_canceled" value="">
-                                            <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
-                                        </div>
+                                        <input type="hidden" id="cancel_appointment" name="appointment_canceled" value="">
+                                        <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
+        </div>
 
             <script>
 

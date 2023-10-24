@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Service;
+import utils.SessionUtils;
 
 /**
  *
@@ -37,7 +38,7 @@ public class ServiceController extends HttpServlet {
             String action = request.getParameter("action");
             request.setAttribute("cateList", sDAO.getAllServiceCategory());
             if (action != null && action.equals("view-all")) {
-                List<Service> serList = sDAO.getAllService();
+                List<Service> serList = sDAO.getAllServiceByStatus();
                 request.setAttribute("sList", serList);
                 request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
                 return;
@@ -53,7 +54,6 @@ public class ServiceController extends HttpServlet {
                 String keyword = request.getParameter("keyword").trim();
                 List<Service> sList = sDAO.searchServicesByName(keyword);
                 request.setAttribute("sList", sList);
-
                 request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
                 return;
             }
@@ -69,6 +69,13 @@ public class ServiceController extends HttpServlet {
                 List<Service> sortedServiceList = sDAO.sortService(by, sort);
                 request.setAttribute("sList", sortedServiceList);
                 request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
+            }
+            if (action != null && action.equals("book-service")) {
+                int id = Integer.parseInt(request.getParameter("id"));
+                Service serviceDetail = sDAO.getServiceById(id);
+                SessionUtils.getInstance().putValue(request, "chosen_service", serviceDetail);
+                request.getRequestDispatcher("booking?action=form-filling").forward(request, response);
+                return;
             }
         }
 

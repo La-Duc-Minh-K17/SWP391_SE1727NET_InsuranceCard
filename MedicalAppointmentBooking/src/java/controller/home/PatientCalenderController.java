@@ -5,6 +5,7 @@
 
 package controller.home;
 
+import dal.AppointmentDAO;
 import dal.DoctorDAO;
 import dal.PatientDAO;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Appointment;
 import model.Doctor;
 import model.Patient;
 
@@ -34,7 +36,10 @@ public class PatientCalenderController extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-          
+          AppointmentDAO apptDAO = new AppointmentDAO();
+            int apptId = Integer.parseInt(request.getParameter("pid"));
+            Appointment appt = apptDAO.getAppointmentById(apptId);
+            request.setAttribute("appt", appt);
             request.getRequestDispatcher("frontend/view/admin/patientcalender.jsp").forward(request, response);
 
         }

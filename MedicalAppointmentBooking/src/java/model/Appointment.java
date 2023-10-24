@@ -18,7 +18,7 @@ public class Appointment {
     private String apptTime;
     private String diagnosis;
     private String status;
-    private UserAccount staff;
+   
     private Doctor doctor;
     private Patient patient;
 
@@ -93,14 +93,7 @@ public class Appointment {
         this.status = status;
     }
 
-    public UserAccount getStaff() {
-        return staff;
-    }
-
-    public void setStaff(UserAccount staff) {
-        this.staff = staff;
-    }
-
+   
    
     public Doctor getDoctor() {
         return doctor;
@@ -118,5 +111,8 @@ public class Appointment {
         this.patient = patient;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Appointment{" + "apptId=" + apptId + ", apptNote=" + apptNote + ", apptDate=" + apptDate + ", apptTime=" + apptTime + ", diagnosis=" + diagnosis + ", status=" + status + ", doctor=" + doctor + ", patient=" + patient + '}';
+    } 
 }
