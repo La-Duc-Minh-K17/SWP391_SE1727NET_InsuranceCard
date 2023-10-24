@@ -120,14 +120,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Status</label>
-                                                        <p>${appt.status}</p>
-                                                    </div>
-                                                </div>
 
                                                 <div class="col-lg-12">
                                                     <div class="mb-3">
