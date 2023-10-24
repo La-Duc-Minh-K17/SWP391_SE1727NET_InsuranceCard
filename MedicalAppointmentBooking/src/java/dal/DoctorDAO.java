@@ -297,18 +297,18 @@ public class DoctorDAO {
     }
 
     public Doctor getDoctorRelatedCategory(int Id) {
-        PreparedStatement ps = null;
+         PreparedStatement ps = null;
         ResultSet rs = null;
         Doctor doctor = null;
-        String sql = " SELECT distinct D.doctor_id, UA.username, UA.full_name,UA.phone,UA.image,UA.gender,UA.email,UA.status, D.doctor_position, D.service_fee\n"
-                + "FROM mabs.doctors D\n"
-                + "JOIN mabs.speciality S on D.speciality_id = S.speciality_id\n"
-                + "JOIN mabs.blog_category BC on S.speName = BC.name\n"
-                + "JOIN mabs.blogs B on BC.blog_category_id = B.blog_category_id\n"
-                + "JOIN mabs.user_account UA on D.user_id = UA.user_id\n"
-                + "WHERE B.blog_id = ?\n"
-                + "ORDER BY RAND()\n"
-                + "LIMIT 1;";
+        String sql = "SELECT distinct *\n" +
+"                FROM mabs.doctors D\n" +
+"                JOIN mabs.speciality S on D.speciality_id = S.speciality_id\n" +
+"                JOIN mabs.blog_category BC on S.speName = BC.name\n" +
+"                JOIN mabs.blogs B on BC.blog_category_id = B.blog_category_id\n" +
+"                JOIN mabs.user_account UA on D.user_id = UA.user_id\n" +
+"                WHERE B.blog_id = ?\n" +
+"                ORDER BY RAND()\n" +
+"                LIMIT 1;";
 
         Connection connection = null;
         try {
@@ -345,4 +345,5 @@ public class DoctorDAO {
         }
         return doctor;
     }
+
 }
