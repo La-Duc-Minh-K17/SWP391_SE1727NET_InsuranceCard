@@ -141,17 +141,16 @@
                                     </div>
                                     <div>
                                         <h5>Related Doctor</h5>
-                                        <c:forEach items="${requestScope.doc}" var="d">
                                             <div class="tiny-slide">
                                                 <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
                                                     <div class="d-flex justify-content-center">
-                                                        <img src="data:image/jpg;base64,${d.image}" width="80%" height="220" />
+                                                        <img src="data:image/jpg;base64,${doc.image}" width="80%" height="220" />
                                                     </div>
                                                     <div class="card-body p-4">
                                                         <div class="card-body content text-center">
                                                             <a href="#"
-                                                               class="title text-dark  d-block mb-0">${d.fullName}</a>
-                                                            <small class="text-muted speciality">${d.speciality}</small>
+                                                               class="title text-dark  d-block mb-0">${doc.fullName}</a>
+                                                            <small class="text-muted speciality">${doc.speciality}</small>
                                                         </div>
 
                                                         <div class="post-meta d-flex justify-content-around mt-3">
@@ -165,7 +164,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </c:forEach>
                                     </div>
                                 </div>
                             </div>

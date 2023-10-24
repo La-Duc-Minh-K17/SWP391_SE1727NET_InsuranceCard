@@ -36,16 +36,20 @@ public class NewDetailController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet NewDetailController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet NewDetailController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            int Id = Integer.parseInt(request.getParameter("id"));
+            BlogDAO dao = new BlogDAO();
+            List<Blog> blogsList3 = dao.getTop3News();
+            request.setAttribute("blogs3", blogsList3);
+            List<Blog> blogsList6 = dao.getRandomNews();
+            Blog blogDetail = new Blog();
+            DoctorDAO ddao = new DoctorDAO();
+            Doctor doctor = ddao.getDoctorRelatedCategory(Id);
+            System.out.println(doctor);
+            request.setAttribute("doc", doctor);
+            blogDetail = dao.getBlogDetailByID(Id);
+            request.setAttribute("blogs6", blogsList6);
+            request.setAttribute("blog", blogDetail);
+            request.getRequestDispatcher("frontend/view/blogdetail.jsp").forward(request, response);
         }
     }
 
@@ -61,20 +65,13 @@ public class NewDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int Id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(Id);
-        BlogDAO dao = new BlogDAO();
-        List<Blog> blogsList3 = dao.getTop3News();
-        request.setAttribute("blogs3", blogsList3);
-        List<Blog> blogsList6 = dao.getRandomNews();
-        Blog blogDetail = new Blog();
-        DoctorDAO ddao = new DoctorDAO();
-        Doctor doc = ddao.getDoctorRelatedCategory(Id);
-        request.setAttribute("doc", doc);
-        blogDetail = dao.getBlogDetailByID(Id);
-        request.setAttribute("blogs6", blogsList6);
-        request.setAttribute("blog", blogDetail);
-        request.getRequestDispatcher("frontend/view/blogdetail.jsp").forward(request, response);
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
