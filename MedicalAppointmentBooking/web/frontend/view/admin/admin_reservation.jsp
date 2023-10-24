@@ -215,11 +215,11 @@
                                         <i class="uil uil-times-circle h1 mb-0"></i>
                                     </div>
                                     <div class="mt-4">
-                                        <h4>Cancel Reservation</h4>
-                                        <p class="para-desc mx-auto text-muted mb-0">This reservation will be cancelled by you. Are you sure ?</p>
+                                        <h4>Delete Reservation</h4>
+                                        <p class="para-desc mx-auto text-muted mb-0">This reservation will be deleted.Are you sure ?</p>
                                         <div class="mt-4">
-                                            <input type="hidden" id="cancel_appointment" name="appointment_canceled" value="">
-                                            <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
+                                            <input type="hidden" id="cancel_appointment" name="reservation_canceled " value="">
+                                            <input type="submit" class="btn btn-soft-danger" name="cancel" value="Delete">
                                         </div>
                                     </div>
                                 </div>

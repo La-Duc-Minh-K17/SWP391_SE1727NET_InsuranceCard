@@ -41,6 +41,7 @@ public class AdminScheduleCalendar extends HttpServlet {
         for (Appointment a : appointmentList) {
             list.add(new Calendar(a));
         }
+        
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();

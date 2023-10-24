@@ -33,8 +33,12 @@ public class AdminAppointmentList extends HttpServlet {
         String action = request.getParameter("action");
         String uri = null;
         List<Appointment> apptList = null;
-        AppointmentDAO apptDAO = new AppointmentDAO();  
-        
+        AppointmentDAO apptDAO = new AppointmentDAO();
+        if (action != null && action.equals("delete")) {
+            int apptId = Integer.parseInt(request.getParameter("appointment_canceled"));
+            apptDAO.deleteRecord(apptId);
+            response.sendRedirect("admin-appointment?action=view");
+        }
         if (action != null && action.equals("view")) {
             apptList = apptDAO.getAllAppointment();
             uri = "admin-appointment?action=view";
@@ -43,7 +47,7 @@ public class AdminAppointmentList extends HttpServlet {
         if (action != null && action.equals("search")) {
             String search = request.getParameter("search");
             apptList = apptDAO.searchAppointmentByPatientName(search);
-            uri = "admin-appointment?action=search&search=" + search ;
+            uri = "admin-appointment?action=search&search=" + search;
         }
         if (action != null && action.equals("filter")) {
             String status = request.getParameter("status_filter");
@@ -74,7 +78,6 @@ public class AdminAppointmentList extends HttpServlet {
             request.setAttribute("url", uri);
             request.setAttribute("apptList", appointment);
             request.getRequestDispatcher("frontend/view/admin/admin_appointment.jsp").forward(request, response);
-
         }
     }
 

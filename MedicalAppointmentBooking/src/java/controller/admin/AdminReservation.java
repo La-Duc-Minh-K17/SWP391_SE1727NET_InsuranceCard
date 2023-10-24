@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import model.Appointment;
 import model.Reservation;
 
 /**
@@ -36,14 +35,20 @@ public class AdminReservation extends HttpServlet {
         String uri = null;
         String action = request.getParameter("action");
         List<Reservation> resvList = new ArrayList<>();
-       if (action != null && action.equals("view")) {
+        if (action != null && action.equals("cancel")) {
+            int resvId = Integer.parseInt(request.getParameter("reservation_canceled"));
+            rsDAO.deleteRecord(resvId);
+            response.sendRedirect("admin-reservation?action=view");
+            return;
+        }
+        if (action != null && action.equals("view")) {
             resvList = rsDAO.getAllReservation();
             uri = "admin-reservation?action=view";
         }
         if (action != null && action.equals("search")) {
             String search = request.getParameter("search");
             resvList = rsDAO.searchReservationByPatientName(search);
-            uri = "admin-reservation?action=search&search=" + search ;
+            uri = "admin-reservation?action=search&search=" + search;
         }
         if (action != null && action.equals("filter")) {
             String status = request.getParameter("status_filter");
@@ -75,9 +80,8 @@ public class AdminReservation extends HttpServlet {
             request.setAttribute("url", uri);
             request.setAttribute("resvList", reservation);
             request.getRequestDispatcher("frontend/view/admin/admin_reservation.jsp").forward(request, response);
-
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

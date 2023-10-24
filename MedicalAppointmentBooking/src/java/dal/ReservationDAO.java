@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Appointment;
 import model.Patient;
 import model.Reservation;
 import model.Service;
@@ -333,6 +332,27 @@ public class ReservationDAO {
         }
     }
 
- 
+    public void deleteRecord(int resvId) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "delete from reservations where reservation_id = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, resvId);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+
+    }
 
 }

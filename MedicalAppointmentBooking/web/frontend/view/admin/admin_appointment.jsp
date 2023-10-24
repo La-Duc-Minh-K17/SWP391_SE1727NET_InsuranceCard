@@ -215,7 +215,7 @@
         <!-- javascript -->
         <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <form action="<c:url value='/admin-appointment?action=cancel'></c:url>" method="post">
+                <form action="<c:url value='/admin-appointment?action=delete'></c:url>" method="post">
                         <div class="modal-content">
                             <div class="modal-body py-5">
                                 <div class="text-center">
@@ -223,11 +223,11 @@
                                         <i class="uil uil-times-circle h1 mb-0"></i>
                                     </div>
                                     <div class="mt-4">
-                                        <h4>Cancel Appointment</h4>
-                                        <p class="para-desc mx-auto text-muted mb-0">This appointment will be cancelled by you. Are you sure ?</p>
+                                        <h4>Delete Record</h4>
+                                        <p class="para-desc mx-auto text-muted mb-0">This appointment record will be deleted. Are you sure ?</p>
                                         <div class="mt-4">
                                             <input type="hidden" id="cancel_appointment" name="appointment_canceled" value="">
-                                            <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
+                                            <input type="submit" class="btn btn-soft-danger" name="cancel" value="Delete">
                                         </div>
                                     </div>
                                 </div>

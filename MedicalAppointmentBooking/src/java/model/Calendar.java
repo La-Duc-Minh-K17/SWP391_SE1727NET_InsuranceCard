@@ -25,13 +25,13 @@ public class Calendar {
         String date = TimeUtil.sqlDateToString(appt.getApptDate()) + "T" + appt.getApptTime();
         this.start = date;
         if (TimeUtil.stringToLocalDateTime(date).isBefore(LocalDateTime.now())) {
-            this.backgroundColor = "grey";
-            this.borderColor = "grey";
-            this.textColor = "black";
+                this.backgroundColor = "lightgray";
+                this.borderColor = "gray";
+                this.textColor = "darkgray";
         } else {
-            this.backgroundColor = "blue";
-            this.borderColor = "navy";
-            this.textColor = "white";
+            this.backgroundColor = "#28a745";
+            this.borderColor = "#28a745";
+            this.textColor = "black";
         }
     }
 
@@ -85,7 +85,8 @@ public class Calendar {
 
     @Override
     public String toString() {
-        return "Calendar{" + "title=" + title + ", start=" + start + '}';
+        return "Calendar{" + "title=" + title + ", start=" + start + ", url=" + url + ", backgroundColor=" + backgroundColor + ", borderColor=" + borderColor + ", textColor=" + textColor + '}';
     }
 
+    
 }
