@@ -37,9 +37,9 @@
         </div>
         <!-- Loader -->
         <div class="page-wrapper doctris-theme toggled">
-            
+
             <jsp:include page="/frontend/common/manager_side_bar.jsp" />
-            
+
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
             <main class="page-content">  
@@ -90,86 +90,66 @@
 
                 <div class="container-fluid">
                     <div class="layout-specing">
-
-
-
                         <div class="col-12 mt-4">
                             <div class="card component-wrapper border-0 rounded shadow">
                                 <div class="p-4 border-bottom">
-                                    <h5 class="mb-0">Account List</h5>
+                                    <h5 class="mb-0"> Update Account  </h5>
                                 </div>
-                                <form style="padding: 20px;" action="ManageAccount" method="get" id="searchform" class="searchform">
-                                    <div class="row align-content-center">
-                                        <div class="col-xl-3 col-md-3">
-                                            <div class="card component-wrapper border-0 rounded shadow">
-                                                <div>
-                                                    <label>Filter Role</label>
-                                                    <select onchange="this.form.submit()" class="form-select form-control" id="speFilter" name="role">
-                                                        <option value="" ${param["role"]==""?"selected":""}>All</option>
-                                                        <c:forEach items="${rl}" var="spe">
-                                                            <option ${param["role"]==spe.role_id?"selected":""} value="${spe.role_id}">${spe.role_name}</option>  
-                                                        </c:forEach>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                <form style="padding: 20px;" action="AccountDetail" method="post" id="searchform" class="searchform">
+                                    <div class="row align-content-center justify-content-center">
+                                        <div class="col-xl-6 col-md-6 p-1">
+                                            <label>Id:</label>
+                                            <input class="form-control" type="text" readonly="" name="id" value="${acc.userId}" id="id" >
                                         </div>
-                                        <div class="col-xl-3 col-md-3">
-                                            <div class="search-bar d-lg-block" style="padding-top :0">
-                                                <div>
-                                                    <label>Filter Status</label>
-                                                    <select onchange="this.form.submit()" class="form-select form-control" id="speFilter" name="status">
-                                                        <option value="" ${param["status"]==""?"selected":""}>All</option>
-                                                        <option value="1" ${param["status"]=="1"?"selected":""}>Active</option>
-                                                        <option value="0" ${param["status"]=="0"?"selected":""}>InActive</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                        <div class="col-xl-6 col-md-6 p-1">
+                                            <label>Email:</label>
+                                            <input class="form-control" type="email" readonly name="email" value="${acc.email}" id="email" >
                                         </div>
-                                        <div class="col-xl-3 col-md-3 mt-4 mt-md-0 text-md-end">
-                                            <!--<a href="<c:url value='/manage-doctor?action=create'/>" class="btn btn-primary ">Add Doctor</a>-->
-                                        </div><!--end col-->
-
+                                        <div class="col-xl-6 col-md-6 p-1">
+                                            <label>Username:</label>
+                                            <input class="form-control" type="text" readonly name="username" value="${acc.username}" id="username" >
+                                        </div>
+                                        <div class="col-xl-6 col-md-6 p-1">
+                                            <label>Full name:</label>
+                                            <input class="form-control" type="text" name="fullname" value="${acc.fullName}" id="fullname" >
+                                        </div>
+                                        <div class="col-xl-6 col-md-6 p-1">
+                                            <label>Role:</label>
+                                            <select class="form-select form-control" id="speFilter" name="role">
+                                                <c:forEach var="r" items="${rl}">
+                                                    <option value="${r.role_id}" ${acc.role.role_id == r.role_id?"selected":"" } >${r.role_name}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        <div class="col-xl-6 col-md-6 p-1">
+                                            <label>Phone:</label>
+                                            <input class="form-control" type="text" name="phone" value="${acc.phone}" id="phone" >
+                                        </div>
+                                        <div class="col-xl-6 col-md-6 p-1">
+                                            <label>Dob: </label>
+                                            <input class="form-control" type="date" name="dob" value="${acc.dob}" id="dob" >
+                                        </div>
+                                        <div class="col-xl-6 col-md-6 p-1">
+                                            <label>Gender:</label>
+                                            <p></p>
+                                            <input type="radio" name="gender"  ${acc.status == 1 ?"checked":""} value="1" id="gender" checked="" > Male
+                                            <input type="radio" name="gender"  ${acc.status == 0 ?"checked":""} value="0" id="gender"  > Female
+                                        </div>
+                                        <div class="col-xl-6 col-md-6 p-1">
+                                            <label>Status:</label>
+                                            <p></p>
+                                            <input type="radio" name="status" ${acc.status == 1 ?"checked":""} value="1" id="gender"  > Active
+                                            <input type="radio" name="status"  ${acc.status == 0 ?"checked":""} value="0" id="gender"  > Inactive
+                                        </div>
+                                        <div class="col-xl-12 col-md-12">
+                                            <p style="color: red">${error}</p>
+                                            <p style="color: greenyellow">${success}</p>
+                                        </div>
+                                        <div class="col-xl-12 col-md-12">
+                                            <button class="btn btn-primary" type="submit" >Update</button>
+                                        </div>
                                     </div><!--end row-->
                                 </form>
-                                <div class="p-4">
-                                    <div class="table-responsive bg-white shadow rounded">
-                                        <table id="tablepro" class="table mb-0 table-center">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">ID</th>
-                                                    <th scope="col">Full name</th>
-                                                    <th scope="col">UserName</th>
-                                                    <th scope="col">Email</th>
-                                                    <th scope="col">Phone</th>
-                                                    <th scope="col">Gender</th>
-                                                    <th scope="col">Role</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${ul}" var="d">
-                                                    <tr>
-                                                        <th scope="row">${d.userId}</th>
-                                                        <td><a href="./AccountDetail?aid=${d.userId}"> ${d.fullName}</a></td>
-                                                        <td>${d.username}</td>
-                                                        <td>${d.email}</td>
-                                                        <td>${d.phone}</td>
-                                                        <td>${d.gender==1?"Male":"Female"}</td>
-                                                        <td>${d.role.role_name}</td>
-                                                        <td>${d.status==1?"Active":"InActive"}</td>
-                                                        <c:if test="${d.status==1}">
-                                                            <td><a class="btn btn-danger" href="ChangeAccountStatus?uid=${d.userId}&ss=0">De-active</a> </td>
-                                                        </c:if>
-                                                        <c:if test="${d.status==0}">
-                                                            <td><a class="btn btn-success" href="ChangeAccountStatus?uid=${d.userId}&ss=1">Active</a> </td>
-                                                        </c:if>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
 
                             </div>
                         </div><!--end col-->
@@ -181,15 +161,7 @@
             <!-- Modal -->
 
         </div>
-        <!-- page-wrapper -->
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-        <script>
-                                                        $(document).ready(function () {
-                                                            $("#tablepro").DataTable();
-                                                        });
-        </script>
+
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>
