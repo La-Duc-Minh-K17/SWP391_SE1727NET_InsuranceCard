@@ -121,18 +121,6 @@
                                     </div>
                                 </div>
 
-                                                <div class="col-lg-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Service Fee</label>
-                                                        <p>${appt.doctor.serviceFee}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Appointment Note</label>
-                                                        <p>${appt.apptNote}</p>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center">
