@@ -232,7 +232,7 @@ public class PatientDAO {
         Connection connection = null;
         ResultSet rs = null;
         List<Patient> listPatient = new ArrayList<>();
-        String sql = "SELECT P.patient_id , UA.*\n"
+        String sql = "SELECT DISTINCT P.patient_id, UA.*\n"
                 + "FROM mabs.user_account UA\n"
                 + "JOIN mabs.patients P ON UA.user_id = P.user_id\n"
                 + "JOIN mabs.appointments A ON P.patient_id = A.patient_id\n"
@@ -257,7 +257,7 @@ public class PatientDAO {
                 Patient p = new Patient(patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
                 listPatient.add(p);
             }
-                return listPatient;
+            return listPatient;
         } catch (SQLException ex) {
             System.out.println(ex);
 
