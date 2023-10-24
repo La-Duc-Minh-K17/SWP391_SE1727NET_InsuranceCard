@@ -4,21 +4,22 @@
  */
 package controller.admin;
 
-import dal.SettingDAO;
+import dal.ServicesDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import model.Setting;
+import static java.lang.System.out;
+import java.util.List;
+import model.Doctor;
 
 /**
  *
  * @author DELL
  */
-public class SettingList extends HttpServlet {
+public class ServiceReview extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,19 +32,34 @@ public class SettingList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SettingList</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SettingList at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String action = request.getParameter("action");      
+        ServicesDAO sv = new ServicesDAO();
+        request.setAttribute("serviceList", sv.getAllService());
+        if (action != null && action.equals("view-all")) {
+            
+            request.setAttribute("review", sv.getServiceReview());
+            request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
+            return;
         }
+        if (action != null && action.equals("filter")) {
+            int serId = Integer.parseInt(request.getParameter("service_id"));
+            request.setAttribute("review", sv.getServiceReviewById(serId));
+            request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
+            return;
+        } 
+         if (action != null && action.equals("sort")) {
+            String sortby = request.getParameter("sortby");
+            if(sortby.equalsIgnoreCase("Newest"))
+            {
+                request.setAttribute("review", sv.getServiceReviewDESC());
+                request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
+            }else{
+                request.setAttribute("review", sv.getServiceReviewASC());
+                request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
+            }  
+            
+        } 
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,12 +74,7 @@ public class SettingList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SettingDAO st = new SettingDAO();
-        ArrayList<Setting> settings = st.list();
-
-        request.setAttribute("settings",settings);
-
-        request.getRequestDispatcher("frontend/view/admin/settingList.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -77,25 +88,7 @@ public class SettingList extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String term = request.getParameter("search");
-        String type = request.getParameter("searchType");
-
-        
-         SettingDAO st = new SettingDAO();
-        ArrayList<Setting> settings = new ArrayList<>(); 
-        if(type.equalsIgnoreCase("value"))type="role_name";
-        if(type.equalsIgnoreCase("description"))type="role_description";
-        if(!type.isEmpty() && type.equalsIgnoreCase("status")){
-            settings=st.getSettingbyStatus(Integer.parseInt(term));
-        }else if(!type.isEmpty())
-        {
-            settings=st.getSetting(type,term);
-        }else{
-            settings=st.getSettingAllType( term);
-        }
-                request.setAttribute("settings",settings);
-
+        processRequest(request, response);
     }
 
     /**
