@@ -46,7 +46,6 @@ public class ReservationDAO {
                 String status = rs.getString("reservation_status");
                 int serviceId = rs.getInt("service_id");
                 Service service = sDAO.getServiceById(serviceId);
-                System.out.println(service);
                 int patientId = rs.getInt("patient_id");
                 Patient patient = pDAO.getPatientById(patientId);
                 Reservation resv = new Reservation(id, note, date, time, result, status, service, patient);
@@ -65,6 +64,14 @@ public class ReservationDAO {
             }
         }
         return list;
+    }
+
+    public List<Reservation> getListByPage(List<Reservation> list, int start, int end) {
+        List<Reservation> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list.get(i));
+        }
+        return arr;
     }
 
     public void insertNewReservation(Reservation resv) {
@@ -175,5 +182,177 @@ public class ReservationDAO {
         }
     }
 
-  
+    public List<Reservation> getFilteredReservationList(String text) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<Reservation> listResv = new ArrayList<>();
+        String sql = "select resv.* from reservations resv \n"
+                + "INNER JOIN patients p on p.patient_id = resv.patient_id\n"
+                + "INNER JOIN user_account u on u.user_id = p.user_id\n"
+                + "where resv.reservation_status = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, text);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("reservation_id");
+                String note = rs.getString("reservation_note");
+                Date date = rs.getDate("reservation_date");
+                String time = rs.getString("reservation_time");
+                String diagnosis = rs.getString("test_result");
+                String status = rs.getString("reservation_status");
+                int serviceId = rs.getInt("service_id");
+                Service s = sDAO.getServiceById(serviceId);
+                int patientId = rs.getInt("patient_id");
+                Patient patient = pDAO.getPatientById(patientId);
+                Reservation resv = new Reservation(id, note, date, time, diagnosis, status, s, patient);
+                listResv.add(resv);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return listResv;
+    }
+
+    public List<Reservation> searchReservationByPatientName(String text) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<Reservation> listResv = new ArrayList<>();
+        String sql = "select resv.* from reservations resv \n"
+                + "INNER JOIN patients p on p.patient_id = resv.patient_id\n"
+                + "INNER JOIN user_account u on u.user_id = p.user_id\n"
+                + "where u.full_name like ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + text + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("reservation_id");
+                String note = rs.getString("reservation_note");
+                Date date = rs.getDate("reservation_date");
+                String time = rs.getString("reservation_time");
+                String diagnosis = rs.getString("test_result");
+                String status = rs.getString("reservation_status");
+                int serviceId = rs.getInt("service_id");
+                Service s = sDAO.getServiceById(serviceId);
+                int patientId = rs.getInt("patient_id");
+                Patient patient = pDAO.getPatientById(patientId);
+                Reservation resv = new Reservation(id, note, date, time, diagnosis, status, s, patient);
+                listResv.add(resv);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return listResv;
+    }
+
+    public Reservation getReservationById(int resvId) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        String sql = "select resv.* from reservations resv where resv.reservation_id = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, resvId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("reservation_id");
+                String note = rs.getString("reservation_note");
+                Date date = rs.getDate("reservation_date");
+                String time = rs.getString("reservation_time");
+                String diagnosis = rs.getString("test_result");
+                String status = rs.getString("reservation_status");
+                int serviceId = rs.getInt("service_id");
+                Service s = sDAO.getServiceById(serviceId);
+                int patientId = rs.getInt("patient_id");
+                Patient patient = pDAO.getPatientById(patientId);
+                Reservation resv = new Reservation(id, note, date, time, diagnosis, status, s, patient);
+                return resv;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return null;
+    }
+
+    public void rescheduleReservation(Reservation reservation) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "UPDATE `mabs`.`reservations`\n"
+                + "SET\n"
+                + "`reservation_date` = ?,\n"
+                + "`reservation_time` = ?\n"
+                + "WHERE `reservation_id` = ?;";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setDate(1, reservation.getResvDate());
+            ps.setString(2, reservation.getResvTime());
+            ps.setInt(3, reservation.getResvId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    }
+
+    public void deleteRecord(int resvId) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "delete from reservations where reservation_id = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, resvId);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+
+    }
+
 }

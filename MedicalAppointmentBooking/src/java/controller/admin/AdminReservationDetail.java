@@ -5,20 +5,21 @@
 package controller.admin;
 
 import dal.ReservationDAO;
+import dal.ServicesDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 import model.Reservation;
+import utils.EmailSending;
+import utils.TimeUtil;
 
 /**
  *
  * @author Admin
  */
-public class AdminReservation extends HttpServlet {
+public class AdminReservationDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,57 +32,36 @@ public class AdminReservation extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ReservationDAO rsDAO = new ReservationDAO();
-        String uri = null;
+
         String action = request.getParameter("action");
-        List<Reservation> resvList = new ArrayList<>();
-        if (action != null && action.equals("cancel")) {
-            int resvId = Integer.parseInt(request.getParameter("reservation_canceled"));
-            rsDAO.deleteRecord(resvId);
-            response.sendRedirect("admin-reservation?action=view");
+        ReservationDAO rDAO = new ReservationDAO();
+        ServicesDAO sDAO = new ServicesDAO();
+        if (action != null && action.equals("view-detail")) {
+            int resvId = Integer.parseInt(request.getParameter("resvId"));
+            Reservation resv = rDAO.getReservationById(resvId);
+            request.setAttribute("resv", resv);
+            request.getRequestDispatcher("frontend/view/admin/admin_reservationdetail.jsp").forward(request, response);
+        }
+        if (action != null && action.equals("update")) {
+            String date = request.getParameter("resv-date");
+            String time = request.getParameter("resv-time");
+            int apptId = Integer.parseInt(request.getParameter("resvId"));
+            Reservation resv = rDAO.getReservationById(apptId);
+            resv.setResvDate(TimeUtil.dateConverter1(date));
+            resv.setResvTime(time);
+            rDAO.rescheduleReservation(resv);
+            response.sendRedirect("admin-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
             return;
         }
-        if (action != null && action.equals("view")) {
-            resvList = rsDAO.getAllReservation();
-            uri = "admin-reservation?action=view";
+        if (action != null && action.equals("confirm")) {
+            int resvId = Integer.parseInt(request.getParameter("resvId"));
+            Reservation resv = rDAO.getReservationById(resvId);
+            resv.setStatus("CONFIRMED");
+            rDAO.updateStatus(resv);
+            EmailSending.sendReminderEmail(resv);
+            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + resv.getResvId());
+            return;
         }
-        if (action != null && action.equals("search")) {
-            String search = request.getParameter("search");
-            resvList = rsDAO.searchReservationByPatientName(search);
-            uri = "admin-reservation?action=search&search=" + search;
-        }
-        if (action != null && action.equals("filter")) {
-            String status = request.getParameter("status_filter");
-            resvList = null;
-            if (status.equals("ALL")) {
-                response.sendRedirect("admin-reservation?action=view");
-            } else {
-                resvList = rsDAO.getFilteredReservationList(status);
-            }
-            uri = "admin-reservation?action=filter&status=" + status;
-            request.setAttribute("status", status);
-        }
-        if (resvList != null) {
-            int page, numberpage = 5;
-            int size = resvList.size();
-            int num = (size % numberpage == 0 ? (size / numberpage) : ((size / numberpage)) + 1);
-            String xpage = request.getParameter("page");
-            if (xpage == null) {
-                page = 1;
-            } else {
-                page = Integer.parseInt(xpage);
-            }
-            int start, end;
-            start = (page - 1) * numberpage;
-            end = Math.min(page * numberpage, size);
-            List<Reservation> reservation = rsDAO.getListByPage(resvList, start, end);
-            request.setAttribute("page", page);
-            request.setAttribute("num", num);
-            request.setAttribute("url", uri);
-            request.setAttribute("resvList", reservation);
-            request.getRequestDispatcher("frontend/view/admin/admin_reservation.jsp").forward(request, response);
-        }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

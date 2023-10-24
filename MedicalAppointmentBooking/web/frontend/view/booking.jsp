@@ -172,7 +172,6 @@
                                                         <input type="radio" checked="checked" name="gender" value="Male" required>
                                                         <label for="female">Female</label>
                                                         <input type="radio"  name="gender" value="Female" required>
-
                                                     </c:if>
                                                     <c:if test="${sessionScope.user.gender == 0 }">
                                                         <label for="male">Male</label>

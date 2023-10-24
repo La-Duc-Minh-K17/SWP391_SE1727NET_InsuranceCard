@@ -4,20 +4,26 @@
  */
 package controller.admin;
 
+import com.google.gson.Gson;
 import dal.AppointmentDAO;
+import dal.ReservationDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import model.Appointment;
+import model.Calendar;
+import model.Reservation;
 
 /**
  *
  * @author Admin
  */
-public class AdminAppointmentList extends HttpServlet {
+public class AdminScheduleCalendar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,55 +36,30 @@ public class AdminAppointmentList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        String uri = null;
-        List<Appointment> apptList = null;
         AppointmentDAO apptDAO = new AppointmentDAO();
-        if (action != null && action.equals("delete")) {
-            int apptId = Integer.parseInt(request.getParameter("appointment_canceled"));
-            apptDAO.deleteRecord(apptId);
-            response.sendRedirect("admin-appointment?action=view");
+        ReservationDAO resvDAO = new ReservationDAO();
+        List<Appointment> apptList = apptDAO.getAllAppointment();
+        List<Reservation> resvList = resvDAO.getAllReservation();
+        String scheme = request.getScheme();
+        String serverName = request.getServerName();
+        int serverPort = request.getServerPort();
+        String contextPath = request.getContextPath();
+        String baseUrl = scheme + "://" + serverName + ":" + serverPort + contextPath + "/";
+        List<Calendar> list = new ArrayList<>();
+        for (Appointment a : apptList) {
+            Calendar c = new Calendar(a);
+            c.setUrl(baseUrl + "admin-appointmentdetail?action=view-detail&apptId=" + a.getApptId());
+            list.add(c);
         }
-        if (action != null && action.equals("view")) {
-            apptList = apptDAO.getAllAppointment();
-            uri = "admin-appointment?action=view";
+        for (Reservation resv : resvList) {
+            Calendar c = new Calendar(resv);
+            c.setUrl(baseUrl + "admin-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
+            list.add(c);
         }
-
-        if (action != null && action.equals("search")) {
-            String search = request.getParameter("search");
-            apptList = apptDAO.searchAppointmentByPatientName(search);
-            uri = "admin-appointment?action=search&search=" + search;
-        }
-        if (action != null && action.equals("filter")) {
-            String status = request.getParameter("status_filter");
-            apptList = null;
-            if (status.equals("all")) {
-                response.sendRedirect("admin-appointment?action=view");
-            } else {
-                apptList = apptDAO.getFilteredAppointmentList(status);
-            }
-            uri = "admin-appointment?action=filter&status=" + status;
-        }
-        if (apptList != null) {
-            int page, numberpage = 5;
-            int size = apptList.size();
-            int num = (size % numberpage == 0 ? (size / numberpage) : ((size / numberpage)) + 1);
-            String xpage = request.getParameter("page");
-            if (xpage == null) {
-                page = 1;
-            } else {
-                page = Integer.parseInt(xpage);
-            }
-            int start, end;
-            start = (page - 1) * numberpage;
-            end = Math.min(page * numberpage, size);
-            List<Appointment> appointment = apptDAO.getListByPage(apptList, start, end);
-            request.setAttribute("page", page);
-            request.setAttribute("num", num);
-            request.setAttribute("url", uri);
-            request.setAttribute("apptList", appointment);
-            request.getRequestDispatcher("frontend/view/admin/admin_appointment.jsp").forward(request, response);
-        }
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        out.write(new Gson().toJson(list));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
