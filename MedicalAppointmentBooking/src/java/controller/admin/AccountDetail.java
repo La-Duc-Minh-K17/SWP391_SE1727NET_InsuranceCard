@@ -1,47 +1,26 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller.admin;
 
+import dal.RoleDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ngocq
+ * @author DUCHIEUPC.COM
  */
+@WebServlet(name = "AccountDetail", urlPatterns = {"/AccountDetail"})
 public class AccountDetail extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AccountDetail</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AccountDetail at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -55,7 +34,20 @@ public class AccountDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String action = request.getParameter("action");
+        if (action == null) {
+            UserDAO uDAO = new UserDAO();
+            request.setAttribute("acc", uDAO.getAccountById(Integer.valueOf(request.getParameter("aid"))));
+            request.setAttribute("rl", new RoleDAO().getListRole());
+            request.getRequestDispatcher("frontend/view/admin/accountdetail.jsp").forward(request, response);
+
+        } else {
+            UserDAO uDAO = new UserDAO();
+            request.setAttribute("acc", uDAO.getAccountById(Integer.valueOf(request.getParameter("aid"))));
+            request.setAttribute("rl", new RoleDAO().getListRole());
+            request.getRequestDispatcher("frontend/view/admin/accountedit.jsp").forward(request, response);
+        }
+
     }
 
     /**
@@ -69,7 +61,20 @@ public class AccountDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        UserDAO uDAO = new UserDAO();
+        String id = request.getParameter("id");
+        String role = request.getParameter("role");
+        String status = request.getParameter("status");
+        String fullname = request.getParameter("fullname");
+        String phone = request.getParameter("phone");
+        String gender = request.getParameter("gender");
+        String dob = request.getParameter("dob");
+        uDAO.updateAccount(id, role, status, fullname, phone, gender, dob);
+        request.setAttribute("success", "Update account information successfully.");
+        request.setAttribute("acc", uDAO.getAccountById(Integer.valueOf(request.getParameter("id"))));
+        request.setAttribute("rl", new RoleDAO().getListRole());
+        request.getRequestDispatcher("frontend/view/admin/accountedit.jsp").forward(request, response);
+
     }
 
     /**

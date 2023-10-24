@@ -151,7 +151,7 @@
                                                 <c:forEach items="${ul}" var="d">
                                                     <tr>
                                                         <th scope="row">${d.userId}</th>
-                                                        <td>${d.fullName}</td>
+                                                        <td><a href="./AccountDetail?aid=${d.userId}"> ${d.fullName}</a></td>
                                                         <td>${d.username}</td>
                                                         <td>${d.email}</td>
                                                         <td>${d.phone}</td>
