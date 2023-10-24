@@ -11,10 +11,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-
-        <!-- favicon -->
+      
         <link rel="shortcut icon" href="/assets/images/favicon.ico.png">
-        <!-- Bootstrap -->
+       
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- simplebar -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/simplebar.css" rel="stylesheet" type="text/css" />
@@ -216,8 +215,8 @@
                                         <i class="uil uil-times-circle h1 mb-0"></i>
                                     </div>
                                     <div class="mt-4">
-                                        <h4>Cancel Appointment</h4>
-                                        <p class="para-desc mx-auto text-muted mb-0">This appointment will be cancelled by you. Are you sure ?</p>
+                                        <h4>Cancel Reservation</h4>
+                                        <p class="para-desc mx-auto text-muted mb-0">This reservation will be cancelled by you. Are you sure ?</p>
                                         <div class="mt-4">
                                             <input type="hidden" id="cancel_appointment" name="appointment_canceled" value="">
                                             <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">

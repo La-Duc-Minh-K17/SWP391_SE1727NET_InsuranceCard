@@ -54,7 +54,6 @@ public class CheckAvailabilityServlet extends HttpServlet {
             String timeList = json.toJson(timeSlot);
             response.setContentType("text/html");
             response.getWriter().write(timeList);
-            
         }
     }
 

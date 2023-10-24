@@ -18,7 +18,7 @@ public class Reservation {
     private String resvTime;
     private String testResult;
     private String status;
-    private UserAccount staff;
+  
     private Service service;
     private Patient patient;
 
@@ -93,14 +93,7 @@ public class Reservation {
         this.status = status;
     }
 
-    public UserAccount getStaff() {
-        return staff;
-    }
-
-    public void setStaff(UserAccount staff) {
-        this.staff = staff;
-    }
-
+ 
     public Service getService() {
         return service;
     }

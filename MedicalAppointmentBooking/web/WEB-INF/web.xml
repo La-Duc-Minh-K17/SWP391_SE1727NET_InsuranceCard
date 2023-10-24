@@ -132,6 +132,10 @@
         <servlet-name>AdminReservationDetail</servlet-name>
         <servlet-class>controller.admin.AdminReservationDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminScheduleCalendar</servlet-name>
+        <servlet-class>controller.admin.AdminScheduleCalendar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -255,6 +259,10 @@
     <servlet-mapping>
         <servlet-name>AdminReservationDetail</servlet-name>
         <url-pattern>/admin-reservationdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminScheduleCalendar</servlet-name>
+        <url-pattern>/admin-calendar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
