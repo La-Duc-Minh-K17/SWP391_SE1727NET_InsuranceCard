@@ -6,6 +6,7 @@ package controller.admin;
 
 import com.google.gson.Gson;
 import dal.AppointmentDAO;
+import dal.ReservationDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Appointment;
 import model.Calendar;
+import model.Reservation;
 
 /**
  *
@@ -35,13 +37,25 @@ public class AdminScheduleCalendar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         AppointmentDAO apptDAO = new AppointmentDAO();
-        List<Appointment> appointmentList = apptDAO.getAllAppointment();
-
+        ReservationDAO resvDAO = new ReservationDAO();
+        List<Appointment> apptList = apptDAO.getAllAppointment();
+        List<Reservation> resvList = resvDAO.getAllReservation();
+        String scheme = request.getScheme();
+        String serverName = request.getServerName();
+        int serverPort = request.getServerPort();
+        String contextPath = request.getContextPath();
+        String baseUrl = scheme + "://" + serverName + ":" + serverPort + contextPath + "/";
         List<Calendar> list = new ArrayList<>();
-        for (Appointment a : appointmentList) {
-            list.add(new Calendar(a));
+        for (Appointment a : apptList) {
+            Calendar c = new Calendar(a);
+            c.setUrl(baseUrl + "admin-appointmentdetail?action=view-detail&apptId=" + a.getApptId());
+            list.add(c);
         }
-        
+        for (Reservation resv : resvList) {
+            Calendar c = new Calendar(resv);
+            c.setUrl(baseUrl + "admin-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
+            list.add(c);
+        }
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();

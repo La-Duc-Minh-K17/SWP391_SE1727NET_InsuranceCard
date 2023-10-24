@@ -28,7 +28,7 @@
 
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
         <script src= "<c:url value= '/frontend/template/assets/js/jquery.min.js'/>"></script>
-        <script src="<c:url value= '/frontend/template/assets/js/index.global.min.js'/>"></script>
+        <script src="<c:url value= '/frontend/template/assets/js/index.global.js'/>"></script>
         <style>
 
         </style>
@@ -92,10 +92,9 @@
         </div><!-- comment -->
     </body>
     <script>
-
-
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
+
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialDate: new Date(),

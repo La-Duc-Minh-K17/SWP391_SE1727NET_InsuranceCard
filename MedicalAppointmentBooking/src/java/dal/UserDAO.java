@@ -68,7 +68,6 @@ public class UserDAO {
                     ex.printStackTrace();
                 }
             }
-
         }
         return null;
     }

@@ -116,8 +116,8 @@
                         <li><a href="home" class="sub-menu-item">Home</a></li>
                         <li><a href="home?action=redirect-doctors" class="sub-menu-item">Doctors</a></li>
                         <li><a href="<c:url value= '/service?action=view-all'/>" class="sub-menu-item">Services</a></li>
+                        <li><a href="<c:url value= '/new'/>" class="sub-menu-item">News and Blogs</a></li>
                         <li><a href="home?action=redirect-contact-us" class="sub-menu-item">Contact us</a></li>
-                        <li><a href="home?action=redirect-blogs" class="sub-menu-item">News and Blogs</a></li>
                     </ul>
 
                 </div>

@@ -37,8 +37,6 @@
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
             <main class="page-content">
-
-
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
                         <div class="d-flex align-items-center">
@@ -132,7 +130,6 @@
                                                 <div class="container">
                                                     <div class="row">
                                                         <c:forEach var="o" items="${requestScope.dList}">
-
                                                             <div class=" col-lg-4 col-md-6 col-12 mb-4 pb-2" value="${o.blog_id}">
                                                                 <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                                                                     <div class="imagefit">

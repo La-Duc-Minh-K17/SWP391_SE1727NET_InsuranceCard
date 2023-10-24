@@ -21,17 +21,32 @@ public class Calendar {
     private String textColor;
 
     public Calendar(Appointment appt) {
-        this.title = "Dr."+appt.getDoctor().getFullName();
+        this.title = "Dr." + appt.getDoctor().getFullName();
         String date = TimeUtil.sqlDateToString(appt.getApptDate()) + "T" + appt.getApptTime();
         this.start = date;
         if (TimeUtil.stringToLocalDateTime(date).isBefore(LocalDateTime.now())) {
-                this.backgroundColor = "lightgray";
-                this.borderColor = "gray";
-                this.textColor = "darkgray";
+            this.backgroundColor = "lightgray";
+            this.borderColor = "gray";
+            this.textColor = "red   ";
         } else {
             this.backgroundColor = "#28a745";
             this.borderColor = "#28a745";
-            this.textColor = "black";
+            this.textColor = "white";
+        }
+    }
+
+    public Calendar(Reservation resv) {
+        this.title = "Service:." + resv.getService().getService_name();
+        String date = TimeUtil.sqlDateToString(resv.getResvDate()) + "T" + resv.getResvTime();
+        this.start = date;
+        if (TimeUtil.stringToLocalDateTime(date).isBefore(LocalDateTime.now())) {
+            this.backgroundColor = "lightgray";
+            this.borderColor = "gray";
+            this.textColor = "red";
+        } else {
+            this.backgroundColor = "#28a745";
+            this.borderColor = "#28a745";
+            this.textColor = "white";
         }
     }
 
@@ -88,5 +103,4 @@ public class Calendar {
         return "Calendar{" + "title=" + title + ", start=" + start + ", url=" + url + ", backgroundColor=" + backgroundColor + ", borderColor=" + borderColor + ", textColor=" + textColor + '}';
     }
 
-    
 }
