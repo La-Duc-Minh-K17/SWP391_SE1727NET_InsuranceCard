@@ -300,7 +300,7 @@ public class DoctorDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Doctor doctor = null;
-        String sql = " SELECT distinct D.doctor_id\n"
+        String sql = " SELECT distinct D.doctor_id, UA.username, UA.full_name,UA.phone,UA.image,UA.gender,UA.email,UA.status, D.doctor_position, D.service_fee\n"
                 + "FROM mabs.doctors D\n"
                 + "JOIN mabs.speciality S on D.speciality_id = S.speciality_id\n"
                 + "JOIN mabs.blog_category BC on S.speName = BC.name\n"
@@ -316,10 +316,23 @@ public class DoctorDAO {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, Id);
             rs = ps.executeQuery();
-            if(rs.next()) {
+            while (rs.next()) {
                 int doctorId = rs.getInt("doctor_id");
-                return getDoctorById(doctorId);
+                String username = rs.getString("username");
+                String fullName = rs.getString("full_name");
+                String phone = rs.getString("phone");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String email = rs.getString("email");
+                int status = rs.getInt("status");
+                String position = rs.getString("doctor_position");
+                String speciality = rs.getString("speName");
+                String description = rs.getString("doctor_description");
+                int fee = rs.getInt("service_fee");
+                doctor = new Doctor(doctorId, speciality, position, description, username, email, fullName, gender, phone, image, status);
+                doctor.setServiceFee(fee);
             }
+            return doctor;
         } catch (SQLException e) {
         } finally {
             if (connection != null) {
