@@ -144,39 +144,39 @@
                                         <div class="tiny-slide">
                                             <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
                                                 <div class="tiny-slide">
-                                            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                                <div class="card border-0" >
-                                                    <img src="frontend/template/assets/images/doctors/profile-bg.jpg" class="img-fluid" alt="">
-                                                </div>
-                                                <div>
-                                                    <c:set var="doctor" value="${doctor}"></c:set>
-                                                        <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
-                                                            <img src="data:image/jpg;base64,${doctor.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
-                                                        <h5 class="mt-3 mb-1">Dr. ${doctor.fullName}</h5>
-                                                        <p class="text-muted mb-0">${doctor.speciality}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                                    <div class="post-meta d-flex justify-content-around mt-3">
-                                                        <div>
-                                                            <a href="#" class="btn btn-primary btn-sm">Book Appointment</a></div>
-                                                        <div>
-                                                            <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                                                    <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
+                                                        <div class="card border-0" >
+                                                            <img src="frontend/template/assets/images/doctors/profile-bg.jpg" class="img-fluid" alt="">
                                                         </div>
-
+                                                        <div>
+                                                            <c:set var="doctor" value="${doctor}"></c:set>
+                                                                <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                                                                    <img src="data:image/jpg;base64,${doctor.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                                                <h5 class="mt-3 mb-1">Dr. ${doctor.fullName}</h5>
+                                                                <p class="text-muted mb-0">${doctor.speciality}</p>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                </div>
+                                                <div class="post-meta d-flex justify-content-around mt-3">
+                                                    <div>
+                                                        <a href="#" class="btn btn-primary btn-sm">Book Appointment</a></div>
+                                                    <div>
+                                                        <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                                                    </div>
 
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        </form>
-                    </div><!--end row-->
+                    </div>
+                </div>
+                </form>
+                </div><!--end row-->
                 </div><!--end container-->
 
                 <div class="container mt-100 mt-60">
