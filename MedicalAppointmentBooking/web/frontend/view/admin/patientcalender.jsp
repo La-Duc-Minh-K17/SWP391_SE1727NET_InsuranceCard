@@ -121,11 +121,6 @@
                                     </div>
                                 </div>
                                 
-                                                <div class="col-lg-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Appointment Time</label>
-                                                        <p>${appt.apptTime}</p>
-                                                    </div>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="mb-3">
