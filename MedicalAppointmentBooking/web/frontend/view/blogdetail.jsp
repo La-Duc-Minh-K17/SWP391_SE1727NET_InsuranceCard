@@ -36,7 +36,7 @@
         <jsp:include page="/frontend/common/header.jsp" />
 
         <section class="bg-half-60 d-table w-100" id="home">
-            
+
             <div class="container">
                 <div class="row mt-5 justify-content-center">
                     <div class="col-12">
@@ -138,6 +138,33 @@
                                                 </div>
                                             </c:forEach>
                                         </div>
+                                    </div>
+                                    <div class="slider-range-three">
+                                        <c:forEach items="${requestScope.doctors}" var="d">
+                                            <div class="tiny-slide">
+                                                <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
+                                                    <div class="d-flex justify-content-center">
+                                                        <img src="data:image/jpg;base64,${d.image}" width="80%" height="220" />
+                                                    </div>
+                                                    <div class="card-body p-4">
+                                                        <div class="card-body content text-center">
+                                                            <a href="#"
+                                                               class="title text-dark  d-block mb-0">${d.fullName}</a>
+                                                            <small class="text-muted speciality">${d.speciality}</small>
+                                                        </div>
+
+                                                        <div class="post-meta d-flex justify-content-around mt-3">
+                                                            <div>
+                                                                <a href="#" class="btn btn-primary btn-sm">Book Appointment</a></div>
+                                                            <div>
+                                                                <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
                                     </div>
                                 </div>
                             </div>
