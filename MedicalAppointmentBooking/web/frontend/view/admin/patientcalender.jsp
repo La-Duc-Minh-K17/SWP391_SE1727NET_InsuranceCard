@@ -120,9 +120,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                            </div>
-                                        </div>
                                         <div class="d-flex align-items-center">
                                             <a href="javascript:history.back();" class="me-3 btn btn-primary btn-sml btn-soft-success">
                                                 Turn Back
