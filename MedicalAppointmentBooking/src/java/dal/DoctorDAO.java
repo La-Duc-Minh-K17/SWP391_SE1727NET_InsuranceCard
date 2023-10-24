@@ -296,16 +296,19 @@ public class DoctorDAO {
         }
     }
 
-  
-
     public Doctor getDoctorRelatedCategory(int Id) {
-PreparedStatement ps = null;
+        PreparedStatement ps = null;
         ResultSet rs = null;
         Doctor doctor = null;
-        String sql = "select * from doctors d \n"
-                + "            inner join user_account u on d.user_id = u.user_id \n"
-                + "            inner join  speciality s on s.speciality_id = d.speciality_id\n"
-                + "            where d.doctor_id = ?";
+        String sql = "SELECT distinct D.*, UA.*\n"
+                + "FROM mabs.doctors D\n"
+                + "JOIN mabs.speciality S on D.speciality_id = S.speciality_id\n"
+                + "JOIN mabs.blog_category BC on S.speName = BC.name\n"
+                + "JOIN mabs.blogs B on BC.blog_category_id = B.blog_category_id\n"
+                + "JOIN mabs.user_account UA on D.user_id = UA.user_id\n"
+                + "WHERE B.blog_id = 7\n"
+                + "ORDER BY RAND()\n"
+                + "LIMIT 1;";
 
         Connection connection = null;
         try {
@@ -340,5 +343,6 @@ PreparedStatement ps = null;
                 }
             }
         }
-        return doctor;    }
+        return doctor;
+    }
 }
