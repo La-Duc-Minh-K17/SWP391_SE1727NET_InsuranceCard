@@ -139,7 +139,8 @@
                                             </c:forEach>
                                         </div>
                                     </div>
-                                    <div class="slider-range-three">
+                                    <div>
+                                        <h5>Related Doctor</h5>
                                         <c:forEach items="${requestScope.doctors}" var="d">
                                             <div class="tiny-slide">
                                                 <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
