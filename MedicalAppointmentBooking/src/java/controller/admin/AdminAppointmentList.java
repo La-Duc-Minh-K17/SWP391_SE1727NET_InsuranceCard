@@ -5,7 +5,6 @@
 package controller.admin;
 
 import dal.AppointmentDAO;
-import dal.DoctorDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Appointment;
-import model.Doctor;
 
 /**
  *
@@ -36,21 +34,20 @@ public class AdminAppointmentList extends HttpServlet {
         String uri = null;
         List<Appointment> apptList = null;
         AppointmentDAO apptDAO = new AppointmentDAO();
+        if (action != null && action.equals("delete")) {
+            int apptId = Integer.parseInt(request.getParameter("appointment_canceled"));
+            apptDAO.deleteRecord(apptId);
+            response.sendRedirect("admin-appointment?action=view");
+        }
         if (action != null && action.equals("view")) {
             apptList = apptDAO.getAllAppointment();
             uri = "admin-appointment?action=view";
         }
-        if (action != null && action.equals("view-detail")) {
-            int apptId = Integer.parseInt(request.getParameter("apptId"));
-            Appointment appt = apptDAO.getAppointmentById(apptId);
-            request.setAttribute("appt", appt);
-            request.getRequestDispatcher("frontend/view/admin/admin_appointmentdetail.jsp").forward(request, response);
-            return;
-        }
+
         if (action != null && action.equals("search")) {
             String search = request.getParameter("search");
             apptList = apptDAO.searchAppointmentByPatientName(search);
-            uri = "admin-appointment?action=search&search=" + search ;
+            uri = "admin-appointment?action=search&search=" + search;
         }
         if (action != null && action.equals("filter")) {
             String status = request.getParameter("status_filter");
@@ -60,7 +57,6 @@ public class AdminAppointmentList extends HttpServlet {
             } else {
                 apptList = apptDAO.getFilteredAppointmentList(status);
             }
-
             uri = "admin-appointment?action=filter&status=" + status;
         }
         if (apptList != null) {
@@ -82,7 +78,6 @@ public class AdminAppointmentList extends HttpServlet {
             request.setAttribute("url", uri);
             request.setAttribute("apptList", appointment);
             request.getRequestDispatcher("frontend/view/admin/admin_appointment.jsp").forward(request, response);
-
         }
     }
 

@@ -60,7 +60,7 @@ public class WebDoctorDetail extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("doctorId"));
         DoctorDAO doctor = new DoctorDAO();
         request.setAttribute("doctor", doctor.getDoctorById(id));
-        
+        request.setAttribute("feedback", doctor.getFeedBackByDoctorID(id));
         request.getRequestDispatcher("frontend/view/webdoctordetail.jsp").forward(request, response);
     } 
 

@@ -2,25 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.home;
+package controller.admin;
 
-import dal.DoctorDAO;
 import dal.ServicesDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import static java.lang.System.out;
 import java.util.List;
 import model.Doctor;
-import model.Service;
-import utils.SessionUtils;
 
 /**
  *
- * @author Admin
+ * @author DELL
  */
-public class HomeController extends HttpServlet {
+public class ServiceReview extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,32 +32,34 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        DoctorDAO doctordao = new DoctorDAO();
-        ServicesDAO servicedao = new ServicesDAO();
-        List<Doctor> doctorList = doctordao.getAllDoctor();
-        List<Service> ServiceList = servicedao.getRandomTop3Service();
-        request.setAttribute("doctors", doctorList);
-        request.setAttribute("service", ServiceList);
-        String action = request.getParameter("action");
-
-        if (action != null && action.equals("logout")) {
-            SessionUtils.getInstance().removeValue(request, "user");
-            request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
+        String action = request.getParameter("action");      
+        ServicesDAO sv = new ServicesDAO();
+        request.setAttribute("serviceList", sv.getAllService());
+        if (action != null && action.equals("view-all")) {
+            
+            request.setAttribute("review", sv.getServiceReview());
+            request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
             return;
         }
-        if (action != null && action.equals("view")) {
-                int serivce_id = Integer.parseInt(request.getParameter("id"));
-                Service service = servicedao.getServiceById(serivce_id);
-                request.setAttribute("service", service);
-                request.getRequestDispatcher("frontend/view/servicedetail.jsp").forward(request, response);
-
-            }
-        if (action == null) {
-            request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
+        if (action != null && action.equals("filter")) {
+            int serId = Integer.parseInt(request.getParameter("service_id"));
+            request.setAttribute("review", sv.getServiceReviewById(serId));
+            request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
             return;
-        }
-        
+        } 
+         if (action != null && action.equals("sort")) {
+            String sortby = request.getParameter("sortby");
+            if(sortby.equalsIgnoreCase("Newest"))
+            {
+                request.setAttribute("review", sv.getServiceReviewDESC());
+                request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
+            }else{
+                request.setAttribute("review", sv.getServiceReviewASC());
+                request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
+            }  
+            
+        } 
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

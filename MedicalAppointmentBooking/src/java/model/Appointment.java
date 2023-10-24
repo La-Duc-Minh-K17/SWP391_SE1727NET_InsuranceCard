@@ -18,7 +18,6 @@ public class Appointment {
     private String apptTime;
     private String diagnosis;
     private String status;
-   
     private Doctor doctor;
     private Patient patient;
 
@@ -93,8 +92,6 @@ public class Appointment {
         this.status = status;
     }
 
-   
-   
     public Doctor getDoctor() {
         return doctor;
     }
@@ -114,5 +111,5 @@ public class Appointment {
     @Override
     public String toString() {
         return "Appointment{" + "apptId=" + apptId + ", apptNote=" + apptNote + ", apptDate=" + apptDate + ", apptTime=" + apptTime + ", diagnosis=" + diagnosis + ", status=" + status + ", doctor=" + doctor + ", patient=" + patient + '}';
-    } 
+    }
 }

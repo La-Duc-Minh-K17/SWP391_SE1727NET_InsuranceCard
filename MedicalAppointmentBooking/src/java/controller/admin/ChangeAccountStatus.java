@@ -1,26 +1,25 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-package controller.home;
+package controller.admin;
 
-import dal.DoctorDAO;
-import dal.ServicesDAO;
+import dal.UserDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Doctor;
-import model.Service;
-import utils.SessionUtils;
 
 /**
  *
- * @author Admin
+ * @author DUCHIEUPC.COM
  */
-public class HomeController extends HttpServlet {
+@WebServlet(name = "ChangeAccountStatus", urlPatterns = {"/ChangeAccountStatus"})
+public class ChangeAccountStatus extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,32 +32,19 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        DoctorDAO doctordao = new DoctorDAO();
-        ServicesDAO servicedao = new ServicesDAO();
-        List<Doctor> doctorList = doctordao.getAllDoctor();
-        List<Service> ServiceList = servicedao.getRandomTop3Service();
-        request.setAttribute("doctors", doctorList);
-        request.setAttribute("service", ServiceList);
-        String action = request.getParameter("action");
-
-        if (action != null && action.equals("logout")) {
-            SessionUtils.getInstance().removeValue(request, "user");
-            request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
-            return;
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ChangeAccountStatus</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ChangeAccountStatus at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        if (action != null && action.equals("view")) {
-                int serivce_id = Integer.parseInt(request.getParameter("id"));
-                Service service = servicedao.getServiceById(serivce_id);
-                request.setAttribute("service", service);
-                request.getRequestDispatcher("frontend/view/servicedetail.jsp").forward(request, response);
-
-            }
-        if (action == null) {
-            request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
-            return;
-        }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -73,7 +59,11 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String uid = request.getParameter("uid");
+        String ss = request.getParameter("ss");
+        UserDAO uDAO = new UserDAO();
+        uDAO.ChangeAccountStatus(uid, ss);
+        response.sendRedirect("ManageAccount");
     }
 
     /**

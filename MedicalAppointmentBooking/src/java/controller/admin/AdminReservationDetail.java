@@ -2,24 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.manager;
+package controller.admin;
 
+import dal.ReservationDAO;
 import dal.ServicesDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import static java.lang.System.out;
-import java.util.List;
-import model.Doctor;
+import model.Reservation;
+import utils.EmailSending;
+import utils.TimeUtil;
 
 /**
  *
- * @author DELL
+ * @author Admin
  */
-public class ServiceReview extends HttpServlet {
+public class AdminReservationDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,34 +32,36 @@ public class ServiceReview extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");      
-        ServicesDAO sv = new ServicesDAO();
-        request.setAttribute("serviceList", sv.getAllService());
-        if (action != null && action.equals("view-all")) {
-            
-            request.setAttribute("review", sv.getServiceReview());
-            request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
+
+        String action = request.getParameter("action");
+        ReservationDAO rDAO = new ReservationDAO();
+        ServicesDAO sDAO = new ServicesDAO();
+        if (action != null && action.equals("view-detail")) {
+            int resvId = Integer.parseInt(request.getParameter("resvId"));
+            Reservation resv = rDAO.getReservationById(resvId);
+            request.setAttribute("resv", resv);
+            request.getRequestDispatcher("frontend/view/admin/admin_reservationdetail.jsp").forward(request, response);
+        }
+        if (action != null && action.equals("update")) {
+            String date = request.getParameter("resv-date");
+            String time = request.getParameter("resv-time");
+            int apptId = Integer.parseInt(request.getParameter("resvId"));
+            Reservation resv = rDAO.getReservationById(apptId);
+            resv.setResvDate(TimeUtil.dateConverter1(date));
+            resv.setResvTime(time);
+            rDAO.rescheduleReservation(resv);
+            response.sendRedirect("admin-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
             return;
         }
-        if (action != null && action.equals("filter")) {
-            int serId = Integer.parseInt(request.getParameter("service_id"));
-            request.setAttribute("review", sv.getServiceReviewById(serId));
-            request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
+        if (action != null && action.equals("confirm")) {
+            int resvId = Integer.parseInt(request.getParameter("resvId"));
+            Reservation resv = rDAO.getReservationById(resvId);
+            resv.setStatus("CONFIRMED");
+            rDAO.updateStatus(resv);
+            EmailSending.sendReminderEmail(resv);
+            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + resv.getResvId());
             return;
-        } 
-         if (action != null && action.equals("sort")) {
-            String sortby = request.getParameter("sortby");
-            if(sortby.equalsIgnoreCase("Newest"))
-            {
-                request.setAttribute("review", sv.getServiceReviewDESC());
-                request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
-            }else{
-                request.setAttribute("review", sv.getServiceReviewASC());
-                request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
-            }  
-            
-        } 
-
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -92,7 +92,7 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Title</label>
-                                            <input name="service_name" id="name" type="text" class="form-control" value="${s.service_name}">
+                                            <input name="service_name" id="name" type="text" class="form-control" value="${s.service_name}" required placeholder="Service Name" oninput="validateInput(this)" required placeholder="Enter the Service Name">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -100,7 +100,7 @@
                                             <label class="form-label">Price</label>
                                             <div class="input-group">
                                                 <span class="input-group-text">$</span>
-                                                <input name="service_fee" type="text" class="form-control" value="${s.fee}">
+                                                <input name="service_fee" type="text" class="form-control" value="${s.fee}" required placeholder="Service Fee" oninput="validateInput(this)" pattern="^[0-9.]*$" required placeholder="Enter the Service Fee">
                                             </div>
                                         </div>
                                     </div>
@@ -108,13 +108,13 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Description</label>
-                                            <input name="service_description" type="text" class="form-control" value="${s.service_description}">
+                                            <input name="service_description" type="text" class="form-control" value="${s.service_description}" required placeholder="Service Description" oninput="validateInput(this)" required placeholder="Enter the Service Description">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Detail</label>
-                                            <input name="service_details" type="text" class="form-control" value="${s.service_details}">
+                                            <input name="service_details" type="text" class="form-control" value="${s.service_details}" required placeholder="Service Details" oninput="validateInput(this)" required placeholder="Enter the Service Details">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -183,6 +183,15 @@
             } else {
 
                 thumbnail.src = "";
+            }
+            function validateInput(inputElement) {
+                var inputValue = inputElement.value;
+                var pattern = /^[a-zA-Z0-9 ]*$/; // Only allow alphanumeric characters and spaces
+
+                if (!pattern.test(inputValue)) {
+                    alert("Special characters are not allowed in this field.");
+                    inputElement.value = inputValue.replace(/[^a-zA-Z0-9 ]/g, ''); // Remove special characters
+                }
             }
         }
     </script>

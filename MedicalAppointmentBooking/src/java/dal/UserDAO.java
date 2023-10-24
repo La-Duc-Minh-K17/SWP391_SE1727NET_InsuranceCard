@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import model.Role;
 import model.UserAccount;
 import utils.ImageProcessing;
@@ -68,7 +69,6 @@ public class UserDAO {
                     ex.printStackTrace();
                 }
             }
-
         }
         return null;
     }
@@ -97,6 +97,39 @@ public class UserDAO {
         }
 
     }
+        public void updateAccount(String id, String role, String status, String fullname,
+            String phone, String gender, String dob) {
+        PreparedStatement ps = null;
+        String sql = "UPDATE `mabs`.`user_account`  SET\n"
+                + "            `role_id` =?,\n"
+                + "            `status` = b'"+status+"',\n"
+                + "            `full_name` = ?,\n"
+                + "            `phone` = ?,\n"
+                + "            `gender` =  b'"+gender+"',\n"
+                + "            `dob` = ? \n"
+                + "             WHERE `user_id` =   " + id;
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, role);
+            ps.setString(2, fullname);
+            ps.setString(3, phone);
+            ps.setString(4, dob);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+
 
     public void updatePassword(UserAccount user, String newPassword) {
         PreparedStatement ps = null;
@@ -386,5 +419,93 @@ public class UserDAO {
             }
         }
     }
+public void ChangeAccountStatus(String uid, String ss) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "UPDATE user_account SET status = "+ss+" WHERE user_id = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1,uid);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    }public UserAccount getUserAccountByID(String uid) {
+        PreparedStatement stm = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM user_account "
+                + "WHERE user_id = " + uid;
+        try {
+            connection = dbc.getConnection();
+            stm = connection.prepareStatement(sql);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                UserAccount account = new UserAccount();
+                int id = rs.getInt("user_id");
+                String userName = rs.getString("username");
+                String emailAddress = rs.getString("email");
+                String fullName = rs.getString("full_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String phone = rs.getString("phone");
+                int status = rs.getInt("status");
+                Date dob = rs.getDate("dob");
+                String address = rs.getString("address");
+                account = new UserAccount(id, userName, emailAddress, fullName, gender, phone, image, dob, address, status);
+                return account;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+    public ArrayList<UserAccount> getListUserAccount(String status, String role) {
+        PreparedStatement stm = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        ArrayList<UserAccount> list = new ArrayList<>();
+        String sql = "SELECT a.*, r.role_name FROM user_account a join user_role r on a.role_id = r.role_id where 1=1 ";
+        if (!status.isEmpty()) {
+            sql += "  And a.status = " + status;
+        }
+         if (!role.isEmpty()) {
+            sql += "  And a.role_id = " + role;
+        }
+        try {
+            connection = dbc.getConnection();
+            stm = connection.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
 
+                UserAccount account = new UserAccount();
+                int id = rs.getInt("user_id");
+                String userName = rs.getString("username");
+                String emailAddress = rs.getString("email");
+                String fullName = rs.getString("full_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String phone = rs.getString("phone");
+                int getStatus = rs.getInt("status");
+                Date dob = rs.getDate("dob");
+                String address = rs.getString("address");
+                Role r = new Role(rs.getInt("role_id"),rs.getString("role_name"));
+                account = new UserAccount(id, userName, emailAddress, fullName, gender, phone, image, dob, address, getStatus);
+               account.setRole(r);
+                list.add(account);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return list;
+    }
 }

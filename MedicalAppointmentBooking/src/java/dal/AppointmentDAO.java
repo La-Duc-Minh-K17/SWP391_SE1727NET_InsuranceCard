@@ -183,84 +183,6 @@ public class AppointmentDAO {
         }
         return null;
     }
-    private final int MAX_APPOINTMENT = 1;
-
-    public List<String> getAvailableTimeSlot(int doctorId, String date) {
-        PreparedStatement ps = null;
-        Connection connection = null;
-        ResultSet rs = null;
-        List<String> timeSlot = new ArrayList<>();
-        timeSlot.add("7:00:00");
-        timeSlot.add("8:00:00");
-        timeSlot.add("9:00:00");
-        timeSlot.add("10:00:00");
-        timeSlot.add("11:00:00");
-        timeSlot.add("12:00:00");
-        timeSlot.add("13:00:00");
-        timeSlot.add("14:00:00");
-        timeSlot.add("15:00:00");
-        timeSlot.add("16:00:00");
-        timeSlot.add("17:00:00");
-
-        String sql = "SELECT appointment_time\n"
-                + "FROM appointments\n"
-                + "WHERE doctor_id = ? AND appointment_date = ? ";
-        try {
-            connection = dbc.getConnection();
-            ps = connection.prepareStatement(sql);
-            ps.setDate(2, TimeUtil.dateConverter(date));
-            ps.setInt(1, doctorId);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                if (timeSlot.contains(rs.getString("appointment_time"))) {
-                    timeSlot.remove(rs.getString(1));
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    System.out.println(ex);
-                }
-            }
-        }
-        return timeSlot;
-    }
-
-    public boolean checkAvailability(Appointment appt) {
-        PreparedStatement ps = null;
-        Connection connection = null;
-        ResultSet rs = null;
-        String sql = "SELECT COUNT(*) AS appointment_count\n"
-                + "FROM appointments\n"
-                + "WHERE doctor_id = ? AND appointment_date = ? AND appointment_time = ? ";
-        try {
-            connection = dbc.getConnection();
-            ps.setInt(1, appt.getDoctor().getDoctorId());
-            ps.setDate(2, appt.getApptDate());
-            ps.setString(3, appt.getApptTime());
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                if (rs.getInt(1) >= MAX_APPOINTMENT) {
-                    return false;
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    System.out.println(ex);
-                }
-            }
-        }
-        return true;
-    }
 
     public void updateStatus(Appointment appointment) {
         PreparedStatement ps = null;
@@ -449,5 +371,28 @@ public class AppointmentDAO {
                 }
             }
         }
+    }
+
+    public void deleteRecord(int apptId) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "delete from appointments where appointment_id = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, apptId);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+
     }
 }

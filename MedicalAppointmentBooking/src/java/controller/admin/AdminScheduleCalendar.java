@@ -2,25 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.home;
+package controller.admin;
 
-import dal.DoctorDAO;
-import dal.ServicesDAO;
+import com.google.gson.Gson;
+import dal.AppointmentDAO;
+import dal.ReservationDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
-import model.Doctor;
-import model.Service;
-import utils.SessionUtils;
+import model.Appointment;
+import model.Calendar;
+import model.Reservation;
 
 /**
  *
  * @author Admin
  */
-public class HomeController extends HttpServlet {
+public class AdminScheduleCalendar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,32 +36,30 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        DoctorDAO doctordao = new DoctorDAO();
-        ServicesDAO servicedao = new ServicesDAO();
-        List<Doctor> doctorList = doctordao.getAllDoctor();
-        List<Service> ServiceList = servicedao.getRandomTop3Service();
-        request.setAttribute("doctors", doctorList);
-        request.setAttribute("service", ServiceList);
-        String action = request.getParameter("action");
-
-        if (action != null && action.equals("logout")) {
-            SessionUtils.getInstance().removeValue(request, "user");
-            request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
-            return;
+        AppointmentDAO apptDAO = new AppointmentDAO();
+        ReservationDAO resvDAO = new ReservationDAO();
+        List<Appointment> apptList = apptDAO.getAllAppointment();
+        List<Reservation> resvList = resvDAO.getAllReservation();
+        String scheme = request.getScheme();
+        String serverName = request.getServerName();
+        int serverPort = request.getServerPort();
+        String contextPath = request.getContextPath();
+        String baseUrl = scheme + "://" + serverName + ":" + serverPort + contextPath + "/";
+        List<Calendar> list = new ArrayList<>();
+        for (Appointment a : apptList) {
+            Calendar c = new Calendar(a);
+            c.setUrl(baseUrl + "admin-appointmentdetail?action=view-detail&apptId=" + a.getApptId());
+            list.add(c);
         }
-        if (action != null && action.equals("view")) {
-                int serivce_id = Integer.parseInt(request.getParameter("id"));
-                Service service = servicedao.getServiceById(serivce_id);
-                request.setAttribute("service", service);
-                request.getRequestDispatcher("frontend/view/servicedetail.jsp").forward(request, response);
-
-            }
-        if (action == null) {
-            request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
-            return;
+        for (Reservation resv : resvList) {
+            Calendar c = new Calendar(resv);
+            c.setUrl(baseUrl + "admin-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
+            list.add(c);
         }
-        
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        out.write(new Gson().toJson(list));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
