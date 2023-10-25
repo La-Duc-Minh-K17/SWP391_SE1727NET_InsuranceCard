@@ -33,30 +33,31 @@ public class PatientListController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int doctorId = Integer.parseInt(request.getParameter("id"));
+        int docId = Integer.parseInt(request.getParameter("id"));
         String action = request.getParameter("action");
         DoctorDAO dDao = new DoctorDAO();
-        Doctor doctor = dDao.getDoctorById(doctorId);
+        Doctor doctor = dDao.getDoctorById(docId);
         request.setAttribute("doctor", doctor);
         if (action != null && action.equals("view-all")) {
             PatientDAO pdao = new PatientDAO();
-            List<Patient> listP = pdao.getPatientByDoctorId(doctorId);
+            List<Patient> listP = pdao.getPatientByDoctorId(docId);
             request.setAttribute("listPatient", listP);
             request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
             return;
         }
         if (action != null && action.equals("filter")) {
-            int catId = Integer.parseInt(request.getParameter("sort_id"));
+            int catId = Integer.parseInt(request.getParameter("speFilter"));
             PatientDAO pdao = new PatientDAO();
             List<Patient> listP = new ArrayList<>();
             if (catId == 0) {
-                listP = pdao.getPatientByDoctorId(doctorId);
+                listP = pdao.getPatientByDoctorId(docId);
             } else if (catId == 1) {
-                dbiList = dDAO.getBlogById(catId);
+                listP = pdao.getPatientByDoctorIdSortAZ(docId);
+            } else if (catId == 2) {
+                listP = pdao.getPatientByDoctorIdSortZA(docId);
             }
-            request.setAttribute("dList", dbiList);
-            request.getRequestDispatcher("frontend/view/admin/bloglist.jsp").forward(request, response);
-            return;
+            request.setAttribute("listPatient", listP);
+            request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
         }
     }
 

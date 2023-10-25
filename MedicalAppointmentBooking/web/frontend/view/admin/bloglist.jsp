@@ -88,7 +88,7 @@
                             <div class="col-xl-3 col-md-3">
                                 <div class="card component-wrapper border-0 rounded shadow">
                                     <div>
-                                        <select class="form-select form-control" id="speFilter" onchange="filter()">
+                                        <select class="form-select form-control" name ="speFilter" id="speFilter" onchange="filter()">
                                             <option  value="0">Category</option>
                                             <c:forEach items="${cDAO}" var="o">
                                                 <option value="${o.blog_category_id}">${o.name}</option>  
