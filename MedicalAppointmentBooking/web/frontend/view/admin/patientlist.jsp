@@ -81,7 +81,7 @@
                                 <div class="col-xl-6">
                                     <div class="search-bar d-lg-block" style="padding-top :0">
                                         <div id="search" class="menu-search ">
-                                            <form action="<c:url value='/manage-blog?action=search'/>"role="search" method="post" id="searchform" class="searchform">
+                                            <form action="<c:url value='/doctor-patientlist?action=search'/>"role="search" method="post" id="searchform" class="searchform">
                                                 <div>
                                                     <input type="text" class="form-control border rounded-pill" name="search"
                                                            id="search" placeholder="Search patients by name">
