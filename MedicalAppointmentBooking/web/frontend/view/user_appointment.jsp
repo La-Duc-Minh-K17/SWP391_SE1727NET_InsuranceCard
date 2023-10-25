@@ -37,9 +37,9 @@
     <body>
         <jsp:include page="/frontend/common/header.jsp" />
         <section class="bg-hero mt-4">
-            <div class="container">
-                <div class="row mt-lg-5">
-                    <div class="col-md-6 col-lg-4">
+            <div class="container-fluid ">
+                <div class="row p-4">
+                    <div class="col-md-5 col-lg-4">
                         <div class="rounded shadow overflow-hidden sticky-bar">
                             <div class="card border-0">
                                 <img src="frontend/template/assets/images/bg/bg-profile.jpg" class="img-fluid" alt="">
@@ -67,7 +67,6 @@
                                     <h6 class="mb-0">Phone</h6>
                                     <p class="text-muted mb-0 ms-2">${sessionScope.user.phone}</p>
                                 </div>
-
                                 <div class="d-flex align-items-center mt-2">
                                     <i class="uil uil-italic align-text-bottom text-primary h5 mb-0 me-2"></i>
                                     <h6 class="mb-0">Address</h6>
@@ -114,10 +113,8 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                    </div>
-
-                                    <div class="col-12 mt-4">
+                                    </div>  
+                                    <div class="col-12 mt-1">
                                         <div class="card component-wrapper border-0 rounded shadow">
                                             <div class="p-4 border-bottom">
                                                 <h5 class="mb-0">My Appointment</h5>
@@ -132,60 +129,47 @@
                                                                         <thead>
                                                                             <tr>
                                                                                 <th class="border-bottom p-3" style="min-width: 50px;">#</th>
-                                                                                <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 200px;">Doctor</th>
                                                                                 <th class="border-bottom p-3" style="min-width: 150px;">Date</th>
                                                                                 <th class="border-bottom p-3">Time</th>
-                                                                                <th class="border-bottom p-3" style="min-width: 220px;">Doctor</th>
                                                                                 <th class="border-bottom p-3">Status</th>
                                                                                 <th class="border-bottom p-3" style="min-width: 150px;">Action</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <c:set var="i" value="1"></c:set>
-                                                                            <c:forEach items="${apptList}" var="appt">
-                                                                                <c:set var="patient" value="${appt.patient}"></c:set>
-                                                                                    <tr>
-                                                                                        <td class="p-3">${appt.apptId}</td>
-                                                                                    <td class="p-3">
-                                                                                        <a href="#" class="text-dark">
+                                                                            <c:if test="${not empty apptList}">
+                                                                                <c:forEach items="${apptList}" var="appt">
+                                                                                    <c:set var="patient" value="${appt.patient}"></c:set>
+                                                                                        <tr>
+                                                                                            <td class="p-3">${appt.apptId}</td>
+                                                                                        <td class="p-3">
+                                                                                            <a href="#" class="text-dark">
+                                                                                                <div class="d-flex align-items-center">
+                                                                                                    <img src="data:image/jpg;base64,${appt.doctor.image}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                                                                                    <span class="ms-2">${appt.doctor.fullName}</span>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </td>
+                                                                                        <td class="p-3">${appt.apptDate}</td>
+                                                                                        <td class="p-3">${appt.apptTime}</td>   
+                                                                                        <td class="p-3">${appt.status}</td>
+                                                                                        <td class="p-3">
                                                                                             <div class="d-flex align-items-center">
-                                                                                                <c:if test="${patient.image != 'default'}"> 
-                                                                                                    <img src="data:image/jpg;base64,${patient.image}" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                                                                </c:if>
-                                                                                                <c:if test="${patient.image == 'default'}"> 
-                                                                                                    <img src="frontend/template/assets/images/patient.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                                                                </c:if>
-                                                                                                <span class="ms-2">${patient.fullName}</span>
+                                                                                                <a href="user-appointment?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
+                                                                                                    View details</a>
                                                                                             </div>
-                                                                                        </a>
-                                                                                    </td>
-                                                                                    <td class="p-3">${appt.apptDate}</td>
-                                                                                    <td class="p-3">${appt.apptTime}</td>
-                                                                                    <td class="p-3">
-                                                                                        <a href="#" class="text-dark">
-                                                                                            <div class="d-flex align-items-center">
-                                                                                                <img src="data:image/jpg;base64,${appt.doctor.image}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                                                                <span class="ms-2">${appt.doctor.fullName}</span>
-                                                                                            </div>
-                                                                                        </a>
-                                                                                    </td>
-                                                                                    <td class="p-3">${appt.status}</td>
-                                                                                    <td class="p-3">
-                                                                                        <div class="d-flex align-items-center">
-                                                                                            <a href="admin-appointmentdetail?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
-                                                                                                Details</a>
-                                                                                            <a href="#cancelappointment" class="btn btn-primary btn-sml btn-soft-danger" 
-                                                                                               data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
-                                                                                                DELETE</a>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </c:forEach>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </c:forEach>
+                                                                            </c:if>
+
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
                                                             </div>
-
+                                                            <c:if test="${empty apptList  }" >
+                                                                <div class=" text-center alert alert-primary h4" role="alert"> You haven't had any appointments yet. </div>
+                                                            </c:if>
                                                             <c:set var="page" value="${page}"/>
                                                             <div class="row text-center">
                                                                 <div class="col-12 mt-4">

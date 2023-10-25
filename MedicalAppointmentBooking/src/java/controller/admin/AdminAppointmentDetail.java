@@ -34,7 +34,6 @@ public class AdminAppointmentDetail extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String action = request.getParameter("action");
         AppointmentDAO apptDAO = new AppointmentDAO();
         DoctorDAO dDAO = new DoctorDAO();
@@ -69,7 +68,6 @@ public class AdminAppointmentDetail extends HttpServlet {
             EmailSending.sendReminderEmail(appointment);
             response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
             return;
-
         }
         if (action != null && action.equals("reject")) {
             int apptId = Integer.parseInt(request.getParameter("apptId"));

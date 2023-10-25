@@ -15,8 +15,6 @@ import java.util.List;
 import model.Appointment;
 import model.Doctor;
 import model.Patient;
-import model.UserAccount;
-import utils.TimeUtil;
 
 /**
  *
@@ -167,7 +165,6 @@ public class AppointmentDAO {
                 int patientId = rs.getInt("patient_id");
                 Patient patient = pDAO.getPatientById(patientId);
                 appt = new Appointment(id, note, date, time, diagnosis, status, doctor, patient);
-
             }
             return appt;
         } catch (SQLException ex) {
@@ -303,7 +300,6 @@ public class AppointmentDAO {
     }
 
     public List<Appointment> getAppointmentByDoctorId(int docId) {
-
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -393,6 +389,39 @@ public class AppointmentDAO {
                 }
             }
         }
+    }
 
+    public List<Appointment> getPatientAppointmentByUserId(int userId) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<Appointment> listAppoint = new ArrayList<>();
+        String sql = "select * from appointments appt\n"
+                + "inner join patients p on p.patient_id = appt.patient_id \n"
+                + "inner join user_account ua on ua.user_id = p.user_id\n"
+                + "where ua.user_id = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("appointment_id");
+                Appointment appt = getAppointmentById(id);
+                listAppoint.add(appt);
+            }
+            return listAppoint;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return null;
     }
 }
