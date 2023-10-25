@@ -62,7 +62,7 @@
                                     </div>
                                     <div>
                                         <ul class="list-unstyled sidebar-nav mb-0">
-                                            <li class="navbar-item"><a href="doctor-appointmentlist?id=${doctor.doctorId}" class="navbar-link"><i class="ri-calendar-check-line align-middle navbar-icon"></i> Appointment</a></li>
+                                            <li class="navbar-item"><a href="doctor-appointmentlist?action=view-all&id=${doctor.doctorId}" class="navbar-link"><i class="ri-calendar-check-line align-middle navbar-icon"></i> Appointment</a></li>
                                             <li class="navbar-item"><a href="doctor-schedule.html" class="navbar-link"><i class="ri-timer-line align-middle navbar-icon"></i> Schedule Timing</a></li>
                                             <li class="navbar-item"><a href="doctor-profile.html" class="navbar-link"><i class="ri-user-line align-middle navbar-icon"></i> Profile</a></li>
                                             <li class="navbar-item"><a href="doctor-profile-setting.html" class="navbar-link"><i class="ri-user-settings-line align-middle navbar-icon"></i> Profile Settings</a></li>
