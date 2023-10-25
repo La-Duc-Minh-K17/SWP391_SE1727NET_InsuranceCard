@@ -48,16 +48,18 @@ public class SettingDAO {
     }
 
     public ArrayList<Setting> getSetting(String type, String term) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         ArrayList<Setting> settings = new ArrayList<>();
         Connection connection = dbc.getConnection();
         try {
-            String sql = "select s.setting_id  , s.type , role_name as value , role_description as note , role_status \n"
-                    + "from setting  s,(select * from user_role union  select * from speciality  union select * from service_category union select * from blog_category) as temp \n"
-                    + "where temp.setting_id = s.setting_id and s.type like ?";
-            PreparedStatement stm = connection.prepareStatement(sql);
-
-            stm.setString(1, "%" + term + "%");
-            ResultSet rs = stm.executeQuery();
+            String sql = "select s.setting_id  , type , role_name as value , role_description as note , role_status \n"
+                    + "from setting  s,(select * from user_role union  select * from speciality  union select * from service_category) as temp \n"
+                    + "where temp.setting_id = s.setting_id \n"
+                    + "and " + type + " like ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + term + "%");
+            rs = ps.executeQuery();
 
             while (rs.next()) {
                 Setting s = new Setting();
@@ -75,6 +77,38 @@ public class SettingDAO {
 
         return settings;
     }
+
+    public ArrayList<Setting> getSettingbyStatus(int status) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        ArrayList<Setting> settings = new ArrayList<>();
+        Connection connection = dbc.getConnection();
+        try {
+            String sql = "select s.setting_id  , type , role_name as value , role_description as note , role_status \n"
+                    + "from setting  s,(select * from user_role union  select * from speciality  union select * from service_category) as temp \n"
+                    + "where temp.setting_id = s.setting_id \n"
+                    + "and role_status = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, status );
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Setting s = new Setting();
+                s.setSettingID(rs.getInt("s.setting_id"));
+                s.setType(rs.getString("s.type"));
+                s.setNote(rs.getString("value"));
+                s.setDescription(rs.getString("note"));
+                s.setStatus(rs.getBoolean("role_status"));
+
+                settings.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return settings;
+    }
+
     public ArrayList<Setting> getSettingAllType(String term) {
         ArrayList<Setting> settings = new ArrayList<>();
         Connection connection = dbc.getConnection();
@@ -105,6 +139,7 @@ public class SettingDAO {
 
         return settings;
     }
+
     public void insertSpeciality(Speciality speciality) {
         Connection connection = dbc.getConnection();
         try {
@@ -120,6 +155,7 @@ public class SettingDAO {
             Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public void insertRole(Role role) {
         Connection connection = dbc.getConnection();
         try {
@@ -134,13 +170,14 @@ public class SettingDAO {
             Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public void insertService(Service_Category service) {
         Connection connection = dbc.getConnection();
         try {
             String query = "INSERT INTO service_category (sc_name, sc_description, sc_status, setting_id)\n"
                     + "VALUES (?, ?, ?, 3);";
             PreparedStatement statement = connection.prepareStatement(query);
-            
+
             statement.setString(1, service.getName());
             statement.setString(2, service.getDescription());
             statement.setInt(3, service.getStatus());
@@ -149,19 +186,19 @@ public class SettingDAO {
             Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public void insertBlog(Blog_Category blog) {
         Connection connection = dbc.getConnection();
         try {
             String query = "INSERT INTO blog_category (name, description,status, setting_id)\n"
                     + "VALUES (?, ?, ?, 2);";
-             PreparedStatement statement = connection.prepareStatement(query);               
-                statement.setString(1, blog.getName());
-                statement.setString(2, blog.getDescription());
-                statement.setInt(3, blog.getStatus());
-                statement.executeUpdate();
-            } catch (SQLException ex) {
-                Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, blog.getName());
+            statement.setString(2, blog.getDescription());
+            statement.setInt(3, blog.getStatus());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+}

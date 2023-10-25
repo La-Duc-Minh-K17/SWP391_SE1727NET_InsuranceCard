@@ -41,6 +41,9 @@
                     <li class="sidebar-menu">
                         <a href="<c:url value='/service/review?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Service Review</a>
                     </li>
+                    <li class="sidebar-menu">
+                        <a href="<c:url value='/doctor/feedback?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Doctor Feedback</a>
+                    </li>
                 </ul>
                 <!-- sidebar-menu  -->
             </div>

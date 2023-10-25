@@ -70,7 +70,7 @@
     </servlet>
     <servlet>
         <servlet-name>ServiceReview</servlet-name>
-        <servlet-class>controller.manager.ServiceReview</servlet-class>
+        <servlet-class>controller.admin.ServiceReview</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManageServices</servlet-name>
@@ -113,6 +113,10 @@
         <servlet-class>controller.home.AppointmentListController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>DoctorFeedback</servlet-name>
+        <servlet-class>controller.admin.DoctorFeedback</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>UserProfileController</servlet-name>
         <servlet-class>controller.user.UserProfileController</servlet-class>
     </servlet>
@@ -139,6 +143,14 @@
     <servlet>
         <servlet-name>UserAppointment</servlet-name>
         <servlet-class>controller.user.UserAppointment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeAccountStatus</servlet-name>
+        <servlet-class>controller.admin.ChangeAccountStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageAccount</servlet-name>
+        <servlet-class>controller.admin.ManageAccount</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
@@ -245,6 +257,10 @@
         <url-pattern>/doctor-appointmentlist</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>DoctorFeedback</servlet-name>
+        <url-pattern>/doctor/feedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>UserProfileController</servlet-name>
         <url-pattern>/user-profile</url-pattern>
     </servlet-mapping>
@@ -267,6 +283,14 @@
     <servlet-mapping>
         <servlet-name>AdminScheduleCalendar</servlet-name>
         <url-pattern>/admin-calendar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeAccountStatus</servlet-name>
+        <url-pattern>/ChangeAccountStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageAccount</servlet-name>
+        <url-pattern>/ManageAccount</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserAppointment</servlet-name>

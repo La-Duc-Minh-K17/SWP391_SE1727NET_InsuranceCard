@@ -1,53 +1,56 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
+package controller.admin;
 
-package controller.home;
-
-import dal.AppointmentDAO;
-import dal.DoctorDAO;
-import dal.PatientDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Appointment;
-import model.Doctor;
-import model.Patient;
 
 /**
  *
- * @author nguye
+ * @author DUCHIEUPC.COM
  */
-public class PatientCalenderController extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+@WebServlet(name = "ChangeAccountStatus", urlPatterns = {"/ChangeAccountStatus"})
+public class ChangeAccountStatus extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-          AppointmentDAO apptDAO = new AppointmentDAO();
-            int apptId = Integer.parseInt(request.getParameter("pid"));
-            Appointment appt = apptDAO.getAppointmentById(apptId);
-            request.setAttribute("appt", appt);
-            request.getRequestDispatcher("frontend/view/admin/patientcalender.jsp").forward(request, response);
-
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ChangeAccountStatus</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ChangeAccountStatus at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -55,12 +58,17 @@ public class PatientCalenderController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
-    } 
+            throws ServletException, IOException {
+        String uid = request.getParameter("uid");
+        String ss = request.getParameter("ss");
+        UserDAO uDAO = new UserDAO();
+        uDAO.ChangeAccountStatus(uid, ss);
+        response.sendRedirect("ManageAccount");
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -68,12 +76,13 @@ public class PatientCalenderController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

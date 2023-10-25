@@ -55,11 +55,11 @@
 
                                     <div>
                                         <ul class="list-unstyled sidebar-nav mb-0">
-                                            <li class="navbar-item"><a href="doctor-appointmentlist" class="navbar-link"><i class="ri-calendar-check-line align-middle navbar-icon"></i> Appointment</a></li>
+                                            <li class="navbar-item"><a href="doctor-appointmentlist?id=" class="navbar-link"><i class="ri-calendar-check-line align-middle navbar-icon"></i> Appointment</a></li>
                                             <li class="navbar-item"><a href="doctor-schedule.html" class="navbar-link"><i class="ri-timer-line align-middle navbar-icon"></i> Schedule Timing</a></li>
                                             <li class="navbar-item"><a href="doctor-profile.html" class="navbar-link"><i class="ri-user-line align-middle navbar-icon"></i> Profile</a></li>
                                             <li class="navbar-item"><a href="doctor-profile-setting.html" class="navbar-link"><i class="ri-user-settings-line align-middle navbar-icon"></i> Profile Settings</a></li>
-                                            <li class="navbar-item active"><a href="doctor-patientlist?id=${doctor.doctorId}" class="navbar-link"><i class="ri-empathize-line align-middle navbar-icon"></i> Patients</a></li>
+                                            <li class="navbar-item active"><a href="doctor-patientlist?id=" class="navbar-link"><i class="ri-empathize-line align-middle navbar-icon"></i> Patients</a></li>
                                             <li class="navbar-item"><a href="patient-review.html" class="navbar-link"><i class="ri-chat-1-line align-middle navbar-icon"></i> Patients Review</a></li>
                                             <li class="navbar-item"><a href="forgot-password.html" class="navbar-link"><i class="ri-device-recover-line align-middle navbar-icon"></i> Forgot Password</a></li>
                                         </ul></div>
@@ -67,9 +67,8 @@
                             </div><!--end col-->
                         </div>
                         <div class="col-xl-9 col-lg-8 col-md-7 mt-4 pt-2 mt-sm-0 pt-sm-0">
-                            <h5 class="mb-0">Patients List</h5>
                             <div class="row">
-                                <div class="col-lg-6 col-md-6">
+                                <div class="col-lg-12 col-md-6">
                                     <div class="bg-white rounded shadow overflow-hidden">
                                         <div class="p-4 border-bottom">
                                             <h5 class="mb-0">Patient Information</h5>
@@ -120,63 +119,23 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 ">
-                                    <div class="bg-white rounded shadow overflow-hidden">
-                                        <div class="p-4 border-bottom">
-                                    <h5 class="mb-0">Appointment Details</h5>
-                                </div>
-                                <div class="tab-content p-4" id="pills-tabContent">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Appointment Date</label>
-                                                <p>${appt.apptDate}</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Appointment Time</label>
-                                                <p>${appt.apptTime}</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Status</label>
-                                                <p>${appt.status}</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Service Fee</label>
-                                                <p>${appt.doctor.serviceFee}</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Appointment Note</label>
-                                                <p>${appt.apptNote}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <a href="javascript:history.back();" class="me-3 btn btn-primary btn-sml btn-soft-success">
-                                        Turn Back
-                                    </a>
-                                </div>
-                            </div>
+                                        <div class="d-flex align-items-center">
+                                            <a href="javascript:history.back();" class="me-3 btn btn-primary btn-sml btn-soft-success">
+                                                Turn Back
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                           
+                        </div>
+                    </div>
 
-                                                
-                    </div><!--end col-->
-                </div><!--end row-->
-        </div><!--end container-->
-    </section>
+
+
+                </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+</section>
 </div>
 <jsp:include page="/frontend/common/footer.jsp" />
 <!-- End -->

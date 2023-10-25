@@ -35,7 +35,7 @@ public class PatientDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Patient> PatientList = new ArrayList<>();
-        String sql = "select * from patients p inner join user_account u where p.user_id=u.user_id;";
+        String sql = "select * from patients p inner join user_account u where p.user_id=u.user_id order by patient_id;";
         Connection connection = null;
         try {
             connection = dbc.getConnection();
@@ -226,13 +226,13 @@ public class PatientDAO {
         }
     }
 
-    public List<Patient> getPatientByDoctorId(int doctorId) {
+    public List<Patient> getPatientByDoctorId(int docId) {
 
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
         List<Patient> listPatient = new ArrayList<>();
-        String sql = "SELECT P.patient_id , UA.*\n"
+        String sql = "SELECT DISTINCT P.patient_id, UA.*\n"
                 + "FROM mabs.user_account UA\n"
                 + "JOIN mabs.patients P ON UA.user_id = P.user_id\n"
                 + "JOIN mabs.appointments A ON P.patient_id = A.patient_id\n"
@@ -240,7 +240,7 @@ public class PatientDAO {
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            ps.setInt(1, doctorId);
+            ps.setInt(1, docId);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int patientId = rs.getInt("patient_id");
@@ -257,7 +257,7 @@ public class PatientDAO {
                 Patient p = new Patient(patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
                 listPatient.add(p);
             }
-
+            return listPatient;
         } catch (SQLException ex) {
             System.out.println(ex);
 
