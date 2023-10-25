@@ -23,8 +23,7 @@
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
 
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-        <script type="text/javascript"
-        src="<c:url value='https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js'/>"></script>
 
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/jquery.min.js"></script>
     </head>
@@ -97,14 +96,14 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Title  </label>
+                                            <label class="form-label">Title</label>
                                             <input name="title" id="name" type="text" class="form-control" value="${blog.title}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Description</label>
-                                            <input name="description"  type="text" class="form-control" value="${blog.description}">
+                                            <input name="description" type="text" class="form-control" value="${blog.description}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">

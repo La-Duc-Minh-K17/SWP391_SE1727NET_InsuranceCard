@@ -22,6 +22,9 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <script type="text/javascript" src="<c:url value='https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js'/>"></script>
+        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/jquery.min.js"></script>
+
     </head>
     <body>
         <div class="page-wrapper doctris-theme toggled">
@@ -111,12 +114,7 @@
                                             <input name="service_description" type="text" class="form-control" value="${s.service_description}" required placeholder="Service Description" oninput="validateInput(this)" required placeholder="Enter the Service Description">
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3 custom-box">
-                                            <label class="form-label">Detail</label>
-                                            <input name="service_details" type="text" class="form-control" value="${s.service_details}" required placeholder="Service Details" oninput="validateInput(this)" required placeholder="Enter the Service Details">
-                                        </div>
-                                    </div>
+
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Category</label>
@@ -125,6 +123,12 @@
                                                     <option value="${c.sc_id}">${c.name}</option>
                                                 </c:forEach>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3 custom-box">
+                                            <label class="form-label">Detail</label>
+                                            <textarea id="detail" name="service_details" cols="50" rows="30"class="form-control"  required placeholder="Service Details">${s.service_details} </textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -164,6 +168,9 @@
             </main><!-- comment -->
         </div>
     </body>
+    <script type="text/javascript">
+        CKEDITOR.replace('detail');
+    </script>
     <script>
 
 
