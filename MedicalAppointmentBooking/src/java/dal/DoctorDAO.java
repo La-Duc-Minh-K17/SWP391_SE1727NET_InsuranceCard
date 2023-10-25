@@ -13,13 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Doctor;
 
 import model.DoctorFeedback;
-import model.Service;
-import model.ServiceReview;
 import model.UserAccount;
 import utils.ImageProcessing;
 
@@ -608,17 +604,18 @@ public class DoctorDAO {
          PreparedStatement ps = null;
         ResultSet rs = null;
         Doctor doctor = null;
-        String sql = "SELECT distinct *\n" +
-"                FROM mabs.doctors D\n" +
-"                JOIN mabs.speciality S on D.speciality_id = S.speciality_id\n" +
-"                JOIN mabs.blog_category BC on S.speName = BC.name\n" +
-"                JOIN mabs.blogs B on BC.blog_category_id = B.blog_category_id\n" +
-"                JOIN mabs.user_account UA on D.user_id = UA.user_id\n" +
-"                WHERE B.blog_id = ?\n" +
-"                ORDER BY RAND()\n" +
-"                LIMIT 1;";
+
         Connection connection = null;
-        try {
+        String sql = "SELECT distinct D.*, UA.*\n"
+                + "FROM mabs.doctors D\n"
+                + "JOIN mabs.speciality S on D.speciality_id = S.speciality_id\n"
+                + "JOIN mabs.blog_category BC on S.speName = BC.name\n"
+                + "JOIN mabs.blogs B on BC.blog_category_id = B.blog_category_id\n"
+                + "JOIN mabs.user_account UA on D.user_id = UA.user_id\n"
+                + "WHERE B.blog_id = ?\n"
+                + "ORDER BY RAND()\n"
+                + "LIMIT 1;";
+        try{
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setInt(1, Id);

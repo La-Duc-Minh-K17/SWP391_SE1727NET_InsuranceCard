@@ -21,12 +21,13 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
-
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <script type="text/javascript" src="<c:url value='https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js'/>"></script>
+        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/jquery.min.js"></script>
     </head>
     <body>
         <div class="page-wrapper doctris-theme toggled">
-               <jsp:include page="/frontend/common/manager_side_bar.jsp" />
+            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
             <main class="page-content">
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
@@ -131,7 +132,7 @@
                                                             <option value="${spe.id}" selected>${spe.speName}</option>
                                                         </c:when>
                                                         <c:otherwise>
-                                                               <option value="${spe.id}" >${spe.speName}</option>
+                                                            <option value="${spe.id}" >${spe.speName}</option>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </c:forEach>
@@ -148,7 +149,7 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Description</label>
-                                            <input name="description" type="text" class="form-control" value="${doctor.description}">
+                                            <textarea id="description" name="description" cols="50" rows=50" class="form-control">${doctor.description} </textarea>
                                         </div>
                                     </div>
 
@@ -179,9 +180,11 @@
             </main><!-- comment -->
         </div>
     </body>
+
+    <script type="text/javascript">
+        CKEDITOR.replace('description');
+    </script>
     <script>
-
-
         function displayThumbnail() {
             const input = document.getElementById("uploadfile");
             const thumbnail = document.getElementById("thumbImage");

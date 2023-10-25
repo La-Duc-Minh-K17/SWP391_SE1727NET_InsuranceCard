@@ -32,7 +32,7 @@ public class Appointment {
         this.doctor = doctor;
         this.patient = patient;
     }
-
+    
     public Appointment(int apptId, String apptNote, Date apptDate, String apptTime, String diagnosis, String status, Doctor doctor, Patient patient) {
         this.apptId = apptId;
         this.apptNote = apptNote;
