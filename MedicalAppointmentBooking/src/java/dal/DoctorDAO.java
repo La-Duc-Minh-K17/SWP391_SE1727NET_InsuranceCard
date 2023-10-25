@@ -601,9 +601,10 @@ public class DoctorDAO {
     }
   
     public Doctor getDoctorRelatedCategory(int Id) {
-        PreparedStatement ps = null;
+         PreparedStatement ps = null;
         ResultSet rs = null;
         Doctor doctor = null;
+
         Connection connection = null;
         String sql = "SELECT distinct D.*, UA.*\n"
                 + "FROM mabs.doctors D\n"
@@ -650,4 +651,5 @@ public class DoctorDAO {
         return doctor;
 
     }
+
 }
