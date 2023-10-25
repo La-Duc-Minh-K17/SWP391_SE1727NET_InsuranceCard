@@ -104,13 +104,13 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Description</label>
-                                            <input name="description"  type="text"  class="form-control" value="${blog.description}">
+                                            <input name="description"  type="text" class="form-control" value="${blog.description}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Content</label>
-                                            <textarea id="content" name="content" row="50" cols="50" style="min-height: 300px;" class="form-control">${blog.content} </textarea>
+                                            <textarea id="content" name="content"row="50" cols="50" style="min-height: 300px;" class="form-control">${blog.content} </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -122,7 +122,6 @@
                                         <a href="<c:url value='/manage-blog?action=view-all'/> " class="btn btn-primary btn-sm">TURN BACK</a>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>

@@ -136,6 +136,10 @@
         <servlet-name>AdminScheduleCalendar</servlet-name>
         <servlet-class>controller.admin.AdminScheduleCalendar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserAppointment</servlet-name>
+        <servlet-class>controller.user.UserAppointment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -263,6 +267,10 @@
     <servlet-mapping>
         <servlet-name>AdminScheduleCalendar</servlet-name>
         <url-pattern>/admin-calendar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserAppointment</servlet-name>
+        <url-pattern>/user-appointment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
