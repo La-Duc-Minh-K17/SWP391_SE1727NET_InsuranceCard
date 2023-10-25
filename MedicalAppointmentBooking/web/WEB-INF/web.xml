@@ -100,7 +100,7 @@
         <servlet-name>ManagePatient</servlet-name>
         <servlet-class>controller.manager.ManagePatient</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>PatientListController</servlet-name>
         <servlet-class>controller.home.PatientListController</servlet-class>
     </servlet>
