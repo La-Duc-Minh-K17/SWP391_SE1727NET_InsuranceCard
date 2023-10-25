@@ -227,7 +227,6 @@ public class PatientDAO {
     }
 
     public List<Patient> getPatientByDoctorId(int docId) {
-
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -306,4 +305,136 @@ public class PatientDAO {
         return resultList;
     }
 
-}
+    public List<Patient> getPatientByDoctorIdSortAZ(int docId) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<Patient> listPatient = new ArrayList<>();
+        String sql = "SELECT DISTINCT P.patient_id, UA.*\n"
+                + "FROM mabs.user_account UA\n"
+                + "JOIN mabs.patients P ON UA.user_id = P.user_id\n"
+                + "JOIN mabs.appointments A ON P.patient_id = A.patient_id\n"
+                + "WHERE A.doctor_id = ?"
+                + "ORDER BY UA.full_name;";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, docId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int patientId = rs.getInt("patient_id");
+                String username = rs.getString("username");
+                int userId = rs.getInt("user_id");
+                String email = rs.getString("email");
+                String fullName = rs.getString("full_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String phone = rs.getString("phone");
+                Date dob = rs.getDate("dob");
+                int status = rs.getInt("status");
+                String address = rs.getString("address");
+                Patient p = new Patient(patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
+                listPatient.add(p);
+            }
+            return listPatient;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+
+                    ex.printStackTrace();
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public List<Patient> getPatientByDoctorIdSortZA(int docId) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<Patient> listPatient = new ArrayList<>();
+        String sql = "SELECT DISTINCT P.patient_id, UA.*\n"
+                + "FROM mabs.user_account UA\n"
+                + "JOIN mabs.patients P ON UA.user_id = P.user_id\n"
+                + "JOIN mabs.appointments A ON P.patient_id = A.patient_id\n"
+                + "WHERE A.doctor_id = ?"
+                + "ORDER BY UA.full_name DESC;";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, docId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int patientId = rs.getInt("patient_id");
+                String username = rs.getString("username");
+                int userId = rs.getInt("user_id");
+                String email = rs.getString("email");
+                String fullName = rs.getString("full_name");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String phone = rs.getString("phone");
+                Date dob = rs.getDate("dob");
+                int status = rs.getInt("status");
+                String address = rs.getString("address");
+                Patient p = new Patient(patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
+                listPatient.add(p);
+            }
+            return listPatient;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+
+                    ex.printStackTrace();
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public List<Patient> getPatientByDoctorIdAndName(int docId, String namePatient) {
+        List<Patient> resultList = new ArrayList<>();
+        try ( Connection conn = dbc.getConnection()) {
+            String sql = "SELECT DISTINCT P.patient_id, UA.*\n"
+                    + "FROM mabs.user_account UA\n"
+                    + "JOIN mabs.patients P ON UA.user_id = P.user_id\n"
+                    + "JOIN mabs.appointments A ON P.patient_id = A.patient_id\n"
+                    + "WHERE A.doctor_id = ? and UA.full_name LIKE ?";
+            try ( PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setInt(1, docId);
+                ps.setString(2, "%" + namePatient + "%");
+                try ( ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        int patientId = rs.getInt("patient_id");
+                        int userId = rs.getInt("user_id");
+                        String username = rs.getString("username");
+                        String email = rs.getString("email");
+                        String fullName = rs.getString("full_name");
+                        String phone = rs.getString("phone");
+                        String image = ImageProcessing.imageString(rs.getBlob("image"));
+                        String address = rs.getString("address");
+                        Date dob = rs.getDate("dob");
+                        int gender = rs.getInt("gender");
+                        int status = rs.getInt("status");
+                        Patient patient = new Patient(patientId, userId, username, email, fullName, gender, phone, image, dob, address, status);
+                        resultList.add(patient);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultList;
+    }
+    }

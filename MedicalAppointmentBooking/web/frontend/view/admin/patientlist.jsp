@@ -78,7 +78,21 @@
                                 <div class="col-xl-3 ">
                                     <h5 class="mb-0">Patients List</h5>
                                 </div>
-                                
+                                <div class="col-xl-6">
+                                    <div class="search-bar d-lg-block" style="padding-top :0">
+                                        <div id="search" class="menu-search ">
+                                            <c:set var="doctor" value="${doctor}"></c:set>
+                                                <form action="<c:url value='/doctor-patientlist?action=search&id=${doctor.doctorId}'/>"role="search" method="post" id="searchform" class="searchform">
+                                                <div>
+                                                    <input type="text" class="form-control border rounded-pill" name="search"
+                                                           id="search" placeholder="Search patients by name">
+                                                    <input type="submit" id="searchsubmit" value="Search">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="row">
                                 <c:forEach var="pat" items="${requestScope.listPatient}">
@@ -86,7 +100,7 @@
                                         <div class="card border-0 shadow rounded p-4">
                                             <div class="d-flex justify-content-between">
                                                 <img src="data:image/jpg;base64,${pat.image}" class="avatar avatar-md-md rounded-pill shadow" alt="">
-                                               
+
                                             </div>
                                             <div class="card-body p-0 pt-3">
                                                 <a href="#" class="text-dark h6">${pat.fullName}</a>
@@ -115,7 +129,7 @@
                                                 </ul>
                                                 <div class="dropdown dropdown-primary">
                                                     <a href="doctor-patientcalender?pid=${pat.patientId}" class="me-3 btn btn-primary btn-sml ">
-                                                                                Details</a>
+                                                        Details</a>
                                                 </div>
                                             </div>
                                         </div>
