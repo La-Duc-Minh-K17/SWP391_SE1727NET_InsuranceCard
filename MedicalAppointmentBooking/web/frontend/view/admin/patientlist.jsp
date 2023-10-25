@@ -81,7 +81,8 @@
                                 <div class="col-xl-6">
                                     <div class="search-bar d-lg-block" style="padding-top :0">
                                         <div id="search" class="menu-search ">
-                                            <form action="<c:url value='/doctor-patientlist?action=search'/>"role="search" method="post" id="searchform" class="searchform">
+                                            <c:set var="doctor" value="${doctor}"></c:set>
+                                                <form action="<c:url value='/doctor-patientlist?action=search&id=${doctor.doctorId}'/>"role="search" method="post" id="searchform" class="searchform">
                                                 <div>
                                                     <input type="text" class="form-control border rounded-pill" name="search"
                                                            id="search" placeholder="Search patients by name">
@@ -91,7 +92,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="row">
                                 <c:forEach var="pat" items="${requestScope.listPatient}">
