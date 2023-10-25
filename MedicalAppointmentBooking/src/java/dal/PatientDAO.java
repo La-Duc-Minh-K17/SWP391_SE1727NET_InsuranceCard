@@ -272,7 +272,7 @@ public class PatientDAO {
             }
         }
 
-        return null;
+        return listPatient;
 
     }
 
