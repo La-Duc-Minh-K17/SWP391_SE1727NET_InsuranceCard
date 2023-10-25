@@ -83,15 +83,14 @@
                                 </div>
                                 <div class="col-xl-3">
                                     <div class="card component-wrapper border-0 rounded shadow">
-                                    <div>
-                                        <select class="form-select form-control" id="speFilter" onchange="filter()">
-                                            <option  value="0">Sorted By</option>
-                                            <c:forEach items="${cDAO}" var="o">
-                                                <option value="${o.blog_category_id}">${o.name}</option>  
-                                            </c:forEach>
-                                        </select>
+                                        <div>
+                                            <select class="form-select form-control" id="speFilter" onchange="filter()">
+                                                <option  value="0">Sorted</option>
+                                                <option  value="1">Sorted By Name(A-Z)</option>
+                                                <option  value="2">Sorted By Name(Z-A)</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                             </div>
                             <div class="row">

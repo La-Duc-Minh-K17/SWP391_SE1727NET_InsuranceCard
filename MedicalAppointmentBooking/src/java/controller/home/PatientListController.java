@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import dal.PatientDAO;
+import java.util.ArrayList;
 import java.util.List;
 import model.Doctor;
 import model.Patient;
@@ -35,13 +36,26 @@ public class PatientListController extends HttpServlet {
         int doctorId = Integer.parseInt(request.getParameter("id"));
         String action = request.getParameter("action");
         DoctorDAO dDao = new DoctorDAO();
+        Doctor doctor = dDao.getDoctorById(doctorId);
+        request.setAttribute("doctor", doctor);
         if (action != null && action.equals("view-all")) {
-            Doctor doctor = dDao.getDoctorById(doctorId);
             PatientDAO pdao = new PatientDAO();
             List<Patient> listP = pdao.getPatientByDoctorId(doctorId);
             request.setAttribute("listPatient", listP);
-            request.setAttribute("doctor", doctor);
             request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("filter")) {
+            int catId = Integer.parseInt(request.getParameter("sort_id"));
+            PatientDAO pdao = new PatientDAO();
+            List<Patient> listP = new ArrayList<>();
+            if (catId == 0) {
+                listP = pdao.getPatientByDoctorId(doctorId);
+            } else if (catId == 1) {
+                dbiList = dDAO.getBlogById(catId);
+            }
+            request.setAttribute("dList", dbiList);
+            request.getRequestDispatcher("frontend/view/admin/bloglist.jsp").forward(request, response);
             return;
         }
     }
