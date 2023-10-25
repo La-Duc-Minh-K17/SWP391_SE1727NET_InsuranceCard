@@ -272,12 +272,12 @@
                                 </div>
 
                             </div>
-                            <c:if test="${appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
+                            <c:if test="${(appt.status ==  'PENDING' && appt.doctor != null    )|| appt.status == 'RESCHEDULED'}">
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
                                     <form action="admin-appointmentdetail?action=reassign&apptId=${appt.apptId}" method="post">
                                         <div class="bg-white rounded shadow overflow-hidden">
                                             <div class="p-4 border-bottom">
-                                                <h5 class="mb-0">Update appointment information</h5>
+                                                <h5 class="mb-0">Assign new appointment  </h5>
                                             </div>
                                             <div class="col-md-6 p-3">
                                                 <div class="mb-3">
@@ -286,6 +286,54 @@
                                                         <c:forEach var="d" items="${doctorL}">
                                                             <option value="${d.doctorId }">${d.fullName}</option>
                                                         </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 p-3">
+                                                <div class="">
+                                                    <label class="form-label">Select Appointment Date: </label>
+                                                    <input required="" id="checkin-date" required="" name="appt-date" value="${appt.apptDate}" type="date"class="flatpickr flatpickr-input form-control"  >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 p-3">
+                                                <div class="">
+                                                    <label class="form-label">Select Appointment Time:</label>
+                                                    <select id ="time"required="" name="appt-time" class="form-control department-name select2input" required="">
+                                                        <option readonly>Select Time</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 p-3">
+                                                <div class="">
+                                                    <input type="submit" id="reassign" class="btn btn-primary" value="Re-assign"> </input>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </c:if>
+
+                            <c:if test="${appt.status ==  'PENDING' && appt.doctor == null   }">
+                                <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
+                                    <form action="admin-appointmentdetail?action=reassign&apptId=${appt.apptId}" method="post">
+                                        <div class="bg-white rounded shadow overflow-hidden">
+                                            <div class="p-4 border-bottom">
+                                                <h5 class="mb-0">Assign doctor to appointment</h5>
+                                            </div>
+                                            <div class="col-md-6 p-3">
+                                                 <div class="mb-3">
+                                                    <label class="form-label">Choose Apartment: </label>
+                                                    <select id="speciality" required="" class="form-select form-control" >
+                                                        <c:forEach items="${speList}" var="spe">
+                                                            <option value="${spe.id}">${spe.speName}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Choose doctor: </label>
+                                                    <select required="" class="form-select form-control" name="doctor" id="doctor">
+                                                        <option readonly>Select Doctor</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -323,7 +371,36 @@
                 maxDate: new Date().fp_incr(7)
             });
             $(document).ready(function () {
+                    $("#speciality").change(function () {
+                    $("#doctor").find("option").remove();
+                    $("#doctor").append("<option>Select Doctor</option>");
+                  
+                    let data = {
+                        type: "doctor",     
+                        speciality_id: $("#speciality").val()
+                    };
 
+                    $.ajax({
+                        url: "CheckAvailabilityServlet",
+                        method: "GET",
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            let obj = $.parseJSON(data);
+                            $.each(obj, function (key, value) {
+                                $("#doctor").append(
+                                        '<option value="' + value.doctorId + '">' + value.fullName + "</option>"
+                                        );
+                            });
+                            $("select").formSelect();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            $("#time").append("<option>No Time Slot Unavailable</option>");
+                        },
+                        cache: false
+                    });
+                });
+                
                 $("#checkin-date").change(function () {
                     $("#time").find("option").remove();
                     $("#time").append("<option>Select Time</option>");

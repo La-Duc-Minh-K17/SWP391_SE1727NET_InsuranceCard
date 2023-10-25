@@ -42,7 +42,7 @@
                                     <div class="row align-items-center justify-content-center">
                                         <div class="col-md-auto mt-4 mt-sm-0">
                                             <div class="d-grid d-md-block">
-                                                <a href="#" class="btn btn-primary">Book your appointment</a>
+                                                <a href="frontend/view/bookingnodoctor.jsp" class="btn btn-primary">Book your appointment</a>
                                             </div>
                                         </div><!--end col-->
                                     </div><!--end row-->

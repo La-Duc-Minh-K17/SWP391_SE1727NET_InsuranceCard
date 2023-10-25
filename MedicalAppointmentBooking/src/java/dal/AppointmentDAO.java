@@ -121,10 +121,22 @@ public class AppointmentDAO {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setString(1, appt.getApptNote());
-            ps.setDate(2, appt.getApptDate());
-            ps.setString(3, appt.getApptTime());
+            if (appt.getApptDate() == null) {
+                ps.setNull(2, java.sql.Types.NULL);
+            } else {
+                ps.setDate(2, appt.getApptDate());
+            }
+            if (appt.getApptTime() == null || appt.getApptTime().isEmpty()) {
+                ps.setNull(3, java.sql.Types.NULL);
+            } else {
+                ps.setString(3, appt.getApptTime());
+            }
             ps.setString(4, appt.getStatus());
-            ps.setInt(5, appt.getDoctor().getDoctorId());
+            if (appt.getDoctor() == null) {
+                ps.setNull(5, java.sql.Types.NULL);
+            } else {
+                ps.setInt(5, appt.getDoctor().getDoctorId());
+            }
             ps.setInt(6, appt.getPatient().getPatientId());
             ps.executeUpdate();
 

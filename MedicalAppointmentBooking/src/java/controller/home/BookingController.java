@@ -44,7 +44,7 @@ public class BookingController extends HttpServlet {
         String action = request.getParameter("action");
         Doctor chosenDoctor = (Doctor) SessionUtils.getInstance().getValue(request, "chosen_doctor");
         Service chosenService = (Service) SessionUtils.getInstance().getValue(request, "chosen_service");
-        UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");  
+        UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
         if (action != null && action.equals("yourself-booking")) {
             String apptTime = request.getParameter("appt-time");
             String apptDate = request.getParameter("appt-date");
@@ -89,16 +89,42 @@ public class BookingController extends HttpServlet {
                 }
                 patient.setPatientId(patientId);
                 Reservation resv = new Reservation(apptNote, TimeUtil.dateConverter1(apptDate), apptTime, "PENDING", chosenService, patient);
-                System.out.println(resv);
                 rDAO.insertNewReservation(resv);
                 response.sendRedirect("frontend/view/booking_success.jsp");
                 return;
             }
         }
+        if (action != null && action.equals("booking-nodoctor")) {
+            String apptNote = request.getParameter("appt-reason");
+            Patient patient = new Patient(
+                    user.getUserId(),
+                    user.getUserName(),
+                    user.getEmail(),
+                    user.getFullName(),
+                    user.getGender(),
+                    user.getPhone(),
+                    user.getImage(),
+                    user.getDob(),
+                    user.getAddress(),
+                    user.getStatus());
+            int patientId = pDAO.getPatientId(patient);
+            if (patientId == -1) {
+                patientId = pDAO.insertPatient(patient);
+            }
+            patient.setPatientId(patientId);
+            Appointment appt = new Appointment();
+            appt.setApptNote(apptNote);
+            appt.setPatient(patient);
+            appt.setStatus("PENDING");
+            aDAO.insertNewAppointment(appt);
+            response.sendRedirect("frontend/view/booking_success.jsp");
+        }
         if (action != null && action.equals("form-filling")) {
             request.getRequestDispatcher("frontend/view/booking.jsp").forward(request, response);
             return;
+
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
