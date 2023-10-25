@@ -48,17 +48,24 @@ public class PatientListController extends HttpServlet {
         if (action != null && action.equals("filter")) {
             int catId = Integer.parseInt(request.getParameter("speFilter"));
             PatientDAO pdao = new PatientDAO();
-            List<Patient> listP = new ArrayList<>();
+            List<Patient> listPi = new ArrayList<>();
             if (catId == 0) {
-                listP = pdao.getPatientByDoctorId(docId);
-            } else if (catId == 1) {
-                listP = pdao.getPatientByDoctorIdSortAZ(docId);
-            } else if (catId == 2) {
-                listP = pdao.getPatientByDoctorIdSortZA(docId);
-            }
-            request.setAttribute("listPatient", listP);
+                listPi = pdao.getPatientByDoctorId(docId);
+                 request.setAttribute("listPatient", listPi);
             request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
-        }
+        
+            } else if (catId == 1) {
+                listPi = pdao.getPatientByDoctorIdSortAZ(docId);
+                 request.setAttribute("listPatient", listPi);
+            request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
+        
+            } else if (catId == 2) {
+                listPi = pdao.getPatientByDoctorIdSortZA(docId);
+                 request.setAttribute("listPatient", listPi);
+            request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
+        
+            }
+           }
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

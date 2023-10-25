@@ -79,19 +79,19 @@
                                     <h5 class="mb-0">Patients List</h5>
                                 </div>
                                 <div class="col-xl-6">
-
-                                </div>
-                                <div class="col-xl-3">
-                                    <div class="card component-wrapper border-0 rounded shadow">
-                                        <div>
-                                            <select class="form-select form-control" id="speFilter" onchange="filter()">
-                                                <option  value="0">Sorted</option>
-                                                <option  value="1">Sorted By Name(A-Z)</option>
-                                                <option  value="2">Sorted By Name(Z-A)</option>
-                                            </select>
+                                    <div class="search-bar d-lg-block" style="padding-top :0">
+                                        <div id="search" class="menu-search ">
+                                            <form action="<c:url value='/manage-blog?action=search'/>"role="search" method="post" id="searchform" class="searchform">
+                                                <div>
+                                                    <input type="text" class="form-control border rounded-pill" name="search"
+                                                           id="search" placeholder="Search patients by name">
+                                                    <input type="submit" id="searchsubmit" value="Search">
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
+                                
                             </div>
                             <div class="row">
                                 <c:forEach var="pat" items="${requestScope.listPatient}">
