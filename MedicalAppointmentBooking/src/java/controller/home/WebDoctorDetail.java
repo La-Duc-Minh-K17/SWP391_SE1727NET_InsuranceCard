@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.manager;
+package controller.home;
 
 import dal.DoctorDAO;
 import dal.SpecialityDAO;
@@ -13,15 +13,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import model.Doctor;
 
 /**
  *
  * @author DELL
  */
-public class WebDoctorList extends HttpServlet {
+public class WebDoctorDetail extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +35,10 @@ public class WebDoctorList extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet WebDoctorList</title>");  
+            out.println("<title>Servlet WebDoctorDetail</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet WebDoctorList at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet WebDoctorDetail at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,11 +57,11 @@ public class WebDoctorList extends HttpServlet {
     throws ServletException, IOException {
         SpecialityDAO spe = new SpecialityDAO();
         request.setAttribute("speList", spe.getAllSpeciality());
-        
+        int id = Integer.parseInt(request.getParameter("doctorId"));
         DoctorDAO doctor = new DoctorDAO();
-        request.setAttribute("doctor", doctor.getAllDoctor());
-        
-        request.getRequestDispatcher("frontend/view/webdoctorlist.jsp").forward(request, response);
+        request.setAttribute("doctor", doctor.getDoctorById(id));
+        request.setAttribute("feedback", doctor.getFeedBackByDoctorID(id));
+        request.getRequestDispatcher("frontend/view/webdoctordetail.jsp").forward(request, response);
     } 
 
     /** 
@@ -77,14 +74,7 @@ public class WebDoctorList extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       String name = request.getParameter("search");
-       DoctorDAO doctor = new DoctorDAO();
-//       PrintWriter out = response.getWriter();
-//       out.println(name);
-       SpecialityDAO spe = new SpecialityDAO();
-       request.setAttribute("speList", spe.getAllSpeciality());
-       request.setAttribute("doctor", doctor.getDoctorByName(name));
-       request.getRequestDispatcher("frontend/view/webdoctorlist.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 

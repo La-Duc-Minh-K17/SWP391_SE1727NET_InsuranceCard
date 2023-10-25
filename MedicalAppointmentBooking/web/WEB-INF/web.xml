@@ -58,11 +58,11 @@
     </servlet>
     <servlet>
         <servlet-name>WebDoctorList</servlet-name>
-        <servlet-class>controller.manager.WebDoctorList</servlet-class>
+        <servlet-class>controller.home.WebDoctorList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>WebDoctorDetail</servlet-name>
-        <servlet-class>controller.manager.WebDoctorDetail</servlet-class>
+        <servlet-class>controller.home.WebDoctorDetail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FilterCategory</servlet-name>
