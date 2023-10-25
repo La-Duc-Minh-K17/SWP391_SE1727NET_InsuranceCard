@@ -121,7 +121,7 @@
 
                                     <div class="">
                                         <select class="form-select form-control" class="name" name="category" id="category">
-                                            <option value="0" ${requestScope.selectedCategory == 0 ? 'selected' : ''}>All</option>
+                                            <option value="0" ${requestScope.selectedCategory == 0 ? 'selected' : ''}>All Category</option>
                                             <c:forEach var="o" items="${requestScope.listC}">
                                                 <option value="${o.blog_category_id}" ${o.blog_category_id == requestScope.selectedCategory ? 'selected' : ''}>${o.name}</option>
                                             </c:forEach>
