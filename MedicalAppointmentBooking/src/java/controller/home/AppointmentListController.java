@@ -38,16 +38,18 @@ public class AppointmentListController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             int docId = Integer.parseInt(request.getParameter("id"));
+            String action = request.getParameter("action");
             DoctorDAO dDao = new DoctorDAO();
             Doctor doctor = dDao.getDoctorById(docId);
             request.setAttribute("doctor", doctor);
-
-            PatientDAO pdao = new PatientDAO();
-            AppointmentDAO adao = new AppointmentDAO();
-            List<Appointment> apptList = adao.getAppointmentByDoctorId(docId);
-            request.setAttribute("apptList", apptList);
-            request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
-
+            if (action != null && action.equals("view-all")) {
+                PatientDAO pdao = new PatientDAO();
+                AppointmentDAO adao = new AppointmentDAO();
+                List<Appointment> apptList = adao.getAppointmentByDoctorId(docId);
+                request.setAttribute("apptList", apptList);
+                request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
+                return;
+            }
         }
     }
 
