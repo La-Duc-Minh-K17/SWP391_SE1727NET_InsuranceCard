@@ -61,7 +61,7 @@ public class SettingList extends HttpServlet {
         SettingDAO st = new SettingDAO();
         ArrayList<Setting> settings = st.list();
 
-        request.setAttribute("settings",settings);
+        request.setAttribute("settings", settings);
 
         request.getRequestDispatcher("frontend/view/admin/settingList.jsp").forward(request, response);
     }
@@ -81,21 +81,23 @@ public class SettingList extends HttpServlet {
         String term = request.getParameter("search");
         String type = request.getParameter("searchType");
 
-        
-         SettingDAO st = new SettingDAO();
-        ArrayList<Setting> settings = new ArrayList<>(); 
-        if(type.equalsIgnoreCase("value"))type="role_name";
-        if(type.equalsIgnoreCase("description"))type="role_description";
-        if(!type.isEmpty() && type.equalsIgnoreCase("status")){
-            settings=st.getSettingbyStatus(Integer.parseInt(term));
-        }else if(!type.isEmpty())
-        {
-            settings=st.getSetting(type,term);
-        }else{
-            settings=st.getSettingAllType( term);
+        SettingDAO st = new SettingDAO();
+        ArrayList<Setting> settings = new ArrayList<>();
+        if (type.equalsIgnoreCase("value")) {
+            type = "role_name";
         }
-                request.setAttribute("settings",settings);
-
+        if (type.equalsIgnoreCase("description")) {
+            type = "role_description";
+        }
+        if (!type.isEmpty() && type.equalsIgnoreCase("status")) {
+            settings = st.getSettingbyStatus(Integer.parseInt(term));
+        } else if (!type.isEmpty()) {
+            settings = st.getSetting(type, term);
+        } else {
+            settings = st.getSettingAllType(term);
+        }
+        request.setAttribute("settings", settings);
+        request.getRequestDispatcher("frontend/view/admin/settingList.jsp").forward(request, response);
     }
 
     /**

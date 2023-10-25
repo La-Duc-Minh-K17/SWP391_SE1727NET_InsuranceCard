@@ -99,8 +99,7 @@
                                     <div class="row"> <!-- Added a new row container -->
                                         <div class="col-md-6">
                                             <select class="form-select form-control" id="searchType" name="searchType">
-                                                <option value="">All Types</option>
-                                                <option value="setting_id">Setting ID</option>
+                                                <option value="">All Types</option>                           
                                                 <option value="type">Type</option>
                                                 <option value="value">Value</option>
                                                 <option value="description">Description</option>
@@ -154,10 +153,9 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <c:forEach var="s" items="${settings}">
-
+                                                            <c:forEach var="s" items="${settings}" varStatus="loop">
                                                                 <tr>
-                                                                    <th class="p-3">${s.settingID}</th>
+                                                                    <th class="p-3">${loop.index + 1}</th>
                                                                     <td class="p-3">${s.type}</td>
                                                                     <td class="p-3">${s.note}</td>
                                                                     <td class="p-3">${s.description}</td>
