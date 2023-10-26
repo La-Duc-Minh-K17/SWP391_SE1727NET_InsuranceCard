@@ -86,6 +86,17 @@ public class WebDoctorDetail extends HttpServlet {
         df.setContent(comments);
         df.setRate(rate);
         df.setCreate_time(createTime);
+        
+        DoctorDAO doc = new DoctorDAO();
+        doc.insertFeedback(df);
+        
+        SpecialityDAO spe = new SpecialityDAO();
+        request.setAttribute("speList", spe.getAllSpeciality());
+       
+        DoctorDAO doctor = new DoctorDAO();
+        request.setAttribute("doctor", doctor.getDoctorById(doctorId));
+        request.setAttribute("feedback", doctor.getFeedBackByDoctorID(doctorId));
+        request.getRequestDispatcher("frontend/view/webdoctordetail.jsp").forward(request, response);
     }
 
     /**

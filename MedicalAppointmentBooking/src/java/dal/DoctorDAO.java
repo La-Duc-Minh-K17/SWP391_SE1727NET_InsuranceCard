@@ -587,7 +587,7 @@ public class DoctorDAO {
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setInt(1, feedback.getUser().getUserId());
-//            statement.setInt(2, feedback.getDoctor().getDoctorId());
+            statement.setInt(2, feedback.getDoctor_id());
             statement.setTimestamp(3, feedback.getCreate_time());
             statement.setString(4, feedback.getContent());
             statement.setFloat(5, feedback.getRate());
