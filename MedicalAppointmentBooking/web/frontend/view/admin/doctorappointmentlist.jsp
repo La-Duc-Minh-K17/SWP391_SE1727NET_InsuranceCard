@@ -82,10 +82,10 @@
                                     <div class="search-bar d-lg-block" style="padding-top :0">
                                         <div id="search" class="menu-search ">
                                             <c:set var="doctor" value="${doctor}"></c:set>
-                                                <form action="<c:url value='/doctor-appointment?action=search&id=${doctor.doctorId}'/>"role="search" method="post" id="searchform" class="searchform">
+                                                <form action="<c:url value='/doctor-appointmentlist?action=search&id=${doctor.doctorId}'/>"role="search" method="post" id="searchform" class="searchform">
                                                 <div>
                                                     <input type="text" class="form-control border rounded-pill" name="search"
-                                                           id="search" placeholder="Search appointment by patient name">
+                                                           id="search" placeholder="Search patients by name">
                                                     <input type="submit" id="searchsubmit" value="Search">
                                                 </div>
                                             </form>

@@ -396,7 +396,7 @@ public class AppointmentDAO {
 
     }
 
-    public List<Appointment> searchAppointmentByPatientNameAndIdDoc(int docId, String search) {
+    public List<Appointment> searchAppointmentByPatientNameAndIdDoc(int docId, String namePatient) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -407,8 +407,9 @@ public class AppointmentDAO {
                 + "                where u.full_name like ? and appt.doctor_id = ?;";
         try {
             connection = dbc.getConnection();
-            ps = connection.prepareStatement(sql);
-            ps.setString(1, "%" + search + "%");
+            ps = connection.prepareStatement(sql);       
+            ps.setString(1, "%" + namePatient + "%");
+            ps.setInt(2, docId);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("appointment_id");
