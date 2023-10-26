@@ -97,10 +97,7 @@
                                 </div>
                                 <form style="padding: 20px;" action="AccountAdd" method="post" id="searchform" class="searchform">
                                     <div class="row align-content-center justify-content-center">
-                                        <div class="col-xl-6 col-md-6 p-1">
-                                            <label>Id:</label>
-                                            <input class="form-control" type="text" readonly="" name="id" value="${acc.a}" id="id" >
-                                        </div>
+                                        
                                         <div class="col-xl-6 col-md-6 p-1">
                                             <label>Email:</label>
                                             <input class="form-control" type="email" name="email" value="${acc.a}" id="email" >
