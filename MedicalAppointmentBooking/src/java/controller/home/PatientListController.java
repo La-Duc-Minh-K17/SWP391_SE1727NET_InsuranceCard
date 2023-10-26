@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import dal.PatientDAO;
+import java.util.ArrayList;
 import java.util.List;
 import model.Doctor;
 import model.Patient;
@@ -32,31 +33,39 @@ public class PatientListController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        int doctorId = Integer.parseInt(request.getParameter("id"));
+        int docId = Integer.parseInt(request.getParameter("id"));
+        String action = request.getParameter("action");
         DoctorDAO dDao = new DoctorDAO();
-        Doctor doctor = dDao.getDoctorById(doctorId);
-        PatientDAO pdao = new PatientDAO();
-        List<Patient> listP = pdao.getPatientByDoctorId(doctorId);
-        System.out.println(listP);
+        Doctor doctor = dDao.getDoctorById(docId);
         request.setAttribute("doctor", doctor);
-        request.setAttribute("listPatient", listP);
-        request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
-
+        if (action != null && action.equals("view-all")) {
+            PatientDAO pdao = new PatientDAO();
+            List<Patient> listP = pdao.getPatientByDoctorId(docId);
+            request.setAttribute("listPatient", listP);
+            request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("search")) {
+            String search = request.getParameter("search").trim();
+            PatientDAO pdao = new PatientDAO();
+            List<Patient> listP = pdao.getPatientByDoctorIdAndName(docId, search);
+            request.setAttribute("listPatient", listP);
+            request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
+            return;
+        }
     }
 
-
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-/**
- * Handles the HTTP <code>GET</code> method.
- *
- * @param request servlet request
- * @param response servlet response
- * @throws ServletException if a servlet-specific error occurs
- * @throws IOException if an I/O error occurs
- */
-@Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -70,7 +79,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
      * @throws IOException if an I/O error occurs
      */
     @Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -81,7 +90,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
      * @return a String containing servlet description
      */
     @Override
-public String getServletInfo() {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

@@ -38,6 +38,7 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+
         CategoryDAO cdao = new CategoryDAO();
         BlogDAO blogDAO = new BlogDAO();
         DoctorDAO doctorDao = new DoctorDAO();
@@ -46,6 +47,7 @@ public class HomeController extends HttpServlet {
         List<Service> serviceList = serviceDao.getRandomTop3Service();
         List<Blog> blogsList = blogDAO.getAllNews();
         List<Blog> blogsList3 = blogDAO.getTop3News();
+
         List<Blog_Category> blogCategory = cdao.getAllCategorys();
         request.setAttribute("doctors", doctorList);
         request.setAttribute("service", serviceList);

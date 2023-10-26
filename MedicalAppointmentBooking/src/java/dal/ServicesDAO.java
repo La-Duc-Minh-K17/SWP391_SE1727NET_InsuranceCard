@@ -714,8 +714,7 @@ public class ServicesDAO {
         return null;
     }
 
-    public List<Service> getListByPage(List<Service> list,
-            int start, int end) {
+    public List<Service> getListByPage(List<Service> list, int start, int end) {
         ArrayList<Service> arr = new ArrayList<>();
         for (int i = start; i < end; i++) {
             arr.add(list.get(i));
@@ -723,14 +722,6 @@ public class ServicesDAO {
         return arr;
     }
 
-    public ArrayList<Service> getListByPage(ArrayList<Service> list,
-            int start, int end) {
-        ArrayList<Service> arr = new ArrayList<>();
-        for (int i = start; i < end; i++) {
-            arr.add(list.get(i));
-        }
-        return arr;
-    }
 
     public ArrayList<Service> paging(int page, int page_size) {
         ArrayList<Service> services = new ArrayList<>();
