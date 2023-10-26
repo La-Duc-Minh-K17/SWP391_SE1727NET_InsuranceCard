@@ -50,6 +50,10 @@ public class AppointmentListController extends HttpServlet {
                 request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
                 return;
             }
+            if (action != null && action.equals("search")) {
+                PatientDAO pdao = new PatientDAO();
+                AppointmentDAO adao = new AppointmentDAO();
+            }
         }
     }
 
