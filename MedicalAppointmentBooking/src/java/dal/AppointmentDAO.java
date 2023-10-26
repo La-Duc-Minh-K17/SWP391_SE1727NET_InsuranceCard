@@ -396,20 +396,19 @@ public class AppointmentDAO {
 
     }
 
-    public List<Appointment> searchAppointmentByPatientNameAndIdDoc(String search, int docId) {
+    public List<Appointment> searchAppointmentByPatientNameAndIdDoc(int docId, String search) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
         List<Appointment> listAppt = new ArrayList<>();
-        String sql = "select appt.* from appointments appt \n"
-                + "INNER JOIN patients p on p.patient_id = appt.patient_id\n"
-                + "INNER JOIN user_account u on u.user_id = p.user_id\n"
-                + "where appt.appointment_status = ? and ";
+        String sql = "select appt.* from mabs.appointments appt \n"
+                + "                INNER JOIN mabs.patients p on p.patient_id = appt.patient_id\n"
+                + "                INNER JOIN mabs.user_account u on u.user_id = p.user_id\n"
+                + "                where u.full_name like ? and appt.doctor_id = ?;";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            ps.setString(1, search);
-            ps.setInt(2,docId);
+            ps.setString(1, "%" + search + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("appointment_id");
@@ -437,5 +436,5 @@ public class AppointmentDAO {
             }
         }
         return listAppt;
-    }
+}
 }

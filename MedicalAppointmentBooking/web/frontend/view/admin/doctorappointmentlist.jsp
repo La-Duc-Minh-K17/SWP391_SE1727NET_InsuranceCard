@@ -85,7 +85,7 @@
                                                 <form action="<c:url value='/doctor-appointment?action=search&id=${doctor.doctorId}'/>"role="search" method="post" id="searchform" class="searchform">
                                                 <div>
                                                     <input type="text" class="form-control border rounded-pill" name="search"
-                                                           id="search" placeholder="Search appointment by name">
+                                                           id="search" placeholder="Search appointment by patient name">
                                                     <input type="submit" id="searchsubmit" value="Search">
                                                 </div>
                                             </form>

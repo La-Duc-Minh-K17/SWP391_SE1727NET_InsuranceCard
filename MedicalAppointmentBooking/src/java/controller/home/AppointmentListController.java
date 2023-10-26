@@ -54,7 +54,7 @@ public class AppointmentListController extends HttpServlet {
                 String search = request.getParameter("search").trim();
                 PatientDAO pdao = new PatientDAO();
                 AppointmentDAO adao = new AppointmentDAO();
-                List<Appointment> apptList = adao.searchAppointmentByPatientNameAndIdDoc(search, docId);
+                List<Appointment> apptList = adao.searchAppointmentByPatientNameAndIdDoc(docId, search);
                 request.setAttribute("apptList", apptList);
                 request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
                 return;
