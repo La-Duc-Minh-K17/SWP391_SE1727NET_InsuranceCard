@@ -78,7 +78,20 @@
                                 <div class="col-xl-3 ">
                                     <h5 class="mb-0">Appointment List</h5>  
                                 </div>
-                                
+                                <div class="col-xl-6">
+                                    <div class="search-bar d-lg-block" style="padding-top :0">
+                                        <div id="search" class="menu-search ">
+                                            <c:set var="doctor" value="${doctor}"></c:set>
+                                                <form action="<c:url value='/doctor-appointment?action=search&id=${doctor.doctorId}'/>"role="search" method="post" id="searchform" class="searchform">
+                                                <div>
+                                                    <input type="text" class="form-control border rounded-pill" name="search"
+                                                           id="search" placeholder="Search appointment by name">
+                                                    <input type="submit" id="searchsubmit" value="Search">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                                 <div class="row">
                                     <div class="col-12 mt-4">
