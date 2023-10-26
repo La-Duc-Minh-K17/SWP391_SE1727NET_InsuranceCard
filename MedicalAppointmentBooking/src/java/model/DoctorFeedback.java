@@ -4,17 +4,28 @@
  */
 package model;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author DELL
  */
 public class DoctorFeedback {
     private int feedback_id;
+    private int doctor_id;
     private UserAccount user;
     private String doctorName;
-    private String create_time;
+    private Timestamp create_time;
     private String content;
     private float rate;
+
+    public int getDoctor_id() {
+        return doctor_id;
+    }
+
+    public void setDoctor_id(int doctor_id) {
+        this.doctor_id = doctor_id;
+    }
 
     public int getFeedback_id() {
         return feedback_id;
@@ -40,13 +51,15 @@ public class DoctorFeedback {
         this.doctorName = doctorName;
     }
 
-    public String getCreate_time() {
+    public Timestamp getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(String create_time) {
+    public void setCreate_time(Timestamp create_time) {
         this.create_time = create_time;
     }
+
+    
 
     public String getContent() {
         return content;
