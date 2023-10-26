@@ -74,7 +74,8 @@ public class WebDoctorDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String comments = request.getParameter("comments");
+        float rate = Float.parseFloat(request.getParameter("rating"));
     }
 
     /** 
