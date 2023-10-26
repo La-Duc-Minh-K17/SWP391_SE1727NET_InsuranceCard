@@ -215,7 +215,9 @@
                 </div>
             </div>
             <div >
+
                 <a href="/MedicalAppointmentBooking/new" class="btn btn-soft-primary"> View More Blogs </a>
+
             </div>
 
         </div><!--end row-->

@@ -206,7 +206,7 @@
         <!-- page-wrapper -->
         <!-- javascript -->
         <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog ">
                 <form action="<c:url value='/admin-reservation?action=cancel'></c:url>" method="post">
                         <div class="modal-content">
                             <div class="modal-body py-5">
