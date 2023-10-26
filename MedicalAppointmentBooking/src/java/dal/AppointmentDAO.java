@@ -395,4 +395,47 @@ public class AppointmentDAO {
         }
 
     }
+
+    public List<Appointment> searchAppointmentByPatientNameAndIdDoc(String search, int docId) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<Appointment> listAppt = new ArrayList<>();
+        String sql = "select appt.* from appointments appt \n"
+                + "INNER JOIN patients p on p.patient_id = appt.patient_id\n"
+                + "INNER JOIN user_account u on u.user_id = p.user_id\n"
+                + "where appt.appointment_status = ? and ";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, search);
+            ps.setInt(2,docId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("appointment_id");
+                String note = rs.getString("appointment_note");
+                Date date = rs.getDate("appointment_date");
+                String time = rs.getString("appointment_time");
+                String diagnosis = rs.getString("diagnosis");
+                String status = rs.getString("appointment_status");
+                int doctorId = rs.getInt("doctor_id");
+                Doctor doctor = dDAO.getDoctorById(doctorId);
+                int patientId = rs.getInt("patient_id");
+                Patient patient = pDAO.getPatientById(patientId);
+                Appointment appt = new Appointment(id, note, date, time, diagnosis, status, doctor, patient);
+                listAppt.add(appt);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return listAppt;
+    }
 }
