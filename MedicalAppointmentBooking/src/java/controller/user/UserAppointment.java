@@ -12,8 +12,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Appointment;
+import model.Doctor;
 import model.UserAccount;
 import utils.SessionUtils;
+import utils.TimeUtil;
 
 /**
  *
@@ -41,11 +43,35 @@ public class UserAppointment extends HttpServlet {
             request.getRequestDispatcher("frontend/view/user_appointment.jsp").forward(request, response);
             return;
         }
-        if(action != null && action.equals("view-detail")) {
+        if (action != null && action.equals("view-detail")) {
             int apptId = Integer.parseInt(request.getParameter("apptId"));
             Appointment appt = apptDAO.getAppointmentById(apptId);
             request.setAttribute("appt", appt);
-            request.getRequestDispatcher("frontend/view/user_appointment.jsp").forward(request, response);
+            request.getRequestDispatcher("frontend/view/user_appointmentdetail.jsp").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("reschedule")) {
+            String date = request.getParameter("appt-date");
+            String time = request.getParameter("appt-time");
+            String reason = request.getParameter("reschedule_reason");
+            int apptId = Integer.parseInt(request.getParameter("reschedule_appointment"));
+            Appointment appointment = apptDAO.getAppointmentById(apptId);
+            appointment.setRescheduleReason(reason);
+            appointment.setApptDate(TimeUtil.dateConverter1(date));
+            appointment.setApptTime(time);
+            appointment.setStatus("RESCHEDULED");
+            apptDAO.rescheduleAppointmentForPatient(appointment);
+            response.sendRedirect("user-appointment?action=view-detail&apptId=" + appointment.getApptId());
+            return;
+        }
+        if (action != null && action.equals("cancel")) {
+            int apptId = Integer.parseInt(request.getParameter("cancel_appointment"));
+            Appointment appointment = apptDAO.getAppointmentById(apptId);
+            String reason = request.getParameter("cancel_reason");
+            appointment.setRejectReason(reason);
+            appointment.setStatus("CANCELED");
+            apptDAO.updateStatus(appointment);
+            response.sendRedirect("user-appointment?action=view-detail&apptId=" + appointment.getApptId());
             return;
         }
     }

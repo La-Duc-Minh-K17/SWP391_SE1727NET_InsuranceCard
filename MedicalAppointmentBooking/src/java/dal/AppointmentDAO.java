@@ -381,6 +381,40 @@ public class AppointmentDAO {
         }
     }
 
+    public void rescheduleAppointmentForPatient(Appointment appointment) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "UPDATE `mabs`.`appointments`\n"
+                + "SET\n"
+                + "`reschedule_reason` = ?,\n"
+                + "`appointment_date` = ?,\n"
+                + "`appointment_time` = ?,\n"
+                + "`appointment_status` = ?,\n"
+                + "`doctor_id` = ? \n"
+                + "WHERE `appointment_id` = ?;";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, appointment.getRescheduleReason());
+            ps.setDate(2, appointment.getApptDate());
+            ps.setString(3, appointment.getApptTime());
+            ps.setString(4, appointment.getStatus());
+            ps.setInt(5, appointment.getDoctor().getDoctorId());
+            ps.setInt(6, appointment.getApptId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    }
+
     public void deleteRecord(int apptId) {
         PreparedStatement ps = null;
         Connection connection = null;
@@ -436,4 +470,6 @@ public class AppointmentDAO {
         }
         return null;
     }
+
+    
 }

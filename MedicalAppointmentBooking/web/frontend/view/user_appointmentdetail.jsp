@@ -3,6 +3,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
 <html lang="en">
 
     <head>
@@ -26,7 +27,8 @@
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" type="text/css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/otherStyle.css" rel="stylesheet" type="text/css" />
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="<c:url value= '/frontend/template/assets/js/flatpickr.min.js'/>"></script>
 
     </head>
     <body>
@@ -160,87 +162,147 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card border-0 shadow overflow-hidden mt-4 ">
-                            <div class=" p-3 d-flex justify-content-center ">
-                                <div class="me-5">
-                                    <a href="#cancelappointment" class="btn btn-primary btn-sml btn-soft-danger" 
-                                       data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
-                                        Cancel</a>
-                                    <div class="modal fade"  id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog "style="max-width: 500px;"  >
-                                            <form action="<c:url value='/admin-reservation?action=cancel'></c:url>" method="post">
-                                                    <div class="modal-content">
-                                                        <div class="modal-body py-5">
-                                                            <div class="text-center">
-                                                                <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                                                    <i class="uil uil-times-circle h1 mb-0"></i>
-                                                                </div>
-                                                                <div class="mt-4">
-                                                                    <h4>Cancel Reservation</h4>
-                                                                    <p class="para-desc mx-auto text-muted mb-0">This appointment will be canceled.Are you sure ?</p>
-                                                                    <div class="mt-4">
-                                                                        <textarea type="text" class="form-control" name="cancel_reason" placeholder="Your reason"> </textarea>
-                                                                        <br>
-                                                                        <input type="hidden" id="cancel_appointment" name="appointment_canceled " value="">
-                                                                        <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
+                        <c:if test="${appt.status == 'PENDING' || appt.status == 'CONFIRMED'}">
+                            <div class="card border-0 shadow overflow-hidden mt-4 ">
+                                <div class=" p-3 d-flex justify-content-center ">
+                                    <div class="me-5">
+                                        <a href="#cancelappointment" class="btn btn-primary btn-sml btn-soft-danger" 
+                                           data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
+                                            Cancel</a>
                                     </div>
                                     <div class="">
                                         <a href="#rescheduleappointment" class="btn btn-primary btn-sml" 
                                            data-bs-toggle="modal" data-bs-target="#rescheduleappointment" onclick="reschedule(this)" data-id="${appt.apptId}">
-                                        Reschedule</a>
-                                    <div class="modal fade"  id="rescheduleappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog "style="max-width: 500px;"  >
-                                            <form action="<c:url value='/admin-reservation?action=cancel'></c:url>" method="post">
-                                                    <div class="modal-content">
-                                                        <div class="modal-body py-5">
-                                                            <div class="text-center">
-                                                                <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                                                    <i class="uil uil-times-circle h1 mb-0"></i>
-                                                                </div>
-                                                                <div class="mt-4">
-                                                                    <h4>Delete Reservation</h4>
-                                                                    <p class="para-desc mx-auto text-muted mb-0">This appointment will be canceled.Are you sure ?</p>
-                                                                    <div class="mt-4">
-                                                                        <textarea type="text" class="form-control" name="cancel_reason" placeholder="Your reason"> </textarea>
-                                                                        <br>
-                                                                        <input type="hidden" id="cancel_appointment" name="reservation_canceled " value="">
-                                                                        <input type="submit" class="btn btn-soft-danger" name="cancel" value="Reschedule">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                            Reschedule</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:if>
+                    </div>        
+                </div>
+        </section>
+        <div class="modal fade"  id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog "style="max-width: 500px;"  >
+                <div class="modal-content">
+                    <div class="modal-body py-5">
+                        <div class="text-center">
+                            <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
+                                <i class="uil uil-times-circle h1 mb-0"></i>
+                            </div>
+                            <div class="mt-4">
+                                <h4>Cancel Reservation</h4>
+                                <p class="para-desc mx-auto text-muted mb-0">This appointment will be canceled.Are you sure ?</p>
+                                <div class="mt-4">
+                                    <form action="<c:url value='/user-appointment?action=cancel'></c:url>" method="post">
+                                            <input type="hidden" id="cancel_appointment" name="cancel_appointment" value="">
+                                            <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal fade" id="rescheduleappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" style="max-width: 500px;">
+                    <div class="modal-content">
+                        <div class="modal-body py-5">
+                            <div class="card border-0 shadow overflow-hidden mt-4">
+                                <form action="<c:url value='/user-appointment?action=reschedule'></c:url>" method="post">
+                                    <div class="bg-white rounded shadow overflow-hidden">
+                                        <div class="p-4 border-bottom">
+                                            <h5 class="mb-0">Reschedule new appointment</h5>
+                                        </div>
+                                        <div class="p-3">
+                                            <div class="">
+                                                <label class="form-label">Select Appointment Date:</label>
+                                                <input required id="checkin-date" name="appt-date" type="date" class="flatpickr flatpickr-input form-control">
+                                            </div>
+                                        </div>
+                                        <div class="p-3">
+                                            <div class="">
+                                                <label class="form-label">Select Appointment Time:</label>
+                                                <select required id="time" name="appt-time" class="form-control department-name select2input">
+                                                    <option disabled selected>Select Time</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="p-3">
+                                            <div class="">
+                                                <label class="form-label">Your reason for rescheduling:</label>
+                                                <textarea class="form-control" name="reschedule_reason" placeholder="Your reason" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="p-3">
+                                            <div class="me-5">
+                                                <input type="hidden" id="reschedule_appointment" name="reschedule_appointment" value="">
+                                                <input type="submit" id="reassign" class="btn btn-primary" value="Confirm rescheduling">
                                             </div>
                                         </div>
                                     </div>
-
-                                </div>
-                            </div>        
+                                </form>
+                            </div>
                         </div>
-                        </section>
+                    </div>
+                </div>
+            </div>
 
-                        <script>
-                            function cancelAppt(appt) {
-                                var dataId = appt.getAttribute('data-id');
-                                let cancel_appt = document.getElementById('cancel_appointment');
-                                cancel_appt.value = dataId;
-                            }
-                        </script>
-                    <jsp:include page="/frontend/common/footer.jsp" />
-                    <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
-                    <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
-                    <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-                    <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-                    <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.j'/>"></script>
-                    <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
-                    </body>
-                    </html>
+            <script>
+                $("#checkin-date").flatpickr({
+                    minDate: "today",
+                    maxDate: new Date().fp_incr(7)
+                });
+                function cancelAppt(appt) {
+                    var dataId = appt.getAttribute('data-id');
+                    let cancel_appt = document.getElementById('cancel_appointment');
+                    cancel_appt.value = dataId;
+                }
+                function reschedule(appt) {
+                    var dataId = appt.getAttribute('data-id');
+                    let cancel_appt = document.getElementById('reschedule_appointment');
+                    cancel_appt.value = dataId;
+                }
+                $(document).ready(function () {
+                    $("#checkin-date").change(function () {
+                        $("#time").find("option").remove();
+                        $("#time").append("<option>Select Time</option>");
+                        let chosendate = $("#checkin-date").val();
+                        let data = {
+                            type: "appointment",
+                            chosenDate: chosendate,
+                            doctor_id: "${appt.doctor.doctorId}"
+                        };
+
+                        $.ajax({
+                            url: "CheckAvailabilityServlet",
+                            method: "GET",
+                            data: data,
+                            success: function (data, textStatus, jqXHR) {
+                                let obj = $.parseJSON(data);
+                                $.each(obj, function (key, value) {
+                                    $("#time").append(
+                                            '<option value="' + value.slotTime + '">' + value.slotTime + "</option>"
+                                            );
+                                });
+                                $("select").formSelect();
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                $("#time").append("<option>No Time Slot Unavailable</option>");
+                            },
+                            cache: false
+                        });
+                    });
+
+                });
+        </script>
+        <jsp:include page="/frontend/common/footer.jsp" />
+        <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.j'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
+    </body>
+</html>

@@ -307,7 +307,7 @@
                                                 <div class="me-5">
                                                     <input type="submit" id="reassign" class="btn btn-primary" value="Assign"> </input>
                                                 </div>
-                                                
+
                                                 <div class="">
                                                     <input type="submit" id="remove" class="btn btn-primary" value="Remove"> </input>
                                                 </div>
@@ -325,7 +325,7 @@
                                                 <h5 class="mb-0">Assign doctor to appointment</h5>
                                             </div>
                                             <div class="col-md-6 p-3">
-                                                 <div class="mb-3">
+                                                <div class="mb-3">
                                                     <label class="form-label">Choose Apartment: </label>
                                                     <select id="speciality" required="" class="form-select form-control" >
                                                         <c:forEach items="${speList}" var="spe">
@@ -375,12 +375,12 @@
                 maxDate: new Date().fp_incr(7)
             });
             $(document).ready(function () {
-                    $("#speciality").change(function () {
+                $("#speciality").change(function () {
                     $("#doctor").find("option").remove();
                     $("#doctor").append("<option>Select Doctor</option>");
-                  
+
                     let data = {
-                        type: "doctor",     
+                        type: "doctor",
                         speciality_id: $("#speciality").val()
                     };
 
@@ -404,7 +404,7 @@
                         cache: false
                     });
                 });
-                
+
                 $("#checkin-date").change(function () {
                     $("#time").find("option").remove();
                     $("#time").append("<option>Select Time</option>");
