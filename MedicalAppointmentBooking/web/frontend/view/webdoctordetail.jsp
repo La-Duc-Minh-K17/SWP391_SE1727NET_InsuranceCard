@@ -25,7 +25,24 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="frontend/template/assets/css/flatpickr.min.css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
+        <style>
+            .star {
+                cursor: pointer;
+                transition: color 0.2s; /* Thêm hiệu ứng màu sắc cho sự chuyển đổi màu sao */
+            }
 
+            .star::before {
+                content: '☆';
+            }
+
+            .star.clicked::before {
+                content: '★';
+                color: gold;
+            }
+            .star-gold {
+                color: gold; /* Thay đổi màu của ngôi sao thành vàng */
+            }
+        </style>
     </head>
     <body>
         <div class="header">
@@ -156,18 +173,25 @@
                                             </c:forEach>
                                         </ul>
                                         <h5 class="card-title mt-4 mb-0">Leave A Comment :</h5>
-
-                                        <form class="mt-3">
+                                        <form action="WebDoctorDetail" method="post" class="mt-3">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="mb-3">
                                                         <label class="form-label">Your Comment</label>
+                                                        <div class="rating">
+                                                            <span class="star" data-rating="1"></span>
+                                                            <span class="star" data-rating="2"></span>
+                                                            <span class="star" data-rating="3"></span>
+                                                            <span class="star" data-rating="4"></span>
+                                                            <span class="star" data-rating="5"></span>
+                                                        </div>
+                                                        <input type="hidden" name="rating" id="rating" value="0">
                                                         <textarea id="message" placeholder="Your Comment" rows="5" name="message" class="form-control" required=""></textarea>
                                                     </div>
                                                 </div><!--end col-->
                                                 <div class="col-md-12">
                                                     <div class="send d-grid">
-                                                        <button type="submit" class="btn btn-primary">Send Message</button>
+                                                        <input type="submit" id="submit" name="send" class="btn btn-primary" value="Comment">
                                                     </div>
                                                 </div><!--end col-->
                                             </div><!--end row-->
@@ -183,6 +207,30 @@
     </div>
 
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const starsContainer = document.querySelector(".rating");
+        const ratingInput = document.getElementById("rating");
+
+        starsContainer.addEventListener("click", function (event) {
+            if (event.target.classList.contains("star")) {
+                const rating = parseInt(event.target.getAttribute("data-rating"));
+                ratingInput.value = rating;
+
+                const stars = starsContainer.querySelectorAll(".star");
+
+                // Bật và tắt trạng thái sao
+                stars.forEach((star, index) => {
+                    if (index < rating) {
+                        star.classList.add("clicked");
+                    } else {
+                        star.classList.remove("clicked");
+                    }
+                });
+            }
+        });
+    });
+</script>
 <footer>
     <jsp:include page="/frontend/common/footer.jsp" />
 </footer>

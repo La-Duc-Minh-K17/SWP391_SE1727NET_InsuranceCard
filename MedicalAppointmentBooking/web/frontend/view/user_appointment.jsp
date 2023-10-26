@@ -153,10 +153,10 @@
                                                                                         <td class="p-3">${appt.apptDate}</td>
                                                                                         <td class="p-3">${appt.apptTime}</td>   
                                                                                         <td class="p-3">${appt.status}</td>
-                                                                                        <td class="p-3">
-                                                                                            <div class="d-flex align-items-center">
+                                                                                        <td class="p-3 d-flex align-items-center">
+                                                                                            <div class="">
                                                                                                 <a href="user-appointment?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
-                                                                                                    View details</a>
+                                                                                                    View</a>
                                                                                             </div>
                                                                                         </td>
                                                                                     </tr>

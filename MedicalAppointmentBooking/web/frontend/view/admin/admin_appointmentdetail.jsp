@@ -272,12 +272,12 @@
                                 </div>
 
                             </div>
-                            <c:if test="${(appt.status ==  'PENDING' && appt.doctor != null    )|| appt.status == 'RESCHEDULED'}">
+                            <c:if test="${(appt.status ==  'PENDING' && appt.doctor != null)|| appt.status == 'RESCHEDULED'}">
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
                                     <form action="admin-appointmentdetail?action=reassign&apptId=${appt.apptId}" method="post">
                                         <div class="bg-white rounded shadow overflow-hidden">
                                             <div class="p-4 border-bottom">
-                                                <h5 class="mb-0">Assign new appointment  </h5>
+                                                <h5 class="mb-0">Assign new appointment</h5>
                                             </div>
                                             <div class="col-md-6 p-3">
                                                 <div class="mb-3">
@@ -303,9 +303,13 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 p-3">
+                                            <div class="col-md-6 p-3 d-flex ">
+                                                <div class="me-5">
+                                                    <input type="submit" id="reassign" class="btn btn-primary" value="Assign"> </input>
+                                                </div>
+                                                
                                                 <div class="">
-                                                    <input type="submit" id="reassign" class="btn btn-primary" value="Re-assign"> </input>
+                                                    <input type="submit" id="remove" class="btn btn-primary" value="Remove"> </input>
                                                 </div>
                                             </div>
                                         </div>

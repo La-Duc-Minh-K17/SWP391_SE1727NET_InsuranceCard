@@ -14,18 +14,20 @@ public class Reservation {
 
     private int resvId;
     private String resvNote;
+    private String rescheduleReason;
+    private String rejectReason;
     private Date resvDate;
     private String resvTime;
     private String testResult;
     private String status;
-  
+
     private Service service;
     private Patient patient;
 
     public Reservation() {
     }
 
-    public Reservation(String resvNote, Date resvDate, String resvTime, String status, Service service , Patient patient) {
+    public Reservation(String resvNote, Date resvDate, String resvTime, String status, Service service, Patient patient) {
         this.resvNote = resvNote;
         this.resvDate = resvDate;
         this.resvTime = resvTime;
@@ -34,7 +36,7 @@ public class Reservation {
         this.patient = patient;
     }
 
-    public Reservation(int resvId, String resvNote, Date resvDate, String resvTime, String testResult, String status, Service service , Patient patient) {
+    public Reservation(int resvId, String resvNote, Date resvDate, String resvTime, String testResult, String status, Service service, Patient patient) {
         this.resvId = resvId;
         this.resvNote = resvNote;
         this.resvDate = resvDate;
@@ -93,7 +95,6 @@ public class Reservation {
         this.status = status;
     }
 
- 
     public Service getService() {
         return service;
     }
@@ -110,7 +111,20 @@ public class Reservation {
         this.patient = patient;
     }
 
-    
+    public String getRescheduleReason() {
+        return rescheduleReason;
+    }
 
-  
+    public void setRescheduleReason(String rescheduleReason) {
+        this.rescheduleReason = rescheduleReason;
+    }
+
+    public String getRejectReason() {
+        return rejectReason;
+    }
+
+    public void setRejectReason(String rejectReason) {
+        this.rejectReason = rejectReason;
+    }
+    
 }

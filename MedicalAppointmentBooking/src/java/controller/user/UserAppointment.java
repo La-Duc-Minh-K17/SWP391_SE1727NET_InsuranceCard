@@ -38,7 +38,13 @@ public class UserAppointment extends HttpServlet {
         if (action != null && action.equals("view")) {
             List<Appointment> listAppt = apptDAO.getPatientAppointmentByUserId(user.getUserId());
             request.setAttribute("apptList", listAppt);
-            System.out.println(listAppt);
+            request.getRequestDispatcher("frontend/view/user_appointment.jsp").forward(request, response);
+            return;
+        }
+        if(action != null && action.equals("view-detail")) {
+            int apptId = Integer.parseInt(request.getParameter("apptId"));
+            Appointment appt = apptDAO.getAppointmentById(apptId);
+            request.setAttribute("appt", appt);
             request.getRequestDispatcher("frontend/view/user_appointment.jsp").forward(request, response);
             return;
         }
