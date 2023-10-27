@@ -143,7 +143,7 @@
                                                                                         <td class="p-3">${resv.status}</td>
                                                                                         <td class="p-3 d-flex align-items-center">
                                                                                             <div class="">
-                                                                                                <a href="<c:url value='user-reservation?action=view-detail&apptId=${resv.resvId}'/>" class="me-3 btn btn-primary btn-sml btn-soft-success">
+                                                                                                <a href="<c:url value='user-reservation?action=view-detail&resvId=${resv.resvId}'/>" class="me-3 btn btn-primary btn-sml btn-soft-success">
                                                                                                     View</a>
                                                                                             </div>
                                                                                         </td>

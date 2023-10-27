@@ -43,9 +43,9 @@ public class UserReservation extends HttpServlet {
             return;
         }
         if (action != null && action.equals("view-detail")) {
-            int apptId = Integer.parseInt(request.getParameter("apptId"));
-            Reservation appt = resvDAO.getReservationById(apptId);
-            request.setAttribute("appt", appt);
+            int resvId = Integer.parseInt(request.getParameter("resvId"));
+            Reservation resv = resvDAO.getReservationById(resvId);
+            request.setAttribute("resv", resv);
             request.getRequestDispatcher("frontend/view/user_reservationdetail.jsp").forward(request, response);
             return;
         }
@@ -64,8 +64,8 @@ public class UserReservation extends HttpServlet {
             return;
         }
         if (action != null && action.equals("cancel")) {
-            int apptId = Integer.parseInt(request.getParameter("cancel_appointment"));
-            Reservation resv = resvDAO.getReservationById(apptId);
+            int resvId = Integer.parseInt(request.getParameter("cancel_appointment"));
+            Reservation resv = resvDAO.getReservationById(resvId);
             resv.setStatus("CANCELED");
             resvDAO.updateStatus(resv);
             response.sendRedirect("user-reservation?action=view-detail&apptId=" + resv.getResvId());

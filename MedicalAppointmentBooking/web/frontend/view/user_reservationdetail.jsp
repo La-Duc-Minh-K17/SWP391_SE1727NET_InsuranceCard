@@ -98,11 +98,9 @@
                                 <div class="d-flex align-items-center mt-2">
                                     <i class="uil uil-user align-text-bottom text-primary h5 mb-0 me-2"></i>
                                     <h6 class="mb-0">Service description</h6>
-                                   
-                                        <p class="text-muted mb-0 ms-2">${resv.service.service_description}</p>
-                                   
+                                    <p class="text-muted mb-0 ms-2">${resv.service.service_description}</p>
                                 </div>
-                               
+
                             </div>
                         </div><!--end col-->
                         <div class="card border-0 shadow overflow-hidden mt-4 ">
@@ -199,14 +197,14 @@
                                         </div>
                                         <div class="p-3">
                                             <div class="">
-                                                <label class="form-label">Select Appointment Date:</label>
-                                                <input required id="checkin-date" name="appt-date" type="date" class="flatpickr flatpickr-input form-control">
+                                                <label class="form-label">Select Reservation Date:</label>
+                                                <input required id="checkin-date" name="resv-date" type="date" class="flatpickr flatpickr-input form-control">
                                             </div>
                                         </div>
                                         <div class="p-3">
                                             <div class="">
-                                                <label class="form-label">Select Appointment Time:</label>
-                                                <select required id="time" name="appt-time" class="form-control department-name select2input">
+                                                <label class="form-label">Select Reservation Time:</label>
+                                                <select required id="time" name="resv-time" class="form-control department-name select2input">
                                                     <option disabled selected>Select Time</option>
                                                 </select>
                                             </div>
@@ -252,9 +250,9 @@
                         $("#time").append("<option>Select Time</option>");
                         let chosendate = $("#checkin-date").val();
                         let data = {
-                            type: "appointment",
+                            type: "reservation",
                             chosenDate: chosendate,
-                            doctor_id: "${appt.doctor.doctorId}"
+                            doctor_id: "${resv.resvId}"
                         };
 
                         $.ajax({
@@ -265,7 +263,7 @@
                                 let obj = $.parseJSON(data);
                                 $.each(obj, function (key, value) {
                                     $("#time").append(
-                                            '<option value="' + value.slotTime + '">' + value.slotTime + "</option>"
+                                            '<option value="' + value + '">' + value + "</option>"
                                             );
                                 });
                                 $("select").formSelect();

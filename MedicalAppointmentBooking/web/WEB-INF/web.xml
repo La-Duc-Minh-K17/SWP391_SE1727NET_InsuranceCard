@@ -76,10 +76,7 @@
         <servlet-name>ManageServices</servlet-name>
         <servlet-class>controller.manager.ManageServices</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>WebServiceDetail</servlet-name>
-        <servlet-class>controller.manager.WebServiceDetail</servlet-class>
-    </servlet>
+   
     <servlet>
         <servlet-name>AdminAppointmentList</servlet-name>
         <servlet-class>controller.admin.AdminAppointmentList</servlet-class>
@@ -232,10 +229,7 @@
         <servlet-name>ManageServices</servlet-name>
         <url-pattern>/manage-service</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>WebServiceDetail</servlet-name>
-        <url-pattern>/detailservice</url-pattern>
-    </servlet-mapping>
+   
     <servlet-mapping>
         <servlet-name>ManagePatient</servlet-name>
         <url-pattern>/manage-patient</url-pattern>
