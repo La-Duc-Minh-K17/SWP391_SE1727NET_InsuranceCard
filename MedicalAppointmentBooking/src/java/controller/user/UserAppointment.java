@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Appointment;
-import model.Doctor;
 import model.UserAccount;
 import utils.SessionUtils;
 import utils.TimeUtil;
@@ -72,6 +71,17 @@ public class UserAppointment extends HttpServlet {
             appointment.setStatus("CANCELED");
             apptDAO.updateStatus(appointment);
             response.sendRedirect("user-appointment?action=view-detail&apptId=" + appointment.getApptId());
+            return;
+        }
+        if (action != null && action.equals("filter")) {
+            String filter = request.getParameter("status_filter");
+            if (filter.equalsIgnoreCase("all")) {
+                response.sendRedirect("user-appointment?action=view");
+                return;
+            }
+            List<Appointment> listAppt = apptDAO.getFilteredPatientAppointment(user.getUserId(), filter);
+            request.setAttribute("apptList", listAppt);
+            request.getRequestDispatcher("frontend/view/user_appointment.jsp").forward(request, response);
             return;
         }
     }

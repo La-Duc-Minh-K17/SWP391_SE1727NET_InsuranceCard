@@ -202,7 +202,7 @@
                                             <h6 class="mb-0">Service Detail</h6>
                                             <p class="text-muted mb-0 ms-2">${resv.service.service_details}</p>
                                         </div>
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -245,14 +245,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <c:if test="${resv.status ==  'PENDING' || resv.status == 'RESCHEDULED'}">
+                                    <c:if test="${resv.status == 'PENDING' || resv.status == 'RESCHEDULED'}">
                                         <div class="d-flex justify-content-between">
                                             <div class="mt-3">
                                                 <a href="admin-appointmentdetail?action=confirm&apptId=${resv.resvId}"class="btn btn-primary ">Confirm Reservation</a>
                                             </div>
-                                            <div class="mt-3">
-                                                <a href="admin-appointmentdetail?action=reject&apptId=${resv.resvId}"class="btn btn-primary btn-danger">Reject Reservation  </a>
-                                            </div>
+                                            <c:if test="${resv.status == 'PENDING'}">
+                                                <div class="mt-3">
+                                                    <a href="admin-appointmentdetail?action=reject&apptId=${resv.resvId}"class="btn btn-primary btn-danger">Reject Reservation  </a>
+                                                </div>
+                                            </c:if>
                                         </div>
                                     </c:if>
                                 </div>
@@ -265,7 +267,7 @@
                                             <div class="p-4 border-bottom">
                                                 <h5 class="mb-0">Update appointment information</h5>
                                             </div>
-                                                
+
                                             <div class="col-md-6 p-3">
                                                 <div class="">
                                                     <label class="form-label">Select Reservation Date: </label>

@@ -100,19 +100,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="col-xl-6 col-md-6">
-                                            <div class="search-bar d-lg-block" style="padding-top :0">
-                                                <div id="search" class="menu-search ">
-                                                    <form action="<c:url value='/admin-appointment?action=search'/>" role="search" method="post"
-                                                          id="searchform" class="searchform">
-                                                        <div>
-                                                            <input type="text" class="form-control border rounded-pill" name="search" id="search" placeholder="Search patient name">
-                                                            <input type="submit" id="searchsubmit" value="Search">
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>  
                                     <div class="col-12 mt-1">
                                         <div class="card component-wrapper border-0 rounded shadow">
@@ -199,6 +187,11 @@
         <!-- javascript -->
         <jsp:include page="/frontend/common/footer.jsp" />
         <script>
+            function filter() {
+                const url = 'http://localhost:8080/MedicalAppointmentBooking/user-appointment?action=filter&status_filter=';
+                const filterElement = document.getElementById("status_filter").value;
+                window.location.href = url + filterElement;
+            }
             function onChange() {
                 const password = document.querySelector('input[name=newpassword]');
                 const confirm = document.querySelector('input[name=confirmpassword]');
