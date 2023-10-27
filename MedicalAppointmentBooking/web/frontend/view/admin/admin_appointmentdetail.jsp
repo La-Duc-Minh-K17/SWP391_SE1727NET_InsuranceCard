@@ -259,14 +259,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <c:if test="${appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
+                                    <c:if test="${ appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
                                         <div class="d-flex justify-content-between">
                                             <div class="mt-3">
                                                 <a href="admin-appointmentdetail?action=confirm&apptId=${appt.apptId}"class="btn btn-primary ">Confirm Appointment</a>
                                             </div>
-                                            <div class="mt-3">
-                                                <a href="admin-appointmentdetail?action=reject&apptId=${appt.apptId}"class="btn btn-primary btn-danger">Reject Appointment  </a>
-                                            </div>
+                                            <c:if test = "${appt.status ==  'PENDING'}">    
+                                                <div class="mt-3">
+                                                    <a href="admin-appointmentdetail?action=reject&apptId=${appt.apptId}"class="btn btn-primary btn-danger">Reject Appointment  </a>
+                                                </div>
+                                            </c:if>
                                         </div>
                                     </c:if>
                                 </div>

@@ -24,7 +24,8 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
         <script type="text/javascript" src="<c:url value='https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js'/>"></script>
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/jquery.min.js"></script>
-
+        <script type="text/javascript" src="<c:url value='https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js'/>"></script>
+        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/jquery.min.js"></script>
     </head>
     <body>
         <div class="page-wrapper doctris-theme toggled">

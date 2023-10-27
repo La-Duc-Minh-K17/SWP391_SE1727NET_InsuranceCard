@@ -9,7 +9,7 @@
         <meta charset="utf-8" />
         <title>MABS</title>
         <!-- favicon -->
-         <meta charset="utf-8" />
+        <meta charset="utf-8" />
         <title>MABS - Medical Appointment Booking System</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -31,7 +31,7 @@
         <!-- Css -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" type="text/css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/otherStyle.css" rel="stylesheet" type="text/css" />
-  
+
 
     </head>
     <body>
@@ -74,10 +74,7 @@
                                     <p class="text-muted mb-0 ms-2">${sessionScope.user.address}</p>
                                 </div>
                             </div>
-                            <c:if test="${sessionScope.user.role.role_name == 'PATIENT'}">
-                                <jsp:include page="/frontend/common/patient_side_bar.jsp" />  
-                            </c:if>
-                            
+                            <jsp:include page="/frontend/common/patient_side_bar.jsp" />  
                         </div>
                     </div><!--end col-->
 

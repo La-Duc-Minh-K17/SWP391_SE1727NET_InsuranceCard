@@ -76,10 +76,7 @@
         <servlet-name>ManageServices</servlet-name>
         <servlet-class>controller.manager.ManageServices</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>webServiceDetail</servlet-name>
-        <servlet-class>controller.manager.webServiceDetail</servlet-class>
-    </servlet>
+   
     <servlet>
         <servlet-name>AdminAppointmentList</servlet-name>
         <servlet-class>controller.admin.AdminAppointmentList</servlet-class>
@@ -151,6 +148,10 @@
     <servlet>
         <servlet-name>ManageAccount</servlet-name>
         <servlet-class>controller.admin.ManageAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserReservation</servlet-name>
+        <servlet-class>controller.user.UserReservation</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
@@ -228,10 +229,7 @@
         <servlet-name>ManageServices</servlet-name>
         <url-pattern>/manage-service</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>webServiceDetail</servlet-name>
-        <url-pattern>/detailservice</url-pattern>
-    </servlet-mapping>
+   
     <servlet-mapping>
         <servlet-name>ManagePatient</servlet-name>
         <url-pattern>/manage-patient</url-pattern>
@@ -295,6 +293,10 @@
     <servlet-mapping>
         <servlet-name>UserAppointment</servlet-name>
         <url-pattern>/user-appointment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserReservation</servlet-name>
+        <url-pattern>/user-reservation</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

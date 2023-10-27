@@ -64,7 +64,6 @@ public class ForgotPasswordController extends HttpServlet {
         if (action != null && action.equals("reset-password")) { 
             String newpassword = request.getParameter("password");
             UserAccount account = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
-            System.out.println(account);
             uDAO.updatePassword(account, newpassword);
             request.setAttribute("success", "Password has been reseted successfully.");
             request.getRequestDispatcher("/login").forward(request, response);
