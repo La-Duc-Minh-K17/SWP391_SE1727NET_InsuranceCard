@@ -20,7 +20,6 @@ public class Reservation {
     private String resvTime;
     private String testResult;
     private String status;
-
     private Service service;
     private Patient patient;
 
