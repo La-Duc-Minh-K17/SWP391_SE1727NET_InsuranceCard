@@ -92,7 +92,7 @@ Author     : PC
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <div class="row align-content-center">
-                            
+
                             <div class="col-xl-6 col-md-6">
                                 <div class="search-bar d-lg-block " style="padding-top :0">
                                     <div id="search" class="menu-search  ">
@@ -106,7 +106,7 @@ Author     : PC
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div><!--end row-->
 
 
@@ -141,7 +141,7 @@ Author     : PC
                                                                 <span class="text-primary">Male</span>
                                                             </c:if>
                                                             <c:if test="${p.gender == 0}">
-                                                                <span class="text-secondary">Female</span>
+                                                                <span class="text-danger">Female</span>
                                                             </c:if>
                                                         </td>
                                                         <td>
@@ -149,22 +149,18 @@ Author     : PC
                                                                 <span class="text-success">Active</span>
                                                             </c:if>
                                                             <c:if test="${p.status == 0}">
-                                                                <span class="text-danger">InActive</span>
+                                                                <span class="text-muted">InActive</span>
                                                             </c:if>
                                                         </td>
                                                         <td class="p-3">
-                                                            <style>
-                                                                .custom-btn {
-                                                                    width: 100px; 
-                                                                }
-                                                            </style>
+
                                                         <td class="text-center">
                                                             <div class="container d-flex justify-content-center">
                                                                 <div class="card component-wrapper border-0 rounded">
                                                                     <div class="d-flex mb-2">
                                                                         <a href="<c:url value='/manage-patient?action=view&patientId=${p.patientId}'/>" class="btn btn-primary custom-btn btn-sm m-2">View</a>
                                                                         <a href="<c:url value='/manage-patient?action=edit&patientId=${p.patientId}'/>" class="btn btn-primary custom-btn btn-sm m-2">Edit</a>
-                                                                        
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -205,6 +201,11 @@ Author     : PC
         </div>
         <!-- page-wrapper -->
         <!-- javascript -->
+        <style>
+            .custom-btn {
+                width: 100px;
+            }
+        </style>
         <script>
             function filter() {
                 const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-service?action=filter&category_id=';
