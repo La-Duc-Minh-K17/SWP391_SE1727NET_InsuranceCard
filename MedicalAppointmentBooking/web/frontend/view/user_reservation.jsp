@@ -105,7 +105,7 @@
                                     <div class="col-12 mt-1">
                                         <div class="card component-wrapper border-0 rounded shadow">
                                             <div class="p-4 border-bottom">
-                                                <h5 class="mb-0">My Appointment</h5>
+                                                <h5 class="mb-0">My Reservation</h5>
                                             </div>
                                             <div class="p-4">
                                                 <div class="row pt-2">
@@ -117,7 +117,7 @@
                                                                         <thead>
                                                                             <tr>
                                                                                 <th class="border-bottom p-3" style="min-width: 50px;">#</th>
-                                                                                <th class="border-bottom p-3" style="min-width: 200px;">Doctor</th>
+                                                                                <th class="border-bottom p-3" style="min-width: 200px;">Service</th>
                                                                                 <th class="border-bottom p-3" style="min-width: 150px;">Date</th>
                                                                                 <th class="border-bottom p-3">Time</th>
                                                                                 <th class="border-bottom p-3">Status</th>
@@ -125,25 +125,25 @@
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            <c:if test="${not empty apptList}">
-                                                                                <c:forEach items="${apptList}" var="appt">
-                                                                                    <c:set var="patient" value="${appt.patient}"></c:set>
+                                                                            <c:if test="${not empty resvList}">
+                                                                                <c:forEach items="${resvList}" var="resv">
+                                                                                    <c:set var="patient" value="${resv.patient}"></c:set>
                                                                                         <tr>
-                                                                                            <td class="p-3">${appt.apptId}</td>
+                                                                                            <td class="p-3">${resv.resvId}</td>
                                                                                         <td class="p-3">
                                                                                             <a href="#" class="text-dark">
                                                                                                 <div class="d-flex align-items-center">
-                                                                                                    <img src="data:image/jpg;base64,${appt.doctor.image}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                                                                    <span class="ms-2">${appt.doctor.fullName}</span>
+                                                                                                    <img src="data:image/jpg;base64,${resv.service.service_image}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                                                                                    <span class="ms-2">${resv.service.service_name}</span>
                                                                                                 </div>
                                                                                             </a>
                                                                                         </td>
-                                                                                        <td class="p-3">${appt.apptDate}</td>
-                                                                                        <td class="p-3">${appt.apptTime}</td>   
-                                                                                        <td class="p-3">${appt.status}</td>
+                                                                                        <td class="p-3">${resv.resvDate}</td>
+                                                                                        <td class="p-3">${resv.resvTime}</td>   
+                                                                                        <td class="p-3">${resv.status}</td>
                                                                                         <td class="p-3 d-flex align-items-center">
                                                                                             <div class="">
-                                                                                                <a href="user-appointment?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
+                                                                                                <a href="<c:url value='user-reservation?action=view-detail&resvId=${resv.resvId}'/>" class="me-3 btn btn-primary btn-sml btn-soft-success">
                                                                                                     View</a>
                                                                                             </div>
                                                                                         </td>
@@ -155,9 +155,10 @@
                                                                     </table>
                                                                 </div>
                                                             </div>
-                                                            <c:if test="${empty apptList  }" >
+                                                            <c:if test="${empty resvList  }" >
                                                                 <div class=" text-center alert alert-primary h4" role="alert"> You haven't had any appointments yet. </div>
                                                             </c:if>
+
                                                         </div>
                                                     </div><!--end col-->
                                                 </div>
@@ -176,20 +177,11 @@
         <jsp:include page="/frontend/common/footer.jsp" />
         <script>
             function filter() {
-                const url = 'http://localhost:8080/MedicalAppointmentBooking/user-appointment?action=filter&status_filter=';
+                const url = 'http://localhost:8080/MedicalAppointmentBooking/user-reservation?action=filter&status_filter=';
                 const filterElement = document.getElementById("status_filter").value;
                 window.location.href = url + filterElement;
             }
-            function onChange() {
-                const password = document.querySelector('input[name=newpassword]');
-                const confirm = document.querySelector('input[name=confirmpassword]');
 
-                if (confirm.value === password.value) {
-                    confirm.setCustomValidity('');
-                } else {
-                    confirm.setCustomValidity('Confirm password do not match. Please check again');
-                }
-            }
 
         </script>
         <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>

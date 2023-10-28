@@ -28,12 +28,23 @@ public class DoctorScheduleDAO {
         Connection connection = null;
         ResultSet rs = null;
         List<DoctorSchedule> returnList = new ArrayList<>();
-        String sql = "select dc.* from doctor_schedule dc left join appointments apt\n"
-                + "on dc.date = apt.appointment_date\n"
-                + "and dc.slot_time = apt.appointment_time \n"
-                + "and dc.doctor_id = apt.doctor_id\n"
-                + "where dc.doctor_id = ? and dc.is_day_off = 0 \n"
-                + "AND dc.date =  ? and appointment_id IS NULL ;";
+        String sql = "SELECT dc.*\n"
+                + "FROM doctor_schedule dc\n"
+                + "LEFT JOIN appointments apt\n"
+                + "ON dc.date = apt.appointment_date\n"
+                + "AND dc.slot_time = apt.appointment_time\n"
+                + "AND dc.doctor_id = apt.doctor_id\n"
+                + "WHERE dc.doctor_id = ?\n"
+                + "AND dc.is_day_off = 0\n"
+                + "AND dc.date = ?\n"
+                + "AND appointment_id IS NULL\n"
+                + "AND (\n"
+                + "    dc.date > CURDATE()  \n"
+                + "    OR (\n"
+                + "        dc.date = CURDATE() \n"
+                + "        AND TIME(dc.slot_time) > CURRENT_TIME()\n"
+                + "    )\n"
+                + ");";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);

@@ -151,6 +151,7 @@
     <script type="text/javascript">
         CKEDITOR.replace('content');
     </script>
+    
     <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
     <!-- simplebar -->
     <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>

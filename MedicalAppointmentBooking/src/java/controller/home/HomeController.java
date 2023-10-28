@@ -37,17 +37,18 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         CategoryDAO cdao = new CategoryDAO();
-        BlogDAO dao = new BlogDAO();
-        DoctorDAO doctordao = new DoctorDAO();
-        ServicesDAO servicedao = new ServicesDAO();
-        List<Doctor> doctorList = doctordao.getAllDoctor();
-        List<Service> ServiceList = servicedao.getRandomTop3Service();
-        List<Blog> blogsList = dao.getAllNews();
-        List<Blog> blogsList3 = dao.getTop3News();
+        BlogDAO blogDAO = new BlogDAO();
+        DoctorDAO doctorDao = new DoctorDAO();
+        ServicesDAO serviceDao = new ServicesDAO();
+        List<Doctor> doctorList = doctorDao.getAllDoctor();
+        List<Service> serviceList = serviceDao.getRandomTop3Service();
+        List<Blog> blogsList = blogDAO.getAllNews();
+        List<Blog> blogsList3 = blogDAO.getTop3News();
         List<Blog_Category> blogCategory = cdao.getAllCategorys();
         request.setAttribute("doctors", doctorList);
-        request.setAttribute("service", ServiceList);
+        request.setAttribute("service", serviceList);
         String action = request.getParameter("action");
         request.setAttribute("data", blogsList);
         request.setAttribute("blogs3", blogsList3);
@@ -68,7 +69,6 @@ public class HomeController extends HttpServlet {
             request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
             return;
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

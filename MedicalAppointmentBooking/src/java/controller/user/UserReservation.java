@@ -4,14 +4,14 @@
  */
 package controller.user;
 
-import dal.AppointmentDAO;
+import dal.ReservationDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Appointment;
+import model.Reservation;
 import model.UserAccount;
 import utils.SessionUtils;
 import utils.TimeUtil;
@@ -20,7 +20,7 @@ import utils.TimeUtil;
  *
  * @author Admin
  */
-public class UserAppointment extends HttpServlet {
+public class UserReservation extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,53 +33,53 @@ public class UserAppointment extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AppointmentDAO apptDAO = new AppointmentDAO();
+        ReservationDAO resvDAO = new ReservationDAO();
         String action = request.getParameter("action");
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
         if (action != null && action.equals("view")) {
-            List<Appointment> listAppt = apptDAO.getPatientAppointmentByUserId(user.getUserId());
-            request.setAttribute("apptList", listAppt);
-            request.getRequestDispatcher("frontend/view/user_appointment.jsp").forward(request, response);
+            List<Reservation> resvList = resvDAO.getPatientReservationByUserId(user.getUserId());
+            request.setAttribute("resvList", resvList);
+            request.getRequestDispatcher("frontend/view/user_reservation.jsp").forward(request, response);
             return;
         }
         if (action != null && action.equals("view-detail")) {
-            int apptId = Integer.parseInt(request.getParameter("apptId"));
-            Appointment appt = apptDAO.getAppointmentById(apptId);
-            request.setAttribute("appt", appt);
-            request.getRequestDispatcher("frontend/view/user_appointmentdetail.jsp").forward(request, response);
+            int resvId = Integer.parseInt(request.getParameter("resvId"));
+            Reservation resv = resvDAO.getReservationById(resvId);
+            request.setAttribute("resv", resv);
+            request.getRequestDispatcher("frontend/view/user_reservationdetail.jsp").forward(request, response);
             return;
         }
         if (action != null && action.equals("reschedule")) {
-            String date = request.getParameter("appt-date");
-            String time = request.getParameter("appt-time");
+            String date = request.getParameter("resv-date");
+            String time = request.getParameter("resv-time");
             String reason = request.getParameter("reschedule_reason");
             int apptId = Integer.parseInt(request.getParameter("reschedule_appointment"));
-            Appointment appointment = apptDAO.getAppointmentById(apptId);
-            appointment.setRescheduleReason(reason);
-            appointment.setApptDate(TimeUtil.dateConverter1(date));
-            appointment.setApptTime(time);
-            appointment.setStatus("RESCHEDULED");
-            apptDAO.rescheduleAppointmentForPatient(appointment);
-            response.sendRedirect("user-appointment?action=view-detail&apptId=" + appointment.getApptId());
+            Reservation resv = resvDAO.getReservationById(apptId);
+            resv.setRescheduleReason(reason);
+            resv.setResvDate(TimeUtil.dateConverter1(date));
+            resv.setResvTime(time);
+            resv.setStatus("RESCHEDULED");
+            resvDAO.rescheduleReservationForPatient(resv);
+            response.sendRedirect("user-appointment?action=view-detail&apptId=" + resv.getResvId());
             return;
         }
         if (action != null && action.equals("cancel")) {
-            int apptId = Integer.parseInt(request.getParameter("cancel_appointment"));
-            Appointment appointment = apptDAO.getAppointmentById(apptId);
-            appointment.setStatus("CANCELED");
-            apptDAO.updateStatus(appointment);
-            response.sendRedirect("user-appointment?action=view-detail&apptId=" + appointment.getApptId());
+            int resvId = Integer.parseInt(request.getParameter("cancel_appointment"));
+            Reservation resv = resvDAO.getReservationById(resvId);
+            resv.setStatus("CANCELED");
+            resvDAO.updateStatus(resv);
+            response.sendRedirect("user-reservation?action=view-detail&apptId=" + resv.getResvId());
             return;
         }
         if (action != null && action.equals("filter")) {
             String filter = request.getParameter("status_filter");
             if (filter.equalsIgnoreCase("all")) {
-                response.sendRedirect("user-appointment?action=view");
+                response.sendRedirect("user-reservation?action=view");
                 return;
             }
-            List<Appointment> listAppt = apptDAO.getFilteredPatientAppointment(user.getUserId(), filter);
-            request.setAttribute("apptList", listAppt);
-            request.getRequestDispatcher("frontend/view/user_appointment.jsp").forward(request, response);
+            List<Reservation> resvList = resvDAO.getFilteredPatientReservation(user.getUserId(), filter);
+            request.setAttribute("resvList", resvList);
+            request.getRequestDispatcher("frontend/view/user_reservation.jsp").forward(request, response);
             return;
         }
     }

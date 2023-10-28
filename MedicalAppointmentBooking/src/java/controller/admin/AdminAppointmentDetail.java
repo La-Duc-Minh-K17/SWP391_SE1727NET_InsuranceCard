@@ -70,6 +70,15 @@ public class AdminAppointmentDetail extends HttpServlet {
             apptDAO.rescheduleAppointment(appointment);
             response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
             return;
+        } if (action != null && action.equals("remove")) {  
+            int apptId = Integer.parseInt(request.getParameter("apptId"));
+            Appointment appointment = apptDAO.getAppointmentById(apptId);
+            appointment.setApptDate(null);
+            appointment.setApptTime("");
+            appointment.setDoctor(null);
+            apptDAO.rescheduleAppointment(appointment);
+            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
+            return;
         }
         if (action != null && action.equals("confirm")) {
             int apptId = Integer.parseInt(request.getParameter("apptId"));

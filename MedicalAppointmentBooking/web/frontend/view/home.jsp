@@ -123,7 +123,6 @@
                 </div><!--end row-->
                 <div class="row justify-content-center">
                     <c:forEach items="${requestScope.service}" var="s" varStatus="loop">
-                        
                         <div class="col-md-4 mt-4">
                             <div class="card mb-4">
                                 <div class="card-img-container">
@@ -151,8 +150,6 @@
             </div><!--end row-->
         </div><!--end container-->
     </div><!--end row-->
-
-
 </div><!--end row-->
 </div><!--end container-->
 <!-- Start -->
@@ -168,6 +165,7 @@
                 </div>
             </div><!--end col-->
             <div class="d-flex justify-content-end ">
+
                 <a href="/MedicalAppointmentBooking/WebDoctorList" class="btn btn-soft-primary">View More Doctors </a>
             </div>
         </div><!--end row-->
@@ -216,6 +214,7 @@
                 </div>
             </div>
             <div >
+
                 <a href="/MedicalAppointmentBooking/new" class="btn btn-soft-primary"> View More Blogs </a>
             </div>
 
@@ -225,6 +224,7 @@
             <div class="col-lg-12 mt-4 pt-4 m-4">
                 <div class="slider-range-four">  
                     <c:forEach var="blog" items="${data}">
+
                         <div class="tiny-slide">
                             <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
                                 <img src="frontend/template/assets/images/blog/03.jpg" class="img-fluid" alt="">

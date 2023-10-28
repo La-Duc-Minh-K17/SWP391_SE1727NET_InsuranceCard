@@ -259,25 +259,27 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <c:if test="${appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
+                                    <c:if test="${ appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
                                         <div class="d-flex justify-content-between">
                                             <div class="mt-3">
                                                 <a href="admin-appointmentdetail?action=confirm&apptId=${appt.apptId}"class="btn btn-primary ">Confirm Appointment</a>
                                             </div>
-                                            <div class="mt-3">
-                                                <a href="admin-appointmentdetail?action=reject&apptId=${appt.apptId}"class="btn btn-primary btn-danger">Reject Appointment  </a>
-                                            </div>
+                                            <c:if test = "${appt.status ==  'PENDING'}">    
+                                                <div class="mt-3">
+                                                    <a href="admin-appointmentdetail?action=reject&apptId=${appt.apptId}"class="btn btn-primary btn-danger">Reject Appointment  </a>
+                                                </div>
+                                            </c:if>
                                         </div>
                                     </c:if>
                                 </div>
 
                             </div>
-                            <c:if test="${(appt.status ==  'PENDING' && appt.doctor != null    )|| appt.status == 'RESCHEDULED'}">
+                            <c:if test="${(appt.status ==  'PENDING' && appt.doctor != null)|| appt.status == 'RESCHEDULED'}">
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
                                     <form action="admin-appointmentdetail?action=reassign&apptId=${appt.apptId}" method="post">
                                         <div class="bg-white rounded shadow overflow-hidden">
                                             <div class="p-4 border-bottom">
-                                                <h5 class="mb-0">Assign new appointment  </h5>
+                                                <h5 class="mb-0">Assign new appointment</h5>
                                             </div>
                                             <div class="col-md-6 p-3">
                                                 <div class="mb-3">
@@ -303,9 +305,13 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 p-3">
+                                            <div class="col-md-6 p-3 d-flex ">
+                                                <div class="me-5">
+                                                    <input type="submit" id="reassign" class="btn btn-primary" value="Assign"> </input>
+                                                </div>
+
                                                 <div class="">
-                                                    <input type="submit" id="reassign" class="btn btn-primary" value="Re-assign"> </input>
+                                                    <input type="submit" id="remove" class="btn btn-primary" value="Remove"> </input>
                                                 </div>
                                             </div>
                                         </div>
@@ -321,7 +327,7 @@
                                                 <h5 class="mb-0">Assign doctor to appointment</h5>
                                             </div>
                                             <div class="col-md-6 p-3">
-                                                 <div class="mb-3">
+                                                <div class="mb-3">
                                                     <label class="form-label">Choose Apartment: </label>
                                                     <select id="speciality" required="" class="form-select form-control" >
                                                         <c:forEach items="${speList}" var="spe">
@@ -371,12 +377,12 @@
                 maxDate: new Date().fp_incr(7)
             });
             $(document).ready(function () {
-                    $("#speciality").change(function () {
+                $("#speciality").change(function () {
                     $("#doctor").find("option").remove();
                     $("#doctor").append("<option>Select Doctor</option>");
-                  
+
                     let data = {
-                        type: "doctor",     
+                        type: "doctor",
                         speciality_id: $("#speciality").val()
                     };
 
@@ -400,7 +406,7 @@
                         cache: false
                     });
                 });
-                
+
                 $("#checkin-date").change(function () {
                     $("#time").find("option").remove();
                     $("#time").append("<option>Select Time</option>");

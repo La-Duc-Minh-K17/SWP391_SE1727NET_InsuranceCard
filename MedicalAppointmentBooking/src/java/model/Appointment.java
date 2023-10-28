@@ -14,6 +14,8 @@ public class Appointment {
 
     private int apptId;
     private String apptNote;
+    private String rescheduleReason;
+    private String rejectReason;
     private Date apptDate;
     private String apptTime;
     private String diagnosis;
@@ -108,6 +110,22 @@ public class Appointment {
         this.patient = patient;
     }
 
+    public String getRescheduleReason() {
+        return rescheduleReason;
+    }
+
+    public void setRescheduleReason(String rescheduleReason) {
+        this.rescheduleReason = rescheduleReason;
+    }
+
+    public String getRejectReason() {
+        return rejectReason;
+    }
+
+    public void setRejectReason(String rejectReason) {
+        this.rejectReason = rejectReason;
+    }
+    
     @Override
     public String toString() {
         return "Appointment{" + "apptId=" + apptId + ", apptNote=" + apptNote + ", apptDate=" + apptDate + ", apptTime=" + apptTime + ", diagnosis=" + diagnosis + ", status=" + status + ", doctor=" + doctor + ", patient=" + patient + '}';
