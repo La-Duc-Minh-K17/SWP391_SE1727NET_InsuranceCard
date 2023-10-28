@@ -67,37 +67,44 @@
             <jsp:include page="/frontend/common/header.jsp" />
         </div>
 
-        <div class="header-content">
-            <h3>Doctors team</h2>
-                <h6>Great doctor if you need your family member to get effective immediate assistance,</h6>
-                <h6>emergency treatment or a simple consultation</h6>
+        <div class="header-content  text-center p-5">
+            <h3 class="text-primary">Doctors Team</h3>
+            <p class="lead">Great doctors if you need immediate assistance, emergency treatment, or a simple consultation.</p>
         </div>
         <form action="WebDoctorList" method="POST">
-            <div class="func">
-                <input type="text" id="search" name="search" placeholder="Search">
-                <select id="speciality" name="speciality">
-                    <option value="">Speciality</option>
-                    <c:forEach items="${speList}" var="spe">
-                        <option value="${spe.speName}">${spe.speName}</option>
-                    </c:forEach>
-                </select>
+            <div class="row justify-content-between">
+                <div class="col-md-3 d-flex m-5 ">
+                    <input class="form-control border bg-light" type="text" id="search" name="search" placeholder="Search">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+                <div class="col-md-2 d-flex m-5">
+                    <select class="form-select" id="speciality" name="speciality">
+                        <option value="">Speciality</option>
+                        <c:forEach items="${speList}" var="spe">
+                            <option value="${spe.speName}">${spe.speName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
             </div>
         </form>
-
-        <div id="doctor-container" class="container">
-            <div class="row">
-                <c:forEach items="${doctor}" var="doctor">
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2 doctor">
-                        <a href="WebDoctorDetail?doctorId=${doctor.doctorId}">
-                            <img src="data:image/jpg;base64,${doctor.image}" width="240" height="300"/>
-                            <h5>${doctor.fullName}</h5>
-                            <h6>${doctor.speciality}</h6>
-                            <h6>$ ${doctor.serviceFee} USD / visit</h6>
-                        </a>
-                    </div>
-                </c:forEach>
+        <section class="section bg-white">
+            <div id="doctor-container" class="container">
+                <div class="row justify-content-center">
+                    <c:forEach items="${doctor}" var="doctor">
+                        <div class=" col-xl-3 col-lg-3 col-md-6  doctor card border-1 shadow rounded overflow-hidden m-4 ">
+                            <a href="WebDoctorDetail?doctorId=${doctor.doctorId}">
+                                <div class="d-flex justify-content-center border-1">
+                                    <img src="data:image/jpg;base64,${doctor.image}" width="100%" height="300" class="border-1 rounded" />
+                                </div>
+                                <h5>${doctor.fullName}</h5>
+                                <h6>${doctor.speciality}</h6>
+                                <h6 class="text-muted">$ ${doctor.serviceFee} USD / visit</h6>
+                            </a>
+                        </div>
+                    </c:forEach>
+                </div>
             </div>
-        </div>
+        </section>
         <script>
 
             function filterDoctors() {
