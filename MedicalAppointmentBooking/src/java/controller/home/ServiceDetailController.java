@@ -46,7 +46,7 @@ public class ServiceDetailController extends HttpServlet {
                 int id = Integer.parseInt(request.getParameter("id"));
                 int cateid = Integer.parseInt(request.getParameter("category_id"));
                 Service serviceDetail = new Service();
-                List<Service> sList = servicedao.getRelatedService(cateid);
+                List<Service> sList = servicedao.getRelatedService(cateid,id);
                 List<Doctor> doctorList = doctordao.getAllDoctor();
                 serviceDetail = servicedao.getServiceById(id);
                 request.setAttribute("Lists", sList);
