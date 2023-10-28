@@ -55,8 +55,8 @@
             <c:set value="${requestScope.serviceDetail}" var="s" />
             <div class="row">
                 <div class="col-md-5">
-                    <div class="text-center m-5">
-                        <img src="data:image/jpg;base64,${s.service_image}" height="400" width="500" alt="${s.service_name}" />
+                    <div class="text-center m-5 border-1">
+                        <img src="data:image/jpg;base64,${s.service_image}" height="400" width="500" alt="${s.service_name}"  />
                     </div>
                 </div>
                 <div class="col-md-7">
