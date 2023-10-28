@@ -187,6 +187,7 @@ public class ServicesDAO {
         }
         return reviewList;
     }
+
     public List<ServiceReview> getServiceReviewDESC() {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -239,7 +240,6 @@ public class ServicesDAO {
         }
         return reviewList;
     }
-    
 
     public List<Service> getAllService() {
         PreparedStatement ps = null;
@@ -318,7 +318,7 @@ public class ServicesDAO {
         }
         return serviceList;
     }
-    
+
     public List<Service> getRandomTop3Service() {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -357,16 +357,19 @@ public class ServicesDAO {
         }
         return serviceList;
     }
-    
-    public List<Service> getRelatedService(int cateid) {
+
+    public List<Service> getRelatedService(int cateid, int id) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Service> serviceList = new ArrayList<>();
-        String sql = "SELECT * FROM mabs.services ORDER BY category_id DESC LIMIT 4;";
+        String sql = "SELECT * FROM mabs.services\n"
+                + "WHERE category_id = ? AND service_id <> ? LIMIT 4; ";
         Connection connection = null;
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
+            ps.setInt(1, cateid);
+            ps.setInt(2, id);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int service_id = rs.getInt("service_id");
@@ -633,6 +636,7 @@ public class ServicesDAO {
         return resultList;
 
     }
+
     public List<Service> sortService(String by, String sort) {
         List<Service> slist = new ArrayList<>();
         Connection connection = null;
@@ -665,7 +669,6 @@ public class ServicesDAO {
                 int category_id = rs.getInt("category_id");
                 Service service = new Service(service_id, service_name, service_description, service_details, fee, service_image, service_status, category_id);
                 slist.add(service);
-
 
             }
             return slist;
@@ -721,7 +724,6 @@ public class ServicesDAO {
         }
         return arr;
     }
-
 
     public ArrayList<Service> paging(int page, int page_size) {
         ArrayList<Service> services = new ArrayList<>();
