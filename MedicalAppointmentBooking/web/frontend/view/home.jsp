@@ -117,7 +117,7 @@
                             <p class="text-muted mx-auto para-desc mb-0">Discover a wide spectrum of high-quality medical services at MABS. From preventive care to specialized treatments, our dedicated team of professionals is here to support your health and well-being. Trust us for comprehensive, compassionate, and cutting-edge medical care.</p>
                         </div>
                         <div class="d-flex justify-content-end ">
-                            <a href="#" class="btn btn-soft-primary">More Services </a>
+                            <a href="/MedicalAppointmentBooking/service?action=view-all" class="btn btn-soft-primary">More Services </a>
                         </div>
                     </div><!--end col-->
                 </div><!--end row-->
@@ -150,8 +150,6 @@
             </div><!--end row-->
         </div><!--end container-->
     </div><!--end row-->
-
-
 </div><!--end row-->
 </div><!--end container-->
 <!-- Start -->
@@ -167,7 +165,8 @@
                 </div>
             </div><!--end col-->
             <div class="d-flex justify-content-end ">
-                <a href="#" class="btn btn-soft-primary">View More Doctors </a>
+
+                <a href="/MedicalAppointmentBooking/WebDoctorList" class="btn btn-soft-primary">View More Doctors </a>
             </div>
         </div><!--end row-->
 
@@ -217,7 +216,6 @@
             <div >
 
                 <a href="/MedicalAppointmentBooking/new" class="btn btn-soft-primary"> View More Blogs </a>
-
             </div>
 
         </div><!--end row-->
@@ -225,7 +223,8 @@
         <div class="row">
             <div class="col-lg-12 mt-4 pt-4 m-4">
                 <div class="slider-range-four">  
-                    <c:forEach var="blog" items="${blogs3}">
+                    <c:forEach var="blog" items="${data}">
+
                         <div class="tiny-slide">
                             <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
                                 <img src="frontend/template/assets/images/blog/03.jpg" class="img-fluid" alt="">

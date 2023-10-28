@@ -38,7 +38,6 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
         CategoryDAO cdao = new CategoryDAO();
         BlogDAO blogDAO = new BlogDAO();
         DoctorDAO doctorDao = new DoctorDAO();
@@ -47,7 +46,6 @@ public class HomeController extends HttpServlet {
         List<Service> serviceList = serviceDao.getRandomTop3Service();
         List<Blog> blogsList = blogDAO.getAllNews();
         List<Blog> blogsList3 = blogDAO.getTop3News();
-
         List<Blog_Category> blogCategory = cdao.getAllCategorys();
         request.setAttribute("doctors", doctorList);
         request.setAttribute("service", serviceList);
@@ -55,7 +53,6 @@ public class HomeController extends HttpServlet {
         request.setAttribute("data", blogsList);
         request.setAttribute("blogs3", blogsList3);
         request.setAttribute("listC", blogCategory);
-
         if (action != null && action.equals("logout")) {
             SessionUtils.getInstance().removeValue(request, "user");
             request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
@@ -63,7 +60,7 @@ public class HomeController extends HttpServlet {
         }
         if (action != null && action.equals("view")) {
             int serivce_id = Integer.parseInt(request.getParameter("id"));
-            Service service = serviceDao.getServiceById(serivce_id);
+            Service service = servicedao.getServiceById(serivce_id);
             request.setAttribute("service", service);
             request.getRequestDispatcher("frontend/view/servicedetail.jsp").forward(request, response);
 
@@ -72,7 +69,6 @@ public class HomeController extends HttpServlet {
             request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
             return;
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
