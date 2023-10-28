@@ -100,7 +100,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title text-primary">${s.service_name}</h5>
                                         <div class="card-text">
-                                            <p class="text-secondary">${s.service_details}</p>
+                                            <p class="text-secondary">${s.service_description}</p>
                                         </div>
                                         <h5 class="text-muted">$${s.fee}</h5>
                                     </div>
