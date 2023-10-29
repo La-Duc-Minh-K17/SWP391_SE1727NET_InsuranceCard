@@ -136,6 +136,14 @@
         <servlet-name>ManageAccount</servlet-name>
         <servlet-class>controller.admin.ManageAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AccountAdd</servlet-name>
+        <servlet-class>controller.admin.AccountAdd</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountDetail</servlet-name>
+        <servlet-class>controller.admin.AccountDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -263,6 +271,14 @@
     <servlet-mapping>
         <servlet-name>ManageAccount</servlet-name>
         <url-pattern>/ManageAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountAdd</servlet-name>
+        <url-pattern>/AccountAdd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountDetail</servlet-name>
+        <url-pattern>/AccountDetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
