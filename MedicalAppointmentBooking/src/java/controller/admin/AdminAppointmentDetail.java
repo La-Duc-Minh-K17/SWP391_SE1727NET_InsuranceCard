@@ -40,7 +40,6 @@ public class AdminAppointmentDetail extends HttpServlet {
         AppointmentDAO apptDAO = new AppointmentDAO();
         SpecialityDAO speDAO = new SpecialityDAO();
         DoctorDAO dDAO = new DoctorDAO();
-
         if (action != null && action.equals("view-detail")) {
             int apptId = Integer.parseInt(request.getParameter("apptId"));
             List<Doctor> doctorList = null;
@@ -90,11 +89,12 @@ public class AdminAppointmentDetail extends HttpServlet {
             return;
         }
         if (action != null && action.equals("reject")) {
-            int apptId = Integer.parseInt(request.getParameter("apptId"));
+            int apptId = Integer.parseInt(request.getParameter("cancel_appointment"));
+            String reject_reason = request.getParameter("reject_reason");
             Appointment appointment = apptDAO.getAppointmentById(apptId);
             appointment.setStatus("REJECTED");
+            appointment.setRejectReason(reject_reason);
             apptDAO.updateStatus(appointment);
-            request.setAttribute("success", "REJECTED SUCCESSFULLY");
             response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
             return;
         }

@@ -39,6 +39,7 @@ public class AdminScheduleCalendar extends HttpServlet {
         AppointmentDAO apptDAO = new AppointmentDAO();
         ReservationDAO resvDAO = new ReservationDAO();
         List<Appointment> apptList = apptDAO.getAllAppointment();
+
         List<Reservation> resvList = resvDAO.getAllReservation();
         String scheme = request.getScheme();
         String serverName = request.getServerName();
@@ -47,15 +48,20 @@ public class AdminScheduleCalendar extends HttpServlet {
         String baseUrl = scheme + "://" + serverName + ":" + serverPort + contextPath + "/";
         List<Calendar> list = new ArrayList<>();
         for (Appointment a : apptList) {
-            Calendar c = new Calendar(a);
-            c.setUrl(baseUrl + "admin-appointmentdetail?action=view-detail&apptId=" + a.getApptId());
-            list.add(c);
+            if (!a.getStatus().equals("REJECTED") && !a.getStatus().equals("PENDING") && !a.getStatus().equals("CANCELED")) {
+                Calendar c = new Calendar(a);
+                c.setUrl(baseUrl + "admin-appointmentdetail?action=view-detail&apptId=" + a.getApptId());
+                list.add(c);
+            }
         }
         for (Reservation resv : resvList) {
-            Calendar c = new Calendar(resv);
-            c.setUrl(baseUrl + "admin-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
-            list.add(c);
+            if (!resv.getStatus().equals("REJECTED") && !resv.getStatus().equals("PENDING") && !resv.getStatus().equals("CANCELED")) {
+                Calendar c = new Calendar(resv);
+                c.setUrl(baseUrl + "admin-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
+                list.add(c);
+            }
         }
+
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();

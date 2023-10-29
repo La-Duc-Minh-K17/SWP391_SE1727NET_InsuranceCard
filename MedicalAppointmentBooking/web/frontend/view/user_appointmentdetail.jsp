@@ -86,12 +86,19 @@
                             <br><br><br><br><br>
                             <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
                                 <c:if test="${appt.doctor.image == 'default'}">
-                                    <img src="../template/assets/images/avatar.png" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                    <img src="../template/assets/images/doctor.png" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
                                 </c:if>
                                 <c:if test="${appt.doctor.image != 'default'}">
                                     <img src="data:image/png;base64,${appt.doctor.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
                                 </c:if>
-                                <h5 class="mt-3 mb-1">${appt.doctor.fullName}</h5>
+
+                                <c:if test="${appt.doctor != null}">
+                                    <h5 class="mt-3 mb-1">${appt.doctor.fullName}</h5>
+                                </c:if>
+                                <c:if test="${appt.doctor == null}">
+                                    <h5 class="mt-3 mb-1 text-danger">Undefined</h5>
+                                </c:if>
+
                             </div>
 
                             <div class="list-unstyled p-4">
@@ -103,23 +110,41 @@
                                     </c:if>
                                     <c:if test="${appt.doctor.gender == 0}">
                                         <p class="text-muted mb-0 ms-2">Female</p>
-                                    </c:if>     
+                                    </c:if>  
+                                    <c:if test="${appt.doctor == null}">
+                                        <p class="text-muted mb-0 ms-2">Undefined</p>
+                                    </c:if>
                                 </div>
 
                                 <div class="d-flex align-items-center mt-2">
                                     <i class="uil uil-phone align-text-bottom text-primary h5 mb-0 me-2"></i>
                                     <h6 class="mb-0">Phone Contact</h6>
-                                    <p class="text-muted mb-0 ms-2">${appt.doctor.phone}</p>
+                                    <c:if test="${appt.doctor != null}">
+                                        <p class="text-muted mb-0 ms-2">${appt.doctor.phone}</p>
+                                    </c:if>
+                                    <c:if test="${appt.doctor == null}">
+                                        <p class="text-muted mb-0 ms-2">Undefined</p>
+                                    </c:if>
                                 </div>
                                 <div class="d-flex align-items-center mt-2">
                                     <i class="uil uil-mailbox align-text-bottom text-primary h5 mb-0 me-2"></i>
                                     <h6 class="mb-0">Email</h6>
-                                    <p class="text-muted mb-0 ms-2">${appt.doctor.email}</p>
+                                    <c:if test="${appt.doctor != null}">
+                                        <p class="text-muted mb-0 ms-2">${appt.doctor.email}</p>
+                                    </c:if>
+                                    <c:if test="${appt.doctor == null}">
+                                        <p class="text-muted mb-0 ms-2">Undefined</p>
+                                    </c:if>
                                 </div>
                                 <div class="d-flex align-items-center mt-2">
                                     <i class="uil uil-book-open align-text-bottom text-primary h5 mb-0 me-2"></i>
                                     <h6 class="mb-0">Speciality</h6>
-                                    <p class="text-muted mb-0 ms-2">${appt.doctor.speciality}</p>
+                                    <c:if test="${appt.doctor != null}">
+                                        <p class="text-muted mb-0 ms-2">${appt.doctor.speciality}</p>
+                                    </c:if>
+                                    <c:if test="${appt.doctor == null}">
+                                        <p class="text-muted mb-0 ms-2">Undefined</p>
+                                    </c:if>
                                 </div>
                             </div>
                         </div><!--end col-->

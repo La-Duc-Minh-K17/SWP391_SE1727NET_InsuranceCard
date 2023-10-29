@@ -66,7 +66,7 @@ public class DoctorDAO {
                 }
             }
         }
-        return doctorList;
+        return null;
     }
 
     public List<Doctor> getDoctorByName(String text) {
@@ -127,7 +127,7 @@ public class DoctorDAO {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
             rs = ps.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 int doctorId = rs.getInt("doctor_id");
                 String username = rs.getString("username");
                 String fullName = rs.getString("full_name");
@@ -154,7 +154,53 @@ public class DoctorDAO {
                 }
             }
         }
-        return doctor;
+        return null;
+    }
+
+    public Doctor getDoctorByUserId(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Doctor doctor = null;
+        String sql = "select * from doctors d \n"
+                + "                      inner join user_account u on d.user_id = u.user_id \n"
+                + "                      inner join  speciality s on s.speciality_id = d.speciality_id\n"
+                + "            where u.user_id = ?";
+
+        Connection connection = null;
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int doctorId = rs.getInt("doctor_id");
+                int userId = rs.getInt("user_id");
+                String username = rs.getString("username");
+                String fullName = rs.getString("full_name");
+                String phone = rs.getString("phone");
+                String image = ImageProcessing.imageString(rs.getBlob("image"));
+                int gender = rs.getInt("gender");
+                String email = rs.getString("email");
+                int status = rs.getInt("status");
+                String position = rs.getString("doctor_position");
+                String speciality = rs.getString("speName");
+                String description = rs.getString("doctor_description");
+                int fee = rs.getInt("service_fee");
+                doctor = new Doctor(doctorId, speciality, position, description, userId, username, email, fullName, gender, phone, image, status);
+                doctor.setServiceFee(fee);
+            }
+            return doctor;
+        } catch (SQLException e) {
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return null;
     }
 
     public List<Doctor> getDoctorBySpeciality(int id) {
@@ -199,7 +245,7 @@ public class DoctorDAO {
                 }
             }
         }
-        return doctorList;
+        return null;
     }
 
     public List<Doctor> getDoctorBySpeciality(String spe) {
@@ -299,7 +345,6 @@ public class DoctorDAO {
         }
     }
 
-
     public List<DoctorFeedback> getDoctorFeedback() {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -325,14 +370,11 @@ public class DoctorDAO {
                 String patientName = rs.getString("patient_name");
                 String image = ImageProcessing.imageString(rs.getBlob("image"));
                 String doctorName = rs.getString("doctor_name");
-
                 String content = rs.getString("content");
                 String create_time = rs.getString("create_time");
                 float rate = rs.getFloat("rate");
-
                 acc.setFullName(patientName);
                 acc.setImage(image);
-
                 DoctorFeedback d = new DoctorFeedback();
                 d.setDoctorName(doctorName);
                 d.setContent(content);
@@ -412,6 +454,7 @@ public class DoctorDAO {
         }
         return doctorfeedback;
     }
+
     public List<DoctorFeedback> getDoctorFeedbackDESC() {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -438,14 +481,11 @@ public class DoctorDAO {
                 String patientName = rs.getString("patient_name");
                 String image = ImageProcessing.imageString(rs.getBlob("image"));
                 String doctorName = rs.getString("doctor_name");
-
                 String content = rs.getString("content");
                 String create_time = rs.getString("create_time");
                 float rate = rs.getFloat("rate");
-
                 acc.setFullName(patientName);
                 acc.setImage(image);
-
                 DoctorFeedback d = new DoctorFeedback();
                 d.setDoctorName(doctorName);
                 d.setContent(content);
@@ -599,9 +639,9 @@ public class DoctorDAO {
             }
         }
     }
-  
+
     public Doctor getDoctorRelatedCategory(int Id) {
-         PreparedStatement ps = null;
+        PreparedStatement ps = null;
         ResultSet rs = null;
         Doctor doctor = null;
 
@@ -615,7 +655,7 @@ public class DoctorDAO {
                 + "WHERE B.blog_id = ?\n"
                 + "ORDER BY RAND()\n"
                 + "LIMIT 1;";
-        try{
+        try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setInt(1, Id);

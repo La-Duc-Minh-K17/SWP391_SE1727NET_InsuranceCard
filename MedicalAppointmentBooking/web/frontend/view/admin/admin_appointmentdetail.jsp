@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
+    <head>s
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Appointment Detail Page</title>
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
@@ -243,7 +243,7 @@
                                         <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Status</label>
-                                                <p>${appt.status}</p>
+                                                <p class="">${appt.status}</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -266,8 +266,35 @@
                                             </div>
                                             <c:if test = "${appt.status ==  'PENDING'}">    
                                                 <div class="mt-3">
-                                                    <a href="admin-appointmentdetail?action=reject&apptId=${appt.apptId}"class="btn btn-primary btn-danger">Reject Appointment  </a>
+                                                    <a href="#cancelappointment" class="btn btn-primary btn-danger " 
+                                                       data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
+                                                        Reject Appointment</a>
                                                 </div>
+                                                <div class="modal fade"  id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog "style="max-width: 500px;"  >
+                                                        <div class="modal-content">
+                                                            <div class="modal-body py-5">
+                                                                <div class="text-center">
+                                                                    <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
+                                                                        <i class="uil uil-times-circle h1 mb-0"></i>
+                                                                    </div>
+                                                                    <div class="mt-4">
+                                                                        <h4>Reject Appointment</h4>
+                                                                        <p class="para-desc mx-auto text-muted mb-0">This appointment will be rejected.Are you sure ?</p>
+                                                                        <div class="mt-4">
+                                                                            <form action="<c:url value='admin-appointmentdetail?action=reject'></c:url>" method="post">
+                                                                                    <textarea rows="5" class="form-control" name="reject_reason" placeholder="Your reason" required></textarea>
+                                                                                    <br> <br> <br>
+                                                                                    <input type="hidden" id="cancel_appointment" name="cancel_appointment" value="">
+                                                                                    <input type="submit" class="btn btn-soft-danger" name="cancel" value="Reject">
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                             </c:if>
                                         </div>
                                     </c:if>
@@ -376,6 +403,11 @@
                 minDate: "today",
                 maxDate: new Date().fp_incr(7)
             });
+            function cancelAppt(appt) {
+                var dataId = appt.getAttribute('data-id');
+                let cancel_appt = document.getElementById('cancel_appointment');
+                cancel_appt.value = dataId;
+            }
             $(document).ready(function () {
                 $("#speciality").change(function () {
                     $("#doctor").find("option").remove();

@@ -31,13 +31,13 @@
 
     <body>
         <jsp:include page="/frontend/common/header.jsp" />
-        <section  class="bg-half-150 d-table w-100 bg-light" style="padding: 150px 0 90px 0;">
+        <section  class="bg-half-260 d-table w-100 bg-light" style="padding: 150px 0 90px 0; background: url('${pageContext.request.contextPath}/frontend/template/assets/images/bg/01.jpg'); background-position: center; background-size: cover" >
             <div class="container">
                 <div class="row  justify-content-center">
-                    <div class="col-12"  ">
+                    <div class="col-12" >
                         <div class="section-title text-center">
                             <h3 class="sub-title mb-2">Booking Appointment</h3>
-                            <p class="para-desc mx-auto text-muted">Great doctor if you need your family member to get
+                            <p class="para-desc mx-auto text-dark">Great doctor if you need your family member to get
                                 effective immediate assistance, emergency treatment or a simple consultation.</p>
                         </div>
                     </div>
@@ -108,10 +108,9 @@
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Examination Reason <span class="text-danger">*</span></label>
-                                                    <textarea name="appt-reason" rows="5" class="form-control" placeholder="Your Heath Status (Your symptoms):"></textarea>
+                                                    <textarea name="appt-reason" rows="5" class="form-control" placeholder="Your Heath Status (Your symptoms):" required=""></textarea>
                                                 </div>
                                             </div>
-
                                             <div class="col-lg-12">
                                                 <div class="d-grid">
                                                     <div class="alert alert-primary alert-danger">
