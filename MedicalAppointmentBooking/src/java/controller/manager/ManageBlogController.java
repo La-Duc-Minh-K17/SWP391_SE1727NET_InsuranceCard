@@ -89,7 +89,7 @@ public class ManageBlogController extends HttpServlet {
             String content = request.getParameter("content");
             Part image = request.getPart("image");
             dDAO.updateBlog(blogId, title, description, content, image);
-            response.sendRedirect("manageblog?action=edit&id=" + blogId);
+            response.sendRedirect("manage-blog?action=edit&id=" + blogId);
             return;
         }
         if (action != null && action.equals("detail")) {
@@ -103,7 +103,7 @@ public class ManageBlogController extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("delete_blog_id"));
             dDAO.deleteBlogById(id);
             System.out.println(id);
-            response.sendRedirect("manageblog?action=view-all");
+            response.sendRedirect("manage-blog?action=view-all");
             return;
         }
         if (action != null && action.equals("add")) {
@@ -118,7 +118,7 @@ public class ManageBlogController extends HttpServlet {
             Part image = request.getPart("image");
             Date createdTime = Date.valueOf(request.getParameter("created_time"));
             dDAO.addBlog(title, description, content, categoryId, image, createdTime);
-            response.sendRedirect("manageblog?action=view-all");
+            response.sendRedirect("manage-blog?action=view-all");
             return;
         }
     }
