@@ -119,166 +119,173 @@
                 </div><!--end row-->
             </div><!--end container-->
         </section><!--end section-->
-        <!-- End Service Items -->
-        <div class="container  m-5  ">
-            <!-- Your card elements here -->
-            <ul class="pagination justify-content-end">
-                <li class="page-item ${page==1?"disabled":""}"><a class="page-link btn-primary" href="service?page=${page-1}"  " >Previous</a></li>
-                    <c:forEach begin="1" end="${totalPage}" var="i">
-                    <li class="page-item ${i == page?"active":""}"><a class="page-link btn-primary" href="service?page=${i}">${i}</a></li>
+        
+        <div class="row text-end">
+            <div class="col-12 mt-4">
+                <ul class="pagination justify-content-end mb-5 mt-3 mt-sm-0">
+                    <c:forEach begin="1" end="${num}" var="i">
+                        <li class="page-item ${i == page ? 'active' : ''}">
+                            <a class="page-link" href="${pageContext.request.contextPath}/service?action=view-all&page=${i}">
+                                ${i}
+                            </a>
+                        </li>
                     </c:forEach>
-                <li class="page-item ${page==totalPage?"disabled":""}"><a class="page-link btn-primary "  href="service?page=${page+1}">Next</a></li>
-
-            </ul>
+                </ul>
+            </div>
         </div>
-    </div> 
-    <jsp:include page="/frontend/common/footer.jsp" />
-
-    <script>
-        function viewServiceDetails(serviceId, categoryId) {
-            var url = "servicedetail?action=view-detail&id=" + serviceId + "&category_id=" + categoryId;
-            window.location.href = url;
-        }
-
-        function filter() {
-            var category = document.getElementById("Filter").value;
-            var sort = document.getElementById("sortSelect").value;
-            var searchInput = document.getElementById("searchInput").value;
-            var url = "manage-service?action=view-all"; // Default action
-
-            if (category !== "Filter By") {
-                url = "service?action=filter&category_id=" + category;
-            } else if (searchInput.trim() !== "") {
-                url = "service?action=search&keyword=" + searchInput;
-            } else if (sort !== "Default Sort") {
-                url = "service?action=sorted&by=feename&sort=" + sort;
-            }
-
-            window.location.href = url;
-        }
-    </script>
 
 
-    <style>
-        .custom-center {
-            justify-content: center !important;
-        }
-        .card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            text-align: center;
+
+    </div>
+
+</div> 
+<jsp:include page="/frontend/common/footer.jsp" />
+
+<script>
+    function viewServiceDetails(serviceId, categoryId) {
+        var url = "servicedetail?action=view-detail&id=" + serviceId + "&category_id=" + categoryId;
+        window.location.href = url;
+    }
+
+    function filter() {
+        var category = document.getElementById("Filter").value;
+        var sort = document.getElementById("sortSelect").value;
+        var searchInput = document.getElementById("searchInput").value;
+        var url = "manage-service?action=view-all"; // Default action
+
+        if (category !== "Filter By") {
+            url = "service?action=filter&category_id=" + category;
+        } else if (searchInput.trim() !== "") {
+            url = "service?action=search&keyword=" + searchInput;
+        } else if (sort !== "Default Sort") {
+            url = "service?action=sorted&by=feename&sort=" + sort;
         }
 
-        .card-end {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px; /* Adjust padding as needed */
-        }
-
-        .custom-button {
-            width: 100%;
-            margin: 5px 0;
-        }
-
-        .service-card-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        .card {
-            flex: 1;
-            margin: 0 1rem; /* Adjust margin as needed for spacing between cards */
-            width: 100%; /* Set the width to 100% for full container width */
-            max-width: 400px; /* Adjust the max-width as needed for the desired card size */
-            height: 400px; /* Adjust the height as needed for the desired card size */
-        }
-        .card-img-container {
-            height: 200px;
-            overflow: hidden;
-        }
-        /* CSS để cân đối các dòng chữ trong card */
-        .card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        .card-body {
-            flex: 1;
-        }
-
-        .card-title,
-        .card-text {
-            text-align: center;
-            justify-content: s
-        }
-        .card-title,
-        .card-text {
-            margin-bottom: 15px; /* Khoảng cách giữa các dòng chữ */
-        }
-
-        .btn-primary {
-            align-self: center; /* Để căn giữa nút "Learn More" */
-        }
-
-        .card-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        /* CSS để cân đối nút "Learn More" trong card */
-        .card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            text-align: center;
-        }
+        window.location.href = url;
+    }
+</script>
 
 
-        .custom-button {
-            width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
-            margin: 5px 0; /* Khoảng cách giữa các nút */
-        }
-        .btn-primary {
-            margin-top: auto; /* Để nút "Learn More" ở dưới cùng */
-        }
-        .custom-button {
-            width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
+<style>
+    .custom-center {
+        justify-content: center !important;
+    }
+    .card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+    }
 
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    .card-end {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px; /* Adjust padding as needed */
+    }
 
-        .wrapper {
-            flex: 1;
-        }
-        .footer {
-            background-color: #333; /* Set the background color of your footer */
-            color: white; /* Set the text color of your footer */
-            text-align: center;
-            padding: 20px;
-            width: 100%;
-        }
-    </style>
+    .custom-button {
+        width: 100%;
+        margin: 5px 0;
+    }
 
-    <!-- End -->
-    <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
-    <!-- Icons -->
-    <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
-    <!-- Main Js -->
-    <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-    <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-    <script src= "<c:url     value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-    <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
+    .service-card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .card {
+        flex: 1;
+        margin: 0 1rem; /* Adjust margin as needed for spacing between cards */
+        width: 100%; /* Set the width to 100% for full container width */
+        max-width: 400px; /* Adjust the max-width as needed for the desired card size */
+        height: 400px; /* Adjust the height as needed for the desired card size */
+    }
+    .card-img-container {
+        height: 200px;
+        overflow: hidden;
+    }
+    /* CSS để cân đối các dòng chữ trong card */
+    .card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .card-body {
+        flex: 1;
+    }
+
+    .card-title,
+    .card-text {
+        text-align: center;
+        justify-content: s
+    }
+    .card-title,
+    .card-text {
+        margin-bottom: 15px; /* Khoảng cách giữa các dòng chữ */
+    }
+
+    .btn-primary {
+        align-self: center; /* Để căn giữa nút "Learn More" */
+    }
+
+    .card-img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    /* CSS để cân đối nút "Learn More" trong card */
+    .card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+    }
+
+
+    .custom-button {
+        width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
+        margin: 5px 0; /* Khoảng cách giữa các nút */
+    }
+    .btn-primary {
+        margin-top: auto; /* Để nút "Learn More" ở dưới cùng */
+    }
+    .custom-button {
+        width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
+
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .wrapper {
+        flex: 1;
+    }
+    .footer {
+        background-color: #333; /* Set the background color of your footer */
+        color: white; /* Set the text color of your footer */
+        text-align: center;
+        padding: 20px;
+        width: 100%;
+    }
+</style>
+
+<!-- End -->
+<script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
+<!-- Icons -->
+<script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
+<!-- Main Js -->
+<script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+<script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
+<script src= "<c:url     value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+<script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
 </body>
 
 </html>

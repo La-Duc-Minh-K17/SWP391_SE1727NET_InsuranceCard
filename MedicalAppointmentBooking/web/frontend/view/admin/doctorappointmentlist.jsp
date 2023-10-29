@@ -97,8 +97,6 @@
                                             <option value="FOLLOW_UP">FOLLOW-UP</option>    
                                         </select>
                                     </div>
-                                </div>
-
                             </div>
                             <div class="col-xl-6 col-md-6">
                                 <div class="search-bar d-lg-block" style="padding-top :0">
