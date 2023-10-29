@@ -83,7 +83,7 @@ public class ManageBlogController extends HttpServlet {
             String content = request.getParameter("content");
             Part image = request.getPart("image");
             dDAO.updateBlog(blogId, title, description, content, image);
-            response.sendRedirect("manageblog?action=edit&id=" + blogId);
+            response.sendRedirect("manage-blog?action=edit&id=" + blogId);
             return;
         }
         if (action != null && action.equals("detail")) {

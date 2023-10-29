@@ -471,28 +471,35 @@ public class AppointmentDAO {
         return null;
     }
 
-    public List<Appointment> getFilteredPatientAppointment(int userId , String status) {
+    public List<Appointment> searchAppointmentByPatientNameAndIdDoc(int docId, String namePatient) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
-        List<Appointment> listAppoint = new ArrayList<>();
-        String sql = "select * from appointments appt\n"
-                + "inner join patients p on p.patient_id = appt.patient_id \n"
-                + "inner join user_account ua on ua.user_id = p.user_id\n"
-                + "where ua.user_id = ? "
-                + "and appt.appointment_status = ?";
+        List<Appointment> listAppt = new ArrayList<>();
+        String sql = "select appt.* from mabs.appointments appt \n"
+                + "                INNER JOIN mabs.patients p on p.patient_id = appt.patient_id\n"
+                + "                INNER JOIN mabs.user_account u on u.user_id = p.user_id\n"
+                + "                where u.full_name like ? and appt.doctor_id = ?;";
         try {
             connection = dbc.getConnection();
-            ps = connection.prepareStatement(sql);
-            ps.setInt(1, userId);
-            ps.setString(2, status);
+            ps = connection.prepareStatement(sql);       
+            ps.setString(1, "%" + namePatient + "%");
+            ps.setInt(2, docId);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("appointment_id");
-                Appointment appt = getAppointmentById(id);
-                listAppoint.add(appt);
+                String note = rs.getString("appointment_note");
+                Date date = rs.getDate("appointment_date");
+                String time = rs.getString("appointment_time");
+                String diagnosis = rs.getString("diagnosis");
+                String status = rs.getString("appointment_status");
+                int doctorId = rs.getInt("doctor_id");
+                Doctor doctor = dDAO.getDoctorById(doctorId);
+                int patientId = rs.getInt("patient_id");
+                Patient patient = pDAO.getPatientById(patientId);
+                Appointment appt = new Appointment(id, note, date, time, diagnosis, status, doctor, patient);
+                listAppt.add(appt);
             }
-            return listAppoint;
         } catch (SQLException ex) {
             System.out.println(ex);
         } finally {
@@ -504,7 +511,6 @@ public class AppointmentDAO {
                 }
             }
         }
-        return null;
-    }
-
+        return listAppt;
+}
 }

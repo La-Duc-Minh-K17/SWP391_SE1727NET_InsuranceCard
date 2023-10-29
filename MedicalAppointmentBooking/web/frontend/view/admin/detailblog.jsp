@@ -78,7 +78,7 @@
                     <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
                         <div class="card border-0 shadow overflow-hidden">
                             <div class="tab-content p-4" id="pills-tabContent">
-                                <form action="<c:url value='/manageblog?action=detail&blog_id=${blog.blog_id}'/>" method="POST" enctype="multipart/form-data">
+                                <form action="<c:url value='/manage-blog?action=detail&blog_id=${blog.blog_id}'/>" method="POST" enctype="multipart/form-data">
                                 <h5 class="mb-0"> Blog Information.</h5>
                                 <div>   
                                     <label class="form-label">Image  </label>
@@ -110,7 +110,7 @@
 
                                 <div class="row">
                                     <div class=" col-lg-3">
-                                        <a href="<c:url value='/manageblog?action=view-all'/> " class="btn btn-primary btn-sm">TURN BACK</a>
+                                        <a href="<c:url value='/manage-blog?action=view-all'/> " class="btn btn-primary btn-sm">TURN BACK</a>
                                     </div>
                                 </div>
 
