@@ -8,15 +8,14 @@ import dal.DoctorDAO;
 import dal.PatientDAO;
 import dal.AppointmentDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Doctor;
-import model.Patient;
 import model.Appointment;
+import utils.SessionUtils;
 
 /**
  *
@@ -35,16 +34,14 @@ public class AppointmentListController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        int docId = Integer.parseInt(request.getParameter("id"));
+        Doctor doctor = (Doctor) SessionUtils.getInstance().getValue(request, "user");
         DoctorDAO dDAO = new DoctorDAO();
-        Doctor doctor = dDAO.getDoctorById(docId);
         PatientDAO pDAO = new PatientDAO();
         AppointmentDAO aDAO = new AppointmentDAO();
-        List<Appointment> apptList = aDAO.getAppointmentByDoctorId(docId);
+        List<Appointment> apptList = aDAO.getAppointmentByDoctorId(doctor.getDoctorId());
         request.setAttribute("doctor", doctor);
         request.setAttribute("apptList", apptList);
-        request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
+        request.getRequestDispatcher("frontend/view/admin/doctor_appointmentlist.jsp").forward(request, response);
 
     }
 

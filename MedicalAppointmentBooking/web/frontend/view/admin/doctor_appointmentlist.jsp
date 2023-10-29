@@ -159,7 +159,7 @@
                                                                         <td class="p-3">${appt.status}</td>
                                                                         <td class="p-3">
                                                                             <div class="d-flex align-items-center">
-                                                                                <a href="doctor-appointmentdetail?apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
+                                                                                <a href="doctor-appointmentdetail?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
                                                                                     Details</a>
 
                                                                             </div>

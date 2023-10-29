@@ -47,8 +47,8 @@
         <header id="topnav" class="navigation sticky">
             <div class="container">
                 <div>
-                    <a class="logo" href="home">
-                        <img src="frontend/template/assets/images/MABS__1.png" height="24" alt="">
+                    <a class="logo" href="<c:url value= '/home'/>   ">
+                        <img src="${pageContext.request.contextPath}/frontend/template/assets/images/MABS__1.png" height="24" alt="">
                     </a>
                 </div>
                 <div class="menu-extras">

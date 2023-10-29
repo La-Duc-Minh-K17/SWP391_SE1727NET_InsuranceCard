@@ -58,7 +58,6 @@ public class CheckAvailabilityServlet extends HttpServlet {
             response.getWriter().write(timeList);
         }
          if (type != null && type.equals("doctor")) {
-         
             int specialityId = Integer.parseInt(request.getParameter("speciality_id"));
             List<Doctor> listDoctor = dDAO.getDoctorBySpeciality(specialityId);
             Gson json = new Gson();
