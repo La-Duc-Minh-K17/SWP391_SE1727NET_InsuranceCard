@@ -44,6 +44,7 @@ public class AppointmentDAO {
                 String diagnosis = rs.getString("diagnosis");
                 String status = rs.getString("appointment_status");
                 int doctorId = rs.getInt("doctor_id");
+                
                 Doctor doctor = dDAO.getDoctorById(doctorId);
                 int patientId = rs.getInt("patient_id");
                 Patient patient = pDAO.getPatientById(patientId);

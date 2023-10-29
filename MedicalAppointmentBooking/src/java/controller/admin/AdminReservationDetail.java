@@ -67,7 +67,6 @@ public class AdminReservationDetail extends HttpServlet {
             int resvId = Integer.parseInt(request.getParameter("cancel_appointment"));
             String rejectReason = request.getParameter("reject_reason"); 
             Reservation resv = rDAO.getReservationById(resvId);
-            
             resv.setStatus("REJECTED" );
             resv.setRejectReason(rejectReason);
             rDAO.rejectReservation(resv);

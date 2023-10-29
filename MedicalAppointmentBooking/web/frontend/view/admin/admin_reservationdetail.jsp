@@ -250,7 +250,7 @@
                                             </div>
                                             <c:if test="${resv.status == 'PENDING'}">
                                                 <div class="mt-3">
-                                                    <a href="#cancelappointment" class="btn btn-primary " 
+                                                    <a href="#cancelappointment" class="btn btn-primary btn-danger " 
                                                        data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${resv.resvId}">
                                                         Reject Reservation</a>
                                                 </div>
@@ -264,7 +264,7 @@
                                                                     </div>
                                                                     <div class="mt-4">
                                                                         <h4>Reject  Reservation</h4>
-                                                                        <p class="para-desc mx-auto text-muted mb-0">This appointment will be rejected.Are you sure ?</p>
+                                                                        <p class="para-desc mx-auto text-muted mb-0">This reservation will be rejected.Are you sure ?</p>
                                                                         <div class="mt-4">
                                                                             <form action="<c:url value='admin-reservationdetail?action=reject'></c:url>" method="post">
                                                                                     <textarea rows="5" class="form-control" name="reject_reason" placeholder="Your reason" required></textarea>

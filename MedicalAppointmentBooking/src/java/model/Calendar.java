@@ -20,7 +20,12 @@ public class Calendar {
     private String borderColor;
     private String textColor;
 
+    public Calendar() {
+
+    }
+
     public Calendar(Appointment appt) {
+        
         this.title = "Dr." + appt.getDoctor().getFullName();
         String date = TimeUtil.sqlDateToString(appt.getApptDate()) + "T" + appt.getApptTime();
         this.start = date;

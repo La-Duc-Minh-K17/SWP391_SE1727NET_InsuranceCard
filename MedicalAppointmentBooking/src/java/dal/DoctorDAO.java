@@ -127,7 +127,7 @@ public class DoctorDAO {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
             rs = ps.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 int doctorId = rs.getInt("doctor_id");
                 String username = rs.getString("username");
                 String fullName = rs.getString("full_name");
