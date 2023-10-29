@@ -12,10 +12,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.List;
 import model.Doctor;
 import model.Appointment;
-import utils.SessionUtils;
 
 /**
  *
@@ -34,15 +34,26 @@ public class AppointmentListController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Doctor doctor = (Doctor) SessionUtils.getInstance().getValue(request, "user");
-        DoctorDAO dDAO = new DoctorDAO();
-        PatientDAO pDAO = new PatientDAO();
-        AppointmentDAO aDAO = new AppointmentDAO();
-        List<Appointment> apptList = aDAO.getAppointmentByDoctorId(doctor.getDoctorId());
-        request.setAttribute("doctor", doctor);
-        request.setAttribute("apptList", apptList);
-        request.getRequestDispatcher("frontend/view/admin/doctor_appointmentlist.jsp").forward(request, response);
-
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            int docId = Integer.parseInt(request.getParameter("id"));
+            String action = request.getParameter("action");
+            DoctorDAO dDao = new DoctorDAO();
+            Doctor doctor = dDao.getDoctorById(docId);
+            request.setAttribute("doctor", doctor);
+            if (action != null && action.equals("view-all")) {
+                PatientDAO pdao = new PatientDAO();
+                AppointmentDAO adao = new AppointmentDAO();
+                List<Appointment> apptList = adao.getAppointmentByDoctorId(docId);
+                request.setAttribute("apptList", apptList);
+                request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
+                return;
+            }
+            if (action != null && action.equals("search")) {
+                PatientDAO pdao = new PatientDAO();
+                AppointmentDAO adao = new AppointmentDAO();
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
