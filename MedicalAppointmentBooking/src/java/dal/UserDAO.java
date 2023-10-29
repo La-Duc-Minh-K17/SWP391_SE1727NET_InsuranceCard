@@ -168,8 +168,6 @@ public class UserDAO {
                 + "`dob`,\n"
                 + "`address`,\n"
                 + "`status`,\n"
-                + "`confirmation_token`,\n"
-                + "`confirmation_token_time`,\n"
                 + "`role_id`)\n"
                 + "VALUES\n"
                 + "( ?,\n"
@@ -196,9 +194,8 @@ public class UserDAO {
             ps.setDate(7, user.getDob());
             ps.setString(8, user.getAddress());
             ps.setInt(9, user.getStatus());
-            ps.setString(10, user.getConfirmationToken());
-            ps.setTimestamp(11, user.getConfirmationTokenTime());
-            ps.setInt(12, user.getRole().getRole_id());
+
+            ps.setInt(10, user.getRole().getRole_id());
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);

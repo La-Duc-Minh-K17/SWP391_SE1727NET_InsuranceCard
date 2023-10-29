@@ -17,8 +17,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Role;
 import model.UserAccount;
 import utils.CodeProcessing;
-import utils.EmailSending;
-import utils.SessionUtils;
 import utils.TimeUtil;
 
 /**
@@ -95,16 +93,14 @@ public class AccountAdd extends HttpServlet {
         String dob = request.getParameter("dob");
         String confirmationToken = CodeProcessing.generateToken();
 
-        UserAccount user = new UserAccount(username, "123456@", email, fullname, Integer.valueOf(gender), phone, TimeUtil.dateConverter(dob), address, confirmationToken, timeConfig.getNow(), 0, new Role(Integer.valueOf(role)));
+        UserAccount user = new UserAccount(username, "123456@", email, fullname, Integer.valueOf(gender), phone, TimeUtil.dateConverter(dob), address, null, null, 1, new Role(Integer.valueOf(role)));
         if (uDAO.isAccountExisted(user)) {
             request.setAttribute("error", "Account has existed !");
         } else {
-            SessionUtils.getInstance().putValue(request, "user", user);
+        
             uDAO.addUserAccount(user);
-            String fullURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-            String urlLink = fullURL + "/verify?action=confirm&token=" + confirmationToken;
-            EmailSending.sendVerificationMailAdmin(user, urlLink, email);
-            request.setAttribute("success", "A confirmation email has been sent to your Email, please check.");
+           
+            request.setAttribute("success", "Account added successfully");
         }
         request.getRequestDispatcher("frontend/view/admin/accountadd.jsp").forward(request, response);
     }

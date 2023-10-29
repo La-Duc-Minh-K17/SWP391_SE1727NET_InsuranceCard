@@ -143,8 +143,17 @@
         <servlet-class>controller.admin.ManageAccount</servlet-class>
     </servlet>
     <servlet>
+
+        <servlet-name>AccountAdd</servlet-name>
+        <servlet-class>controller.admin.AccountAdd</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountDetail</servlet-name>
+        <servlet-class>controller.admin.AccountDetail</servlet-class>
+
         <servlet-name>UserReservation</servlet-name>
         <servlet-class>controller.user.UserReservation</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
@@ -284,12 +293,21 @@
         <url-pattern>/ManageAccount</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
+        <servlet-name>AccountAdd</servlet-name>
+        <url-pattern>/AccountAdd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountDetail</servlet-name>
+        <url-pattern>/AccountDetail</url-pattern>
+
         <servlet-name>UserAppointment</servlet-name>
         <url-pattern>/user-appointment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserReservation</servlet-name>
         <url-pattern>/user-reservation</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

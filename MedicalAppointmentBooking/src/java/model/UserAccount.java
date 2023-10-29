@@ -58,6 +58,7 @@ public class UserAccount {
         this.status = status;
         this.role = role;
     }
+    
 
     public UserAccount(String username, String email, String fullName, int gender, String phone, String image, String confirmationToken, Timestamp confirmationTokenTime, String recoveryToken, Timestamp recoveryTokenTime) {
         this.username = username;
@@ -70,6 +71,15 @@ public class UserAccount {
         this.confirmationTokenTime = confirmationTokenTime;
         this.recoveryToken = recoveryToken;
         this.recoveryTokenTime = recoveryTokenTime;
+    }
+        public UserAccount(String username, String email, String fullName, int gender, String phone, String image) {
+        this.username = username;
+        this.email = email;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.phone = phone;
+        this.image = image;
+        
     }
 
     public UserAccount(int userId, String username, String email, String fullName, int gender, String phone, String image, Date dob, String address, int status) {
