@@ -85,14 +85,7 @@
         <servlet-name>AdminReservation</servlet-name>
         <servlet-class>controller.admin.AdminReservation</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>StaffAppointmentList</servlet-name>
-        <servlet-class>controller.staff.StaffAppointmentList</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StaffReservationList</servlet-name>
-        <servlet-class>controller.staff.StaffReservationList</servlet-class>
-    </servlet>
+  
     <servlet>
         <servlet-name>ManagePatient</servlet-name>
         <servlet-class>controller.manager.ManagePatient</servlet-class>

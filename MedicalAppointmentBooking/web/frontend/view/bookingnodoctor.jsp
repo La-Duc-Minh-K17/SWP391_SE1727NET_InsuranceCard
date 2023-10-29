@@ -108,10 +108,9 @@
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Examination Reason <span class="text-danger">*</span></label>
-                                                    <textarea name="appt-reason" rows="5" class="form-control" placeholder="Your Heath Status (Your symptoms):"></textarea>
+                                                    <textarea name="appt-reason" rows="5" class="form-control" placeholder="Your Heath Status (Your symptoms):" required=""></textarea>
                                                 </div>
                                             </div>
-
                                             <div class="col-lg-12">
                                                 <div class="d-grid">
                                                     <div class="alert alert-primary alert-danger">

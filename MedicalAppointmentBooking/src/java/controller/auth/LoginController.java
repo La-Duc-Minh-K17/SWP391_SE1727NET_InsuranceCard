@@ -4,6 +4,7 @@
  */
 package controller.auth;
 
+import dal.DoctorDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -11,7 +12,9 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Doctor;
 import model.UserAccount;
+import resource.RoleProp;
 import utils.SessionUtils;
 
 /**
@@ -47,16 +50,24 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserDAO uDAO = new UserDAO();
+        DoctorDAO dDAO = new DoctorDAO();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String remember = request.getParameter("remember");
         UserAccount account = uDAO.getUserAccount(username, password);
+
         if (account == null) {
             request.setAttribute("error", "Invalid username or password");
             request.getRequestDispatcher("/frontend/view/login.jsp").forward(request, response);
             return;
         } else {
-            SessionUtils.getInstance().putValue(request, "user", account);
+            Doctor doctor = null;
+            if (account.getRole().getRole_name().equals(RoleProp.DOCTOR)) {
+                doctor = dDAO.getDoctorByUserId(account.getUserId());
+                SessionUtils.getInstance().putValue(request, "user", doctor);
+            } else {
+                SessionUtils.getInstance().putValue(request, "user", account);
+            }
             Cookie cusername = new Cookie("username", username);
             Cookie cpass = new Cookie("password", password);
             Cookie crem = new Cookie("remember", "ON");

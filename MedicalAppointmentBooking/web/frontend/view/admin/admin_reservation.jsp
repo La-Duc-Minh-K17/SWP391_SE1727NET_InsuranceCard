@@ -86,6 +86,7 @@
                                             <option ${status == 'CONFIRMED' ? 'selected' : ''} value="CONFIRMED">CONFIRMED</option>
                                             <option ${status == 'PENDING' ? 'selected' : ''} value="PENDING">PENDING</option>
                                             <option ${status == 'RESCHEDULED' ? 'selected' : ''} value="RESCHEDULED">RESCHEDULED</option>
+                                              <option ${status == 'REJECTED' ? 'selected' : ''} value="REJECTED">REJECTED</option>
                                             <option ${status == 'COMPLETED' ? 'selected' : ''} value="COMPLETED">COMPLETED</option>
                                             <option ${status == 'CANCELED' ? 'selected' : ''} value="CANCELED">CANCELED</option>
                                                 
