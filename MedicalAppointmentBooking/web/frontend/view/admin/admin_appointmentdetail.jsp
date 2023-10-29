@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
+    <head>s
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Appointment Detail Page</title>
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
@@ -243,7 +243,7 @@
                                         <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Status</label>
-                                                <p>${appt.status}</p>
+                                                <p class="">${appt.status}</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -259,25 +259,54 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <c:if test="${appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
+                                    <c:if test="${ appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
                                         <div class="d-flex justify-content-between">
                                             <div class="mt-3">
                                                 <a href="admin-appointmentdetail?action=confirm&apptId=${appt.apptId}"class="btn btn-primary ">Confirm Appointment</a>
                                             </div>
-                                            <div class="mt-3">
-                                                <a href="admin-appointmentdetail?action=reject&apptId=${appt.apptId}"class="btn btn-primary btn-danger">Reject Appointment  </a>
-                                            </div>
+                                            <c:if test = "${appt.status ==  'PENDING'}">    
+                                                <div class="mt-3">
+                                                    <a href="#cancelappointment" class="btn btn-primary btn-danger " 
+                                                       data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
+                                                        Reject Appointment</a>
+                                                </div>
+                                                <div class="modal fade"  id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog "style="max-width: 500px;"  >
+                                                        <div class="modal-content">
+                                                            <div class="modal-body py-5">
+                                                                <div class="text-center">
+                                                                    <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
+                                                                        <i class="uil uil-times-circle h1 mb-0"></i>
+                                                                    </div>
+                                                                    <div class="mt-4">
+                                                                        <h4>Reject Appointment</h4>
+                                                                        <p class="para-desc mx-auto text-muted mb-0">This appointment will be rejected.Are you sure ?</p>
+                                                                        <div class="mt-4">
+                                                                            <form action="<c:url value='admin-appointmentdetail?action=reject'></c:url>" method="post">
+                                                                                    <textarea rows="5" class="form-control" name="reject_reason" placeholder="Your reason" required></textarea>
+                                                                                    <br> <br> <br>
+                                                                                    <input type="hidden" id="cancel_appointment" name="cancel_appointment" value="">
+                                                                                    <input type="submit" class="btn btn-soft-danger" name="cancel" value="Reject">
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </c:if>
                                         </div>
                                     </c:if>
                                 </div>
 
                             </div>
-                            <c:if test="${appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
+                            <c:if test="${(appt.status ==  'PENDING' && appt.doctor != null)|| appt.status == 'RESCHEDULED'}">
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
                                     <form action="admin-appointmentdetail?action=reassign&apptId=${appt.apptId}" method="post">
                                         <div class="bg-white rounded shadow overflow-hidden">
                                             <div class="p-4 border-bottom">
-                                                <h5 class="mb-0">Update appointment information</h5>
+                                                <h5 class="mb-0">Assign new appointment</h5>
                                             </div>
                                             <div class="col-md-6 p-3">
                                                 <div class="mb-3">
@@ -286,6 +315,58 @@
                                                         <c:forEach var="d" items="${doctorL}">
                                                             <option value="${d.doctorId }">${d.fullName}</option>
                                                         </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 p-3">
+                                                <div class="">
+                                                    <label class="form-label">Select Appointment Date: </label>
+                                                    <input required="" id="checkin-date" required="" name="appt-date" value="${appt.apptDate}" type="date"class="flatpickr flatpickr-input form-control"  >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 p-3">
+                                                <div class="">
+                                                    <label class="form-label">Select Appointment Time:</label>
+                                                    <select id ="time"required="" name="appt-time" class="form-control department-name select2input" required="">
+                                                        <option readonly>Select Time</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 p-3 d-flex ">
+                                                <div class="me-5">
+                                                    <input type="submit" id="reassign" class="btn btn-primary" value="Assign"> </input>
+                                                </div>
+
+                                                <div class="">
+                                                    <input type="submit" id="remove" class="btn btn-primary" value="Remove"> </input>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </c:if>
+
+                            <c:if test="${appt.status ==  'PENDING' && appt.doctor == null   }">
+                                <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
+                                    <form action="admin-appointmentdetail?action=reassign&apptId=${appt.apptId}" method="post">
+                                        <div class="bg-white rounded shadow overflow-hidden">
+                                            <div class="p-4 border-bottom">
+                                                <h5 class="mb-0">Assign doctor to appointment</h5>
+                                            </div>
+                                            <div class="col-md-6 p-3">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Choose Apartment: </label>
+                                                    <select id="speciality" required="" class="form-select form-control" >
+                                                        <c:forEach items="${speList}" var="spe">
+                                                            <option value="${spe.id}">${spe.speName}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Choose doctor: </label>
+                                                    <select required="" class="form-select form-control" name="doctor" id="doctor">
+                                                        <option readonly>Select Doctor</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -322,7 +403,41 @@
                 minDate: "today",
                 maxDate: new Date().fp_incr(7)
             });
+            function cancelAppt(appt) {
+                var dataId = appt.getAttribute('data-id');
+                let cancel_appt = document.getElementById('cancel_appointment');
+                cancel_appt.value = dataId;
+            }
             $(document).ready(function () {
+                $("#speciality").change(function () {
+                    $("#doctor").find("option").remove();
+                    $("#doctor").append("<option>Select Doctor</option>");
+
+                    let data = {
+                        type: "doctor",
+                        speciality_id: $("#speciality").val()
+                    };
+
+                    $.ajax({
+                        url: "CheckAvailabilityServlet",
+                        method: "GET",
+                        data: data,
+                        success: function (data, textStatus, jqXHR) {
+
+                            let obj = $.parseJSON(data);
+                            $.each(obj, function (key, value) {
+                                $("#doctor").append(
+                                        '<option value="' + value.doctorId + '">' + value.fullName + "</option>"
+                                        );
+                            });
+                            $("select").formSelect();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            $("#time").append("<option>No Time Slot Unavailable</option>");
+                        },
+                        cache: false
+                    });
+                });
 
                 $("#checkin-date").change(function () {
                     $("#time").find("option").remove();

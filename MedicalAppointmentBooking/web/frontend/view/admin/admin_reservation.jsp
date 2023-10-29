@@ -86,6 +86,7 @@
                                             <option ${status == 'CONFIRMED' ? 'selected' : ''} value="CONFIRMED">CONFIRMED</option>
                                             <option ${status == 'PENDING' ? 'selected' : ''} value="PENDING">PENDING</option>
                                             <option ${status == 'RESCHEDULED' ? 'selected' : ''} value="RESCHEDULED">RESCHEDULED</option>
+                                              <option ${status == 'REJECTED' ? 'selected' : ''} value="REJECTED">REJECTED</option>
                                             <option ${status == 'COMPLETED' ? 'selected' : ''} value="COMPLETED">COMPLETED</option>
                                             <option ${status == 'CANCELED' ? 'selected' : ''} value="CANCELED">CANCELED</option>
                                                 
@@ -206,7 +207,7 @@
         <!-- page-wrapper -->
         <!-- javascript -->
         <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog ">
                 <form action="<c:url value='/admin-reservation?action=cancel'></c:url>" method="post">
                         <div class="modal-content">
                             <div class="modal-body py-5">

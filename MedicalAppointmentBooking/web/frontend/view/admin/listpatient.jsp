@@ -11,7 +11,7 @@ Author     : PC
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Manage Service</title>
+        <title>Manage Patient</title>
 
         <!-- favicon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">

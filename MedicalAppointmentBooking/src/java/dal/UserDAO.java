@@ -321,7 +321,6 @@ public class UserDAO {
                 Date dob = rs.getDate("dob");
                 String address = rs.getString("address");
                 Role role = rDAO.getRoleById(rs.getInt("role_id"));
-                System.out.println(role);
                 account = new UserAccount(id, userName, emailAddress, fullName, gender, phone, image, dob, address, status);
                 account.setRole(role);
                 return account;

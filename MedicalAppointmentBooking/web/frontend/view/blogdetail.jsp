@@ -41,8 +41,8 @@
                 <div class="row mt-5 justify-content-center">
                     <div class="col-12">
                         <div class="section-title text-center">
-                            <h3 class="sub-title mb-4 text-white title-dark">Blogs &amp; News</h3>
-                            <p class="para-desc mx-auto text-white-50">Great doctor if you need your family member to get
+                            <h3 class="sub-title mb-4 text-dark title-dark">Blogs &amp; News</h3>
+                            <p class="para-desc mx-auto text-dark">Great doctor if you need your family member to get
                                 effective immediate assistance, emergency treatment or a simple consultation.</p>
 
                             <nav aria-label="breadcrumb" class="d-inline-block mt-3">
@@ -68,7 +68,6 @@
                                         <div class="section-title text-center">
                                             <h3 class="sub-title mb-4">${blog.title}</h3>
                                             <ul class="list-unstyled mt-4">
-
                                                 <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i> ${blog.created_time}</li>
                                             </ul>
                                         </div>
@@ -175,9 +174,8 @@
                         </div>
                     </div>
                 </div>
-                </form>
-                </div><!--end row-->
-                </div><!--end container-->
+               
+
 
                 <div class="container mt-100 mt-60">
                     <div class="row">
@@ -245,18 +243,7 @@
         <script src="frontend/template/assets/js/tiny-slider.js"></script>
         <script src="frontend/template/assets/js/tiny-slider-init.js"></script>
         <script src="frontend/template/assets/js/easy_background.js"></script>
-        <!-- Select2 -->
-        <script src="frontend/template/assets/js/select2.min.js"></script>
-        <script src="frontend/template/assets/js/select2.init.js"></script>
-        <!-- Datepicker -->
-        <script src="frontend/template/assets/js/flatpickr.min.js"></script>
-        <script src="frontend/template/assets/js/flatpickr.init.js"></script>
-        <!-- Datepicker -->
-        <script src="frontend/template/assets/js/jquery.timepicker.min.js"></script> 
-        <script src="frontend/template/assets/js/timepicker.init.js"></script> 
-        <!-- Icons -->
         <script src="frontend/template/assets/js/feather.min.js"></script>
-        <!-- Main Js -->
         <script src="frontend/template/assets/js/app.js"></script>
 
     </body>

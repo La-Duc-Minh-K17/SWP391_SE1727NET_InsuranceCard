@@ -5,6 +5,7 @@
 package controller.manager;
 
 import dal.DoctorDAO;
+import dal.PatientDAO;
 import dal.SpecialityDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -16,6 +17,7 @@ import jakarta.servlet.http.Part;
 import java.util.List;
 
 import model.Doctor;
+import model.Patient;
 
 /**
  *
@@ -37,6 +39,7 @@ public class ManageDoctorController extends HttpServlet {
             throws ServletException, IOException {
 
         DoctorDAO dDAO = new DoctorDAO();
+        PatientDAO pDAO = new PatientDAO();
         String action = request.getParameter("action");
         SpecialityDAO sDAO = new SpecialityDAO();
         request.setAttribute("speList", sDAO.getAllSpeciality());
@@ -85,6 +88,8 @@ public class ManageDoctorController extends HttpServlet {
         if (action != null && action.equals("view")) {
             int doctorId = Integer.parseInt(request.getParameter("id"));
             Doctor doctor = dDAO.getDoctorById(doctorId);
+            List<Patient> patient = pDAO.getPatientByDoctorId(doctorId);
+            request.setAttribute("patient", patient);
             request.setAttribute("doctor", doctor);
             request.getRequestDispatcher("frontend/view/admin/doctordetail.jsp").forward(request, response);
 
