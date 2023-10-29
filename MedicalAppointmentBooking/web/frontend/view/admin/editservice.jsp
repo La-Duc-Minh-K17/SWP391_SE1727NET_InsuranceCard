@@ -22,6 +22,10 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <script type="text/javascript" src="<c:url value='https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js'/>"></script>
+        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/jquery.min.js"></script>
+        <script type="text/javascript" src="<c:url value='https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js'/>"></script>
+        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/jquery.min.js"></script>
     </head>
     <body>
         <div class="page-wrapper doctris-theme toggled">
@@ -92,7 +96,7 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Title</label>
-                                            <input name="service_name" id="name" type="text" class="form-control" value="${s.service_name}">
+                                            <input name="service_name" id="name" type="text" class="form-control" value="${s.service_name}" required placeholder="Service Name" oninput="validateInput(this)" required placeholder="Enter the Service Name">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -100,7 +104,7 @@
                                             <label class="form-label">Price</label>
                                             <div class="input-group">
                                                 <span class="input-group-text">$</span>
-                                                <input name="service_fee" type="text" class="form-control" value="${s.fee}">
+                                                <input name="service_fee" type="text" class="form-control" value="${s.fee}" required placeholder="Service Fee" oninput="validateInput(this)" pattern="^[0-9.]*$" required placeholder="Enter the Service Fee">
                                             </div>
                                         </div>
                                     </div>
@@ -108,15 +112,10 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Description</label>
-                                            <input name="service_description" type="text" class="form-control" value="${s.service_description}">
+                                            <input name="service_description" type="text" class="form-control" value="${s.service_description}" required placeholder="Service Description" oninput="validateInput(this)" required placeholder="Enter the Service Description">
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
-                                        <div class="mb-3 custom-box">
-                                            <label class="form-label">Detail</label>
-                                            <input name="service_details" type="text" class="form-control" value="${s.service_details}">
-                                        </div>
-                                    </div>
+
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Category</label>
@@ -125,6 +124,12 @@
                                                     <option value="${c.sc_id}">${c.name}</option>
                                                 </c:forEach>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3 custom-box">
+                                            <label class="form-label">Detail</label>
+                                            <textarea id="detail" name="service_details" cols="50" rows="30"class="form-control"  required placeholder="Service Details">${s.service_details} </textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -164,6 +169,9 @@
             </main><!-- comment -->
         </div>
     </body>
+    <script type="text/javascript">
+        CKEDITOR.replace('detail');
+    </script>
     <script>
 
 
@@ -183,6 +191,15 @@
             } else {
 
                 thumbnail.src = "";
+            }
+            function validateInput(inputElement) {
+                var inputValue = inputElement.value;
+                var pattern = /^[a-zA-Z0-9 ]*$/; // Only allow alphanumeric characters and spaces
+
+                if (!pattern.test(inputValue)) {
+                    alert("Special characters are not allowed in this field.");
+                    inputElement.value = inputValue.replace(/[^a-zA-Z0-9 ]/g, ''); // Remove special characters
+                }
             }
         }
     </script>

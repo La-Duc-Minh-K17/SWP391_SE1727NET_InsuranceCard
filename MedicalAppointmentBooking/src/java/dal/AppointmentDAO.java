@@ -15,8 +15,6 @@ import java.util.List;
 import model.Appointment;
 import model.Doctor;
 import model.Patient;
-import model.UserAccount;
-import utils.TimeUtil;
 
 /**
  *
@@ -123,10 +121,22 @@ public class AppointmentDAO {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setString(1, appt.getApptNote());
-            ps.setDate(2, appt.getApptDate());
-            ps.setString(3, appt.getApptTime());
+            if (appt.getApptDate() == null) {
+                ps.setNull(2, java.sql.Types.NULL);
+            } else {
+                ps.setDate(2, appt.getApptDate());
+            }
+            if (appt.getApptTime() == null || appt.getApptTime().isEmpty()) {
+                ps.setNull(3, java.sql.Types.NULL);
+            } else {
+                ps.setString(3, appt.getApptTime());
+            }
             ps.setString(4, appt.getStatus());
-            ps.setInt(5, appt.getDoctor().getDoctorId());
+            if (appt.getDoctor() == null) {
+                ps.setNull(5, java.sql.Types.NULL);
+            } else {
+                ps.setInt(5, appt.getDoctor().getDoctorId());
+            }
             ps.setInt(6, appt.getPatient().getPatientId());
             ps.executeUpdate();
 
@@ -167,7 +177,6 @@ public class AppointmentDAO {
                 int patientId = rs.getInt("patient_id");
                 Patient patient = pDAO.getPatientById(patientId);
                 appt = new Appointment(id, note, date, time, diagnosis, status, doctor, patient);
-
             }
             return appt;
         } catch (SQLException ex) {
@@ -182,84 +191,6 @@ public class AppointmentDAO {
             }
         }
         return null;
-    }
-    private final int MAX_APPOINTMENT = 1;
-
-    public List<String> getAvailableTimeSlot(int doctorId, String date) {
-        PreparedStatement ps = null;
-        Connection connection = null;
-        ResultSet rs = null;
-        List<String> timeSlot = new ArrayList<>();
-        timeSlot.add("7:00:00");
-        timeSlot.add("8:00:00");
-        timeSlot.add("9:00:00");
-        timeSlot.add("10:00:00");
-        timeSlot.add("11:00:00");
-        timeSlot.add("12:00:00");
-        timeSlot.add("13:00:00");
-        timeSlot.add("14:00:00");
-        timeSlot.add("15:00:00");
-        timeSlot.add("16:00:00");
-        timeSlot.add("17:00:00");
-
-        String sql = "SELECT appointment_time\n"
-                + "FROM appointments\n"
-                + "WHERE doctor_id = ? AND appointment_date = ? ";
-        try {
-            connection = dbc.getConnection();
-            ps = connection.prepareStatement(sql);
-            ps.setDate(2, TimeUtil.dateConverter(date));
-            ps.setInt(1, doctorId);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                if (timeSlot.contains(rs.getString("appointment_time"))) {
-                    timeSlot.remove(rs.getString(1));
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    System.out.println(ex);
-                }
-            }
-        }
-        return timeSlot;
-    }
-
-    public boolean checkAvailability(Appointment appt) {
-        PreparedStatement ps = null;
-        Connection connection = null;
-        ResultSet rs = null;
-        String sql = "SELECT COUNT(*) AS appointment_count\n"
-                + "FROM appointments\n"
-                + "WHERE doctor_id = ? AND appointment_date = ? AND appointment_time = ? ";
-        try {
-            connection = dbc.getConnection();
-            ps.setInt(1, appt.getDoctor().getDoctorId());
-            ps.setDate(2, appt.getApptDate());
-            ps.setString(3, appt.getApptTime());
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                if (rs.getInt(1) >= MAX_APPOINTMENT) {
-                    return false;
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    System.out.println(ex);
-                }
-            }
-        }
-        return true;
     }
 
     public void updateStatus(Appointment appointment) {
@@ -381,7 +312,6 @@ public class AppointmentDAO {
     }
 
     public List<Appointment> getAppointmentByDoctorId(int docId) {
-
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -450,4 +380,137 @@ public class AppointmentDAO {
             }
         }
     }
+
+    public void rescheduleAppointmentForPatient(Appointment appointment) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "UPDATE `mabs`.`appointments`\n"
+                + "SET\n"
+                + "`reschedule_reason` = ?,\n"
+                + "`appointment_date` = ?,\n"
+                + "`appointment_time` = ?,\n"
+                + "`appointment_status` = ?,\n"
+                + "`doctor_id` = ? \n"
+                + "WHERE `appointment_id` = ?;";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, appointment.getRescheduleReason());
+            ps.setDate(2, appointment.getApptDate());
+            ps.setString(3, appointment.getApptTime());
+            ps.setString(4, appointment.getStatus());
+            ps.setInt(5, appointment.getDoctor().getDoctorId());
+            ps.setInt(6, appointment.getApptId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    }
+
+    public void deleteRecord(int apptId) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "delete from appointments where appointment_id = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, apptId);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    }
+
+    public List<Appointment> getPatientAppointmentByUserId(int userId) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<Appointment> listAppoint = new ArrayList<>();
+        String sql = "select * from appointments appt\n"
+                + "inner join patients p on p.patient_id = appt.patient_id \n"
+                + "inner join user_account ua on ua.user_id = p.user_id\n"
+                + "where ua.user_id = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("appointment_id");
+                Appointment appt = getAppointmentById(id);
+                listAppoint.add(appt);
+            }
+            return listAppoint;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return null;
+    }
+
+    public List<Appointment> searchAppointmentByPatientNameAndIdDoc(int docId, String namePatient) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<Appointment> listAppt = new ArrayList<>();
+        String sql = "select appt.* from mabs.appointments appt \n"
+                + "                INNER JOIN mabs.patients p on p.patient_id = appt.patient_id\n"
+                + "                INNER JOIN mabs.user_account u on u.user_id = p.user_id\n"
+                + "                where u.full_name like ? and appt.doctor_id = ?;";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);       
+            ps.setString(1, "%" + namePatient + "%");
+            ps.setInt(2, docId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("appointment_id");
+                String note = rs.getString("appointment_note");
+                Date date = rs.getDate("appointment_date");
+                String time = rs.getString("appointment_time");
+                String diagnosis = rs.getString("diagnosis");
+                String status = rs.getString("appointment_status");
+                int doctorId = rs.getInt("doctor_id");
+                Doctor doctor = dDAO.getDoctorById(doctorId);
+                int patientId = rs.getInt("patient_id");
+                Patient patient = pDAO.getPatientById(patientId);
+                Appointment appt = new Appointment(id, note, date, time, diagnosis, status, doctor, patient);
+                listAppt.add(appt);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return listAppt;
+}
 }

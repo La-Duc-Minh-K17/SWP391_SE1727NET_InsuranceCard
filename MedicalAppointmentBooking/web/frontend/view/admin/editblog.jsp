@@ -23,6 +23,9 @@
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
 
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <script type="text/javascript" src="<c:url value='https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js'/>"></script>
+
+        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/jquery.min.js"></script>
     </head>
     <body>
         <div class="page-wrapper doctris-theme toggled">
@@ -79,7 +82,7 @@
                     <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
                         <div class="card border-0 shadow overflow-hidden">
                             <div class="tab-content p-4" id="pills-tabContent">
-                                <form action="<c:url value='/manageblog?action=edit-info&blog_id=${blog.blog_id}'/>" method="POST" enctype="multipart/form-data">
+                                <form action="<c:url value='/manage-blog?action=edit-info&blog_id=${blog.blog_id}'/>" method="POST" enctype="multipart/form-data">
                                 <h5 class="mb-0">Edit Blog Information.</h5>
                                 <div>
                                     <p class="text-muted">Update Image.</p>
@@ -93,34 +96,31 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Title  </label>
+                                            <label class="form-label">Title</label>
                                             <input name="title" id="name" type="text" class="form-control" value="${blog.title}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Description</label>
-                                            <input name="description"  type="text"  class="form-control" value="${blog.description}">
+                                            <input name="description" type="text" class="form-control" value="${blog.description}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Content</label>
-                                            <input name="content" type="text" class="form-control" value="${blog.content}">
+                                            <textarea id="content" name="content"row="50" cols="50" style="min-height: 300px;" class="form-control">${blog.content} </textarea>
                                         </div>
                                     </div>
-
                                 </div>
-
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <input type="submit" id="submit" name="send" class="btn btn-primary btn-sm"value="SAVE">
                                     </div>
                                     <div class=" col-lg-3">
-                                        <a href="<c:url value='/manageblog?action=view-all'/> " class="btn btn-primary btn-sm">TURN BACK</a>
+                                        <a href="<c:url value='/manage-blog?action=view-all'/> " class="btn btn-primary btn-sm">TURN BACK</a>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -134,15 +134,12 @@
         function displayThumbnail() {
             const input = document.getElementById("uploadfile");
             const thumbnail = document.getElementById("thumbImage");
-
             // Check if a file has been selected
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
-
                 reader.onload = function (e) {
                     thumbnail.src = e.target.result;
                 };
-
                 reader.readAsDataURL(input.files[0]);
             } else {
 
@@ -150,6 +147,11 @@
             }
         }
     </script>
+
+    <script type="text/javascript">
+        CKEDITOR.replace('content');
+    </script>
+    
     <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
     <!-- simplebar -->
     <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>

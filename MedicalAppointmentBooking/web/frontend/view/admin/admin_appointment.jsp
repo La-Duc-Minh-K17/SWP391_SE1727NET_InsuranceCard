@@ -69,9 +69,7 @@
                                                 <small class="text-muted"></small>
                                             </div>
                                         </a>
-                                        <a class="dropdown-item text-dark" href="dr-profile.html"><span
-                                                class="mb-0 d-inline-block me-1"><i
-                                                    class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                                       
                                         <div class="dropdown-divider border-top"></div>
                                         <a class="dropdown-item text-dark" href="lock-screen.html"><span
                                                 class="mb-0 d-inline-block me-1"><i
@@ -215,35 +213,28 @@
         <!-- javascript -->
         <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <form action="<c:url value='/admin-appointment?action=cancel'></c:url>" method="post">
-                    <div class="modal-content">
-                        <div class="modal-body py-5">
-                            <div class="text-center">
-                                <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                    <i class="uil uil-times-circle h1 mb-0"></i>
-                                </div>
-                                <div class="mt-4">
-                                    <h4>Cancel Appointment</h4>
-                                    <p class="para-desc mx-auto text-muted mb-0">This appointment will be cancelled by you. Are you sure ?</p>
+                <form action="<c:url value='/admin-appointment?action=delete'></c:url>" method="post">
+                        <div class="modal-content">
+                            <div class="modal-body py-5">
+                                <div class="text-center">
+                                    <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
+                                        <i class="uil uil-times-circle h1 mb-0"></i>
+                                    </div>
                                     <div class="mt-4">
-                                        <input type="hidden" id="cancel_appointment" name="appointment_canceled" value="">
-                                        <input type="submit" class="btn btn-soft-danger" name="cancel" value="Cancel">
+                                        <h4>Delete Record</h4>
+                                        <p class="para-desc mx-auto text-muted mb-0">This appointment record will be deleted. Are you sure ?</p>
+                                        <div class="mt-4">
+                                            <input type="hidden" id="cancel_appointment" name="appointment_canceled" value="">
+                                            <input type="submit" class="btn btn-soft-danger" name="cancel" value="Delete">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
-
             <script>
-
-                function viewAppt(appt) {
-                    var dataId = appt.getAttribute('data-id');
-                    const url = 'http://localhost:8080/MedicalAppointmentBooking/admin-appointment?action=view-detail&apptId=' + dataId;
-                    window.href.location = url;
-                }
 
                 function cancelAppt(appt) {
                     var dataId = appt.getAttribute('data-id');

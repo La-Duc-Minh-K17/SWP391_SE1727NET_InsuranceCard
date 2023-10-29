@@ -2,24 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.manager;
+package controller.admin;
 
-import dal.ServicesDAO;
+import com.google.gson.Gson;
+import dal.AppointmentDAO;
+import dal.ReservationDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import static java.lang.System.out;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
-import model.Doctor;
+import model.Appointment;
+import model.Calendar;
+import model.Reservation;
 
 /**
  *
- * @author DELL
+ * @author Admin
  */
-public class ServiceReview extends HttpServlet {
+public class AdminScheduleCalendar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,34 +36,36 @@ public class ServiceReview extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");      
-        ServicesDAO sv = new ServicesDAO();
-        request.setAttribute("serviceList", sv.getAllService());
-        if (action != null && action.equals("view-all")) {
-            
-            request.setAttribute("review", sv.getServiceReview());
-            request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
-            return;
-        }
-        if (action != null && action.equals("filter")) {
-            int serId = Integer.parseInt(request.getParameter("service_id"));
-            request.setAttribute("review", sv.getServiceReviewById(serId));
-            request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
-            return;
-        } 
-         if (action != null && action.equals("sort")) {
-            String sortby = request.getParameter("sortby");
-            if(sortby.equalsIgnoreCase("Newest"))
-            {
-                request.setAttribute("review", sv.getServiceReviewDESC());
-                request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
-            }else{
-                request.setAttribute("review", sv.getServiceReviewASC());
-                request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
-            }  
-            
-        } 
+        AppointmentDAO apptDAO = new AppointmentDAO();
+        ReservationDAO resvDAO = new ReservationDAO();
+        List<Appointment> apptList = apptDAO.getAllAppointment();
 
+        List<Reservation> resvList = resvDAO.getAllReservation();
+        String scheme = request.getScheme();
+        String serverName = request.getServerName();
+        int serverPort = request.getServerPort();
+        String contextPath = request.getContextPath();
+        String baseUrl = scheme + "://" + serverName + ":" + serverPort + contextPath + "/";
+        List<Calendar> list = new ArrayList<>();
+        for (Appointment a : apptList) {
+            if (!a.getStatus().equals("REJECTED") && !a.getStatus().equals("PENDING") && !a.getStatus().equals("CANCELED")) {
+                Calendar c = new Calendar(a);
+                c.setUrl(baseUrl + "admin-appointmentdetail?action=view-detail&apptId=" + a.getApptId());
+                list.add(c);
+            }
+        }
+        for (Reservation resv : resvList) {
+            if (!resv.getStatus().equals("REJECTED") && !resv.getStatus().equals("PENDING") && !resv.getStatus().equals("CANCELED")) {
+                Calendar c = new Calendar(resv);
+                c.setUrl(baseUrl + "admin-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
+                list.add(c);
+            }
+        }
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        out.write(new Gson().toJson(list));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

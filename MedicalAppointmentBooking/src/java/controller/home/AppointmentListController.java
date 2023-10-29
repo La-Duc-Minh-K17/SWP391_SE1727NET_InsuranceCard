@@ -8,14 +8,13 @@ import dal.DoctorDAO;
 import dal.PatientDAO;
 import dal.AppointmentDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.List;
 import model.Doctor;
-import model.Patient;
 import model.Appointment;
 
 /**
@@ -38,15 +37,27 @@ public class AppointmentListController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             int docId = Integer.parseInt(request.getParameter("id"));
+            String action = request.getParameter("action");
             DoctorDAO dDao = new DoctorDAO();
             Doctor doctor = dDao.getDoctorById(docId);
-            PatientDAO pdao = new PatientDAO();
-            AppointmentDAO adao = new AppointmentDAO();
-            List<Appointment> apptList = adao.getAppointmentByDoctorId(docId);
             request.setAttribute("doctor", doctor);
-            request.setAttribute("apptList", apptList);
-            request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
-
+            if (action != null && action.equals("view-all")) {
+                PatientDAO pdao = new PatientDAO();
+                AppointmentDAO adao = new AppointmentDAO();
+                List<Appointment> apptList = adao.getAppointmentByDoctorId(docId);
+                request.setAttribute("apptList", apptList);
+                request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
+                return;
+            }
+            if (action != null && action.equals("search")) {
+                String search = request.getParameter("search").trim();
+                PatientDAO pdao = new PatientDAO();
+                AppointmentDAO adao = new AppointmentDAO();
+                List<Appointment> apptList = adao.searchAppointmentByPatientNameAndIdDoc(docId, search);
+                request.setAttribute("apptList", apptList);
+                request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
+                return;
+            }
         }
     }
 

@@ -2,11 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
-package controller.manager;
+package controller.admin;
 
 import dal.DoctorDAO;
-import dal.SpecialityDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,35 +16,52 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author DELL
  */
-public class WebDoctorDetail extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+public class DoctorFeedback extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet WebDoctorDetail</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet WebDoctorDetail at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            throws ServletException, IOException {
+        String action = request.getParameter("action");
+        DoctorDAO d = new DoctorDAO();
+        request.setAttribute("doctorList", d.getAllDoctor());    
+        if (action != null && action.equals("view-all")) {
+            request.setAttribute("doctorFeedback", d.getDoctorFeedback());
+            request.getRequestDispatcher("../frontend/view/doctorfeedback.jsp").forward(request, response);
+            return;
         }
-    } 
+        if (action != null && action.equals("filter")) {
+            int docId = Integer.parseInt(request.getParameter("doctorId"));
+            request.setAttribute("doctorFeedback", d.getFeedBackByDoctorID(docId));
+            request.getRequestDispatcher("../frontend/view/doctorfeedback.jsp").forward(request, response);
+            
+        } 
+         if (action != null && action.equals("sort")) {
+            String sortby = request.getParameter("sortby");
+            if(sortby.equalsIgnoreCase("Newest"))
+            {
+                request.setAttribute("doctorFeedback", d.getDoctorFeedbackDESC());
+                request.getRequestDispatcher("../frontend/view/doctorfeedback.jsp").forward(request, response);
+            }else{
+                request.setAttribute("doctorFeedback",d.getDoctorFeedbackASC());
+                request.getRequestDispatcher("../frontend/view/doctorfeedback.jsp").forward(request, response);
+            }  
+            
+        } 
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -54,18 +69,13 @@ public class WebDoctorDetail extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        SpecialityDAO spe = new SpecialityDAO();
-        request.setAttribute("speList", spe.getAllSpeciality());
-        int id = Integer.parseInt(request.getParameter("doctorId"));
-        DoctorDAO doctor = new DoctorDAO();
-        request.setAttribute("doctor", doctor.getDoctorById(id));
-        
-        request.getRequestDispatcher("frontend/view/webdoctordetail.jsp").forward(request, response);
-    } 
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -73,12 +83,13 @@ public class WebDoctorDetail extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

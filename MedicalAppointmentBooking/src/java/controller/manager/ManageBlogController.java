@@ -13,15 +13,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import java.io.InputStream;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import model.Blog;
 
 /**
@@ -89,7 +83,7 @@ public class ManageBlogController extends HttpServlet {
             String content = request.getParameter("content");
             Part image = request.getPart("image");
             dDAO.updateBlog(blogId, title, description, content, image);
-            response.sendRedirect("manageblog?action=edit&id=" + blogId);
+            response.sendRedirect("manage-blog?action=edit&id=" + blogId);
             return;
         }
         if (action != null && action.equals("detail")) {
@@ -103,7 +97,7 @@ public class ManageBlogController extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("delete_blog_id"));
             dDAO.deleteBlogById(id);
             System.out.println(id);
-            response.sendRedirect("manageblog?action=view-all");
+            response.sendRedirect("manage-blog?action=view-all");
             return;
         }
         if (action != null && action.equals("add")) {
@@ -118,7 +112,7 @@ public class ManageBlogController extends HttpServlet {
             Part image = request.getPart("image");
             Date createdTime = Date.valueOf(request.getParameter("created_time"));
             dDAO.addBlog(title, description, content, categoryId, image, createdTime);
-            response.sendRedirect("manageblog?action=view-all");
+            response.sendRedirect("manage-blog?action=view-all");
             return;
         }
     }

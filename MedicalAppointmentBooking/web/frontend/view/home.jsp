@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8" />
         <title>MABS</title>
-        <!-- favicon -->
+        <!-- favicon -->    
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -21,7 +21,7 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="frontend/template/assets/css/flatpickr.min.css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
-        
+
     </head>
     <body>
 
@@ -42,7 +42,7 @@
                                     <div class="row align-items-center justify-content-center">
                                         <div class="col-md-auto mt-4 mt-sm-0">
                                             <div class="d-grid d-md-block">
-                                                <a href="#" class="btn btn-primary">Book your appointment</a>
+                                                <a href="frontend/view/bookingnodoctor.jsp" class="btn btn-primary">Book your appointment</a>
                                             </div>
                                         </div><!--end col-->
                                     </div><!--end row-->
@@ -117,295 +117,279 @@
                             <p class="text-muted mx-auto para-desc mb-0">Discover a wide spectrum of high-quality medical services at MABS. From preventive care to specialized treatments, our dedicated team of professionals is here to support your health and well-being. Trust us for comprehensive, compassionate, and cutting-edge medical care.</p>
                         </div>
                         <div class="d-flex justify-content-end ">
-                        <a href="#" class="btn btn-soft-primary">More Services </a>
-                    </div>
+                            <a href="/MedicalAppointmentBooking/service?action=view-all" class="btn btn-soft-primary">More Services </a>
+                        </div>
                     </div><!--end col-->
                 </div><!--end row-->
                 <div class="row justify-content-center">
-                <c:forEach items="${requestScope.service}" var="s" varStatus="loop">
-                            <div class="col-md-4 mt-4">
-                                <div class="card mb-4">
-                                    <div class="card-img-container">
-                                        <img src="data:image/jpg;base64,${s.service_image}" class="card-img-top" alt="${s.service_name}">
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title text-primary">${s.service_name}</h5>
-                                        <div class="card-text">
-                                            <p class="text-secondary">${s.service_description}</p>
-                                        </div>
-                                        <h5 class="text-muted">$${s.fee}</h5>
-                                    </div>
-                                    <div class="card-end">
-                                        <a href="javascript:void(0);" onclick="viewServiceDetails(${s.service_id}, ${s.category_id})" class="btn btn-primary custom-button">Learn More</a>
-                                        <a href="service?action=book-service&id=${s.service_id}" class="btn btn-success custom-button">Appointment Now</a>
-                                    </div>
+                    <c:forEach items="${requestScope.service}" var="s" varStatus="loop">
+                        <div class="col-md-4 mt-4">
+                            <div class="card mb-4">
+                                <div class="card-img-container">
+                                    <img src="data:image/jpg;base64,${s.service_image}" class="card-img-top" alt="${s.service_name}">
                                 </div>
-
+                                <div class="card-body">
+                                    <h5 class="card-title text-primary">${s.service_name}</h5>
+                                    <div class="card-text">
+                                        <p class="text-secondary">${s.service_description}</p>
+                                    </div>
+                                    <h5 class="text-muted">$${s.fee}</h5>
+                                </div>
+                                <div class="card-end">
+                                    <a href="servicedetail?action=view-detail&id=${s.service_id}&category_id=${s.category_id}"  class="btn btn-primary custom-button">Learn More</a>
+                                    <a href="service?action=book-service&id=${s.service_id}" class="btn btn-success custom-button">Appointment Now</a>
+                                </div>
                             </div>
-                            <c:if test="${loop.index % 3 == 3}">
-                                <div class="w-100"></div>
-                            </c:if>
-                        </c:forEach>
-                    </div>
-                </div><!--end row-->
-            </div><!--end container-->
-                </div><!--end row-->
-            
-            
-                </div><!--end row-->
-            </div><!--end container-->
-            <!-- Start -->
-        </section>
-        <section class="section bg-white">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <div class="section-title mb-1 pb-2 text-center">
-                            <span class="badge badge-pill badge-soft-primary mb-3">Doctors</span>
-                            <h4 class="title mb-2">Find Your Specialists</h4>
-                            <p class="text-muted mx-auto para-desc mb-0">We've assembled a team of highly skilled and compassionate specialists to address your unique healthcare needs. Whether you're seeking a primary care physician or a specialized expert, you can trust our doctors to provide personalized care that puts your health first. Search our directory to find the perfect specialist for you.</p>
+
                         </div>
-                    </div><!--end col-->
-                    <div class="d-flex justify-content-end ">
-                        <a href="#" class="btn btn-soft-primary">View More Doctors </a>
-                    </div>
-                </div><!--end row-->
+                        <c:if test="${loop.index % 3 == 3}">
+                            <div class="w-100"></div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+            </div><!--end row-->
+        </div><!--end container-->
+    </div><!--end row-->
+</div><!--end row-->
+</div><!--end container-->
+<!-- Start -->
+</section>
+<section class="section bg-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="section-title mb-1 pb-2 text-center">
+                    <span class="badge badge-pill badge-soft-primary mb-3">Doctors</span>
+                    <h4 class="title mb-2">Find Your Specialists</h4>
+                    <p class="text-muted mx-auto para-desc mb-0">We've assembled a team of highly skilled and compassionate specialists to address your unique healthcare needs. Whether you're seeking a primary care physician or a specialized expert, you can trust our doctors to provide personalized care that puts your health first. Search our directory to find the perfect specialist for you.</p>
+                </div>
+            </div><!--end col-->
+            <div class="d-flex justify-content-end ">
 
-                <div class="row">
-                    <div class="col-lg-12 mt-2 pt-4 m-4">
-                        <div class="slider-range-three">
-                            <c:forEach items="${requestScope.doctors}" var="d">
-                                <div class="tiny-slide">
-                                    <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                        <div class="d-flex justify-content-center">
-                                            <img src="data:image/jpg;base64,${d.image}" width="80%" height="220" />
-                                        </div>
-                                        <div class="card-body p-4">
-                                            <div class="card-body content text-center">
-                                                <a href="#"
-                                                   class="title text-dark  d-block mb-0">${d.fullName}</a>
-                                                <small class="text-muted speciality">${d.speciality}</small>
-                                            </div>
-
-                                            <div class="post-meta d-flex justify-content-around mt-3">
-                                                <div>
-                                                    <a href="#" class="btn btn-primary btn-sm">Book Appointment</a></div>
-                                                <div>
-                                                    <a href="#" class="btn btn-primary btn-sm">View Details</a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-
-                    </div>
-                </div><!--end row-->
+                <a href="/MedicalAppointmentBooking/WebDoctorList" class="btn btn-soft-primary">View More Doctors </a>
             </div>
-        </section><!--end section-->
+        </div><!--end row-->
 
-        <section class=" bg-white">
-            <div class="container mt-70 mt-70">
-                <div class="d-flex justify-content-between">
-                    <div class="">
-                        <div class="section-title">
-                            <h4 class="title mb-0 text-muted">Medical Blogs</h4>
-                        </div>
-                    </div>
-                    <div >
-                        <a href="#" class="btn btn-soft-primary"> View More Blogs </a>
-                    </div>
-
-                </div><!--end row-->
-
-                <div class="row">
-                    <div class="col-lg-12 mt-4 pt-4 m-4">
-                        <div class="slider-range-four">  
-                            <div class="tiny-slide">
-                                <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                    <img src="frontend/template/assets/images/blog/03.jpg" class="img-fluid" alt="">
-                                    <div class="card-body p-4">
-                                        <ul class="list-unstyled mb-2">
-                                            <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
-                                            <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                                        </ul>
-                                        <a href="blog-detail.html" class="text-dark title h5">medicine research course for doctors</a>
-                                        <div class="post-meta d-flex justify-content-between mt-3">
-                                            <ul class="list-unstyled mb-0">
-                                                <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
-                                                <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="mdi mdi-comment-outline me-1"></i>08</a></li>
-                                            </ul>
-                                            <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
-                                        </div>
-                                    </div>
+        <div class="row">
+            <div class="col-lg-12 mt-2 pt-4 m-4">
+                <div class="slider-range-three">
+                    <c:forEach items="${requestScope.doctors}" var="d">
+                        <div class="tiny-slide">
+                            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
+                                <div class="d-flex justify-content-center">
+                                    <img src="data:image/jpg;base64,${d.image}" width="80%" height="220" />
                                 </div>
-                            </div>
+                                <div class="card-body p-4">
+                                    <div class="card-body content text-center">
+                                        <a href="#"
+                                           class="title text-dark  d-block mb-0">${d.fullName}</a>
+                                        <small class="text-muted speciality">${d.speciality}</small>
+                                    </div>
 
-
-                            <div class="tiny-slide">
-                                <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                    <img src="frontend/template/assets/images/blog/07.jpg" class="img-fluid" alt="">
-                                    <div class="card-body p-4">
-                                        <ul class="list-unstyled mb-2">
-                                            <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
-                                            <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                                        </ul>
-                                        <a href="blog-detail.html" class="text-dark title h5">A Researcher Is Research On Coronavirus In Lab</a>
-                                        <div class="post-meta d-flex justify-content-between mt-3">
-                                            <ul class="list-unstyled mb-0">
-                                                <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
-                                                <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="mdi mdi-comment-outline me-1"></i>08</a></li>
-                                            </ul>
-                                            <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
+                                    <div class="post-meta d-flex justify-content-around mt-3">
+                                        <div>
+                                            <a href="#" class="btn btn-primary btn-sm">Book Appointment</a></div>
+                                        <div>
+                                            <a href="#" class="btn btn-primary btn-sm">View Details</a>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div><!--end col-->
-                </div><!--end row-->
+                    </c:forEach>
+                </div>
+
             </div>
-        </section><!--end section-->
-        <!-- End -->
-        <script>
-           function viewServiceDetails(serviceId, categoryId) {
-            var url = "servicedetail?action=view-detail&id=" + serviceId + "&category_id=" + categoryId;
-            window.location.href = url;
-        }
+        </div><!--end row-->
+    </div>
+</section><!--end section-->
 
-        function search() {
-            var searchInput = document.getElementById("searchInput").value;
-            var url = "home"; // Default action
-            }
+<section class=" bg-white">
+    <div class="container mt-70 mt-70">
+        <div class="d-flex justify-content-between">
+            <div class="">
+                <div class="section-title">
+                    <h4 class="title mb-0 text-muted">Medical Blogs</h4>
+                </div>
+            </div>
+            <div >
 
-            window.location.href = url;
-        }
+                <a href="/MedicalAppointmentBooking/new" class="btn btn-soft-primary"> View More Blogs </a>
+            </div>
 
+        </div><!--end row-->
 
-        </script>
-        <style>
-            #home{
-                background-image: url("frontend/template/assets/images/bg/backgroundclinic.jpg") ;
-                
-            }
-              .custom-center {
-            justify-content: center !important;
-        }
-        .card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            text-align: center;
-        }
+        <div class="row">
+            <div class="col-lg-12 mt-4 pt-4 m-4">
+                <div class="slider-range-four">  
+                    <c:forEach var="blog" items="${data}">
 
-        .card-end {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px; /* Adjust padding as needed */
-        }
-
-        .custom-button {
-            width: 100%;
-            margin: 5px 0;
-        }
-
-        .service-card-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        .card {
-            flex: 1;
-            margin: 0 1rem; /* Adjust margin as needed for spacing between cards */
-            width: 100%; /* Set the width to 100% for full container width */
-            max-width: 400px; /* Adjust the max-width as needed for the desired card size */
-            height: 400px; /* Adjust the height as needed for the desired card size */
-        }
-        .card-img-container {
-            height: 200px;
-            overflow: hidden;
-        }
-        /* CSS để cân đối các dòng chữ trong card */
-        .card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        .card-body {
-            flex: 1;
-        }
-
-        .card-title,
-        .card-text {
-            text-align: center;
-            justify-content: s
-        }
-        .card-title,
-        .card-text {
-            margin-bottom: 15px; /* Khoảng cách giữa các dòng chữ */
-        }
-
-        .btn-primary {
-            align-self: center; /* Để căn giữa nút "Learn More" */
-        }
-
-        .card-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        /* CSS để cân đối nút "Learn More" trong card */
-        .card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            text-align: center;
-        }
+                        <div class="tiny-slide">
+                            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
+                                <img src="frontend/template/assets/images/blog/03.jpg" class="img-fluid" alt="">
+                                <div class="card-body p-4">
+                                    <ul class="list-unstyled mb-2">
+                                        <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>${blog.created_time}</li>
+                                        <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
+                                    </ul>
+                                    <a href="blog-detail.html" class="text-dark title h5">${blog.title}</a>
+                                    <div class="post-meta d-flex justify-content-between mt-3">
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
+                                            <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="mdi mdi-comment-outline me-1"></i>08</a></li>
+                                        </ul>
+                                        <a href="blog-detail.html" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
 
 
-        .custom-button {
-            width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
-            margin: 5px 0; /* Khoảng cách giữa các nút */
-        }
-        .btn-primary {
-            margin-top: auto; /* Để nút "Learn More" ở dưới cùng */
-        }
-        .custom-button {
-            width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div>
+</section><!--end section-->
+<!-- End -->
+<script>
+    function viewServiceDetails(serviceId, categoryId) {
+        var url = "servicedetail?action=view-detail&id=" + serviceId + "&category_id=" + categoryId;
+        window.location.href = url;
+    }
 
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    function search() {
+        var searchInput = document.getElementById("searchInput").value;
+        var url = "home"; // Default action
+    }
 
-        .wrapper {
-            flex: 1;
-        }
-        .footer {
-            background-color: #333; /* Set the background color of your footer */
-            color: white; /* Set the text color of your footer */
-            text-align: center;
-            padding: 20px;
-            width: 100%;
-        }
-        </style>
-        <jsp:include page="/frontend/common/footer.jsp" />
-        <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.j'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
-    </body>
+    window.location.href = url;
+    }
+
+
+</script>
+<style>
+    #home{
+        background-image: url("frontend/template/assets/images/bg/backgroundclinic.jpg") ;
+
+    }
+    .custom-center {
+        justify-content: center !important;
+    }
+    .card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+    }
+
+    .card-end {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px; /* Adjust padding as needed */
+    }
+
+    .custom-button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .service-card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .card {
+        flex: 1;
+        margin: 0 1rem; /* Adjust margin as needed for spacing between cards */
+        width: 100%; /* Set the width to 100% for full container width */
+        max-width: 400px; /* Adjust the max-width as needed for the desired card size */
+        height: 400px; /* Adjust the height as needed for the desired card size */
+    }
+    .card-img-container {
+        height: 200px;
+        overflow: hidden;
+    }
+    /* CSS để cân đối các dòng chữ trong card */
+    .card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .card-body {
+        flex: 1;
+    }
+
+    .card-title,
+    .card-text {
+        text-align: center;
+        justify-content: s
+    }
+    .card-title,
+    .card-text {
+        margin-bottom: 15px; /* Khoảng cách giữa các dòng chữ */
+    }
+
+    .btn-primary {
+        align-self: center; /* Để căn giữa nút "Learn More" */
+    }
+
+    .card-img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    /* CSS để cân đối nút "Learn More" trong card */
+    .card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+    }
+
+
+    .custom-button {
+        width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
+        margin: 5px 0; /* Khoảng cách giữa các nút */
+    }
+    .btn-primary {
+        margin-top: auto; /* Để nút "Learn More" ở dưới cùng */
+    }
+    .custom-button {
+        width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
+
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .wrapper {
+        flex: 1;
+    }
+    .footer {
+        background-color: #333; /* Set the background color of your footer */
+        color: white; /* Set the text color of your footer */
+        text-align: center;
+        padding: 20px;
+        width: 100%;
+    }
+</style>
+<jsp:include page="/frontend/common/footer.jsp" />
+<script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
+<script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
+<script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+<script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
+<script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.j'/>"></script>
+<script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
+</body>
 
 </html> 

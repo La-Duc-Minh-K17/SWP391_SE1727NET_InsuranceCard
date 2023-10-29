@@ -5,14 +5,13 @@
 package controller.home;
 
 import dal.DoctorDAO;
-import dal.PatientDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import dal.PatientDAO;
+import java.util.ArrayList;
 import java.util.List;
 import model.Doctor;
 import model.Patient;
@@ -34,21 +33,29 @@ public class PatientListController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            int doctorId = Integer.parseInt(request.getParameter("id"));
-            DoctorDAO dDao = new DoctorDAO();
-            Doctor doctor = dDao.getDoctorById(doctorId);
+        int docId = Integer.parseInt(request.getParameter("id"));
+        String action = request.getParameter("action");
+        DoctorDAO dDao = new DoctorDAO();
+        Doctor doctor = dDao.getDoctorById(docId);
+        request.setAttribute("doctor", doctor);
+        if (action != null && action.equals("view-all")) {
             PatientDAO pdao = new PatientDAO();
-            List<Patient> listP = pdao.getPatientByDoctorId(doctorId);
-            request.setAttribute("doctor", doctor);
-            request.setAttribute("listP", listP);
+            List<Patient> listP = pdao.getPatientByDoctorId(docId);
+            request.setAttribute("listPatient", listP);
             request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
-
+            return;
+        }
+        if (action != null && action.equals("search")) {
+            String search = request.getParameter("search").trim();
+            PatientDAO pdao = new PatientDAO();
+            List<Patient> listP = pdao.getPatientByDoctorIdAndName(docId, search);
+            request.setAttribute("listPatient", listP);
+            request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
+            return;
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

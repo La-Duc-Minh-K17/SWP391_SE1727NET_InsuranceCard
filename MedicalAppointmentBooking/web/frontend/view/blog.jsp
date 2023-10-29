@@ -34,70 +34,8 @@
     <body>
 
 
-        <!-- Navbar STart -->
-        <header id="topnav" class="defaultscroll sticky">
-            <div class="container">
-                <!-- Logo container-->
-                <div>
-                    <a class="logo" href="home">
-                        <span class="logo-light-mode">
-                            <img src="frontend/template/assets/images/MABS__1.png" class="l-dark" height="30" alt="">
-                            <img src="frontend/template/assets/images/MABS__1.png" class="l-light" height="30" alt="">
-                        </span>
-                        <img src="frontend/template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
-                    </a>
-                </div>
-                <!-- End Logo container-->
-
-                <!-- Start Mobile Toggle -->
-                <div class="menu-extras">
-                    <div class="menu-item">
-                        <!-- Mobile menu toggle-->
-                        <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
-                            <div class="lines">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                        </a>
-                        <!-- End mobile menu toggle-->
-                    </div>
-                </div>
-                <!-- End Mobile Toggle -->
-                <ul class="dropdowns list-inline mb-0">
-                    <li class="list-inline-item mb-0 ms-1">
-                        <div class="flex-1 ms-2">
-                        </div>
-                        <div class="d-grid d-md-block">
-                            <button type="submit" class="btn btn-primary">Sign up</button>
-
-                            <button type="submit" class="btn btn-primary">Login</button>
-                        </div>
-                        <div id="navigation">
-                    </li>
-                </ul>
-
-
-                <div id="navigation">
-                    <!-- Navigation Menu-->   
-                    <ul class="navigation-menu nav-left nav-light">
-                        <li class="has-submenu parent-menu-item">
-                            <a href="home">Home</a>
-                        </li>
-
-                        <li class="has-submenu parent-parent-menu-item">
-                            <a href="doctor-team-one.html">Doctors</a>
-                        </li>
-                        <li class="has-submenu parent-menu-item">
-                            <a href="javascript:void(0)">Services</a>
-                        </li>
-                        <li class="has-submenu parent-parent-menu-item"><a href="new">Blogs</a>
-                        </li>
-                        <li><a href="../admin/index.html" class="sub-menu-item" target="_blank">About Us</a></li>
-                    </ul><!--end navigation menu-->
-                </div><!--end navigation-->
-            </div><!--end container-->
-        </header><!--end header-->
+       
+        <jsp:include page="/frontend/common/header.jsp" />
 
         <section class="bg-half-60 d-table w-100" id="home">
             <div class="bg-overlay bg-overlay-dark"></div>
@@ -108,7 +46,6 @@
                             <h3 class="sub-title mb-4 text-white title-dark">Blogs &amp; News</h3>
                             <p class="para-desc mx-auto text-white-50">Great doctor if you need your family member to get
                                 effective immediate assistance, emergency treatment or a simple consultation.</p>
-
                             <nav aria-label="breadcrumb" class="d-inline-block mt-3">
                                 <ul class="breadcrumb bg-light rounded mb-0 py-1 px-2">
                                     <li class="breadcrumb-item"><a href="home">MABS</a></li>
@@ -126,7 +63,7 @@
             <section class="blog_area section-padding">
                 <div class="container">
                     <div class="row">
-                        <h6 class="widget_title" style="color: #2d2d2d;">Recent Post</h6>                          
+                        <h6 class="widget_title h4" >Recent Post</h6>                          
                         <c:forEach var="o" items="${requestScope.blogs3}">
 
                             <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2" value="${o.blog_id}">
@@ -164,11 +101,11 @@
 
         <div class="container py-5" style="">
             <section class="blog_area section-padding">
-                <div class="container">      
+                <div >      
                     <form class="" action="new" method="post">
                         <div class="row align-items-center justify-content-between">
                             <div class="col-3">
-                                <div class="card component-wrapper border-0 rounded ">
+                                <div ">
                                     <div class="">
                                         <select name="sort"class="form-select form-control" id="sort">
                                             <option value="all" ${"all".equals(requestScope.selectedSort) ? 'selected' : ''}>All</option>
@@ -184,7 +121,7 @@
 
                                     <div class="">
                                         <select class="form-select form-control" class="name" name="category" id="category">
-                                            <option value="0" ${requestScope.selectedCategory == 0 ? 'selected' : ''}>All</option>
+                                            <option value="0" ${requestScope.selectedCategory == 0 ? 'selected' : ''}>All Category</option>
                                             <c:forEach var="o" items="${requestScope.listC}">
                                                 <option value="${o.blog_category_id}" ${o.blog_category_id == requestScope.selectedCategory ? 'selected' : ''}>${o.name}</option>
                                             </c:forEach>

@@ -36,13 +36,13 @@
         <jsp:include page="/frontend/common/header.jsp" />
 
         <section class="bg-half-60 d-table w-100" id="home">
-            
+
             <div class="container">
                 <div class="row mt-5 justify-content-center">
                     <div class="col-12">
                         <div class="section-title text-center">
-                            <h3 class="sub-title mb-4 text-white title-dark">Blogs &amp; News</h3>
-                            <p class="para-desc mx-auto text-white-50">Great doctor if you need your family member to get
+                            <h3 class="sub-title mb-4 text-dark title-dark">Blogs &amp; News</h3>
+                            <p class="para-desc mx-auto text-dark">Great doctor if you need your family member to get
                                 effective immediate assistance, emergency treatment or a simple consultation.</p>
 
                             <nav aria-label="breadcrumb" class="d-inline-block mt-3">
@@ -68,7 +68,6 @@
                                         <div class="section-title text-center">
                                             <h3 class="sub-title mb-4">${blog.title}</h3>
                                             <ul class="list-unstyled mt-4">
-
                                                 <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i> ${blog.created_time}</li>
                                             </ul>
                                         </div>
@@ -139,12 +138,44 @@
                                             </c:forEach>
                                         </div>
                                     </div>
+                                    <div>
+                                        <h5>Related Doctor</h5>
+                                        <div class="tiny-slide">
+                                            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
+                                                <div class="tiny-slide">
+                                                    <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
+                                                        <div class="card border-0" >
+                                                            <img src="frontend/template/assets/images/doctors/profile-bg.jpg" class="img-fluid" alt="">
+                                                        </div>
+                                                        <div>
+                                                            <c:set var="doctor" value="${doctor}"></c:set>
+                                                                <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                                                                    <img src="data:image/jpg;base64,${doctor.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                                                <h5 class="mt-3 mb-1">Dr. ${doctor.fullName}</h5>
+                                                                <p class="text-muted mb-0">${doctor.speciality}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="post-meta d-flex justify-content-around mt-3">
+                                                    <div>
+                                                        <a href="#" class="btn btn-primary btn-sm">Book Appointment</a></div>
+                                                    <div>
+                                                        <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        </form>
-                    </div><!--end row-->
-                </div><!--end container-->
+                    </div>
+                </div>
+               
+
 
                 <div class="container mt-100 mt-60">
                     <div class="row">
@@ -212,18 +243,7 @@
         <script src="frontend/template/assets/js/tiny-slider.js"></script>
         <script src="frontend/template/assets/js/tiny-slider-init.js"></script>
         <script src="frontend/template/assets/js/easy_background.js"></script>
-        <!-- Select2 -->
-        <script src="frontend/template/assets/js/select2.min.js"></script>
-        <script src="frontend/template/assets/js/select2.init.js"></script>
-        <!-- Datepicker -->
-        <script src="frontend/template/assets/js/flatpickr.min.js"></script>
-        <script src="frontend/template/assets/js/flatpickr.init.js"></script>
-        <!-- Datepicker -->
-        <script src="frontend/template/assets/js/jquery.timepicker.min.js"></script> 
-        <script src="frontend/template/assets/js/timepicker.init.js"></script> 
-        <!-- Icons -->
         <script src="frontend/template/assets/js/feather.min.js"></script>
-        <!-- Main Js -->
         <script src="frontend/template/assets/js/app.js"></script>
 
     </body>

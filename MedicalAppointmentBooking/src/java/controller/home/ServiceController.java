@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Service;
+import utils.SessionUtils;
 
 /**
  *
@@ -35,26 +36,22 @@ public class ServiceController extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             ServicesDAO sDAO = new ServicesDAO();
             String action = request.getParameter("action");
+            List<Service> List = null;
+            String uri = null;
             request.setAttribute("cateList", sDAO.getAllServiceCategory());
             if (action != null && action.equals("view-all")) {
-                List<Service> serList = sDAO.getAllService();
-                request.setAttribute("sList", serList);
-                request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
-                return;
+                List = sDAO.getAllServiceByStatus();
+                uri = "service?action=view-all";
             }
             if (action != null && action.equals("filter")) {
                 int cateId = Integer.parseInt(request.getParameter("category_id"));
-                List<Service> serList = sDAO.getServiceByCategoryID(cateId);
-                request.setAttribute("sList", serList);
-                request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
-                return;
+                List = sDAO.getServiceByCategoryID(cateId);
+                uri = "service?action=filter&category_id="+cateId;
             }
             if (action != null && action.equals("search")) {
                 String keyword = request.getParameter("keyword").trim();
-                List<Service> sList = sDAO.searchServicesByName(keyword);
-                request.setAttribute("sList", sList);
-                request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
-                return;
+                List = sDAO.searchServicesByName(keyword);
+                uri = "service?action=search&keyword="+keyword;
             }
             if (action != null && action.equals("view")) {
                 int serivce_id = Integer.parseInt(request.getParameter("id"));
@@ -62,15 +59,41 @@ public class ServiceController extends HttpServlet {
                 request.setAttribute("service", service);
                 request.getRequestDispatcher("frontend/view/servicedetail.jsp").forward(request, response);
 
-            }  if (action != null && action.equals("sorted")) {
+            }
+            if (action != null && action.equals("sorted")) {
                 String by = request.getParameter("by");
                 String sort = request.getParameter("sort");
-                List<Service> sortedServiceList = sDAO.sortService(by, sort);
-                request.setAttribute("sList", sortedServiceList);
+                List = sDAO.sortService(by, sort);
+                uri = "service?action=sorted&by=feename&sort=" + sort;
+            }
+            if (action != null && action.equals("book-service")) {
+                int id = Integer.parseInt(request.getParameter("id"));
+                Service serviceDetail = sDAO.getServiceById(id);
+                SessionUtils.getInstance().putValue(request, "chosen_service", serviceDetail);
+                request.getRequestDispatcher("booking?action=form-filling").forward(request, response);
+                return;
+            }
+            if (List != null) {
+                int page, numberpage = 6;
+                int size = List.size();
+                int num = (size % numberpage == 0 ? (size / numberpage) : ((size / numberpage) + 1));
+                String xpage = request.getParameter("page");
+                if (xpage == null) {
+                    page = 1;
+                } else {
+                    page = Integer.parseInt(xpage);
+                }
+                int start = (page - 1) * numberpage;
+                int end = Math.min(page * numberpage, size);
+
+                List<Service> servicelist = sDAO.getListByPage(List, start, end);
+                request.setAttribute("page", page);
+                request.setAttribute("num", num);
+                request.setAttribute("url", uri);
+                request.setAttribute("sList", servicelist);
                 request.getRequestDispatcher("frontend/view/service.jsp").forward(request, response);
             }
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

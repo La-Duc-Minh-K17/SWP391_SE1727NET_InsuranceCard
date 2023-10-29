@@ -3,15 +3,14 @@
     Created on : Sep 28, 2023, 10:44:49 AM
     Author     : Admin
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Doctris - Doctor Appointment Booking System</title>
-        <link rel="shortcut icon" href="/assets/images/favicon.ico.png">
+        <title>MABS-Doctor-Manager</title>
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/simplebar.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
@@ -115,7 +114,7 @@
                                                        href="#pills-timetable" role="tab" aria-controls="pills-timetable"
                                                        aria-selected="false">
                                                         <div class="text-center pt-1 pb-1">
-                                                            <h4 class="title fw-normal mb-0">Appointments</h4>
+                                                            <h4 class="title fw-normal mb-0">List Patient</h4>
                                                         </div>
                                                     </a>
                                                 </li>
@@ -204,96 +203,54 @@
                                                 <div class="tab-pane fade" id="pills-timetable" role="tabpanel"
                                                      aria-labelledby="timetable-tab">
                                                     <div class="row">
-                                                        <div class="col-lg-4 col-md-12">
-                                                            <div class="card border-0 p-3 rounded shadow">
-                                                                <ul class="list-unstyled mb-0">
-                                                                    <li class="d-flex justify-content-between">
-                                                                        <p class="text-muted mb-0"><i
-                                                                                class="ri-time-fill text-primary align-middle h5 mb-0"></i>
-                                                                            Monday</p>
-                                                                        <p class="text-primary mb-0"><span
-                                                                                class="text-dark">Time:</span> 8.00 - 20.00</p>
-                                                                    </li>
-                                                                    <li class="d-flex justify-content-between mt-2">
-                                                                        <p class="text-muted mb-0"><i
-                                                                                class="ri-time-fill text-primary align-middle h5 mb-0"></i>
-                                                                            Tuesday</p>
-                                                                        <p class="text-primary mb-0"><span
-                                                                                class="text-dark">Time:</span> 8.00 - 20.00</p>
-                                                                    </li>
-                                                                    <li class="d-flex justify-content-between mt-2">
-                                                                        <p class="text-muted mb-0"><i
-                                                                                class="ri-time-fill text-primary align-middle h5 mb-0"></i>
-                                                                            Wednesday</p>
-                                                                        <p class="text-primary mb-0"><span
-                                                                                class="text-dark">Time:</span> 8.00 - 20.00</p>
-                                                                    </li>
-                                                                    <li class="d-flex justify-content-between mt-2">
-                                                                        <p class="text-muted mb-0"><i
-                                                                                class="ri-time-fill text-primary align-middle h5 mb-0"></i>
-                                                                            Thursday</p>
-                                                                        <p class="text-primary mb-0"><span
-                                                                                class="text-dark">Time:</span> 8.00 - 20.00</p>
-                                                                    </li>
-                                                                    <li class="d-flex justify-content-between mt-2">
-                                                                        <p class="text-muted mb-0"><i
-                                                                                class="ri-time-fill text-primary align-middle h5 mb-0"></i>
-                                                                            Friday</p>
-                                                                        <p class="text-primary mb-0"><span
-                                                                                class="text-dark">Time:</span> 8.00 - 20.00</p>
-                                                                    </li>
-                                                                    <li class="d-flex justify-content-between mt-2">
-                                                                        <p class="text-muted mb-0"><i
-                                                                                class="ri-time-fill text-primary align-middle h5 mb-0"></i>
-                                                                            Saturday</p>
-                                                                        <p class="text-primary mb-0"><span
-                                                                                class="text-dark">Time:</span> 8.00 - 18.00</p>
-                                                                    </li>
-                                                                    <li class="d-flex justify-content-between mt-2">
-                                                                        <p class="text-muted mb-0"><i
-                                                                                class="ri-time-fill text-primary align-middle h5 mb-0"></i>
-                                                                            Sunday</p>
-                                                                        <p class="text-primary mb-0"><span
-                                                                                class="text-dark">Time:</span> 8.00 - 14.00</p>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div><!--end col-->
+                                                        <div class="col-12 mt-5">
+                            <div class="card component-wrapper border-0 rounded shadow ">
+                                <div class="p-4 border-bottom">
+                                    <h4 class="mb-0 text-primary">Patient List</h4>
+                                </div>
 
-                                                        <div class="col-lg-4 col-md-6 mt-4 mt-lg-0 pt-2 pt-lg-0">
-                                                            <div class="card border-0 text-center features feature-primary">
-                                                                <div class="icon text-center mx-auto rounded-md">
-                                                                    <i class="uil uil-phone h3 mb-0"></i>
-                                                                </div>
+                                <div class="p-4">
+                                    <div class="table-responsive bg-white shadow rounded">
+                                        <table class="table mb-0 table-center">
+                                            <thead>
+                                                <tr>
+                                                    <th class="border-bottom p-3">PatientID</th>
+                                                    <th class="border-bottom p-3">Name</th>
+                                                    <th class="border-bottom p-3">DOB</th>
+                                                    <th class="border-bottom p-3">Gender</th>
+                                                    <th class="border-bottom p-3">Status</th>
 
-                                                                <div class="card-body p-0 mt-4">
-                                                                    <h5 class="title fw-bold">Phone</h5>
-                                                                    <p class="text-muted">Great doctor if you need your family
-                                                                        member to get effective immediate assistance</p>
-                                                                    <a href="tel:+152534-468-854" class="link">+152
-                                                                        534-468-854</a>
-                                                                </div>
-                                                            </div>
-                                                        </div><!--end col-->
 
-                                                        <div class="col-lg-4 col-md-6 mt-4 mt-lg-0 pt-2 pt-lg-0">
-                                                            <div class="card border-0 text-center features feature-primary">
-                                                                <div class="icon text-center mx-auto rounded-md">
-                                                                    <i class="uil uil-envelope h3 mb-0"></i>
-                                                                </div>
-
-                                                                <div class="card-body p-0 mt-4">
-                                                                    <h5 class="title fw-bold">Email</h5>
-                                                                    <p class="text-muted">Great doctor if you need your family
-                                                                        member to get effective immediate assistance</p>
-                                                                    <a href="mailto:contact@example.com"
-                                                                       class="link">contact@example.com</a>
-                                                                </div>
-                                                            </div>
-                                                        </div><!--end col-->
-                                                    </div><!--end row-->
-                                                </div><!--end teb pane-->
-
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${patient}" var="p">
+                                                    <tr>
+                                                        <th scope="col">${p.patientId}</th>
+                                                        <td class="p-3">${p.fullName}</td>
+                                                        <td class="p-3">${p.dob}</td>
+                                                        <td> 
+                                                            <c:if test="${p.gender == 1}">
+                                                                <span class="text-primary">Male</span>
+                                                            </c:if>
+                                                            <c:if test="${p.gender == 0}">
+                                                                <span class="text-secondary">Female</span>
+                                                            </c:if>
+                                                        </td>
+                                                        <td>
+                                                            <c:if test="${p.status == 1}">
+                                                                <span class="text-success">Active</span>
+                                                            </c:if>
+                                                            <c:if test="${p.status == 0}">
+                                                                <span class="text-danger">InActive</span>
+                                                            </c:if>
+                                                        </td>
+                                                </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                                             </div><!--end tab content-->
                                         </div>
                                     </div><!--end col-->

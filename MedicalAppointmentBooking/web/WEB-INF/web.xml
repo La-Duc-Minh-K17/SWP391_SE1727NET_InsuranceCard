@@ -58,11 +58,11 @@
     </servlet>
     <servlet>
         <servlet-name>WebDoctorList</servlet-name>
-        <servlet-class>controller.manager.WebDoctorList</servlet-class>
+        <servlet-class>controller.home.WebDoctorList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>WebDoctorDetail</servlet-name>
-        <servlet-class>controller.manager.WebDoctorDetail</servlet-class>
+        <servlet-class>controller.home.WebDoctorDetail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FilterCategory</servlet-name>
@@ -70,16 +70,13 @@
     </servlet>
     <servlet>
         <servlet-name>ServiceReview</servlet-name>
-        <servlet-class>controller.manager.ServiceReview</servlet-class>
+        <servlet-class>controller.admin.ServiceReview</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManageServices</servlet-name>
         <servlet-class>controller.manager.ManageServices</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>webServiceDetail</servlet-name>
-        <servlet-class>controller.manager.webServiceDetail</servlet-class>
-    </servlet>
+   
     <servlet>
         <servlet-name>AdminAppointmentList</servlet-name>
         <servlet-class>controller.admin.AdminAppointmentList</servlet-class>
@@ -88,14 +85,7 @@
         <servlet-name>AdminReservation</servlet-name>
         <servlet-class>controller.admin.AdminReservation</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>StaffAppointmentList</servlet-name>
-        <servlet-class>controller.staff.StaffAppointmentList</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StaffReservationList</servlet-name>
-        <servlet-class>controller.staff.StaffReservationList</servlet-class>
-    </servlet>
+  
     <servlet>
         <servlet-name>ManagePatient</servlet-name>
         <servlet-class>controller.manager.ManagePatient</servlet-class>
@@ -111,6 +101,10 @@
     <servlet>
         <servlet-name>AppointmentListController</servlet-name>
         <servlet-class>controller.home.AppointmentListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DoctorFeedback</servlet-name>
+        <servlet-class>controller.admin.DoctorFeedback</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserProfileController</servlet-name>
@@ -129,6 +123,18 @@
         <servlet-class>controller.home.AppoinmentDetailController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AdminReservationDetail</servlet-name>
+        <servlet-class>controller.admin.AdminReservationDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminScheduleCalendar</servlet-name>
+        <servlet-class>controller.admin.AdminScheduleCalendar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserAppointment</servlet-name>
+        <servlet-class>controller.user.UserAppointment</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ChangeAccountStatus</servlet-name>
         <servlet-class>controller.admin.ChangeAccountStatus</servlet-class>
     </servlet>
@@ -137,12 +143,17 @@
         <servlet-class>controller.admin.ManageAccount</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>AccountAdd</servlet-name>
         <servlet-class>controller.admin.AccountAdd</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AccountDetail</servlet-name>
         <servlet-class>controller.admin.AccountDetail</servlet-class>
+
+        <servlet-name>UserReservation</servlet-name>
+        <servlet-class>controller.user.UserReservation</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
@@ -182,7 +193,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManageBlogController</servlet-name>
-        <url-pattern>/manageblog</url-pattern>
+        <url-pattern>/manage-blog</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SettingList</servlet-name>
@@ -220,10 +231,7 @@
         <servlet-name>ManageServices</servlet-name>
         <url-pattern>/manage-service</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>webServiceDetail</servlet-name>
-        <url-pattern>/detailservice</url-pattern>
-    </servlet-mapping>
+   
     <servlet-mapping>
         <servlet-name>ManagePatient</servlet-name>
         <url-pattern>/manage-patient</url-pattern>
@@ -249,6 +257,10 @@
         <url-pattern>/doctor-appointmentlist</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>DoctorFeedback</servlet-name>
+        <url-pattern>/doctor/feedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>UserProfileController</servlet-name>
         <url-pattern>/user-profile</url-pattern>
     </servlet-mapping>
@@ -265,6 +277,14 @@
         <url-pattern>/doctor-appointmentdetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>AdminReservationDetail</servlet-name>
+        <url-pattern>/admin-reservationdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminScheduleCalendar</servlet-name>
+        <url-pattern>/admin-calendar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ChangeAccountStatus</servlet-name>
         <url-pattern>/ChangeAccountStatus</url-pattern>
     </servlet-mapping>
@@ -273,12 +293,21 @@
         <url-pattern>/ManageAccount</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>AccountAdd</servlet-name>
         <url-pattern>/AccountAdd</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountDetail</servlet-name>
         <url-pattern>/AccountDetail</url-pattern>
+
+        <servlet-name>UserAppointment</servlet-name>
+        <url-pattern>/user-appointment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserReservation</servlet-name>
+        <url-pattern>/user-reservation</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

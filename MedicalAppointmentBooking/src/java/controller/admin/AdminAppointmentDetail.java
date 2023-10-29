@@ -16,6 +16,8 @@ import model.Appointment;
 import model.Doctor;
 import utils.EmailSending;
 import utils.TimeUtil;
+import dal.SpecialityDAO;
+import model.Speciality;
 
 /**
  *
@@ -34,15 +36,22 @@ public class AdminAppointmentDetail extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String action = request.getParameter("action");
         AppointmentDAO apptDAO = new AppointmentDAO();
+        SpecialityDAO speDAO = new SpecialityDAO();
         DoctorDAO dDAO = new DoctorDAO();
         if (action != null && action.equals("view-detail")) {
             int apptId = Integer.parseInt(request.getParameter("apptId"));
+            List<Doctor> doctorList = null;
+            List<Speciality> speList = null;
             Appointment appt = apptDAO.getAppointmentById(apptId);
-            List<Doctor> doctorList = dDAO.getDoctorBySpeciality(appt.getDoctor().getSpeciality());
-            request.setAttribute("doctorL", doctorList);
+            if (appt.getDoctor() != null) {
+                doctorList = dDAO.getDoctorBySpeciality(appt.getDoctor().getSpeciality());
+                request.setAttribute("doctorL", doctorList);
+            } else {
+                speList = speDAO.getAllSpeciality();
+                request.setAttribute("speList", speList);
+            }
             request.setAttribute("appt", appt);
             request.getRequestDispatcher("frontend/view/admin/admin_appointmentdetail.jsp").forward(request, response);
             return;
@@ -60,6 +69,15 @@ public class AdminAppointmentDetail extends HttpServlet {
             apptDAO.rescheduleAppointment(appointment);
             response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
             return;
+        } if (action != null && action.equals("remove")) {  
+            int apptId = Integer.parseInt(request.getParameter("apptId"));
+            Appointment appointment = apptDAO.getAppointmentById(apptId);
+            appointment.setApptDate(null);
+            appointment.setApptTime("");
+            appointment.setDoctor(null);
+            apptDAO.rescheduleAppointment(appointment);
+            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
+            return;
         }
         if (action != null && action.equals("confirm")) {
             int apptId = Integer.parseInt(request.getParameter("apptId"));
@@ -69,14 +87,14 @@ public class AdminAppointmentDetail extends HttpServlet {
             EmailSending.sendReminderEmail(appointment);
             response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
             return;
-
         }
         if (action != null && action.equals("reject")) {
-            int apptId = Integer.parseInt(request.getParameter("apptId"));
+            int apptId = Integer.parseInt(request.getParameter("cancel_appointment"));
+            String reject_reason = request.getParameter("reject_reason");
             Appointment appointment = apptDAO.getAppointmentById(apptId);
             appointment.setStatus("REJECTED");
+            appointment.setRejectReason(reject_reason);
             apptDAO.updateStatus(appointment);
-            request.setAttribute("success", "REJECTED SUCCESSFULLY");
             response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
             return;
         }

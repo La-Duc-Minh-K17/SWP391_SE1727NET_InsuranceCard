@@ -24,11 +24,16 @@ public class UserProfileController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         UserDAO uDAO = new UserDAO();
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
         String action = request.getParameter("action");
         if (action != null && action.equals("view")) {
-            request.getRequestDispatcher("frontend/view/userprofile.jsp").forward(request, response);
+            if (user.getRole().getRole_name().equals("PATIENT")) {
+                request.getRequestDispatcher("frontend/view/userprofile.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("frontend/view/admin/profile.jsp").forward(request, response);
+            }
             return;
         }
         if (action != null && action.equals("edit-info")) {
@@ -45,8 +50,14 @@ public class UserProfileController extends HttpServlet {
             request.setAttribute("success", "UPDATE SUCCESSFULLY");
             UserAccount newUser = uDAO.getAccountById(user.getUserId());
             SessionUtils.getInstance().putValue(request, "user", newUser);
-            request.getRequestDispatcher("frontend/view/userprofile.jsp").forward(request, response);
+            if (newUser.getRole().getRole_name().equals("PATIENT")) {
+                request.getRequestDispatcher("frontend/view/userprofile.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("frontend/view/admin/profile.jsp").forward(request, response);
+
+            }
             return;
+
         }
         if (action != null && action.equals("change-password")) {
             String oldPassword = request.getParameter("oldpassword");
@@ -92,7 +103,7 @@ public class UserProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-    }   
+    }
 
     /**
      * Returns a short description of the servlet.
