@@ -100,7 +100,7 @@ public class AccountAdd extends HttpServlet {
         
             uDAO.addUserAccount(user);
            
-            request.setAttribute("success", "Account added successfully");
+            request.setAttribute("success", "Account added successfully with password 123456@");
         }
         request.getRequestDispatcher("frontend/view/admin/accountadd.jsp").forward(request, response);
     }
