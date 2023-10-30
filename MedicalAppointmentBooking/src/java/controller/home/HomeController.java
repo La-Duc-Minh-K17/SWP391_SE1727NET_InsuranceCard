@@ -60,7 +60,7 @@ public class HomeController extends HttpServlet {
         }
         if (action != null && action.equals("view")) {
             int serivce_id = Integer.parseInt(request.getParameter("id"));
-            Service service = servicedao.getServiceById(serivce_id);
+            Service service = serviceDao.getServiceById(serivce_id);
             request.setAttribute("service", service);
             request.getRequestDispatcher("frontend/view/servicedetail.jsp").forward(request, response);
 
