@@ -164,7 +164,7 @@
                                                                     </td>
                                                                     
                                                                     <td>
-                                                                        <a  class="btn btn-primary btn-sml" href="javascript:void(0);"
+                                                                        <a  class="btn btn-primary btn-sml" href="editSetting?type=${s.type}&note=${s.note}&description=${s.description}&status=${s.status}"
                                                                             onclick="editSetting(${s.settingID}, '${s.type}', '${s.note}', '${s.description}', ${s.status});">Edit</a>
                                                                     </td>
 
