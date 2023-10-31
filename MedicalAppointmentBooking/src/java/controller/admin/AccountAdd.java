@@ -91,7 +91,7 @@ public class AccountAdd extends HttpServlet {
         String gender = request.getParameter("gender");
         String address = request.getParameter("address");
         String dob = request.getParameter("dob");
-        
+        String confirmationToken = CodeProcessing.generateToken();
 
         UserAccount user = new UserAccount(username, "123456@", email, fullname, Integer.valueOf(gender), phone, TimeUtil.dateConverter(dob), address, null, null, 1, new Role(Integer.valueOf(role)));
         if (uDAO.isAccountExisted(user)) {
