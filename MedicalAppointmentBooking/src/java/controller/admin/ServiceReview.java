@@ -38,13 +38,13 @@ public class ServiceReview extends HttpServlet {
         if (action != null && action.equals("view-all")) {
             
             request.setAttribute("review", sv.getServiceReview());
-            request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
+            request.getRequestDispatcher("frontend/view/servicereview.jsp").forward(request, response);
             return;
         }
         if (action != null && action.equals("filter")) {
             int serId = Integer.parseInt(request.getParameter("service_id"));
             request.setAttribute("review", sv.getServiceReviewById(serId));
-            request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
+            request.getRequestDispatcher("frontend/view/servicereview.jsp").forward(request, response);
             return;
         } 
          if (action != null && action.equals("sort")) {
@@ -52,10 +52,10 @@ public class ServiceReview extends HttpServlet {
             if(sortby.equalsIgnoreCase("Newest"))
             {
                 request.setAttribute("review", sv.getServiceReviewDESC());
-                request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
+                request.getRequestDispatcher("frontend/view/servicereview.jsp").forward(request, response);
             }else{
                 request.setAttribute("review", sv.getServiceReviewASC());
-                request.getRequestDispatcher("../frontend/view/servicereview.jsp").forward(request, response);
+                request.getRequestDispatcher("frontend/view/servicereview.jsp").forward(request, response);
             }  
             
         } 
