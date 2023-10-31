@@ -37,9 +37,9 @@
         </div>
         <!-- Loader -->
         <div class="page-wrapper doctris-theme toggled">
-            
+
             <jsp:include page="/frontend/common/manager_side_bar.jsp" />
-            
+
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
             <main class="page-content">  
@@ -126,7 +126,7 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-3 col-md-3 mt-4 mt-md-0 text-md-end">
-                                            <a href="<c:url value='/AccountAdd'/>" class="btn btn-primary ">Add Account</a>
+                                            <a href="<c:url value='/admin-addaccount'/>" class="btn btn-primary ">Add Account</a>
                                         </div><!--end col-->
 
                                     </div><!--end row-->
@@ -151,7 +151,7 @@
                                                 <c:forEach items="${ul}" var="d">
                                                     <tr>
                                                         <th scope="row">${d.userId}</th>
-                                                        <td><a href="./AccountDetail?aid=${d.userId}"> ${d.fullName}</a></td>
+                                                        <td><a href="./admin-accountdetail?aid=${d.userId}"> ${d.fullName}</a></td>
                                                         <td>${d.username}</td>
                                                         <td>${d.email}</td>
                                                         <td>${d.phone}</td>

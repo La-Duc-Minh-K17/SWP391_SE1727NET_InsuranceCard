@@ -177,9 +177,8 @@
                                                 </div>
                                             </div>
                                             <div id="addSettingForm" class="add-setting-form" style="display: none;">
-                                                <form action="addSetting" method="POST">
+                                                <form action="<c:url value='/admin-addsetting'/> " method="POST">
                                                     <h4 class="mb-3 p-4">Add Settings</h4>
-                                            
                                                     <div class="form-group p-4">
                                                         <label for="settingType">Type:</label>
                                                         <select id="settingType" name="settingType" class="form-control">

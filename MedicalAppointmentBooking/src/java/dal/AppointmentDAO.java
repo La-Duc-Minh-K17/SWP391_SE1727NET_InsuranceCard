@@ -15,6 +15,7 @@ import java.util.List;
 import model.Appointment;
 import model.Doctor;
 import model.Patient;
+import utils.TimeUtil;
 
 /**
  *
@@ -517,7 +518,7 @@ public class AppointmentDAO {
                 + "                where u.full_name like ? and appt.doctor_id = ?;";
         try {
             connection = dbc.getConnection();
-            ps = connection.prepareStatement(sql);       
+            ps = connection.prepareStatement(sql);
             ps.setString(1, "%" + namePatient + "%");
             ps.setInt(2, docId);
             rs = ps.executeQuery();
@@ -547,5 +548,85 @@ public class AppointmentDAO {
             }
         }
         return listAppt;
-}
+    }
+
+    public List<Appointment> getFilteredPatientAppointment(int userId, String status) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<Appointment> listAppoint = new ArrayList<>();
+        String sql = "select * from appointments appt\n"
+                + "inner join patients p on p.patient_id = appt.patient_id \n"
+                + "inner join user_account ua on ua.user_id = p.user_id\n"
+                + "where ua.user_id = ? "
+                + "and appt.appointment_status = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.setString(2, status);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("appointment_id");
+                Appointment appt = getAppointmentById(id);
+                listAppoint.add(appt);
+            }
+            return listAppoint;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return null;
+    }
+     public List<String> getAvailableTimeSlot(int doctorId, String date) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<String> timeSlot = new ArrayList<>();
+        timeSlot.add("7:00:00");
+        timeSlot.add("8:00:00");
+        timeSlot.add("9:00:00");
+        timeSlot.add("10:00:00");
+        timeSlot.add("11:00:00");
+        timeSlot.add("13:00:00");
+        timeSlot.add("14:00:00");
+        timeSlot.add("15:00:00");
+        timeSlot.add("16:00:00");
+        timeSlot.add("17:00:00");
+
+        String sql = "SELECT appointment_time\n"
+                + "FROM appointments\n"
+                + "WHERE doctor_id = ? AND appointment_date = ? ";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setDate(2, TimeUtil.dateConverter1(date));
+            ps.setInt(1, doctorId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                if (timeSlot.contains(rs.getString(1))) {
+                    timeSlot.remove(rs.getString(1));
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return timeSlot;
+    }
+
 }
