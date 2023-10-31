@@ -128,37 +128,37 @@
                                                                 <img src="data:image/jpg;base64,${feedback.user.image}" class="img-fluid avatar avatar-md-sm rounded-circle shadow" alt="img">
                                                             </a>
                                                             <div class="commentor-detail">
-                                                                <h6 class="mb-0"><a href="javascript:void(0)" class="text-dark media-heading">{feedback.user.fullName}</a></h6>
+                                                                <h6 class="mb-0"><a href="javascript:void(0)" class="text-dark media-heading">${feedback.user.fullName}</a></h6>
                                                                 <small class="text-muted">${feedback.create_time}</small>
                                                             </div>
                                                             <div>
                                                                 <c:choose>
                                                                     <c:when test="${feedback.rate >= 1}">
-                                                                        ★
+                                                                        <span class="star-gold">★</span>
                                                                     </c:when>
                                                                     <c:otherwise>☆</c:otherwise>
                                                                 </c:choose>
                                                                 <c:choose>
                                                                     <c:when test="${feedback.rate >= 2}">
-                                                                        ★
+                                                                        <span class="star-gold">★</span>
                                                                     </c:when>
                                                                     <c:otherwise>☆</c:otherwise>
                                                                 </c:choose>
                                                                 <c:choose>
                                                                     <c:when test="${feedback.rate >= 3}">
-                                                                        ★
+                                                                        <span class="star-gold">★</span>
                                                                     </c:when>
                                                                     <c:otherwise>☆</c:otherwise>
                                                                 </c:choose>
                                                                 <c:choose>
                                                                     <c:when test="${feedback.rate >= 4}">
-                                                                        ★
+                                                                        <span class="star-gold">★</span>
                                                                     </c:when>
                                                                     <c:otherwise>☆</c:otherwise>
                                                                 </c:choose>
                                                                 <c:choose>
                                                                     <c:when test="${feedback.rate >= 5}">
-                                                                        ★
+                                                                       <span class="star-gold">★</span>
                                                                     </c:when>
                                                                     <c:otherwise>☆</c:otherwise>
                                                                 </c:choose>      
@@ -173,7 +173,7 @@
                                             </c:forEach>
                                         </ul>
                                         <h5 class="card-title mt-4 mb-0">Leave A Comment :</h5>
-                                        <form action="WebDoctorDetail" method="post" class="mt-3">
+                                        <form action="WebDoctorDetail?doctorId=${doctor.doctorId}" method="post" class="mt-3">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="mb-3">
