@@ -19,13 +19,16 @@
                         <img src="frontend/template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                     </a>
                 </div>
+                <div class="card border-0 mt-5" >
+                    <img src="frontend/template/assets/images/doctors/profile-bg.jpg" class="img-fluid" alt="">
+                </div>
                 <ul class="sidebar-menu pt-3">
-                  
+
                     <li class="sidebar-menu">
-                        <a href="<c:url value='/admin-appointment?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Appointment List</a>
+                        <a href="<c:url value='/doctor-appointmentlist?action=view-all'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Appointment List</a>
                     </li>
                     <li class="sidebar-menu">
-                        <a href="<c:url value='/admin-reservation?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Patient List</a>
+                        <a href="<c:url value='/doctor-patientlist?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Patient List</a>
                     </li>
                     <li class="sidebar-menu">
                         <a href="<c:url value='/user-profile?action=view'/>"><i class="uil uil-user me-2 d-inline-block"></i>My Account</a>

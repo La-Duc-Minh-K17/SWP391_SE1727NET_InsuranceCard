@@ -45,11 +45,11 @@ public class UserProfileController extends HttpServlet {
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
             int gender = Integer.parseInt(request.getParameter("gender"));
-            System.out.println(gender);
             uDAO.updateAccountProfile(user.getUserId(), name, gender, email, phone, dob, address, image);
             request.setAttribute("success", "UPDATE SUCCESSFULLY");
             UserAccount newUser = uDAO.getAccountById(user.getUserId());
             SessionUtils.getInstance().putValue(request, "user", newUser);
+            System.out.println(newUser);
             if (newUser.getRole().getRole_name().equals("PATIENT")) {
                 request.getRequestDispatcher("frontend/view/userprofile.jsp").forward(request, response);
             } else {
@@ -57,7 +57,6 @@ public class UserProfileController extends HttpServlet {
 
             }
             return;
-
         }
         if (action != null && action.equals("change-password")) {
             String oldPassword = request.getParameter("oldpassword");

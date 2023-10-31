@@ -30,7 +30,16 @@
 
     <body>
         <div class="page-wrapper doctris-theme toggled">
-            <jsp:include page="/frontend/common/admin_side_bar.jsp" />
+
+            <c:if test="${sessionScope.user.role.role_name == 'ADMIN'}">
+                <jsp:include page="/frontend/common/admin_side_bar.jsp" />
+            </c:if>
+            <c:if test="${sessionScope.user.role.role_name == 'DOCTOR'}">
+                <jsp:include page="/frontend/common/doctor_side_bar.jsp" />
+            </c:if>
+            <c:if test="${sessionScope.user.role.role_name == 'MANAGER'}">
+                <jsp:include page="/frontend/common/manager_side_bar    .jsp" />
+            </c:if>
             <main class="page-content bg-light">
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
@@ -83,6 +92,7 @@
                                 <form action="<c:url value='/user-profile?action=edit-info'/>" method="post" class="mt-4" enctype="multipart/form-data">
                                     <h5 class="mb-0">Personal Information :</h5>
                                     <div class="row align-items-center mt-4">
+
                                         <div>
                                             <p class="text-muted">Update Image.</p>
                                             <div id="myfileupload">
@@ -99,15 +109,14 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Full Name</label>
                                                 <input name="name" id="name" type="text" class="form-control"
-                                                       placeholder="Full Name :" value="${sessionScope.user.fullName}">
+                                                       placeholder="Full Name :" value="${sessionScope.user.fullName}   ">
                                             </div>
                                         </div><!--end col-->
 
                                         <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Date of birth </label>
-                                                <input name="dob" id="dob" type="date" class="form-control" placeholder="Date of birth :"
-                                                       value="${sessionScope.user.dob}">
+                                                <input name="dob" id="dob" type="date" class="form-control" placeholder="Date of birth :" value="${sessionScope.user.dob}">
                                             </div>
                                         </div><!--end col-->
 
@@ -123,7 +132,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Phone</label>
                                                 <input name="phone" id="phone" type="text" class="form-control"
-                                                       placeholder="Phone no. :" value="${sessionScope.user.phone}">
+                                                       placeholder="Phone no:" value="${sessionScope.user.phone}">
                                             </div>
                                         </div><!--end col-->
                                         <div class="col-lg-6">
@@ -133,7 +142,6 @@
                                                        placeholder="Address :" value="${sessionScope.user.address}">
                                             </div>
                                         </div>
-
                                         <div class="col-lg-6">
                                             <div class="mt-3">
                                                 <div>
@@ -149,17 +157,14 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <input type="submit" id="submit" name="send" class="btn btn-primary"
                                                    value="Save changes">
                                         </div>
                                     </div>
-                                </form><!--end form-->
-
+                                </form>
                                 <div class="mt-4 pt-2">
                                     <c:if test="${error != null }">
                                         <div class="alert alert-error">${requestScope.error}</div>

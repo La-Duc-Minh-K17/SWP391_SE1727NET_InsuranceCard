@@ -37,7 +37,6 @@ public class ManageDoctorController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         DoctorDAO dDAO = new DoctorDAO();
         PatientDAO pDAO = new PatientDAO();
         String action = request.getParameter("action");

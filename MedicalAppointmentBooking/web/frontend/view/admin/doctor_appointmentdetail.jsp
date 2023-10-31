@@ -172,8 +172,7 @@
                                         </div>
 
                                         <div class="d-flex align-items-center mt-2">
-                                            <i
-                                                class="uil uil-phone align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                            <i class="uil uil-phone align-text-bottom text-primary h5 mb-0 me-2"></i>
                                             <h6 class="mb-0">Phone</h6>
                                             <p class="text-muted mb-0 ms-2">${appt.patient.phone}</p>
                                         </div>
@@ -204,7 +203,15 @@
                                     <div class="p-4 border-bottom">
                                         <h5 class="mb-0">Appointment Details</h5>
                                     </div>
+                                    <br><br><br><br><br>
+                                    <div
+                                        class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
 
+                                        <img src="frontend/template/assets/images/appointment.jpg"
+                                             class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+
+                                        <br><br><br><br>
+                                    </div>
                                     <div class="tab-content p-4" id="pills-tabContent">
                                         <div class="row">
                                             <div class="col-lg-6">
@@ -243,7 +250,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="card border-0 mt-4 col-lg-12 row ">
                             <div class=" col-5">
                                 <a href="javascript:history.back();"
@@ -251,15 +257,13 @@
                                     Complete appointment
                                 </a>
                             </div>
-                            
+
                         </div>
                     </div>
 
                 </div>
             </main>
         </div>
-
-
         <script src="<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/app.js'/>"></script>

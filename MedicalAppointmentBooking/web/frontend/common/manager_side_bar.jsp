@@ -19,8 +19,11 @@
                         <img src="frontend/template/assets/images/MABS__1.png" height="24" class="logo-dark-mode" alt="">
                     </a>
                 </div>
+                <div class="card border-0" >
+                    <img src="frontend/template/assets/images/doctors/profile-bg.jpg" class="img-fluid" alt="">
+                </div>
                 <ul class="sidebar-menu pt-3">
-                   
+
                     <li class="sidebar-menu">
                         <a href="<c:url value='/manage-doctor?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>
                     </li>

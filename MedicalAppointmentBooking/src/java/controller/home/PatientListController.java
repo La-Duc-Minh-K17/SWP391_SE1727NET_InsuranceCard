@@ -11,10 +11,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import dal.PatientDAO;
-import java.util.ArrayList;
 import java.util.List;
 import model.Doctor;
 import model.Patient;
+import utils.SessionUtils;
 
 /**
  *
@@ -33,14 +33,14 @@ public class PatientListController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int docId = Integer.parseInt(request.getParameter("id"));
+
         String action = request.getParameter("action");
         DoctorDAO dDao = new DoctorDAO();
-        Doctor doctor = dDao.getDoctorById(docId);
+        Doctor doctor = (Doctor) SessionUtils.getInstance().getValue(request, "user");
         request.setAttribute("doctor", doctor);
         if (action != null && action.equals("view-all")) {
             PatientDAO pdao = new PatientDAO();
-            List<Patient> listP = pdao.getPatientByDoctorId(docId);
+            List<Patient> listP = pdao.getPatientByDoctorId(doctor.getDoctorId());
             request.setAttribute("listPatient", listP);
             request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
             return;
@@ -48,9 +48,12 @@ public class PatientListController extends HttpServlet {
         if (action != null && action.equals("search")) {
             String search = request.getParameter("search").trim();
             PatientDAO pdao = new PatientDAO();
-            List<Patient> listP = pdao.getPatientByDoctorIdAndName(docId, search);
+            List<Patient> listP = pdao.getPatientByDoctorIdAndName(doctor.getDoctorId(), search);
             request.setAttribute("listPatient", listP);
             request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
+            return;
+        }
+        if(action != null && action.equals("view-detail")) {
             return;
         }
     }
