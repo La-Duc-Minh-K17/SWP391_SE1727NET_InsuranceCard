@@ -5,6 +5,7 @@
 package controller.home;
 
 import com.google.gson.Gson;
+import dal.DoctorDAO;
 import dal.DoctorScheduleDAO;
 import dal.ReservationDAO;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Doctor;
 import model.DoctorSchedule;
 
 /**
@@ -35,7 +37,7 @@ public class CheckAvailabilityServlet extends HttpServlet {
         ReservationDAO rDAO = new ReservationDAO();
         DoctorScheduleDAO dcDAO = new DoctorScheduleDAO();
         String type = request.getParameter("type");
-
+        DoctorDAO dDAO = new DoctorDAO();
         if (type != null && type.equals("appointment")) {
             String date = request.getParameter("chosenDate");
             int doctorId = Integer.parseInt(request.getParameter("doctor_id"));
@@ -54,6 +56,14 @@ public class CheckAvailabilityServlet extends HttpServlet {
             String timeList = json.toJson(timeSlot);
             response.setContentType("text/html");
             response.getWriter().write(timeList);
+        }
+         if (type != null && type.equals("doctor")) {
+            int specialityId = Integer.parseInt(request.getParameter("speciality_id"));
+            List<Doctor> listDoctor = dDAO.getDoctorBySpeciality(specialityId);
+            Gson json = new Gson();
+            String list = json.toJson(listDoctor);
+            response.setContentType("text/html");
+            response.getWriter().write(list);
         }
     }
 

@@ -2,10 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.admin;
+package controller.user;
 
 import dal.AppointmentDAO;
-import dal.DoctorDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -13,17 +12,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Appointment;
-import model.Doctor;
-import utils.EmailSending;
+import model.UserAccount;
+import utils.SessionUtils;
 import utils.TimeUtil;
-import dal.SpecialityDAO;
-import model.Speciality;
 
 /**
  *
  * @author Admin
  */
-public class AdminAppointmentDetail extends HttpServlet {
+public class UserAppointment extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,71 +33,58 @@ public class AdminAppointmentDetail extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
         AppointmentDAO apptDAO = new AppointmentDAO();
-        SpecialityDAO speDAO = new SpecialityDAO();
-        DoctorDAO dDAO = new DoctorDAO();
+        String action = request.getParameter("action");
+        UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
+        if (action != null && action.equals("view")) {
+            List<Appointment> listAppt = apptDAO.getPatientAppointmentByUserId(user.getUserId());
+            request.setAttribute("apptList", listAppt);
+            request.getRequestDispatcher("frontend/view/user_appointment.jsp").forward(request, response);
+            return;
+        }
         if (action != null && action.equals("view-detail")) {
             int apptId = Integer.parseInt(request.getParameter("apptId"));
-            List<Doctor> doctorList = null;
-            List<Speciality> speList = null;
             Appointment appt = apptDAO.getAppointmentById(apptId);
-            if (appt.getDoctor() != null) {
-                doctorList = dDAO.getDoctorBySpeciality(appt.getDoctor().getSpeciality());
-                request.setAttribute("doctorL", doctorList);
-            } else {
-                speList = speDAO.getAllSpeciality();
-                request.setAttribute("speList", speList);
-            }
             request.setAttribute("appt", appt);
-            request.getRequestDispatcher("frontend/view/admin/admin_appointmentdetail.jsp").forward(request, response);
+            request.getRequestDispatcher("frontend/view/user_appointmentdetail.jsp").forward(request, response);
             return;
         }
-        if (action != null && action.equals("reassign")) {
-            int doctorId = Integer.parseInt(request.getParameter("doctor"));
+        if (action != null && action.equals("reschedule")) {
             String date = request.getParameter("appt-date");
             String time = request.getParameter("appt-time");
-            int apptId = Integer.parseInt(request.getParameter("apptId"));
+            String reason = request.getParameter("reschedule_reason");
+            int apptId = Integer.parseInt(request.getParameter("reschedule_appointment"));
             Appointment appointment = apptDAO.getAppointmentById(apptId);
+            appointment.setRescheduleReason(reason);
             appointment.setApptDate(TimeUtil.dateConverter1(date));
             appointment.setApptTime(time);
-            Doctor d = dDAO.getDoctorById(doctorId);
-            appointment.setDoctor(d);
-            apptDAO.rescheduleAppointment(appointment);
-            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
-            return;
-        } if (action != null && action.equals("remove")) {  
-            int apptId = Integer.parseInt(request.getParameter("apptId"));
-            Appointment appointment = apptDAO.getAppointmentById(apptId);
-            appointment.setApptDate(null);
-            appointment.setApptTime("");
-            appointment.setDoctor(null);
-            apptDAO.rescheduleAppointment(appointment);
-            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
+            appointment.setStatus("RESCHEDULED");
+            apptDAO.rescheduleAppointmentForPatient(appointment);
+            response.sendRedirect("user-appointment?action=view-detail&apptId=" + appointment.getApptId());
             return;
         }
-        if (action != null && action.equals("confirm")) {
-            int apptId = Integer.parseInt(request.getParameter("apptId"));
-            Appointment appointment = apptDAO.getAppointmentById(apptId);
-            appointment.setStatus("CONFIRMED");
-            apptDAO.updateStatus(appointment);
-            EmailSending.sendReminderEmail(appointment);
-            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
-            return;
-        }
-        if (action != null && action.equals("reject")) {
+        if (action != null && action.equals("cancel")) {
             int apptId = Integer.parseInt(request.getParameter("cancel_appointment"));
-            String reject_reason = request.getParameter("reject_reason");
             Appointment appointment = apptDAO.getAppointmentById(apptId);
-            appointment.setStatus("REJECTED");
-            appointment.setRejectReason(reject_reason);
+            appointment.setStatus("CANCELED");
             apptDAO.updateStatus(appointment);
-            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
+            response.sendRedirect("user-appointment?action=view-detail&apptId=" + appointment.getApptId());
+            return;
+        }
+        if (action != null && action.equals("filter")) {
+            String filter = request.getParameter("status_filter");
+            if (filter.equalsIgnoreCase("all")) {
+                response.sendRedirect("user-appointment?action=view");
+                return;
+            }
+            List<Appointment> listAppt = apptDAO.getFilteredPatientAppointment(user.getUserId(), filter);
+            request.setAttribute("apptList", listAppt);
+            request.getRequestDispatcher("frontend/view/user_appointment.jsp").forward(request, response);
             return;
         }
     }
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

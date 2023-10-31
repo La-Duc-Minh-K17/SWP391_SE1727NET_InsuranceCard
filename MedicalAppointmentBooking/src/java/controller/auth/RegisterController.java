@@ -58,7 +58,6 @@ public class RegisterController extends HttpServlet {
                 String urlLink = fullURL + "/verify?action=confirm&token=" + confirmationToken; 
                 EmailSending.sendVerificationMail(user, urlLink, email);
                 request.setAttribute("success", "A confirmation email has been sent to your Email, please check.");
-
             }
         }
 

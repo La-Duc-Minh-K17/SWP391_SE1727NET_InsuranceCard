@@ -126,7 +126,7 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-3 col-md-3 mt-4 mt-md-0 text-md-end">
-                                            <!--<a href="<c:url value='/manage-doctor?action=create'/>" class="btn btn-primary ">Add Doctor</a>-->
+                                            <a href="<c:url value='/AccountAdd'/>" class="btn btn-primary ">Add Account</a>
                                         </div><!--end col-->
 
                                     </div><!--end row-->

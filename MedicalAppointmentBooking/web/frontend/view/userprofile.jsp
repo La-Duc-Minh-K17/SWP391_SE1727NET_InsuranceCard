@@ -9,8 +9,29 @@
         <meta charset="utf-8" />
         <title>MABS</title>
         <!-- favicon -->
+        <meta charset="utf-8" />
+        <title>MABS - Medical Appointment Booking System</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- favicon -->
         <link rel="shortcut icon" href="frontend/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!-- SLIDER -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/tiny-slider.css"/>
+        <!-- Select2 -->
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
+        <!-- Date picker -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
+        <!-- Icons -->
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css"  type="text/css" />
+        <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
+        <!-- Css -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" type="text/css">
+        <link href="${pageContext.request.contextPath}/frontend/template/assets/css/otherStyle.css" rel="stylesheet" type="text/css" />
+
 
     </head>
     <body>
@@ -53,10 +74,7 @@
                                     <p class="text-muted mb-0 ms-2">${sessionScope.user.address}</p>
                                 </div>
                             </div>
-                            <c:if test="${sessionScope.user.role.role_name == 'PATIENT'}">
-                                <jsp:include page="/frontend/common/patient_side_bar.jsp" />  
-                            </c:if>
-                            
+                            <jsp:include page="/frontend/common/patient_side_bar.jsp" />  
                         </div>
                     </div><!--end col-->
 

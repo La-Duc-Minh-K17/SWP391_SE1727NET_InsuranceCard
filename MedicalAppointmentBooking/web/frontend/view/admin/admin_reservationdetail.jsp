@@ -149,7 +149,6 @@
                                                 <p class="text-muted mb-0 ms-2">Female</p>
                                             </c:if>     
                                         </div>
-
                                         <div class="d-flex align-items-center mt-2">
                                             <i class="uil uil-phone align-text-bottom text-primary h5 mb-0 me-2"></i>
                                             <h6 class="mb-0">Phone</h6>
@@ -189,7 +188,6 @@
                                         </c:if>
                                         <h5 class="mt-3 mb-1">${resv.service.service_name}</h5>
                                     </div>
-
                                     <div class="list-unstyled p-4">
                                         <div class="d-flex align-items-center mt-2">
                                             <i class="uil uil-user align-text-bottom text-primary h5 mb-0 me-2"></i>
@@ -202,7 +200,7 @@
                                             <h6 class="mb-0">Service Detail</h6>
                                             <p class="text-muted mb-0 ms-2">${resv.service.service_details}</p>
                                         </div>
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -240,23 +238,51 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="mb-3">
-                                                <label class="form-label">Appointment Note</label>
+                                                <label class="form-label">Reservation Note</label>
                                                 <p>${resv.resvNote}</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <c:if test="${resv.status ==  'PENDING' || resv.status == 'RESCHEDULED'}">
+                                    <c:if test="${resv.status == 'PENDING' || resv.status == 'RESCHEDULED'}">
                                         <div class="d-flex justify-content-between">
                                             <div class="mt-3">
-                                                <a href="admin-appointmentdetail?action=confirm&apptId=${resv.resvId}"class="btn btn-primary ">Confirm Reservation</a>
+                                                <a href="admin-reservationdetail?action=confirm&apptId=${resv.resvId}"class="btn btn-primary ">Confirm Reservation</a>
                                             </div>
-                                            <div class="mt-3">
-                                                <a href="admin-appointmentdetail?action=reject&apptId=${resv.resvId}"class="btn btn-primary btn-danger">Reject Reservation  </a>
-                                            </div>
+                                            <c:if test="${resv.status == 'PENDING'}">
+                                                <div class="mt-3">
+                                                    <a href="#cancelappointment" class="btn btn-primary btn-danger " 
+                                                       data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${resv.resvId}">
+                                                        Reject Reservation</a>
+                                                </div>
+                                                <div class="modal fade"  id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog "style="max-width: 500px;"  >
+                                                        <div class="modal-content">
+                                                            <div class="modal-body py-5">
+                                                                <div class="text-center">
+                                                                    <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
+                                                                        <i class="uil uil-times-circle h1 mb-0"></i>
+                                                                    </div>
+                                                                    <div class="mt-4">
+                                                                        <h4>Reject  Reservation</h4>
+                                                                        <p class="para-desc mx-auto text-muted mb-0">This reservation will be rejected.Are you sure ?</p>
+                                                                        <div class="mt-4">
+                                                                            <form action="<c:url value='admin-reservationdetail?action=reject'></c:url>" method="post">
+                                                                                    <textarea rows="5" class="form-control" name="reject_reason" placeholder="Your reason" required></textarea>
+                                                                                    <br> <br> <br>
+                                                                                    <input type="hidden" id="cancel_appointment" name="cancel_appointment" value="">
+                                                                                    <input type="submit" class="btn btn-soft-danger" name="cancel" value="Reject">
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </c:if>
                                         </div>
                                     </c:if>
                                 </div>
-
                             </div>
                             <c:if test="${resv.status ==  'PENDING' || resv.status == 'RESCHEDULED'}">
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
@@ -265,7 +291,7 @@
                                             <div class="p-4 border-bottom">
                                                 <h5 class="mb-0">Update appointment information</h5>
                                             </div>
-                                                
+
                                             <div class="col-md-6 p-3">
                                                 <div class="">
                                                     <label class="form-label">Select Reservation Date: </label>
@@ -299,6 +325,11 @@
                 minDate: "today",
                 maxDate: new Date().fp_incr(7)
             });
+            function cancelAppt(appt) {
+                var dataId = appt.getAttribute('data-id');
+                let cancel_appt = document.getElementById('cancel_appointment');
+                cancel_appt.value = dataId;
+            }
             $(document).ready(function () {
                 $("#checkin-date").change(function () {
                     $("#time").find("option").remove();
