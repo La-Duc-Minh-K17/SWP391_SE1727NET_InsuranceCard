@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>Authorization</filter-name>
+        <filter-class>authorization.Authorization</filter-class>
+    </filter>
+   
     <servlet>
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>controller.auth.RegisterController</servlet-class>
@@ -58,11 +63,11 @@
     </servlet>
     <servlet>
         <servlet-name>WebDoctorList</servlet-name>
-        <servlet-class>controller.manager.WebDoctorList</servlet-class>
+        <servlet-class>controller.home.WebDoctorList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>WebDoctorDetail</servlet-name>
-        <servlet-class>controller.manager.WebDoctorDetail</servlet-class>
+        <servlet-class>controller.home.WebDoctorDetail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FilterCategory</servlet-name>
@@ -77,24 +82,12 @@
         <servlet-class>controller.manager.ManageServices</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>webServiceDetail</servlet-name>
-        <servlet-class>controller.manager.webServiceDetail</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AdminAppointmentList</servlet-name>
         <servlet-class>controller.admin.AdminAppointmentList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminReservation</servlet-name>
         <servlet-class>controller.admin.AdminReservation</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StaffAppointmentList</servlet-name>
-        <servlet-class>controller.staff.StaffAppointmentList</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StaffReservationList</servlet-name>
-        <servlet-class>controller.staff.StaffReservationList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManagePatient</servlet-name>
@@ -141,6 +134,10 @@
         <servlet-class>controller.admin.AdminScheduleCalendar</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>UserAppointment</servlet-name>
+        <servlet-class>controller.user.UserAppointment</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ChangeAccountStatus</servlet-name>
         <servlet-class>controller.admin.ChangeAccountStatus</servlet-class>
     </servlet>
@@ -149,8 +146,16 @@
         <servlet-class>controller.admin.ManageAccount</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>editSetting</servlet-name>
-        <servlet-class>controller.admin.EditSetting</servlet-class>
+        <servlet-name>AccountAdd</servlet-name>
+        <servlet-class>controller.admin.AccountAdd</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AccountDetail</servlet-name>
+        <servlet-class>controller.admin.AccountDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserReservation</servlet-name>
+        <servlet-class>controller.user.UserReservation</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
@@ -206,7 +211,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddSetting</servlet-name>
-        <url-pattern>/addSetting</url-pattern>
+        <url-pattern>/admin-addsetting</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>WebDoctorList</servlet-name>
@@ -222,15 +227,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServiceReview</servlet-name>
-        <url-pattern>/service/review</url-pattern>
+        <url-pattern>/manage-servicereview</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManageServices</servlet-name>
         <url-pattern>/manage-service</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>webServiceDetail</servlet-name>
-        <url-pattern>/detailservice</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManagePatient</servlet-name>
@@ -258,7 +259,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DoctorFeedback</servlet-name>
-        <url-pattern>/doctor/feedback</url-pattern>
+        <url-pattern>/manage-doctorfeedback</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserProfileController</servlet-name>
@@ -290,11 +291,23 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManageAccount</servlet-name>
-        <url-pattern>/ManageAccount</url-pattern>
+        <url-pattern>/admin-accountlist</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>editSetting</servlet-name>
-        <url-pattern>/editSetting</url-pattern>
+        <servlet-name>AccountAdd</servlet-name>
+        <url-pattern>/admin-addaccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountDetail</servlet-name>
+        <url-pattern>/admin-accountdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserAppointment</servlet-name>
+        <url-pattern>/user-appointment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserReservation</servlet-name>
+        <url-pattern>/user-reservation</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
