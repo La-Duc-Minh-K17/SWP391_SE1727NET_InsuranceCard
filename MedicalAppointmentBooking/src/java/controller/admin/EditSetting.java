@@ -5,12 +5,15 @@
 
 package controller.admin;
 
+import dal.SettingDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import model.Setting;
 
 /**
  *
@@ -42,6 +45,9 @@ public class EditSetting extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+         SettingDAO st = new SettingDAO();
+        ArrayList<Setting> settings = st.list();
+        request.setAttribute("settings", settings);
         request.getRequestDispatcher("frontend/view/admin/editSetting.jsp").forward(request, response);
     } 
 

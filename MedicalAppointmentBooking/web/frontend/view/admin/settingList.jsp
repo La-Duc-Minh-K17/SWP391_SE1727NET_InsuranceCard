@@ -87,7 +87,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div>  
 
             <div class="container-fluid">
                 <div class="layout-specing">
@@ -164,7 +164,7 @@
                                                                     </td>
                                                                     
                                                                     <td>
-                                                                        <a  class="btn btn-primary btn-sml" href="editSetting?type=${s.type}&note=${s.note}&description=${s.description}&status=${s.status}"
+                                                                        <a  class="btn btn-primary btn-sml" href="editSetting"
                                                                             onclick="editSetting(${s.settingID}, '${s.type}', '${s.note}', '${s.description}', ${s.status});">Edit</a>
                                                                     </td>
 
