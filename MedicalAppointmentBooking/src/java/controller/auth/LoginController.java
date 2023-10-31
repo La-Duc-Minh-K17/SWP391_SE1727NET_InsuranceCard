@@ -68,6 +68,7 @@ public class LoginController extends HttpServlet {
             } else {
                 SessionUtils.getInstance().putValue(request, "user", account);
             }
+            
             Cookie cusername = new Cookie("username", username);
             Cookie cpass = new Cookie("password", password);
             Cookie crem = new Cookie("remember", "ON");
@@ -83,6 +84,8 @@ public class LoginController extends HttpServlet {
             response.addCookie(cusername);
             response.addCookie(cpass);
             response.addCookie(crem);
+
+            
             request.getRequestDispatcher("home").forward(request, response);
             return;
         }

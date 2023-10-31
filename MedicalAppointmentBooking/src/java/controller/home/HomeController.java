@@ -53,9 +53,10 @@ public class HomeController extends HttpServlet {
         request.setAttribute("data", blogsList);
         request.setAttribute("blogs3", blogsList3);
         request.setAttribute("listC", blogCategory);
+        
         if (action != null && action.equals("logout")) {
             SessionUtils.getInstance().removeValue(request, "user");
-            request.getRequestDispatcher(request.getContextPath() +"/frontend/view/home.jsp").forward(request, response);
+            request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
             return;
         }
         if (action != null && action.equals("view")) {
