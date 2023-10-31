@@ -39,7 +39,6 @@ public class AdminScheduleCalendar extends HttpServlet {
         AppointmentDAO apptDAO = new AppointmentDAO();
         ReservationDAO resvDAO = new ReservationDAO();
         List<Appointment> apptList = apptDAO.getAllAppointment();
-
         List<Reservation> resvList = resvDAO.getAllReservation();
         String scheme = request.getScheme();
         String serverName = request.getServerName();

@@ -5,6 +5,7 @@
 package controller.home;
 
 import com.google.gson.Gson;
+import dal.AppointmentDAO;
 import dal.DoctorDAO;
 import dal.DoctorScheduleDAO;
 import dal.ReservationDAO;
@@ -36,6 +37,7 @@ public class CheckAvailabilityServlet extends HttpServlet {
             throws ServletException, IOException {
         ReservationDAO rDAO = new ReservationDAO();
         DoctorScheduleDAO dcDAO = new DoctorScheduleDAO();
+        AppointmentDAO apptDAO = new AppointmentDAO();
         String type = request.getParameter("type");
         DoctorDAO dDAO = new DoctorDAO();
         if (type != null && type.equals("appointment")) {

@@ -65,7 +65,6 @@ public class LoginController extends HttpServlet {
             if (account.getRole().getRole_name().equals(RoleProp.DOCTOR)) {
                 doctor = dDAO.getDoctorByUserId(account.getUserId());
                 SessionUtils.getInstance().putValue(request, "user", doctor);
-                System.out.println("DOctor");
             } else {
                 SessionUtils.getInstance().putValue(request, "user", account);
             }

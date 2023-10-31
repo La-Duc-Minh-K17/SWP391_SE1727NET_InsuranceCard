@@ -60,10 +60,8 @@ public class WebDoctorList extends HttpServlet {
     throws ServletException, IOException {
         SpecialityDAO spe = new SpecialityDAO();
         request.setAttribute("speList", spe.getAllSpeciality());
-        
         DoctorDAO doctor = new DoctorDAO();
         request.setAttribute("doctor", doctor.getAllDoctor());
-        
         request.getRequestDispatcher("frontend/view/webdoctorlist.jsp").forward(request, response);
     } 
 

@@ -55,15 +55,14 @@ public class HomeController extends HttpServlet {
         request.setAttribute("listC", blogCategory);
         if (action != null && action.equals("logout")) {
             SessionUtils.getInstance().removeValue(request, "user");
-            request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);
+            request.getRequestDispatcher(request.getContextPath() +"/frontend/view/home.jsp").forward(request, response);
             return;
         }
         if (action != null && action.equals("view")) {
             int serivce_id = Integer.parseInt(request.getParameter("id"));
-            Service service = servicedao.getServiceById(serivce_id);
+            Service service = serviceDao.getServiceById(serivce_id);
             request.setAttribute("service", service);
             request.getRequestDispatcher("frontend/view/servicedetail.jsp").forward(request, response);
-
         }
         if (action == null) {
             request.getRequestDispatcher("frontend/view/home.jsp").forward(request, response);

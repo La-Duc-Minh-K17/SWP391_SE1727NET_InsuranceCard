@@ -21,9 +21,9 @@ import utils.TimeUtil;
 
 /**
  *
- * @author DUCHIEUPC.COM
+ * @author 
  */
-@WebServlet(name = "AccountAdd", urlPatterns = {"/AccountAdd"})
+@WebServlet(name = "AccountAdd", urlPatterns = {"/admin-addaccount"})
 public class AccountAdd extends HttpServlet {
 
     /**
@@ -97,9 +97,7 @@ public class AccountAdd extends HttpServlet {
         if (uDAO.isAccountExisted(user)) {
             request.setAttribute("error", "Account has existed !");
         } else {
-        
             uDAO.addUserAccount(user);
-           
             request.setAttribute("success", "Account added successfully");
         }
         request.getRequestDispatcher("frontend/view/admin/accountadd.jsp").forward(request, response);

@@ -12,10 +12,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import model.Doctor;
 import model.Appointment;
+import utils.SessionUtils;
 
 /**
  *
@@ -34,30 +35,42 @@ public class AppointmentListController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            int docId = Integer.parseInt(request.getParameter("id"));
-            String action = request.getParameter("action");
-            DoctorDAO dDao = new DoctorDAO();
-            Doctor doctor = dDao.getDoctorById(docId);
-            request.setAttribute("doctor", doctor);
-            if (action != null && action.equals("view-all")) {
-                PatientDAO pdao = new PatientDAO();
-                AppointmentDAO adao = new AppointmentDAO();
-                List<Appointment> apptList = adao.getAppointmentByDoctorId(docId);
-                request.setAttribute("apptList", apptList);
-                request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
-                return;
+        PatientDAO pdao = new PatientDAO();
+        AppointmentDAO adao = new AppointmentDAO();
+
+        String action = request.getParameter("action");
+        DoctorDAO dDao = new DoctorDAO();
+        Doctor doctor = (Doctor) SessionUtils.getInstance().getValue(request, "user");
+        request.setAttribute("doctor", doctor);
+        if (action != null && action.equals("view-all")) {
+            List<Appointment> apptList = adao.getAppointmentByDoctorId(doctor.getDoctorId());
+            request.setAttribute("apptList", apptList);
+            request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("search")) {
+            String search = request.getParameter("search").trim();
+            List<Appointment> apptList = adao.searchAppointmentByPatientNameAndIdDoc(doctor.getDoctorId(), search);
+            request.setAttribute("apptList", apptList);
+            request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
+            return;
+
+        }
+        if (action != null && action.equals("filter")) {
+            String filter = request.getParameter("status_filter");
+            if (filter.equalsIgnoreCase("all")) {
+                response.sendRedirect("doctor-appointment?action=view-all");
             }
-            if (action != null && action.equals("search")) {
-                String search = request.getParameter("search").trim();
-                PatientDAO pdao = new PatientDAO();
-                AppointmentDAO adao = new AppointmentDAO();
-                List<Appointment> apptList = adao.searchAppointmentByPatientNameAndIdDoc(docId, search);
-                request.setAttribute("apptList", apptList);
-                request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
-                return;
+            List<Appointment> returnList = new ArrayList<>();
+            List<Appointment> apptList = adao.getAppointmentByDoctorId(doctor.getDoctorId());
+            for (Appointment appt : apptList) {
+                if (appt.getStatus().equalsIgnoreCase(filter)) {
+                    returnList.add(appt);
+                }
             }
+            request.setAttribute("apptList", returnList);
+            request.getRequestDispatcher("frontend/view/admin/doctorappointmentlist.jsp").forward(request, response);
+            return;
         }
     }
 
