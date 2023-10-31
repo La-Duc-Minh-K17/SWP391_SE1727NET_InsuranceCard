@@ -96,10 +96,8 @@ public class AccountAdd extends HttpServlet {
         UserAccount user = new UserAccount(username, "123456@", email, fullname, Integer.valueOf(gender), phone, TimeUtil.dateConverter(dob), address, null, null, 1, new Role(Integer.valueOf(role)));
         if (uDAO.isAccountExisted(user)) {
             request.setAttribute("error", "Account has existed !");
-        } else {
-        
+        } else { 
             uDAO.addUserAccount(user);
-           
             request.setAttribute("success", "Account added successfully with password 123456@!");
         }
         request.getRequestDispatcher("frontend/view/admin/accountadd.jsp").forward(request, response);
