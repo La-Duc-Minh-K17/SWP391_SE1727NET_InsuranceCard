@@ -175,18 +175,7 @@
 
             </div>
         </div>
-        <div>
-            <ul class="pagination mb-0 mt-5">
-                <li class="page-item"><a class="page-link" href="javascript:void(0)"
-                                         aria-label="Previous">Prev</a></li>
-                <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0)"
-                                         aria-label="Next">Next</a></li>
-            </ul>
-        </div>
+        
         <footer class="bg-footer">
             <div class="container">
                 <div class="row">
