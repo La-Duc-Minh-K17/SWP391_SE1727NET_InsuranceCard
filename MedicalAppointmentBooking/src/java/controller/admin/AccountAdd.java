@@ -98,7 +98,11 @@ public class AccountAdd extends HttpServlet {
             request.setAttribute("error", "Account has existed !");
         } else {
             uDAO.addUserAccount(user);
+
+            request.setAttribute("success", "Account has been added successfully with password 123456@!");
+
             request.setAttribute("success", "Account added successfully");
+
         }
         request.getRequestDispatcher("frontend/view/admin/accountadd.jsp").forward(request, response);
     }
