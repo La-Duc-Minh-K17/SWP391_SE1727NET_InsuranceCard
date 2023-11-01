@@ -8,8 +8,9 @@ package resource;
  *
  * @author Admin
  */
-public class AppointmentStatus {
+public class ApptStatus {
 
+    public static final String COMPLETED = "COMPLETED";
     public static final String PENDING = "PENDING";
     public static final String CONFIRMED = "CONFIRMED";
     public static final String RESCHEDULED = "RESCHEDULED";

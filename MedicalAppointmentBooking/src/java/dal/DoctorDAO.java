@@ -8,6 +8,7 @@ import dbContext.DBConnection;
 import jakarta.servlet.http.Part;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,8 +16,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import model.Doctor;
-
 import model.DoctorFeedback;
+import model.Role;
 import model.UserAccount;
 import utils.ImageProcessing;
 
@@ -27,6 +28,7 @@ import utils.ImageProcessing;
 public class DoctorDAO {
 
     DBConnection dbc = new DBConnection();
+    RoleDAO roleDAO = new RoleDAO();
 
     public List<Doctor> getAllDoctor() {
         PreparedStatement ps = null;
@@ -130,6 +132,7 @@ public class DoctorDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 int doctorId = rs.getInt("doctor_id");
+                int roleId = rs.getInt("role_id");
                 String username = rs.getString("username");
                 String fullName = rs.getString("full_name");
                 String phone = rs.getString("phone");
@@ -141,8 +144,10 @@ public class DoctorDAO {
                 String speciality = rs.getString("speName");
                 String description = rs.getString("doctor_description");
                 int fee = rs.getInt("service_fee");
+                Role role = roleDAO.getRoleById(roleId);
                 doctor = new Doctor(doctorId, speciality, position, description, username, email, fullName, gender, phone, image, status);
                 doctor.setServiceFee(fee);
+                doctor.setRole(role);
             }
             return doctor;
         } catch (SQLException e) {
@@ -181,14 +186,17 @@ public class DoctorDAO {
                 String phone = rs.getString("phone");
                 String image = ImageProcessing.imageString(rs.getBlob("image"));
                 int gender = rs.getInt("gender");
+                Date dob = rs.getDate("dob");
                 String email = rs.getString("email");
                 int status = rs.getInt("status");
                 String position = rs.getString("doctor_position");
                 String speciality = rs.getString("speName");
                 String description = rs.getString("doctor_description");
                 int fee = rs.getInt("service_fee");
-                doctor = new Doctor(doctorId, speciality, position, description, userId, username, email, fullName, gender, phone, image, status);
-                doctor.setServiceFee(fee);
+                String address = rs.getString("address");
+                Role role = roleDAO.getRoleById(rs.getInt("role_id"));
+                doctor = new Doctor(doctorId, speciality, position, description, fee, userId, username, email, fullName, gender, phone, image, dob, address, status);
+                doctor.setRole(role);
             }
             return doctor;
         } catch (SQLException e) {

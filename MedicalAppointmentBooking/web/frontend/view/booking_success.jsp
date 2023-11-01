@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,7 +31,7 @@
                             <p class=" h5 text-success">Your appointment has been added to waiting list.</p>
                             <p class=" h5 text-success  ">We will inform you soon. </p>
                             <p class=" h5 text-success  "> Please check your email to get more information. </p>
-                            <a href="" class="btn btn-soft-primary mt-3">Go To Home</a>
+                            <a href="<c:url value="/home"></c:url>" class="btn btn-soft-primary mt-3">Go To Home</a>
                         </div><!---->
                     </div> 
                 </div>

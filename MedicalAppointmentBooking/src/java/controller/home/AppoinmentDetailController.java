@@ -6,12 +6,12 @@ package controller.home;
 
 import dal.AppointmentDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Appointment;
+import resource.ApptStatus;
 
 /**
  *
@@ -30,7 +30,6 @@ public class AppoinmentDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         AppointmentDAO apptDAO = new AppointmentDAO();
         int apptId = Integer.parseInt(request.getParameter("apptId"));
         String action = request.getParameter("action");
@@ -38,6 +37,13 @@ public class AppoinmentDetailController extends HttpServlet {
             Appointment appt = apptDAO.getAppointmentById(apptId);
             request.setAttribute("appt", appt);
             request.getRequestDispatcher("frontend/view/admin/doctor_appointmentdetail.jsp").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("complete")) {
+            Appointment appt = apptDAO.getAppointmentById(apptId);
+            appt.setStatus(ApptStatus.COMPLETED);
+            apptDAO.updateStatus(appt);
+            response.sendRedirect("doctor-appointmentdetail?action=view-detail&apptId="+apptId);
             return;
         }
     }

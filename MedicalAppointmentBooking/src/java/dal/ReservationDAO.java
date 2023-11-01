@@ -116,9 +116,9 @@ public class ReservationDAO {
         Connection connection = null;
         ResultSet rs = null;
         List<String> timeSlot = new ArrayList<>();
-        timeSlot.add("7:00:00");
-        timeSlot.add("8:00:00");
-        timeSlot.add("9:00:00");
+        timeSlot.add("07:00:00");
+        timeSlot.add("08:00:00");
+        timeSlot.add("09:00:00");
         timeSlot.add("10:00:00");
         timeSlot.add("11:00:00");
         timeSlot.add("12:00:00");
