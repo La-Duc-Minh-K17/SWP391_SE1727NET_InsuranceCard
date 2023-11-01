@@ -27,6 +27,35 @@ public class UserDAO {
 
     DBConnection dbc = new DBConnection();
     RoleDAO rDAO = new RoleDAO();
+        public boolean isEmailtExisted(UserAccount account) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        boolean isExisted = false;
+        String sql = "select * from user_account where email = ? ";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, account.getEmail());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                isExisted = true;
+            }
+            return isExisted;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return isExisted;
+    }
+
 
     public UserAccount getAccountByEmail(String email) {
         PreparedStatement ps = null;
