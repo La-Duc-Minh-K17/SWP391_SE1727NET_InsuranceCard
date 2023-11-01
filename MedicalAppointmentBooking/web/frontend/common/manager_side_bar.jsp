@@ -39,10 +39,10 @@
                         <a href="<c:url value='/manage-blog?action=view-all'/>"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
                     </li>
                     <li class="sidebar-menu">
-                        <a href="<c:url value='/service/review?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Service Review</a>
+                        <a href="<c:url value='/manage-servicereview?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Service Review</a>
                     </li>
                     <li class="sidebar-menu">
-                        <a href="<c:url value='/doctor/feedback?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Doctor Feedback</a>
+                        <a href="<c:url value='/manage-doctorfeedback?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Doctor Feedback</a>
                     </li>
                 </ul>
                 <!-- sidebar-menu  -->
