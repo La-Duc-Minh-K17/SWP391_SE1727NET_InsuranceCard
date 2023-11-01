@@ -13,9 +13,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import model.Doctor;
 
 /**
  *
@@ -77,8 +74,6 @@ public class WebDoctorList extends HttpServlet {
     throws ServletException, IOException {
        String name = request.getParameter("search");
        DoctorDAO doctor = new DoctorDAO();
-//       PrintWriter out = response.getWriter();
-//       out.println(name);
        SpecialityDAO spe = new SpecialityDAO();
        request.setAttribute("speList", spe.getAllSpeciality());
        request.setAttribute("doctor", doctor.getDoctorByName(name));

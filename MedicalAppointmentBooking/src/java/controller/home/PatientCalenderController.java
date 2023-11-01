@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
@@ -35,7 +35,7 @@ public class PatientCalenderController extends HttpServlet {
         int apptId = Integer.parseInt(request.getParameter("pid"));
         Appointment appt = apptDAO.getAppointmentById(apptId);
         request.setAttribute("appt", appt);
-        request.getRequestDispatcher("frontend/view/admin/patientcalender.jsp").forward(request, response);
+        request.getRequestDispatcher("frontend/view/admin/doctor_patientdetail.jsp").forward(request, response);
 
     }
 

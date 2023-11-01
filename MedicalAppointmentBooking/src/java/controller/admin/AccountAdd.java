@@ -79,7 +79,7 @@ public class AccountAdd extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        TimeUtil timeConfig = new TimeUtil();
+      
         UserDAO uDAO = new UserDAO();
         String username = request.getParameter("username");
         String role = request.getParameter("role");
@@ -91,14 +91,18 @@ public class AccountAdd extends HttpServlet {
         String gender = request.getParameter("gender");
         String address = request.getParameter("address");
         String dob = request.getParameter("dob");
-        String confirmationToken = CodeProcessing.generateToken();
+      
 
         UserAccount user = new UserAccount(username, "123456@", email, fullname, Integer.valueOf(gender), phone, TimeUtil.dateConverter(dob), address, null, null, 1, new Role(Integer.valueOf(role)));
         if (uDAO.isAccountExisted(user)) {
             request.setAttribute("error", "Account has existed !");
         } else {
             uDAO.addUserAccount(user);
+
+            request.setAttribute("success", "Account has been added successfully with password 123456@!");
+
             request.setAttribute("success", "Account added successfully");
+
         }
         request.getRequestDispatcher("frontend/view/admin/accountadd.jsp").forward(request, response);
     }

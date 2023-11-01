@@ -7,11 +7,12 @@ package controller.home;
 import dal.DoctorDAO;
 import dal.SpecialityDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Doctor;
+import model.Service;
 import static java.lang.System.out;
 import java.sql.Timestamp;
 import model.DoctorFeedback;
@@ -35,7 +36,6 @@ public class WebDoctorDetail extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -50,13 +50,28 @@ public class WebDoctorDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SpecialityDAO spe = new SpecialityDAO();
-        request.setAttribute("speList", spe.getAllSpeciality());
+        DoctorDAO doctorDAO = new DoctorDAO();
+        SpecialityDAO speDAO = new SpecialityDAO();
+        String action = request.getParameter("action");
         int id = Integer.parseInt(request.getParameter("doctorId"));
-        DoctorDAO doctor = new DoctorDAO();
-        request.setAttribute("doctor", doctor.getDoctorById(id));
-        request.setAttribute("feedback", doctor.getFeedBackByDoctorID(id));
-        request.getRequestDispatcher("frontend/view/webdoctordetail.jsp").forward(request, response);
+        if (action != null && action.equals("view-detail")) {
+            request.setAttribute("speList", speDAO.getAllSpeciality());
+            request.setAttribute("doctor", doctorDAO.getDoctorById(id));
+            request.setAttribute("feedback", doctorDAO.getFeedBackByDoctorID(id));
+            request.getRequestDispatcher("frontend/view/webdoctordetail.jsp").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("book-doctor")) {
+            Doctor doctor = doctorDAO.getDoctorById(id);
+            Service chosenService = (Service) SessionUtils.getInstance().getValue(request, "chosen_service");
+            if (chosenService != null) {
+                SessionUtils.getInstance().removeValue(request, "chosen_service");
+            }
+            SessionUtils.getInstance().putValue(request, "chosen_doctor", doctor);
+            request.getRequestDispatcher("booking?action=form-filling").forward(request, response);
+            return;
+        }
+
     }
 
     /**
@@ -70,6 +85,7 @@ public class WebDoctorDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
          //out.println(user.getUserId());
         String comments = request.getParameter("message");
@@ -97,6 +113,7 @@ public class WebDoctorDetail extends HttpServlet {
         request.setAttribute("doctor", doctor.getDoctorById(doctorId));
         request.setAttribute("feedback", doctor.getFeedBackByDoctorID(doctorId));
         request.getRequestDispatcher("frontend/view/webdoctordetail.jsp").forward(request, response);
+
     }
 
     /**

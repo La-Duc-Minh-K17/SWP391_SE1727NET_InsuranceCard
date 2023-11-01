@@ -62,7 +62,7 @@
                         <div class="text-center">
                             <div class="mt-5 pt-2">
                                 <div class="d-flex justify-content-center">
-                                    <a href="servicedetail?action=book-service&id=${s.service_id}" class="btn btn-outline-primary btn-lg">Book Now</a>
+                                    <a href="WebDoctorDetail?action=book-doctor&doctorId=${doctor.doctorId}" class="btn btn-outline-primary btn-lg">Book Now</a>
                                 </div>
                             </div>
                         </div><!--end text-center-->

@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>s
+    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Appointment Detail Page</title>
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
@@ -386,7 +386,7 @@
                                             </div>
                                             <div class="col-md-6 p-3">
                                                 <div class="">
-                                                    <input type="submit" id="reassign" class="btn btn-primary" value="Re-assign"> </input>
+                                                    <input type="submit" id="reassign" class="btn btn-primary" value="Update"> </input>
                                                 </div>
                                             </div>
                                         </div>
@@ -458,7 +458,7 @@
                             let obj = $.parseJSON(data);
                             $.each(obj, function (key, value) {
                                 $("#time").append(
-                                        '<option value="' + value.slotTime + '">' + value.slotTime + "</option>"
+                                        '<option value="' + value + '">' + value + "</option>"
                                         );
                             });
                             $("select").formSelect();

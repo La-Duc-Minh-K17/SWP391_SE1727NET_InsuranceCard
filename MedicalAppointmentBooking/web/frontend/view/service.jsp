@@ -29,25 +29,25 @@
     <body>
 
         <jsp:include page="/frontend/common/header.jsp" />
-        <section class="bg-half-170 d-table w-100" style="background: url('frontend/template/assets/images/bg/department.jpg') center center;">
-            <div class="bg-overlay bg-overlay-dark"></div>
-            <div class="container">
-                <div class="row mt-5 justify-content-center">
-                    <div class="col-12">
-                        <div class="section-title text-center">
-                            <h3 class="sub-title mb-4 text-white title-dark">Services</h3>
-                            <p class="para-desc mx-auto text-white-50">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
+        <section class="bg-half-170 d-table w-100 mt-100" style="background: url('frontend/template/assets/images/bg/department.jpg') center center;">
+            <div class="bg-overlay bg-overlay-dark">
+                <div class="container">
+                    <div class="row mt-5 justify-content-center">
+                        <div class="col-12">
+                            <div class="section-title text-center">
+                                <h3 class="sub-title mb-4 text-white title-dark">Services</h3>
+                                <p class="para-desc mx-auto text-white-50">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
 
-                            <nav aria-label="breadcrumb" class="d-inline-block mt-3">
-                                <ul class="breadcrumb bg-light rounded mb-0 py-1 px-2">
-                                    <li class="breadcrumb-item"><a href="home">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Services</li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
+                                <nav aria-label="breadcrumb" class="d-inline-block mt-3">
+                                    <ul class="breadcrumb bg-light rounded mb-0 py-1 px-2">
+                                        <li class="breadcrumb-item"><a href="home">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Services</li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end container-->
         </section><!--end section-->
         <div class="container">
             <div class="row">
@@ -119,7 +119,7 @@
                 </div><!--end row-->
             </div><!--end container-->
         </section><!--end section-->
-        
+
         <div class="row text-end">
             <div class="col-12 mt-4">
                 <ul class="pagination justify-content-end mb-5 mt-3 mt-sm-0">
@@ -133,159 +133,154 @@
                 </ul>
             </div>
         </div>
-
-
-
     </div>
+    <jsp:include page="/frontend/common/footer.jsp" />
 
-</div> 
-<jsp:include page="/frontend/common/footer.jsp" />
-
-<script>
-    function viewServiceDetails(serviceId, categoryId) {
-        var url = "servicedetail?action=view-detail&id=" + serviceId + "&category_id=" + categoryId;
-        window.location.href = url;
-    }
-
-    function filter() {
-        var category = document.getElementById("Filter").value;
-        var sort = document.getElementById("sortSelect").value;
-        var searchInput = document.getElementById("searchInput").value;
-        var url = "manage-service?action=view-all"; // Default action
-
-        if (category !== "Filter By") {
-            url = "service?action=filter&category_id=" + category;
-        } else if (searchInput.trim() !== "") {
-            url = "service?action=search&keyword=" + searchInput;
-        } else if (sort !== "Default Sort") {
-            url = "service?action=sorted&by=feename&sort=" + sort;
+    <script>
+        function viewServiceDetails(serviceId, categoryId) {
+            var url = "servicedetail?action=view-detail&id=" + serviceId + "&category_id=" + categoryId;
+            window.location.href = url;
         }
 
-        window.location.href = url;
-    }
-</script>
+        function filter() {
+            var category = document.getElementById("Filter").value;
+            var sort = document.getElementById("sortSelect").value;
+            var searchInput = document.getElementById("searchInput").value;
+            var url = "manage-service?action=view-all"; // Default action
+
+            if (category !== "Filter By") {
+                url = "service?action=filter&category_id=" + category;
+            } else if (searchInput.trim() !== "") {
+                url = "service?action=search&keyword=" + searchInput;
+            } else if (sort !== "Default Sort") {
+                url = "service?action=sorted&by=feename&sort=" + sort;
+            }
+
+            window.location.href = url;
+        }
+    </script>
 
 
-<style>
-    .custom-center {
-        justify-content: center !important;
-    }
-    .card {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        text-align: center;
-    }
+    <style>
+        .custom-center {
+            justify-content: center !important;
+        }
+        .card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+        }
 
-    .card-end {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 10px; /* Adjust padding as needed */
-    }
+        .card-end {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px; /* Adjust padding as needed */
+        }
 
-    .custom-button {
-        width: 100%;
-        margin: 5px 0;
-    }
+        .custom-button {
+            width: 100%;
+            margin: 5px 0;
+        }
 
-    .service-card-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
+        .service-card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
 
-    .card {
-        flex: 1;
-        margin: 0 1rem; /* Adjust margin as needed for spacing between cards */
-        width: 100%; /* Set the width to 100% for full container width */
-        max-width: 400px; /* Adjust the max-width as needed for the desired card size */
-        height: 400px; /* Adjust the height as needed for the desired card size */
-    }
-    .card-img-container {
-        height: 200px;
-        overflow: hidden;
-    }
-    /* CSS để cân đối các dòng chữ trong card */
-    .card {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .card-body {
-        flex: 1;
-    }
+        .card {
+            flex: 1;
+            margin: 0 1rem; /* Adjust margin as needed for spacing between cards */
+            width: 100%; /* Set the width to 100% for full container width */
+            max-width: 400px; /* Adjust the max-width as needed for the desired card size */
+            height: 400px; /* Adjust the height as needed for the desired card size */
+        }
+        .card-img-container {
+            height: 200px;
+            overflow: hidden;
+        }
+        /* CSS để cân đối các dòng chữ trong card */
+        .card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-body {
+            flex: 1;
+        }
 
-    .card-title,
-    .card-text {
-        text-align: center;
-        justify-content: s
-    }
-    .card-title,
-    .card-text {
-        margin-bottom: 15px; /* Khoảng cách giữa các dòng chữ */
-    }
+        .card-title,
+        .card-text {
+            text-align: center;
+            justify-content: s
+        }
+        .card-title,
+        .card-text {
+            margin-bottom: 15px; /* Khoảng cách giữa các dòng chữ */
+        }
 
-    .btn-primary {
-        align-self: center; /* Để căn giữa nút "Learn More" */
-    }
+        .btn-primary {
+            align-self: center; /* Để căn giữa nút "Learn More" */
+        }
 
-    .card-img-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    /* CSS để cân đối nút "Learn More" trong card */
-    .card {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        text-align: center;
-    }
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* CSS để cân đối nút "Learn More" trong card */
+        .card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+        }
 
 
-    .custom-button {
-        width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
-        margin: 5px 0; /* Khoảng cách giữa các nút */
-    }
-    .btn-primary {
-        margin-top: auto; /* Để nút "Learn More" ở dưới cùng */
-    }
-    .custom-button {
-        width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
+        .custom-button {
+            width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
+            margin: 5px 0; /* Khoảng cách giữa các nút */
+        }
+        .btn-primary {
+            margin-top: auto; /* Để nút "Learn More" ở dưới cùng */
+        }
+        .custom-button {
+            width: 100%; /* Đảm bảo rằng nút có chiều ngang 100% của phần tử cha */
 
-    }
-    body {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-    }
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-    .wrapper {
-        flex: 1;
-    }
-    .footer {
-        background-color: #333; /* Set the background color of your footer */
-        color: white; /* Set the text color of your footer */
-        text-align: center;
-        padding: 20px;
-        width: 100%;
-    }
-</style>
+        .wrapper {
+            flex: 1;
+        }
+        .footer {
+            background-color: #333; /* Set the background color of your footer */
+            color: white; /* Set the text color of your footer */
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+    </style>
 
-<!-- End -->
-<script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
-<!-- Icons -->
-<script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
-<!-- Main Js -->
-<script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-<script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-<script src= "<c:url     value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-<script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
+    <!-- End -->
+    <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
+    <!-- Icons -->
+    <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
+    <!-- Main Js -->
+    <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+    <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
+    <script src= "<c:url     value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+    <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
 </body>
 
 </html>

@@ -60,9 +60,7 @@ public class SettingList extends HttpServlet {
             throws ServletException, IOException {
         SettingDAO st = new SettingDAO();
         ArrayList<Setting> settings = st.list();
-
-        request.setAttribute("settings",settings);
-
+        request.setAttribute("settings", settings);
         request.getRequestDispatcher("frontend/view/admin/settingList.jsp").forward(request, response);
     }
 

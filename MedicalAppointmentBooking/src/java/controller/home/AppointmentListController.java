@@ -59,7 +59,8 @@ public class AppointmentListController extends HttpServlet {
         if (action != null && action.equals("filter")) {
             String filter = request.getParameter("status_filter");
             if (filter.equalsIgnoreCase("all")) {
-                response.sendRedirect("doctor-appointment?action=view-all");
+                response.sendRedirect("doctor-appointmentlist?action=view-all");
+                return;
             }
             List<Appointment> returnList = new ArrayList<>();
             List<Appointment> apptList = adao.getAppointmentByDoctorId(doctor.getDoctorId());

@@ -4,6 +4,7 @@
  */
 package controller.user;
 
+import dal.DoctorDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -12,7 +13,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import model.Doctor;
 import model.UserAccount;
+import resource.RoleProp;
 import utils.SessionUtils;
 
 /**
@@ -24,7 +27,7 @@ public class UserProfileController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        DoctorDAO doctorDAO = new DoctorDAO();
         UserDAO uDAO = new UserDAO();
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
         String action = request.getParameter("action");
@@ -45,19 +48,22 @@ public class UserProfileController extends HttpServlet {
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
             int gender = Integer.parseInt(request.getParameter("gender"));
-            System.out.println(gender);
             uDAO.updateAccountProfile(user.getUserId(), name, gender, email, phone, dob, address, image);
             request.setAttribute("success", "UPDATE SUCCESSFULLY");
             UserAccount newUser = uDAO.getAccountById(user.getUserId());
-            SessionUtils.getInstance().putValue(request, "user", newUser);
-            if (newUser.getRole().getRole_name().equals("PATIENT")) {
+            if (newUser.getRole().getRole_name().equals(RoleProp.DOCTOR)) {
+                Doctor doctor = doctorDAO.getDoctorByUserId(user.getUserId());
+                System.out.println(doctor.getDoctorId());
+                SessionUtils.getInstance().putValue(request, "user", doctor);
+            } else {
+                SessionUtils.getInstance().putValue(request, "user", newUser);
+            }
+            if (newUser.getRole().getRole_name().equals(RoleProp.PATIENT)) {
                 request.getRequestDispatcher("frontend/view/userprofile.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("frontend/view/admin/profile.jsp").forward(request, response);
-
             }
             return;
-
         }
         if (action != null && action.equals("change-password")) {
             String oldPassword = request.getParameter("oldpassword");

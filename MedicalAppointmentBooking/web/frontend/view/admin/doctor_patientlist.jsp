@@ -85,26 +85,12 @@
                         <div class="row align-content-center">
                             <div class="row align-content-center">
                                 <div class="col-xl-3 col-md-3">
-                                    <div class="card component-wrapper border-0 rounded shadow">
-                                        <div>
-                                            <select class="form-select form-control" id="status_filter" onchange="filter()">
-                                                <option selected disabled>Status</option>
-                                                <option value="all">All</option>
-                                                <option value="CONFIRMED">CONFIRMED</option>
-                                                <option value="PENDING">PENDING</option>
-                                                <option value="RESCHEDULED">RESCHEDULED</option>
-                                                <option value="COMPLETED">COMPLETED</option>
-                                                <option value="CANCELED">CANCELED</option>
-                                                <option value="FOLLOW_UP">FOLLOW-UP</option>    
-                                            </select>
-                                        </div>
-                                    </div>
-
+                                 
                                 </div>
                                 <div class="col-xl-6 col-md-6">
                                     <div class="search-bar d-lg-block" style="padding-top :0">
                                         <div id="search" class="menu-search ">
-                                            <form action="<c:url value='/doctor-appointmentlist?action=search'/>" role="search" method="post"
+                                            <form action="<c:url value='/doctor_appointmentlist?action=search'/>" role="search" method="post"
                                                   id="searchform" class="searchform">
                                                 <div>
                                                     <input type="text" class="form-control border rounded-pill" name="search" id="search" placeholder="Search patient name">
@@ -114,67 +100,57 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                             <div class="col-12 mt-4">
                                 <div class="card component-wrapper border-0 rounded shadow">
                                     <div class="p-4 border-bottom">
-                                        <h5 class="mb-0">Appointment List</h5>
+                                        <h5 class="mb-0">Patient List</h5>
                                     </div>
                                     <div class="p-4">
                                         <div class="row pt-2">
                                             <div class="col-12 ">
                                                 <div class="card component-wrapper border-0 rounded shadow">
-                                                    <div> <div class="table-responsive bg-white shadow rounded">
-                                                            <table class="table mb-0 table-center">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
-                                                                        <th class="border-bottom p-3" style="min-width: 150px;">Date</th>
-                                                                        <th class="border-bottom p-3">Time</th>
-                                                                        <th class="border-bottom p-3">Status</th>
-                                                                        <th class="border-bottom p-3" style="min-width: 150px;">Action</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
+                                                    <div class="row">
+                                                        <c:forEach var="patient" items="${requestScope.listPatient}">
+                                                            <div class="col-xl-5 col-lg-6 col-12 mt-4 pt-2">
+                                                                <div class="card border-0 shadow rounded p-4">
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <img src="data:image/jpg;base64,${patient.image}" class="avatar avatar-md-md rounded-pill shadow" alt="">
 
-                                                                    <c:forEach items="${apptList}" var="appt">
-                                                                        <c:set var="patient" value="${appt.patient}"></c:set>
-                                                                            <tr>
-                                                                                <td class="p-3">
-                                                                                    <a href="#" class="text-dark">
-                                                                                        <div class="d-flex align-items-center">
-                                                                                        <c:if test="${patient.image != 'default'}"> 
-                                                                                            <img src="data:image/jpg;base64,${patient.image}" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                                                        </c:if>
-                                                                                        <c:if test="${patient.image == 'default'}"> 
-                                                                                            <img src="frontend/template/assets/images/patient.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                                                        </c:if>
-                                                                                        <span class="ms-2">${patient.fullName}</span>
-                                                                                    </div>
-                                                                                </a>
-                                                                            </td>
-                                                                            <td class="p-3">${appt.apptDate}</td>
-                                                                            <td class="p-3">${appt.apptTime}</td>
+                                                                    </div>
+                                                                    <div class="card-body p-0 pt-3">
+                                                                        <a href="#" class="text-dark h6">${patient.fullName}</a>
 
-                                                                            <td class="p-3">${appt.status}</td>
-                                                                            <td class="p-3">
-                                                                                <div class="d-flex align-items-center">
-                                                                                    <a href="doctor-appointmentdetail?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
-                                                                                        Details</a>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </c:forEach>
+                                                                        <ul class="mb-0 list-unstyled mt-2">
+                                                                            <li class="mt-1">
+                                                                                <i class="uil uil-user text-primary "> Gender:</i>
+                                                                                <span class="ms-5 h6">
+                                                                                    <c:if test= "${patient.gender == 0}">Female</c:if>
+                                                                                    <c:if test= "${patient.gender == 1}">Male</c:if>
+                                                                                    </span>
+                                                                                </li>
+                                                                                <li class="mt-1"><i class="uil uil-phone text-primary "> Phone:</i>
+                                                                                    <span class=" ms-5 h6">${patient.phone}</span>
+                                                                            </li>
+                                                                            <li class="mt-1"><i class="uil uil-mailbox text-primary "> Email:</i>
+                                                                                <span class=" ms-5 h6">${patient.email}</span>
+                                                                            </li>
+                                                                            <li class="mt-1"><i class="uil uil-user-nurse text-primary "> DoB:</i>
+                                                                                <span class="ms-5 h6">${patient.dob}</span>
+                                                                            </li>
+                                                                            <li class="mt-1"><i class="uil uil-user-nurse text-primary "> Address:</i>
+                                                                                <span class="ms-5 h6">${patient.address}</span>
+                                                                            </li>
 
-                                                                </tbody>
-
-                                                            </table>
-                                                            <c:if test="${apptList == null || empty apptList }">
-                                                                <div class=" text-center alert alert-primary h4" role="alert">No appointments yet. </div>
-                                                            </c:if>
-                                                        </div>
+                                                                        </ul>
+                                                                        <div class="dropdown dropdown-primary">
+                                                                            <a href="doctor-patientlist?action=view-detail&pid=${patient.patientId}" class="me-3 btn btn-primary btn-sml ">
+                                                                                Details</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </c:forEach>
                                                     </div>
                                                     <c:set var="page" value="${page}"/>
                                                     <div class="row text-center">
@@ -194,9 +170,9 @@
                                     </div>
                                 </div>
                             </div>
-
-                        </div><!--end container-->
-                    </div>
+                        </div>
+                    </div><!--end container-->
+                </div>
             </main>
         </div>
 
