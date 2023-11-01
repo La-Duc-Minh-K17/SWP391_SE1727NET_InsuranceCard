@@ -6,12 +6,12 @@ package controller.home;
 
 import dal.AppointmentDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Appointment;
+import resource.ApptStatus;
 
 /**
  *
@@ -40,7 +40,10 @@ public class AppoinmentDetailController extends HttpServlet {
             return;
         }
         if (action != null && action.equals("complete")) {
-
+            Appointment appt = apptDAO.getAppointmentById(apptId);
+            appt.setStatus(ApptStatus.COMPLETED);
+            apptDAO.updateStatus(appt);
+            response.sendRedirect("doctor-appointmentdetail?action=view-detail&apptId="+apptId);
             return;
         }
     }
