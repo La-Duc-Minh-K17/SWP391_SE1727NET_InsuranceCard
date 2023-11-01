@@ -13,6 +13,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Doctor;
 import model.Service;
+import static java.lang.System.out;
+import java.sql.Timestamp;
+import model.DoctorFeedback;
+import model.UserAccount;
 import utils.SessionUtils;
 
 /**
@@ -32,7 +36,6 @@ public class WebDoctorDetail extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -69,6 +72,7 @@ public class WebDoctorDetail extends HttpServlet {
             request.getRequestDispatcher("booking?action=form-filling").forward(request, response);
             return;
         }
+
     }
 
     /**
@@ -82,7 +86,35 @@ public class WebDoctorDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
+         //out.println(user.getUserId());
+        String comments = request.getParameter("message");
+        //out.println(comments);
+        float rate = Float.parseFloat(request.getParameter("rating"));
+        //out.println(rate);
+        int doctorId = Integer.parseInt(request.getParameter("doctorId"));
+        //out.println(doctorId);
+        Timestamp createTime = new Timestamp(System.currentTimeMillis());
+        //out.println(createTime);
+        DoctorFeedback df = new DoctorFeedback();
+        df.setUser(user);
+        df.setDoctor_id(doctorId);
+        df.setContent(comments);
+        df.setRate(rate);
+        df.setCreate_time(createTime);
+        
+        DoctorDAO doc = new DoctorDAO();
+        doc.insertFeedback(df);
+        
+        SpecialityDAO spe = new SpecialityDAO();
+        request.setAttribute("speList", spe.getAllSpeciality());
+       
+        DoctorDAO doctor = new DoctorDAO();
+        request.setAttribute("doctor", doctor.getDoctorById(doctorId));
+        request.setAttribute("feedback", doctor.getFeedBackByDoctorID(doctorId));
+        request.getRequestDispatcher("frontend/view/webdoctordetail.jsp").forward(request, response);
+
     }
 
     /**

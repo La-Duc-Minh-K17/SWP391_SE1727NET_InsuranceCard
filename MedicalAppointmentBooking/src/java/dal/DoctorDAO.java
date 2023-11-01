@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import model.Doctor;
@@ -375,7 +376,7 @@ public class DoctorDAO {
                 String image = ImageProcessing.imageString(rs.getBlob("image"));
                 String doctorName = rs.getString("doctor_name");
                 String content = rs.getString("content");
-                String create_time = rs.getString("create_time");
+                Timestamp create_time = rs.getTimestamp("create_time");
                 float rate = rs.getFloat("rate");
                 acc.setFullName(patientName);
                 acc.setImage(image);
@@ -430,7 +431,7 @@ public class DoctorDAO {
                 String doctorName = rs.getString("doctor_name");
 
                 String content = rs.getString("content");
-                String create_time = rs.getString("create_time");
+                Timestamp create_time = rs.getTimestamp("create_time");
                 float rate = rs.getFloat("rate");
 
                 acc.setFullName(patientName);
@@ -486,7 +487,7 @@ public class DoctorDAO {
                 String image = ImageProcessing.imageString(rs.getBlob("image"));
                 String doctorName = rs.getString("doctor_name");
                 String content = rs.getString("content");
-                String create_time = rs.getString("create_time");
+                Timestamp create_time = rs.getTimestamp("create_time");
                 float rate = rs.getFloat("rate");
                 acc.setFullName(patientName);
                 acc.setImage(image);
@@ -542,7 +543,7 @@ public class DoctorDAO {
                 String doctorName = rs.getString("doctor_name");
 
                 String content = rs.getString("content");
-                String create_time = rs.getString("create_time");
+                Timestamp create_time = rs.getTimestamp("create_time");
                 float rate = rs.getFloat("rate");
 
                 acc.setFullName(patientName);
@@ -589,7 +590,7 @@ public class DoctorDAO {
                 String name = rs.getString("full_name");
                 String image = ImageProcessing.imageString(rs.getBlob("image"));
 
-                String create_time = rs.getString("create_time");
+                Timestamp create_time = rs.getTimestamp("create_time");
                 String content = rs.getString("content");
                 float rate = rs.getFloat("rate");
 
@@ -626,8 +627,8 @@ public class DoctorDAO {
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setInt(1, feedback.getUser().getUserId());
-//            statement.setInt(2, feedback.getDoctor().getDoctorId());
-            statement.setString(3, feedback.getCreate_time());
+            statement.setInt(2, feedback.getDoctor_id());
+            statement.setTimestamp(3, feedback.getCreate_time());
             statement.setString(4, feedback.getContent());
             statement.setFloat(5, feedback.getRate());
             statement.executeUpdate();
