@@ -41,10 +41,8 @@ public class ForgotPasswordController extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action != null && action.equals("send-link")) {
-
             String email = request.getParameter("email");
             UserAccount account = uDAO.getAccountByEmail(email);
-
             if (account == null) {
                 request.setAttribute("error", "Email address is not found in the system! Try again.");
             } else {

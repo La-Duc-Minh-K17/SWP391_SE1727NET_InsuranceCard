@@ -50,7 +50,7 @@ public class WebDoctorDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         DoctorDAO doctorDAO = new DoctorDAO();
         SpecialityDAO speDAO = new SpecialityDAO();
         String action = request.getParameter("action");
@@ -88,28 +88,21 @@ public class WebDoctorDetail extends HttpServlet {
             throws ServletException, IOException {
 
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
-         //out.println(user.getUserId());
         String comments = request.getParameter("message");
-        //out.println(comments);
         float rate = Float.parseFloat(request.getParameter("rating"));
-        //out.println(rate);
-        int doctorId = Integer.parseInt(request.getParameter("doctorId"));
-        //out.println(doctorId);
+        System.out.println(request.getParameter("doctorId"));
+        int doctorId = Integer.parseInt(request.getParameter("doctorId"));  
         Timestamp createTime = new Timestamp(System.currentTimeMillis());
-        //out.println(createTime);
         DoctorFeedback df = new DoctorFeedback();
         df.setUser(user);
         df.setDoctor_id(doctorId);
         df.setContent(comments);
         df.setRate(rate);
         df.setCreate_time(createTime);
-        
         DoctorDAO doc = new DoctorDAO();
         doc.insertFeedback(df);
-        
         SpecialityDAO spe = new SpecialityDAO();
         request.setAttribute("speList", spe.getAllSpeciality());
-       
         DoctorDAO doctor = new DoctorDAO();
         request.setAttribute("doctor", doctor.getDoctorById(doctorId));
         request.setAttribute("feedback", doctor.getFeedBackByDoctorID(doctorId));
