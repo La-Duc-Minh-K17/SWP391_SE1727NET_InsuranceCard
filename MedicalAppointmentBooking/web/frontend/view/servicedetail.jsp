@@ -82,7 +82,25 @@
                     </div>
                 </div>
             </div><!--end row-->
+            <div>
 
+
+                <form class="mt-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label class="form-label">Your Comment</label>
+                                <textarea id="message" placeholder="Your Comment" rows="5" name="message" class="form-control" required=""></textarea>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-md-12">
+                            <div class="send d-grid">
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </form><!--end form-->
+            </div>
             <div class="row mt-5">
                 <h4 class="col-12 text-start title text-primary">Related Services</h4>
                 <c:forEach items="${requestScope.Lists}" var="l" >
@@ -99,7 +117,9 @@
                     </div><!--end col-->
                 </c:forEach>
             </div><!--end row-->
+            <div>
 
+            </div>
 
         </section><!--end Product Images and Details Section-->
         <script>
