@@ -250,15 +250,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card border-0 mt-4 col-lg-12 row ">
-                            <div class=" col-5">
-                                <a href="javascript:history.back();"
-                                   class="me-3 btn btn-primary btn-sml btn-soft-success">
-                                    Complete appointment
-                                </a>
+                        <c:if test="${appt.status == 'CONFIRMED'}">
+                            <div class="card border-0 mt-4 col-lg-12 row ">
+                                <div class="col-5">
+                                    <a href="<c:url value= 'doctor-appointmentdetail?action=complete&apptId=${appt.apptId}'/>"
+                                       class="me-3 btn btn-primary  ">
+                                        Complete appointment
+                                    </a>
+                                </div>
                             </div>
-
-                        </div>
+                        </c:if>
                     </div>
 
                 </div>

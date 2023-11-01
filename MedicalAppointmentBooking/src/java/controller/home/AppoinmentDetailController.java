@@ -30,7 +30,6 @@ public class AppoinmentDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         AppointmentDAO apptDAO = new AppointmentDAO();
         int apptId = Integer.parseInt(request.getParameter("apptId"));
         String action = request.getParameter("action");
@@ -38,6 +37,10 @@ public class AppoinmentDetailController extends HttpServlet {
             Appointment appt = apptDAO.getAppointmentById(apptId);
             request.setAttribute("appt", appt);
             request.getRequestDispatcher("frontend/view/admin/doctor_appointmentdetail.jsp").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("complete")) {
+
             return;
         }
     }

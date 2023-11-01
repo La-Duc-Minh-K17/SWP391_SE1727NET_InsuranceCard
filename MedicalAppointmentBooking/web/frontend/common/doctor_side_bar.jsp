@@ -28,7 +28,7 @@
                         <a href="<c:url value='/doctor-appointmentlist?action=view-all'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Appointment List</a>
                     </li>
                     <li class="sidebar-menu">
-                        <a href="<c:url value='/doctor-patientlist?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Patient List</a>
+                        <a href="<c:url value='/doctor-patientlist?action=view-all'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Patient List</a>
                     </li>
                     <li class="sidebar-menu">
                         <a href="<c:url value='/user-profile?action=view'/>"><i class="uil uil-user me-2 d-inline-block"></i>My Account</a>

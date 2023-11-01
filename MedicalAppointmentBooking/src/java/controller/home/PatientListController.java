@@ -35,14 +35,14 @@ public class PatientListController extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-        DoctorDAO dDao = new DoctorDAO();
+        PatientDAO patientDAO = new PatientDAO();
         Doctor doctor = (Doctor) SessionUtils.getInstance().getValue(request, "user");
         request.setAttribute("doctor", doctor);
         if (action != null && action.equals("view-all")) {
             PatientDAO pdao = new PatientDAO();
             List<Patient> listP = pdao.getPatientByDoctorId(doctor.getDoctorId());
             request.setAttribute("listPatient", listP);
-            request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
+            request.getRequestDispatcher("frontend/view/admin/doctor_patientlist.jsp").forward(request, response);
             return;
         }
         if (action != null && action.equals("search")) {
@@ -50,11 +50,15 @@ public class PatientListController extends HttpServlet {
             PatientDAO pdao = new PatientDAO();
             List<Patient> listP = pdao.getPatientByDoctorIdAndName(doctor.getDoctorId(), search);
             request.setAttribute("listPatient", listP);
-            request.getRequestDispatcher("frontend/view/admin/patientlist.jsp").forward(request, response);
+            request.getRequestDispatcher("frontend/view/admin/doctor_patientlist.jsp").forward(request, response);
             return;
         }
-        if(action != null && action.equals("view-detail")) {
-            return;
+        if (action != null && action.equals("view-detail")) {
+            int patientID = Integer.parseInt(request.getParameter("pid"));
+            Patient p = patientDAO.getPatientById(patientID);
+            request.setAttribute("patient", p);
+            request.getRequestDispatcher("frontend/view/admin/doctor_patientdetail.jsp").forward(request, response);
+
         }
     }
 

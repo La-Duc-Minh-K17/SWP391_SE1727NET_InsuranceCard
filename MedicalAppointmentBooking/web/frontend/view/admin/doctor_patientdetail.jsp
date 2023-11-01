@@ -73,13 +73,13 @@
                                     </div>
                                     <br><br><br><br><br>
                                     <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
-                                        <c:if test="${appt.patient.image == 'default'}">
+                                        <c:if test="${patient.image == 'default'}">
                                             <img src="frontend/template/assets/images/patient.jpg" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
                                         </c:if>
-                                        <c:if test="${appt.patient.image != 'default'}">
-                                            <img src="data:image/png;base64,${appt.patient.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                                        <c:if test="${patient.image != 'default'}">
+                                            <img src="data:image/png;base64,${patient.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
                                         </c:if>
-                                        <h5 class="mt-3 mb-1">${appt.patient.fullName}</h5>
+                                        <h5 class="mt-3 mb-1">${patient.fullName}</h5>
                                     </div>
                                     <div class="list-unstyled p-4">
                                         <div class="d-flex align-items-center mt-2">
@@ -92,46 +92,41 @@
                                                 <p class="text-muted mb-0 ms-2">Female</p>
                                             </c:if>     
                                         </div>
-
                                         <div class="d-flex align-items-center mt-2">
                                             <i class="uil uil-phone align-text-bottom text-primary h5 mb-0 me-2"></i>
                                             <h6 class="mb-0">Phone</h6>
-                                            <p class="text-muted mb-0 ms-2">${appt.patient.phone}</p>
+                                            <p class="text-muted mb-0 ms-2">${patient.phone}</p>
                                         </div>
                                         <div class="d-flex align-items-center mt-2">
                                             <i class="uil uil-mailbox align-text-bottom text-primary h5 mb-0 me-2"></i>
                                             <h6 class="mb-0">Email</h6>
-                                            <p class="text-muted mb-0 ms-2">${appt.patient.email}</p>
+                                            <p class="text-muted mb-0 ms-2">${patient.email}</p>
                                         </div>
 
                                         <div class="d-flex align-items-center mt-2">
                                             <i class="uil uil-calendar-alt align-text-bottom text-primary h5 mb-0 me-2"></i>
                                             <h6 class="mb-0">Date Of Birth</h6>
-                                            <p class="text-muted mb-0 ms-2">${appt.patient.dob}</p>
+                                            <p class="text-muted mb-0 ms-2">${patient.dob}</p>
                                         </div>
                                         <div class="d-flex align-items-center mt-2">
                                             <i class="uil uil-globe align-text-bottom text-primary h5 mb-0 me-2"></i>
                                             <h6 class="mb-0">Address</h6>
-                                            <p class="text-muted mb-0 ms-2">${appt.patient.address}</p>
+                                            <p class="text-muted mb-0 ms-2">${patient.address}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center mt-4">
                                 <a href="javascript:history.back();" class="me-3 btn btn-primary btn-sml btn-soft-success">
-                                    Return
+                                    Return  
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-
+        </section>
         <jsp:include page="/frontend/common/footer.jsp" />
-
-
         <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
         <!-- Icons -->
         <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
