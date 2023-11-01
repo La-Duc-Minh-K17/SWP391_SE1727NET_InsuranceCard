@@ -6,7 +6,6 @@ package controller.admin;
 
 import dal.DoctorDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,30 +30,29 @@ public class DoctorFeedback extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
         DoctorDAO d = new DoctorDAO();
-        request.setAttribute("doctorList", d.getAllDoctor());    
+        request.setAttribute("doctorList", d.getAllDoctor());
         if (action != null && action.equals("view-all")) {
             request.setAttribute("doctorFeedback", d.getDoctorFeedback());
-            request.getRequestDispatcher("../frontend/view/doctorfeedback.jsp").forward(request, response);
+            request.getRequestDispatcher("frontend/view/doctorfeedback.jsp").forward(request, response);
             return;
         }
         if (action != null && action.equals("filter")) {
             int docId = Integer.parseInt(request.getParameter("doctorId"));
             request.setAttribute("doctorFeedback", d.getFeedBackByDoctorID(docId));
-            request.getRequestDispatcher("../frontend/view/doctorfeedback.jsp").forward(request, response);
-            
-        } 
-         if (action != null && action.equals("sort")) {
+            request.getRequestDispatcher("frontend/view/doctorfeedback.jsp").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("sort")) {
             String sortby = request.getParameter("sortby");
-            if(sortby.equalsIgnoreCase("Newest"))
-            {
+            if (sortby.equalsIgnoreCase("Newest")) {
                 request.setAttribute("doctorFeedback", d.getDoctorFeedbackDESC());
-                request.getRequestDispatcher("../frontend/view/doctorfeedback.jsp").forward(request, response);
-            }else{
-                request.setAttribute("doctorFeedback",d.getDoctorFeedbackASC());
-                request.getRequestDispatcher("../frontend/view/doctorfeedback.jsp").forward(request, response);
-            }  
-            
-        } 
+                request.getRequestDispatcher("frontend/view/doctorfeedback.jsp").forward(request, response);
+            } else {
+                request.setAttribute("doctorFeedback", d.getDoctorFeedbackASC());
+                request.getRequestDispatcher("frontend/view/doctorfeedback.jsp").forward(request, response);
+            }
+            return;
+        }
 
     }
 

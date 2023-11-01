@@ -65,10 +65,10 @@ public class LoginController extends HttpServlet {
             if (account.getRole().getRole_name().equals(RoleProp.DOCTOR)) {
                 doctor = dDAO.getDoctorByUserId(account.getUserId());
                 SessionUtils.getInstance().putValue(request, "user", doctor);
-                System.out.println("DOctor");
             } else {
                 SessionUtils.getInstance().putValue(request, "user", account);
             }
+            
             Cookie cusername = new Cookie("username", username);
             Cookie cpass = new Cookie("password", password);
             Cookie crem = new Cookie("remember", "ON");
@@ -84,6 +84,8 @@ public class LoginController extends HttpServlet {
             response.addCookie(cusername);
             response.addCookie(cpass);
             response.addCookie(crem);
+
+            
             request.getRequestDispatcher("home").forward(request, response);
             return;
         }

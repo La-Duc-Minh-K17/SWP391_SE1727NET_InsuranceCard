@@ -78,7 +78,7 @@
                 <div class="col-md-12">
                     <div class="text-start m-5">
                         <h5 class="mt-4 py-2">Description</h5>
-                        <label class="form-label">${s.service_description} </label>
+                        <label class="form-label">${s.service_details} </label>
                     </div>
                 </div>
             </div><!--end row-->

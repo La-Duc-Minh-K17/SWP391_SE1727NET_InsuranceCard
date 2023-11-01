@@ -17,9 +17,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author DUCHIEUPC.COM
+ * @author 
  */
-@WebServlet(name = "ManageAccount", urlPatterns = {"/ManageAccount"})
+@WebServlet(name = "ManageAccount", urlPatterns = {"/admin-accountlist"})
 public class ManageAccount extends HttpServlet {
 
     /**
@@ -62,11 +62,9 @@ public class ManageAccount extends HttpServlet {
             throws ServletException, IOException {
         String role = request.getParameter("role")==null?"":request.getParameter("role");
         String status = request.getParameter("status")==null?"":request.getParameter("status");
-
         UserDAO uDAO = new UserDAO();
         request.setAttribute("ul", uDAO.getListUserAccount(status, role));
         request.setAttribute("rl", new RoleDAO().getListRole());
-
         request.getRequestDispatcher("frontend/view/admin/accountlist.jsp").forward(request, response);
     }
 

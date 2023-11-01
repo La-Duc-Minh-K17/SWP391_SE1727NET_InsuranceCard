@@ -209,10 +209,9 @@
                 </div>
             </main>
         </div>
-        <!-- page-wrapper -->
-        <!-- javascript -->
+
         <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog">
                 <form action="<c:url value='/admin-appointment?action=delete'></c:url>" method="post">
                         <div class="modal-content">
                             <div class="modal-body py-5">
@@ -241,7 +240,6 @@
                     let cancel_appt = document.getElementById('cancel_appointment');
                     cancel_appt.value = dataId;
                 }
-
                 function filter() {
                     const url = 'http://localhost:8080/MedicalAppointmentBooking/admin-appointment?action=filter&status_filter=';
                     const filterElement = document.getElementById("status_filter").value;

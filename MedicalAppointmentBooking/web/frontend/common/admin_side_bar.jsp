@@ -14,7 +14,7 @@
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                 <div class="sidebar-brand">
-                    <a href="index.html">
+                    <a href="#">
                         <img src="${pageContext.request.contextPath}/frontend/template/assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
                         <img src="${pageContext.request.contextPath}/frontend/template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                     </a>
@@ -26,7 +26,7 @@
                         <a href="<c:url value='/frontend/view/admin/admin_schedulecalendar.jsp'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>System Schedule</a></li>
 
                     <li class="sidebar-menu">
-                        <a href="<c:url value='/admin-account?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Accounts</a>
+                        <a href="<c:url value='/admin-accountlist?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Accounts</a>
                     </li>
                     <li class="sidebar-menu">
                         <a href="<c:url value='/admin-settinglist'/>"><i class="uil uil-setting me-2 d-inline-block"></i>Settings</a>
