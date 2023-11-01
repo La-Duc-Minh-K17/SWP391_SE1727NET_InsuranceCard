@@ -47,6 +47,7 @@ public class WebDoctorDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         DoctorDAO doctorDAO = new DoctorDAO();
         SpecialityDAO speDAO = new SpecialityDAO();
         String action = request.getParameter("action");

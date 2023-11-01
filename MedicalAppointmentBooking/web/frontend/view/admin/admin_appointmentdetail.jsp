@@ -149,7 +149,6 @@
                                                 <p class="text-muted mb-0 ms-2">Female</p>
                                             </c:if>     
                                         </div>
-
                                         <div class="d-flex align-items-center mt-2">
                                             <i class="uil uil-phone align-text-bottom text-primary h5 mb-0 me-2"></i>
                                             <h6 class="mb-0">Phone</h6>
@@ -160,7 +159,6 @@
                                             <h6 class="mb-0">Email</h6>
                                             <p class="text-muted mb-0 ms-2">${appt.patient.email}</p>
                                         </div>
-
                                         <div class="d-flex align-items-center mt-2">
                                             <i class="uil uil-calendar-alt align-text-bottom text-primary h5 mb-0 me-2"></i>
                                             <h6 class="mb-0">Date Of Birth</h6>

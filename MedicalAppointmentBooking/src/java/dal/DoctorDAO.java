@@ -215,7 +215,6 @@ public class DoctorDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Doctor> doctorList = new ArrayList<>();
-
         String sql = "select * from doctors d \n"
                 + "            inner join user_account u on d.user_id = u.user_id \n"
                 + "            inner join  speciality s on s.speciality_id = d.speciality_id\n"
@@ -257,16 +256,13 @@ public class DoctorDAO {
     }
 
     public List<Doctor> getDoctorBySpeciality(String spe) {
-
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Doctor> doctorList = new ArrayList<>();
-
         String sql = "select * from doctors d \n"
                 + "            inner join user_account u on d.user_id = u.user_id \n"
                 + "            inner join  speciality s on s.speciality_id = d.speciality_id\n"
                 + "            where s.speName = ?";
-
         Connection connection = null;
         try {
             connection = dbc.getConnection();

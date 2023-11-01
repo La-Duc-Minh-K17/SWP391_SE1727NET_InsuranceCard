@@ -40,6 +40,7 @@ public class AdminAppointmentDetail extends HttpServlet {
         AppointmentDAO apptDAO = new AppointmentDAO();
         SpecialityDAO speDAO = new SpecialityDAO();
         DoctorDAO dDAO = new DoctorDAO();
+        
         if (action != null && action.equals("view-detail")) {
             int apptId = Integer.parseInt(request.getParameter("apptId"));
             List<Doctor> doctorList = null;
