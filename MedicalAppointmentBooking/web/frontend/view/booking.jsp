@@ -297,15 +297,11 @@
                             let obj = $.parseJSON(data);
 
                             $.each(obj, function (key, value) {
-                                if ('${isApptOrResv}' === 'appt') {
-                                    $("#time").append(
-                                            '<option value="' + value.slotTime + '">' + value.slotTime + "</option>"
-                                            );
-                                } else {
+                            
                                     $("#time").append(
                                             '<option value="' + value + '">' + value + "</option>"
                                             );
-                                }
+                              
                             });
                             $("select").formSelect();
                         },
