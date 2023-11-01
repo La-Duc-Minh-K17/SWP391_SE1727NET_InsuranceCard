@@ -76,6 +76,7 @@ public class SettingList extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        
         String term = request.getParameter("search");
         String type = request.getParameter("searchType");
 
@@ -95,6 +96,7 @@ public class SettingList extends HttpServlet {
             settings = st.getSettingAllType(term);
         }
         request.setAttribute("settings", settings);
+        request.getRequestDispatcher("frontend/view/admin/settingList.jsp").forward(request, response);
 
     }
 

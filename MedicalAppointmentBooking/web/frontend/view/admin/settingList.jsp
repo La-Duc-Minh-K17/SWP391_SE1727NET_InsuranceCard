@@ -87,7 +87,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div>  
 
             <div class="container-fluid">
                 <div class="layout-specing">
@@ -99,8 +99,7 @@
                                     <div class="row"> <!-- Added a new row container -->
                                         <div class="col-md-6">
                                             <select class="form-select form-control" id="searchType" name="searchType">
-                                                <option value="">All Types</option>
-                                                <option value="setting_id">Setting ID</option>
+                                                <option value="">All Types</option>                           
                                                 <option value="type">Type</option>
                                                 <option value="value">Value</option>
                                                 <option value="description">Description</option>
@@ -154,10 +153,9 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <c:forEach var="s" items="${settings}">
-
+                                                            <c:forEach var="s" items="${settings}" varStatus="loop">
                                                                 <tr>
-                                                                    <th class="p-3">${s.settingID}</th>
+                                                                    <th class="p-3">${loop.index + 1}</th>
                                                                     <td class="p-3">${s.type}</td>
                                                                     <td class="p-3">${s.note}</td>
                                                                     <td class="p-3">${s.description}</td>
@@ -166,7 +164,7 @@
                                                                     </td>
                                                                     
                                                                     <td>
-                                                                        <a  class="btn btn-primary btn-sml" href="javascript:void(0);"
+                                                                        <a  class="btn btn-primary btn-sml" href="editSetting"
                                                                             onclick="editSetting(${s.settingID}, '${s.type}', '${s.note}', '${s.description}', ${s.status});">Edit</a>
                                                                     </td>
 
@@ -177,8 +175,9 @@
                                                 </div>
                                             </div>
                                             <div id="addSettingForm" class="add-setting-form" style="display: none;">
-                                                <form action="<c:url value='/admin-addsetting'/> " method="POST">
+                                                <form action="addSetting" method="POST">
                                                     <h4 class="mb-3 p-4">Add Settings</h4>
+                                            
                                                     <div class="form-group p-4">
                                                         <label for="settingType">Type:</label>
                                                         <select id="settingType" name="settingType" class="form-control">
