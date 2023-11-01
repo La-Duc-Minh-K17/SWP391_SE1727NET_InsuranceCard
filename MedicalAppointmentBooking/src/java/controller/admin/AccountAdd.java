@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Role;
 import model.UserAccount;
 import utils.CodeProcessing;
-import utils.EmailSending;
 import utils.SessionUtils;
 import utils.TimeUtil;
 
@@ -24,15 +23,7 @@ import utils.TimeUtil;
 @WebServlet(name = "AccountAdd", urlPatterns = {"/AccountAdd"})
 public class AccountAdd extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -102,7 +93,7 @@ public class AccountAdd extends HttpServlet {
                 SessionUtils.getInstance().putValue(request, "user", user);
                 uDAO.addUserAccount(user);
 
-                request.setAttribute("success", "Account added with default password 123456@!");
+                request.setAttribute("success", "Account added with default password 123456@ !");
             }
             request.getRequestDispatcher("frontend/view/admin/accountadd.jsp").forward(request, response);
         } catch (Exception e) {
