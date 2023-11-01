@@ -83,6 +83,7 @@ public class AdminAppointmentDetail extends HttpServlet {
             int apptId = Integer.parseInt(request.getParameter("apptId"));
             Appointment appointment = apptDAO.getAppointmentById(apptId);
             appointment.setStatus("CONFIRMED");
+            System.out.println(appointment);
             apptDAO.updateStatus(appointment);
             EmailSending.sendReminderEmail(appointment);
             response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());

@@ -60,11 +60,11 @@
                                 <div class="mb-4">
                                     <div class="bg-white rounded shadow overflow-hidden">
                                         <div class="text-center avatar-profile margin-nagative mt-5 position-relative pb-4 border-bottom">
-                                            <c:if test="${sessionScope.chosen_doctor.img == 'default'}">
+                                            <c:if test="${sessionScope.chosen_doctor.image == 'default'}">
                                                 <img src="/frontend/template/assets/images/avatar.png" class="rounded-circle shadow-md avatar avatar-md-md"
                                                      alt="">
                                             </c:if>
-                                            <c:if test="${sessionScope.chosen_doctor.img != 'default'}">
+                                            <c:if test="${sessionScope.chosen_doctor.image != 'default'}">
                                                 <img src="data:image/png;base64,${sessionScope.chosen_doctor.image}" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
                                             </c:if>
                                             <h5 class="mt-3 mb-1"></h5>

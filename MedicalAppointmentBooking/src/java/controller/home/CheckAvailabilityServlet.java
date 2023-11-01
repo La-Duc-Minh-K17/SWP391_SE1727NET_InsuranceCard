@@ -44,6 +44,7 @@ public class CheckAvailabilityServlet extends HttpServlet {
             String date = request.getParameter("chosenDate");
             int doctorId = Integer.parseInt(request.getParameter("doctor_id"));
             List<String> timeSlot = apptDAO.getAvailableTimeSlot(doctorId, date);
+            System.out.println(timeSlot);
             Gson json = new Gson();
             String timeList = json.toJson(timeSlot);
             response.setContentType("text/html");

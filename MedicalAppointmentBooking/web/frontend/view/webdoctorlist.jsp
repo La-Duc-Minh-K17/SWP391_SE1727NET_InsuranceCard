@@ -56,17 +56,15 @@
                 </div>
             </div>
             <div class="row mb-5">
-
-
                 <div class="">
-                    <div class="selection-bar  m-2 ">
+                    <div class="selection-bar m-2 ">
                         <form action="WebDoctorList" method="POST">
                             <div class="d-flex justify-content-between">
-                                <div>
+                                <div class="col-4">
                                     <input class="form-control"type="text" id="search" name="search" placeholder="Search">
                                 </div>
-                                <div>
-                                    <select id="speciality" name="speciality" class="form-select">
+                                 <div class="col-4">
+                                    <select id="speciality" name="speciality" class="form-select"   >
                                         <option value="">Speciality</option>
                                         <c:forEach items="${speList}" var="spe">
                                             <option value="${spe.speName}">${spe.speName}</option>
@@ -83,7 +81,7 @@
                     <div class="row justify-content-center">
 
                         <c:forEach items="${requestScope.doctor}" var="doctor">
-                            <div class="col-md-3 mt-4">
+                            <div class="col-md-3 mt-4 doctor">
                                 <div class="card mb-4 ">
                                     <div class="card-img-container ">
                                         <img src="data:image/jpg;base64,${doctor.image}" class="card-img-top" width="240" height="300">
@@ -91,18 +89,16 @@
                                     <div class="card-body">
                                         <h5 class="card-title text-primary">${doctor.fullName}</h5>
                                         <div class="card-text">
-                                            <p class="text-secondary">${doctor.speciality}</p>
+                                            <p class="text-secondary spe">${doctor.speciality}</p>
                                         </div>
                                         <h5 class="text-muted">${doctor.serviceFee} USD / visit</h5>
                                     </div>
                                     <div class="card-end">
-                                        <a href="WebDoctorDetail?doctorId=${doctor.doctorId}" class="btn btn-primary custom-button">Details</a>
-                                        <a href="servicedetail?action=book-service&id=${s.service_id}"class="btn btn-success custom-button">Appointment Now</a>
+                                        <a href="WebDoctorDetail?action=view-detail&doctorId=${doctor.doctorId}" class="btn btn-primary custom-button">Details</a>
+                                        <a href="WebDoctorDetail?action=book-doctor&doctorId=${doctor.doctorId}"class="btn btn-success custom-button">Appointment Now</a>
                                     </div>
                                 </div>
-
                             </div>
-
                         </c:forEach>
                     </div>
                 </div>
@@ -127,9 +123,10 @@
             function filterDoctors() {
                 var selectedSpeciality = document.getElementById("speciality").value;
                 var doctorContainers = document.getElementsByClassName("doctor");
-
+             
                 for (var i = 0; i < doctorContainers.length; i++) {
-                    var doctorSpeciality = doctorContainers[i].querySelector("h6").textContent;
+                    var doctorSpeciality = doctorContainers[i].querySelector(".spe").textContent;
+                   
                     if (selectedSpeciality === "" || selectedSpeciality === doctorSpeciality) {
                         doctorContainers[i].style.display = "block";
                     } else {

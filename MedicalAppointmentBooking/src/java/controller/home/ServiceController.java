@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Doctor;
 import model.Service;
 import utils.SessionUtils;
 
@@ -46,12 +47,12 @@ public class ServiceController extends HttpServlet {
             if (action != null && action.equals("filter")) {
                 int cateId = Integer.parseInt(request.getParameter("category_id"));
                 List = sDAO.getServiceByCategoryID(cateId);
-                uri = "service?action=filter&category_id="+cateId;
+                uri = "service?action=filter&category_id=" + cateId;
             }
             if (action != null && action.equals("search")) {
                 String keyword = request.getParameter("keyword").trim();
                 List = sDAO.searchServicesByName(keyword);
-                uri = "service?action=search&keyword="+keyword;
+                uri = "service?action=search&keyword=" + keyword;
             }
             if (action != null && action.equals("view")) {
                 int serivce_id = Integer.parseInt(request.getParameter("id"));
@@ -70,6 +71,10 @@ public class ServiceController extends HttpServlet {
                 int id = Integer.parseInt(request.getParameter("id"));
                 Service serviceDetail = sDAO.getServiceById(id);
                 SessionUtils.getInstance().putValue(request, "chosen_service", serviceDetail);
+                Doctor doctor = (Doctor) SessionUtils.getInstance().getValue(request, "chosen_doctor");
+                if (doctor != null) {
+                    SessionUtils.getInstance().removeValue(request, "chosen_doctor");
+                }
                 request.getRequestDispatcher("booking?action=form-filling").forward(request, response);
                 return;
             }
