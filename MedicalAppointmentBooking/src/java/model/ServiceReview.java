@@ -11,6 +11,7 @@ package model;
 public class ServiceReview {
     private int review_id;
     private int user_id;
+    private UserAccount user;
     private int service_id;
     private String create_time;
     private String review;
@@ -25,7 +26,7 @@ public class ServiceReview {
         this.service = service;
     }
     
-    private UserAccount user;
+    
 
     public UserAccount getUser() {
         return user;
