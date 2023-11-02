@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import static java.lang.System.out;
 import java.util.ArrayList;
 import model.Setting;
 
@@ -60,8 +61,10 @@ public class SettingList extends HttpServlet {
             throws ServletException, IOException {
         SettingDAO st = new SettingDAO();
         ArrayList<Setting> settings = st.list();
+        out.println(settings);
         request.setAttribute("settings", settings);
         request.getRequestDispatcher("frontend/view/admin/settingList.jsp").forward(request, response);
+        
     }
 
     /**
