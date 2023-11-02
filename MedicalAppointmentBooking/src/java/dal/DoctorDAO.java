@@ -625,7 +625,6 @@ public class DoctorDAO {
             String query = "INSERT INTO doctor_feedback ( user_id,doctor_id,create_time,content,rate)\n"
                     + "VALUES (?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query);
-
             statement.setInt(1, feedback.getUser().getUserId());
             statement.setInt(2, feedback.getDoctor_id());
             statement.setTimestamp(3, feedback.getCreate_time());

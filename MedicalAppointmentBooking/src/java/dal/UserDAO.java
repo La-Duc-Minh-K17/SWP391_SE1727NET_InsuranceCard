@@ -27,7 +27,8 @@ public class UserDAO {
 
     DBConnection dbc = new DBConnection();
     RoleDAO rDAO = new RoleDAO();
-        public boolean isEmailtExisted(UserAccount account) {
+
+    public boolean isEmailtExisted(UserAccount account) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -55,7 +56,6 @@ public class UserDAO {
         }
         return isExisted;
     }
-
 
     public UserAccount getAccountByEmail(String email) {
         PreparedStatement ps = null;
@@ -126,15 +126,16 @@ public class UserDAO {
         }
 
     }
-        public void updateAccount(String id, String role, String status, String fullname,
+
+    public void updateAccount(String id, String role, String status, String fullname,
             String phone, String gender, String dob) {
         PreparedStatement ps = null;
         String sql = "UPDATE `mabs`.`user_account`  SET\n"
                 + "            `role_id` =?,\n"
-                + "            `status` = b'"+status+"',\n"
+                + "            `status` = b'" + status + "',\n"
                 + "            `full_name` = ?,\n"
                 + "            `phone` = ?,\n"
-                + "            `gender` =  b'"+gender+"',\n"
+                + "            `gender` =  b'" + gender + "',\n"
                 + "            `dob` = ? \n"
                 + "             WHERE `user_id` =   " + id;
         Connection connection = null;
@@ -158,7 +159,6 @@ public class UserDAO {
             }
         }
     }
-
 
     public void updatePassword(UserAccount user, String newPassword) {
         PreparedStatement ps = null;
@@ -327,7 +327,7 @@ public class UserDAO {
         ResultSet rs = null;
         String sql = "SELECT * FROM user_account "
                 + "WHERE username = ?\n"
-                + "AND password = ?";
+                + "AND password = ? AND status = 1 AND 1 = 1";
         try {
             connection = dbc.getConnection();
             stm = connection.prepareStatement(sql);
@@ -385,17 +385,15 @@ public class UserDAO {
             }
             return userAccount;
         } catch (SQLException ex) {
-
+            System.out.println(ex);
         } finally {
             if (connection != null) {
-                // closes the database connection
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-
+                    System.out.println(ex);
                 }
             }
-
         }
         return null;
     }
@@ -444,14 +442,15 @@ public class UserDAO {
             }
         }
     }
-public void ChangeAccountStatus(String uid, String ss) {
+
+    public void ChangeAccountStatus(String uid, String ss) {
         PreparedStatement ps = null;
         Connection connection = null;
-        String sql = "UPDATE user_account SET status = "+ss+" WHERE user_id = ?";
+        String sql = "UPDATE user_account SET status = " + ss + " WHERE user_id = ?";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            ps.setString(1,uid);
+            ps.setString(1, uid);
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -464,7 +463,9 @@ public void ChangeAccountStatus(String uid, String ss) {
                 }
             }
         }
-    }public UserAccount getUserAccountByID(String uid) {
+    }
+
+    public UserAccount getUserAccountByID(String uid) {
         PreparedStatement stm = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -494,16 +495,17 @@ public void ChangeAccountStatus(String uid, String ss) {
         }
         return null;
     }
+
     public ArrayList<UserAccount> getListUserAccount(String status, String role) {
         PreparedStatement stm = null;
         Connection connection = null;
         ResultSet rs = null;
         ArrayList<UserAccount> list = new ArrayList<>();
-        String sql = "SELECT a.*, r.role_name FROM user_account a join user_role r on a.role_id = r.role_id where 1=1 ";
+        String sql = "SELECT a.*, r.role_name FROM user_account a join user_role r on a.role_id = r.role_id where 1=1 and r.role_name <> 'ADMIN'";
         if (!status.isEmpty()) {
             sql += "  And a.status = " + status;
         }
-         if (!role.isEmpty()) {
+        if (!role.isEmpty()) {
             sql += "  And a.role_id = " + role;
         }
         try {
@@ -511,7 +513,6 @@ public void ChangeAccountStatus(String uid, String ss) {
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
-
                 UserAccount account = new UserAccount();
                 int id = rs.getInt("user_id");
                 String userName = rs.getString("username");
@@ -523,9 +524,9 @@ public void ChangeAccountStatus(String uid, String ss) {
                 int getStatus = rs.getInt("status");
                 Date dob = rs.getDate("dob");
                 String address = rs.getString("address");
-                Role r = new Role(rs.getInt("role_id"),rs.getString("role_name"));
+                Role r = new Role(rs.getInt("role_id"), rs.getString("role_name"));
                 account = new UserAccount(id, userName, emailAddress, fullName, gender, phone, image, dob, address, getStatus);
-               account.setRole(r);
+                account.setRole(r);
                 list.add(account);
             }
         } catch (SQLException ex) {

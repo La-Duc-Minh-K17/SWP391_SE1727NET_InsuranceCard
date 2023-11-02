@@ -308,7 +308,7 @@
                                 let obj = $.parseJSON(data);
                                 $.each(obj, function (key, value) {
                                     $("#time").append(
-                                            '<option value="' + value.slotTime + '">' + value.slotTime + "</option>"
+                                            '<option value="' + value + '">' + value + "</option>"
                                             );
                                 });
                                 $("select").formSelect();

@@ -55,6 +55,7 @@ public class CheckAvailabilityServlet extends HttpServlet {
             String date = request.getParameter("chosenDate");
             int serviceId = Integer.parseInt(request.getParameter("service_id"));
             List<String> timeSlot = rDAO.getAvailableTimeSlot(serviceId, date) ;
+            System.out.println(timeSlot);
             Gson json = new Gson();
             String timeList = json.toJson(timeSlot);
             response.setContentType("text/html");

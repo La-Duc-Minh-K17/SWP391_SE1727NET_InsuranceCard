@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author 
+ * @author
  */
 @WebServlet(name = "ManageAccount", urlPatterns = {"/admin-accountlist"})
 public class ManageAccount extends HttpServlet {
@@ -34,7 +34,7 @@ public class ManageAccount extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -60,9 +60,10 @@ public class ManageAccount extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String role = request.getParameter("role")==null?"":request.getParameter("role");
-        String status = request.getParameter("status")==null?"":request.getParameter("status");
+        String role = request.getParameter("role") == null ? "" : request.getParameter("role");
+        String status = request.getParameter("status") == null ? "" : request.getParameter("status");
         UserDAO uDAO = new UserDAO();
+        
         request.setAttribute("ul", uDAO.getListUserAccount(status, role));
         request.setAttribute("rl", new RoleDAO().getListRole());
         request.getRequestDispatcher("frontend/view/admin/accountlist.jsp").forward(request, response);

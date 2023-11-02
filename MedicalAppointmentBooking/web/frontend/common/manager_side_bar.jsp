@@ -33,7 +33,6 @@
 
                     <li class="sidebar-menu">
                         <a href="<c:url value='/manage-patient?action=view-all'/>"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Patients</a>
-
                     </li>
                     <li class="sidebar-menu">
                         <a href="<c:url value='/manage-blog?action=view-all'/>"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
@@ -43,6 +42,9 @@
                     </li>
                     <li class="sidebar-menu">
                         <a href="<c:url value='/manage-doctorfeedback?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Doctor Feedback</a>
+                    </li>
+                      <li class="sidebar-menu">
+                        <a href="<c:url value='/user-profile?action=view'/>"><i class="uil uil-user me-2 d-inline-block"></i>My Account</a>
                     </li>
                 </ul>
                 <!-- sidebar-menu  -->

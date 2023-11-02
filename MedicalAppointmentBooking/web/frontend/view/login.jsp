@@ -11,7 +11,6 @@
         <meta charset="utf-8" />
         <title>MABS - Medical Appointment Booking System</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
         <!-- favicon -->
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
