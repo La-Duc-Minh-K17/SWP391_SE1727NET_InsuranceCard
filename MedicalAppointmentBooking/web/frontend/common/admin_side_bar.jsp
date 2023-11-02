@@ -40,7 +40,7 @@
                         <a href="<c:url value='/admin-reservation?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Reservation List</a>
                     </li>
                     <li class="sidebar-menu">
-                        <a href="<c:url value='/frontend/view/admin/profile.jsp'/>"><i class="uil uil-user me-2 d-inline-block"></i>My Account</a>
+                        <a href="<c:url value='/user-profile?action=view'/>"><i class="uil uil-user me-2 d-inline-block"></i>My Account</a>
                     </li>
                 </ul>
             </div>

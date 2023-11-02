@@ -252,7 +252,7 @@
                         let data = {
                             type: "reservation",
                             chosenDate: chosendate,
-                            doctor_id: "${resv.resvId}"
+                            service_id: "${resv.resvId}"
                         };
 
                         $.ajax({

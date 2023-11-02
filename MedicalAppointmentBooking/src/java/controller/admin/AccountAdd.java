@@ -14,7 +14,6 @@ import model.Role;
 import model.UserAccount;
 import utils.CodeProcessing;
 import utils.EmailSending;
-import utils.SessionUtils;
 import utils.TimeUtil;
 
 /**
@@ -77,6 +76,7 @@ public class AccountAdd extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         try {
             TimeUtil timeConfig = new TimeUtil();
             UserDAO uDAO = new UserDAO();
@@ -107,6 +107,7 @@ public class AccountAdd extends HttpServlet {
             request.getRequestDispatcher("frontend/view/admin/accountadd.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
+
         }
     }
 }

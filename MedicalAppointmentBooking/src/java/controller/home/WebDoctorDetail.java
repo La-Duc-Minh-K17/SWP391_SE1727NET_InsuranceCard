@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Doctor;
 import model.Service;
-import static java.lang.System.out;
 import java.sql.Timestamp;
 import model.DoctorFeedback;
 import model.UserAccount;
