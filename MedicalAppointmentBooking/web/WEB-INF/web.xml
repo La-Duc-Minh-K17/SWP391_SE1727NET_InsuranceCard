@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-     <filter>
+    <filter>
         <filter-name>Authorization</filter-name>
         <filter-class>authorization.Authorization</filter-class>
     </filter>
-   
+    <filter-mapping>
+        <filter-name>Authorization</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>controller.auth.RegisterController</servlet-class>
@@ -83,11 +86,11 @@
     </servlet>
     <servlet>
         <servlet-name>AdminAppointmentList</servlet-name>
-        <servlet-class>controller.admin.AdminAppointmentList</servlet-class>
+        <servlet-class>controller.manager.AdminAppointmentList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminReservation</servlet-name>
-        <servlet-class>controller.admin.AdminReservation</servlet-class>
+        <servlet-class>controller.manager.AdminReservation</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManagePatient</servlet-name>
@@ -115,7 +118,7 @@
     </servlet>
     <servlet>
         <servlet-name>AdminAppointmentDetail</servlet-name>
-        <servlet-class>controller.admin.AdminAppointmentDetail</servlet-class>
+        <servlet-class>controller.manager.AdminAppointmentDetail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CheckAvailabilityServlet</servlet-name>
@@ -127,7 +130,7 @@
     </servlet>
     <servlet>
         <servlet-name>AdminReservationDetail</servlet-name>
-        <servlet-class>controller.admin.AdminReservationDetail</servlet-class>
+        <servlet-class>controller.manager.AdminReservationDetail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminScheduleCalendar</servlet-name>
@@ -239,11 +242,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminAppointmentList</servlet-name>
-        <url-pattern>/admin-appointment</url-pattern>
+        <url-pattern>/manage-appointment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminReservation</servlet-name>
-        <url-pattern>/admin-reservation</url-pattern>
+        <url-pattern>/manage-reservation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PatientListController</servlet-name>
@@ -267,7 +270,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminAppointmentDetail</servlet-name>
-        <url-pattern>/admin-appointmentdetail</url-pattern>
+        <url-pattern>/manage-appointmentdetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CheckAvailabilityServlet</servlet-name>
@@ -279,7 +282,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminReservationDetail</servlet-name>
-        <url-pattern>/admin-reservationdetail</url-pattern>
+        <url-pattern>/manage-reservationdetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminScheduleCalendar</servlet-name>

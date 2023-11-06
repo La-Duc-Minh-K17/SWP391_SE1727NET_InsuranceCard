@@ -36,7 +36,7 @@
         </div>
         <!-- Loader -->
         <div class="page-wrapper doctris-theme toggled">
-            <jsp:include page="/frontend/common/admin_side_bar.jsp" />
+            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
             <main class="page-content">  
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
@@ -103,7 +103,7 @@
                             <div class="col-xl-6 col-md-6">
                                 <div class="search-bar d-lg-block" style="padding-top :0">
                                     <div id="search" class="menu-search ">
-                                        <form action="<c:url value='/admin-appointment?action=search'/>" role="search" method="post"
+                                        <form action="<c:url value='/manage-appointment?action=search'/>" role="search" method="post"
                                               id="searchform" class="searchform">
                                             <div>
                                                 <input type="text" class="form-control border rounded-pill" name="search" id="search" placeholder="Search patient name">
@@ -171,7 +171,7 @@
                                                                         <td class="p-3">${appt.status}</td>
                                                                         <td class="p-3">
                                                                             <div class="d-flex align-items-center">
-                                                                                <a href="admin-appointmentdetail?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
+                                                                                <a href="manage-appointmentdetail?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
                                                                                     Details</a>
                                                                                 <a href="#cancelappointment" class="btn btn-primary btn-sml btn-soft-danger" 
                                                                                    data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
@@ -211,7 +211,7 @@
 
         <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <form action="<c:url value='/admin-appointment?action=delete'></c:url>" method="post">
+                <form action="<c:url value='/manage-appointment?action=delete'></c:url>" method="post">
                         <div class="modal-content">
                             <div class="modal-body py-5">
                                 <div class="text-center">
@@ -240,7 +240,7 @@
                     cancel_appt.value = dataId;
                 }
                 function filter() {
-                    const url = 'http://localhost:8080/MedicalAppointmentBooking/admin-appointment?action=filter&status_filter=';
+                    const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-appointment?action=filter&status_filter=';
                     const filterElement = document.getElementById("status_filter").value;
                     window.location.href = url + filterElement;
                 }

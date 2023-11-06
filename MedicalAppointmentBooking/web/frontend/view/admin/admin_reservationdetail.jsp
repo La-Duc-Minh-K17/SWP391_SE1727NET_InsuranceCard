@@ -30,7 +30,7 @@
 
     <body>
         <div class="page-wrapper doctris-theme toggled">
-            <jsp:include page="/frontend/common/admin_side_bar.jsp" />
+            <jsp:include page="/frontend/common/manage_side_bar.jsp" />
             <main class="page-content bg-light">
               <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
@@ -199,7 +199,7 @@
                                     <c:if test="${resv.status == 'PENDING' || resv.status == 'RESCHEDULED'}">
                                         <div class="d-flex justify-content-between">
                                             <div class="mt-3">
-                                                <a href="admin-reservationdetail?action=confirm&apptId=${resv.resvId}"class="btn btn-primary ">Confirm Reservation</a>
+                                                <a href="manage-reservationdetail?action=confirm&apptId=${resv.resvId}"class="btn btn-primary ">Confirm Reservation</a>
                                             </div>
                                             <c:if test="${resv.status == 'PENDING'}">
                                                 <div class="mt-3">
@@ -219,7 +219,7 @@
                                                                         <h4>Reject  Reservation</h4>
                                                                         <p class="para-desc mx-auto text-muted mb-0">This reservation will be rejected.Are you sure ?</p>
                                                                         <div class="mt-4">
-                                                                            <form action="<c:url value='admin-reservationdetail?action=reject'></c:url>" method="post">
+                                                                            <form action="<c:url value='manage-reservationdetail?action=reject'></c:url>" method="post">
                                                                                     <textarea rows="5" class="form-control" name="reject_reason" placeholder="Your reason" required></textarea>
                                                                                     <br> <br> <br>
                                                                                     <input type="hidden" id="cancel_appointment" name="cancel_appointment" value="">
@@ -239,7 +239,7 @@
                             </div>
                             <c:if test="${resv.status ==  'PENDING' || resv.status == 'RESCHEDULED'}">
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
-                                    <form action="admin-reservationdetail?action=update&resvId=${resv.resvId}" method="post">
+                                    <form action="manage-reservationdetail?action=update&resvId=${resv.resvId}" method="post">
                                         <div class="bg-white rounded shadow overflow-hidden">
                                             <div class="p-4 border-bottom">
                                                 <h5 class="mb-0">Update appointment information</h5>

@@ -41,7 +41,7 @@ public class Authorization implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
         String url = request.getRequestURI() + "?" + request.getQueryString();
-
+        System.out.println();
         if (url.startsWith("/manage") || url.startsWith("/doctor") || url.startsWith("/admin")) {
             if (user != null) {
                 if (url.contains("manage")) {
@@ -66,7 +66,8 @@ public class Authorization implements Filter {
             } else {
                 response.sendRedirect(request.getContextPath() + LOGIN);
             }
-        } else if (url.startsWith("/booking")) {
+        } else if (url.startsWith("/booking") || url.contains("book")) {
+
             if (user != null) {
                 if (user.getRole().getRole_name().equals(RoleProp.PATIENT)) {
                     filterChain.doFilter(servletRequest, servletResponse);
