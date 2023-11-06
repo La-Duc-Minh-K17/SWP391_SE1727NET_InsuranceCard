@@ -27,9 +27,9 @@ public class SettingDAO {
         Connection connection = dbc.getConnection();
         ArrayList<Setting> settings = new ArrayList<>();
         try {
-            String sql = "select s.setting_id  , s.type , role_name as value , role_description as note , role_status \n"
+            String sql = "select s.setting_id  , s.type , role_name as value , role_description as note , role_status,role_id as id\n"
                     + "from setting  s,(select * from user_role union  select * from speciality  union select * from service_category union select * from blog_category) as temp \n"
-                    + "where temp.setting_id = s.setting_id";
+                    + "where temp.setting_id = s.setting_id;";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -39,6 +39,7 @@ public class SettingDAO {
                 s.setNote(rs.getString("value"));
                 s.setDescription(rs.getString("note"));
                 s.setStatus(rs.getBoolean("role_status"));
+                s.setId(rs.getInt("id"));
                 settings.add(s);
             }
         } catch (SQLException ex) {
@@ -89,7 +90,7 @@ public class SettingDAO {
                     + "where temp.setting_id = s.setting_id \n"
                     + "and role_status = ?";
             ps = connection.prepareStatement(sql);
-            ps.setInt(1, status );
+            ps.setInt(1, status);
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -195,6 +196,72 @@ public class SettingDAO {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, blog.getName());
             statement.setString(2, blog.getDescription());
+            statement.setInt(3, blog.getStatus());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateSpeciality(Speciality speciality, int id) {
+        Connection connection = dbc.getConnection();
+        try {
+            String query = "UPDATE speciality\n"
+                    + "SET speName = ?, speDescription = ?, speStatus = ?\n"
+                    + "WHERE speciality_id =" + id + ";";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setString(1, speciality.getSpeName() );
+            statement.setString(2, speciality.getSpeDescription());
+            statement.setInt(3, speciality.getSpeStatus());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateRole(Role role, int id) {
+        Connection connection = dbc.getConnection();
+        try {
+            String query = "update user_role\n"
+                    + "set role_name = ?,role_description=?,role_status= ?\n"
+                    + "where role_id = " + id + ";";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, role.getRole_name() );
+            statement.setString(2, role.getRole_description());
+            statement.setInt(3, role.getStatus());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateService(Service_Category service, int id) {
+        Connection connection = dbc.getConnection();
+        try {
+            String query = "update service_category\n"
+                    + "set sc_name = ?, sc_description=?,sc_status=?\n"
+                    + "where service_category_id =" + id + ";";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setString(1,   service.getName() );
+            statement.setString(2,   service.getDescription());
+            statement.setInt(3, service.getStatus());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateBlog(Blog_Category blog, int id) {
+        Connection connection = dbc.getConnection();
+        try {
+            String query = "update blog_category\n"
+                    + "set name = ?, description=?,status=?\n"
+                    + "where blog_category_id =" + id + ";";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1,blog.getName());
+            statement.setString(2,blog.getDescription());
             statement.setInt(3, blog.getStatus());
             statement.executeUpdate();
         } catch (SQLException ex) {

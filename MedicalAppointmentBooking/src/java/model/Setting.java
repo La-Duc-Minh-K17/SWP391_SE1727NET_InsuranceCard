@@ -12,11 +12,23 @@ import java.util.ArrayList;
  */
 public class Setting {
     private int settingID;
+    private int id;
     private String type;
     private String note;
-     private String description;
+    private String description;
     private boolean status;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
+
+    
     public String getDescription() {
         return description;
     }
@@ -91,6 +103,11 @@ public class Setting {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    @Override
+    public String toString() {
+        return "Setting{" + "settingID=" + settingID + ", id=" + id + ", type=" + type + ", note=" + note + ", description=" + description + ", status=" + status + ", speciality=" + speciality + ", blog=" + blog + ", service=" + service + ", role=" + role + '}';
     }
     
 }
