@@ -254,7 +254,6 @@
                             chosenDate: chosendate,
                             service_id: "${resv.resvId}"
                         };
-
                         $.ajax({
                             url: "CheckAvailabilityServlet",
                             method: "GET",

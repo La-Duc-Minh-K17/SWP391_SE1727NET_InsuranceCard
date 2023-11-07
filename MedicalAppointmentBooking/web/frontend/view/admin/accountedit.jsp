@@ -80,7 +80,6 @@
                         </ul>
                     </div>
                 </div>
-
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <div class="col-12 mt-4">

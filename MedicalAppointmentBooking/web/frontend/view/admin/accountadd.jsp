@@ -37,7 +37,7 @@
         <!-- Loader -->
         <div class="page-wrapper doctris-theme toggled">
 
-            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
+            <jsp:include page="/frontend/common/admin_side_bar.jsp" />
 
             <!-- sidebar-wrapper  -->
             <!-- Start Page Content -->
@@ -94,24 +94,25 @@
                                 <div class="p-4 border-bottom">
                                     <h5 class="mb-0">Add Account </h5>
                                 </div>
-                                <form style="padding: 20px;" action="AccountAdd" method="post" id="searchform" class="searchform">
+                                <form style="padding: 20px;" action="admin-addaccount" method="post" id="searchform" class="searchform">
                                     <div class="row align-content-center justify-content-center">
-                                        
                                         <div class="col-xl-6 col-md-6 p-1">
                                             <label>Email:</label>
-                                            <input class="form-control" type="email" name="email" value="${acc.a}" id="email" >
+                                            <input class="form-control" type="email" name="email"  id="email" required placeholder="example@gmail.com" >
                                         </div>
                                         <div class="col-xl-6 col-md-6 p-1">
                                             <label>Username:</label>
-                                            <input class="form-control" type="text" name="username" value="${acc.a}" id="username" >
+                                            <input class="form-control" type="text" name="username"  id="username" required 
+                                                   oninvalid="validateUsername(this);" oninput="validateUsername(this);" >
                                         </div>
                                         <div class="col-xl-6 col-md-6 p-1">
                                             <label>Full name:</label>
-                                            <input class="form-control" type="text" name="fullname" value="${acc.a}" id="fullname" >
+                                            <input class="form-control" type="text" name="fullname" id="fullname" required 
+                                                   onvalidate="validateName(this);" onvalidate="validateName(this);">
                                         </div>
                                         <div class="col-xl-6 col-md-6 p-1">
                                             <label>Role:</label>
-                                            <select class="form-select form-control" id="speFilter" name="role">
+                                            <select class="form-select form-control" id="speFilter" name="role" required>
                                                 <c:forEach var="r" items="${rl}">
                                                     <option value="${r.role_id}" >${r.role_name}</option>
                                                 </c:forEach>
@@ -119,24 +120,20 @@
                                         </div>
                                         <div class="col-xl-6 col-md-6 p-1">
                                             <label>Phone:</label>
-                                            <input class="form-control" type="text" name="phone" value="${acc.a}" id="phone" >
+                                            <input class="form-control" type="text" name="phone"  id="phone" required onvalid="validatePhone(this);" oninput="validatePhone(this)" >
                                         </div>
                                         <div class="col-xl-6 col-md-6 p-1">
                                             <label>Dob: </label>
-                                            <input class="form-control" type="date" name="dob" value="${acc.a}" id="dob" >
+                                            <input class="form-control" type="date" name="dob"  id="dob" required>
                                         </div>
-                                        <div class="col-xl-6 col-md-6 p-1">
+                                        <div class="col-xl-12 col-md-12 p-1">
                                             <label>Gender:</label>
                                             <p></p>
                                             <input type="radio" name="gender" value="1" id="gender" checked="" > Male
-                                            <input type="radio" name="gender" value="0" id="gender"  > Female
+                                            
+                                            <input type="radio" name="gender" value="0" id="gender"class="ms-5"  > Female
                                         </div>
-                                        <div class="col-xl-6 col-md-6 p-1">
-<!--                                            <label>Status:</label>
-                                            <p></p>
-                                            <input type="radio" name="status" value="1" id="gender"  > Active
-                                            <input type="radio" name="status" value="0" id="gender"  > Inactive-->
-                                        </div>
+                                       
                                         <div class="col-xl-12 col-md-12">
                                             <p style="color: red">${error}</p>
                                             <p style="color: greenyellow">${success}</p>

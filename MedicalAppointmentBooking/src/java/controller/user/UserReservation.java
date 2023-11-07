@@ -60,7 +60,7 @@ public class UserReservation extends HttpServlet {
             resv.setResvTime(time);
             resv.setStatus("RESCHEDULED");
             resvDAO.rescheduleReservationForPatient(resv);
-            response.sendRedirect("user-appointment?action=view-detail&apptId=" + resv.getResvId());
+            response.sendRedirect("user-appointment?action=view-detail&resvId=" + resv.getResvId());
             return;
         }
         if (action != null && action.equals("cancel")) {
@@ -68,7 +68,7 @@ public class UserReservation extends HttpServlet {
             Reservation resv = resvDAO.getReservationById(resvId);
             resv.setStatus("CANCELED");
             resvDAO.updateStatus(resv);
-            response.sendRedirect("user-reservation?action=view-detail&apptId=" + resv.getResvId());
+            response.sendRedirect("user-reservation?action=view-detail&resvId=" + resv.getResvId());
             return;
         }
         if (action != null && action.equals("filter")) {

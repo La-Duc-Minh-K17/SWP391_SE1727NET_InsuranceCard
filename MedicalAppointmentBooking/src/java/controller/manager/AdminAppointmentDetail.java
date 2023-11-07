@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.admin;
+package controller.manager;
 
 import dal.AppointmentDAO;
 import dal.DoctorDAO;
@@ -68,7 +68,7 @@ public class AdminAppointmentDetail extends HttpServlet {
             Doctor d = dDAO.getDoctorById(doctorId);
             appointment.setDoctor(d);
             apptDAO.rescheduleAppointment(appointment);
-            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
+            response.sendRedirect("manage-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
             return;
         } if (action != null && action.equals("remove")) {  
             int apptId = Integer.parseInt(request.getParameter("apptId"));
@@ -77,7 +77,7 @@ public class AdminAppointmentDetail extends HttpServlet {
             appointment.setApptTime("");
             appointment.setDoctor(null);
             apptDAO.rescheduleAppointment(appointment);
-            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
+            response.sendRedirect("manage-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
             return;
         }
         if (action != null && action.equals("confirm")) {
@@ -87,7 +87,7 @@ public class AdminAppointmentDetail extends HttpServlet {
             System.out.println(appointment);
             apptDAO.updateStatus(appointment);
             EmailSending.sendReminderEmail(appointment);
-            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
+            response.sendRedirect("manage-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
             return;
         }
         if (action != null && action.equals("reject")) {
@@ -97,7 +97,7 @@ public class AdminAppointmentDetail extends HttpServlet {
             appointment.setStatus("REJECTED");
             appointment.setRejectReason(reject_reason);
             apptDAO.updateStatus(appointment);
-            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
+            response.sendRedirect("manage-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
             return;
         }
     }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.admin;
+package controller.manager;
 
 import dal.ReservationDAO;
 import dal.ServicesDAO;
@@ -50,7 +50,7 @@ public class AdminReservationDetail extends HttpServlet {
             resv.setResvDate(TimeUtil.dateConverter1(date));
             resv.setResvTime(time);
             rDAO.rescheduleReservation(resv);
-            response.sendRedirect("admin-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
+            response.sendRedirect("manage-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
             return;
         }
         if (action != null && action.equals("confirm")) {
@@ -59,7 +59,7 @@ public class AdminReservationDetail extends HttpServlet {
             resv.setStatus("CONFIRMED");
             rDAO.updateStatus(resv);
             EmailSending.sendReminderEmail(resv);
-            response.sendRedirect("admin-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
+            response.sendRedirect("manage-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
             return;
         }
         if (action != null && action.equals("reject")) {
@@ -69,7 +69,7 @@ public class AdminReservationDetail extends HttpServlet {
             resv.setStatus("REJECTED" );
             resv.setRejectReason(rejectReason);
             rDAO.rejectReservation(resv);
-            response.sendRedirect("admin-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
+            response.sendRedirect("manage-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
             return;
         }
     }

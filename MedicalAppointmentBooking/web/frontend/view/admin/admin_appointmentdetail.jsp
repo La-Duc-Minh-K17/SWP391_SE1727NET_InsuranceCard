@@ -30,7 +30,7 @@
 
     <body>
         <div class="page-wrapper doctris-theme toggled">
-            <jsp:include page="/frontend/common/admin_side_bar.jsp" />
+            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
 
             <main class="page-content bg-light">
                 <div class="top-header">
@@ -210,11 +210,23 @@
                                                 <p>${appt.apptNote}</p>
                                             </div>
                                         </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label"> Reschedule Reason</label>
+                                                <p>${appt.rescheduleReason}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Reject Reason</label>
+                                                <p>${appt.rejectReason}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <c:if test="${ appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
                                         <div class="d-flex justify-content-between">
                                             <div class="mt-3">
-                                                <a href="admin-appointmentdetail?action=confirm&apptId=${appt.apptId}"class="btn btn-primary ">Confirm Appointment</a>
+                                                <a href="manage-appointmentdetail?action=confirm&apptId=${appt.apptId}"class="btn btn-primary ">Confirm Appointment</a>
                                             </div>
                                             <c:if test = "${appt.status ==  'PENDING'}">    
                                                 <div class="mt-3">
@@ -234,7 +246,7 @@
                                                                         <h4>Reject Appointment</h4>
                                                                         <p class="para-desc mx-auto text-muted mb-0">This appointment will be rejected.Are you sure ?</p>
                                                                         <div class="mt-4">
-                                                                            <form action="<c:url value='admin-appointmentdetail?action=reject'></c:url>" method="post">
+                                                                            <form action="<c:url value='manage-appointmentdetail?action=reject'></c:url>" method="post">
                                                                                     <textarea rows="5" class="form-control" name="reject_reason" placeholder="Your reason" required></textarea>
                                                                                     <br> <br> <br>
                                                                                     <input type="hidden" id="cancel_appointment" name="cancel_appointment" value="">
@@ -255,7 +267,7 @@
                             </div>
                             <c:if test="${(appt.status ==  'PENDING' && appt.doctor != null)|| appt.status == 'RESCHEDULED'}">
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
-                                    <form action="admin-appointmentdetail?action=reassign&apptId=${appt.apptId}" method="post">
+                                    <form action="<c:url value='manage-appointmentdetail?action=reassign&apptId=${appt.apptId}'/>" method="post">
                                         <div class="bg-white rounded shadow overflow-hidden">
                                             <div class="p-4 border-bottom">
                                                 <h5 class="mb-0">Assign new appointment</h5>
@@ -300,7 +312,7 @@
 
                             <c:if test="${appt.status ==  'PENDING' && appt.doctor == null   }">
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
-                                    <form action="admin-appointmentdetail?action=reassign&apptId=${appt.apptId}" method="post">
+                                    <form action="<c:url value='manage-appointmentdetail?action=reassign&apptId=${appt.apptId}'/>" method="post">
                                         <div class="bg-white rounded shadow overflow-hidden">
                                             <div class="p-4 border-bottom">
                                                 <h5 class="mb-0">Assign doctor to appointment</h5>

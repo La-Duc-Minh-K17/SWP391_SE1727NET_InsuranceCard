@@ -32,7 +32,7 @@ public class AppointmentDAO {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
-        String sql = "select * from appointments WHERE 1=1 ORDER BY appointment_date ASC , appointment_time ASC";
+        String sql = "select * from appointments WHERE 1=1 ORDER BY appointment_date desc , appointment_time desc   ";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
@@ -65,6 +65,7 @@ public class AppointmentDAO {
         }
         return list;
     }
+
     public List<Appointment> getFilteredPatientAppointment(int userId, String status) {
         PreparedStatement ps = null;
         Connection connection = null;
@@ -211,8 +212,12 @@ public class AppointmentDAO {
                 int doctorId = rs.getInt("doctor_id");
                 Doctor doctor = dDAO.getDoctorById(doctorId);
                 int patientId = rs.getInt("patient_id");
+                String rescheduleReason = rs.getString("reschedule_reason");
+                String rejectReason = rs.getString("reject_reason");
                 Patient patient = pDAO.getPatientById(patientId);
                 appt = new Appointment(id, note, date, time, diagnosis, status, doctor, patient);
+                appt.setRejectReason(rejectReason);
+                appt.setRescheduleReason(rescheduleReason);
             }
             return appt;
         } catch (SQLException ex) {
@@ -550,8 +555,7 @@ public class AppointmentDAO {
         return listAppt;
     }
 
-   
-     public List<String> getAvailableTimeSlot(int doctorId, String date) {
+    public List<String> getAvailableTimeSlot(int doctorId, String date) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
