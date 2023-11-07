@@ -103,7 +103,6 @@ public class AccountAdd extends HttpServlet {
             request.getRequestDispatcher("frontend/view/admin/accountadd.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
-
         }
     }
 }

@@ -207,7 +207,7 @@ public class UserDAO {
                 + "?,\n"
                 + "?,\n"
                 + "?,\n"
-                + "?,\n"
+                + "?,\n"    
                 + "?);   ";
         try {
             connection = dbc.getConnection();

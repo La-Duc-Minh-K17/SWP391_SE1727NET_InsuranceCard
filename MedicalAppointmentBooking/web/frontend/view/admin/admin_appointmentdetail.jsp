@@ -210,6 +210,18 @@
                                                 <p>${appt.apptNote}</p>
                                             </div>
                                         </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label"> Reschedule Reason</label>
+                                                <p>${appt.rescheduleReason}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Reject Reason</label>
+                                                <p>${appt.rejectReason}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <c:if test="${ appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
                                         <div class="d-flex justify-content-between">
