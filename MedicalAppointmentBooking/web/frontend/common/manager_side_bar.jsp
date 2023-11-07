@@ -24,10 +24,10 @@
                 </div>
                 <ul class="sidebar-menu pt-3">
                     <li class="sidebar-menu">
-                        <a href="<c:url value='/admin-appointment?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Appointment List</a>
+                        <a href="<c:url value='/manage-appointment?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Appointment List</a>
                     </li>
                     <li class="sidebar-menu">
-                        <a href="<c:url value='/admin-reservation?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Reservation List</a>
+                        <a href="<c:url value='/manage-reservation?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Reservation List</a>
                     </li>
                     <li class="sidebar-menu">
                         <a href="<c:url value='/manage-doctor?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>

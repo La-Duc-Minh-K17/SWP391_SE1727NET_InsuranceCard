@@ -38,17 +38,17 @@ public class AdminReservation extends HttpServlet {
         if (action != null && action.equals("cancel")) {
             int resvId = Integer.parseInt(request.getParameter("reservation_canceled"));
             rsDAO.deleteRecord(resvId);
-            response.sendRedirect("admin-reservation?action=view");
+            response.sendRedirect("manage-reservation?action=view");
             return;
         }
         if (action != null && action.equals("view")) {
             resvList = rsDAO.getAllReservation();
-            uri = "admin-reservation?action=view";
+            uri = "manage-reservation?action=view";
         }
         if (action != null && action.equals("search")) {
             String search = request.getParameter("search");
             resvList = rsDAO.searchReservationByPatientName(search);
-            uri = "admin-reservation?action=search&search=" + search;
+            uri = "manage-reservation?action=search&search=" + search;
         }
         if (action != null && action.equals("filter")) {
             String status = request.getParameter("status_filter");
@@ -58,7 +58,7 @@ public class AdminReservation extends HttpServlet {
             } else {
                 resvList = rsDAO.getFilteredReservationList(status);
             }
-            uri = "admin-reservation?action=filter&status=" + status;
+            uri = "manage-reservation?action=filter&status=" + status;
             request.setAttribute("status", status);
         }
         if (resvList != null) {

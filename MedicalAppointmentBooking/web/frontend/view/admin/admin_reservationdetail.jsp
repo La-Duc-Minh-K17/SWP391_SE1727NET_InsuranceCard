@@ -30,7 +30,7 @@
 
     <body>
         <div class="page-wrapper doctris-theme toggled">
-            <jsp:include page="/frontend/common/manage_side_bar.jsp" />
+            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
             <main class="page-content bg-light">
               <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
@@ -199,7 +199,7 @@
                                     <c:if test="${resv.status == 'PENDING' || resv.status == 'RESCHEDULED'}">
                                         <div class="d-flex justify-content-between">
                                             <div class="mt-3">
-                                                <a href="manage-reservationdetail?action=confirm&apptId=${resv.resvId}"class="btn btn-primary ">Confirm Reservation</a>
+                                                <a href="manage-reservationdetail?action=confirm&resvId =${resv.resvId}"class="btn btn-primary ">Confirm Reservation</a>
                                             </div>
                                             <c:if test="${resv.status == 'PENDING'}">
                                                 <div class="mt-3">

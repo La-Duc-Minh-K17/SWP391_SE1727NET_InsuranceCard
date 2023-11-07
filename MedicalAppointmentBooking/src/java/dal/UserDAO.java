@@ -208,8 +208,6 @@ public class UserDAO {
                 + "?,\n"
                 + "?,\n"
                 + "?,\n"
-                + "?,\n"
-                + "?,\n"
                 + "?);   ";
         try {
             connection = dbc.getConnection();
@@ -223,7 +221,6 @@ public class UserDAO {
             ps.setDate(7, user.getDob());
             ps.setString(8, user.getAddress());
             ps.setInt(9, user.getStatus());
-
             ps.setInt(10, user.getRole().getRole_id());
             ps.executeUpdate();
         } catch (SQLException ex) {

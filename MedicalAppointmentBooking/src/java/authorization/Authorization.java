@@ -42,7 +42,7 @@ public class Authorization implements Filter {
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
         String url = request.getRequestURI() + "?" + request.getQueryString();
         System.out.println();
-        if (url.startsWith("/manage") || url.startsWith("/doctor") || url.startsWith("/admin")) {
+        if (url.contains("/manage") || url.contains("/doctor") || url.contains("/admin")) {
             if (user != null) {
                 if (url.contains("manage")) {
                     if (user.getRole().getRole_name().equals(RoleProp.MANAGER)) {

@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Role;
 import model.UserAccount;
 import utils.CodeProcessing;
-import utils.EmailSending;
+import utils.SessionUtils;
 import utils.TimeUtil;
 
 /**
@@ -85,23 +85,19 @@ public class AccountAdd extends HttpServlet {
             String status = request.getParameter("status");
             String fullname = request.getParameter("fullname");
             String email = request.getParameter("email");
-            String password = request.getParameter("password");
             String phone = request.getParameter("phone");
             String gender = request.getParameter("gender");
             String address = request.getParameter("address");
             String dob = request.getParameter("dob");
-            String confirmationToken = CodeProcessing.generateToken();
-
+           
             UserAccount user = new UserAccount(username, "123456@", email, fullname, Integer.valueOf(gender),
-                    phone, TimeUtil.dateConverter(dob), address, confirmationToken, timeConfig.getNow(), 0, new Role(Integer.valueOf(role)));
+                    phone, TimeUtil.dateConverter1(dob), address, null, timeConfig.getNow(), 1, new Role(Integer.valueOf(role)));
             if (uDAO.isAccountExisted(user)) {
                 request.setAttribute("error", "Account has existed !");
             } else if (uDAO.isEmailtExisted(user)) {
                 request.setAttribute("error", "This email already existed !");
             } else {
-                SessionUtils.getInstance().putValue(request, "user", user);
                 uDAO.addUserAccount(user);
-
                 request.setAttribute("success", "Account added with default password 123456@!");
             }
             request.getRequestDispatcher("frontend/view/admin/accountadd.jsp").forward(request, response);

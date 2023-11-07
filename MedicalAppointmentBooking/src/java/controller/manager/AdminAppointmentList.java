@@ -37,27 +37,27 @@ public class AdminAppointmentList extends HttpServlet {
         if (action != null && action.equals("delete")) {
             int apptId = Integer.parseInt(request.getParameter("appointment_canceled"));
             apptDAO.deleteRecord(apptId);
-            response.sendRedirect("admin-appointment?action=view");
+            response.sendRedirect("manage-appointment?action=view");
         }
         if (action != null && action.equals("view")) {
             apptList = apptDAO.getAllAppointment();
-            uri = "admin-appointment?action=view";
+            uri = "manage-appointment?action=view";
         }
 
         if (action != null && action.equals("search")) {
             String search = request.getParameter("search");
             apptList = apptDAO.searchAppointmentByPatientName(search);
-            uri = "admin-appointment?action=search&search=" + search;
+            uri = "manage-appointment?action=search&search=" + search;
         }
         if (action != null && action.equals("filter")) {
             String status = request.getParameter("status_filter");
             apptList = null;
             if (status.equals("all")) {
-                response.sendRedirect("admin-appointment?action=view");
+                response.sendRedirect("manage-appointment?action=view");
             } else {
                 apptList = apptDAO.getFilteredAppointmentList(status);
             }
-            uri = "admin-appointment?action=filter&status=" + status;
+            uri = "manage-appointment?action=filter&status=" + status;
         }
         if (apptList != null) {
             int page, numberpage = 5;

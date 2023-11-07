@@ -30,7 +30,7 @@
 
     <body>
         <div class="page-wrapper doctris-theme toggled">
-            <jsp:include page="/frontend/common/manage_side_bar.jsp" />
+            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
 
             <main class="page-content bg-light">
                 <div class="top-header">
@@ -255,7 +255,7 @@
                             </div>
                             <c:if test="${(appt.status ==  'PENDING' && appt.doctor != null)|| appt.status == 'RESCHEDULED'}">
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
-                                    <form action="manage-appointmentdetail?action=reassign&apptId=${appt.apptId}" method="post">
+                                    <form action="<c:url value='manage-appointmentdetail?action=reassign&apptId=${appt.apptId}'/>" method="post">
                                         <div class="bg-white rounded shadow overflow-hidden">
                                             <div class="p-4 border-bottom">
                                                 <h5 class="mb-0">Assign new appointment</h5>
@@ -300,7 +300,7 @@
 
                             <c:if test="${appt.status ==  'PENDING' && appt.doctor == null   }">
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
-                                    <form action="manage-appointmentdetail?action=reassign&apptId=${appt.apptId}" method="post">
+                                    <form action="<c:url value='manage-appointmentdetail?action=reassign&apptId=${appt.apptId}'/>" method="post">
                                         <div class="bg-white rounded shadow overflow-hidden">
                                             <div class="p-4 border-bottom">
                                                 <h5 class="mb-0">Assign doctor to appointment</h5>
