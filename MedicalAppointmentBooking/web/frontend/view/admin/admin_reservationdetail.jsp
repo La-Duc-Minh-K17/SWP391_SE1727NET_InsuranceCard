@@ -199,7 +199,7 @@
                                     <c:if test="${resv.status == 'PENDING' || resv.status == 'RESCHEDULED'}">
                                         <div class="d-flex justify-content-between">
                                             <div class="mt-3">
-                                                <a href="manage-reservationdetail?action=confirm&resvId =${resv.resvId}"class="btn btn-primary ">Confirm Reservation</a>
+                                                <a href="manage-reservationdetail?action=confirm&resvId=${resv.resvId}"class="btn btn-primary ">Confirm Reservation</a>
                                             </div>
                                             <c:if test="${resv.status == 'PENDING'}">
                                                 <div class="mt-3">
@@ -248,13 +248,13 @@
                                             <div class="col-md-6 p-3">
                                                 <div class="">
                                                     <label class="form-label">Select Reservation Date: </label>
-                                                    <input required="" id="checkin-date" required="" name="resv-date" value="${resv.resvDate}" type="date"class="flatpickr flatpickr-input form-control"  >
+                                                    <input required="" id="checkin-date" required name="resv-date" value="${resv.resvDate}" type="date"class="flatpickr flatpickr-input form-control"  >
                                                 </div>
                                             </div>
                                             <div class="col-md-6 p-3">
                                                 <div class="">
                                                     <label class="form-label">Select Reservation Time:</label>
-                                                    <select id ="time"required="" name="resv-time" class="form-control department-name select2input" required="">
+                                                    <select id ="time"required="" name="resv-time" class="form-control department-name select2input" required>
                                                         <option readonly>Select Time</option>
                                                     </select>
                                                 </div>

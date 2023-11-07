@@ -696,4 +696,21 @@ public class DoctorDAO {
 
     }
 
+    public int countDoctor() {
+        int count = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection connection = null;
+        String sql = "select count(*) from doctors";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return count;
+    }
 }

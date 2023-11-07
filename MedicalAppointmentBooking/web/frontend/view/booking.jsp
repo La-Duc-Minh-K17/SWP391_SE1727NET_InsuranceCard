@@ -199,22 +199,22 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Date : </label>
-                                                    <input id="checkin-date" required="" name="appt-date" type="date"class="flatpickr flatpickr-input form-control"  >
+                                                    <input id="checkin-date"name="appt-date" type="date" class="flatpickr flatpickr-input form-control" required=""  onsubmit="validateDate(this)">
+                                                    <span id="date-error" style="color: red; display: none;">Please select a date.</span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Time</label>
-                                                    <select id ="time"required="" name="appt-time"
-                                                            class="form-control department-name select2input">
+                                                    <select id ="time" name="appt-time"  class="form-control department-name select2input" required="">
                                                         <option>Select Time</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Examination Reason <span class="text-danger">*</span></label>
-                                                    <textarea name="appt-reason" rows="5" class="form-control" placeholder="Your Heath Status:"></textarea>
+                                                    <label class="form-label">Examination Reason: <span class="text-danger">*</span></label>
+                                                    <textarea name="appt-reason" rows="5" class="form-control" placeholder="Your Heath Status:" required></textarea>
                                                 </div>
                                             </div><!--end col-->
                                             <div class="col-md-12">
@@ -243,8 +243,6 @@
                                         </div><!--end row-->
                                     </form>
                                 </div>
-
-
                             </div>
                         </div>
                     </div><!--end col-->
@@ -260,6 +258,16 @@
         <script src="<c:url value= '/frontend/template/assets/js/jquery.timepicker.min.js'/>"></script>
         <script src="<c:url value= '/frontend/template/assets/js/timepicker.init.js'/>"></script>
         <script>
+            function validateDate(input) {
+                var dateError = document.getElementById("date-error");
+                console.log(input.value);
+                if (input.value === "") {
+                    dateError.style.display = "block";
+                } else {
+                    dateError.style.display = "none";
+                }
+            }
+
             $("#checkin-date").flatpickr({
                 minDate: "today",
                 maxDate: new Date().fp_incr(7)
@@ -297,11 +305,11 @@
                             let obj = $.parseJSON(data);
 
                             $.each(obj, function (key, value) {
-                            
-                                    $("#time").append(
-                                            '<option value="' + value + '">' + value + "</option>"
-                                            );
-                              
+
+                                $("#time").append(
+                                        '<option value="' + value + '">' + value + "</option>"
+                                        );
+
                             });
                             $("select").formSelect();
                         },

@@ -261,7 +261,6 @@ public class ServicesDAO {
                 int service_status = rs.getInt("service_status");
                 int category_id = rs.getInt("category_id");
                 Service s = new Service(service_id, service_name, service_description, service_details, fee, service_image, service_status, category_id);
-
                 serviceList.add(s);
 
             }
