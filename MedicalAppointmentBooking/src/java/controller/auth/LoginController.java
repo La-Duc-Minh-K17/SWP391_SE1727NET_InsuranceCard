@@ -55,7 +55,7 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("password");
         String remember = request.getParameter("remember");
         UserAccount account = uDAO.getUserAccount(username, password);
-        System.out.println(account.getRole().getRole_name());
+
         if (account == null) {
             request.setAttribute("error", "Invalid username or password");
             request.getRequestDispatcher("/frontend/view/login.jsp").forward(request, response);
@@ -68,7 +68,7 @@ public class LoginController extends HttpServlet {
             } else {
                 SessionUtils.getInstance().putValue(request, "user", account);
             }
-            
+
             Cookie cusername = new Cookie("username", username);
             Cookie cpass = new Cookie("password", password);
             Cookie crem = new Cookie("remember", "ON");
@@ -85,7 +85,6 @@ public class LoginController extends HttpServlet {
             response.addCookie(cpass);
             response.addCookie(crem);
 
-            
             request.getRequestDispatcher("home").forward(request, response);
             return;
         }

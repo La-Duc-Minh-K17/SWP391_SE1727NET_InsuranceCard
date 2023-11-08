@@ -43,7 +43,6 @@ public class AdminAppointmentList extends HttpServlet {
             apptList = apptDAO.getAllAppointment();
             uri = "manage-appointment?action=view";
         }
-
         if (action != null && action.equals("search")) {
             String search = request.getParameter("search");
             apptList = apptDAO.searchAppointmentByPatientName(search);
@@ -51,7 +50,6 @@ public class AdminAppointmentList extends HttpServlet {
         }
         if (action != null && action.equals("filter")) {
             String status = request.getParameter("status_filter");
-          
             apptList = null;
             if (status.equals("all")) {
                 response.sendRedirect("manage-appointment?action=view");

@@ -76,6 +76,7 @@ public class AdminReservationDetail extends HttpServlet {
             resv.setStatus("REJECTED");
             resv.setRejectReason(rejectReason);
             rDAO.rejectReservation(resv);
+            EmailSending.sendRejectEmail(resv);
             response.sendRedirect("manage-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
             return;
         }

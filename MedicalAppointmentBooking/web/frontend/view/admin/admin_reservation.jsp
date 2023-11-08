@@ -192,6 +192,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <c:if test="${empty resvList  }" >
+                                                    <div class=" text-center alert alert-primary h4" role="alert"> No reservations . </div>
+                                                </c:if>
                                             </div>
                                         </div><!--end col-->
                                     </div>

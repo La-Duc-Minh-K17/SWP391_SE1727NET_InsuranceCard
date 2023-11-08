@@ -104,6 +104,7 @@ public class AdminAppointmentDetail extends HttpServlet {
             appointment.setStatus("REJECTED");
             appointment.setRejectReason(reject_reason);
             apptDAO.updateStatus(appointment);
+            EmailSending.sendRejectEmail(appointment);
             response.sendRedirect("manage-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
             return;
         }

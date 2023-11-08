@@ -185,7 +185,6 @@
                                                         </table>
                                                     </div>
                                                 </div>
-
                                                 <c:set var="page" value="${page}"/>
                                                 <div class="row text-center">
                                                     <div class="col-12 mt-4">
@@ -198,6 +197,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                 <c:if test="${empty apptList}" >
+                                                    <div class=" text-center alert alert-primary h4" role="alert"> No appointments . </div>
+                                                </c:if>
                                             </div>
                                         </div><!--end col-->
                                     </div>
