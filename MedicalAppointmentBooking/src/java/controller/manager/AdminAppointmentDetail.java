@@ -18,6 +18,7 @@ import utils.EmailSending;
 import utils.TimeUtil;
 import dal.SpecialityDAO;
 import model.Speciality;
+import resource.ApptStatus;
 
 /**
  *
@@ -83,7 +84,7 @@ public class AdminAppointmentDetail extends HttpServlet {
         if (action != null && action.equals("confirm")) {
             int apptId = Integer.parseInt(request.getParameter("apptId"));
             Appointment appointment = apptDAO.getAppointmentById(apptId);
-            appointment.setStatus("CONFIRMED");
+            appointment.setStatus(ApptStatus.RESCHEDULED);
             System.out.println(appointment);
             apptDAO.updateStatus(appointment);
             EmailSending.sendReminderEmail(appointment);

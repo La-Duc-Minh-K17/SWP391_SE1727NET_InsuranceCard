@@ -159,7 +159,6 @@ public class Appointment {
     }
 
     public boolean checkNoticePeriod() {
-
         LocalDate apptLocalDate = apptDate.toLocalDate();
         String[] timeParts = apptTime.split(":");
         int hour = Integer.parseInt(timeParts[0]);

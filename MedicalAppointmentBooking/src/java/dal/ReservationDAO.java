@@ -152,7 +152,6 @@ public class ReservationDAO {
                 LocalTime currentTime = LocalTime.now();
                 for (String time : timeSlot) {
                     LocalTime slotTime = LocalTime.parse(time);
-                    System.out.println(currentTime.isBefore(slotTime));
                     if (currentTime.isBefore(slotTime)) {
                         remainingTimeSlots.add(time);
                     }
@@ -384,8 +383,10 @@ public class ReservationDAO {
         String sql = "UPDATE `mabs`.`reservations`\n"
                 + "SET\n"
                 + "`reservation_date` = ?,\n"
-                + "`reservation_time` = ?\n"
-                + "`reservation_status` = ?\n"
+                + "`reservation_time` = ?,\n"
+                + "`reservation_status` = ?,\n"
+                + "`updated_time` = ?,\n"
+                + "`other_charge` = ?\n"
                 + "WHERE `reservation_id` = ?;";
         try {
             connection = dbc.getConnection();
@@ -393,7 +394,9 @@ public class ReservationDAO {
             ps.setDate(1, reservation.getResvDate());
             ps.setString(2, reservation.getResvTime());
             ps.setString(3, reservation.getStatus());
-            ps.setInt(4, reservation.getResvId());
+            ps.setTimestamp(4, reservation.getUpdatedTime());
+            ps.setDouble(5, reservation.getOtherCharge());
+            ps.setInt(6, reservation.getResvId());
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -498,5 +501,40 @@ public class ReservationDAO {
             }
         }
         return null;
+    }
+
+    private final int MAX_LIMIT_TIME_PER_MONTH = 2;
+
+    public boolean checkLimitedTime(Reservation resv, String status1, String status2) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        String sql = "SELECT COUNT(*) AS resv_count\n"
+                + "FROM reservations\n"
+                + "WHERE patient_id = ? AND (reservation_status = ? OR reservation_status = ? ) AND MONTH(updated_time) = MONTH(CURDATE()) ;";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, resv.getPatient().getPatientId());
+            ps.setString(2, status1);
+            ps.setString(3, status2);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                if (rs.getInt(1) >= MAX_LIMIT_TIME_PER_MONTH) {
+                    return false;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return true;
     }
 }

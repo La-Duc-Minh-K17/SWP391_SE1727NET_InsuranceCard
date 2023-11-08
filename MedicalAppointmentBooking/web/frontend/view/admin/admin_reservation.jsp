@@ -11,9 +11,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-      
+
         <link rel="shortcut icon" href="/assets/images/favicon.ico.png">
-       
+
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- simplebar -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/simplebar.css" rel="stylesheet" type="text/css" />
@@ -29,7 +29,7 @@
         <div class="page-wrapper doctris-theme toggled">
             <jsp:include page="/frontend/common/manager_side_bar.jsp" />
             <main class="page-content">  
-             <div class="top-header">
+                <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
                         <div class="d-flex align-items-center">
                             <a href="#" class="logo-icon">
@@ -48,7 +48,7 @@
                                 <div class="dropdown dropdown-primary">
                                     <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                           src="data:image/jpg;base64,${sessionScope.user.image}"
+                                            src="data:image/jpg;base64,${sessionScope.user.image}"
                                             class="avatar avatar-ex-small rounded-circle" alt=""></button>
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                          style="min-width: 200px;">
@@ -79,14 +79,16 @@
                                     <div>
                                         <select class="form-select form-control" id="status_filter" onchange="filter()">
                                             <option selected disabled>Status</option>
-                                            <option ${status == 'ALL' ? 'selected' : ''} value="ALL">All</option>
-                                            <option ${status == 'CONFIRMED' ? 'selected' : ''} value="CONFIRMED">CONFIRMED</option>
-                                            <option ${status == 'PENDING' ? 'selected' : ''} value="PENDING">PENDING</option>
-                                            <option ${status == 'RESCHEDULED' ? 'selected' : ''} value="RESCHEDULED">RESCHEDULED</option>
-                                            <option ${status == 'REJECTED' ? 'selected' : ''} value="REJECTED">REJECTED</option>
-                                            <option ${status == 'COMPLETED' ? 'selected' : ''} value="COMPLETED">COMPLETED</option>
-                                            <option ${status == 'CANCELED' ? 'selected' : ''} value="CANCELED">CANCELED</option>
-                                                
+                                            <option value="all">All</option>
+                                            <option value="CONFIRMED">CONFIRMED</option>
+                                            <option value="PENDING">PENDING</option>
+                                            <option value="RESCHEDULING">RESCHEDULING</option>
+                                            <option value="RESCHEDULED">RESCHEDULED</option>
+                                            <option value="COMPLETED">COMPLETED</option>
+                                            <option value="CANCELED">CANCELED</option>
+                                            <option value="RESCHEDULING">CANCELLING</option>
+                                            <option value="FOLLOW_UP">FOLLOW-UP</option>    
+
                                         </select>
 
                                     </div>

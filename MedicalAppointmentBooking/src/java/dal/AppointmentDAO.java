@@ -627,22 +627,24 @@ public class AppointmentDAO {
         return timeSlot;
     }
 
-    private final int MAX_LIMIT_TIME_RESCHEDULE_PER_MONTH = 3;
+    private final int MAX_LIMIT_TIME_PER_MONTH = 2;
 
-    public boolean checkLimiteRedscheduledTime(Appointment appt) {
+    public boolean checkLimitedTime(Appointment appt , String status1 , String status2) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
         String sql = "SELECT COUNT(*) AS appointment_count\n"
                 + "FROM appointments\n"
-                + "WHERE patient_id = ? and MONTH(updated_time) = MONTH(CURDATE());";
+                + "WHERE patient_id = ? AND (appointment_status = ? OR appointment_status = ? ) AND MONTH(updated_time) = MONTH(CURDATE()) ;";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setInt(1, appt.getPatient().getPatientId());
+            ps.setString(2, status1);
+            ps.setString(3, status2);
             rs = ps.executeQuery();
             if (rs.next()) {
-                if (rs.getInt(1) >= MAX_LIMIT_TIME_RESCHEDULE_PER_MONTH) {
+                if (rs.getInt(1) >= MAX_LIMIT_TIME_PER_MONTH) {
                     return false;
                 }
             }

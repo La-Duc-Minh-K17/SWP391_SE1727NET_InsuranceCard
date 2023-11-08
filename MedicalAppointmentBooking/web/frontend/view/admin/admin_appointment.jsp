@@ -57,7 +57,7 @@
                                 <div class="dropdown dropdown-primary">
                                     <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                           src="data:image/jpg;base64,${sessionScope.user.image}"
+                                            src="data:image/jpg;base64,${sessionScope.user.image}"
                                             class="avatar avatar-ex-small rounded-circle" alt=""></button>
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                          style="min-width: 200px;">
@@ -91,10 +91,11 @@
                                             <option value="all">All</option>
                                             <option value="CONFIRMED">CONFIRMED</option>
                                             <option value="PENDING">PENDING</option>
-                                             <option value="RESCHEDULING">RESCHEDULING</option>
+                                            <option value="RESCHEDULING">RESCHEDULING</option>
                                             <option value="RESCHEDULED">RESCHEDULED</option>
                                             <option value="COMPLETED">COMPLETED</option>
                                             <option value="CANCELED">CANCELED</option>
+                                            <option value="RESCHEDULING">CANCELLING</option>
                                             <option value="FOLLOW_UP">FOLLOW-UP</option>    
                                         </select>
                                     </div>
