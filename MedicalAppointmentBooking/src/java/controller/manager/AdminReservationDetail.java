@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Reservation;
+import resource.ApptStatus;
 import utils.EmailSending;
 import utils.TimeUtil;
 
@@ -56,7 +57,13 @@ public class AdminReservationDetail extends HttpServlet {
         if (action != null && action.equals("confirm")) {
             int resvId = Integer.parseInt(request.getParameter("resvId"));
             Reservation resv = rDAO.getReservationById(resvId);
-            resv.setStatus("CONFIRMED");
+            if (resv.getStatus().equals(ApptStatus.RESCHEDULING)) {
+                resv.setStatus(ApptStatus.RESCHEDULED);
+            } else if (resv.getStatus().equals(ApptStatus.CANCELLING)) {
+                resv.setStatus(ApptStatus.CANCELLED);
+            } else {
+                resv.setStatus(ApptStatus.CONFIRMED);
+            }
             rDAO.updateStatus(resv);
             EmailSending.sendReminderEmail(resv);
             response.sendRedirect("manage-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
@@ -64,9 +71,9 @@ public class AdminReservationDetail extends HttpServlet {
         }
         if (action != null && action.equals("reject")) {
             int resvId = Integer.parseInt(request.getParameter("cancel_appointment"));
-            String rejectReason = request.getParameter("reject_reason"); 
+            String rejectReason = request.getParameter("reject_reason");
             Reservation resv = rDAO.getReservationById(resvId);
-            resv.setStatus("REJECTED" );
+            resv.setStatus("REJECTED");
             resv.setRejectReason(rejectReason);
             rDAO.rejectReservation(resv);
             response.sendRedirect("manage-reservationdetail?action=view-detail&resvId=" + resv.getResvId());

@@ -64,7 +64,7 @@
                                             </div>
                                         </a>
                                         <div class="dropdown-divider border-top"></div>
-                                        <a class="dropdown-item text-dark" href="lock-screen.html"><span
+                                        <a class="dropdown-item text-dark" href="<c:url value='/home?action=logout'/>"><span
                                                 class="mb-0 d-inline-block me-1"><i
                                                     class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                                     </div>
@@ -201,7 +201,7 @@
                                             <div class="mt-3">
                                                 <a href="manage-reservationdetail?action=confirm&resvId=${resv.resvId}"class="btn btn-primary ">Confirm Reservation</a>
                                             </div>
-                                            <c:if test="${resv.status == 'PENDING' ||resv.status == 'CANCELLING'}">
+                                            <c:if test="${resv.status == 'PENDING'  }">
                                                 <div class="mt-3">
                                                     <a href="#cancelappointment" class="btn btn-primary btn-danger " 
                                                        data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${resv.resvId}">

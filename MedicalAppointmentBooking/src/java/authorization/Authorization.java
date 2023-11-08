@@ -66,13 +66,27 @@ public class Authorization implements Filter {
             } else {
                 response.sendRedirect(request.getContextPath() + LOGIN);
             }
-        } else if (url.startsWith("/booking") || url.contains("book")) {
+        } else if (url.contains("/booking") || url.contains("book")) {
 
             if (user != null) {
                 if (user.getRole().getRole_name().equals(RoleProp.PATIENT)) {
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {
                     response.sendRedirect(request.getContextPath() + ERROR401);
+                }
+            } else {
+                response.sendRedirect(request.getContextPath() + LOGIN);
+            }
+        } else if (url.contains("/user")) {
+            if (user != null) {
+                if (url.contains("/user-profile")) {
+                    filterChain.doFilter(servletRequest, servletResponse);
+                } else {
+                    if (user.getRole().getRole_name().equals(RoleProp.PATIENT)) {
+                        filterChain.doFilter(servletRequest, servletResponse);
+                    } else {
+                        response.sendRedirect(request.getContextPath() + ERROR401);
+                    }
                 }
             } else {
                 response.sendRedirect(request.getContextPath() + LOGIN);
