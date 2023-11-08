@@ -223,7 +223,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <c:if test="${ appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
+                                    <c:if test="${ appt.status ==  'PENDING' || appt.status == 'RESCHEDULING' ||appt.status == 'CANCELLING'}">
                                         <div class="d-flex justify-content-between">
                                             <div class="mt-3">
                                                 <a href="manage-appointmentdetail?action=confirm&apptId=${appt.apptId}"class="btn btn-primary ">Confirm Appointment</a>
@@ -265,7 +265,7 @@
                                 </div>
 
                             </div>
-                            <c:if test="${(appt.status ==  'PENDING' && appt.doctor != null)|| appt.status == 'RESCHEDULED'}">
+                            <c:if test="${(appt.status ==  'PENDING' && appt.doctor != null)|| appt.status == 'RESCHEDULING'}">
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
                                     <form action="<c:url value='manage-appointmentdetail?action=reassign&apptId=${appt.apptId}'/>" method="post">
                                         <div class="bg-white rounded shadow overflow-hidden">

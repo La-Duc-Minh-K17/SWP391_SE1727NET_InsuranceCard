@@ -51,13 +51,14 @@ public class AdminAppointmentList extends HttpServlet {
         }
         if (action != null && action.equals("filter")) {
             String status = request.getParameter("status_filter");
+          
             apptList = null;
             if (status.equals("all")) {
                 response.sendRedirect("manage-appointment?action=view");
             } else {
                 apptList = apptDAO.getFilteredAppointmentList(status);
             }
-            uri = "manage-appointment?action=filter&status=" + status;
+            uri = "manage-appointment?action=filter&status_filter=" + status;
         }
         if (apptList != null) {
             int page, numberpage = 5;

@@ -196,12 +196,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <c:if test="${resv.status == 'PENDING' || resv.status == 'RESCHEDULED'}">
+                                    <c:if test="${resv.status == 'PENDING' || resv.status == 'RESCHEDULING' ||resv.status == 'CANCELLING'}">
                                         <div class="d-flex justify-content-between">
                                             <div class="mt-3">
                                                 <a href="manage-reservationdetail?action=confirm&resvId=${resv.resvId}"class="btn btn-primary ">Confirm Reservation</a>
                                             </div>
-                                            <c:if test="${resv.status == 'PENDING'}">
+                                            <c:if test="${resv.status == 'PENDING' ||resv.status == 'CANCELLING'}">
                                                 <div class="mt-3">
                                                     <a href="#cancelappointment" class="btn btn-primary btn-danger " 
                                                        data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${resv.resvId}">
@@ -237,7 +237,7 @@
                                     </c:if>
                                 </div>
                             </div>
-                            <c:if test="${resv.status ==  'PENDING' || resv.status == 'RESCHEDULED'}">
+                            <c:if test="${resv.status ==  'PENDING' || resv.status == 'RESCHEDULING'}">
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
                                     <form action="manage-reservationdetail?action=update&resvId=${resv.resvId}" method="post">
                                         <div class="bg-white rounded shadow overflow-hidden">

@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Appointment;
 import model.UserAccount;
+import resource.ApptStatus;
 import utils.SessionUtils;
 import utils.TimeUtil;
 
@@ -56,11 +57,11 @@ public class UserAppointment extends HttpServlet {
             int apptId = Integer.parseInt(request.getParameter("reschedule_appointment"));
             Appointment appointment = apptDAO.getAppointmentById(apptId);
        
-            if (apptDAO.checkLimitedTime(appointment, "RESCHEDULED", "RESCHEDULING") && appointment.checkNoticePeriod()) {
+            if (apptDAO.checkLimitedTime(appointment, ApptStatus.RESCHEDULED, ApptStatus.RESCHEDULING) && appointment.checkNoticePeriod()) {
                 appointment.setRescheduleReason(reason);
                 appointment.setApptDate(TimeUtil.dateConverter1(date));
                 appointment.setApptTime(time);
-                appointment.setStatus("RESCHEDULING");
+                appointment.setStatus(ApptStatus.RESCHEDULING);
                 appointment.setUpdatedTime(TimeUtil.getNow());
                 appointment.setOtherCharge(appointment.getDoctor().getServiceFee() * 0.1);
                 apptDAO.rescheduleAppointmentForPatient(appointment);
@@ -75,8 +76,8 @@ public class UserAppointment extends HttpServlet {
         if (action != null && action.equals("cancel")) {
             int apptId = Integer.parseInt(request.getParameter("cancel_appointment"));
             Appointment appointment = apptDAO.getAppointmentById(apptId);
-            if (appointment.checkNoticePeriod() && apptDAO.checkLimitedTime(appointment, "CANCELLING", "CANCELLED")) {
-                appointment.setStatus("CANCELING");
+            if (appointment.checkNoticePeriod() && apptDAO.checkLimitedTime(appointment, ApptStatus.CANCELLING, ApptStatus.CANCELLED)) {
+                appointment.setStatus(ApptStatus.CANCELLING);
                 appointment.setOtherCharge(appointment.getDoctor().getServiceFee() * 0.1);
                 apptDAO.updateStatus(appointment);
                 response.sendRedirect("user-appointment?action=view-detail&apptId=" + appointment.getApptId());

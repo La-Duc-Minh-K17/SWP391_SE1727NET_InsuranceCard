@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Reservation;
 import model.UserAccount;
+import resource.ApptStatus;
 import utils.SessionUtils;
 import utils.TimeUtil;
 
@@ -56,13 +57,13 @@ public class UserReservation extends HttpServlet {
             int apptId = Integer.parseInt(request.getParameter("reschedule_appointment"));
             Reservation resv = resvDAO.getReservationById(apptId);
 
-            if (resvDAO.checkLimitedTime(resv, "RESCHEDULED", "RESCHEDULING") && resv.checkNoticePeriod()) {
+            if (resvDAO.checkLimitedTime(resv, ApptStatus.RESCHEDULED, ApptStatus.RESCHEDULING) && resv.checkNoticePeriod()) {
                 resv.setRescheduleReason(reason);
                 resv.setResvDate(TimeUtil.dateConverter1(date));
                 resv.setResvTime(time);
                 resv.setUpdatedTime(TimeUtil.getNow());
                 resv.setOtherCharge(resv.getService().getFee() * 0.1);
-                resv.setStatus("RESCHEDULING");
+                resv.setStatus(ApptStatus.RESCHEDULING);
                 resvDAO.rescheduleReservationForPatient(resv);
                 response.sendRedirect("user-reservation?action=view-detail&resvId=" + resv.getResvId());
             } else {
@@ -75,8 +76,8 @@ public class UserReservation extends HttpServlet {
         if (action != null && action.equals("cancel")) {
             int resvId = Integer.parseInt(request.getParameter("cancel_appointment"));
             Reservation resv = resvDAO.getReservationById(resvId);
-            if (resv.checkNoticePeriod() && resvDAO.checkLimitedTime(resv, "CANCELING", "CANCELED")) {
-                resv.setStatus("CANCELING");
+            if (resv.checkNoticePeriod() && resvDAO.checkLimitedTime(resv, ApptStatus.CANCELLED, ApptStatus.CANCELLING)) {
+                resv.setStatus(ApptStatus.CANCELLING);
                 resvDAO.updateStatus(resv);
                 response.sendRedirect("user-reservation?action=view-detail&resvId=" + resv.getResvId());
             } else {

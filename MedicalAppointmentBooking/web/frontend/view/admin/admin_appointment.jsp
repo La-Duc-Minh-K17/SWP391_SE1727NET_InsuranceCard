@@ -94,13 +94,12 @@
                                             <option value="RESCHEDULING">RESCHEDULING</option>
                                             <option value="RESCHEDULED">RESCHEDULED</option>
                                             <option value="COMPLETED">COMPLETED</option>
-                                            <option value="CANCELED">CANCELED</option>
-                                            <option value="RESCHEDULING">CANCELLING</option>
+                                            <option value="CANCELLED">CANCELLED</option>
+                                            <option value="CANCELLING">CANCELLING</option>
                                             <option value="FOLLOW_UP">FOLLOW-UP</option>    
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="col-xl-6 col-md-6">
                                 <div class="search-bar d-lg-block" style="padding-top :0">
