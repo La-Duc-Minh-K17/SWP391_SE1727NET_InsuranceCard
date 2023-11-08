@@ -5,6 +5,7 @@
 package model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -19,7 +20,10 @@ public class Reservation {
     private Date resvDate;
     private String resvTime;
     private String testResult;
+    private String otherCharge;
     private String status;
+    private Timestamp createdTime;
+    private Timestamp updatedTime;
     private Service service;
     private Patient patient;
 
@@ -125,5 +129,35 @@ public class Reservation {
     public void setRejectReason(String rejectReason) {
         this.rejectReason = rejectReason;
     }
-    
+
+    public String getOtherCharge() {
+        return otherCharge;
+    }
+
+    public void setOtherCharge(String otherCharge) {
+        this.otherCharge = otherCharge;
+    }
+
+    public Timestamp getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(Timestamp createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public Timestamp getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(Timestamp updatedTime) {
+        this.updatedTime = updatedTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation{" + "resvId=" + resvId + ", resvNote=" + resvNote + ", rescheduleReason=" + rescheduleReason + ", rejectReason=" + rejectReason + ", resvDate=" + resvDate + ", resvTime=" + resvTime + ", testResult=" + testResult + ", otherCharge=" + otherCharge + ", status=" + status + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", service=" + service + ", patient=" + patient + '}';
+    }
+
+   
 }

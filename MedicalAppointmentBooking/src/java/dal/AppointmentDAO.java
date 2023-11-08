@@ -10,6 +10,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import model.Appointment;
@@ -27,7 +31,6 @@ public class AppointmentDAO {
     private final DoctorDAO dDAO = new DoctorDAO();
     private final PatientDAO pDAO = new PatientDAO();
 
-    
     public List<Appointment> getAllAppointment() {
         List<Appointment> list = new ArrayList<>();
         PreparedStatement ps = null;
@@ -151,10 +154,11 @@ public class AppointmentDAO {
                 + "`appointment_date`,\n"
                 + "`appointment_time`,\n"
                 + "`appointment_status`,\n"
+                + "`created_time`,\n"
                 + "`doctor_id`,\n"
                 + "`patient_id`)\n"
                 + "VALUES\n"
-                + "(? ,?,?,?,?,?);";
+                + "(? ,?,?,?,?,?, ?);";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
@@ -170,12 +174,13 @@ public class AppointmentDAO {
                 ps.setString(3, appt.getApptTime());
             }
             ps.setString(4, appt.getStatus());
+            ps.setTimestamp(5, appt.getCreatedTime());
             if (appt.getDoctor() == null) {
-                ps.setNull(5, java.sql.Types.NULL);
+                ps.setNull(6, java.sql.Types.NULL);
             } else {
-                ps.setInt(5, appt.getDoctor().getDoctorId());
+                ps.setInt(6, appt.getDoctor().getDoctorId());
             }
-            ps.setInt(6, appt.getPatient().getPatientId());
+            ps.setInt(7, appt.getPatient().getPatientId());
             ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -215,10 +220,14 @@ public class AppointmentDAO {
                 int patientId = rs.getInt("patient_id");
                 String rescheduleReason = rs.getString("reschedule_reason");
                 String rejectReason = rs.getString("reject_reason");
+                Timestamp createdTime = rs.getTimestamp("created_time");
+                Timestamp updatedTime = rs.getTimestamp("updated_time");
                 Patient patient = pDAO.getPatientById(patientId);
                 appt = new Appointment(id, note, date, time, diagnosis, status, doctor, patient);
                 appt.setRejectReason(rejectReason);
                 appt.setRescheduleReason(rescheduleReason);
+                appt.setCreatedTime(createdTime);
+                appt.setUpdatedTime(updatedTime);
             }
             return appt;
         } catch (SQLException ex) {
@@ -432,6 +441,8 @@ public class AppointmentDAO {
                 + "`appointment_date` = ?,\n"
                 + "`appointment_time` = ?,\n"
                 + "`appointment_status` = ?,\n"
+                + "`updated_time` = ?,\n"
+                + "`other_charge` = ?,\n"
                 + "`doctor_id` = ? \n"
                 + "WHERE `appointment_id` = ?;";
         try {
@@ -441,8 +452,10 @@ public class AppointmentDAO {
             ps.setDate(2, appointment.getApptDate());
             ps.setString(3, appointment.getApptTime());
             ps.setString(4, appointment.getStatus());
-            ps.setInt(5, appointment.getDoctor().getDoctorId());
-            ps.setInt(6, appointment.getApptId());
+            ps.setTimestamp(5, appointment.getUpdatedTime());
+            ps.setDouble(6, appointment.getOtherCharge());
+            ps.setInt(7, appointment.getDoctor().getDoctorId());
+            ps.setInt(8, appointment.getApptId());
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -561,6 +574,7 @@ public class AppointmentDAO {
         Connection connection = null;
         ResultSet rs = null;
         List<String> timeSlot = new ArrayList<>();
+        List<String> remainingTimeSlots = new ArrayList<>();
         timeSlot.add("07:00:00");
         timeSlot.add("08:00:00");
         timeSlot.add("09:00:00");
@@ -571,7 +585,6 @@ public class AppointmentDAO {
         timeSlot.add("15:00:00");
         timeSlot.add("16:00:00");
         timeSlot.add("17:00:00");
-
         String sql = "SELECT appointment_time\n"
                 + "FROM appointments\n"
                 + "WHERE doctor_id = ? AND appointment_date = ? ";
@@ -586,6 +599,20 @@ public class AppointmentDAO {
                     timeSlot.remove(rs.getString(1));
                 }
             }
+            LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate currentDate = LocalDate.now();
+            if (parsedDate.isEqual(currentDate)) {
+                LocalTime currentTime = LocalTime.now();
+                for (String time : timeSlot) {
+                    LocalTime slotTime = LocalTime.parse(time);
+                    System.out.println(currentTime.isBefore(slotTime));
+                    if (currentTime.isBefore(slotTime)) {
+                        remainingTimeSlots.add(time);
+                    }
+                }
+                return remainingTimeSlots;
+            }
+
         } catch (SQLException ex) {
             System.out.println(ex);
         } finally {
@@ -600,4 +627,36 @@ public class AppointmentDAO {
         return timeSlot;
     }
 
+    private final int MAX_LIMIT_TIME_RESCHEDULE_PER_MONTH = 3;
+
+    public boolean checkLimiteRedscheduledTime(Appointment appt) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        String sql = "SELECT COUNT(*) AS appointment_count\n"
+                + "FROM appointments\n"
+                + "WHERE patient_id = ? and MONTH(updated_time) = MONTH(CURDATE());";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, appt.getPatient().getPatientId());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                if (rs.getInt(1) >= MAX_LIMIT_TIME_RESCHEDULE_PER_MONTH) {
+                    return false;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return true;
+    }
 }

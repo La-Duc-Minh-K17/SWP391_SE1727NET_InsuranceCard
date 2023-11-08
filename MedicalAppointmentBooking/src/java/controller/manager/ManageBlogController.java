@@ -52,7 +52,6 @@ public class ManageBlogController extends HttpServlet {
             List<Blog> dbiList= new ArrayList<>();
             if (catId == 0) {
                 dbiList = dDAO.getAllNews();
-                
             }else{
             dbiList = dDAO.getBlogById(catId);}
             request.setAttribute("dList", dbiList);
@@ -110,7 +109,7 @@ public class ManageBlogController extends HttpServlet {
             String content = request.getParameter("content");
             int categoryId = Integer.parseInt(request.getParameter("category_id"));
             Part image = request.getPart("image");
-            Date createdTime = Date.valueOf(request.getParameter("created_time"));
+            Date createdTime = new java.sql.Date(System.currentTimeMillis());
             dDAO.addBlog(title, description, content, categoryId, image, createdTime);
             response.sendRedirect("manage-blog?action=view-all");
             return;

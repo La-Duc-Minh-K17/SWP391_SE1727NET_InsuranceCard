@@ -91,6 +91,7 @@
                                             <option value="all">All</option>
                                             <option value="CONFIRMED">CONFIRMED</option>
                                             <option value="PENDING">PENDING</option>
+                                             <option value="RESCHEDULING">RESCHEDULING</option>
                                             <option value="RESCHEDULED">RESCHEDULED</option>
                                             <option value="COMPLETED">COMPLETED</option>
                                             <option value="CANCELED">CANCELED</option>

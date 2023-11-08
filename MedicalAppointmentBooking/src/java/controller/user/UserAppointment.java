@@ -55,12 +55,21 @@ public class UserAppointment extends HttpServlet {
             String reason = request.getParameter("reschedule_reason");
             int apptId = Integer.parseInt(request.getParameter("reschedule_appointment"));
             Appointment appointment = apptDAO.getAppointmentById(apptId);
-            appointment.setRescheduleReason(reason);
-            appointment.setApptDate(TimeUtil.dateConverter1(date));
-            appointment.setApptTime(time);
-            appointment.setStatus("RESCHEDULED");
-            apptDAO.rescheduleAppointmentForPatient(appointment);
-            response.sendRedirect("user-appointment?action=view-detail&apptId=" + appointment.getApptId());
+            if (apptDAO.checkLimiteRedscheduledTime(appointment) && appointment.checkNoticePeriod()) {
+                appointment.setRescheduleReason(reason);
+                appointment.setApptDate(TimeUtil.dateConverter1(date));
+                appointment.setApptTime(time);
+                appointment.setStatus("RESCHEDULED");
+                appointment.setUpdatedTime(TimeUtil.getNow());
+                appointment.setOtherCharge(appointment.getDoctor().getServiceFee() * 0.1);
+                apptDAO.rescheduleAppointmentForPatient(appointment);
+                request.setAttribute("success", "Your request for rescheduling is made successfully.Please wait for our notification.");
+                response.sendRedirect("user-appointment?action=view-detail&apptId=" + appointment.getApptId());
+            }
+            else {
+                request.setAttribute("error", "You cannot reschedule now. Please check again our policy or contact us for further support.");
+                request.getRequestDispatcher("user-appointment?action=view-detail&apptId=" + appointment.getApptId()).forward(request, response);
+            }
             return;
         }
         if (action != null && action.equals("cancel")) {

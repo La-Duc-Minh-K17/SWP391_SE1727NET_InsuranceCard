@@ -5,6 +5,11 @@
 package model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -19,7 +24,10 @@ public class Appointment {
     private Date apptDate;
     private String apptTime;
     private String diagnosis;
+    private double otherCharge;
     private String status;
+    private Timestamp createdTime;
+    private Timestamp updatedTime;
     private Doctor doctor;
     private Patient patient;
 
@@ -34,7 +42,7 @@ public class Appointment {
         this.doctor = doctor;
         this.patient = patient;
     }
-    
+
     public Appointment(int apptId, String apptNote, Date apptDate, String apptTime, String diagnosis, String status, Doctor doctor, Patient patient) {
         this.apptId = apptId;
         this.apptNote = apptNote;
@@ -125,9 +133,50 @@ public class Appointment {
     public void setRejectReason(String rejectReason) {
         this.rejectReason = rejectReason;
     }
-    
+
+    public double getOtherCharge() {
+        return otherCharge;
+    }
+
+    public void setOtherCharge(double otherCharge) {
+        this.otherCharge = otherCharge;
+    }
+
+    public Timestamp getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(Timestamp created_time) {
+        this.createdTime = created_time;
+    }
+
+    public Timestamp getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(Timestamp updated_time) {
+        this.updatedTime = updated_time;
+    }
+
+    public boolean checkNoticePeriod() {
+
+        LocalDate apptLocalDate = apptDate.toLocalDate();
+        String[] timeParts = apptTime.split(":");
+        int hour = Integer.parseInt(timeParts[0]);
+        int minute = Integer.parseInt(timeParts[1]);
+        LocalTime apptLocalTime = LocalTime.of(hour, minute);
+        LocalDateTime apptLocalDateTime = apptLocalDate.atTime(apptLocalTime);
+        LocalDateTime twentyFourHoursBefore = apptLocalDateTime.minus(24, ChronoUnit.HOURS);
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        if (currentDateTime.isBefore(twentyFourHoursBefore)) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
-        return "Appointment{" + "apptId=" + apptId + ", apptNote=" + apptNote + ", apptDate=" + apptDate + ", apptTime=" + apptTime + ", diagnosis=" + diagnosis + ", status=" + status + ", doctor=" + doctor + ", patient=" + patient + '}';
+        return "Appointment{" + "apptId=" + apptId + ", apptNote=" + apptNote + ", rescheduleReason=" + rescheduleReason + ", rejectReason=" + rejectReason + ", apptDate=" + apptDate + ", apptTime=" + apptTime + ", diagnosis=" + diagnosis + ", otherCharge=" + otherCharge + ", status=" + status + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", doctor=" + doctor + ", patient=" + patient + '}';
     }
+
 }

@@ -29,7 +29,7 @@ public class BlogDAO {
 
     public List<Blog> getAllNews() {
         List<Blog> blogsList = new ArrayList<>();
-        String sql = "SELECT *FROM mabs.blogs ";
+        String sql = "SELECT * FROM mabs.blogs ";
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet result = null;

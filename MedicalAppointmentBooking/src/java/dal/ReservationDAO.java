@@ -10,6 +10,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import model.Patient;
@@ -83,10 +86,11 @@ public class ReservationDAO {
                 + "`reservation_date`,\n"
                 + "`reservation_time`,\n"
                 + "`reservation_status`,\n"
+                + "`created_time`,\n"
                 + "`service_id`,\n"
                 + "`patient_id`)\n"
                 + "VALUES\n"
-                + "(? ,?,?,?,?,?);";
+                + "(? ,?,?,?,?,?,?);";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
@@ -94,8 +98,9 @@ public class ReservationDAO {
             ps.setDate(2, resv.getResvDate());
             ps.setString(3, resv.getResvTime());
             ps.setString(4, resv.getStatus());
-            ps.setInt(5, resv.getService().getService_id());
-            ps.setInt(6, resv.getPatient().getPatientId());
+            ps.setTimestamp(5, resv.getCreatedTime());
+            ps.setInt(6, resv.getService().getService_id());
+            ps.setInt(7, resv.getPatient().getPatientId());
             ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -116,18 +121,17 @@ public class ReservationDAO {
         Connection connection = null;
         ResultSet rs = null;
         List<String> timeSlot = new ArrayList<>();
+        List<String> remainingTimeSlots = new ArrayList<>();
         timeSlot.add("07:00:00");
         timeSlot.add("08:00:00");
         timeSlot.add("09:00:00");
         timeSlot.add("10:00:00");
         timeSlot.add("11:00:00");
-        timeSlot.add("12:00:00");
         timeSlot.add("13:00:00");
         timeSlot.add("14:00:00");
         timeSlot.add("15:00:00");
         timeSlot.add("16:00:00");
         timeSlot.add("17:00:00");
-
         String sql = "SELECT reservation_time\n"
                 + "FROM reservations\n"
                 + "WHERE service_id = ? AND reservation_date = ? ";
@@ -142,6 +146,20 @@ public class ReservationDAO {
                     timeSlot.remove(rs.getString(1));
                 }
             }
+            LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate currentDate = LocalDate.now();
+            if (parsedDate.isEqual(currentDate)) {
+                LocalTime currentTime = LocalTime.now();
+                for (String time : timeSlot) {
+                    LocalTime slotTime = LocalTime.parse(time);
+                    System.out.println(currentTime.isBefore(slotTime));
+                    if (currentTime.isBefore(slotTime)) {
+                        remainingTimeSlots.add(time);
+                    }
+                }
+                return remainingTimeSlots;
+            }
+
         } catch (SQLException ex) {
             System.out.println(ex);
         } finally {

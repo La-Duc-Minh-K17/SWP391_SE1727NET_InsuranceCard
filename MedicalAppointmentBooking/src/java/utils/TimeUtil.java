@@ -27,6 +27,8 @@ public class TimeUtil {
         return sqlTime;
     }
 
+    
+
     public static LocalDateTime stringToLocalDateTime(String dateString) {
         try {
             String formatPattern = "yyyy-MM-dd'T'HH:mm:ss";
@@ -77,7 +79,7 @@ public class TimeUtil {
         return null;
     }
 
-    public Timestamp getNow() {
+    public static Timestamp getNow() {
         long createdTimeMillis = System.currentTimeMillis();
         Timestamp createdTimeTimeStamp = new Timestamp(createdTimeMillis);
         return createdTimeTimeStamp;
