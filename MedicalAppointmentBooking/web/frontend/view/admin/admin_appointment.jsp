@@ -57,7 +57,7 @@
                                 <div class="dropdown dropdown-primary">
                                     <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                           src="data:image/jpg;base64,${sessionScope.user.image}"
+                                            src="data:image/jpg;base64,${sessionScope.user.image}"
                                             class="avatar avatar-ex-small rounded-circle" alt=""></button>
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                          style="min-width: 200px;">
@@ -70,7 +70,7 @@
                                             </div>
                                         </a>
                                         <div class="dropdown-divider border-top"></div>
-                                        <a class="dropdown-item text-dark" href="lock-screen.html"><span
+                                        <a class="dropdown-item text-dark" href="<c:url value='/home?action=logout'/>"><span
                                                 class="mb-0 d-inline-block me-1"><i
                                                     class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                                     </div>
@@ -91,14 +91,15 @@
                                             <option value="all">All</option>
                                             <option value="CONFIRMED">CONFIRMED</option>
                                             <option value="PENDING">PENDING</option>
+                                            <option value="RESCHEDULING">RESCHEDULING</option>
                                             <option value="RESCHEDULED">RESCHEDULED</option>
                                             <option value="COMPLETED">COMPLETED</option>
-                                            <option value="CANCELED">CANCELED</option>
+                                            <option value="CANCELLED">CANCELLED</option>
+                                            <option value="CANCELLING">CANCELLING</option>
                                             <option value="FOLLOW_UP">FOLLOW-UP</option>    
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="col-xl-6 col-md-6">
                                 <div class="search-bar d-lg-block" style="padding-top :0">
@@ -184,7 +185,6 @@
                                                         </table>
                                                     </div>
                                                 </div>
-
                                                 <c:set var="page" value="${page}"/>
                                                 <div class="row text-center">
                                                     <div class="col-12 mt-4">
@@ -197,6 +197,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                 <c:if test="${empty apptList}" >
+                                                    <div class=" text-center alert alert-primary h4" role="alert"> No appointments . </div>
+                                                </c:if>
                                             </div>
                                         </div><!--end col-->
                                     </div>

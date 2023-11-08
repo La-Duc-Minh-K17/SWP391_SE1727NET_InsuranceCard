@@ -21,8 +21,9 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
-
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <script type="text/javascript" src="<c:url value='https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js'/>"></script>
+        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/jquery.min.js"></script>
     </head>
     <body>
         <div class="page-wrapper doctris-theme toggled">
@@ -72,7 +73,7 @@
                 <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
                     <div class="card border-0 shadow overflow-hidden">
                         <div class="tab-content p-4" id="pills-tabContent">
-                            <form action="<c:url value='/manageblog?action=add-info'/>" method="POST" enctype="multipart/form-data">
+                            <form action="<c:url value='/manage-blog?action=add-info'/>" method="POST" enctype="multipart/form-data">
                                 <h5 class="mb-0">Add Blog Information.</h5>
                                 <div>
                                     <p class="text-muted">Update Image.</p>
@@ -87,26 +88,26 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Title  </label>
-                                            <input name="title" id="name" type="text" class="form-control" >
+                                            <input name="title" id="name" type="text" class="form-control" required >
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Description</label>
-                                            <input name="description"  type="text"  class="form-control" >
+                                            <textarea  name="description" cols="8" class="form-control" required></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Content</label>
-                                            <input name="content" type="text" class="form-control" >
+                                            <textarea id="content" name="content"row="5" cols="5" style="min-height: 300px;" class="form-control">${blog.content} </textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <div class="form-group">
-                                                <label>Category</label>
-                                                <select name="category_id" class="select">
+                                                <label class="form-label">Category</label>
+                                                <select name="category_id" class="form-control">
                                                     <option>Choose Category</option>
                                                     <c:forEach var="o" items="${requestScope.cDAO}">
                                                         <option value="${o.blog_category_id}">${o.name}</option>
@@ -114,12 +115,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Created Time</label>
-                                                <input name="created_time" type="date" class="form-control" >
-                                            </div>
-                                        </div>
+
                                     </div>
 
                                     <div class="row">
@@ -134,14 +130,13 @@
             </main><!-- comment -->
         </div>
     </body>
+    <script type="text/javascript">
+        CKEDITOR.replace('content');
+    </script>
     <script>
-
-
         function displayThumbnail() {
             const input = document.getElementById("uploadfile");
             const thumbnail = document.getElementById("thumbImage");
-
-            // Check if a file has been selected
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
 

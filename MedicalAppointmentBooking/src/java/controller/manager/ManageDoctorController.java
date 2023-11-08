@@ -15,7 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.util.List;
-
 import model.Doctor;
 import model.Patient;
 
@@ -78,9 +77,8 @@ public class ManageDoctorController extends HttpServlet {
             int spe_id = Integer.parseInt(request.getParameter("speciality"));
             String position = request.getParameter("position");
             String description = request.getParameter("description");
-            int status = Integer.parseInt(request.getParameter("status"));
             Part image = request.getPart("image");
-            dDAO.updateDoctor(doctorId, name, gender, phone, spe_id, position, description, status, image);
+            dDAO.updateDoctor(doctorId, name, gender, phone, spe_id, position, description, image);
             response.sendRedirect("manage-doctor?action=edit&id=" + doctorId);
             return;
         }  

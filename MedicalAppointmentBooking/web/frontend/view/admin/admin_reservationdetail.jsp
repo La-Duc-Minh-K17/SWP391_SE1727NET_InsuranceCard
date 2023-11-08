@@ -64,7 +64,7 @@
                                             </div>
                                         </a>
                                         <div class="dropdown-divider border-top"></div>
-                                        <a class="dropdown-item text-dark" href="lock-screen.html"><span
+                                        <a class="dropdown-item text-dark" href="<c:url value='/home?action=logout'/>"><span
                                                 class="mb-0 d-inline-block me-1"><i
                                                     class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                                     </div>
@@ -196,12 +196,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <c:if test="${resv.status == 'PENDING' || resv.status == 'RESCHEDULED'}">
+                                    <c:if test="${resv.status == 'PENDING' || resv.status == 'RESCHEDULING' ||resv.status == 'CANCELLING'}">
                                         <div class="d-flex justify-content-between">
                                             <div class="mt-3">
-                                                <a href="manage-reservationdetail?action=confirm&resvId =${resv.resvId}"class="btn btn-primary ">Confirm Reservation</a>
+                                                <a href="manage-reservationdetail?action=confirm&resvId=${resv.resvId}"class="btn btn-primary ">Confirm Reservation</a>
                                             </div>
-                                            <c:if test="${resv.status == 'PENDING'}">
+                                            <c:if test="${resv.status == 'PENDING'  }">
                                                 <div class="mt-3">
                                                     <a href="#cancelappointment" class="btn btn-primary btn-danger " 
                                                        data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${resv.resvId}">
@@ -237,7 +237,7 @@
                                     </c:if>
                                 </div>
                             </div>
-                            <c:if test="${resv.status ==  'PENDING' || resv.status == 'RESCHEDULED'}">
+                            <c:if test="${resv.status ==  'PENDING' || resv.status == 'RESCHEDULING'}">
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
                                     <form action="manage-reservationdetail?action=update&resvId=${resv.resvId}" method="post">
                                         <div class="bg-white rounded shadow overflow-hidden">
@@ -248,13 +248,13 @@
                                             <div class="col-md-6 p-3">
                                                 <div class="">
                                                     <label class="form-label">Select Reservation Date: </label>
-                                                    <input required="" id="checkin-date" required="" name="resv-date" value="${resv.resvDate}" type="date"class="flatpickr flatpickr-input form-control"  >
+                                                    <input required="" id="checkin-date" required name="resv-date" value="${resv.resvDate}" type="date"class="flatpickr flatpickr-input form-control"  >
                                                 </div>
                                             </div>
                                             <div class="col-md-6 p-3">
                                                 <div class="">
                                                     <label class="form-label">Select Reservation Time:</label>
-                                                    <select id ="time"required="" name="resv-time" class="form-control department-name select2input" required="">
+                                                    <select id ="time"required="" name="resv-time" class="form-control department-name select2input" required>
                                                         <option readonly>Select Time</option>
                                                     </select>
                                                 </div>

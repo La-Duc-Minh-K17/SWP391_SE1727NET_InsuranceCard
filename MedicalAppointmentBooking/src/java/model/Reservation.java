@@ -5,6 +5,11 @@
 package model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -19,7 +24,10 @@ public class Reservation {
     private Date resvDate;
     private String resvTime;
     private String testResult;
+    private double otherCharge;
     private String status;
+    private Timestamp createdTime;
+    private Timestamp updatedTime;
     private Service service;
     private Patient patient;
 
@@ -125,5 +133,49 @@ public class Reservation {
     public void setRejectReason(String rejectReason) {
         this.rejectReason = rejectReason;
     }
-    
+
+    public double getOtherCharge() {
+        return otherCharge;
+    }
+
+    public void setOtherCharge(double otherCharge) {
+        this.otherCharge = otherCharge;
+    }
+
+    public Timestamp getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(Timestamp createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public Timestamp getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(Timestamp updatedTime) {
+        this.updatedTime = updatedTime;
+    }
+
+    public boolean checkNoticePeriod() {
+        LocalDate apptLocalDate = resvDate.toLocalDate();
+        String[] timeParts = resvTime.split(":");
+        int hour = Integer.parseInt(timeParts[0]);
+        int minute = Integer.parseInt(timeParts[1]);
+        LocalTime apptLocalTime = LocalTime.of(hour, minute);
+        LocalDateTime apptLocalDateTime = apptLocalDate.atTime(apptLocalTime);
+        LocalDateTime twentyFourHoursBefore = apptLocalDateTime.minus(24, ChronoUnit.HOURS);
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        if (currentDateTime.isBefore(twentyFourHoursBefore)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation{" + "resvId=" + resvId + ", resvNote=" + resvNote + ", rescheduleReason=" + rescheduleReason + ", rejectReason=" + rejectReason + ", resvDate=" + resvDate + ", resvTime=" + resvTime + ", testResult=" + testResult + ", otherCharge=" + otherCharge + ", status=" + status + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", service=" + service + ", patient=" + patient + '}';
+    }
+
 }

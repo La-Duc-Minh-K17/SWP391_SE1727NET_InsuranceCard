@@ -300,7 +300,7 @@ public class DoctorDAO {
         return doctorList;
     }
 
-    public void updateDoctor(int doctorId, String name, int gender, String phone, int speciality_id, String position, String description, int status, Part image) {
+    public void updateDoctor(int doctorId, String name, int gender, String phone, int speciality_id, String position, String description,  Part image) {
         PreparedStatement ps = null;
         InputStream fileImage = ImageProcessing.imageStream(image);
         String sql = "UPDATE mabs.doctors d\n"
@@ -311,8 +311,8 @@ public class DoctorDAO {
                 + "  u.phone = ?,\n"
                 + "  d.speciality_id = ?,\n"
                 + "  d.doctor_position = ?,\n"
-                + "  d.doctor_description = ?,\n"
-                + "  u.status = ? \n";
+                + "  d.doctor_description = ?\n";
+              
         if (fileImage != null) {
             sql = sql + " , u.image = ? \n";
         }
@@ -328,13 +328,13 @@ public class DoctorDAO {
             ps.setInt(4, speciality_id);
             ps.setString(5, position);
             ps.setString(6, description);
-            ps.setInt(7, status);
+           
             if (fileImage != null) {
-                ps.setBlob(8, fileImage);
-                ps.setInt(9, doctorId);
+                ps.setBlob(7, fileImage);
+                ps.setInt(8, doctorId);
 
             } else {
-                ps.setInt(8, doctorId);
+                ps.setInt(7, doctorId);
             }
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -696,4 +696,21 @@ public class DoctorDAO {
 
     }
 
+    public int countDoctor() {
+        int count = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection connection = null;
+        String sql = "select count(*) from doctors";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return count;
+    }
 }

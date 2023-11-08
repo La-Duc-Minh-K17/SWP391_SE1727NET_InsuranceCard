@@ -23,10 +23,9 @@
                     <img src="frontend/template/assets/images/doctors/profile-bg.jpg" class="img-fluid" alt="">
                 </div>
                 <ul class="sidebar-menu pt-3">
-                    <li class="sidebar-menu" >
-                        <a href="<c:url value='/admin-dashboard?action=view-all'/>"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
+   
                     <li class="sidebar-menu">
-                        <a href="<c:url value='/frontend/view/admin/admin_schedulecalendar.jsp'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>System Schedule</a></li>
+                        <a href="<c:url value='/frontend/view/admin/admin_schedulecalendar.jsp'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>Dashboard</a></li>
                     <li class="sidebar-menu">
                         <a href="<c:url value='/admin-accountlist?action=view-all'/>"><i class="uil uil-user me-2 d-inline-block"></i>Accounts</a>
                     </li>

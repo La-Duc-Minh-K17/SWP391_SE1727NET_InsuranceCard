@@ -207,7 +207,7 @@ public class UserDAO {
                 + "?,\n"
                 + "?,\n"
                 + "?,\n"
-                + "?,\n"    
+                + "?,\n"
                 + "?);   ";
         try {
             connection = dbc.getConnection();
@@ -530,5 +530,22 @@ public class UserDAO {
             System.out.println(ex);
         }
         return list;
+    }
+    public int countAccount() {
+        int count = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection connection = null;
+        String sql = "select count(*) from user_account";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return count;
     }
 }

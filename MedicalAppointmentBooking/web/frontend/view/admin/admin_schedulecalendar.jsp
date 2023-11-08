@@ -81,13 +81,101 @@
                         </ul>
                     </div>
                 </div>
-                <div class="row justify-content-center mt-100">
-                    <div class=" col-12 mt-4">
-                        <div id="calendar-container" class="card rounded border-0 shadow p-4">
-                            <div id="calendar"></div>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
+                <div class="container-fluid  mt-5">
+                    <div class="layout-specing">
+
+                        <h5 class="mb-0">Dashboard</h5>
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-4 col-md-4 mt-4">
+                                <div class="card features feature-primary rounded border-0 shadow p-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon text-center rounded-md">
+                                            <i class="uil uil-bed h3 mb-0"></i>
+                                        </div>
+                                        <div class="flex-1 ms-2">
+                                            <h5 class="mb-0">${patient}</h5>
+                                            <p class="text-muted mb-0">Patients </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-4 col-md-4 mt-4">
+                                <div class="card features feature-primary rounded border-0 shadow p-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon text-center rounded-md">
+                                            <i class="uil uil-social-distancing h3 mb-0"></i>
+                                        </div>
+                                        <div class="flex-1 ms-2">
+                                            <h5 class="mb-0">${doctor}</h5>
+                                            <p class="text-muted mb-0">Doctors</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-4 col-md-4 mt-4">
+                                <div class="card features feature-primary rounded border-0 shadow p-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon text-center rounded-md">
+                                            <i class="uil uil-social-distancing h3 mb-0"></i>
+                                        </div>
+                                        <div class="flex-1 ms-2">
+                                            <h5 class="mb-0">${service}</h5>
+                                            <p class="text-muted mb-0">Services</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-4 col-md-4 mt-4">
+                                <div class="card features feature-primary rounded border-0 shadow p-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon text-center rounded-md">
+                                            <i class="uil uil-setting h3 mb-0"></i>
+                                        </div>
+                                        <div class="flex-1 ms-2">
+                                            <h5 class="mb-0">${account}</h5>
+                                            <p class="text-muted mb-0">Accounts</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 mt-4">
+                                <div class="card features feature-primary rounded border-0 shadow p-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon text-center rounded-md">
+                                            <i class="uil uil-medkit h3 mb-0"></i>
+                                        </div>
+                                        <div class="flex-1 ms-2">
+                                            <h5 class="mb-0">${reservation}</h5>
+                                            <p class="text-muted mb-0">Reservations</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 mt-4">
+                                <div class="card features feature-primary rounded border-0 shadow p-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="icon text-center rounded-md">
+                                            <i class="uil uil-medkit h3 mb-0"></i>
+                                        </div>
+                                        <div class="flex-1 ms-2">
+                                            <h5 class="mb-0">${appointment}</h5>
+                                            <p class="text-muted mb-0">Appointments</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class=" col-12 mt-4">
+                                <div id="calendar-container" class="card rounded border-0 shadow p-4">
+                                    <div id="calendar"></div>
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div>
+                </div>
+
             </main>
         </div><!-- comment -->
     </body>

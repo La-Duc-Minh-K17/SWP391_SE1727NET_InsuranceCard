@@ -53,12 +53,12 @@ public class AdminReservation extends HttpServlet {
         if (action != null && action.equals("filter")) {
             String status = request.getParameter("status_filter");
             resvList = null;
-            if (status.equals("ALL")) {
-                response.sendRedirect("admin-reservation?action=view");
+            if (status.equals("all")) {
+                response.sendRedirect("manage-reservation?action=view");
             } else {
                 resvList = rsDAO.getFilteredReservationList(status);
             }
-            uri = "manage-reservation?action=filter&status=" + status;
+            uri = "manage-reservation?action=filter&status_filter=" + status;
             request.setAttribute("status", status);
         }
         if (resvList != null) {

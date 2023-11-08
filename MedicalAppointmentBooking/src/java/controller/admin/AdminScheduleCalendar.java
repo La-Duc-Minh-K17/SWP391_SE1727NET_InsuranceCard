@@ -49,14 +49,14 @@ public class AdminScheduleCalendar extends HttpServlet {
         for (Appointment a : apptList) {
             if (!a.getStatus().equals("REJECTED") && !a.getStatus().equals("PENDING") && !a.getStatus().equals("CANCELED")) {
                 Calendar c = new Calendar(a);
-                c.setUrl(baseUrl + "admin-appointmentdetail?action=view-detail&apptId=" + a.getApptId());
+                c.setUrl(baseUrl + "manage-appointmentdetail?action=view-detail&apptId=" + a.getApptId());
                 list.add(c);
             }
         }
         for (Reservation resv : resvList) {
             if (!resv.getStatus().equals("REJECTED") && !resv.getStatus().equals("PENDING") && !resv.getStatus().equals("CANCELED")) {
                 Calendar c = new Calendar(resv);
-                c.setUrl(baseUrl + "admin-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
+                c.setUrl(baseUrl + "manage-reservationdetail?action=view-detail&resvId=" + resv.getResvId());
                 list.add(c);
             }
         }

@@ -2,26 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+package controller.admin;
 
-
-package controller.auth;
-
+import dal.AppointmentDAO;
+import dal.DoctorDAO;
+import dal.PatientDAO;
+import dal.ReservationDAO;
+import dal.ServicesDAO;
 import dal.UserDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Timestamp;
-import model.UserAccount;
-import utils.SessionUtils;
-import utils.TimeUtil;
 
 /**
  *
  * @author Admin
  */
-public class VerificationController extends HttpServlet {
+public class DashBoard extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,31 +35,17 @@ public class VerificationController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String action = request.getParameter("action");
-        TimeUtil timeConfig = new TimeUtil();
-        UserDAO uDAO = new UserDAO();
-        if (action != null && action.equals("confirm")) {
-            UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
-            Timestamp confirmationTokenTime = user.getConfirmationTokenTime();
-            if (!timeConfig.isExpired(confirmationTokenTime)) {
-                String token = uDAO.getConfirmationToken(user);
-                String urlToken = request.getParameter("token");
-                if (token.equals(urlToken)) {
-                    uDAO.activateUserAccount(user);
-                    request.setAttribute("message", "Verify Successfully.");
-                } else {
-                    response.sendRedirect("error.jsp");
-                }
-            } else {
-                response.sendRedirect("error.jsp");
-            }
-            request.getRequestDispatcher("/login").forward(request, response);
-            return;
-        }
-        if (action != null && action.equals("verify-reset")) {
-            UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
-            request.getRequestDispatcher("frontend/view/resetpassword.jsp").forward(request, response);
-            return;
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet DashBoard</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet DashBoard at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -75,7 +61,19 @@ public class VerificationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        DoctorDAO doctorDAO = new DoctorDAO();
+        UserDAO uDAO = new UserDAO();
+        AppointmentDAO apptDAO = new AppointmentDAO();
+        ReservationDAO resvDAO = new ReservationDAO();
+        PatientDAO pDAO = new PatientDAO();
+        ServicesDAO sDAO = new ServicesDAO();
+        request.setAttribute("patient", pDAO.countPatient());
+        request.setAttribute("appointment", apptDAO.getAllAppointment().size());
+        request.setAttribute("reservation", resvDAO.getAllReservation().size());
+        request.setAttribute("service", sDAO.getAllService().size());
+        request.setAttribute("doctor", doctorDAO.countDoctor());
+        request.setAttribute("account", uDAO.countAccount());
+        request.getRequestDispatcher("frontend/view/admin/admin_schedulecalendar.jsp").forward(request, response);
     }
 
     /**
