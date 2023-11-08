@@ -62,8 +62,21 @@
                             <input type="text" name="keyword" id="searchInput" class="form-control border bg-light" placeholder="Search by name">
                             <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
                         </div>
+                        <c:choose>
+                            <c:when test="${empty sList}">
+                                <tr>
+                                    <td colspan="1" class="h-5" style="font-size: 20px;">No services found with the given name.</td>
+                                </tr>
+                            </c:when>
+                            <c:otherwise>
+                                <c:forEach items="${sList}" var="s">
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                     </form>
                 </div>
+                <div id="noServiceFound" style="display: none; color: red;">No Service found</div>
+
 
                 <div class="col-md-8 d-flex align-items-center justify-content-end">
                     <div class=" justify-content-end ">
@@ -143,20 +156,28 @@
         }
 
         function filter() {
-            var category = document.getElementById("Filter").value;
-            var sort = document.getElementById("sortSelect").value;
-            var searchInput = document.getElementById("searchInput").value;
-            var url = "manage-service?action=view-all"; // Default action
+        var category = document.getElementById("Filter").value;
+                var sort = document.getElementById("sortSelect").value;
+                var searchInput = document.getElementById("searchInput").value;
+                var url = "manage-service?action=view-all"; // Default action
 
-            if (category !== "Filter By") {
-                url = "service?action=filter&category_id=" + category;
-            } else if (searchInput.trim() !== "") {
-                url = "service?action=search&keyword=" + searchInput;
-            } else if (sort !== "Default Sort") {
-                url = "service?action=sorted&by=feename&sort=" + sort;
-            }
+                if (category !== "Filter By") {
+        url = "service?action=filter&category_id=" + category;
+        } else if (searchInput.trim() !== "") {
+        url = "service?action=search&keyword=" + searchInput;
+        } else if (sort !== "Default Sort") {
+        url = "service?action=sorted&by=feename&sort=" + sort;
+        }
 
-            window.location.href = url;
+        window.location.href = url;
+                var searchInput = document.getElementById("searchInput").value;
+                List < Service > services = searchServices(keyword);
+                if (services.isEmpty()) {
+        // No services found, include the message in the response
+        out.println("<script>document.getElementById('noServiceFound').style.display = 'block';
+        } else {
+
+        }
         }
     </script>
 
