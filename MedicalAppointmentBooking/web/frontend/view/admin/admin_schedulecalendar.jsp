@@ -168,6 +168,7 @@
                             </div>
 
                             <div class=" col-12 mt-4">
+                                <div class="h5 text-center">Schedule Calendar</div>
                                 <div id="calendar-container" class="card rounded border-0 shadow p-4">
                                     <div id="calendar"></div>
                                 </div>

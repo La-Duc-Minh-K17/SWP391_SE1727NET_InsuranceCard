@@ -8,8 +8,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Appointment Detail Page</title>
-        <link rel="shortcut icon"
-              href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
+        <link rel="shortcut icon"href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css"
               rel="stylesheet" type="text/css" />
@@ -250,7 +249,7 @@
                                 </div>
                             </div>
                         </div>
-                        <c:if test="${appt.status == 'CONFIRMED'}">
+                        <c:if test="${appt.status == 'CONFIRMED' || appt.status == 'RESCHEDULED'}">
                             <div class="card border-0 mt-4 col-lg-12 row ">
                                 <div class="col-5">
                                     <a href="<c:url value= 'doctor-appointmentdetail?action=complete&apptId=${appt.apptId}'/>"

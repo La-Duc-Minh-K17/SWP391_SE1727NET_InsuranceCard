@@ -141,7 +141,7 @@
             var url = "servicedetail?action=view-detail&id=" + serviceId + "&category_id=" + categoryId;
             window.location.href = url;
         }
-
+        
         function filter() {
             var category = document.getElementById("Filter").value;
             var sort = document.getElementById("sortSelect").value;

@@ -47,11 +47,11 @@ public class RegisterController extends HttpServlet {
             String address = request.getParameter("address");
             String dob = request.getParameter("dob");
             String confirmationToken = CodeProcessing.generateToken();
-   
             UserAccount user = new UserAccount(username, password, email, fullname, gender.equals("Male") ? 1 : 0, phone,TimeUtil.dateConverter(dob) , address, confirmationToken, timeConfig.getNow(), 0, new Role(1));
             if (uDAO.isAccountExisted(user)) {
-                request.setAttribute("error", "Account has existed !");
+                request.setAttribute("error", "Account has existed in the system !");
             } else {
+                
                 SessionUtils.getInstance().putValue(request, "user", user);
                 uDAO.addUserAccount(user);
                 String fullURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();

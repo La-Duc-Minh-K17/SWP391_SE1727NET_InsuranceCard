@@ -26,7 +26,7 @@ public class BlogDAO {
 
     DBConnection dbc = new DBConnection();
     public CategoryDAO categoryDao = new CategoryDAO();
-
+    
     public List<Blog> getAllNews() {
         List<Blog> blogsList = new ArrayList<>();
         String sql = "SELECT * FROM mabs.blogs ";
@@ -56,7 +56,6 @@ public class BlogDAO {
     }
 
     public List<Blog> getTop3News() {
-
         List<Blog> blogsList3 = new ArrayList<>();
         String sql = "SELECT * FROM mabs.blogs ORDER BY created_time DESC LIMIT 3;";
         PreparedStatement ps = null;

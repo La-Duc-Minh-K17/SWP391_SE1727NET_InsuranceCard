@@ -55,7 +55,7 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("password");
         String remember = request.getParameter("remember");
         UserAccount account = uDAO.getUserAccount(username, password);
-
+       
         if (account == null) {
             request.setAttribute("error", "Invalid username or password");
             request.getRequestDispatcher("/frontend/view/login.jsp").forward(request, response);
