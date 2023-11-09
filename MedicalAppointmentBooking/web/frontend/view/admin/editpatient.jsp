@@ -95,7 +95,7 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Patient Name</label>
-                                            <input name="fullName" id="name" type="text" class="form-control" value="${p.fullName}" required placeholder="Patient Name" oninput="validateInput(this)" required placeholder="Enter the Patient Name">
+                                            <input name="fullName" id="name" type="text" class="form-control" value="${p.fullName}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -120,13 +120,13 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Date Of Birth</label>
-                                            <input name="dob" type="date" class="form-control" value="${p.dob}" >
+                                            <input name="dob" type="date" class="form-control" value="${p.dob}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">address</label>
-                                            <input name="address" type="text" class="form-control" value="${p.address}" required placeholder="Patient Address" oninput="validateInput(this)" required placeholder="Enter the Patient Address">
+                                            <input name="address" type="text" class="form-control" value="${p.address}">
                                         </div>
                                     </div>
 
@@ -187,18 +187,6 @@
 
                 thumbnail.src = "";
             }
-            
-        }
-        function validateInput(inputElement) {
-        var inputValue = inputElement.value;
-        var pattern = /^[a-zA-Z0-9 ]*$/; // Allow letters, numbers, and spaces
-
-
-        if (!pattern.test(inputValue)) {
-            alert("Numbers and special characters are not allowed in this field.");
-            inputElement.value = inputValue.replace(/[^a-zA-Z ]/g, ''); // Remove numbers and special characters
-        }
-    
         }
     </script>
     <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>

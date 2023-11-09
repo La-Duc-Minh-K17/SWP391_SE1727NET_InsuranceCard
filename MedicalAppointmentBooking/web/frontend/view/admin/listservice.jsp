@@ -204,18 +204,17 @@
 
 
 
-                                <div class="row text-end">
-                                    <div class="col-12 mt-4">
-                                        <ul class="pagination justify-content-end mb-5 mt-3 mt-sm-0">
-                                            <c:forEach begin="1" end="${num}" var="i">
-                                                <li class="page-item ${i == page ? 'active' : ''}">
-                                                    <a class="page-link" href="${pageContext.request.contextPath}/manage-service?action=view-all&page=${i}">
-                                                        ${i}
-                                                    </a>
-                                                </li>
-                                            </c:forEach>
-                                        </ul>
-                                    </div>
+                                <div>
+                                    <ul class="pagination mb-0 mt-5">
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)"
+                                                                 aria-label="Previous">Prev</a></li>
+                                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)"
+                                                                 aria-label="Next">Next</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div><!--end col-->

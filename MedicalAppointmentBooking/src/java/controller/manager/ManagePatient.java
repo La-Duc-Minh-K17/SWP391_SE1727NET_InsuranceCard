@@ -39,11 +39,10 @@ public class ManagePatient extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             PatientDAO pDAO = new PatientDAO();
             String action = request.getParameter("action");
-            List<Patient> List = null;
-            String uri = null;
             if (action != null && action.equals("view-all")) {
-                List = pDAO.getAllPatient();
-                uri = "manage-patient?action=view-all";
+                List<Patient> pList = pDAO.getAllPatient();
+                request.setAttribute("pList", pList);
+                request.getRequestDispatcher("frontend/view/admin/listpatient.jsp").forward(request, response);
             }
             if (action != null && action.equals("view")) {
                 int id = Integer.parseInt(request.getParameter("patientId"));
@@ -74,11 +73,13 @@ public class ManagePatient extends HttpServlet {
                 response.sendRedirect("manage-patient?action=edit&patientId=" + patientId);
                 return;
             }
-
+            
             if (action != null && action.equals("search")) {
                 String search = request.getParameter("search").trim();
-                List = pDAO.searchPatientsByName(search);
-                uri = "manage-patient?action=view-all";
+                List<Patient> pList = pDAO.searchPatientsByName(search);
+                request.setAttribute("pList", pList);
+                request.getRequestDispatcher("frontend/view/admin/listpatient.jsp").forward(request, response);
+                return;
             }
             if (action != null && action.equals("status")) {
                 int patientId = Integer.parseInt(request.getParameter("patientId"));
@@ -92,26 +93,6 @@ public class ManagePatient extends HttpServlet {
                 pDAO.updatePatientStatus(patientId, newStatus);
                 response.sendRedirect("manage-patient?action=view-all");
                 return;
-            }
-            if (List != null) {
-                int page, numberpage = 10;
-                int size = List.size();
-                int num = (size % numberpage == 0 ? (size / numberpage) : ((size / numberpage) + 1));
-                String xpage = request.getParameter("page");
-                if (xpage == null) {
-                    page = 1;
-                } else {
-                    page = Integer.parseInt(xpage);
-                }
-                int start = (page - 1) * numberpage;
-                int end = Math.min(page * numberpage, size);
-
-                List<Patient> patientlist = pDAO.getListByPage(List, start, end);
-                request.setAttribute("page", page);
-                request.setAttribute("num", num);
-                request.setAttribute("url", uri);
-                request.setAttribute("pList", patientlist);
-                request.getRequestDispatcher("frontend/view/admin/listpatient.jsp").forward(request, response);
             }
         }
     }
