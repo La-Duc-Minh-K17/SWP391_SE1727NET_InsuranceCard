@@ -437,4 +437,11 @@ public class PatientDAO {
         }
         return resultList;
     }
+        public List<Patient> getListByPage(List<Patient> list, int start, int end) {
+        ArrayList<Patient> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
 }
