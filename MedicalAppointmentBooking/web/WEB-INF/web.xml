@@ -152,6 +152,10 @@
         <servlet-name>UserReservation</servlet-name>
         <servlet-class>controller.user.UserReservation</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditSetting</servlet-name>
+        <servlet-class>controller.admin.EditSetting</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -303,6 +307,10 @@
     <servlet-mapping>
         <servlet-name>UserReservation</servlet-name>
         <url-pattern>/user-reservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSetting</servlet-name>
+        <url-pattern>/admin-editsetting</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
