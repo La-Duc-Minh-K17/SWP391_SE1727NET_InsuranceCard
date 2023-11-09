@@ -304,6 +304,14 @@
         <servlet-name>UserReservation</servlet-name>
         <url-pattern>/user-reservation</url-pattern>
     </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>ChangeAccountStatus</servlet-name>
+        <url-pattern>/ChangeAccountStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageAccount</servlet-name>
+        <url-pattern>/ManageAccount</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
