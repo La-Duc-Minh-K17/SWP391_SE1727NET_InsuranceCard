@@ -75,7 +75,6 @@
                         </c:choose>
                     </form>
                 </div>
-                <div id="noServiceFound" style="display: none; color: red;">No Service found</div>
 
 
                 <div class="col-md-8 d-flex align-items-center justify-content-end">
@@ -170,15 +169,10 @@
         }
 
         window.location.href = url;
-                var searchInput = document.getElementById("searchInput").value;
-                List < Service > services = searchServices(keyword);
-                if (services.isEmpty()) {
-        // No services found, include the message in the response
-        out.println("<script>document.getElementById('noServiceFound').style.display = 'block';
-        } else {
+     
 
         }
-        }
+        
     </script>
 
 
