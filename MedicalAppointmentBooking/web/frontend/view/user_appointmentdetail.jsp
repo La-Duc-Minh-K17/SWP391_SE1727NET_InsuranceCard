@@ -184,6 +184,12 @@
                                             <p>${appt.apptNote}</p>
                                         </div>
                                     </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Reschedule Reason</label>
+                                            <p>${appt.rescheduleReason}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -202,6 +208,12 @@
                                     </div>
                                 </div>
                             </div>
+                        </c:if>
+                        <c:if test="${error != null}">
+                            <div class="alert alert-danger">${error}</div>
+                        </c:if>
+                        <c:if test="${success != null}">
+                            <div class="alert alert-success">${success}</div>
                         </c:if>
                     </div>        
                 </div>
@@ -308,7 +320,7 @@
                                 let obj = $.parseJSON(data);
                                 $.each(obj, function (key, value) {
                                     $("#time").append(
-                                            '<option value="' + value.slotTime + '">' + value.slotTime + "</option>"
+                                            '<option value="' + value + '">' + value + "</option>"
                                             );
                                 });
                                 $("select").formSelect();

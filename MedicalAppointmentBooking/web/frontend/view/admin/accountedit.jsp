@@ -37,18 +37,14 @@
         </div>
         <!-- Loader -->
         <div class="page-wrapper doctris-theme toggled">
-
-            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
-
-            <!-- sidebar-wrapper  -->
-            <!-- Start Page Content -->
+            <jsp:include page="/frontend/common/admin_side_bar.jsp" />
             <main class="page-content">  
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
                         <div class="d-flex align-items-center">
                             <a href="#" class="logo-icon">
-                                <img src="../assets/images/logo-icon.png" height="30" class="small" alt="">
-                                <span class="big">
+                                <img src="frontend/template/assets/images/logo-icon.png" height="30" class="small" alt="">
+                                <span class="">
                                     <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
                                     <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                                 </span>
@@ -62,21 +58,18 @@
                                 <div class="dropdown dropdown-primary">
                                     <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                            src="../assets/images/doctors/01.jpg"
+                                            src="data:image/jpg;base64,${sessionScope.user.image}"
                                             class="avatar avatar-ex-small rounded-circle" alt=""></button>
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                          style="min-width: 200px;">
                                         <a class="dropdown-item d-flex align-items-center text-dark"
-                                           <img src="../assets/images/doctors/01.jpg"
+                                           <img src="data:image/jpg;base64,${sessionScope.user.image}"
                                            class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                             <div class="flex-1 ms-2">
-                                                <span class="d-block mb-1">Calvin Carlo</span>
-                                                <small class="text-muted">Orthopedic</small>
+                                                <span class="d-block mb-1">${sessionScope.user.fullName}</span>
+                                                <small class="text-muted"></small>
                                             </div>
                                         </a>
-                                        <a class="dropdown-item text-dark" href="dr-profile.html"><span
-                                                class="mb-0 d-inline-block me-1"><i
-                                                    class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
                                         <div class="dropdown-divider border-top"></div>
                                         <a class="dropdown-item text-dark" href="lock-screen.html"><span
                                                 class="mb-0 d-inline-block me-1"><i
@@ -87,7 +80,6 @@
                         </ul>
                     </div>
                 </div>
-
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <div class="col-12 mt-4">
@@ -95,7 +87,7 @@
                                 <div class="p-4 border-bottom">
                                     <h5 class="mb-0"> Update Account  </h5>
                                 </div>
-                                <form style="padding: 20px;" action="AccountDetail" method="post" id="searchform" class="searchform">
+                                <form style="padding: 20px;" action="admin-accountdetail" method="post" id="searchform" class="searchform">
                                     <div class="row align-content-center justify-content-center">
                                         <div class="col-xl-6 col-md-6 p-1">
                                             <label>Id:</label>
@@ -132,7 +124,7 @@
                                         <div class="col-xl-6 col-md-6 p-1">
                                             <label>Gender:</label>
                                             <p></p>
-                                            <input type="radio" name="gender"  ${acc.status == 1 ?"checked":""} value="1" id="gender" checked="" > Male
+                                            <input type="radio" name="gender"  ${acc.status == 1 ?"checked":""} value="1" id="gender"  > Male
                                             <input type="radio" name="gender"  ${acc.status == 0 ?"checked":""} value="0" id="gender"  > Female
                                         </div>
                                         <div class="col-xl-6 col-md-6 p-1">

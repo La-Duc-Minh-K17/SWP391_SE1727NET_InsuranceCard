@@ -75,7 +75,7 @@ public class PatientDAO {
             int affectedRow = ps.executeUpdate();
             if (affectedRow == 1) {
                 try (
-                    ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                         ResultSet generatedKeys = ps.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         int generatedId = generatedKeys.getInt(1);
                         return generatedId;
@@ -437,11 +437,32 @@ public class PatientDAO {
         }
         return resultList;
     }
+
         public List<Patient> getListByPage(List<Patient> list, int start, int end) {
         ArrayList<Patient> arr = new ArrayList<>();
         for (int i = start; i < end; i++) {
             arr.add(list.get(i));
         }
         return arr;
+        }
+
+    public int countPatient() {
+        int count = 0;
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        String sql = "select count(*) from patients";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return count;
+
     }
-}
+

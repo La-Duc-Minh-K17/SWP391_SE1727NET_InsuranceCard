@@ -67,6 +67,7 @@ public class BookingController extends HttpServlet {
                 }
                 patient.setPatientId(patientId);
                 Appointment appt = new Appointment(apptNote, TimeUtil.dateConverter1(apptDate), apptTime, "PENDING", chosenDoctor, patient);
+                appt.setCreatedTime(TimeUtil.getNow());
                 aDAO.insertNewAppointment(appt);
                 response.sendRedirect("frontend/view/booking_success.jsp");
                 return;
@@ -89,6 +90,7 @@ public class BookingController extends HttpServlet {
                 }
                 patient.setPatientId(patientId);
                 Reservation resv = new Reservation(apptNote, TimeUtil.dateConverter1(apptDate), apptTime, "PENDING", chosenService, patient);
+                resv.setCreatedTime(TimeUtil.getNow());
                 rDAO.insertNewReservation(resv);
                 response.sendRedirect("frontend/view/booking_success.jsp");
                 return;

@@ -36,7 +36,7 @@
         </div>
         <!-- Loader -->
         <div class="page-wrapper doctris-theme toggled">
-            <jsp:include page="/frontend/common/admin_side_bar.jsp" />
+            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
             <main class="page-content">  
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
@@ -57,21 +57,20 @@
                                 <div class="dropdown dropdown-primary">
                                     <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                            src="/assets/images/doctors/01.jpg"
+                                            src="data:image/jpg;base64,${sessionScope.user.image}"
                                             class="avatar avatar-ex-small rounded-circle" alt=""></button>
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                          style="min-width: 200px;">
                                         <a class="dropdown-item d-flex align-items-center text-dark"
-                                           <img src="../assets/images/doctors/01.jpg"
+                                           <img src="data:image/jpg;base64,${sessionScope.user.image}"
                                            class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                             <div class="flex-1 ms-2">
                                                 <span class="d-block mb-1">${sessionScope.user.fullName}</span>
                                                 <small class="text-muted"></small>
                                             </div>
                                         </a>
-                                       
                                         <div class="dropdown-divider border-top"></div>
-                                        <a class="dropdown-item text-dark" href="lock-screen.html"><span
+                                        <a class="dropdown-item text-dark" href="<c:url value='/home?action=logout'/>"><span
                                                 class="mb-0 d-inline-block me-1"><i
                                                     class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                                     </div>
@@ -92,19 +91,20 @@
                                             <option value="all">All</option>
                                             <option value="CONFIRMED">CONFIRMED</option>
                                             <option value="PENDING">PENDING</option>
+                                            <option value="RESCHEDULING">RESCHEDULING</option>
                                             <option value="RESCHEDULED">RESCHEDULED</option>
                                             <option value="COMPLETED">COMPLETED</option>
-                                            <option value="CANCELED">CANCELED</option>
+                                            <option value="CANCELLED">CANCELLED</option>
+                                            <option value="CANCELLING">CANCELLING</option>
                                             <option value="FOLLOW_UP">FOLLOW-UP</option>    
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="col-xl-6 col-md-6">
                                 <div class="search-bar d-lg-block" style="padding-top :0">
                                     <div id="search" class="menu-search ">
-                                        <form action="<c:url value='/admin-appointment?action=search'/>" role="search" method="post"
+                                        <form action="<c:url value='/manage-appointment?action=search'/>" role="search" method="post"
                                               id="searchform" class="searchform">
                                             <div>
                                                 <input type="text" class="form-control border rounded-pill" name="search" id="search" placeholder="Search patient name">
@@ -172,7 +172,7 @@
                                                                         <td class="p-3">${appt.status}</td>
                                                                         <td class="p-3">
                                                                             <div class="d-flex align-items-center">
-                                                                                <a href="admin-appointmentdetail?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
+                                                                                <a href="manage-appointmentdetail?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
                                                                                     Details</a>
                                                                                 <a href="#cancelappointment" class="btn btn-primary btn-sml btn-soft-danger" 
                                                                                    data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
@@ -185,7 +185,6 @@
                                                         </table>
                                                     </div>
                                                 </div>
-
                                                 <c:set var="page" value="${page}"/>
                                                 <div class="row text-center">
                                                     <div class="col-12 mt-4">
@@ -198,6 +197,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                 <c:if test="${empty apptList}" >
+                                                    <div class=" text-center alert alert-primary h4" role="alert"> No appointments . </div>
+                                                </c:if>
                                             </div>
                                         </div><!--end col-->
                                     </div>
@@ -212,7 +214,7 @@
 
         <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <form action="<c:url value='/admin-appointment?action=delete'></c:url>" method="post">
+                <form action="<c:url value='/manage-appointment?action=delete'></c:url>" method="post">
                         <div class="modal-content">
                             <div class="modal-body py-5">
                                 <div class="text-center">
@@ -241,7 +243,7 @@
                     cancel_appt.value = dataId;
                 }
                 function filter() {
-                    const url = 'http://localhost:8080/MedicalAppointmentBooking/admin-appointment?action=filter&status_filter=';
+                    const url = 'http://localhost:8080/MedicalAppointmentBooking/manage-appointment?action=filter&status_filter=';
                     const filterElement = document.getElementById("status_filter").value;
                     window.location.href = url + filterElement;
                 }

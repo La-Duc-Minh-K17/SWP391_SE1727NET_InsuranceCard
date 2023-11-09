@@ -29,7 +29,7 @@ public class BlogDAO {
 
     public List<Blog> getAllNews() {
         List<Blog> blogsList = new ArrayList<>();
-        String sql = "SELECT *FROM mabs.blogs ";
+        String sql = "SELECT * FROM mabs.blogs ";
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet result = null;
@@ -127,7 +127,7 @@ public class BlogDAO {
     public List<Blog> getAllNewsBySearch2(int categoryId, String sort) {
         List<Blog> blogsList = new ArrayList<>();
         String sql;
-        if ("all".equals(sort)) {
+        if("all".equals(sort)) {
             sql = "SELECT * FROM mabs.blogs  WHERE blog_category_id = ?";
         } else if ("newest".equals(sort)) {
             sql = "SELECT * FROM mabs.blogs WHERE blog_category_id = ? ORDER BY created_time DESC";

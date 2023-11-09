@@ -13,7 +13,6 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import model.UserAccount;
@@ -42,8 +41,8 @@ public class Authorization implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
         String url = request.getRequestURI() + "?" + request.getQueryString();
-
-        if (url.contains("manage") || url.contains("doctor") || url.contains("admin")) {
+        System.out.println();
+        if (url.contains("/manage") || url.contains("/doctor") || url.contains("/admin")) {
             if (user != null) {
                 if (url.contains("manage")) {
                     if (user.getRole().getRole_name().equals(RoleProp.MANAGER)) {
@@ -63,11 +62,12 @@ public class Authorization implements Filter {
                     } else {
                         response.sendRedirect(request.getContextPath() + ERROR401);
                     }
-                } 
+                }
             } else {
                 response.sendRedirect(request.getContextPath() + LOGIN);
             }
-        } else if (url.contains("user")) {
+        } else if (url.contains("/booking") || url.contains("book")) {
+
             if (user != null) {
                 if (user.getRole().getRole_name().equals(RoleProp.PATIENT)) {
                     filterChain.doFilter(servletRequest, servletResponse);
@@ -77,12 +77,16 @@ public class Authorization implements Filter {
             } else {
                 response.sendRedirect(request.getContextPath() + LOGIN);
             }
-        } else if (url.contains("booking") ) {
+        } else if (url.contains("/user")) {
             if (user != null) {
-                if (user.getRole().getRole_name().equals(RoleProp.PATIENT)) {
+                if (url.contains("/user-profile")) {
                     filterChain.doFilter(servletRequest, servletResponse);
                 } else {
-                    response.sendRedirect(request.getContextPath() + ERROR401);
+                    if (user.getRole().getRole_name().equals(RoleProp.PATIENT)) {
+                        filterChain.doFilter(servletRequest, servletResponse);
+                    } else {
+                        response.sendRedirect(request.getContextPath() + ERROR401);
+                    }
                 }
             } else {
                 response.sendRedirect(request.getContextPath() + LOGIN);
@@ -124,7 +128,6 @@ public class Authorization implements Filter {
         return (sb.toString());
     }
 
-  
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {

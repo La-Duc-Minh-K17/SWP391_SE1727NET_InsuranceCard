@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package controller.admin;
 
 import dal.SettingDAO;
@@ -13,44 +14,45 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import static java.lang.System.out;
 import java.util.ArrayList;
+import model.Blog_Category;
+import model.Role;
+import model.Service_Category;
 import model.Setting;
+import model.Speciality;
 
 /**
  *
  * @author DELL
  */
-public class SettingList extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+public class EditSetting extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SettingList</title>");
+            out.println("<title>Servlet EditSetting</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SettingList at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditSetting at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -58,18 +60,15 @@ public class SettingList extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        SettingDAO st = new SettingDAO();
+    throws ServletException, IOException {
+       SettingDAO st = new SettingDAO();
         ArrayList<Setting> settings = st.list();
-        out.println(settings);
         request.setAttribute("settings", settings);
         request.getRequestDispatcher("frontend/view/admin/settingList.jsp").forward(request, response);
-        
-    }
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -77,35 +76,55 @@ public class SettingList extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        
-        String term = request.getParameter("search");
-        String type = request.getParameter("searchType");
-
-        SettingDAO st = new SettingDAO();
-        ArrayList<Setting> settings = new ArrayList<>();
-        if (type.equalsIgnoreCase("value")) {
-            type = "role_name";
-        }
-        if (type.equalsIgnoreCase("description")) {
-            type = "role_description";
-        }
-        if (!type.isEmpty() && type.equalsIgnoreCase("status")) {
-            settings = st.getSettingbyStatus(Integer.parseInt(term));
-        } else if (!type.isEmpty()) {
-            settings = st.getSetting(type, term);
+    throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String editSettingType = request.getParameter("editSettingType");
+        String editSettingValue = request.getParameter("editSettingValue");
+        String editSettingDescription = request.getParameter("editSettingDescription");
+        String editSettingStatus = request.getParameter("editSettingStatus");
+        int status;
+        if (editSettingStatus.equalsIgnoreCase("Active")) {
+            status = 1;
         } else {
-            settings = st.getSettingAllType(term);
+            status = 0;
         }
-        request.setAttribute("settings", settings);
-        request.getRequestDispatcher("frontend/view/admin/settingList.jsp").forward(request, response);
+        SettingDAO db = new SettingDAO();
 
+        if (editSettingType.equalsIgnoreCase("user")) {
+            Role role = new Role();
+            role.setRole_name(editSettingValue);
+            role.setRole_description(editSettingDescription);
+            role.setStatus(status);
+            db.updateRole(role,id);
+        } else if (editSettingType.equalsIgnoreCase("speciality")) {
+            Speciality spe = new Speciality();
+            spe.setSpeName(editSettingValue);
+            spe.setSpeDescription(editSettingDescription);
+            spe.setSpeStatus(status);
+            db.updateSpeciality(spe,id);
+        } else if (editSettingType.equalsIgnoreCase("service")) {
+            Service_Category service = new Service_Category();
+            service.setName(editSettingValue);
+            service.setDescription(editSettingDescription);
+            service.setStatus(status);
+            db.updateService(service,id);
+        } else if (editSettingType.equalsIgnoreCase("blog")) {
+            Blog_Category blog = new Blog_Category();
+            blog.setName(editSettingValue);
+            blog.setDescription(editSettingDescription);
+            blog.setStatus(status);
+            db.updateBlog(blog,id);
+        }
+        SettingDAO st = new SettingDAO();
+        ArrayList<Setting> settings = st.list();
+        request.setAttribute("settings", settings);
+        
+        request.getRequestDispatcher("frontend/view/admin/settingList.jsp").forward(request, response);
+        
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

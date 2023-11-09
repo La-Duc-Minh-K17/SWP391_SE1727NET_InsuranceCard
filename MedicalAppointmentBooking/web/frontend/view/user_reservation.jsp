@@ -91,10 +91,11 @@
                                                         <option value="all">All</option>
                                                         <option value="CONFIRMED">CONFIRMED</option>
                                                         <option value="PENDING">PENDING</option>
+                                                        <option value="RESCHEDULING">RESCHEDULING</option>
                                                         <option value="RESCHEDULED">RESCHEDULED</option>
                                                         <option value="COMPLETED">COMPLETED</option>
                                                         <option value="CANCELED">CANCELED</option>
-                                                        <option value="REJECTED">REJECTED</option>
+                                                        <option value="RESCHEDULING">CANCELLING</option>
                                                         <option value="FOLLOW_UP">FOLLOW-UP</option>    
                                                     </select>
                                                 </div>

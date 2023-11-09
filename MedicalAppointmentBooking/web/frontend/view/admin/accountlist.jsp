@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Medical Booking Page</title>
 
         <!-- favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico.png">
@@ -23,7 +23,6 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
-
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
     </head>
     <body>
@@ -35,13 +34,8 @@
                 </div>
             </div>
         </div>
-        <!-- Loader -->
         <div class="page-wrapper doctris-theme toggled">
-
-            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
-
-            <!-- sidebar-wrapper  -->
-            <!-- Start Page Content -->
+            <jsp:include page="/frontend/common/admin_side_bar.jsp" />
             <main class="page-content">  
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
@@ -98,7 +92,7 @@
                                 <div class="p-4 border-bottom">
                                     <h5 class="mb-0">Account List</h5>
                                 </div>
-                                <form style="padding: 20px;" action="ManageAccount" method="get" id="searchform" class="searchform">
+                                <form style="padding: 20px;" action="admin-accountlist" method="get" id="searchform" class="searchform">
                                     <div class="row align-content-center">
                                         <div class="col-xl-3 col-md-3">
                                             <div class="card component-wrapper border-0 rounded shadow">

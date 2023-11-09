@@ -24,7 +24,6 @@
 
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
         <script type="text/javascript" src="<c:url value='https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js'/>"></script>
-
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/jquery.min.js"></script>
     </head>
     <body>
@@ -109,7 +108,7 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Content</label>
-                                            <textarea id="content" name="content"row="50" cols="50" style="min-height: 300px;" class="form-control">${blog.content} </textarea>
+                                            <textarea id="content" name="content"row="5" cols="5" style="min-height: 300px;" class="form-control">${blog.content} </textarea>
                                         </div>
                                     </div>
                                 </div>
