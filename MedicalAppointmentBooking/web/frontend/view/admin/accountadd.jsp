@@ -141,6 +141,7 @@
 
                                         <div class="col-xl-12 col-md-12">
                                             <button class="btn btn-primary" type="submit" >Add</button>
+                                            <a href="<c:url value='/admin-accountlist'/>" class="btn btn-primary ">Back</a>
                                         </div>
 
                                     </div><!--end row-->
