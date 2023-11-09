@@ -31,26 +31,22 @@ public class ManageServices extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             ServicesDAO sDAO = new ServicesDAO();
             String action = request.getParameter("action");
+            List<Service> List = null;
+            String uri = null;
             request.setAttribute("cateList", sDAO.getAllServiceCategory());
             if (action != null && action.equals("view-all")) {
-                List<Service> serviceList = sDAO.getAllService();
-                request.setAttribute("sList", serviceList);
-                request.getRequestDispatcher("frontend/view/admin/listservice.jsp").forward(request, response);
-                return;
+                List = sDAO.getAllService();
+                uri = "manage-service?action=view-all";
             }
             if (action != null && action.equals("filter")) {
                 int cateId = Integer.parseInt(request.getParameter("category_id"));
-                ArrayList<Service> serviceList = sDAO.getServiceByCategoryID(cateId);
-                request.setAttribute("sList", serviceList);
-                request.getRequestDispatcher("frontend/view/admin/listservice.jsp").forward(request, response);
-                return;
+                List = sDAO.getServiceByCategoryID(cateId);
+                uri = "/manage-service?action=filter&category_id=" + cateId;
             }
             if (action != null && action.equals("search")) {
                 String search = request.getParameter("search").trim();
-                List<Service> sList = sDAO.searchServicesByName(search);
-                request.setAttribute("sList", sList);
-                request.getRequestDispatcher("frontend/view/admin/listservice.jsp").forward(request, response);
-                return;
+                List = sDAO.searchServicesByName(search);
+                uri = "manage-service?action=search" + search;
             }
             if (action != null && action.equals("edit")) {
                 int id = Integer.parseInt(request.getParameter("service_id"));
@@ -108,10 +104,29 @@ public class ManageServices extends HttpServlet {
                 response.sendRedirect("manage-service?action=view-all");
                 return;
             }
+            if (List != null) {
+                int page, numberpage = 10;
+                int size = List.size();
+                int num = (size % numberpage == 0 ? (size / numberpage) : ((size / numberpage) + 1));
+                String xpage = request.getParameter("page");
+                if (xpage == null) {
+                    page = 1;
+                } else {
+                    page = Integer.parseInt(xpage);
+                }
+                int start = (page - 1) * numberpage;
+                int end = Math.min(page * numberpage, size);
 
+                List<Service> servicelist = sDAO.getListByPage(List, start, end);
+                request.setAttribute("page", page);
+                request.setAttribute("num", num);
+                request.setAttribute("url", uri);
+                request.setAttribute("sList", servicelist);
+                request.getRequestDispatcher("frontend/view/admin/listservice.jsp").forward(request, response);
         }
 
         
+    }
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
