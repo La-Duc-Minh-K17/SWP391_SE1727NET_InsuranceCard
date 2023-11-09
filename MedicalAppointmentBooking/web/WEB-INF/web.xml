@@ -280,17 +280,14 @@
         <servlet-name>AdminScheduleCalendar</servlet-name>
         <url-pattern>/admin-calendar</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ChangeAccountStatus</servlet-name>
-        <url-pattern>/ChangeAccountStatus</url-pattern>
-    </servlet-mapping>
+   
     <servlet-mapping>
         <servlet-name>ManageAccount</servlet-name>
         <url-pattern>/admin-accountlist</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountAdd</servlet-name>
-        <url-pattern>/admin-addaccount</url-pattern>
+        <url-pattern>/AccountAdd</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountDetail</servlet-name>
