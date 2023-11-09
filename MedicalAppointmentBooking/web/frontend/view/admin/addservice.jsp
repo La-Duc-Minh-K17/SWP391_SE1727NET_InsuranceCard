@@ -90,6 +90,9 @@
                                         <img class="rounded" height="20%" width="30%" alt="Thumb image" id="thumbImage"  src="data:image/jpg;base64,${blog.image}" />
                                     </div>
                                 </div>
+                                <div id="imageUploadError" style="color: red; display: none;">
+                                    Please choose an image file.
+                                </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="col-lg-12">
@@ -103,7 +106,7 @@
                                                 <label class="form-label">Price</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text">$</span>
-                                                    <input name="service_fee" type="text" class="form-control" value="${s.fee}" required placeholder="Service Fee">
+                                                    <input name="service_fee" type="text" class="form-control" value="${s.fee}" required placeholder="Service Fee" oninput="validateInput(this)" pattern="^[0-9.]*$" required placeholder="Enter the Service Fee">
                                                 </div>
                                             </div>
                                         </div>
@@ -165,14 +168,12 @@
         </div>
     </body>
     <script>
-
-
-        function displayThumbnail() {
-            const input = document.getElementById("uploadfile");
+        function displayThumbnail(input) {
             const thumbnail = document.getElementById("thumbImage");
+            const errorText = document.getElementById("imageUploadError");
 
-            // Check if a file has been selected
             if (input.files && input.files[0]) {
+                errorText.style.display = "none";
                 const reader = new FileReader();
 
                 reader.onload = function (e) {
@@ -181,31 +182,50 @@
 
                 reader.readAsDataURL(input.files[0]);
             } else {
-
-                thumbnail.src = "";
+                errorText.style.display = "block";
+                thumbnail.src = ""; // Clear the thumbnail
             }
-            function validateForm() {
-        var serviceName = document.getElementById("name").value;
-        var serviceFee = document.getElementById("service_fee").value;
-        var serviceDescription = document.getElementById("service_description").value;
-        var serviceDetails = document.getElementById("service_details").value;
-
-        if (serviceName === "" || serviceFee === "" || serviceDescription === "" || serviceDetails === "") {
-            alert("Please fill in all the required fields.");
-            return false; // Prevent form submission
         }
 
-        // You can add additional validation logic here if needed
+        function validateForm() {
+            var serviceName = document.getElementById("name").value;
+            var serviceFee = document.getElementById("service_fee").value;
+            var serviceDescription = document.getElementById("service_description").value;
+            var serviceDetails = document.getElementById("service_details").value;
 
-        return true; // Allow form submission
-    }
+            if (serviceName === "" || serviceDescription === "" || serviceDetails === "") {
+                alert("Please fill in all the required fields.");
+                return false; // Prevent form submission
+            }
+
+            // Check if serviceFee is a valid number using a regular expression
+            var pricePattern = /^\d+(\.\d{1,2})?$/; // Allows positive numbers with up to two decimal places
+            if (!pricePattern.test(serviceFee)) {
+                // Display the price validation error message
+                document.getElementById("priceValidationError").style.display = "block";
+                return false; // Prevent form submission
+            }
+
+            // Check if an image file is selected
+            const input = document.getElementById("uploadfile");
+            if (!input.files || !input.files[0]) {
+                document.getElementById("imageUploadError").style.display = "block";
+                alert("Please fill in all the required fields.");
+                return false; // Prevent form submission
+            }
+
+            // You can add additional validation logic here if needed
+
+            return true; // Allow form submission
         }
     </script>
-    <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
-    <!-- simplebar -->
-    <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>
-    <!-- Icons -->
-    <script src="${pageContext.request.contextPath}/frontend/template/assets/js/feather.min.js"></script>
-    <!-- Main Js -->
-    <script src="${pageContext.request.contextPath}/frontend/template/assets/js/app.js"></script><
+
+</script>
+<script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
+<!-- simplebar -->
+<script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>
+<!-- Icons -->
+<script src="${pageContext.request.contextPath}/frontend/template/assets/js/feather.min.js"></script>
+<!-- Main Js -->
+<script src="${pageContext.request.contextPath}/frontend/template/assets/js/app.js"></script><
 </html>

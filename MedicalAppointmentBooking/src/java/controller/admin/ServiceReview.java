@@ -6,14 +6,10 @@ package controller.admin;
 
 import dal.ServicesDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import static java.lang.System.out;
-import java.util.List;
-import model.Doctor;
 
 /**
  *
@@ -36,7 +32,6 @@ public class ServiceReview extends HttpServlet {
         ServicesDAO sv = new ServicesDAO();
         request.setAttribute("serviceList", sv.getAllService());
         if (action != null && action.equals("view-all")) {
-            
             request.setAttribute("review", sv.getServiceReview());
             request.getRequestDispatcher("frontend/view/servicereview.jsp").forward(request, response);
             return;

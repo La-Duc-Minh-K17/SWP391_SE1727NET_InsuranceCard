@@ -14,6 +14,8 @@ public class ApptStatus {
     public static final String PENDING = "PENDING";
     public static final String CONFIRMED = "CONFIRMED";
     public static final String RESCHEDULED = "RESCHEDULED";
-    public static final String CANCELED = "CANCELED";
+    public static final String CANCELLED = "CANCELLED";
+    public static final String RESCHEDULING = "RESCHEDULING";
+    public static final String CANCELLING = "CANCELLING";
     public static final String REJECTED = "REJECTED";
 }

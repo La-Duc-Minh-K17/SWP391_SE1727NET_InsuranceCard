@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Reservation;
 import model.UserAccount;
+import resource.ApptStatus;
 import utils.SessionUtils;
 import utils.TimeUtil;
 
@@ -55,20 +56,35 @@ public class UserReservation extends HttpServlet {
             String reason = request.getParameter("reschedule_reason");
             int apptId = Integer.parseInt(request.getParameter("reschedule_appointment"));
             Reservation resv = resvDAO.getReservationById(apptId);
-            resv.setRescheduleReason(reason);
-            resv.setResvDate(TimeUtil.dateConverter1(date));
-            resv.setResvTime(time);
-            resv.setStatus("RESCHEDULED");
-            resvDAO.rescheduleReservationForPatient(resv);
-            response.sendRedirect("user-appointment?action=view-detail&apptId=" + resv.getResvId());
+
+            if (resvDAO.checkLimitedTime(resv, ApptStatus.RESCHEDULED, ApptStatus.RESCHEDULING) && resv.checkNoticePeriod()) {
+                resv.setRescheduleReason(reason);
+                resv.setResvDate(TimeUtil.dateConverter1(date));
+                resv.setResvTime(time);
+                resv.setUpdatedTime(TimeUtil.getNow());
+                resv.setOtherCharge(resv.getService().getFee() * 0.1);
+                resv.setStatus(ApptStatus.RESCHEDULING);
+                resvDAO.rescheduleReservationForPatient(resv);
+                response.sendRedirect("user-reservation?action=view-detail&resvId=" + resv.getResvId());
+            } else {
+                request.setAttribute("error", "You cannot reschedule now. Please check again our policy or contact us for further support.");
+                request.getRequestDispatcher("user-reservation?action=view-detail&resvId=" + resv.getResvId()).forward(request, response);
+
+            }
             return;
         }
         if (action != null && action.equals("cancel")) {
             int resvId = Integer.parseInt(request.getParameter("cancel_appointment"));
             Reservation resv = resvDAO.getReservationById(resvId);
-            resv.setStatus("CANCELED");
-            resvDAO.updateStatus(resv);
-            response.sendRedirect("user-reservation?action=view-detail&apptId=" + resv.getResvId());
+            if (resv.checkNoticePeriod() && resvDAO.checkLimitedTime(resv, ApptStatus.CANCELLED, ApptStatus.CANCELLING)) {
+                resv.setStatus(ApptStatus.CANCELLING);
+                resvDAO.updateStatus(resv);
+                response.sendRedirect("user-reservation?action=view-detail&resvId=" + resv.getResvId());
+            } else {
+                request.setAttribute("error", "You cannot cancel now. Please check again our policy or contact us for further support.");
+                request.getRequestDispatcher("user-reservation?action=view-detail&resvId=" + resv.getResvId()).forward(request, response);
+
+            }
             return;
         }
         if (action != null && action.equals("filter")) {

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.admin;
+package controller.manager;
 
 import dal.AppointmentDAO;
 import dal.DoctorDAO;
@@ -18,6 +18,7 @@ import utils.EmailSending;
 import utils.TimeUtil;
 import dal.SpecialityDAO;
 import model.Speciality;
+import resource.ApptStatus;
 
 /**
  *
@@ -40,6 +41,7 @@ public class AdminAppointmentDetail extends HttpServlet {
         AppointmentDAO apptDAO = new AppointmentDAO();
         SpecialityDAO speDAO = new SpecialityDAO();
         DoctorDAO dDAO = new DoctorDAO();
+
         if (action != null && action.equals("view-detail")) {
             int apptId = Integer.parseInt(request.getParameter("apptId"));
             List<Doctor> doctorList = null;
@@ -67,26 +69,32 @@ public class AdminAppointmentDetail extends HttpServlet {
             Doctor d = dDAO.getDoctorById(doctorId);
             appointment.setDoctor(d);
             apptDAO.rescheduleAppointment(appointment);
-            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
+            response.sendRedirect("manage-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
             return;
-        } if (action != null && action.equals("remove")) {  
+        }
+        if (action != null && action.equals("remove")) {
             int apptId = Integer.parseInt(request.getParameter("apptId"));
             Appointment appointment = apptDAO.getAppointmentById(apptId);
             appointment.setApptDate(null);
             appointment.setApptTime("");
             appointment.setDoctor(null);
             apptDAO.rescheduleAppointment(appointment);
-            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
+            response.sendRedirect("manage-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
             return;
         }
         if (action != null && action.equals("confirm")) {
             int apptId = Integer.parseInt(request.getParameter("apptId"));
             Appointment appointment = apptDAO.getAppointmentById(apptId);
-            appointment.setStatus("CONFIRMED");
-            System.out.println(appointment);
+            if (appointment.getStatus().equals(ApptStatus.RESCHEDULING)) {
+                appointment.setStatus(ApptStatus.RESCHEDULED);
+            } else if (appointment.getStatus().equals(ApptStatus.CANCELLING)) {
+                appointment.setStatus(ApptStatus.CANCELLED);
+            } else {
+                appointment.setStatus(ApptStatus.CONFIRMED);
+            }
             apptDAO.updateStatus(appointment);
             EmailSending.sendReminderEmail(appointment);
-            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
+            response.sendRedirect("manage-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
             return;
         }
         if (action != null && action.equals("reject")) {
@@ -96,7 +104,8 @@ public class AdminAppointmentDetail extends HttpServlet {
             appointment.setStatus("REJECTED");
             appointment.setRejectReason(reject_reason);
             apptDAO.updateStatus(appointment);
-            response.sendRedirect("admin-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
+            EmailSending.sendRejectEmail(appointment);
+            response.sendRedirect("manage-appointmentdetail?action=view-detail&apptId=" + appointment.getApptId());
             return;
         }
     }

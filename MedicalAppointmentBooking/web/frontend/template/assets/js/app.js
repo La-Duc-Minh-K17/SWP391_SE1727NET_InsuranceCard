@@ -314,3 +314,14 @@ function validateEmail(input) {
         input.setCustomValidity(""); // Clear any custom validation message
     }
 }
+
+function validateName(input) {
+    let name = input.value;
+    let regex = /^[a-zA-Z\s]+$/;
+    
+    if (!regex.test(name)) {
+        input.setCustomValidity("Name should contain only letters and white spaces.");
+    } else {
+        input.setCustomValidity(""); 
+    }
+}

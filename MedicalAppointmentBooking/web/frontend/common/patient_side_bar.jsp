@@ -11,16 +11,14 @@
                 <ul class="sidebar-menu pt-3 " style="list-style: none">
                     <li class="sidebar-menu side" >
                         <a href="<c:url value='/user-profile?action=view'/>"><i class="uil uil-dashboard me-2 d-inline-block"></i>My Profile</a></li>
-                    
+
                     <li class="sidebar-menu">
                         <a href="<c:url value='/user-appointment?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>My Appointment </a>
                     </li>
                     <li class="sidebar-menu">
                         <a href="<c:url value='/user-reservation?action=view'/>"><i class="uil uil-calendar-alt me-2 d-inline-block"></i>My Reservation</a>
                     </li>
- 
                 </ul>
-
             </div>
         </nav>
     </body>

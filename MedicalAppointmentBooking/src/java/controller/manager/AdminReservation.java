@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.admin;
+package controller.manager;
 
 import dal.ReservationDAO;
 import java.io.IOException;
@@ -38,27 +38,27 @@ public class AdminReservation extends HttpServlet {
         if (action != null && action.equals("cancel")) {
             int resvId = Integer.parseInt(request.getParameter("reservation_canceled"));
             rsDAO.deleteRecord(resvId);
-            response.sendRedirect("admin-reservation?action=view");
+            response.sendRedirect("manage-reservation?action=view");
             return;
         }
         if (action != null && action.equals("view")) {
             resvList = rsDAO.getAllReservation();
-            uri = "admin-reservation?action=view";
+            uri = "manage-reservation?action=view";
         }
         if (action != null && action.equals("search")) {
             String search = request.getParameter("search");
             resvList = rsDAO.searchReservationByPatientName(search);
-            uri = "admin-reservation?action=search&search=" + search;
+            uri = "manage-reservation?action=search&search=" + search;
         }
         if (action != null && action.equals("filter")) {
             String status = request.getParameter("status_filter");
             resvList = null;
-            if (status.equals("ALL")) {
-                response.sendRedirect("admin-reservation?action=view");
+            if (status.equals("all")) {
+                response.sendRedirect("manage-reservation?action=view");
             } else {
                 resvList = rsDAO.getFilteredReservationList(status);
             }
-            uri = "admin-reservation?action=filter&status=" + status;
+            uri = "manage-reservation?action=filter&status_filter=" + status;
             request.setAttribute("status", status);
         }
         if (resvList != null) {

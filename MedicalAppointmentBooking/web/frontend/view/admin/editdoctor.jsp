@@ -104,7 +104,7 @@
                                                         <td><input id="" name="gender" ${doctor.gender== 1?"checked":""} value="1" type="radio" class="form-check-input"
                                                                    checked required ></td>
                                                         <td><label class="form-check-label">Male</label></td>
-                                                        <td></td>
+                                                    
                                                         <td><input id="" name="gender" ${doctor.gender==0 ?"checked":""} value="0" type="radio" class="form-check-input"
                                                                    required></td>
                                                         <td><label class="form-check-label">Female</label></td>
@@ -116,7 +116,19 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Phone</label>
-                                            <input name="phone" oninvalid="" oninput="" id="number" type="text" class="form-control" value="${doctor.phone}">
+                                            <input name="phone" id="number" type="text" class="form-control" value="${doctor.phone}">
+                                        </div>
+                                    </div>
+                                          <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">DOB</label>
+                                            <input name="dob"id="dob" type="date" class="form-control" value="${doctor.dob}">
+                                        </div>
+                                    </div>
+                                          <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Address</label>
+                                            <input name="address"  id="number" type="text" class="form-control" value="${doctor.address}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -147,20 +159,6 @@
                                         <div class="mb-3">
                                             <label class="form-label">Description</label>
                                             <textarea id="description" name="description" cols="50" rows=50" class="form-control">${doctor.description} </textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Status <span class="text-danger"></span></label>
-                                            <br>
-                                            <input id="credit" name="status" ${doctor.status== 1?"checked":""} value="1" type="radio" class="form-check-input"checked required >
-
-                                            <label class="form-check-label">Active</label>
-
-                                            <input id="debit" name="status" ${doctor.status== 0?"checked":""} value="0" type="radio" class="form-check-input"
-                                                   required>
-                                            <label class="form-check-label">Inactive</label>
                                         </div>
                                     </div>
                                 </div>

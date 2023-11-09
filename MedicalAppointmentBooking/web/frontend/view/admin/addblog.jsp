@@ -21,8 +21,9 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
-
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <script type="text/javascript" src="<c:url value='https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js'/>"></script>
+        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/jquery.min.js"></script>
     </head>
     <body>
         <div class="page-wrapper doctris-theme toggled">
@@ -33,40 +34,34 @@
                         <div class="d-flex align-items-center">
                             <a href="#" class="logo-icon">
                                 <img src="frontend/template/assets/images/logo-icon.png" height="30" class="small" alt="">
-                                <span class="big">
-                                    <img src="frontend/template/assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                                    <img src="frontend/template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                                <span class="">
+                                    <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                                    <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                                 </span>
                             </a>
                             <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
                                 <i class="uil uil-bars"></i>
                             </a>
-
                         </div>
                         <ul class="list-unstyled mb-0">
                             <li class="list-inline-item mb-0 ms-1">
                                 <div class="dropdown dropdown-primary">
                                     <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                            src="frontend/template/assets/images/doctors/01.jpg"
+                                            src="data:image/jpg;base64,${sessionScope.user.image}"
                                             class="avatar avatar-ex-small rounded-circle" alt=""></button>
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                          style="min-width: 200px;">
                                         <a class="dropdown-item d-flex align-items-center text-dark"
-                                           href="https://shreethemes.in/doctris/layouts/admin/profile.html">
-                                            <img src="../assets/images/doctors/01.jpg"
-                                                 class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                           <img src="data:image/jpg;base64,${sessionScope.user.image}"
+                                           class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                             <div class="flex-1 ms-2">
-                                                <span class="d-block mb-1">Calvin Carlo</span>
-                                                <small class="text-muted">Orthopedic</small>
+                                                <span class="d-block mb-1">${sessionScope.user.fullName}</span>
+                                                <small class="text-muted"></small>
                                             </div>
                                         </a>
-
-                                        <a class="dropdown-item text-dark" href="dr-profile.html"><span
-                                                class="mb-0 d-inline-block me-1"><i
-                                                    class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
                                         <div class="dropdown-divider border-top"></div>
-                                        <a class="dropdown-item text-dark" href="lock-screen.html"><span
+                                        <a class="dropdown-item text-dark" href="<c:url value='/home?action=logout'/>"><span
                                                 class="mb-0 d-inline-block me-1"><i
                                                     class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                                     </div>
@@ -78,7 +73,7 @@
                 <div class="mt-100" id="edit" role="tabpanel" aria-labelledby="edit">
                     <div class="card border-0 shadow overflow-hidden">
                         <div class="tab-content p-4" id="pills-tabContent">
-                            <form action="<c:url value='/manageblog?action=add-info'/>" method="POST" enctype="multipart/form-data">
+                            <form action="<c:url value='/manage-blog?action=add-info'/>" method="POST" enctype="multipart/form-data">
                                 <h5 class="mb-0">Add Blog Information.</h5>
                                 <div>
                                     <p class="text-muted">Update Image.</p>
@@ -93,26 +88,26 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Title  </label>
-                                            <input name="title" id="name" type="text" class="form-control" >
+                                            <input name="title" id="name" type="text" class="form-control" required >
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Description</label>
-                                            <input name="description"  type="text"  class="form-control" >
+                                            <textarea  name="description" cols="8" class="form-control" required></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <label class="form-label">Content</label>
-                                            <input name="content" type="text" class="form-control" >
+                                            <textarea id="content" name="content"row="5" cols="5" style="min-height: 300px;" class="form-control">${blog.content} </textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3 custom-box">
                                             <div class="form-group">
-                                                <label>Category</label>
-                                                <select name="category_id" class="select">
+                                                <label class="form-label">Category</label>
+                                                <select name="category_id" class="form-control">
                                                     <option>Choose Category</option>
                                                     <c:forEach var="o" items="${requestScope.cDAO}">
                                                         <option value="${o.blog_category_id}">${o.name}</option>
@@ -120,12 +115,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Created Time</label>
-                                                <input name="created_time" type="date" class="form-control" >
-                                            </div>
-                                        </div>
+
                                     </div>
 
                                     <div class="row">
@@ -140,14 +130,13 @@
             </main><!-- comment -->
         </div>
     </body>
+    <script type="text/javascript">
+        CKEDITOR.replace('content');
+    </script>
     <script>
-
-
         function displayThumbnail() {
             const input = document.getElementById("uploadfile");
             const thumbnail = document.getElementById("thumbImage");
-
-            // Check if a file has been selected
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
 

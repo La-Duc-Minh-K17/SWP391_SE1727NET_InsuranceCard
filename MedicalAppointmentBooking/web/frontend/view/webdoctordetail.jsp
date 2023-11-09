@@ -30,11 +30,9 @@
                 cursor: pointer;
                 transition: color 0.2s; /* Thêm hiệu ứng màu sắc cho sự chuyển đổi màu sao */
             }
-
             .star::before {
                 content: '☆';
             }
-
             .star.clicked::before {
                 content: '★';
                 color: gold;

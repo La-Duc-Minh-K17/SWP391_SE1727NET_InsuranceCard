@@ -10,8 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-
+        <title>Medical Booking Page</title>
         <!-- favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
@@ -35,13 +34,11 @@
                 </div>
             </div>
         </div>
-        <!-- Loader -->
+
         <div class="page-wrapper doctris-theme toggled">
 
-            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
+            <jsp:include page="/frontend/common/admin_side_bar.jsp" />
 
-            <!-- sidebar-wrapper  -->
-            <!-- Start Page Content -->
             <main class="page-content">  
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
@@ -116,7 +113,7 @@
                                         <div class="col-xl-6 col-md-6 p-1">
                                             <label>Role:</label>
                                             <select class="form-select form-control" id="speFilter" name="role">
-                                                    <option   >${acc.role.role_name}</option>
+                                                <option   >${acc.role.role_name}</option>
                                             </select>
                                         </div>
                                         <div class="col-xl-6 col-md-6 p-1">
@@ -144,7 +141,7 @@
                                             <p style="color: greenyellow">${success}</p>
                                         </div>
                                         <div class="col-xl-12 col-md-12">
-                                            <a class="btn btn-primary" href="AccountDetail?aid=${acc.userId}&action=edit" type="submit" >Edit</a>
+                                            <a class="btn btn-primary" href="admin-accountdetail?aid=${acc.userId}&action=edit" type="submit" >Edit</a>
                                         </div>
                                     </div><!--end row-->
                                 </form>
@@ -155,11 +152,7 @@
                     </div>
                 </div><!--end container-->
             </main>
-            <!--End page-content" -->
-            <!-- Modal -->
-
         </div>
-
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>
@@ -167,7 +160,5 @@
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/feather.min.js"></script>
         <!-- Main Js -->
         <script src="${pageContext.request.contextPath}/frontend/template/assets/js/app.js"></script>
-
-
     </body>
 </html>

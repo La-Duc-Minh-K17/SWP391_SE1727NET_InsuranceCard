@@ -36,7 +36,7 @@ public class CheckAvailabilityServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ReservationDAO rDAO = new ReservationDAO();
-        DoctorScheduleDAO dcDAO = new DoctorScheduleDAO();
+
         AppointmentDAO apptDAO = new AppointmentDAO();
         String type = request.getParameter("type");
         DoctorDAO dDAO = new DoctorDAO();
@@ -44,23 +44,24 @@ public class CheckAvailabilityServlet extends HttpServlet {
             String date = request.getParameter("chosenDate");
             int doctorId = Integer.parseInt(request.getParameter("doctor_id"));
             List<String> timeSlot = apptDAO.getAvailableTimeSlot(doctorId, date);
-            System.out.println(timeSlot);
+
             Gson json = new Gson();
             String timeList = json.toJson(timeSlot);
             response.setContentType("text/html");
             response.getWriter().write(timeList);
-            
+
         }
         if (type != null && type.equals("reservation")) {
             String date = request.getParameter("chosenDate");
             int serviceId = Integer.parseInt(request.getParameter("service_id"));
-            List<String> timeSlot = rDAO.getAvailableTimeSlot(serviceId, date) ;
+            List<String> timeSlot = rDAO.getAvailableTimeSlot(serviceId, date);
+
             Gson json = new Gson();
             String timeList = json.toJson(timeSlot);
             response.setContentType("text/html");
             response.getWriter().write(timeList);
         }
-         if (type != null && type.equals("doctor")) {
+        if (type != null && type.equals("doctor")) {
             int specialityId = Integer.parseInt(request.getParameter("speciality_id"));
             List<Doctor> listDoctor = dDAO.getDoctorBySpeciality(specialityId);
             Gson json = new Gson();

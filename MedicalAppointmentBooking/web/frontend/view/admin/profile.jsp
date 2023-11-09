@@ -38,7 +38,7 @@
                 <jsp:include page="/frontend/common/doctor_side_bar.jsp" />
             </c:if>
             <c:if test="${sessionScope.user.role.role_name == 'MANAGER'}">
-                <jsp:include page="/frontend/common/manager_side_bar    .jsp" />
+                <jsp:include page="/frontend/common/manager_side_bar.jsp" />
             </c:if>
             <main class="page-content bg-light">
                 <div class="top-header">

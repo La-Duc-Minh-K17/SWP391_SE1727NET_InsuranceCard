@@ -30,51 +30,8 @@
 
     <body>
         <div class="page-wrapper doctris-theme toggled">
-            <jsp:include page="/frontend/common/admin_side_bar.jsp" />
-            <div class="top-header">
-                <div class="header-bar d-flex justify-content-between border-bottom">
-                    <div class="d-flex align-items-center">
-                        <a href="#" class="logo-icon">
-                            <img src="frontend/template/assets/images/logo-icon.png" height="30" class="small" alt="">
-                            <span class="">
-                                <img src="frontend/template/assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                                <img src="frontend/template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
-                            </span>
-                        </a>
-                        <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
-                            <i class="uil uil-bars"></i>
-                        </a>
-                    </div>
-                    <ul class="list-unstyled mb-0">
-                        <li class="list-inline-item mb-0 ms-1">
-                            <div class="dropdown dropdown-primary">
-                                <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                        src="/assets/images/doctors/01.jpg"
-                                        class="avatar avatar-ex-small rounded-circle" alt=""></button>
-                                <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
-                                     style="min-width: 200px;">
-                                    <a class="dropdown-item d-flex align-items-center text-dark"
-                                       <img src="frontend/template/assets/images/doctors/01.jpg"
-                                       class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                        <div class="flex-1 ms-2">
-                                            <span class="d-block mb-1">${sessionScope.user.fullName}</span>
-                                            <small class="text-muted"></small>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item text-dark" href="dr-profile.html"><span
-                                            class="mb-0 d-inline-block me-1"><i
-                                                class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
-                                    <div class="dropdown-divider border-top"></div>
-                                    <a class="dropdown-item text-dark" href="lock-screen.html"><span
-                                            class="mb-0 d-inline-block me-1"><i
-                                                class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <jsp:include page="/frontend/common/manager_side_bar.jsp" />
+
             <main class="page-content bg-light">
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
@@ -95,23 +52,20 @@
                                 <div class="dropdown dropdown-primary">
                                     <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                            src="/assets/images/doctors/01.jpg"
+                                            src="data:image/jpg;base64,${sessionScope.user.image}"
                                             class="avatar avatar-ex-small rounded-circle" alt=""></button>
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                          style="min-width: 200px;">
                                         <a class="dropdown-item d-flex align-items-center text-dark"
-                                           <img src="../assets/images/doctors/01.jpg"
+                                           <img src="data:image/jpg;base64,${sessionScope.user.image}"
                                            class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                             <div class="flex-1 ms-2">
                                                 <span class="d-block mb-1">${sessionScope.user.fullName}</span>
                                                 <small class="text-muted"></small>
                                             </div>
                                         </a>
-                                        <a class="dropdown-item text-dark" href="dr-profile.html"><span
-                                                class="mb-0 d-inline-block me-1"><i
-                                                    class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
                                         <div class="dropdown-divider border-top"></div>
-                                        <a class="dropdown-item text-dark" href="lock-screen.html"><span
+                                        <a class="dropdown-item text-dark" href="<c:url value='/home?action=logout'/>"><span
                                                 class="mb-0 d-inline-block me-1"><i
                                                     class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                                     </div>
@@ -149,7 +103,6 @@
                                                 <p class="text-muted mb-0 ms-2">Female</p>
                                             </c:if>     
                                         </div>
-
                                         <div class="d-flex align-items-center mt-2">
                                             <i class="uil uil-phone align-text-bottom text-primary h5 mb-0 me-2"></i>
                                             <h6 class="mb-0">Phone</h6>
@@ -160,7 +113,6 @@
                                             <h6 class="mb-0">Email</h6>
                                             <p class="text-muted mb-0 ms-2">${appt.patient.email}</p>
                                         </div>
-
                                         <div class="d-flex align-items-center mt-2">
                                             <i class="uil uil-calendar-alt align-text-bottom text-primary h5 mb-0 me-2"></i>
                                             <h6 class="mb-0">Date Of Birth</h6>
@@ -258,11 +210,23 @@
                                                 <p>${appt.apptNote}</p>
                                             </div>
                                         </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label"> Reschedule Reason</label>
+                                                <p>${appt.rescheduleReason}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Reject Reason</label>
+                                                <p>${appt.rejectReason}</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <c:if test="${ appt.status ==  'PENDING' || appt.status == 'RESCHEDULED'}">
+                                    <c:if test="${ appt.status ==  'PENDING' || appt.status == 'RESCHEDULING' ||appt.status == 'CANCELLING'}">
                                         <div class="d-flex justify-content-between">
                                             <div class="mt-3">
-                                                <a href="admin-appointmentdetail?action=confirm&apptId=${appt.apptId}"class="btn btn-primary ">Confirm Appointment</a>
+                                                <a href="manage-appointmentdetail?action=confirm&apptId=${appt.apptId}"class="btn btn-primary ">Confirm Appointment</a>
                                             </div>
                                             <c:if test = "${appt.status ==  'PENDING'}">    
                                                 <div class="mt-3">
@@ -282,7 +246,7 @@
                                                                         <h4>Reject Appointment</h4>
                                                                         <p class="para-desc mx-auto text-muted mb-0">This appointment will be rejected.Are you sure ?</p>
                                                                         <div class="mt-4">
-                                                                            <form action="<c:url value='admin-appointmentdetail?action=reject'></c:url>" method="post">
+                                                                            <form action="<c:url value='manage-appointmentdetail?action=reject'></c:url>" method="post">
                                                                                     <textarea rows="5" class="form-control" name="reject_reason" placeholder="Your reason" required></textarea>
                                                                                     <br> <br> <br>
                                                                                     <input type="hidden" id="cancel_appointment" name="cancel_appointment" value="">
@@ -301,9 +265,9 @@
                                 </div>
 
                             </div>
-                            <c:if test="${(appt.status ==  'PENDING' && appt.doctor != null)|| appt.status == 'RESCHEDULED'}">
+                            <c:if test="${(appt.status ==  'PENDING' && appt.doctor != null)|| appt.status == 'RESCHEDULING'}">
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
-                                    <form action="admin-appointmentdetail?action=reassign&apptId=${appt.apptId}" method="post">
+                                    <form action="<c:url value='manage-appointmentdetail?action=reassign&apptId=${appt.apptId}'/>" method="post">
                                         <div class="bg-white rounded shadow overflow-hidden">
                                             <div class="p-4 border-bottom">
                                                 <h5 class="mb-0">Assign new appointment</h5>
@@ -348,7 +312,7 @@
 
                             <c:if test="${appt.status ==  'PENDING' && appt.doctor == null   }">
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
-                                    <form action="admin-appointmentdetail?action=reassign&apptId=${appt.apptId}" method="post">
+                                    <form action="<c:url value='manage-appointmentdetail?action=reassign&apptId=${appt.apptId}'/>" method="post">
                                         <div class="bg-white rounded shadow overflow-hidden">
                                             <div class="p-4 border-bottom">
                                                 <h5 class="mb-0">Assign doctor to appointment</h5>

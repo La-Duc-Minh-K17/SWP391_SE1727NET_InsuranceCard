@@ -216,7 +216,6 @@ public class DoctorDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Doctor> doctorList = new ArrayList<>();
-
         String sql = "select * from doctors d \n"
                 + "            inner join user_account u on d.user_id = u.user_id \n"
                 + "            inner join  speciality s on s.speciality_id = d.speciality_id\n"
@@ -258,16 +257,13 @@ public class DoctorDAO {
     }
 
     public List<Doctor> getDoctorBySpeciality(String spe) {
-
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Doctor> doctorList = new ArrayList<>();
-
         String sql = "select * from doctors d \n"
                 + "            inner join user_account u on d.user_id = u.user_id \n"
                 + "            inner join  speciality s on s.speciality_id = d.speciality_id\n"
                 + "            where s.speName = ?";
-
         Connection connection = null;
         try {
             connection = dbc.getConnection();
@@ -304,7 +300,7 @@ public class DoctorDAO {
         return doctorList;
     }
 
-    public void updateDoctor(int doctorId, String name, int gender, String phone, int speciality_id, String position, String description, int status, Part image) {
+    public void updateDoctor(int doctorId, String name, int gender, String phone, int speciality_id, String position, String description,  Part image) {
         PreparedStatement ps = null;
         InputStream fileImage = ImageProcessing.imageStream(image);
         String sql = "UPDATE mabs.doctors d\n"
@@ -315,8 +311,8 @@ public class DoctorDAO {
                 + "  u.phone = ?,\n"
                 + "  d.speciality_id = ?,\n"
                 + "  d.doctor_position = ?,\n"
-                + "  d.doctor_description = ?,\n"
-                + "  u.status = ? \n";
+                + "  d.doctor_description = ?\n";
+              
         if (fileImage != null) {
             sql = sql + " , u.image = ? \n";
         }
@@ -332,13 +328,13 @@ public class DoctorDAO {
             ps.setInt(4, speciality_id);
             ps.setString(5, position);
             ps.setString(6, description);
-            ps.setInt(7, status);
+           
             if (fileImage != null) {
-                ps.setBlob(8, fileImage);
-                ps.setInt(9, doctorId);
+                ps.setBlob(7, fileImage);
+                ps.setInt(8, doctorId);
 
             } else {
-                ps.setInt(8, doctorId);
+                ps.setInt(7, doctorId);
             }
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -629,7 +625,6 @@ public class DoctorDAO {
             String query = "INSERT INTO doctor_feedback ( user_id,doctor_id,create_time,content,rate)\n"
                     + "VALUES (?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(query);
-
             statement.setInt(1, feedback.getUser().getUserId());
             statement.setInt(2, feedback.getDoctor_id());
             statement.setTimestamp(3, feedback.getCreate_time());
@@ -701,4 +696,21 @@ public class DoctorDAO {
 
     }
 
+    public int countDoctor() {
+        int count = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection connection = null;
+        String sql = "select count(*) from doctors";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return count;
+    }
 }

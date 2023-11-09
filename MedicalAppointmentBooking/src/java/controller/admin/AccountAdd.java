@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controller.admin;
 
 import dal.RoleDAO;
@@ -17,13 +13,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Role;
 import model.UserAccount;
 import utils.CodeProcessing;
+import utils.SessionUtils;
 import utils.TimeUtil;
 
 /**
  *
- * @author 
+ * @author lnq
  */
-@WebServlet(name = "AccountAdd", urlPatterns = {"/admin-addaccount"})
+@WebServlet(name = "AccountAdd", urlPatterns = {"/AccountAdd"})
 public class AccountAdd extends HttpServlet {
 
     /**
@@ -38,7 +35,7 @@ public class AccountAdd extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -79,42 +76,33 @@ public class AccountAdd extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
-        UserDAO uDAO = new UserDAO();
-        String username = request.getParameter("username");
-        String role = request.getParameter("role");
-        String status = request.getParameter("status");
-        String fullname = request.getParameter("fullname");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String phone = request.getParameter("phone");
-        String gender = request.getParameter("gender");
-        String address = request.getParameter("address");
-        String dob = request.getParameter("dob");
-      
 
-        UserAccount user = new UserAccount(username, "123456@", email, fullname, Integer.valueOf(gender), phone, TimeUtil.dateConverter(dob), address, null, null, 1, new Role(Integer.valueOf(role)));
-        if (uDAO.isAccountExisted(user)) {
-            request.setAttribute("error", "Account has existed !");
-        } else {
-            uDAO.addUserAccount(user);
-
-            request.setAttribute("success", "Account has been added successfully with password 123456@!");
-
-            request.setAttribute("success", "Account added successfully");
-
+        try {
+            TimeUtil timeConfig = new TimeUtil();
+            UserDAO uDAO = new UserDAO();
+            String username = request.getParameter("username");
+            String role = request.getParameter("role");
+            String status = request.getParameter("status");
+            String fullname = request.getParameter("fullname");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String gender = request.getParameter("gender");
+            String address = request.getParameter("address");
+            String dob = request.getParameter("dob");
+           
+            UserAccount user = new UserAccount(username, "123456@", email, fullname, Integer.valueOf(gender),
+                    phone, TimeUtil.dateConverter1(dob), address, null, timeConfig.getNow(), 1, new Role(Integer.valueOf(role)));
+            if (uDAO.isAccountExisted(user)) {
+                request.setAttribute("error", "Account has existed !");
+            } else if (uDAO.isEmailtExisted(user)) {
+                request.setAttribute("error", "This email already existed !");
+            } else {
+                uDAO.addUserAccount(user);
+                request.setAttribute("success", "Account added with default password 123456@!");
+            }
+            request.getRequestDispatcher("frontend/view/admin/accountadd.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        request.getRequestDispatcher("frontend/view/admin/accountadd.jsp").forward(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

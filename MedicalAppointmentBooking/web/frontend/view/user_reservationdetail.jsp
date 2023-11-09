@@ -158,6 +158,12 @@
                                 </div>
                             </div>
                         </c:if>
+                        <c:if test="${error != null}">
+                            <div class="alert alert-danger">${error}</div>
+                        </c:if>
+                        <c:if test="${success != null}">
+                            <div class="alert alert-success">${success}</div>
+                        </c:if>
                     </div>        
                 </div>
         </section>
@@ -252,9 +258,8 @@
                         let data = {
                             type: "reservation",
                             chosenDate: chosendate,
-                            doctor_id: "${resv.resvId}"
+                            service_id: "${resv.resvId}"
                         };
-
                         $.ajax({
                             url: "CheckAvailabilityServlet",
                             method: "GET",
