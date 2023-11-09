@@ -293,7 +293,7 @@ public class UserDAO {
         Connection connection = null;
         ResultSet rs = null;
         boolean isExisted = false;
-        String sql = "select * from user_account where email = ? and username = ? ";
+        String sql = "select * from user_account where email = ? and username = ? and status = 1 ";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
@@ -531,6 +531,7 @@ public class UserDAO {
         }
         return list;
     }
+
     public int countAccount() {
         int count = 0;
         PreparedStatement ps = null;
@@ -547,5 +548,9 @@ public class UserDAO {
         } catch (Exception e) {
         }
         return count;
+    }
+
+    public void deleteAccountRecord(UserAccount account) {
+        
     }
 }

@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class TimeUtil {
 
-    private final int OTP_EXPIRY_TIME = 3;
+    private final int OTP_EXPIRY_TIME = 1;
 
     public static Time sqlTime(String time) {
         Time sqlTime = Time.valueOf(time);

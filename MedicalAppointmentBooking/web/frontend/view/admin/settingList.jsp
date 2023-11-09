@@ -26,24 +26,7 @@
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
 
-        <style>
-            /*            #settingListForm {
-                            z-index: 1;
-                        }
-            
-                        #editSettingForm {
-                            z-index: 2;  Set it to a higher value 
-                        }
-                        #settingListForm, #editSettingForm {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                        }*/
-
-        </style>
     </head>  
-
-
     <body>
         <!-- Loader -->
         <div id="preloader">
@@ -132,7 +115,6 @@
                                     </div>
                                 </form>
                             </div>
-
 
                             <div class="col-xl-3 col-md-3">
                                 <button class="btn btn-primary" type="button" id="addMoreButton">Add more</button>
@@ -243,9 +225,6 @@
                                                                 <option value="blog">Blog</option>
                                                             </select>
                                                         </div>
-
-
-
                                                         <div class="form-group  p-4">
                                                             <label for="editSettingValue">Value:</label>
                                                             <input type="text" id="editSettingValue" value="${s.note}" name="editSettingValue" required class="form-control">
@@ -256,23 +235,22 @@
                                                             <input type="text" id="editSettingDescription" placeholder="${s.description}" name="editSettingDescription" required class="form-control">
                                                         </div>
 
-                                                        <div class="form-group  p-4">
+                                                        <div class="form-group  p-4 col-md-6">
                                                             <label for="editSettingStatus">Status:</label>
-                                                            <div class="form-group  p-4">
-                                                                <label for="editSettingStatus">Status:</label>
-                                                                <select id="editSettingStatus" name="editSettingStatus" class="form-control">
-                                                                    <c:choose>
-                                                                        <c:when test="${s.status == true}">
-                                                                            <option value="Active" selected="selected">Active</option>
-                                                                            <option value="Deactive">Deactive</option>
-                                                                        </c:when>
-                                                                        <c:otherwise>
-                                                                            <option value="Active">Active</option>
-                                                                            <option value="Deactive" selected="selected">Deactive</option>
-                                                                        </c:otherwise>
-                                                                    </c:choose>
-                                                                </select>
-                                                            </div>
+
+                                                            <select id="editSettingStatus" name="editSettingStatus" class="form-control">
+                                                                <c:choose>
+                                                                    <c:when test="${s.status == true}">
+                                                                        <option class="form-select" value="Active" selected="selected">Active</option>
+                                                                        <option  class="form-select" value="Deactive">Deactive</option>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <option  class="form-select" value="Active">Active</option>
+                                                                        <option  class="form-select" value="Deactive" selected="selected">Deactive</option>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </select>
+
                                                         </div>
 
                                                         <button type="submit" class="btn btn-primary ms-4">Save Changes</button>

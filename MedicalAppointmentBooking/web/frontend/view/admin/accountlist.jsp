@@ -56,25 +56,25 @@
                                 <div class="dropdown dropdown-primary">
                                     <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                            src="../assets/images/doctors/01.jpg"
+                                            src="data:image/jpg;base64,${sessionScope.user.image}"
                                             class="avatar avatar-ex-small rounded-circle" alt=""></button>
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                          style="min-width: 200px;">
                                         <a class="dropdown-item d-flex align-items-center text-dark"
-                                           <img src="../assets/images/doctors/01.jpg"
+                                           <img src="data:image/jpg;base64,${sessionScope.user.image}"
                                            class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                             <div class="flex-1 ms-2">
-                                                <span class="d-block mb-1">Calvin Carlo</span>
-                                                <small class="text-muted">Orthopedic</small>
+                                                <span class="d-block mb-1">${sessionScope.user.fullName}</span>
+                                                <small class="text-muted"></small>
                                             </div>
-                                        </a>
+                                        </a>                                    
                                         <a class="dropdown-item text-dark" href="dr-profile.html"><span
-                                                class="mb-0 d-inline-block me-1"><i
-                                                    class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                                                class="mb-0 d-inline-block me-1">
+                                                <i class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
                                         <div class="dropdown-divider border-top"></div>
-                                        <a class="dropdown-item text-dark" href="lock-screen.html"><span
-                                                class="mb-0 d-inline-block me-1"><i
-                                                    class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                                        <a class="dropdown-item text-dark" href="<c:url value='/home?action=logout'/>"><span
+                                                class="mb-0 d-inline-block me-1">
+                                                <i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                                     </div>
                                 </div>
                             </li>
@@ -84,18 +84,15 @@
 
                 <div class="container-fluid">
                     <div class="layout-specing">
-
-
-
                         <div class="col-12 mt-4">
                             <div class="card component-wrapper border-0 rounded shadow">
                                 <div class="p-4 border-bottom">
                                     <h5 class="mb-0">Account List</h5>
                                 </div>
                                 <form style="padding: 20px;" action="admin-accountlist" method="get" id="searchform" class="searchform">
-                                    <div class="row align-content-center">
+                                    <div class="row align-content-around">
                                         <div class="col-xl-3 col-md-3">
-                                            <div class="card component-wrapper border-0 rounded shadow">
+                                            <div class="">
                                                 <div>
                                                     <label>Filter Role</label>
                                                     <select onchange="this.form.submit()" class="form-select form-control" id="speFilter" name="role">
@@ -108,7 +105,7 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-3 col-md-3">
-                                            <div class="search-bar d-lg-block" style="padding-top :0">
+                                            <div class="">
                                                 <div>
                                                     <label>Filter Status</label>
                                                     <select onchange="this.form.submit()" class="form-select form-control" id="speFilter" name="status">
@@ -119,8 +116,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-3 col-md-3 mt-4 mt-md-0 text-md-end">
-                                            <a href="<c:url value='/admin-addaccount'/>" class="btn btn-primary ">Add Account</a>
+                                        <div class="col-xl-3 col-md-3   ">
+                                            <a href="<c:url value='/admin-addaccount'/>" class="btn btn-primary form-control mt-3  ">Add Account</a>
                                         </div><!--end col-->
 
                                     </div><!--end row-->
@@ -149,14 +146,14 @@
                                                         <td>${d.username}</td>
                                                         <td>${d.email}</td>
                                                         <td>${d.phone}</td>
-                                                        <td>${d.gender==1?"Male":"Female"}</td>
+                                                        <td>${d.gender == 1?"Male":"Female"}</td>
                                                         <td>${d.role.role_name}</td>
-                                                        <td>${d.status==1?"Active":"InActive"}</td>
+                                                        <td>${d.status == 1?"Active":"InActive"}</td>
                                                         <c:if test="${d.status==1}">
-                                                            <td><a class="btn btn-danger" href="ChangeAccountStatus?uid=${d.userId}&ss=0">De-active</a> </td>
+                                                            <td><a class="btn btn-danger" href="<c:url value='/ChangeAccountStatus?uid=${d.userId}&ss=0'/>">De-active</a> </td>
                                                         </c:if>
                                                         <c:if test="${d.status==0}">
-                                                            <td><a class="btn btn-success" href="ChangeAccountStatus?uid=${d.userId}&ss=1">Active</a> </td>
+                                                            <td><a class="btn btn-success" href="<c:url value='/ChangeAccountStatus?uid=${d.userId}&ss=1'/>">Active</a> </td>
                                                         </c:if>
                                                     </tr>
                                                 </c:forEach>
