@@ -14,6 +14,7 @@ import java.util.List;
 import model.Reservation;
 import model.UserAccount;
 import resource.ApptStatus;
+import utils.EmailSending;
 import utils.SessionUtils;
 import utils.TimeUtil;
 
@@ -76,14 +77,17 @@ public class UserReservation extends HttpServlet {
         if (action != null && action.equals("cancel")) {
             int resvId = Integer.parseInt(request.getParameter("cancel_appointment"));
             Reservation resv = resvDAO.getReservationById(resvId);
-            if (resv.checkNoticePeriod() && resvDAO.checkLimitedTime(resv, ApptStatus.CANCELLED, ApptStatus.CANCELLING)) {
-                resv.setStatus(ApptStatus.CANCELLING);
+            if (resvDAO.checkLimitedTime(resv, ApptStatus.CANCELLED, ApptStatus.CANCELLING)) {
+                resv.setStatus(ApptStatus.CANCELLED);
+                if (!resv.checkNoticePeriod() || resv.getStatus().equals(ApptStatus.PENDING)) {
+                    resv.setOtherCharge(resv.getService().getFee() * 0.1);
+                    EmailSending.sendCancellationNotice(resv);
+                }
                 resvDAO.updateStatus(resv);
                 response.sendRedirect("user-reservation?action=view-detail&resvId=" + resv.getResvId());
             } else {
                 request.setAttribute("error", "You cannot cancel now. Please check again our policy or contact us for further support.");
                 request.getRequestDispatcher("user-reservation?action=view-detail&resvId=" + resv.getResvId()).forward(request, response);
-
             }
             return;
         }

@@ -587,7 +587,7 @@ public class AppointmentDAO {
         timeSlot.add("17:00:00");
         String sql = "SELECT appointment_time\n"
                 + "FROM appointments\n"
-                + "WHERE doctor_id = ? AND appointment_date = ? ";
+                + "WHERE doctor_id = ? AND appointment_date = ?  ";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);

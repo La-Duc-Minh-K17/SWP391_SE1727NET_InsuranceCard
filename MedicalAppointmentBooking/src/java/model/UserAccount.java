@@ -167,6 +167,10 @@ public class UserAccount {
         return status;
     }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
     public void setPhone(String phone) {
         this.phone = phone;
     }
