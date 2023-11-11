@@ -70,7 +70,6 @@ public class UserReservation extends HttpServlet {
             } else {
                 request.setAttribute("error", "You cannot reschedule now. Please check again our policy or contact us for further support.");
                 request.getRequestDispatcher("user-reservation?action=view-detail&resvId=" + resv.getResvId()).forward(request, response);
-
             }
             return;
         }

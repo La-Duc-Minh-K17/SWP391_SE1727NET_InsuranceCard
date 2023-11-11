@@ -83,8 +83,6 @@
                 </div>
             </div><!--end row-->
             <div>
-
-
                 <form class="mt-3">
                     <div class="row">
                         <div class="col-md-12">

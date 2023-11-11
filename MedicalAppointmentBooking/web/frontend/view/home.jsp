@@ -245,8 +245,6 @@
                             </div>
                         </div>
                     </c:forEach>
-
-
                 </div>
             </div><!--end col-->
         </div><!--end row-->

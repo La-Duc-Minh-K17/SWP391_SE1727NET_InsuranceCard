@@ -159,24 +159,41 @@
                                                                                 </div>
                                                                             </a>
                                                                         </td>
-                                                                        <td class="p-3">${appt.apptDate}</td>
-                                                                        <td class="p-3">${appt.apptTime}</td>
+                                                                        <td class="p-3">
+                                                                            <c:if test="${appt.apptDate != null || not empty appt.apptDate }">
+                                                                                ${appt.apptDate}
+                                                                            </c:if>
+                                                                            <c:if test="${appt.apptDate == null ||  empty appt.apptDate }">
+                                                                                NOT SET
+                                                                            </c:if>
+                                                                        </td>
+
+                                                                        <td class="p-3"><c:if test="${appt.apptTime != null || not empty appt.apptTime }">
+                                                                                ${appt.apptDate}
+                                                                            </c:if>
+                                                                            <c:if test="${appt.apptTime == null ||  empty appt.apptTime }">
+                                                                                NOT SET
+                                                                            </c:if></td>
                                                                         <td class="p-3">
                                                                             <a href="#" class="text-dark">
                                                                                 <div class="d-flex align-items-center">
                                                                                     <img src="data:image/jpg;base64,${appt.doctor.image}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                                                    <span class="ms-2">${appt.doctor.fullName}</span>
-                                                                                </div>
-                                                                            </a>
-                                                                        </td>
-                                                                        <td class="p-3">${appt.status}</td>
+
+                                                                                    <span class="ms-2">  
+                                                                                        <c:if test="${appt.doctor != null || not empty appt.doctor}">${appt.doctor.fullName}</c:if>
+                                                                                        <c:if test="${appt.doctor == null || empty appt.doctor}">NOT SET</c:if>
+                                                                                        </span>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </td>
+                                                                            <td class="p-3">${appt.status}</td>
                                                                         <td class="p-3">
                                                                             <div class="d-flex align-items-center">
                                                                                 <a href="manage-appointmentdetail?action=view-detail&apptId=${appt.apptId}" class="me-3 btn btn-primary btn-sml btn-soft-success">
                                                                                     Details</a>
                                                                                 <a href="#cancelappointment" class="btn btn-primary btn-sml btn-soft-danger" 
                                                                                    data-bs-toggle="modal" data-bs-target="#cancelappointment" onclick="cancelAppt(this)" data-id="${appt.apptId}">
-                                                                                    DELETE</a>
+                                                                                    Delete</a>
                                                                             </div>
                                                                         </td>
                                                                     </tr>
@@ -197,7 +214,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                 <c:if test="${empty apptList}" >
+                                                <c:if test="${empty apptList}" >
                                                     <div class=" text-center alert alert-primary h4" role="alert"> No appointments . </div>
                                                 </c:if>
                                             </div>
