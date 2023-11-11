@@ -29,6 +29,7 @@ public class ReservationDAO {
     DBConnection dbc = new DBConnection();
     private ServicesDAO sDAO = new ServicesDAO();
     private PatientDAO pDAO = new PatientDAO();
+    
 
     public List<Reservation> getAllReservation() {
         List<Reservation> list = new ArrayList<>();
@@ -116,7 +117,7 @@ public class ReservationDAO {
         }
     }
 
-    public List<String> getAvailableTimeSlot(int serviceId, String date) {
+    public List<String> getAvailableTimeSlot(int patientId, int serviceId, String date) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -134,7 +135,7 @@ public class ReservationDAO {
         timeSlot.add("17:00:00");
         String sql = "SELECT reservation_time\n"
                 + "FROM reservations\n"
-                + "WHERE service_id = ? AND reservation_date = ? ";
+                + "WHERE service_id = ? AND reservation_date = ? and reservation_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED') ";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
@@ -145,6 +146,10 @@ public class ReservationDAO {
                 if (timeSlot.contains(rs.getString(1))) {
                     timeSlot.remove(rs.getString(1));
                 }
+            }
+            List<String> bookedAppointmentInDay = getBookedAppointmentSlotTime(patientId, date);
+            for (String s : bookedAppointmentInDay) {
+                timeSlot.remove(s);
             }
             LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             LocalDate currentDate = LocalDate.now();
@@ -173,6 +178,36 @@ public class ReservationDAO {
         return timeSlot;
     }
 
+    
+    public List<String> getBookedAppointmentSlotTime(int patientId , String date) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<String> resultList = new ArrayList<>();
+        String sql = "Select appointment_time from appointments where patient_id = ?"
+                + " and appointment_date = ? and appointment_status not in ('CANCELLED')";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1 , patientId);
+            ps.setDate(2, TimeUtil.dateConverter1(date));
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                resultList.add(rs.getString("appointment_time"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return resultList;
+    }
     public void updateStatus(Reservation resv) {
         PreparedStatement ps = null;
         Connection connection = null;

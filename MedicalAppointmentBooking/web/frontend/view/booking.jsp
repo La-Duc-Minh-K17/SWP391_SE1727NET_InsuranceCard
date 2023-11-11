@@ -284,12 +284,14 @@
                     if ('${isApptOrResv}' === 'appt') {
                         data = {
                             type: "appointment",
+                            patientId:"",
                             chosenDate: chosendate,
                             doctor_id: '${sessionScope.chosen_doctor.doctorId}'
                         };
                     } else {
                         data = {
                             type: "reservation",
+                            patientId:"",
                             chosenDate: chosendate,
                             service_id: '${sessionScope.chosen_service.service_id}'
                         };

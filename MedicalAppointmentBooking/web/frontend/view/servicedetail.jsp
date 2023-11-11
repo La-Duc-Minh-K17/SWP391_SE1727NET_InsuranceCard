@@ -101,7 +101,6 @@
                 </div>
             </div><!--end row-->
             <div>
-
                 <h5 class="card-title mt-4 mb-0">Comments :</h5>
                 <ul class="media-list list-unstyled mb-0">
                     <c:forEach items="${review}" var="rv">

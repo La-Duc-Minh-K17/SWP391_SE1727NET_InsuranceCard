@@ -66,7 +66,7 @@ public class Authorization implements Filter {
             } else {
                 response.sendRedirect(request.getContextPath() + LOGIN);
             }
-        } else if (url.contains("/booking") || url.contains("book")) {
+        } else if (url.contains("/booking") || url.contains("book")|| url.contains("?action=comment")) {
 
             if (user != null) {
                 if (user.getRole().getRole_name().equals(RoleProp.PATIENT)) {

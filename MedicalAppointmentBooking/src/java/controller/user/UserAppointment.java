@@ -14,6 +14,7 @@ import java.util.List;
 import model.Appointment;
 import model.UserAccount;
 import resource.ApptStatus;
+import utils.EmailSending;
 import utils.SessionUtils;
 import utils.TimeUtil;
 
@@ -56,7 +57,7 @@ public class UserAppointment extends HttpServlet {
             String reason = request.getParameter("reschedule_reason");
             int apptId = Integer.parseInt(request.getParameter("reschedule_appointment"));
             Appointment appointment = apptDAO.getAppointmentById(apptId);
-       
+
             if (apptDAO.checkLimitedTime(appointment, ApptStatus.RESCHEDULED, ApptStatus.RESCHEDULING) && appointment.checkNoticePeriod()) {
                 appointment.setRescheduleReason(reason);
                 appointment.setApptDate(TimeUtil.dateConverter1(date));
@@ -76,10 +77,13 @@ public class UserAppointment extends HttpServlet {
         if (action != null && action.equals("cancel")) {
             int apptId = Integer.parseInt(request.getParameter("cancel_appointment"));
             Appointment appointment = apptDAO.getAppointmentById(apptId);
-            if (appointment.checkNoticePeriod() && apptDAO.checkLimitedTime(appointment, ApptStatus.CANCELLING, ApptStatus.CANCELLED)) {
-                appointment.setStatus(ApptStatus.CANCELLING);
-                appointment.setOtherCharge(appointment.getDoctor().getServiceFee() * 0.1);
+            if (apptDAO.checkLimitedTime(appointment, ApptStatus.CANCELLING, ApptStatus.CANCELLED)) {
+                appointment.setStatus(ApptStatus.CANCELLED);
+                if (!appointment.checkNoticePeriod() || appointment.getStatus().equals(ApptStatus.PENDING)) {
+                    appointment.setOtherCharge(appointment.getDoctor().getServiceFee() * 0.1);
+                }
                 apptDAO.updateStatus(appointment);
+                EmailSending.sendCancellationNotice(appointment);
                 response.sendRedirect("user-appointment?action=view-detail&apptId=" + appointment.getApptId());
             } else {
                 request.setAttribute("error", "You cannot cancel now. Please check again our policy or contact us for further support.");

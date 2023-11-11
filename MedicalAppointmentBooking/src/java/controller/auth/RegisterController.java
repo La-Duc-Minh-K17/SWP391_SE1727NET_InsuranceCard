@@ -53,7 +53,6 @@ public class RegisterController extends HttpServlet {
             } else {
                 
                 SessionUtils.getInstance().putValue(request, "user", user);
-                uDAO.addUserAccount(user);
                 String fullURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
                 String urlLink = fullURL + "/verify?action=confirm&token=" + confirmationToken; 
                 EmailSending.sendVerificationMail(user, urlLink, email);
