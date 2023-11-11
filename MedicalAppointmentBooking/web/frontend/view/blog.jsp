@@ -54,7 +54,7 @@
             <section class="blog_area section-padding">
                 <div class="container">
                     <div class="row">
-                        <h6 class="widget_title h4" >Recent Post</h6>                          
+                        <h6 class="widget_title h4">Recent Post</h6>                          
                         <c:forEach var="o" items="${requestScope.blogs3}">
 
                             <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2" value="${o.blog_id}">

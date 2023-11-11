@@ -201,41 +201,42 @@
                 </div>
             </div><!--end col-->
         </div>
-    </div>
+                                           
 
-</body>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const starsContainer = document.querySelector(".rating");
-        const ratingInput = document.getElementById("rating");
 
-        starsContainer.addEventListener("click", function (event) {
-            if (event.target.classList.contains("star")) {
-                const rating = parseInt(event.target.getAttribute("data-rating"));
-                ratingInput.value = rating;
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const starsContainer = document.querySelector(".rating");
+                const ratingInput = document.getElementById("rating");
 
-                const stars = starsContainer.querySelectorAll(".star");
+                starsContainer.addEventListener("click", function (event) {
+                    if (event.target.classList.contains("star")) {
+                        const rating = parseInt(event.target.getAttribute("data-rating"));
+                        ratingInput.value = rating;
 
-                // Bật và tắt trạng thái sao
-                stars.forEach((star, index) => {
-                    if (index < rating) {
-                        star.classList.add("clicked");
-                    } else {
-                        star.classList.remove("clicked");
+                        const stars = starsContainer.querySelectorAll(".star");
+
+                        // Bật và tắt trạng thái sao
+                        stars.forEach((star, index) => {
+                            if (index < rating) {
+                                star.classList.add("clicked");
+                            } else {
+                                star.classList.remove("clicked");
+                            }
+                        });
                     }
                 });
-            }
-        });
-    });
-</script>
+            });
+        </script>
 
-<jsp:include page="/frontend/common/footer.jsp" />
-<script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
-<script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
-<script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-<script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-<script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.j'/>"></script>
-<script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
+        <jsp:include page="/frontend/common/footer.jsp" />
+        <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.j'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
+    </body>
 </html>
 
 

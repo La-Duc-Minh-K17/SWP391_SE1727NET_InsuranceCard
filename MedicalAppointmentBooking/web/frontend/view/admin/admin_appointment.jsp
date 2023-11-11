@@ -3,15 +3,14 @@
     Created on : Sep 28, 2023, 10:44:49 AM
     Author     : Admin
 --%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-
+         <title>Appointment Page</title>
         <!-- favicon -->
         <link rel="shortcut icon" href="/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
@@ -161,7 +160,8 @@
                                                                         </td>
                                                                         <td class="p-3">
                                                                             <c:if test="${appt.apptDate != null || not empty appt.apptDate }">
-                                                                                ${appt.apptDate}
+                                                                                <fmt:formatDate value="${appt.apptDate}" pattern="dd/MM/yyyy" var="formattedDate" />
+                                                                                ${formattedDate}
                                                                             </c:if>
                                                                             <c:if test="${appt.apptDate == null ||  empty appt.apptDate }">
                                                                                 NOT SET
@@ -169,7 +169,7 @@
                                                                         </td>
 
                                                                         <td class="p-3"><c:if test="${appt.apptTime != null || not empty appt.apptTime }">
-                                                                                ${appt.apptDate}
+                                                                                ${appt.apptTime}
                                                                             </c:if>
                                                                             <c:if test="${appt.apptTime == null ||  empty appt.apptTime }">
                                                                                 NOT SET

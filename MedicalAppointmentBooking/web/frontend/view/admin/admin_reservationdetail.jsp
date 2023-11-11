@@ -290,6 +290,7 @@
                     let chosendate = $("#checkin-date").val();
                     let data = {
                         type: "reservation",
+                        patientId:"${resv.patient.patientId}",
                         chosenDate: chosendate,
                         service_id: "${resv.service.service_id}"
                     };

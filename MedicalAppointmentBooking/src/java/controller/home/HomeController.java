@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller.home;
-
 import dal.BlogDAO;
 import dal.CategoryDAO;
 import dal.DoctorDAO;
