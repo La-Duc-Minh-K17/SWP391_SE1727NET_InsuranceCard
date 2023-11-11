@@ -65,7 +65,7 @@ public class ManageAccount extends HttpServlet {
         UserDAO uDAO = new UserDAO();
         
         request.setAttribute("ul", uDAO.getListUserAccount(status, role));
-        request.setAttribute("rl", new RoleDAO().getListRole());
+        request.setAttribute("rl", new RoleDAO().getListRoleButAdmin());
         request.getRequestDispatcher("frontend/view/admin/accountlist.jsp").forward(request, response);
     }
 

@@ -173,8 +173,6 @@
         CKEDITOR.replace('detail');
     </script>
     <script>
-
-
         function displayThumbnail() {
             const input = document.getElementById("uploadfile");
             const thumbnail = document.getElementById("thumbImage");
@@ -189,20 +187,21 @@
 
                 reader.readAsDataURL(input.files[0]);
             } else {
-
                 thumbnail.src = "";
             }
-            function validateInput(inputElement) {
-                var inputValue = inputElement.value;
-                var pattern = /^[a-zA-Z0-9 ]*$/; // Only allow alphanumeric characters and spaces
+        }
 
-                if (!pattern.test(inputValue)) {
-                    alert("Special characters are not allowed in this field.");
-                    inputElement.value = inputValue.replace(/[^a-zA-Z0-9 ]/g, ''); // Remove special characters
-                }
+        function validateInput(inputElement) {
+            var inputValue = inputElement.value;
+            var pattern = /^[a-zA-Z0-9 ]*$/; // Only allow alphanumeric characters and spaces
+
+            if (!pattern.test(inputValue)) {
+                alert("Special characters are not allowed in this field.");
+                inputElement.value = inputValue.replace(/[^a-zA-Z0-9 ]/g, ''); // Remove special characters
             }
         }
     </script>
+
     <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
     <!-- simplebar -->
     <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>

@@ -180,5 +180,6 @@
         <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.j'/>"></script>
         <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
+
     </body>
 </html>

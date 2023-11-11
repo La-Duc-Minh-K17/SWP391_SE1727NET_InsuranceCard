@@ -71,4 +71,23 @@ public class RoleDAO {
         }
         return list;
     }
+          public ArrayList<Role> getListRoleButAdmin() {
+        PreparedStatement stm = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        ArrayList<Role> list = new ArrayList<>();
+        String sql = "SELECT r.* FROM user_role r where role_name <> 'ADMIN' ";
+        try {
+            connection = dbc.getConnection();
+            stm = connection.prepareStatement(sql);
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                Role r = new Role(rs.getInt("role_id"),rs.getString("role_name"));
+                list.add(r);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return list;
+    }
 }

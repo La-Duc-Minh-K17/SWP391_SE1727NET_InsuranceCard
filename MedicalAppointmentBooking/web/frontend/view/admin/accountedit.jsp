@@ -90,15 +90,15 @@
                                 <form style="padding: 20px;" action="admin-accountdetail" method="post" id="searchform" class="searchform">
                                     <div class="row align-content-center justify-content-center">
                                         <div class="col-xl-6 col-md-6 p-1">
-                                            <label>Id:</label>
+                                            <label>Id(Read only):</label>
                                             <input class="form-control" type="text" readonly="" name="id" value="${acc.userId}" id="id" >
                                         </div>
                                         <div class="col-xl-6 col-md-6 p-1">
-                                            <label>Email:</label>
+                                            <label>Email(Read only):</label>
                                             <input class="form-control" type="email" readonly name="email" value="${acc.email}" id="email" >
                                         </div>
                                         <div class="col-xl-6 col-md-6 p-1">
-                                            <label>Username:</label>
+                                            <label>Username(Read only):</label>
                                             <input class="form-control" type="text" readonly name="username" value="${acc.username}" id="username" >
                                         </div>
                                         <div class="col-xl-6 col-md-6 p-1">
@@ -139,6 +139,7 @@
                                         </div>
                                         <div class="col-xl-12 col-md-12">
                                             <button class="btn btn-primary" type="submit" >Update</button>
+                                            <a href="<c:url value='/admin-accountlist'/>" class="btn btn-primary ">Back</a>
                                         </div>
                                     </div><!--end row-->
                                 </form>
