@@ -222,12 +222,12 @@
 
         <script>
             function filter() {
-                const url = 'http://localhost:9999/MedicalAppointmentBooking/service/review?action=filter&service_id=';
+                const url = 'http://localhost:9999/MedicalAppointmentBooking/manage-servicereview?action=filter&service_id=';
                 const filterElement = document.getElementById("serFilter").value;
                 window.location.href = url + filterElement;
             }
             function sort() {
-                const url = 'http://localhost:9999/MedicalAppointmentBooking/service/review?action=sort&sortby=';
+                const url = 'http://localhost:9999/MedicalAppointmentBooking/manage-servicereview?action=sort&sortby=';
                 const filterElement = document.getElementById("sort").value;
                 window.location.href = url + filterElement;
             }

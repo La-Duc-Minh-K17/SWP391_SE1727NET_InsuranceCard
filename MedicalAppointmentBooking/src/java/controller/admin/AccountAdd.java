@@ -20,7 +20,7 @@ import utils.TimeUtil;
  *
  * @author lnq
  */
-@WebServlet(name = "AccountAdd", urlPatterns = {"/AccountAdd"})
+@WebServlet(name = "AccountAdd", urlPatterns = {"/admin-addaccount"})
 public class AccountAdd extends HttpServlet {
 
     /**

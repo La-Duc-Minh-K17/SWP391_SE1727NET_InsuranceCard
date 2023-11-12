@@ -224,12 +224,12 @@
 
         <script>
             function filter() {
-                const url = 'http://localhost:9999/MedicalAppointmentBooking/doctor/feedback?action=filter&doctorId=';
+                const url = 'http://localhost:9999/MedicalAppointmentBooking/manage-doctorfeedback?action=filter&doctorId=';
                 const filterElement = document.getElementById("serFilter").value;
                 window.location.href = url + filterElement;
             }
             function sort() {
-                const url = 'http://localhost:9999/MedicalAppointmentBooking/doctor/feedback?action=sort&sortby=';
+                const url = 'http://localhost:9999/MedicalAppointmentBooking/manage-doctorfeedback?action=sort&sortby=';
                 const filterElement = document.getElementById("sort").value;
                 window.location.href = url + filterElement;
             }

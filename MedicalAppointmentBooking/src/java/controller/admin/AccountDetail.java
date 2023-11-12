@@ -37,13 +37,13 @@ public class AccountDetail extends HttpServlet {
         if (action == null) {
             UserDAO uDAO = new UserDAO();
             request.setAttribute("acc", uDAO.getAccountById(Integer.valueOf(request.getParameter("aid"))));
-            request.setAttribute("rl", new RoleDAO().getListRole());
+            request.setAttribute("rl", new RoleDAO().getListRoleButAdmin());
             request.getRequestDispatcher("frontend/view/admin/accountdetail.jsp").forward(request, response);
 
         } else {
             UserDAO uDAO = new UserDAO();
             request.setAttribute("acc", uDAO.getAccountById(Integer.valueOf(request.getParameter("aid"))));
-            request.setAttribute("rl", new RoleDAO().getListRole());
+            request.setAttribute("rl", new RoleDAO().getListRoleButAdmin());
             request.getRequestDispatcher("frontend/view/admin/accountedit.jsp").forward(request, response);
         }
 

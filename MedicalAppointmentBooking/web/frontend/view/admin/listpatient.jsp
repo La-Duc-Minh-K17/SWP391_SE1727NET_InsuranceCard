@@ -92,7 +92,7 @@ Author     : PC
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <div class="row align-content-center">
-                            
+
                             <div class="col-xl-6 col-md-6">
                                 <div class="search-bar d-lg-block " style="padding-top :0">
                                     <div id="search" class="menu-search  ">
@@ -106,7 +106,7 @@ Author     : PC
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div><!--end row-->
 
 
@@ -153,7 +153,7 @@ Author     : PC
                                                         <td class="p-3">
                                                             <style>
                                                                 .custom-btn {
-                                                                    width: 100px; 
+                                                                    width: 100px;
                                                                 }
                                                             </style>
                                                         <td class="text-center">
@@ -162,7 +162,7 @@ Author     : PC
                                                                     <div class="d-flex mb-2">
                                                                         <a href="<c:url value='/manage-patient?action=view&patientId=${p.patientId}'/>" class="btn btn-primary custom-btn btn-sm m-2">View</a>
                                                                         <a href="<c:url value='/manage-patient?action=edit&patientId=${p.patientId}'/>" class="btn btn-primary custom-btn btn-sm m-2">Edit</a>
-                                                                        
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -179,17 +179,18 @@ Author     : PC
 
 
 
-                                <div>
-                                    <ul class="pagination mb-0 mt-5">
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)"
-                                                                 aria-label="Previous">Prev</a></li>
-                                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)"
-                                                                 aria-label="Next">Next</a></li>
-                                    </ul>
+                                <div class="row text-end">
+                                    <div class="col-12 mt-4">
+                                        <ul class="pagination justify-content-end mb-5 mt-3 mt-sm-0">
+                                            <c:forEach begin="1" end="${num}" var="i">
+                                                <li class="page-item ${i == page ? 'active' : ''}">
+                                                    <a class="page-link" href="${pageContext.request.contextPath}/manage-patient?action=view-all&page=${i}">
+                                                        ${i}
+                                                    </a>
+                                                </li>
+                                            </c:forEach>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div><!--end col-->

@@ -112,8 +112,9 @@
                                         </div>
                                         <div class="col-xl-6 col-md-6 p-1">
                                             <label>Role:</label>
-                                            <select class="form-select form-control" id="speFilter" name="role">
-                                                <option   >${acc.role.role_name}</option>
+                                            
+                                                <input class="form-control" type="text" readonlyname="fullname" value="${acc.role.role_name}" id="fullname" >
+                                                
                                             </select>
                                         </div>
                                         <div class="col-xl-6 col-md-6 p-1">

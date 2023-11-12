@@ -30,7 +30,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-5 col-lg-4 mb-0 mb-md-1 pb-0  pb-md-2">
-                        <a href="#" class="logo-footer">
+                        <a href="home" class="logo-footer">
                             <img src="frontend/template/assets/images/MABS__1.png" height="30" alt="">
                         </a>
                         <p class="mt-4 me-xl-5">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
@@ -42,9 +42,9 @@
                                 <h5 class="text-light title-dark footer-head">Company</h5>
                                 <ul class="list-unstyled footer-list mt-4">
                                     <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> About us</a></li>
-                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Services</a></li>
-                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Doctors</a></li>
-                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Blogs</a></li>
+                                    <li><a href="/MedicalAppointmentBooking/service?action=view-all" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Services</a></li>
+                                    <li><a href="WebDoctorList" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Doctors</a></li>
+                                    <li><a href="new" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Blogs</a></li>
                                
                                 </ul>
                             </div><!--end col-->
@@ -52,13 +52,13 @@
                             <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
                                 <h5 class="text-light title-dark footer-head">Departments</h5>
                                 <ul class="list-unstyled footer-list mt-4">
-                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Eye Care</a></li>
-                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Psychotherapy</a></li>
-                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Dental Care</a></li>
-                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Orthopedic</a></li>
-                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Cardiology</a></li>
-                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Gynecology</a></li>
-                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Neurology</a></li>
+                                    <li><a href="http://localhost:8080/MedicalAppointmentBooking/service?action=filter&category_id=2" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> ENT </a></li>
+                                    <li><a href="http://localhost:8080/MedicalAppointmentBooking/service?action=filter&category_id=3" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Dermatology</a></li>
+                                    <li><a href="http://localhost:8080/MedicalAppointmentBooking/service?action=filter&category_id=4" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Dental Care</a></li>
+                                    <li><a href="http://localhost:8080/MedicalAppointmentBooking/service?action=filter&category_id=1" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Orthopedic</a></li>
+                                    <li><a href="http://localhost:8080/MedicalAppointmentBooking/service?action=filter&category_id=6" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Cardiology</a></li>
+                                    <li><a href="http://localhost:8080/MedicalAppointmentBooking/service?action=filter&category_id=5" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> OB-GYN </a></li>
+                                    <li><a href="http://localhost:8080/MedicalAppointmentBooking/service?action=filter&category_id=7" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Neurology</a></li>
                                 </ul>
                             </div><!--end col-->
 
@@ -82,10 +82,10 @@
                                 </ul> -->
 
                                     <ul class="list-unstyled social-icon footer-social mb-0 mt-4">
-                                        <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="facebook" class="fea icon-sm fea-social"></i></a></li>
+<!--                                        <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="facebook" class="fea icon-sm fea-social"></i></a></li>
                                         <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
                                         <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="twitter" class="fea icon-sm fea-social"></i></a></li>
-                                        <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="linkedin" class="fea icon-sm fea-social"></i></a></li>
+                                        <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="linkedin" class="fea icon-sm fea-social"></i></a></li>-->
                                     </ul><!--end icon-->
                             </div><!--end col-->
                         </div><!--end row-->
