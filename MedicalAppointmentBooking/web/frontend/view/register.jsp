@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : register
     Created on : Sep 18, 2023, 3:49:22 PM
     Author     : Admin
@@ -108,13 +108,13 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Date of Birth<span class="text-danger">*</span></label>
-                                                <input name="dob"  type="date" class="flatpickr flatpickr-input form-control" id="dob">
+                                                <input name="dob"  type="date" class="flatpickr flatpickr-input form-control" id="dob" required="">
                                             </div> 
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Address <span class="text-danger">*</span></label>
-                                                <input name="address" class="form-control" placeholder="Address:">
+                                                <input name="address" class="form-control" placeholder="Address:" required>
                                             </div>
                                         </div><!--end col-->
                                         <div class="col-md-12">

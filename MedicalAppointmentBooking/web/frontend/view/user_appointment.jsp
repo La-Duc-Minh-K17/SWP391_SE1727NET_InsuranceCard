@@ -1,5 +1,8 @@
-
-
+<%-- 
+    Document   : managedoctor
+    Created on : Sep 28, 2023, 10:44:49 AM
+    Author     : Admin
+--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -140,7 +143,8 @@
                                                                                                 </div>
                                                                                             </a>
                                                                                         </td>
-                                                                                        <td class="p-3">${appt.apptDate}</td>
+                                                                                        <fmt:formatDate value="${appt.apptDate}" pattern="dd/MM/yyyy" var="formattedDate" />
+                                                                                        <td class="p-3">${formattedDate}</td>
                                                                                         <td class="p-3">${appt.apptTime}</td>   
                                                                                         <td class="p-3">${appt.status}</td>
                                                                                         <td class="p-3 d-flex align-items-center">

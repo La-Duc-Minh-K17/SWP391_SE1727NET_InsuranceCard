@@ -63,7 +63,8 @@ public class ChangeAccountStatus extends HttpServlet {
         String ss = request.getParameter("ss");
         UserDAO uDAO = new UserDAO();
         uDAO.ChangeAccountStatus(uid, ss);
-        response.sendRedirect("ManageAccount");
+
+        response.sendRedirect("admin-accountlist?action=view-all");
     }
 
     /**

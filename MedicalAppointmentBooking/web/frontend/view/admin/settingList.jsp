@@ -26,24 +26,7 @@
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
 
-        <style>
-            /*            #settingListForm {
-                            z-index: 1;
-                        }
-            
-                        #editSettingForm {
-                            z-index: 2;  Set it to a higher value 
-                        }
-                        #settingListForm, #editSettingForm {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                        }*/
-
-        </style>
     </head>  
-
-
     <body>
         <!-- Loader -->
         <div id="preloader">
@@ -132,7 +115,6 @@
                                     </div>
                                 </form>
                             </div>
-
 
                             <div class="col-xl-3 col-md-3">
                                 <button class="btn btn-primary" type="button" id="addMoreButton">Add more</button>
@@ -243,9 +225,6 @@
                                                                 <option value="blog">Blog</option>
                                                             </select>
                                                         </div>
-
-
-
                                                         <div class="form-group  p-4">
                                                             <label for="editSettingValue">Value:</label>
                                                             <input type="text" id="editSettingValue" value="${s.note}" name="editSettingValue" required class="form-control">

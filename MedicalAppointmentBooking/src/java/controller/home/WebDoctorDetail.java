@@ -85,11 +85,9 @@ public class WebDoctorDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
         String comments = request.getParameter("message");
         float rate = Float.parseFloat(request.getParameter("rating"));
-        System.out.println(request.getParameter("doctorId"));
         int doctorId = Integer.parseInt(request.getParameter("doctorId"));  
         Timestamp createTime = new Timestamp(System.currentTimeMillis());
         DoctorFeedback df = new DoctorFeedback();

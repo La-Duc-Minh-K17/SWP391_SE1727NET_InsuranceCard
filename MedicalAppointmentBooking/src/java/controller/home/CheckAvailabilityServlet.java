@@ -7,7 +7,7 @@ package controller.home;
 import com.google.gson.Gson;
 import dal.AppointmentDAO;
 import dal.DoctorDAO;
-import dal.DoctorScheduleDAO;
+import dal.PatientDAO;
 import dal.ReservationDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -16,7 +16,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Doctor;
-import model.DoctorSchedule;
+import model.Patient;
+import model.UserAccount;
+import utils.SessionUtils;
 
 /**
  *
@@ -37,14 +39,26 @@ public class CheckAvailabilityServlet extends HttpServlet {
             throws ServletException, IOException {
         ReservationDAO rDAO = new ReservationDAO();
 
+        PatientDAO pDAO = new PatientDAO();
+        UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
         AppointmentDAO apptDAO = new AppointmentDAO();
         String type = request.getParameter("type");
         DoctorDAO dDAO = new DoctorDAO();
+        String patientID = request.getParameter("patientId");
+        
+        int pId = -1;
+        if (patientID != null && !patientID.isEmpty()) {
+            pId = Integer.parseInt(patientID);
+        } else {
+            Patient p = new Patient();
+            p.setUserId(user.getUserId());
+            pId = pDAO.getPatientId(p);
+        }
+       
         if (type != null && type.equals("appointment")) {
             String date = request.getParameter("chosenDate");
             int doctorId = Integer.parseInt(request.getParameter("doctor_id"));
-            List<String> timeSlot = apptDAO.getAvailableTimeSlot(doctorId, date);
-
+            List<String> timeSlot = apptDAO.getAvailableTimeSlot(pId, doctorId, date);
             Gson json = new Gson();
             String timeList = json.toJson(timeSlot);
             response.setContentType("text/html");
@@ -54,8 +68,7 @@ public class CheckAvailabilityServlet extends HttpServlet {
         if (type != null && type.equals("reservation")) {
             String date = request.getParameter("chosenDate");
             int serviceId = Integer.parseInt(request.getParameter("service_id"));
-            List<String> timeSlot = rDAO.getAvailableTimeSlot(serviceId, date);
-
+            List<String> timeSlot = rDAO.getAvailableTimeSlot(pId, serviceId, date);
             Gson json = new Gson();
             String timeList = json.toJson(timeSlot);
             response.setContentType("text/html");

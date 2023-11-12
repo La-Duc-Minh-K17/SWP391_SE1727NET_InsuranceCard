@@ -37,7 +37,7 @@ public class ForgotPasswordController extends HttpServlet {
             throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
-        TimeUtil timeUtil = new TimeUtil();
+      
         String action = request.getParameter("action");
 
         if (action != null && action.equals("send-link")) {
@@ -47,7 +47,7 @@ public class ForgotPasswordController extends HttpServlet {
                 request.setAttribute("error", "Email address is not found in the system! Try again.");
             } else {
                 String recoveryToken = CodeProcessing.generateToken();
-                Timestamp updatedTime = timeUtil.getNow();
+                Timestamp updatedTime = TimeUtil.getNow();
                 account = uDAO.getAccountByEmail(email);
                 uDAO.updateRecoveryToken(account, recoveryToken, updatedTime);
                 String fullURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();

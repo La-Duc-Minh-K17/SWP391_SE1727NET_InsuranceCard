@@ -40,7 +40,6 @@ public class UserProfileController extends HttpServlet {
             return;
         }
         if (action != null && action.equals("edit-info")) {
-
             Part image = request.getPart("image");
             String name = request.getParameter("name");
             String dob = request.getParameter("dob");

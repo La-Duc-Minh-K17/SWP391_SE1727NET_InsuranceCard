@@ -2,8 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
-
 package controller.auth;
 
 import dal.UserDAO;
@@ -41,20 +39,23 @@ public class VerificationController extends HttpServlet {
         if (action != null && action.equals("confirm")) {
             UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
             Timestamp confirmationTokenTime = user.getConfirmationTokenTime();
-            if (!timeConfig.isExpired(confirmationTokenTime)) {
-                String token = uDAO.getConfirmationToken(user);
+            if (!timeConfig.isExpired(confirmationTokenTime)) {         
                 String urlToken = request.getParameter("token");
-                if (token.equals(urlToken)) {
-                    uDAO.activateUserAccount(user);
+                if (user.getConfirmationToken().equals(urlToken)) {
+                    user.setStatus(1);
+                    uDAO.addUserAccount(user);
                     request.setAttribute("message", "Verify Successfully.");
+                    request.getRequestDispatcher("/login").forward(request, response);
+                    return;
                 } else {
                     response.sendRedirect("error.jsp");
+                    return;
                 }
             } else {
                 response.sendRedirect("error.jsp");
+                return;
             }
-            request.getRequestDispatcher("/login").forward(request, response);
-            return;
+
         }
         if (action != null && action.equals("verify-reset")) {
             UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");

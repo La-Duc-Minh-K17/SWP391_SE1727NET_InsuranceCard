@@ -38,8 +38,6 @@
         <!-- Loader -->
         <div class="page-wrapper doctris-theme toggled">
             <jsp:include page="/frontend/common/manager_side_bar.jsp" />
-            <!-- sidebar-wrapper  -->
-            <!-- Start Page Content -->
             <main class="page-content">
                 <div class="top-header">
                     <div class="header-bar d-flex justify-content-between border-bottom">
@@ -60,23 +58,23 @@
                                 <div class="dropdown dropdown-primary">
                                     <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                            src="../assets/images/doctors/01.jpg"
+                                            src="data:image/png;base64,${sessionScope.user.image}"
                                             class="avatar avatar-ex-small rounded-circle" alt=""></button>
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                          style="min-width: 200px;">
                                         <a class="dropdown-item d-flex align-items-center text-dark"
-                                           <img src="../assets/images/doctors/01.jpg"
+                                           <img src="data:image/png;base64,${sessionScope.user.image}"
                                            class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                             <div class="flex-1 ms-2">
-                                                <span class="d-block mb-1">Calvin Carlo</span>
+                                                <span class="d-block mb-1">${sessionScope.user.username}</span>
                                                 <small class="text-muted">Orthopedic</small>
                                             </div>
                                         </a>
-                                        <a class="dropdown-item text-dark" href="dr-profile.html"><span
+                                        <a class="dropdown-item text-dark" href="<c:url value= '/user-profile?action=view'/>"><span
                                                 class="mb-0 d-inline-block me-1"><i
                                                     class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
                                         <div class="dropdown-divider border-top"></div>
-                                        <a class="dropdown-item text-dark" href="lock-screen.html"><span
+                                        <a class="dropdown-item text-dark" href="<c:url value= '/home?action=logout'/>"><span
                                                 class="mb-0 d-inline-block me-1"><i
                                                     class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                                     </div>
@@ -147,6 +145,7 @@
                                                     <th scope="col">Feedback</th>
                                                     <th scope="col">Rate</th>     
                                                     <th scope="col">Created Time</th>
+                                                    <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -156,7 +155,6 @@
                                                         <td>${df.user.fullName}</td>
                                                         <td>${df.doctorName}</td>
                                                         <td>${df.content}</td>
-
                                                         <td><c:choose>
                                                                 <c:when test="${df.rate >= 1}">
                                                                     ★
@@ -189,6 +187,9 @@
                                                             </c:choose></td>
 
                                                         <td>${df.create_time}</td>  
+                                                        <td><a href="<c:url value='/manage-doctorfeedback?action=delete&id=${df.feedback_id}'/>" class="me-3 btn btn-primary btn-sml btn-soft-danger">
+                                                                Delete</a>
+                                                        </td>
                                                     </tr>     
                                                 </c:forEach>
                                             </tbody>
@@ -223,12 +224,12 @@
 
         <script>
             function filter() {
-                const url = 'http://localhost:9999/MedicalAppointmentBooking/doctor/feedback?action=filter&doctorId=';
+                const url = 'http://localhost:9999/MedicalAppointmentBooking/manage-doctorfeedback?action=filter&doctorId=';
                 const filterElement = document.getElementById("serFilter").value;
                 window.location.href = url + filterElement;
             }
             function sort() {
-                const url = 'http://localhost:9999/MedicalAppointmentBooking/doctor/feedback?action=sort&sortby=';
+                const url = 'http://localhost:9999/MedicalAppointmentBooking/manage-doctorfeedback?action=sort&sortby=';
                 const filterElement = document.getElementById("sort").value;
                 window.location.href = url + filterElement;
             }
