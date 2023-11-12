@@ -118,7 +118,7 @@
                                                     <option value="type">Type</option>
                                                     <option value="value">Value</option>
                                                     <option value="description">Description</option>
-                                                    <option value="status">Status</option>
+<!--                                                    <option value="status">Status</option>-->
                                                 </select>
                                             </div>
                                             <div class="col-md-6">
@@ -161,7 +161,7 @@
                                                                     <th class="border-bottom p-3" >
                                                                         Value</th>
                                                                     <th class="border-bottom p-3" style="min-width: 100px;">Description</th>
-                                                                    <th class="border-bottom p-3" > Status</th>
+<!--                                                                    <th class="border-bottom p-3" > Status</th>-->
 
                                                                     <th class="border-bottom p-3" ">
                                                                         Action</th>
@@ -174,9 +174,9 @@
                                                                         <td class="p-3">${s.type}</td>
                                                                         <td class="p-3">${s.note}</td>
                                                                         <td class="p-3">${s.description}</td>
-                                                                        <td class="p-3">
+<!--                                                                        <td class="p-3">
                                                                             ${s.status ? 'Active' : 'Deactive'}
-                                                                        </td>
+                                                                        </td>-->
 
                                                                         <td>
                                                                             <a class="btn btn-primary editButton" type="button" onclick="editSetting(${s.id}, '${s.settingID}', '${s.type}', '${s.note}', '${s.description}', ${s.status});">Edit</a>
@@ -217,10 +217,10 @@
 
                                                         <div class="form-group  p-4">
                                                             <label for="settingStatus">Status:</label>
-                                                            <select id="settingStatus" name="settingStatus" class="form-control">
+<!--                                                            <select id="settingStatus" name="settingStatus" class="form-control">
                                                                 <option value="Active">Active</option>
                                                                 <option value="Deactive">Deactive</option>
-                                                            </select>
+                                                            </select>-->
                                                         </div>
 
                                                         <button type="submit" class="btn btn-primary ms-4">Add Setting</button>
@@ -256,7 +256,7 @@
                                                             <input type="text" id="editSettingDescription" placeholder="${s.description}" name="editSettingDescription" required class="form-control">
                                                         </div>
 
-                                                        <div class="form-group  p-4">
+<!--                                                        <div class="form-group  p-4">
                                                             <label for="editSettingStatus">Status:</label>
                                                             <div class="form-group  p-4">
                                                                 <label for="editSettingStatus">Status:</label>
@@ -273,7 +273,7 @@
                                                                     </c:choose>
                                                                 </select>
                                                             </div>
-                                                        </div>
+                                                       </div>-->
 
                                                         <button type="submit" class="btn btn-primary ms-4">Save Changes</button>
                                                         <button type="button" id="cancelEditButton" class="ms-4 btn btn-secondary">Cancel</button>
