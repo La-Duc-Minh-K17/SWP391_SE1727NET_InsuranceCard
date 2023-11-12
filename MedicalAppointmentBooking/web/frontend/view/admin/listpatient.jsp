@@ -126,8 +126,6 @@ Author     : PC
                                                     <th class="border-bottom p-3">DOB</th>
                                                     <th class="border-bottom p-3">Gender</th>
                                                     <th class="border-bottom p-3">Status</th>
-
-
                                                 </tr>
                                             </thead>
                                             <tbody>
