@@ -145,12 +145,12 @@ public class SettingDAO {
         Connection connection = dbc.getConnection();
         try {
             String query = "INSERT INTO speciality (speName, speDescription, speStatus, setting_id)\n"
-                    + "VALUES (?,?,  ?, 4)";
+                    + "VALUES (?,?,  1, 4)";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(1, speciality.getSpeName());
             statement.setString(2, speciality.getSpeDescription());
-            statement.setInt(3, speciality.getSpeStatus());
+            //statement.setInt(3, speciality.getSpeStatus());
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -161,11 +161,11 @@ public class SettingDAO {
         Connection connection = dbc.getConnection();
         try {
             String query = "INSERT INTO user_role (role_name, role_description, role_Status, setting_id)\n"
-                    + "VALUES (?, ?, ?, 1);";
+                    + "VALUES (?, ?, 1, 1);";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, role.getRole_name());
             statement.setString(2, role.getRole_description());
-            statement.setInt(3, role.getStatus());
+            //statement.setInt(3, role.getStatus());
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -176,12 +176,12 @@ public class SettingDAO {
         Connection connection = dbc.getConnection();
         try {
             String query = "INSERT INTO service_category (sc_name, sc_description, sc_status, setting_id)\n"
-                    + "VALUES (?, ?, ?, 3);";
+                    + "VALUES (?, ?, 1, 3);";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(1, service.getName());
             statement.setString(2, service.getDescription());
-            statement.setInt(3, service.getStatus());
+            //statement.setInt(3, service.getStatus());
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -192,11 +192,11 @@ public class SettingDAO {
         Connection connection = dbc.getConnection();
         try {
             String query = "INSERT INTO blog_category (name, description,status, setting_id)\n"
-                    + "VALUES (?, ?, ?, 2);";
+                    + "VALUES (?, ?, 1, 2);";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, blog.getName());
             statement.setString(2, blog.getDescription());
-            statement.setInt(3, blog.getStatus());
+           // statement.setInt(3, blog.getStatus());
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -207,13 +207,13 @@ public class SettingDAO {
         Connection connection = dbc.getConnection();
         try {
             String query = "UPDATE speciality\n"
-                    + "SET speName = ?, speDescription = ?, speStatus = ?\n"
+                    + "SET speName = ?, speDescription = ?\n"
                     + "WHERE speciality_id =" + id + ";";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(1, speciality.getSpeName() );
             statement.setString(2, speciality.getSpeDescription());
-            statement.setInt(3, speciality.getSpeStatus());
+            //statement.setInt(3, speciality.getSpeStatus());
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -224,12 +224,12 @@ public class SettingDAO {
         Connection connection = dbc.getConnection();
         try {
             String query = "update user_role\n"
-                    + "set role_name = ?,role_description=?,role_status= ?\n"
+                    + "set role_name = ?,role_description=?\n"
                     + "where role_id = " + id + ";";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, role.getRole_name() );
             statement.setString(2, role.getRole_description());
-            statement.setInt(3, role.getStatus());
+           // statement.setInt(3, role.getStatus());
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -240,13 +240,13 @@ public class SettingDAO {
         Connection connection = dbc.getConnection();
         try {
             String query = "update service_category\n"
-                    + "set sc_name = ?, sc_description=?,sc_status=?\n"
+                    + "set sc_name = ?, sc_description=?\n"
                     + "where service_category_id =" + id + ";";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(1,   service.getName() );
             statement.setString(2,   service.getDescription());
-            statement.setInt(3, service.getStatus());
+            //statement.setInt(3, service.getStatus());
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -257,12 +257,12 @@ public class SettingDAO {
         Connection connection = dbc.getConnection();
         try {
             String query = "update blog_category\n"
-                    + "set name = ?, description=?,status=?\n"
+                    + "set name = ?, description=?\n"
                     + "where blog_category_id =" + id + ";";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1,blog.getName());
             statement.setString(2,blog.getDescription());
-            statement.setInt(3, blog.getStatus());
+            //statement.setInt(3, blog.getStatus());
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);

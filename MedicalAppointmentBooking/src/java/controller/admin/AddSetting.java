@@ -82,13 +82,13 @@ public class AddSetting extends HttpServlet {
         String settingType = request.getParameter("settingType");
         String settingValue = request.getParameter("settingValue");
         String settingDescription = request.getParameter("settingDescription");
-        String settingStatus = request.getParameter("settingStatus");
-        int status;
-        if (settingStatus.equalsIgnoreCase("Active")) {
-            status = 1;
-        } else {
-            status = 0;
-        }
+//        String settingStatus = request.getParameter("settingStatus");
+//        int status;
+//        if (settingStatus.equalsIgnoreCase("Active")) {
+//            status = 1;
+//        } else {
+//            status = 0;
+//        }
 
         SettingDAO db = new SettingDAO();
 
@@ -96,25 +96,25 @@ public class AddSetting extends HttpServlet {
             Role role = new Role();
             role.setRole_name(settingValue);
             role.setRole_description(settingDescription);
-            role.setStatus(status);
+           // role.setStatus(status);
             db.insertRole(role);
         } else if (settingType.equalsIgnoreCase("speciality")) {
             Speciality spe = new Speciality();
             spe.setSpeName(settingValue);
             spe.setSpeDescription(settingDescription);
-            spe.setSpeStatus(status);
+            //spe.setSpeStatus(status);
             db.insertSpeciality(spe);
         } else if (settingType.equalsIgnoreCase("service")) {
             Service_Category service = new Service_Category();
             service.setName(settingValue);
             service.setDescription(settingDescription);
-            service.setStatus(status);
+            //service.setStatus(status);
             db.insertService(service);
         } else if (settingType.equalsIgnoreCase("blog")) {
             Blog_Category blog = new Blog_Category();
             blog.setName(settingValue);
             blog.setDescription(settingDescription);
-            blog.setStatus(status);
+           // blog.setStatus(status);
             db.insertBlog(blog);
         }
         SettingDAO st = new SettingDAO();
