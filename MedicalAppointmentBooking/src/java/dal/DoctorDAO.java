@@ -300,7 +300,7 @@ public class DoctorDAO {
         return doctorList;
     }
 
-    public void updateDoctor(int doctorId, String name, int gender, String phone, int speciality_id, String position, String description,  Part image) {
+    public void updateDoctor(int doctorId, String name, int gender, String phone, int speciality_id, String position, String description, Part image) {
         PreparedStatement ps = null;
         InputStream fileImage = ImageProcessing.imageStream(image);
         String sql = "UPDATE mabs.doctors d\n"
@@ -312,7 +312,7 @@ public class DoctorDAO {
                 + "  d.speciality_id = ?,\n"
                 + "  d.doctor_position = ?,\n"
                 + "  d.doctor_description = ?\n";
-              
+
         if (fileImage != null) {
             sql = sql + " , u.image = ? \n";
         }
@@ -328,7 +328,7 @@ public class DoctorDAO {
             ps.setInt(4, speciality_id);
             ps.setString(5, position);
             ps.setString(6, description);
-           
+
             if (fileImage != null) {
                 ps.setBlob(7, fileImage);
                 ps.setInt(8, doctorId);
@@ -358,6 +358,7 @@ public class DoctorDAO {
                 + "    ua.full_name AS patient_name,\n"
                 + "    ua.image,\n"
                 + "    da.full_name AS doctor_name,\n"
+                + "    df.feedback_id,\n"
                 + "    df.content,\n"
                 + "    df.rate,\n"
                 + "    df.create_time\n"
@@ -380,7 +381,10 @@ public class DoctorDAO {
                 float rate = rs.getFloat("rate");
                 acc.setFullName(patientName);
                 acc.setImage(image);
+
                 DoctorFeedback d = new DoctorFeedback();
+                int id = rs.getInt("feedback_id");
+                d.setFeedback_id(id);
                 d.setDoctorName(doctorName);
                 d.setContent(content);
                 d.setCreate_time(create_time);
@@ -411,6 +415,7 @@ public class DoctorDAO {
                 + "    ua.full_name AS patient_name,\n"
                 + "    ua.image,\n"
                 + "    da.full_name AS doctor_name,\n"
+                + "    df.feedback_id,\n"
                 + "    df.content,\n"
                 + "    df.rate,\n"
                 + "    df.create_time\n"
@@ -433,11 +438,11 @@ public class DoctorDAO {
                 String content = rs.getString("content");
                 Timestamp create_time = rs.getTimestamp("create_time");
                 float rate = rs.getFloat("rate");
-
                 acc.setFullName(patientName);
                 acc.setImage(image);
-
                 DoctorFeedback d = new DoctorFeedback();
+                int id = rs.getInt("feedback_id");
+                d.setFeedback_id(id);
                 d.setDoctorName(doctorName);
                 d.setContent(content);
                 d.setCreate_time(create_time);
@@ -468,6 +473,7 @@ public class DoctorDAO {
                 + "    ua.full_name AS patient_name,\n"
                 + "    ua.image,\n"
                 + "    da.full_name AS doctor_name,\n"
+                + "    df.feedback_id,\n"
                 + "    df.content,\n"
                 + "    df.rate,\n"
                 + "    df.create_time\n"
@@ -492,6 +498,8 @@ public class DoctorDAO {
                 acc.setFullName(patientName);
                 acc.setImage(image);
                 DoctorFeedback d = new DoctorFeedback();
+                int id = rs.getInt("feedback_id");
+                d.setFeedback_id(id);
                 d.setDoctorName(doctorName);
                 d.setContent(content);
                 d.setCreate_time(create_time);
@@ -541,15 +549,14 @@ public class DoctorDAO {
                 String patientName = rs.getString("patient_name");
                 String image = ImageProcessing.imageString(rs.getBlob("image"));
                 String doctorName = rs.getString("doctor_name");
-
                 String content = rs.getString("content");
                 Timestamp create_time = rs.getTimestamp("create_time");
                 float rate = rs.getFloat("rate");
-
                 acc.setFullName(patientName);
                 acc.setImage(image);
-
                 DoctorFeedback d = new DoctorFeedback();
+                int fId = rs.getInt("feedback_id");
+                d.setFeedback_id(fId);
                 d.setDoctorName(doctorName);
                 d.setContent(content);
                 d.setCreate_time(create_time);
@@ -589,15 +596,14 @@ public class DoctorDAO {
                 UserAccount acc = new UserAccount();
                 String name = rs.getString("full_name");
                 String image = ImageProcessing.imageString(rs.getBlob("image"));
-
                 Timestamp create_time = rs.getTimestamp("create_time");
                 String content = rs.getString("content");
                 float rate = rs.getFloat("rate");
-
                 acc.setFullName(name);
                 acc.setImage(image);
-
                 DoctorFeedback d = new DoctorFeedback();
+                int fId = rs.getInt("feedback_id");
+                d.setFeedback_id(fId);
                 d.setUser(acc);
                 d.setCreate_time(create_time);
                 d.setContent(content);
@@ -710,7 +716,40 @@ public class DoctorDAO {
                 count = rs.getInt(1);
             }
         } catch (Exception e) {
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
         }
         return count;
+    }
+
+    public void deleteFeedback(int feedbackId) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection connection = null;
+        String sql = "Delete FROM doctor_feedback where  feedback_id = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, feedbackId);
+            int i = ps.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+
     }
 }
