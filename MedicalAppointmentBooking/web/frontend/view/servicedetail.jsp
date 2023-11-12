@@ -4,6 +4,7 @@
     Author     : PC
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,7 +104,8 @@
             <div>
                 <h5 class="card-title mt-4 mb-0">Comments :</h5>
                 <ul class="media-list list-unstyled mb-0">
-                    <c:forEach items="${review}" var="rv">
+                  
+                   <c:forEach items="${reviews}" var="rv">
                         <li class="mt-4">
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex align-items-center">

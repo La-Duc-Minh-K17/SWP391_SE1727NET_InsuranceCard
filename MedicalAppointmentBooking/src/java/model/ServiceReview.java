@@ -84,5 +84,10 @@ public class ServiceReview {
     public void setRate(float rate) {
         this.rate = rate;
     }
+
+    @Override
+    public String toString() {
+        return "ServiceReview{" + "review_id=" + review_id + ", user_id=" + user_id + ", user=" + user + ", service_id=" + service_id + ", create_time=" + create_time + ", review=" + review + ", rate=" + rate + ", service=" + service + '}';
+    }
     
 }

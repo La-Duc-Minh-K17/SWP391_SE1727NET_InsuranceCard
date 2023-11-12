@@ -323,10 +323,9 @@
         <url-pattern>/user-reservation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>EditSetting</servlet-name>
         <url-pattern>/admin-editsetting</url-pattern>
-</servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DashBoard</servlet-name>
         <url-pattern>/admin-dashboard</url-pattern>
