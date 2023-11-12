@@ -114,15 +114,7 @@
                                                 </a><!--end nav link-->
                                             </li><!--end nav item-->
 
-                                            <li class="nav-item">
-                                                <a class="nav-link rounded-0" id="timetable-tab" data-bs-toggle="pill"
-                                                   href="#pills-timetable" role="tab" aria-controls="pills-timetable"
-                                                   aria-selected="false">
-                                                    <div class="text-center pt-1 pb-1">
-                                                        <h4 class="title fw-normal mb-0">List Patient</h4>
-                                                    </div>
-                                                </a>
-                                            </li>
+                                            
                                             <li class="nav-item">
                                                 <a class="nav-link rounded-0" id="review-tab" data-bs-toggle="pill"
                                                    href="#pills-review" role="tab" aria-controls="pills-review"
