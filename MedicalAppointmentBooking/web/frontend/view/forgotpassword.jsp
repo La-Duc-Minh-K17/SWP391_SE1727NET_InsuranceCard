@@ -24,11 +24,8 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-
     </head>
-
     <body>
-        <!-- Loader -->
         <div id="preloader">
             <div id="status">
                 <div class="spinner">
@@ -37,13 +34,9 @@
                 </div>
             </div>
         </div>
-        <!-- Loader -->
-
         <div class="back-to-home rounded d-none d-sm-block">
             <a href="index.html" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
         </div>
-
-        <!-- Hero Start -->
         <section class="bg-home d-flex bg-light align-items-center" >
             <div class="container">
                 <div class="row justify-content-center">

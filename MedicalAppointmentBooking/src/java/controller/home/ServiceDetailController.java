@@ -37,9 +37,6 @@ public class ServiceDetailController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-
-            
-
         }
     }
 
@@ -55,31 +52,35 @@ public class ServiceDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            ServicesDAO servicedao = new ServicesDAO();
-            DoctorDAO doctordao = new DoctorDAO();
-            String action = request.getParameter("action");
-            
-            if (action != null && action.equals("view-detail")) {
-                int id = Integer.parseInt(request.getParameter("id"));
-                int cateid = Integer.parseInt(request.getParameter("category_id"));
-                Service serviceDetail = new Service();
-                List<Service> sList = servicedao.getRelatedService(cateid);
-                List<Doctor> doctorList = doctordao.getAllDoctor();
-                serviceDetail = servicedao.getServiceById(id);
-                request.setAttribute("reviews",servicedao.getServiceReviewById(id) );
-                request.setAttribute("Lists", sList);
-                request.setAttribute("doctors", doctorList);
-                request.setAttribute("serviceDetail", serviceDetail);
-                request.getRequestDispatcher("frontend/view/servicedetail.jsp").forward(request, response);
-                return;
+        ServicesDAO servicedao = new ServicesDAO();
+        DoctorDAO doctordao = new DoctorDAO();
+        String action = request.getParameter("action");
+
+        if (action != null && action.equals("view-detail")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            int cateid = Integer.parseInt(request.getParameter("category_id"));
+            Service serviceDetail = new Service();
+            List<Service> sList = servicedao.getRelatedService(cateid);
+            List<Doctor> doctorList = doctordao.getAllDoctor();
+            serviceDetail = servicedao.getServiceById(id);
+            request.setAttribute("reviews", servicedao.getServiceReviewById(id));
+            request.setAttribute("Lists", sList);
+            request.setAttribute("doctors", doctorList);
+            request.setAttribute("serviceDetail", serviceDetail);
+            request.getRequestDispatcher("frontend/view/servicedetail.jsp").forward(request, response);
+            return;
+        }
+        if (action != null && action.equals("book-service")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            Service serviceDetail = servicedao.getServiceById(id);
+            Doctor chosenDoctor = (Doctor) SessionUtils.getInstance().getValue(request, "chosen_doctor");
+            if (chosenDoctor != null) {
+                SessionUtils.getInstance().removeValue(request, "chosen_doctor");
             }
-            if (action != null && action.equals("book-service")) {
-                int id = Integer.parseInt(request.getParameter("id"));
-                Service serviceDetail = servicedao.getServiceById(id);
-                SessionUtils.getInstance().putValue(request, "chosen_service", serviceDetail);
-                request.getRequestDispatcher("booking?action=form-filling").forward(request, response);
-                return;
-            }
+            SessionUtils.getInstance().putValue(request, "chosen_service", serviceDetail);
+            request.getRequestDispatcher("booking?action=form-filling").forward(request, response);
+            return;
+        }
 
     }
 

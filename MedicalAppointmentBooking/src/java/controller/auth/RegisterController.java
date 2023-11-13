@@ -51,7 +51,6 @@ public class RegisterController extends HttpServlet {
             if (uDAO.isAccountExisted(user)) {
                 request.setAttribute("error", "Account has existed in the system !");
             } else {
-                
                 SessionUtils.getInstance().putValue(request, "user", user);
                 String fullURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
                 String urlLink = fullURL + "/verify?action=confirm&token=" + confirmationToken; 

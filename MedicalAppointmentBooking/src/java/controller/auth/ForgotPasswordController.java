@@ -35,11 +35,7 @@ public class ForgotPasswordController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        response.setContentType("text/html;charset=UTF-8");
-      
         String action = request.getParameter("action");
-
         if (action != null && action.equals("send-link")) {
             String email = request.getParameter("email");
             UserAccount account = uDAO.getAccountByEmail(email);
@@ -59,7 +55,7 @@ public class ForgotPasswordController extends HttpServlet {
                 return;
             }
         }
-        if (action != null && action.equals("reset-password")) { 
+        if (action != null && action.equals("reset-password")) {
             String newpassword = request.getParameter("password");
             UserAccount account = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
             uDAO.updatePassword(account, newpassword);

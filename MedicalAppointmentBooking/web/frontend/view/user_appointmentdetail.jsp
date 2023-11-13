@@ -193,7 +193,7 @@
                                 </div>
                             </div>
                         </div>
-                        <c:if test="${appt.status == 'PENDING' || appt.status == 'CONFIRMED'}">
+                        <c:if test="${appt.doctor != null && appt.status == 'PENDING' || appt.status == 'CONFIRMED'}">
                             <div class="card border-0 shadow overflow-hidden mt-4 ">
                                 <div class=" p-3 d-flex justify-content-center ">
                                     <div class="me-5">
@@ -309,7 +309,7 @@
                         let data = {
                             type: "appointment",
                             chosenDate: chosendate,
-                            patientId :"",
+                            patientId: "",
                             doctor_id: "${appt.doctor.doctorId}"
                         };
 

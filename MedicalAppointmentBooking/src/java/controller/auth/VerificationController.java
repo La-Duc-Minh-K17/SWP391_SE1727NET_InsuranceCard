@@ -39,27 +39,28 @@ public class VerificationController extends HttpServlet {
         if (action != null && action.equals("confirm")) {
             UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
             Timestamp confirmationTokenTime = user.getConfirmationTokenTime();
-            if (!timeConfig.isExpired(confirmationTokenTime)) {         
+            if (!timeConfig.isExpired(confirmationTokenTime)) {
                 String urlToken = request.getParameter("token");
                 if (user.getConfirmationToken().equals(urlToken)) {
                     user.setStatus(1);
                     uDAO.addUserAccount(user);
-                    request.setAttribute("message", "Verify Successfully.");
-                    request.getRequestDispatcher("/login").forward(request, response);
+                    request.setAttribute("message", "Register Successfully.");
+                    request.getRequestDispatcher("/frontend/view/login.jsp").forward(request, response);
                     return;
                 } else {
-                    response.sendRedirect("error.jsp");
+                    request.setAttribute("error", "Verify failed!");
+                    request.getRequestDispatcher("/frontend/view/register.jsp").forward(request, response);
                     return;
                 }
             } else {
-                response.sendRedirect("error.jsp");
+                request.setAttribute("error", "Expired verification link. Please register again!");
+                request.getRequestDispatcher("/frontend/view/register.jsp").forward(request, response);
                 return;
             }
-
         }
         if (action != null && action.equals("verify-reset")) {
             UserAccount user = (UserAccount) SessionUtils.getInstance().getValue(request, "user");
-            request.getRequestDispatcher("frontend/view/resetpassword.jsp").forward(request, response);
+            request.getRequestDispatcher("/frontend/view/resetpassword.jsp").forward(request, response);
             return;
         }
     }
