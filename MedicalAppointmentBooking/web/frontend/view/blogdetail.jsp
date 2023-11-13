@@ -133,7 +133,7 @@
                                                                  class="img-fluid rounded"></a></div>
                                                     <div class="post-recent-content float-start"><a
                                                             href="newdetail?id=${o.blog_id}"">${o.title}</a><span
-                                                            class="text-muted mt-2">${created_time}</span></div>
+                                                            class="text-muted mt-2"><fmt:formatDate value="${o.created_time}" pattern="dd/MM/yyyy"/></span></div>
                                                 </div>
                                             </c:forEach>
                                         </div>
@@ -159,7 +159,7 @@
                                                 </div>
                                                 <div class="post-meta d-flex justify-content-around mt-3">
                                                     <div>
-                                                        <a href="#" class="btn btn-primary btn-sm">Book Appointment</a></div>
+                                                        <a href="frontend/view/bookingnodoctor.jsp" class="btn btn-primary btn-sm">Book Appointment</a></div>
                                                     <div>
                                                         <a href="#" class="btn btn-primary btn-sm">View Details</a>
                                                     </div>
