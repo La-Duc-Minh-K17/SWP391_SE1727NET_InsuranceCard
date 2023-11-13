@@ -77,46 +77,6 @@
                             <div class="">
                                 <img src="data:image/jpg;base64,${blog.image}" class="img-fluid rounded shadow" alt="">
                                 <p class="text-muted">${blog.content}</p>
-                                <h5 class="card-title mt-4 mb-0">Comments :</h5>
-                                <ul class="media-list list-unstyled mb-0">
-                                    <li class="mt-4">
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <a class="pe-3" href="#">
-                                                    <img src="../assets/images/client/01.jpg" class="img-fluid avatar avatar-md-sm rounded-circle shadow" alt="img">
-                                                </a>
-                                                <div class="commentor-detail">
-                                                    <h6 class="mb-0"><a href="javascript:void(0)" class="text-dark media-heading">Lorenzo Peterson</a></h6>
-                                                    <small class="text-muted">15th August, 2019 at 01:25 pm</small>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="mt-3">
-                                            <p class="text-muted font-italic p-3 bg-light rounded">" There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour "</p>
-                                        </div>
-                                    </li>
-
-
-                                </ul>
-
-                                <h5 class="card-title mt-4 mb-0">Leave A Comment :</h5>
-
-                                <form class="mt-3">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Your Comment</label>
-                                                <textarea id="message" placeholder="Your Comment" rows="5" name="message" class="form-control" required=""></textarea>
-                                            </div>
-                                        </div><!--end col-->
-                                        <div class="col-md-12">
-                                            <div class="send d-grid">
-                                                <button type="submit" class="btn btn-primary">Send Message</button>
-                                            </div>
-                                        </div><!--end col-->
-                                    </div><!--end row-->
-                                </form><!--end form-->
                             </div><!--end col-->
                         </div>
 
@@ -159,9 +119,9 @@
                                                 </div>
                                                 <div class="post-meta d-flex justify-content-around mt-3">
                                                     <div>
-                                                        <a href="#" class="btn btn-primary btn-sm">Book Appointment</a></div>
+                                                        <a href="WebDoctorDetail?action=book-doctor&doctorId=${doctor.doctorId}" class="btn btn-primary btn-sm">Book Appointment</a></div>
                                                     <div>
-                                                        <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                                                        <a href="WebDoctorDetail?action=view-detail&doctorId=${doctor.doctorId}" class="btn btn-primary btn-sm">View Details</a>
                                                     </div>
 
                                                 </div>

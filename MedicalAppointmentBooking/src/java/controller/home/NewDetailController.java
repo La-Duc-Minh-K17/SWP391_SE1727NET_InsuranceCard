@@ -34,8 +34,7 @@ public class NewDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+       
             int Id = Integer.parseInt(request.getParameter("id"));
             BlogDAO dao = new BlogDAO();
             List<Blog> blogsList3 = dao.getTop3News();
@@ -45,12 +44,13 @@ public class NewDetailController extends HttpServlet {
             DoctorDAO ddao = new DoctorDAO();
             Doctor doctor = ddao.getDoctorRelatedCategory(Id);
             System.out.println(doctor);
+            System.out.println(doctor);
             request.setAttribute("doctor", doctor);
             blogDetail = dao.getBlogDetailByID(Id);
             request.setAttribute("blogs6", blogsList6);
             request.setAttribute("blog", blogDetail);
             request.getRequestDispatcher("frontend/view/blogdetail.jsp").forward(request, response);
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
