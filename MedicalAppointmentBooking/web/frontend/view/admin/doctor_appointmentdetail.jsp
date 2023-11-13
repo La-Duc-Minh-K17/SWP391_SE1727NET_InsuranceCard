@@ -1,6 +1,7 @@
 <%-- Document : admin_appointmentdetail Created on : Oct 19, 2023, 2:40:48 PM Author : Admin --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -186,7 +187,7 @@
                                             <i
                                                 class="uil uil-calendar-alt align-text-bottom text-primary h5 mb-0 me-2"></i>
                                             <h6 class="mb-0">Date Of Birth</h6>
-                                            <p class="text-muted mb-0 ms-2">${appt.patient.dob}</p>
+                                            <p class="text-muted mb-0 ms-2"><fmt:formatDate value="${appt.patient.dob}" pattern="dd/MM/yyyy"/></p>
                                         </div>
                                         <div class="d-flex align-items-center mt-2">
                                             <i
@@ -222,7 +223,7 @@
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Appointment Time</label>
-                                                    <p>${appt.apptTime}</p>
+                                                    <p><fmt:formatDate value="${appt.apptTime}" pattern="dd/MM/yyyy"/></p>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
