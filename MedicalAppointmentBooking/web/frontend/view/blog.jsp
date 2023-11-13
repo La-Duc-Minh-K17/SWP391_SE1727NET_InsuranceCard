@@ -42,7 +42,7 @@
                             <nav aria-label="breadcrumb" class="d-inline-block mt-3">
                                 <ul class="breadcrumb bg-light rounded mb-0 py-1 px-2">
                                     <li class="breadcrumb-item"><a href="home">MABS</a></li>
-                                    <li class="breadcrumb-item active" href="new">Blogs</li>
+                                    <li class="breadcrumb-item"><a href="new">BLogs</a></li>
                                 </ul>
                             </nav>
                         </div>

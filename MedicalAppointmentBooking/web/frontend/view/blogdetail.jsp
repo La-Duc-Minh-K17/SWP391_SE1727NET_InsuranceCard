@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,6 +56,7 @@
                 </div>
             </div><!--end container-->
         </section>
+
         <main>
             <section class="section">
                 <div class="container">
@@ -67,10 +68,7 @@
                                         <div class="section-title text-center">
                                             <h3 class="sub-title mb-4">${blog.title}</h3>
                                             <ul class="list-unstyled mt-4">
-                                                <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i>
-                                                    <fmt:parseDate value="${blog.created_time}" pattern="yyyy-MM-dd" var="parsedDate" />
-                                                    <fmt:formatDate value="${parsedDate}" pattern="dd/MM/yyyy" var="formattedDate" />
-                                                    ${formattedDate}</li>
+                                                <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i> ${blog.created_time}</li>
                                             </ul>
                                         </div>
                                     </div><!--end col-->
@@ -78,7 +76,7 @@
                             </div><!--end container-->
                             <div class="">
                                 <img src="data:image/jpg;base64,${blog.image}" class="img-fluid rounded shadow" alt="">
-                                <div class="text-muted">${blog.content}</div>
+                                <p class="text-muted">${blog.content}</p>
                             </div><!--end col-->
                         </div>
 
@@ -95,9 +93,7 @@
                                                                  class="img-fluid rounded"></a></div>
                                                     <div class="post-recent-content float-start"><a
                                                             href="newdetail?id=${o.blog_id}"">${o.title}</a><span
-                                                            <fmt:parseDate value="${o.created_time}" pattern="yyyy-MM-dd" var="parsedDate" />
-                                                            <fmt:formatDate value="${parsedDate}" pattern="dd/MM/yyyy" var="formattedDate" />
-                                                            class="text-muted mt-2">${formattedDate }</span></div>
+                                                            class="text-muted mt-2">${created_time}</span></div>
                                                 </div>
                                             </c:forEach>
                                         </div>
@@ -123,9 +119,7 @@
                                                 </div>
                                                 <div class="post-meta d-flex justify-content-around mt-3">
                                                     <div>
-                                                        <a href="#" class="btn btn-primary btn-sm">Book Appointment</a></div>
-                                                    <div>
-                                                        <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                                                        <a href="WebDoctorDetail?action=view-detail&doctorId=${doctor.doctorId}" class="btn btn-primary btn-sm">View Details</a>
                                                     </div>
 
                                                 </div>
@@ -138,7 +132,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="container">
+               
+
+
+                <div class="container mt-100 mt-60">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="section-title">
@@ -146,7 +143,7 @@
                             </div>
                         </div><!--end col-->
                     </div><!--end row-->
-                    <div class="container" ">
+                    <div class="container" style="margin-top: 90px;">
                         <section class="blog_area section-padding">
                             <div class="container">
                                 <div class="row">
@@ -163,8 +160,7 @@
                                                                 <div class="card-body p-4">
                                                                     <ul class="list-unstyled mb-2">
                                                                         <li class="list-inline-item text-muted small me-3">
-                                                                            <fmt:formatDate value="${o.created_time}" pattern="dd/MM/yyyy" var="formattedDate" />
-                                                                            ${formattedDate}
+                                                                            ${o.created_time}
                                                                         </li>
                                                                         <li class="list-inline-item text-muted small"><i
                                                                                 class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
@@ -192,15 +188,21 @@
                     </div>
                 </div><!--end col-->
             </section>
+
+
         </main>
 
         <jsp:include page="/frontend/common/footer.jsp" />
-        <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.j'/>"></script>
-        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
+        <!-- MOdal End -->
+        <!-- javascript -->
+        <script src="frontend/template/assets/js/jquery.min.js"></script>
+        <script src="frontend/template/assets/js/bootstrap.bundle.min.js"></script>
+        <!-- SLIDER -->
+        <script src="frontend/template/assets/js/tiny-slider.js"></script>
+        <script src="frontend/template/assets/js/tiny-slider-init.js"></script>
+        <script src="frontend/template/assets/js/easy_background.js"></script>
+        <script src="frontend/template/assets/js/feather.min.js"></script>
+        <script src="frontend/template/assets/js/app.js"></script>
 
     </body>
 </html>
