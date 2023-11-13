@@ -530,6 +530,7 @@ public class DoctorDAO {
                 + "    ua.full_name AS patient_name,\n"
                 + "    ua.image,\n"
                 + "    da.full_name AS doctor_name,\n"
+                + "    df.feedback_id,\n"
                 + "    df.content,\n"
                 + "    df.rate,\n"
                 + "    df.create_time\n"
@@ -583,7 +584,7 @@ public class DoctorDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<DoctorFeedback> feedbackList = new ArrayList<>();
-        String sql = "select full_name , image,create_time,rate,content \n"
+        String sql = "select * \n"
                 + "from doctor_feedback df join user_account u on df.user_id = u.user_id\n"
                 + "where doctor_id = ?";
         Connection connection = null;

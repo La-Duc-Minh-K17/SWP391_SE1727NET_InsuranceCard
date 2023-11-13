@@ -367,7 +367,7 @@ public class AppointmentDAO {
         Connection connection = null;
         ResultSet rs = null;
         List<Appointment> listAppoint = new ArrayList<>();
-        String sql = "select * from appointments where doctor_id = ?;";
+        String sql = "select * from appointments where doctor_id = ? and appointment_status = 'CONFIRMED' OR appointment_status = 'RESCHEDULED'";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
