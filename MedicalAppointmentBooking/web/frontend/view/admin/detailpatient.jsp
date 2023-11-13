@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -96,7 +97,7 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <h5>Date Of Birth</h5>
-                                            <label class="form-label">${p.dob}  </label>
+                                            <label class="form-label"><fmt:formatDate value="${p.dob}" pattern="dd/MM/yyyy"/></label>
 
                                         </div>
                                     </div>
