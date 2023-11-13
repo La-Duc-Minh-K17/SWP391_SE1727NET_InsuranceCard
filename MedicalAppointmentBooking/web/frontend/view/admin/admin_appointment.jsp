@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -159,7 +160,7 @@
                                                                                 </div>
                                                                             </a>
                                                                         </td>
-                                                                        <td class="p-3">${appt.apptDate}</td>
+                                                                        <td class="p-3"><fmt:formatDate value="${appt.apptDate}" pattern="dd/MM/yyyy"/></td>
                                                                         <td class="p-3">${appt.apptTime}</td>
                                                                         <td class="p-3">
                                                                             <a href="#" class="text-dark">
