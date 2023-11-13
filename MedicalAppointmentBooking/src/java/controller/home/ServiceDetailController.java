@@ -55,7 +55,7 @@ public class ServiceDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       ServicesDAO servicedao = new ServicesDAO();
+            ServicesDAO servicedao = new ServicesDAO();
             DoctorDAO doctordao = new DoctorDAO();
             String action = request.getParameter("action");
             
@@ -66,7 +66,7 @@ public class ServiceDetailController extends HttpServlet {
                 List<Service> sList = servicedao.getRelatedService(cateid);
                 List<Doctor> doctorList = doctordao.getAllDoctor();
                 serviceDetail = servicedao.getServiceById(id);
-                request.setAttribute("review", servicedao.getServiceById(cateid));
+                request.setAttribute("reviews",servicedao.getServiceReviewById(id) );
                 request.setAttribute("Lists", sList);
                 request.setAttribute("doctors", doctorList);
                 request.setAttribute("serviceDetail", serviceDetail);

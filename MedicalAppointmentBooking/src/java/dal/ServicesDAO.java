@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -45,19 +45,14 @@ public class ServicesDAO {
                 UserAccount acc = new UserAccount();
                 String name = rs.getString("full_name");
                 String image = ImageProcessing.imageString(rs.getBlob("image"));
-
                 Service sv = new Service();
                 String service_name = rs.getString("service_name");
-
                 String review = rs.getString("review");
                 String create_time = rs.getString("create_time");
                 float rate = rs.getFloat("rate");
-
                 acc.setFullName(name);
                 acc.setImage(image);
-
                 sv.setService_name(service_name);
-
                 ServiceReview s = new ServiceReview();
                 s.setService(sv);
                 s.setUser(acc);
@@ -86,7 +81,7 @@ public class ServicesDAO {
         ResultSet rs = null;
         ServiceReview s = new ServiceReview();
         List<ServiceReview> reviewList = new ArrayList<>();
-        String sql = "select review_id,a.full_name,a.image,service_name,review,create_time,rate from \n"
+        String sql = "select * from \n"
                 + "user_account a join service_review sv on a.user_id=sv.user_id\n"
                 + "join services on sv.service_id=services.service_id\n"
                 + "where sv.service_id= ?";
@@ -101,19 +96,16 @@ public class ServicesDAO {
                 UserAccount acc = new UserAccount();
                 String name = rs.getString("full_name");
                 String image = ImageProcessing.imageString(rs.getBlob("image"));
-
                 Service sv = new Service();
                 String service_name = rs.getString("service_name");
-
                 String review = rs.getString("review");
                 String create_time = rs.getString("create_time");
+                int reviewId = rs.getInt("review_id");
                 float rate = rs.getFloat("rate");
-
                 acc.setFullName(name);
                 acc.setImage(image);
-
                 sv.setService_name(service_name);
-
+                s.setReview_id(reviewId);
                 s.setService(sv);
                 s.setUser(acc);
                 s.setRate(rate);

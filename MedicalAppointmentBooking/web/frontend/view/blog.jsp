@@ -18,10 +18,7 @@
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/newstyle.css" rel="stylesheet" type="text/css" id="theme-opt" />
-
-        <!-- SLIDER -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/tiny-slider.css"/>
-        <!-- Select2 -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
         <!-- Date picker -->
         <link rel="stylesheet" href="frontend/template/assets/css/flatpickr.min.css">
@@ -32,11 +29,7 @@
             }
         </style>
     <body>
-
-
-
         <jsp:include page="/frontend/common/header.jsp" />
-
         <section class="bg-half-60 d-table w-100" id="home">
             <div class="bg-overlay bg-overlay-dark"></div>
             <div class="container">
@@ -57,13 +50,11 @@
                 </div>
             </div><!--end container-->
         </section>
-
-
         <div class="container" style="margin-top: 90px;">
             <section class="blog_area section-padding">
                 <div class="container">
                     <div class="row">
-                        <h6 class="widget_title h4" >Recent Post</h6>                          
+                        <h6 class="widget_title h4">Recent Post</h6>                          
                         <c:forEach var="o" items="${requestScope.blogs3}">
 
                             <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2" value="${o.blog_id}">
@@ -118,7 +109,6 @@
                             </div><!--end col-->
                             <div class="col-3">
                                 <div class="card component-wrapper border-0 rounded ">
-
                                     <div class="">
                                         <select class="form-select form-control" class="name" name="category" id="category">
                                             <option value="0" ${requestScope.selectedCategory == 0 ? 'selected' : ''}>All Category</option>
@@ -134,7 +124,6 @@
                             </div>
                         </div>
                     </form>
-
             </section>
         </div>
 
@@ -168,44 +157,29 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>  
                 </c:forEach>
-
             </div>
         </div>
+        <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
+        <div class="modal fade" id="watchvideomodal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content video-modal rounded overflow-hidden">
+                    <video class="w-100" controls autoplay muted loop>
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">>
+                        <!--Browser does not support <video> tag -->
+                    </video>
+                </div>
+            </div>
+        </div>
+        <jsp:include page="/frontend/common/footer.jsp" />
+        <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.j'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
 
-
-            <jsp:include page="/frontend/common/footer.jsp" />
-            <!-- MOdal End -->
-            <!-- javascript -->
-            <script src="frontend/template/assets/js/jquery.min.js"></script>
-            <script src="frontend/template/assets/js/bootstrap.bundle.min.js"></script>
-            <!-- SLIDER -->
-            <script src="frontend/template/assets/js/tiny-slider.js"></script>
-            <script src="frontend/template/assets/js/tiny-slider-init.js"></script>
-            <script src="frontend/template/assets/js/easy_background.js"></script>
-            <!-- Select2 -->
-            <script src="frontend/template/assets/js/select2.min.js"></script>
-            <script src="frontend/template/assets/js/select2.init.js"></script>
-            <!-- Datepicker -->
-            <script src="frontend/template/assets/js/flatpickr.min.js"></script>
-            <script src="frontend/template/assets/js/flatpickr.init.js"></script>
-            <!-- Datepicker -->
-            <script src="frontend/template/assets/js/jquery.timepicker.min.js"></script> 
-            <script src="frontend/template/assets/js/timepicker.init.js"></script> 
-            <!-- Icons -->
-            <script src="frontend/template/assets/js/feather.min.js"></script>
-            <!-- Main Js -->
-            <script src="frontend/template/assets/js/app.js"></script>
-            <script>
-                // easy_background("#home",
-                //     {
-                //         slide: ["../assets/images/bg/02.jpg", "../assets/images/bg/03.jpg", "../assets/images/bg/04.jpg"],
-                //         delay: [1000, 1000, 1000]
-                //     }
-                // );
-            </script>
     </body>
 </html>

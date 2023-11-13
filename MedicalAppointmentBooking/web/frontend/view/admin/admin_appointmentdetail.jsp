@@ -3,7 +3,7 @@
     Created on : Oct 19, 2023, 2:40:48 PM
     Author     : Admin
 --%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -184,7 +184,8 @@
                                         <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Appointment Date</label>
-                                                <p>${appt.apptDate}</p>
+                                                <fmt:formatDate value="${appt.apptDate}" pattern="dd/MM/yyyy" var="formattedDate" />
+                                                <p> ${formattedDate}</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -410,6 +411,7 @@
                     let chosendate = $("#checkin-date").val();
                     let data = {
                         type: "appointment",
+                        patientId: "${appt.patient.patientId}",
                         chosenDate: chosendate,
                         doctor_id: $("#doctor").val()
                     };

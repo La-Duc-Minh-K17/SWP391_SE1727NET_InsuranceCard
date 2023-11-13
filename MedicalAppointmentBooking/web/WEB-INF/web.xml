@@ -4,7 +4,10 @@
         <filter-name>Authorization</filter-name>
         <filter-class>authorization.Authorization</filter-class>
     </filter>
-   
+    <filter-mapping>
+        <filter-name>Authorization</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>controller.auth.RegisterController</servlet-class>
@@ -107,7 +110,7 @@
     </servlet>
     <servlet>
         <servlet-name>DoctorFeedback</servlet-name>
-        <servlet-class>controller.admin.DoctorFeedback</servlet-class>
+        <servlet-class>controller.manager.DoctorFeedback</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserProfileController</servlet-name>
@@ -158,14 +161,12 @@
         <servlet-class>controller.user.UserReservation</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>EditSetting</servlet-name>
         <servlet-class>controller.admin.EditSetting</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DashBoard</servlet-name>
         <servlet-class>controller.admin.DashBoard</servlet-class>
-
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
@@ -320,10 +321,9 @@
         <url-pattern>/user-reservation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>EditSetting</servlet-name>
         <url-pattern>/admin-editsetting</url-pattern>
-</servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DashBoard</servlet-name>
         <url-pattern>/admin-dashboard</url-pattern>

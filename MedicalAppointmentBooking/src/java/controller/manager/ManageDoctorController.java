@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.util.List;
 import model.Doctor;
+import model.DoctorFeedback;
 import model.Patient;
 
 /**
@@ -86,6 +87,8 @@ public class ManageDoctorController extends HttpServlet {
             int doctorId = Integer.parseInt(request.getParameter("id"));
             Doctor doctor = dDAO.getDoctorById(doctorId);
             List<Patient> patient = pDAO.getPatientByDoctorId(doctorId);
+            List<DoctorFeedback> fb = dDAO.getDoctorFeedbackByDoctorId(doctorId);
+            request.setAttribute("feedback", fb);
             request.setAttribute("patient", patient);
             request.setAttribute("doctor", doctor);
             request.getRequestDispatcher("frontend/view/admin/doctordetail.jsp").forward(request, response);

@@ -98,7 +98,7 @@
                                             <i class="uil uil-sign-out-alt align-middle h6"></i></span>User Profile</a>
                                         </c:if>
                                         <c:if test="${sessionScope.user != null}">
-                                    <a class="dropdown-item text-dark" href="home?action=logout"><span class="mb-0 d-inline-block me-1">
+                                    <a class="dropdown-item text-dark" href="<c:url value= '/home?action=logout'/>"><span class="mb-0 d-inline-block me-1">
                                             <i class="uil uil-sign-out-alt align-middle h6"></i></span>Sign out</a>
                                         </c:if>
                                         <c:if test="${sessionScope.user == null}">

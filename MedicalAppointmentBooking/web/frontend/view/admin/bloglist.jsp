@@ -194,7 +194,7 @@
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <form action="manageblog?action=delete" method="post">
+                <form action="manage-blog?action=delete" method="post">
                     <div class="modal-content">
                         <div class="modal-header border-bottom p-3">
                             <h5 class="modal-title" id="exampleModalLabel">Delete</h5>

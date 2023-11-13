@@ -367,7 +367,7 @@ public class AppointmentDAO {
         Connection connection = null;
         ResultSet rs = null;
         List<Appointment> listAppoint = new ArrayList<>();
-        String sql = "select * from appointments where doctor_id = ?;";
+        String sql = "select * from appointments where doctor_id = ? and appointment_status = 'CONFIRMED' OR appointment_status = 'RESCHEDULED'";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
@@ -569,7 +569,7 @@ public class AppointmentDAO {
         return listAppt;
     }
 
-    public List<String> getAvailableTimeSlot(int doctorId, String date) {
+    public List<String> getAvailableTimeSlot(int patientId, int doctorId, String date) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -587,7 +587,7 @@ public class AppointmentDAO {
         timeSlot.add("17:00:00");
         String sql = "SELECT appointment_time\n"
                 + "FROM appointments\n"
-                + "WHERE doctor_id = ? AND appointment_date = ? ";
+                + "WHERE doctor_id = ? AND appointment_date = ?  and appointment_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED') ";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
@@ -598,6 +598,10 @@ public class AppointmentDAO {
                 if (timeSlot.contains(rs.getString(1))) {
                     timeSlot.remove(rs.getString(1));
                 }
+            }
+            List<String> bookedServiceInDay = getBookedServiceSlotTime(patientId, date);
+            for (String s : bookedServiceInDay) {
+                timeSlot.remove(s);
             }
             LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             LocalDate currentDate = LocalDate.now();
@@ -627,9 +631,38 @@ public class AppointmentDAO {
         return timeSlot;
     }
 
+    public List<String> getBookedServiceSlotTime(int patientId, String date) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        List<String> resultList = new ArrayList<>();
+        String sql = "Select reservation_time from reservations where patient_id = ? and reservation_date = ? and reservation_status not in  ('CANCELLED')";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, patientId);
+            ps.setDate(2, TimeUtil.dateConverter1(date));
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                resultList.add(rs.getString("reservation_time"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return resultList;
+    }
+
     private final int MAX_LIMIT_TIME_PER_MONTH = 2;
 
-    public boolean checkLimitedTime(Appointment appt , String status1 , String status2) {
+    public boolean checkLimitedTime(Appointment appt, String status1, String status2) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -660,5 +693,31 @@ public class AppointmentDAO {
             }
         }
         return true;
+    }
+
+    public void updateTime(Appointment appt) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "UPDATE `mabs`.`appointments`\n"
+                + "SET\n"
+                + "`updated_time` = ?\n"
+                + "WHERE `appointment_id` = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setTimestamp(1, appt.getUpdatedTime());
+            ps.setInt(2, appt.getApptId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
     }
 }

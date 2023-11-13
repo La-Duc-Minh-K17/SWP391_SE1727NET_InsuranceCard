@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.admin;
+package controller.manager;
 
 import dal.DoctorDAO;
 import java.io.IOException;
@@ -30,7 +30,15 @@ public class DoctorFeedback extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
         DoctorDAO d = new DoctorDAO();
+        
         request.setAttribute("doctorList", d.getAllDoctor());
+        if (action != null && action.equals("delete")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            d.deleteFeedback(id);
+            System.out.println(id);
+            response.sendRedirect("manage-doctorfeedback?action=view-all");
+            return;
+        }
         if (action != null && action.equals("view-all")) {
             request.setAttribute("doctorFeedback", d.getDoctorFeedback());
             request.getRequestDispatcher("frontend/view/doctorfeedback.jsp").forward(request, response);
@@ -53,7 +61,7 @@ public class DoctorFeedback extends HttpServlet {
             }
             return;
         }
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -309,6 +309,7 @@
                         let data = {
                             type: "appointment",
                             chosenDate: chosendate,
+                            patientId :"",
                             doctor_id: "${appt.doctor.doctorId}"
                         };
 

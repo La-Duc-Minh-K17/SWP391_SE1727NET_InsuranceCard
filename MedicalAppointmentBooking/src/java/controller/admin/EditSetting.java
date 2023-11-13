@@ -81,38 +81,38 @@ public class EditSetting extends HttpServlet {
         String editSettingType = request.getParameter("editSettingType");
         String editSettingValue = request.getParameter("editSettingValue");
         String editSettingDescription = request.getParameter("editSettingDescription");
-        String editSettingStatus = request.getParameter("editSettingStatus");
-        int status;
-        if (editSettingStatus.equalsIgnoreCase("Active")) {
-            status = 1;
-        } else {
-            status = 0;
-        }
+//        String editSettingStatus = request.getParameter("editSettingStatus");
+//        int status;
+//        if (editSettingStatus.equalsIgnoreCase("Active")) {
+//            status = 1;
+//        } else {
+//            status = 0;
+//        }
         SettingDAO db = new SettingDAO();
 
         if (editSettingType.equalsIgnoreCase("user")) {
             Role role = new Role();
             role.setRole_name(editSettingValue);
             role.setRole_description(editSettingDescription);
-            role.setStatus(status);
+            //role.setStatus(status);
             db.updateRole(role,id);
         } else if (editSettingType.equalsIgnoreCase("speciality")) {
             Speciality spe = new Speciality();
             spe.setSpeName(editSettingValue);
             spe.setSpeDescription(editSettingDescription);
-            spe.setSpeStatus(status);
+           // spe.setSpeStatus(status);
             db.updateSpeciality(spe,id);
         } else if (editSettingType.equalsIgnoreCase("service")) {
             Service_Category service = new Service_Category();
             service.setName(editSettingValue);
             service.setDescription(editSettingDescription);
-            service.setStatus(status);
+            //service.setStatus(status);
             db.updateService(service,id);
         } else if (editSettingType.equalsIgnoreCase("blog")) {
             Blog_Category blog = new Blog_Category();
             blog.setName(editSettingValue);
             blog.setDescription(editSettingDescription);
-            blog.setStatus(status);
+            //blog.setStatus(status);
             db.updateBlog(blog,id);
         }
         SettingDAO st = new SettingDAO();

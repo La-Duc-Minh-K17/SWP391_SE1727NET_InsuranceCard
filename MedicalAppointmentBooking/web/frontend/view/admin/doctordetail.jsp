@@ -20,6 +20,11 @@
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
     </head>
+    <style>
+        .star-gold {
+            color: gold; /* Thay đổi màu của ngôi sao thành vàng */
+        }
+    </style>
     <body>
         <div id="preloader">
             <div id="status">
@@ -89,50 +94,42 @@
                                 <div class="p-5 bg-primary bg-gradient"></div>
                                 <div class="avatar-profile d-flex margin-nagative mt-n5 position-relative ps-3">
                                     <img src="data:image/jpg;base64,${doctor.image}"
-                                         class="rounded-circle shadow-md avatar avatar-medium" alt="">
-                                    <div class="mt-4 ms-3 pt-3">
-                                        <h5 class="mt-3 mb-1">Dr. ${doctor.fullName}</h5>
-                                    </div>
+                                     class="rounded-circle shadow-md avatar avatar-medium" alt="">
+                                <div class="mt-4 ms-3 pt-3">
+                                    <h5 class="mt-3 mb-1">Dr. ${doctor.fullName}</h5>
                                 </div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-12 mt-4">
-                                        <div class="card border-0 rounded-0 p-4">
-                                            <ul class="nav nav-pills nav-justified flex-column flex-sm-row rounded shadow overflow-hidden bg-light"
-                                                id="pills-tab" role="tablist">
-                                                <li class="nav-item">
-                                                    <a class="nav-link rounded-0 active" id="overview-tab" data-bs-toggle="pill"
-                                                       href="#pills-overview" role="tab" aria-controls="pills-overview"
-                                                       aria-selected="false">
-                                                        <div class="text-center pt-1 pb-1">
-                                                            <h4 class="title fw-normal mb-0">Overview</h4>
-                                                        </div>
-                                                    </a><!--end nav link-->
-                                                </li><!--end nav item-->
+                            <div class="row">
+                                <div class="col-12 mt-4">
+                                    <div class="card border-0 rounded-0 p-4">
+                                        <ul class="nav nav-pills nav-justified flex-column flex-sm-row rounded shadow overflow-hidden bg-light"
+                                            id="pills-tab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link rounded-0 active" id="overview-tab" data-bs-toggle="pill"
+                                                   href="#pills-overview" role="tab" aria-controls="pills-overview"
+                                                   aria-selected="false">
+                                                    <div class="text-center pt-1 pb-1">
+                                                        <h4 class="title fw-normal mb-0">Overview</h4>
+                                                    </div>
+                                                </a><!--end nav link-->
+                                            </li><!--end nav item-->
 
-                                                <li class="nav-item">
-                                                    <a class="nav-link rounded-0" id="timetable-tab" data-bs-toggle="pill"
-                                                       href="#pills-timetable" role="tab" aria-controls="pills-timetable"
-                                                       aria-selected="false">
-                                                        <div class="text-center pt-1 pb-1">
-                                                            <h4 class="title fw-normal mb-0">List Patient</h4>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link rounded-0" id="review-tab" data-bs-toggle="pill"
-                                                       href="#pills-review" role="tab" aria-controls="pills-review"
-                                                       aria-selected="false">
-                                                        <div class="text-center pt-1 pb-1">
-                                                            <h4 class="title fw-normal mb-0">Feedbacks</h4>
-                                                        </div>
-                                                    </a><!--end nav link-->
-                                                </li><!--end nav item-->
-                                            </ul>
-                                            <div class="tab-content mt-2" id="pills-tabContent">
-                                                <div class="tab-pane fade show active" id="pills-overview" role="tabpanel"
-                                                     aria-labelledby="overview-tab">
-                                                    <p class="text-muted">${doctor.description}</p>
+                                            
+                                            <li class="nav-item">
+                                                <a class="nav-link rounded-0" id="review-tab" data-bs-toggle="pill"
+                                                   href="#pills-review" role="tab" aria-controls="pills-review"
+                                                   aria-selected="false">
+                                                    <div class="text-center pt-1 pb-1">
+                                                        <h4 class="title fw-normal mb-0">Feedbacks</h4>
+                                                    </div>
+                                                </a><!--end nav link-->
+                                            </li><!--end nav item-->
+                                        </ul>
+                                        <div class="tab-content mt-2" id="pills-tabContent">
+                                            <div class="tab-pane fade show active" id="pills-overview" role="tabpanel"
+                                                 aria-labelledby="overview-tab">
+                                                <p class="text-muted">${doctor.description}</p>
                                                 <h6 class="mb-0">Information: </h6>
 
                                                 <ul class="list-unstyled mt-4">
@@ -150,7 +147,7 @@
                                                     <li class="mt-1"><i class="uil uil-mailbox text-primary "> Email:</i>
                                                         <span class=" ms-5 h6">${doctor.email}</span>
                                                     </li>
-                                                     <li class="mt-1"><i class="uil uil-user-nurse text-primary "> Speciality:</i>
+                                                    <li class="mt-1"><i class="uil uil-user-nurse text-primary "> Speciality:</i>
                                                         <span class="ms-5 h6">${doctor.speciality   }</span>
                                                     </li>
                                                     <li class="mt-1"><i class="uil uil-user-nurse text-primary "> Position:</i>
@@ -158,9 +155,9 @@
                                                     </li>
                                                     <li class="mt-1"><i class="uil uil-user-check text-primary "> Status:</i>
                                                         <span class="ms-5 h6">
-                                                        <c:if test= "${doctor.status == 0}">Inactive</c:if>
-                                                        <c:if test= "${doctor.status == 1}">Active</c:if>
-                                                        </span>
+                                                            <c:if test= "${doctor.status == 0}">Inactive</c:if>
+                                                            <c:if test= "${doctor.status == 1}">Active</c:if>
+                                                            </span>
                                                         </li>
                                                     </ul>
 
@@ -170,56 +167,85 @@
                                                 <div class="tab-pane fade" id="pills-review" role="tabpanel"
                                                      aria-labelledby="review-tab">
                                                     <div class="row justify-content-center">
-                                                        <div class="col-lg-8 text-center">
+                                                        <div class="col-lg-8 ">
                                                             <div class="client-review-slider">
-                                                                <div class="tiny-slide text-center">
-                                                                    <p class="text-muted h6 fw-normal fst-italic">" It seems
-                                                                        that only fragments of the original text remain in the
-                                                                        Lorem Ipsum texts used today. One may speculate that
-                                                                        over the course of time certain letters were added or
-                                                                        deleted at various positions within the text. "</p>
-                                                                    <img src="../assets/images/client/06.jpg"
-                                                                         class="img-fluid avatar avatar-small rounded-circle mx-auto shadow my-3"
-                                                                         alt="">
-                                                                    <ul class="list-unstyled mb-0">
-                                                                        <li class="list-inline-item"><i
-                                                                                class="mdi mdi-star text-warning"></i></li>
-                                                                        <li class="list-inline-item"><i
-                                                                                class="mdi mdi-star text-warning"></i></li>
-                                                                        <li class="list-inline-item"><i
-                                                                                class="mdi mdi-star text-warning"></i></li>
-                                                                        <li class="list-inline-item"><i
-                                                                                class="mdi mdi-star text-warning"></i></li>
-                                                                        <li class="list-inline-item"><i
-                                                                                class="mdi mdi-star text-warning"></i></li>
-                                                                    </ul>
-                                                                    <h6 class="text-primary">- Jill Webb <small
-                                                                            class="text-muted">Designer</small></h6>
-                                                                </div><!--end customer testi-->
-                                                            </div><!--end carousel-->
-                                                        </div><!--end col-->
-                                                    </div><!--end row-->
-                                                </div><!--end teb pane-->
+                                                                <div class="tiny-slide ">
+                                                                <c:forEach items="${feedback}" var="feedback">
+                                                                    <li class="mt-4">
+                                                                        <div class="d-flex justify-content-between">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <a class="pe-3" href="#">
+                                                                                    <img src="data:image/jpg;base64,${feedback.user.image}" class="img-fluid avatar avatar-md-sm rounded-circle shadow" alt="img">
+                                                                                </a>
+                                                                                <div class="commentor-detail">
+                                                                                    <h6 class="mb-0"><a href="javascript:void(0)" class="text-dark media-heading">${feedback.user.fullName}</a></h6>
+                                                                                    <small class="text-muted">${feedback.create_time}</small>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <c:choose>
+                                                                                        <c:when test="${feedback.rate >= 1}">
+                                                                                            <span class="star-gold">★</span>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>☆</c:otherwise>
+                                                                                    </c:choose>
+                                                                                    <c:choose>
+                                                                                        <c:when test="${feedback.rate >= 2}">
+                                                                                            <span class="star-gold">★</span>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>☆</c:otherwise>
+                                                                                    </c:choose>
+                                                                                    <c:choose>
+                                                                                        <c:when test="${feedback.rate >= 3}">
+                                                                                            <span class="star-gold">★</span>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>☆</c:otherwise>
+                                                                                    </c:choose>
+                                                                                    <c:choose>
+                                                                                        <c:when test="${feedback.rate >= 4}">
+                                                                                            <span class="star-gold">★</span>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>☆</c:otherwise>
+                                                                                    </c:choose>
+                                                                                    <c:choose>
+                                                                                        <c:when test="${feedback.rate >= 5}">
+                                                                                            <span class="star-gold">★</span>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>☆</c:otherwise>
+                                                                                    </c:choose>      
+                                                                                </div>
+                                                                            </div>
 
-                                                <div class="tab-pane fade" id="pills-timetable" role="tabpanel"
-                                                     aria-labelledby="timetable-tab">
-                                                    <div class="row">
-                                                        <div class="col-12 mt-5">
-                            <div class="card component-wrapper border-0 rounded shadow ">
-                                <div class="p-4 border-bottom">
-                                    <h4 class="mb-0 text-primary">Patient List</h4>
-                                </div>
+                                                                        </div>
+                                                                        <div class="mt-3">
+                                                                            <p class="text-muted font-italic p-3 bg-light rounded">${feedback.content}</p>
+                                                                        </div>
+                                                                    </li>
+                                                                </c:forEach>
+                                                            </div><!--end customer testi-->
+                                                        </div><!--end carousel-->
+                                                    </div><!--end col-->
+                                                </div><!--end row-->
+                                            </div><!--end teb pane-->
 
-                                <div class="p-4">
-                                    <div class="table-responsive bg-white shadow rounded">
-                                        <table class="table mb-0 table-center">
-                                            <thead>
-                                                <tr>
-                                                    <th class="border-bottom p-3">PatientID</th>
-                                                    <th class="border-bottom p-3">Name</th>
-                                                    <th class="border-bottom p-3">DOB</th>
-                                                    <th class="border-bottom p-3">Gender</th>
-                                                    <th class="border-bottom p-3">Status</th>
+                                            <div class="tab-pane fade" id="pills-timetable" role="tabpanel"
+                                                 aria-labelledby="timetable-tab">
+                                                <div class="row">
+                                                    <div class="col-12 mt-5">
+                                                        <div class="card component-wrapper border-0 rounded shadow ">
+                                                            <div class="p-4 border-bottom">
+                                                                <h4 class="mb-0 text-primary">Patient List</h4>
+                                                            </div>
+
+                                                            <div class="p-4">
+                                                                <div class="table-responsive bg-white shadow rounded">
+                                                                    <table class="table mb-0 table-center">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th class="border-bottom p-3">PatientID</th>
+                                                                                <th class="border-bottom p-3">Name</th>
+                                                                                <th class="border-bottom p-3">DOB</th>
+                                                                                <th class="border-bottom p-3">Gender</th>
+                                                                                <th class="border-bottom p-3">Status</th>
 
 
                                                 </tr>
@@ -253,29 +279,27 @@
                                     </div>
                                 </div>
                                             </div><!--end tab content-->
+
                                         </div>
-                                    </div><!--end col-->
-                                </div><!--end row-->
+                                    </div>
+                                </div><!--end container-->
+
+                                </main>
+                                <!--End page-content" -->
+                                <!-- Modal -->
+
                             </div>
-                        </div>
-                    </div><!--end container-->
+                            <!-- page-wrapper -->
+                            <!-- javascript -->
 
-                </main>
-                <!--End page-content" -->
-                <!-- Modal -->
-
-            </div>
-            <!-- page-wrapper -->
-            <!-- javascript -->
-
-            <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
-        <!-- simplebar -->
-        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>
-        <!-- Icons -->
-        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/feather.min.js"></script>
-        <!-- Main Js -->
-        <script src="${pageContext.request.contextPath}/frontend/template/assets/js/app.js"></script>
+                            <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
+                            <!-- simplebar -->
+                            <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>
+                            <!-- Icons -->
+                            <script src="${pageContext.request.contextPath}/frontend/template/assets/js/feather.min.js"></script>
+                            <!-- Main Js -->
+                            <script src="${pageContext.request.contextPath}/frontend/template/assets/js/app.js"></script>
 
 
-    </body>
-</html> 
+                            </body>
+                            </html> 

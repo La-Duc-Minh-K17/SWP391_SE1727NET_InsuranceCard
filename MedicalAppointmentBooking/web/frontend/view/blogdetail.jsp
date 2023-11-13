@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +56,6 @@
                 </div>
             </div><!--end container-->
         </section>
-
         <main>
             <section class="section">
                 <div class="container">
@@ -68,7 +67,10 @@
                                         <div class="section-title text-center">
                                             <h3 class="sub-title mb-4">${blog.title}</h3>
                                             <ul class="list-unstyled mt-4">
-                                                <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i> ${blog.created_time}</li>
+                                                <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i>
+                                                    <fmt:parseDate value="${blog.created_time}" pattern="yyyy-MM-dd" var="parsedDate" />
+                                                    <fmt:formatDate value="${parsedDate}" pattern="dd/MM/yyyy" var="formattedDate" />
+                                                    ${formattedDate}</li>
                                             </ul>
                                         </div>
                                     </div><!--end col-->
@@ -76,47 +78,7 @@
                             </div><!--end container-->
                             <div class="">
                                 <img src="data:image/jpg;base64,${blog.image}" class="img-fluid rounded shadow" alt="">
-                                <p class="text-muted">${blog.content}</p>
-                                <h5 class="card-title mt-4 mb-0">Comments :</h5>
-                                <ul class="media-list list-unstyled mb-0">
-                                    <li class="mt-4">
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <a class="pe-3" href="#">
-                                                    <img src="../assets/images/client/01.jpg" class="img-fluid avatar avatar-md-sm rounded-circle shadow" alt="img">
-                                                </a>
-                                                <div class="commentor-detail">
-                                                    <h6 class="mb-0"><a href="javascript:void(0)" class="text-dark media-heading">Lorenzo Peterson</a></h6>
-                                                    <small class="text-muted">15th August, 2019 at 01:25 pm</small>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="mt-3">
-                                            <p class="text-muted font-italic p-3 bg-light rounded">" There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour "</p>
-                                        </div>
-                                    </li>
-
-
-                                </ul>
-
-                                <h5 class="card-title mt-4 mb-0">Leave A Comment :</h5>
-
-                                <form class="mt-3">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Your Comment</label>
-                                                <textarea id="message" placeholder="Your Comment" rows="5" name="message" class="form-control" required=""></textarea>
-                                            </div>
-                                        </div><!--end col-->
-                                        <div class="col-md-12">
-                                            <div class="send d-grid">
-                                                <button type="submit" class="btn btn-primary">Send Message</button>
-                                            </div>
-                                        </div><!--end col-->
-                                    </div><!--end row-->
-                                </form><!--end form-->
+                                <div class="text-muted">${blog.content}</div>
                             </div><!--end col-->
                         </div>
 
@@ -133,7 +95,10 @@
                                                                  class="img-fluid rounded"></a></div>
                                                     <div class="post-recent-content float-start"><a
                                                             href="newdetail?id=${o.blog_id}"">${o.title}</a><span
-                                                            class="text-muted mt-2"><fmt:formatDate value="${o.created_time}" pattern="dd/MM/yyyy"/></span></div>
+
+                                                            <fmt:parseDate value="${o.created_time}" pattern="yyyy-MM-dd" var="parsedDate" />
+                                                            <fmt:formatDate value="${parsedDate}" pattern="dd/MM/yyyy" var="formattedDate" />
+                                                            class="text-muted mt-2">${formattedDate }</span></div>
                                                 </div>
                                             </c:forEach>
                                         </div>
@@ -174,10 +139,7 @@
                         </div>
                     </div>
                 </div>
-               
-
-
-                <div class="container mt-100 mt-60">
+                <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="section-title">
@@ -185,7 +147,7 @@
                             </div>
                         </div><!--end col-->
                     </div><!--end row-->
-                    <div class="container" style="margin-top: 90px;">
+                    <div class="container" ">
                         <section class="blog_area section-padding">
                             <div class="container">
                                 <div class="row">
@@ -202,7 +164,8 @@
                                                                 <div class="card-body p-4">
                                                                     <ul class="list-unstyled mb-2">
                                                                         <li class="list-inline-item text-muted small me-3">
-                                                                            ${o.created_time}
+                                                                            <fmt:formatDate value="${o.created_time}" pattern="dd/MM/yyyy" var="formattedDate" />
+                                                                            ${formattedDate}
                                                                         </li>
                                                                         <li class="list-inline-item text-muted small"><i
                                                                                 class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
@@ -230,21 +193,15 @@
                     </div>
                 </div><!--end col-->
             </section>
-
-
         </main>
 
         <jsp:include page="/frontend/common/footer.jsp" />
-        <!-- MOdal End -->
-        <!-- javascript -->
-        <script src="frontend/template/assets/js/jquery.min.js"></script>
-        <script src="frontend/template/assets/js/bootstrap.bundle.min.js"></script>
-        <!-- SLIDER -->
-        <script src="frontend/template/assets/js/tiny-slider.js"></script>
-        <script src="frontend/template/assets/js/tiny-slider-init.js"></script>
-        <script src="frontend/template/assets/js/easy_background.js"></script>
-        <script src="frontend/template/assets/js/feather.min.js"></script>
-        <script src="frontend/template/assets/js/app.js"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/bootstrap.bundle.min.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/feather.min.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/app.js'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider.j'/>"></script>
+        <script src= "<c:url value= '/frontend/template/assets/js/tiny-slider-init.js'/>"></script>
 
     </body>
 </html>
