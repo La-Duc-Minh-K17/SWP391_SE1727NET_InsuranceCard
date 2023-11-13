@@ -293,12 +293,13 @@ public class UserDAO {
         Connection connection = null;
         ResultSet rs = null;
         boolean isExisted = false;
-        String sql = "select * from user_account where email = ? and username = ? and status = 1 ";
+        String sql = "select * from user_account where email = ? or username = ? or phone= ? and status = 1 ";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setString(1, account.getEmail());
             ps.setString(2, account.getUserName());
+            ps.setString(3 , account.getPhone());
             rs = ps.executeQuery();
             if (rs.next()) {
                 isExisted = true;

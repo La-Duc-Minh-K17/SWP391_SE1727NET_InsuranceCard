@@ -15,7 +15,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import model.Appointment;
 import model.Patient;
 import model.Reservation;
 import model.Service;
@@ -30,7 +29,6 @@ public class ReservationDAO {
     DBConnection dbc = new DBConnection();
     private ServicesDAO sDAO = new ServicesDAO();
     private PatientDAO pDAO = new PatientDAO();
-    
 
     public List<Reservation> getAllReservation() {
         List<Reservation> list = new ArrayList<>();
@@ -120,8 +118,12 @@ public class ReservationDAO {
 
     public List<String> getAvailableTimeSlot(int patientId, int serviceId, String date) {
         PreparedStatement ps = null;
+        PreparedStatement ps1 = null;
+        PreparedStatement ps2 = null;
         Connection connection = null;
         ResultSet rs = null;
+        ResultSet rs1 = null;
+        ResultSet rs2 = null;
         List<String> timeSlot = new ArrayList<>();
         List<String> remainingTimeSlots = new ArrayList<>();
         timeSlot.add("07:00:00");
@@ -134,20 +136,47 @@ public class ReservationDAO {
         timeSlot.add("15:00:00");
         timeSlot.add("16:00:00");
         timeSlot.add("17:00:00");
-        String sql = "SELECT reservation_time\n"
+        String sql = 
+                "SELECT reservation_time\n"
                 + "FROM reservations\n"
-                + "WHERE service_id = ? AND reservation_date = ? and reservation_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED') ";
+                + "WHERE service_id = ? AND reservation_date = ?"
+                + "and reservation_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED') ";
+        String sql1 = "select reservation_time from reservations where patient_id = ?  and reservation_date = ?  "
+                + "and reservation_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED')";
+        String sql2 = "select reservation_time from reservations where patient_id = ?  and reservation_date = ?  "
+                + "and reservation_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED')";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setDate(2, TimeUtil.dateConverter1(date));
             ps.setInt(1, serviceId);
             rs = ps.executeQuery();
+            //------------------------
+            ps1 = connection.prepareStatement(sql1);
+            ps1.setInt(1, patientId);
+            ps1.setDate(2, TimeUtil.dateConverter1(date));
+            rs1 = ps1.executeQuery();
+            //------------------------
+            ps2 = connection.prepareStatement(sql2);
+            ps2.setInt(1, patientId);
+            ps2.setDate(2, TimeUtil.dateConverter1(date));
+            rs2 = ps2.executeQuery();
             while (rs.next()) {
                 if (timeSlot.contains(rs.getString(1))) {
                     timeSlot.remove(rs.getString(1));
                 }
             }
+            while (rs1.next()) {
+                if (timeSlot.contains(rs1.getString(1))) {
+                    timeSlot.remove(rs1.getString(1));
+                }
+            }
+            while (rs2.next()) {
+                if (timeSlot.contains(rs2.getString(1))) {
+                    timeSlot.remove(rs2.getString(1));
+                }
+            }
+
             List<String> bookedAppointmentInDay = getBookedAppointmentSlotTime(patientId, date);
             for (String s : bookedAppointmentInDay) {
                 timeSlot.remove(s);
@@ -179,8 +208,7 @@ public class ReservationDAO {
         return timeSlot;
     }
 
-    
-    public List<String> getBookedAppointmentSlotTime(int patientId , String date) {
+    public List<String> getBookedAppointmentSlotTime(int patientId, String date) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -190,10 +218,10 @@ public class ReservationDAO {
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
-            ps.setInt(1 , patientId);
+            ps.setInt(1, patientId);
             ps.setDate(2, TimeUtil.dateConverter1(date));
             rs = ps.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 resultList.add(rs.getString("appointment_time"));
             }
         } catch (SQLException ex) {
@@ -209,6 +237,7 @@ public class ReservationDAO {
         }
         return resultList;
     }
+
     public void updateStatus(Reservation resv) {
         PreparedStatement ps = null;
         Connection connection = null;
@@ -573,7 +602,8 @@ public class ReservationDAO {
         }
         return true;
     }
-     public void updateTime(Reservation resv) {
+
+    public void updateTime(Reservation resv) {
         PreparedStatement ps = null;
         Connection connection = null;
         String sql = "UPDATE `mabs`.`reservations`\n"

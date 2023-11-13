@@ -35,11 +35,8 @@ public class AppointmentListController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PatientDAO pdao = new PatientDAO();
         AppointmentDAO adao = new AppointmentDAO();
-
         String action = request.getParameter("action");
-        DoctorDAO dDao = new DoctorDAO();
         Doctor doctor = (Doctor) SessionUtils.getInstance().getValue(request, "user");
         request.setAttribute("doctor", doctor);
         if (action != null && action.equals("view-all")) {

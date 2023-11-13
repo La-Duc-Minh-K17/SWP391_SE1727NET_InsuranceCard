@@ -42,7 +42,6 @@ public class ServiceDetailController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-
         }
     }
 
@@ -80,6 +79,10 @@ public class ServiceDetailController extends HttpServlet {
         if (action != null && action.equals("book-service")) {
             int id = Integer.parseInt(request.getParameter("id"));
             Service serviceDetail = servicedao.getServiceById(id);
+            Doctor chosenDoctor = (Doctor) SessionUtils.getInstance().getValue(request, "chosen_doctor");
+            if (chosenDoctor != null) {
+                SessionUtils.getInstance().removeValue(request, "chosen_doctor");
+            }
             SessionUtils.getInstance().putValue(request, "chosen_service", serviceDetail);
             request.getRequestDispatcher("booking?action=form-filling").forward(request, response);
             return;

@@ -26,9 +26,6 @@ public class TimeUtil {
         Time sqlTime = Time.valueOf(time);
         return sqlTime;
     }
-
-    
-
     public static LocalDateTime stringToLocalDateTime(String dateString) {
         try {
             String formatPattern = "yyyy-MM-dd'T'HH:mm:ss";

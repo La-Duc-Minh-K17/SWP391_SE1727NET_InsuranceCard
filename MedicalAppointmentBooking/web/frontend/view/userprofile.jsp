@@ -76,14 +76,12 @@
                             </div>
                             <jsp:include page="/frontend/common/patient_side_bar.jsp" />  
                         </div>
-                    </div><!--end col-->
-
+                    </div>
                     <div class="col-lg-8 col-md-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
                         <div class="card border-0 shadow overflow-hidden">
                             <div class="text-center pt-1 pb-1">
                                 <h4 class="title fw-normal mb-0">Profile Settings</h4>
                             </div>
-
                             <c:if test="${success != null}">
                                 <div class="alert alert-success">${requestScope.success}</div>
                             </c:if>
@@ -102,9 +100,7 @@
                                                          id="thumbImage"  src="data:image/jpg;base64,${sessionScope.user.image}" />
                                                 </div>
                                             </div>
-                                        </div><!--end row-->
-
-
+                                        </div>
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
@@ -112,31 +108,28 @@
                                                     <input name="name" id="name" type="text" class="form-control"
                                                            placeholder="Full Name :" value="${sessionScope.user.fullName}">
                                                 </div>
-                                            </div><!--end col-->
-
+                                            </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Date of birth </label>
                                                     <input name="dob" id="dob" type="date" class="form-control" placeholder="Date of birth :"
                                                            value="${sessionScope.user.dob}">
                                                 </div>
-                                            </div><!--end col-->
-
+                                            </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Your Email</label>
                                                     <input name="email" id="email" type="email" class="form-control"
                                                            placeholder="Your email :" value="${sessionScope.user.email}">
                                                 </div>
-                                            </div><!--end col-->
-
+                                            </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Phone</label>
                                                     <input name="phone" id="phone" type="text" class="form-control"
                                                            placeholder="Phone no. :" value="${sessionScope.user.phone}">
                                                 </div>
-                                            </div><!--end col-->
+                                            </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Address </label>
@@ -144,7 +137,6 @@
                                                            placeholder="Address :" value="${sessionScope.user.address}">
                                                 </div>
                                             </div>
-
                                             <div class="col-lg-6">
                                                 <div class="mt-3">
                                                     <div>
@@ -173,7 +165,7 @@
 
                                     <div class="mt-4 pt-2">
                                         <c:if test="${error != null }">
-                                            <div class="alert alert-error">${requestScope.error}</div>
+                                            <div class="alert alert-danger">${requestScope.error}</div>
                                         </c:if>
                                         <h5 class="mb-0">Change Password :</h5>
                                         <form action="user-profile?action=change-password" method="post" class="mt-4">
@@ -203,7 +195,7 @@
                                                 </div><!--end col-->
 
                                                 <div class="col-lg-12 mt-2 mb-0">
-                                                    <input type="submit" id="submit" name="send" class="btn btn-primary"
+                                                    <input type="submit"  name="send" class="btn btn-primary"
                                                            value="Change Password">
                                                 </div><!--end col-->
                                             </div><!--end row-->
@@ -216,13 +208,13 @@
                 </div><!--end row-->
             </div><!--end container-->
         </section><!--end section-->
-        <!-- javascript -->
+      
         <jsp:include page="/frontend/common/footer.jsp" />
         <script>
             function onChange() {
                 const password = document.querySelector('input[name=newpassword]');
                 const confirm = document.querySelector('input[name=confirmpassword]');
-
+                console.log(confirm.value);
                 if (confirm.value === password.value) {
                     confirm.setCustomValidity('');
                 } else {

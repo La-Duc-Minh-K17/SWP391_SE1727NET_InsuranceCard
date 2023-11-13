@@ -571,8 +571,12 @@ public class AppointmentDAO {
 
     public List<String> getAvailableTimeSlot(int patientId, int doctorId, String date) {
         PreparedStatement ps = null;
+        PreparedStatement ps1 = null;
+        PreparedStatement ps2 = null;
         Connection connection = null;
         ResultSet rs = null;
+        ResultSet rs1 = null;
+        ResultSet rs2 = null;
         List<String> timeSlot = new ArrayList<>();
         List<String> remainingTimeSlots = new ArrayList<>();
         timeSlot.add("07:00:00");
@@ -588,21 +592,49 @@ public class AppointmentDAO {
         String sql = "SELECT appointment_time\n"
                 + "FROM appointments\n"
                 + "WHERE doctor_id = ? AND appointment_date = ?  and appointment_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED') ";
+        String sql1 = "select appointment_time from appointments "
+                + "where patient_id = ?  and appointment_date = ? "
+                + " and appointment_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED')";
+
+        String sql2 = "select * from reservations where patient_id = ?  "
+                + "and reservation_date = ?  "
+                + "and reservation_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED')";
         try {
             connection = dbc.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setDate(2, TimeUtil.dateConverter1(date));
             ps.setInt(1, doctorId);
             rs = ps.executeQuery();
+            //------------------------
+            ps1 = connection.prepareStatement(sql1);
+            ps1.setInt(1, patientId);
+            ps1.setDate(2, TimeUtil.dateConverter1(date));
+            rs1 = ps1.executeQuery();
+            //------------------------
+            ps2 = connection.prepareStatement(sql2);
+            ps2.setInt(1, patientId);
+            ps2.setDate(2, TimeUtil.dateConverter1(date));
+            rs2 = ps2.executeQuery();
             while (rs.next()) {
                 if (timeSlot.contains(rs.getString(1))) {
                     timeSlot.remove(rs.getString(1));
+                }
+            }
+            while (rs1.next()) {
+                if (timeSlot.contains(rs1.getString(1))) {
+                    timeSlot.remove(rs1.getString(1));
+                }
+            }
+            while (rs2.next()) {
+                if (timeSlot.contains(rs2.getString(1))) {
+                    timeSlot.remove(rs2.getString(1));
                 }
             }
             List<String> bookedServiceInDay = getBookedServiceSlotTime(patientId, date);
             for (String s : bookedServiceInDay) {
                 timeSlot.remove(s);
             }
+
             LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             LocalDate currentDate = LocalDate.now();
             if (parsedDate.isEqual(currentDate)) {

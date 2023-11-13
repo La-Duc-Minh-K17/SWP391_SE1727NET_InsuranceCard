@@ -1,7 +1,7 @@
-    <%-- 
-    Document   : register
-    Created on : Sep 18, 2023, 3:49:22 PM
-    Author     : Admin
+<%-- 
+Document   : register
+Created on : Sep 18, 2023, 3:49:22 PM
+Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- favicon -->
-          <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/frontend/template/assets/images/favicon.ico.png">
         <!-- Bootstrap -->
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- Icons -->
@@ -28,7 +28,7 @@
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
-        
+
     </head>
 
     <body>
@@ -53,7 +53,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-5 col-md-8">
                         <c:if test="${error != null}">
-                            <div class="alert alert-error">${requestScope.error}</div>
+                            <div class="alert alert-danger">${requestScope.error}</div>
                         </c:if>
                         <c:if test="${success != null}">
                             <div class="alert alert-success">${requestScope.success}</div>
@@ -66,7 +66,7 @@
                                         <div class="col-md-12">
                                             <div class="mb-3">                                               
                                                 <label class="form-label">Username <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" placeholder="User Name" name="username" required="" oninvalid="validateUsername(this);" oninput="validateUsername(this);>
+                                                <input type="text" class="form-control" placeholder="User Name" name="username" required="" oninvalid="validateUsername(this);" oninput="validateUsername(this);">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -125,16 +125,16 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="col-md-12">
                                             <div class="d-grid">
                                                 <button class="btn btn-primary">Register</button>
                                             </div>
                                         </div>
-
-
                                         <div class="mx-auto">
-                                            <p class="mb-0 mt-3"><small class="text-dark me-2">Already have an account ?</small> <a href="login.html" class="text-dark fw-bold">Sign in</a></p>
+                                            <p class="mb-0 mt-3">
+                                                <small class="text-dark me-2">Already have an account ?</small> 
+                                                <a href="<c:url value='/login'/>" class="text-dark fw-bold">Sign in</a>
+                                            </p>
                                         </div>
                                     </div>
                                 </form>
