@@ -57,11 +57,7 @@ public class UserProfileController extends HttpServlet {
             } else {
                 SessionUtils.getInstance().putValue(request, "user", newUser);
             }
-            if (newUser.getRole().getRole_name().equals(RoleProp.PATIENT)) {
-                request.getRequestDispatcher("frontend/view/userprofile.jsp").forward(request, response);
-            } else {
-                request.getRequestDispatcher("frontend/view/admin/profile.jsp").forward(request, response);
-            }
+            request.getRequestDispatcher("/user-profile?action=view").forward(request, response);
             return;
         }
         if (action != null && action.equals("change-password")) {
@@ -70,7 +66,7 @@ public class UserProfileController extends HttpServlet {
             UserAccount checkAccount = uDAO.getUserAccount(user.getUserName(), oldPassword);
             if (checkAccount == null) {
                 request.setAttribute("error", "Your password is not correct!");
-                request.getRequestDispatcher("frontend/view/userprofile.jsp").forward(request, response);
+                request.getRequestDispatcher("/user-profile?action=view").forward(request, response);
             } else {
                 uDAO.updatePassword(user, newPassword);
                 SessionUtils.getInstance().removeValue(request, "user");
