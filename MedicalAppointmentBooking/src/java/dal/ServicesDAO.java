@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -48,7 +49,7 @@ public class ServicesDAO {
                 Service sv = new Service();
                 String service_name = rs.getString("service_name");
                 String review = rs.getString("review");
-                String create_time = rs.getString("create_time");
+                Timestamp create_time = rs.getTimestamp("create_time");
                 float rate = rs.getFloat("rate");
                 acc.setFullName(name);
                 acc.setImage(image);
@@ -99,7 +100,7 @@ public class ServicesDAO {
                 Service sv = new Service();
                 String service_name = rs.getString("service_name");
                 String review = rs.getString("review");
-                String create_time = rs.getString("create_time");
+                Timestamp create_time = rs.getTimestamp("create_time");
                 int reviewId = rs.getInt("review_id");
                 float rate = rs.getFloat("rate");
                 acc.setFullName(name);
@@ -149,7 +150,7 @@ public class ServicesDAO {
                 String service_name = rs.getString("service_name");
 
                 String review = rs.getString("review");
-                String create_time = rs.getString("create_time");
+               Timestamp create_time = rs.getTimestamp("create_time");
                 float rate = rs.getFloat("rate");
 
                 acc.setFullName(name);
@@ -201,7 +202,7 @@ public class ServicesDAO {
                 String service_name = rs.getString("service_name");
 
                 String review = rs.getString("review");
-                String create_time = rs.getString("create_time");
+                Timestamp create_time = rs.getTimestamp("create_time");
                 float rate = rs.getFloat("rate");
 
                 acc.setFullName(name);
@@ -672,7 +673,31 @@ public class ServicesDAO {
         }
         return slist;
     }
-
+    public void insertReview(ServiceReview review)
+    {
+        Connection connection = dbc.getConnection();
+        try{
+            String query = "INSERT INTO service_review (user_id,service_id,create_time,review,rate)\n"
+                    + "VALUES (?,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, review.getUser().getUserId());
+            statement.setInt(2, review.getService_id());
+            statement.setTimestamp(3, review.getCreate_time());
+            statement.setString(4, review.getReview());
+            statement.setFloat(5, review.getRate());
+            statement.executeUpdate();
+        }catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    }
     public List<Service_Category> getSCategory(int scId, String sort) {
         List<Service_Category> scList = new ArrayList<>();
         String sql;
