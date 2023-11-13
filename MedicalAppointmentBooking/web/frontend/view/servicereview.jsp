@@ -102,19 +102,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-xl-6 col-md-6">
-                                <div class="search-bar d-lg-block" style="padding-top :0">
-                                    <div id="search" class="menu-search ">
-                                        <form action=""role="search" method="post" id="searchform" class="searchform">
-                                            <div>
-                                                <input type="text" class="form-control border rounded-pill" name="search"
-                                                       id="search" placeholder="Search patient by name">
-                                                <input type="submit" id="searchsubmit" value="Search">
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div class="col-xl-3 col-md-3">
                                 <div class="card component-wrapper border-0 rounded shadow">
                                     <div>

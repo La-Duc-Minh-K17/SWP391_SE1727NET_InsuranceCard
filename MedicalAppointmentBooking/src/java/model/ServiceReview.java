@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author DELL
@@ -13,7 +15,7 @@ public class ServiceReview {
     private int user_id;
     private UserAccount user;
     private int service_id;
-    private String create_time;
+    private Timestamp create_time;
     private String review;
     private float rate;
     private Service service;
@@ -61,13 +63,15 @@ public class ServiceReview {
         this.service_id = service_id;
     }
 
-    public String getCreate_time() {
+    public Timestamp getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(String create_time) {
+    public void setCreate_time(Timestamp create_time) {
         this.create_time = create_time;
     }
+
+    
 
     public String getReview() {
         return review;
