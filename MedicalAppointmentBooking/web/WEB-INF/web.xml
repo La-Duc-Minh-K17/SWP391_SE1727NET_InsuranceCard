@@ -8,7 +8,6 @@
         <filter-name>Authorization</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
     <servlet>
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>controller.auth.RegisterController</servlet-class>
