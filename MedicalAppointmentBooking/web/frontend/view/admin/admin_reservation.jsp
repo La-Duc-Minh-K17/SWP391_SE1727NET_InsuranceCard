@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -153,7 +154,7 @@
                                                                                 </div>
                                                                             </a>
                                                                         </td>
-                                                                        <td class="p-3">${resv.resvDate}</td>
+                                                                        <td class="p-3"><fmt:formatDate value="${resv.resvDate}" pattern="dd/MM/yyyy"/></td>
                                                                         <td class="p-3">${resv.resvTime}</td>
                                                                         <td class="p-3">
                                                                             <a href="#" class="text-dark">
