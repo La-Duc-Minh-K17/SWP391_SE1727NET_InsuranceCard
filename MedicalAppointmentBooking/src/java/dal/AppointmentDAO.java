@@ -30,7 +30,7 @@ public class AppointmentDAO {
     DBConnection dbc = new DBConnection();
     private final DoctorDAO dDAO = new DoctorDAO();
     private final PatientDAO pDAO = new PatientDAO();
-   
+
     public List<Appointment> getAllAppointment() {
         List<Appointment> list = new ArrayList<>();
         PreparedStatement ps = null;
@@ -569,7 +569,7 @@ public class AppointmentDAO {
         return listAppt;
     }
 
-    public List<String> getAvailableTimeSlot(int patientId , int doctorId, String date) {
+    public List<String> getAvailableTimeSlot(int patientId, int doctorId, String date) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -600,7 +600,7 @@ public class AppointmentDAO {
                 }
             }
             List<String> bookedServiceInDay = getBookedServiceSlotTime(patientId, date);
-            for(String s : bookedServiceInDay) {
+            for (String s : bookedServiceInDay) {
                 timeSlot.remove(s);
             }
             LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -630,6 +630,7 @@ public class AppointmentDAO {
         }
         return timeSlot;
     }
+
     public List<String> getBookedServiceSlotTime(int patientId, String date) {
         PreparedStatement ps = null;
         Connection connection = null;
@@ -661,7 +662,7 @@ public class AppointmentDAO {
 
     private final int MAX_LIMIT_TIME_PER_MONTH = 2;
 
-    public boolean checkLimitedTime(Appointment appt , String status1 , String status2) {
+    public boolean checkLimitedTime(Appointment appt, String status1, String status2) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -692,5 +693,31 @@ public class AppointmentDAO {
             }
         }
         return true;
+    }
+
+    public void updateTime(Appointment appt) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "UPDATE `mabs`.`appointments`\n"
+                + "SET\n"
+                + "`updated_time` = ?\n"
+                + "WHERE `appointment_id` = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setTimestamp(1, appt.getUpdatedTime());
+            ps.setInt(2, appt.getApptId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
     }
 }

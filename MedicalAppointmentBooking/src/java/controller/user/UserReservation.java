@@ -82,6 +82,7 @@ public class UserReservation extends HttpServlet {
                     resv.setOtherCharge(resv.getService().getFee() * 0.1);
                     EmailSending.sendCancellationNotice(resv);
                 }
+                resv.setUpdatedTime(TimeUtil.getNow());
                 resvDAO.updateStatus(resv);
                 response.sendRedirect("user-reservation?action=view-detail&resvId=" + resv.getResvId());
             } else {

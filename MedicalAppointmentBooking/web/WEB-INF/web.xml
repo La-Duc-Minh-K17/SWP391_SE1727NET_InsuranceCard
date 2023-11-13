@@ -161,14 +161,12 @@
         <servlet-class>controller.user.UserReservation</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>EditSetting</servlet-name>
         <servlet-class>controller.admin.EditSetting</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DashBoard</servlet-name>
         <servlet-class>controller.admin.DashBoard</servlet-class>
-
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
