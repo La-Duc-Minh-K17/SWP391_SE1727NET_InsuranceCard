@@ -5,6 +5,7 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -247,40 +248,38 @@
                                                                                 <th class="border-bottom p-3">Status</th>
 
 
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <c:forEach items="${patient}" var="p">
-                                                                                <tr>
-                                                                                    <th scope="col">${p.patientId}</th>
-                                                                                    <td class="p-3">${p.fullName}</td>
-                                                                                    <td class="p-3">${p.dob}</td>
-                                                                                    <td> 
-                                                                                        <c:if test="${p.gender == 1}">
-                                                                                            <span class="text-primary">Male</span>
-                                                                                        </c:if>
-                                                                                        <c:if test="${p.gender == 0}">
-                                                                                            <span class="text-secondary">Female</span>
-                                                                                        </c:if>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <c:if test="${p.status == 1}">
-                                                                                            <span class="text-success">Active</span>
-                                                                                        </c:if>
-                                                                                        <c:if test="${p.status == 0}">
-                                                                                            <span class="text-danger">InActive</span>
-                                                                                        </c:if>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </c:forEach>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div><!--end tab content-->
-                                                    </div>
-                                                </div><!--end col-->
-                                            </div><!--end row-->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${patient}" var="p">
+                                                    <tr>
+                                                        <th scope="col">${p.patientId}</th>
+                                                        <td class="p-3">${p.fullName}</td>
+                                                        <td class="p-3"><fmt:formatDate value="${p.dob}" pattern="dd/MM/yyyy"/></td>
+                                                        <td> 
+                                                            <c:if test="${p.gender == 1}">
+                                                                <span class="text-primary">Male</span>
+                                                            </c:if>
+                                                            <c:if test="${p.gender == 0}">
+                                                                <span class="text-secondary">Female</span>
+                                                            </c:if>
+                                                        </td>
+                                                        <td>
+                                                            <c:if test="${p.status == 1}">
+                                                                <span class="text-success">Active</span>
+                                                            </c:if>
+                                                            <c:if test="${p.status == 0}">
+                                                                <span class="text-danger">InActive</span>
+                                                            </c:if>
+                                                        </td>
+                                                </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                            </div><!--end tab content-->
+
                                         </div>
                                     </div>
                                 </div><!--end container-->

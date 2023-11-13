@@ -6,6 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -158,6 +159,10 @@
                                                                                 </div>
                                                                             </a>
                                                                         </td>
+
+                                                                        <td class="p-3"><fmt:formatDate value="${appt.apptDate}" pattern="dd/MM/yyyy"/></td>
+                                                                        <td class="p-3">${appt.apptTime}</td>
+
                                                                         <td class="p-3">
                                                                             <c:if test="${appt.apptDate != null || not empty appt.apptDate }">
                                                                                 <fmt:formatDate value="${appt.apptDate}" pattern="dd/MM/yyyy" var="formattedDate" />
@@ -174,6 +179,7 @@
                                                                             <c:if test="${appt.apptTime == null ||  empty appt.apptTime }">
                                                                                 NOT SET
                                                                             </c:if></td>
+
                                                                         <td class="p-3">
                                                                             <a href="#" class="text-dark">
                                                                                 <div class="d-flex align-items-center">

@@ -6,7 +6,7 @@ Author     : PC
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -133,7 +133,7 @@ Author     : PC
                                                     <tr>
                                                         <th scope="col">${p.patientId}</th>
                                                         <td class="p-3">${p.fullName}</td>
-                                                        <td class="p-3">${p.dob}</td>
+                                                        <td class="p-3"><fmt:formatDate value="${p.dob}" pattern="dd/MM/yyyy"/></td>
                                                         <td> 
                                                             <c:if test="${p.gender == 1}">
                                                                 <span class="text-primary">Male</span>

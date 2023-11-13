@@ -14,9 +14,9 @@
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                 <div class="sidebar-brand">
-                    <a href="#">
-                        <img src="${pageContext.request.contextPath}/frontend/template/assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                        <img src="${pageContext.request.contextPath}/frontend/template/assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                    <a href="home">
+                        <img src="frontend/template/assets/images/MABS__1.png" height="24" class="logo-light-mode" alt="">
+                        <img src="frontend/template/assets/images/MABS__1.png" height="24" class="logo-dark-mode" alt="">
                     </a>
                 </div>
                 <div class="card border-0" >
