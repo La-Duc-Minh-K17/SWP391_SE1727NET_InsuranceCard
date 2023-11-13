@@ -58,6 +58,7 @@ public class WebDoctorDetail extends HttpServlet {
             request.setAttribute("speList", speDAO.getAllSpeciality());
             request.setAttribute("doctor", doctorDAO.getDoctorById(id));
             request.setAttribute("feedback", doctorDAO.getFeedBackByDoctorID(id));
+            System.out.println(doctorDAO.getFeedBackByDoctorID(id));
             request.getRequestDispatcher("frontend/view/webdoctordetail.jsp").forward(request, response);
             return;
         }
