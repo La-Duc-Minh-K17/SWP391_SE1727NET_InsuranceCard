@@ -5,6 +5,7 @@
 --%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -39,8 +40,8 @@
                             <a href="#" class="logo-icon">
                                 <img src="frontend/template/assets/images/logo-icon.png" height="30" class="small" alt="">
                                 <span class="">
-                                    <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                                    <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                                    <img src="frontend/template/assets/images/MABS__1.png" height="24" class="logo-light-mode" alt="">
+                                    <img src="frontend/template/assets/images/MABS__1.png" height="24" class="logo-dark-mode" alt="">
                                 </span>
                             </a>
                             <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
@@ -116,7 +117,7 @@
                                         <div class="d-flex align-items-center mt-2">
                                             <i class="uil uil-calendar-alt align-text-bottom text-primary h5 mb-0 me-2"></i>
                                             <h6 class="mb-0">Date Of Birth</h6>
-                                            <p class="text-muted mb-0 ms-2">${appt.patient.dob}</p>
+                                            <p class="text-muted mb-0 ms-2"><fmt:formatDate value="${appt.patient.dob}" pattern="dd/MM/yyyy"/></p>
                                         </div>
                                         <div class="d-flex align-items-center mt-2">
                                             <i class="uil uil-globe align-text-bottom text-primary h5 mb-0 me-2"></i>

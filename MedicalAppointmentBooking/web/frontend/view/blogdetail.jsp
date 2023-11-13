@@ -93,7 +93,12 @@
                                                                  class="img-fluid rounded"></a></div>
                                                     <div class="post-recent-content float-start"><a
                                                             href="newdetail?id=${o.blog_id}"">${o.title}</a><span
+
                                                             class="text-muted mt-2">${created_time}</span></div>
+                                                            <fmt:parseDate value="${o.created_time}" pattern="yyyy-MM-dd" var="parsedDate" />
+                                                            <fmt:formatDate value="${parsedDate}" pattern="dd/MM/yyyy" var="formattedDate" />
+                                                            class="text-muted mt-2">${formattedDate }</span></div>
+
                                                 </div>
                                             </c:forEach>
                                         </div>
@@ -119,8 +124,11 @@
                                                 </div>
                                                 <div class="post-meta d-flex justify-content-around mt-3">
                                                     <div>
+
                                                         <a href="WebDoctorDetail?action=view-detail&doctorId=${doctor.doctorId}" class="btn btn-primary btn-sm">View Details</a>
-                                                    </div>
+
+                                                    <div>
+                         </div>
 
                                                 </div>
                                             </div>
