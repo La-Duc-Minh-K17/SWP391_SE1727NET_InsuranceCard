@@ -138,7 +138,7 @@
                                                                     <div class="card-body p-4">
                                                                         <ul class="list-unstyled mb-2">
                                                                             <li class="list-inline-item text-muted small me-3">
-                                                                                ${o.created_time}
+                                                                                <fmt:formatDate value="${o.created_time}" pattern="dd/MM/yyyy"/>
                                                                             </li>
                                                                             <li class="list-inline-item text-muted small"><i
                                                                                     class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
