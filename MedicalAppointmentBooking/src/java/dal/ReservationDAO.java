@@ -15,6 +15,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import model.Appointment;
 import model.Patient;
 import model.Reservation;
 import model.Service;
@@ -571,5 +572,30 @@ public class ReservationDAO {
             }
         }
         return true;
+    }
+     public void updateTime(Reservation resv) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        String sql = "UPDATE `mabs`.`reservations`\n"
+                + "SET\n"
+                + "`updated_time` = ?\n"
+                + "WHERE `reservation_id` = ?";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setTimestamp(1, resv.getUpdatedTime());
+            ps.setInt(2, resv.getResvId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
     }
 }

@@ -82,6 +82,7 @@ public class UserAppointment extends HttpServlet {
                 if (!appointment.checkNoticePeriod() || appointment.getStatus().equals(ApptStatus.PENDING)) {
                     appointment.setOtherCharge(appointment.getDoctor().getServiceFee() * 0.1);
                 }
+                appointment.setUpdatedTime(TimeUtil.getNow());
                 apptDAO.updateStatus(appointment);
                 EmailSending.sendCancellationNotice(appointment);
                 response.sendRedirect("user-appointment?action=view-detail&apptId=" + appointment.getApptId());
