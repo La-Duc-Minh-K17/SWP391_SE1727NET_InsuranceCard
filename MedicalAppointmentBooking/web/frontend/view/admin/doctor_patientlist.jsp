@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -136,7 +137,7 @@
                                                                                 <span class=" ms-5 h6">${patient.email}</span>
                                                                             </li>
                                                                             <li class="mt-1"><i class="uil uil-user-nurse text-primary "> DoB:</i>
-                                                                                <span class="ms-5 h6">${patient.dob}</span>
+                                                                                <span class="ms-5 h6"><fmt:formatDate value="${patient.dob}" pattern="dd/MM/yyyy"/></span>
                                                                             </li>
                                                                             <li class="mt-1"><i class="uil uil-user-nurse text-primary "> Address:</i>
                                                                                 <span class="ms-5 h6">${patient.address}</span>
