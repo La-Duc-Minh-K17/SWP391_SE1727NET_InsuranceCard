@@ -158,7 +158,7 @@
                     </c:forEach>
                 </ul>
                 <h5 class="card-title mt-4 mb-0">Leave A Comment :</h5>
-                <form action="servicedetail?serviceId=${s.service_id}" method="post" class="mt-3">
+                <form action="servicedetail?action=comment&serviceId=${s.service_id}&category_id=${categoryId}" method="post" class="mt-3">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="mb-3">

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +65,7 @@
                                     <div class="card-body p-4">
                                         <ul class="list-unstyled mb-2">
                                             <li class="list-inline-item text-muted small me-3">
-                                                ${o.created_time}
+                                                <fmt:formatDate value="${o.created_time}" pattern="dd/MM/yyyy"/>
                                             </li>
                                             <li class="list-inline-item text-muted small"><i
                                                     class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
@@ -140,7 +140,7 @@
                                     <div class="card-body p-4">
                                         <ul class="list-unstyled mb-2">
                                             <li class="list-inline-item text-muted small me-3"><i
-                                                    class="uil uil-calendar-alt text-dark h6 me-1"></i>${o.created_time}</li>
+                                                    class="uil uil-calendar-alt text-dark h6 me-1"><fmt:formatDate value="${o.created_time}" pattern="dd/MM/yyyy"/></i></li>
                                             <li class="list-inline-item text-muted small"><i
                                                     class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
                                         </ul>
