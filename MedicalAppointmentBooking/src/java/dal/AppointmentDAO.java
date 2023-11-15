@@ -70,7 +70,7 @@ public class AppointmentDAO {
         return list;
     }
 
-    public List<Appointment> getFilteredPatientAppointment(int userId, String status) {
+        public List<Appointment> getFilteredPatientAppointment(int userId, String status) {
         PreparedStatement ps = null;
         Connection connection = null;
         ResultSet rs = null;
