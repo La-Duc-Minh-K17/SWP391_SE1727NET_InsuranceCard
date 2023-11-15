@@ -591,7 +591,8 @@ public class AppointmentDAO {
         timeSlot.add("17:00:00");
         String sql = "SELECT appointment_time\n"
                 + "FROM appointments\n"
-                + "WHERE doctor_id = ? AND appointment_date = ?  and appointment_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED') ";
+                + "WHERE doctor_id = ? AND appointment_date = ?  "
+                + "and appointment_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED') ";
         String sql1 = "select appointment_time from appointments "
                 + "where patient_id = ?  and appointment_date = ? "
                 + " and appointment_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED')";
