@@ -136,14 +136,14 @@ public class ReservationDAO {
         timeSlot.add("15:00:00");
         timeSlot.add("16:00:00");
         timeSlot.add("17:00:00");
-        String sql = 
-                "SELECT reservation_time\n"
+        String sql = "SELECT reservation_time\n"
                 + "FROM reservations\n"
                 + "WHERE service_id = ? AND reservation_date = ?"
-                + "and reservation_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED') ";
-        String sql1 = "select reservation_time from reservations where patient_id = ?  and reservation_date = ?  "
                 + "and reservation_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED')";
-        String sql2 = "select reservation_time from reservations where patient_id = ?  and reservation_date = ?  "
+        String sql1 = "select appointment_time from appointments "
+                + "where patient_id = ?  and appointment_date = ? "
+                + " and appointment_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED')";
+        String sql2 = "select reservation_time from reservations where patient_id = ?  and reservation_date = ?"
                 + "and reservation_status in ('PENDING' , 'RESCHEDULING' , 'RESCHEDULED', 'CONFIRMED')";
         try {
             connection = dbc.getConnection();
