@@ -159,10 +159,6 @@
                                                                                 </div>
                                                                             </a>
                                                                         </td>
-
-                                                                        <td class="p-3"><fmt:formatDate value="${appt.apptDate}" pattern="dd/MM/yyyy"/></td>
-                                                                        <td class="p-3">${appt.apptTime}</td>
-
                                                                         <td class="p-3">
                                                                             <c:if test="${appt.apptDate != null || not empty appt.apptDate }">
                                                                                 <fmt:formatDate value="${appt.apptDate}" pattern="dd/MM/yyyy" var="formattedDate" />

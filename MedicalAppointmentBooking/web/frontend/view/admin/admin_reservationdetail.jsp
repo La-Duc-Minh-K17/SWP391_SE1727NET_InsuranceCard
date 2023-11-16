@@ -144,14 +144,14 @@
                                     <div class="list-unstyled p-4">
                                         <div class="d-flex align-items-center mt-2">
                                             <i class="uil uil-user align-text-bottom text-primary h5 mb-0 me-2"></i>
-                                            <h6 class="mb-0">Service Description</h6>
-                                            <p class="text-muted mb-0 ms-2">${resv.service.service_description}</p>
+                                            <h6 class="mb-0">Service Fee</h6>
+                                            <p class="text-muted mb-0 ms-2">$${resv.service.fee}</p>
                                         </div>
 
                                         <div class="d-flex align-items-center mt-2">
                                             <i class="uil uil-phone align-text-bottom text-primary h5 mb-0 me-2"></i>
-                                            <h6 class="mb-0">Service Detail</h6>
-                                            <p class="text-muted mb-0 ms-2">${resv.service.service_details}</p>
+                                            <h6 class="mb-0">Service Description</h6>
+                                            <p class="text-muted mb-0 ms-2">${resv.service.service_description}</p>
                                         </div>
 
                                     </div>
@@ -237,7 +237,7 @@
                                     </c:if>
                                 </div>
                             </div>
-                            <c:if test="${resv.status ==  'PENDING' || resv.status == 'RESCHEDULING'}">
+                            <c:if test="${resv.status ==  'PENDING' || resv.status == 'RESCHEDULING' || resv.status == 'CONFIRMED'}" >
                                 <div class="card border-0 shadow overflow-hidden mt-4 col-lg-6 col-md-6">  
                                     <form action="manage-reservationdetail?action=update&resvId=${resv.resvId}" method="post">
                                         <div class="bg-white rounded shadow overflow-hidden">

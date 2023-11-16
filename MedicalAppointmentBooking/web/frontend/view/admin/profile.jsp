@@ -110,7 +110,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Full Name</label>
                                                 <input name="name" id="name" type="text" class="form-control"
-                                                       placeholder="Full Name :" value="${sessionScope.user.fullName}   ">
+                                                       placeholder="Full Name :" value="${sessionScope.user.fullName}" >
                                             </div>
                                         </div><!--end col-->
 
@@ -133,7 +133,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Phone</label>
                                                 <input name="phone" id="phone" type="text" class="form-control"
-                                                       placeholder="Phone no:" value="${sessionScope.user.phone}">
+                                                       placeholder="Phone no:" value="${sessionScope.user.phone}"onvalid="validatePhone(this)" oninput="validatePhone(this)">
                                             </div>
                                         </div><!--end col-->
                                         <div class="col-lg-6">
@@ -168,7 +168,7 @@
                                 </form>
                                 <div class="mt-4 pt-2">
                                     <c:if test="${error != null }">
-                                        <div class="alert alert-error">${requestScope.error}</div>
+                                        <div class="alert alert-danger">${requestScope.error}</div>
                                     </c:if>
                                     <h5 class="mb-0">Change Password :</h5>
                                     <form action="<c:url value='/user-profile?action=change-password'/>" method="post" class="mt-4">
@@ -177,7 +177,7 @@
                                                 <div class="mb-3">
                                                     <label class="form-label">Old password :</label>
                                                     <input name="oldpassword" type="password" class="form-control"
-                                                           placeholder="Old password" required="">
+                                                           placeholder="Old password" required="" >
                                                 </div>
                                             </div><!--end col-->
 
@@ -185,7 +185,7 @@
                                                 <div class="mb-3">
                                                     <label class="form-label">New password :</label>
                                                     <input name="newpassword" type="password" class="form-control"
-                                                           placeholder="New password" required="">
+                                                           placeholder="New password" required=""oninvalid="validatePassword(this);" oninput="validatePassword(this);>
                                                 </div>
                                             </div><!--end col-->
 

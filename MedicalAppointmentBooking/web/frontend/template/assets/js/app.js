@@ -278,7 +278,7 @@ function validateUsername(input) {
     if (!regex.test(username)) {
         input.setCustomValidity("Username should be between 8 and 20 characters and contain only letters and numbers.");
     } else {
-        input.setCustomValidity(""); 
+        input.setCustomValidity("");
     }
 }
 function validatePassword(input) {
@@ -318,10 +318,30 @@ function validateEmail(input) {
 function validateName(input) {
     let name = input.value;
     let regex = /^[a-zA-Z\s]+$/;
-    
+
     if (!regex.test(name)) {
         input.setCustomValidity("Name should contain only letters and white spaces.");
     } else {
-        input.setCustomValidity(""); 
+        input.setCustomValidity("");
+    }
+}
+
+function isOver18YearsOld(dateString) {
+    const inputDate = new Date(dateString);
+    const currentDate = new Date();
+    const eighteenYearsAgo = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
+    return inputDate <= eighteenYearsAgo;
+}
+
+function validateDOB(input) {
+    const dobErrorElement = document.getElementById("dobError");
+    const dob = input.value;
+
+    if (!isOver18YearsOld(dob)) {
+        dobErrorElement.innerText = "Date of birth must be over 18 years from now.";
+        input.setCustomValidity("Date of birth must be over 18 years from now.");
+    } else {
+        dobErrorElement.innerText = "";
+        input.setCustomValidity("");
     }
 }

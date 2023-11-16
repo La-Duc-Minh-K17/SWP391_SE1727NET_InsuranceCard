@@ -144,10 +144,14 @@ public class DoctorDAO {
                 String speciality = rs.getString("speName");
                 String description = rs.getString("doctor_description");
                 int fee = rs.getInt("service_fee");
+                Date dob = rs.getDate("dob");
+                String address = rs.getString("address");
                 Role role = roleDAO.getRoleById(roleId);
                 doctor = new Doctor(doctorId, speciality, position, description, username, email, fullName, gender, phone, image, status);
                 doctor.setServiceFee(fee);
                 doctor.setRole(role);
+                doctor.setDob(dob);
+                doctor.setAddress(address);
             }
             return doctor;
         } catch (SQLException e) {

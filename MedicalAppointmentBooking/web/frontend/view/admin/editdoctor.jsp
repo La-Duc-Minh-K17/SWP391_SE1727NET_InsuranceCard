@@ -64,7 +64,7 @@
                                                 class="mb-0 d-inline-block me-1"><i
                                                     class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
                                         <div class="dropdown-divider border-top"></div>
-                                        <a class="dropdown-item text-dark" href="lock-screen.html"><span
+                                        <a class="dropdown-item text-dark" href="<c:url value='/home?action=logout'/>"><span
                                                 class="mb-0 d-inline-block me-1"><i
                                                     class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                                     </div>
@@ -92,7 +92,7 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Name</label>
-                                            <input name="fullname" id="name" type="text" class="form-control" value="${doctor.fullName}">
+                                            <input name="fullname" id="name" type="text" class="form-control" value="${doctor.fullName}" oninvalid="validateName(this);" oninput="validateName(this)>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -104,7 +104,7 @@
                                                         <td><input id="" name="gender" ${doctor.gender== 1?"checked":""} value="1" type="radio" class="form-check-input"
                                                                    checked required ></td>
                                                         <td><label class="form-check-label">Male</label></td>
-                                                    
+
                                                         <td><input id="" name="gender" ${doctor.gender==0 ?"checked":""} value="0" type="radio" class="form-check-input"
                                                                    required></td>
                                                         <td><label class="form-check-label">Female</label></td>
@@ -116,16 +116,16 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Phone</label>
-                                            <input name="phone" id="number" type="text" class="form-control" value="${doctor.phone}">
+                                            <input name="phone" id="number" type="text" class="form-control" value="${doctor.phone}" onvalid="validatePhone(this)" oninput="validatePhone(this)">
                                         </div>
                                     </div>
-                                          <div class="col-lg-12">
+                                    <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">DOB</label>
-                                            <input name="dob"id="dob" type="date" class="form-control" value="${doctor.dob}">
+                                            <input name="dob"id="dob" type="date" class="form-control" value="${doctor.dob}" onchange="validateDOB(this)">
                                         </div>
                                     </div>
-                                          <div class="col-lg-12">
+                                    <div class="col-lg-12">
                                         <div class="mb-3">
                                             <label class="form-label">Address</label>
                                             <input name="address"  id="number" type="text" class="form-control" value="${doctor.address}">
@@ -198,7 +198,11 @@
                 thumbnail.src = "";
             }
         }
+
+
+
     </script>
+
     <script src="${pageContext.request.contextPath}/frontend/template/assets/js/bootstrap.bundle.min.js"></script>
     <!-- simplebar -->
     <script src="${pageContext.request.contextPath}/frontend/template/assets/js/simplebar.min.js"></script>
