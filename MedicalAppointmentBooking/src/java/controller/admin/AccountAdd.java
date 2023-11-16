@@ -61,7 +61,7 @@ public class AccountAdd extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("rl", new RoleDAO().getListRole());
+        request.setAttribute("rl", new RoleDAO().getListRoleButAdmin());
         request.getRequestDispatcher("frontend/view/admin/accountadd.jsp").forward(request, response);
     }
 
