@@ -299,7 +299,7 @@ public class UserDAO {
             ps = connection.prepareStatement(sql);
             ps.setString(1, account.getEmail());
             ps.setString(2, account.getUserName());
-            ps.setString(3 , account.getPhone());
+            ps.setString(3, account.getPhone());
             rs = ps.executeQuery();
             if (rs.next()) {
                 isExisted = true;
@@ -552,6 +552,35 @@ public class UserDAO {
     }
 
     public void deleteAccountRecord(UserAccount account) {
-        
+
+    }
+
+    public boolean isPhoneNoExisted(UserAccount account) {
+        PreparedStatement ps = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        boolean isExisted = false;
+        String sql = "select * from user_account where phone = ? ";
+        try {
+            connection = dbc.getConnection();
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, account.getPhone());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                isExisted = true;
+            }
+            return isExisted;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+        return isExisted;
     }
 }

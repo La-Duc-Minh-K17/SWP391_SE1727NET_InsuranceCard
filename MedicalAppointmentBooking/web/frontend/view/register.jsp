@@ -28,9 +28,7 @@ Author     : Admin
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/frontend/template/assets/css/flatpickr.min.css">
         <link href="${pageContext.request.contextPath}/frontend/template/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
-
     </head>
-
     <body>
         <!-- Loader -->
         <div id="preloader">
@@ -72,7 +70,7 @@ Author     : Admin
                                         <div class="col-md-12">
                                             <div class="mb-3">                                               
                                                 <label class="form-label">Full Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" placeholder="Full Name" name="fullname" required="">
+                                                <input type="text" class="form-control" placeholder="Full Name" name="fullname" required="" oninvalid="validateName(this);" oninput="validateName(this);>
                                             </div>
                                         </div>
 

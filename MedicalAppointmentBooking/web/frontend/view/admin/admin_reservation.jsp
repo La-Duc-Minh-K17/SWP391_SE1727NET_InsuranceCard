@@ -87,9 +87,6 @@
                                             <option value="RESCHEDULED">RESCHEDULED</option>
                                             <option value="COMPLETED">COMPLETED</option>
                                             <option value="CANCELLED">CANCELLED</option>
-                                            <option value="CANCELLING">CANCELLING</option>
-                                            <option value="FOLLOW_UP">FOLLOW-UP</option>    
-
                                         </select>
 
                                     </div>
