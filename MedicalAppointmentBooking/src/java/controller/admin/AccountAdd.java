@@ -93,10 +93,13 @@ public class AccountAdd extends HttpServlet {
             UserAccount user = new UserAccount(username, "123456@", email, fullname, Integer.valueOf(gender),
                     phone, TimeUtil.dateConverter1(dob), address, null, timeConfig.getNow(), 1, new Role(Integer.valueOf(role)));
             if (uDAO.isAccountExisted(user)) {
-                request.setAttribute("error", "Account has existed !");
+                request.setAttribute("error", "Username has already existed !");
             } else if (uDAO.isEmailtExisted(user)) {
                 request.setAttribute("error", "This email already existed !");
-            } else {
+            }else if(uDAO.isPhoneNoExisted(user)){
+                request.setAttribute("error", "This phone number already existed !");
+        }
+            else {
                 uDAO.addUserAccount(user);
                 request.setAttribute("success", "Account added with default password 123456@!");
             }
